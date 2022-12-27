@@ -1,0 +1,10 @@
+<?page title="${labels.pageProductCategories.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-details.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageProductCategories.WindowTitle}" sclass="PageTitle"/>
+	<include src="intellisensecombobox_details.zul"></include>
+	
+	<!-- TODO: populate showing all panel, intellisense combobox in the header, and details logic -->
+</zk>

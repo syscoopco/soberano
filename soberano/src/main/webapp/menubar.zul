@@ -1,0 +1,34 @@
+<zk>
+	<menubar>
+		<menu image="./images/menu_38.jpg" sclass="BarMenu">
+			<menupopup>
+				<menuitem id="mniActivity" label="${labels.menuItem.Activity}" href="activity.zul"/>
+				<menuseparator/>
+				<menu label="${labels.menuItem.Configuration}" sclass="BarMenu">
+					<menupopup>
+						<menuitem label="${labels.menuItem.Outputs}" href="outputs.zul"/>
+						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
+						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
+						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
+							<menupopup>
+								<menuitem label="${labels.menuItem.Warehouses}" href="warehouses.zul"/>
+								<menuitem label="${labels.menuItem.CostCenters}" href="cost_centers.zul"/>
+								<menuitem label="${labels.menuItem.Processes}" href="processes.zul"/>
+							</menupopup>
+						</menu>				
+						<menuitem label="${labels.menuItem.ProductCategories}" href="product_categories.zul"/>
+						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
+						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
+						<menuitem label="${labels.menuItem.RawMaterials}" href="raw_materials.zul"/>
+						<menuitem label="${labels.menuItem.Providers}" href="providers.zul"/>
+						<menuitem label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>
+						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
+						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
+					</menupopup>
+				</menu>	
+				<menuseparator/>
+				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>
+			</menupopup>
+		</menu>
+	</menubar>	
+</zk>

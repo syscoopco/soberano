@@ -1,0 +1,14 @@
+<zk>
+	<window hflex="1" vflex="1">
+		<borderlayout id="borderlayout" >
+			<north hflex="1" sclass="DefaultBackground">
+				<include src="/WEB-INF/layouts/template-north.zul"/>
+			</north>			
+			<center self="@insert(contentPanel)" autoscroll="true" sclass="DefaultBackground">
+			</center>
+			<south id="south" sclass="DefaultBackground">
+				<include id="incSouth" src="/WEB-INF/layouts/template-south.zul"></include>
+			</south>			
+		</borderlayout>
+	</window>
+</zk>

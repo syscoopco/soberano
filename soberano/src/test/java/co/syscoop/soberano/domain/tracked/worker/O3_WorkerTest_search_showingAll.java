@@ -1,0 +1,166 @@
+package co.syscoop.soberano.domain.tracked.worker;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.zkoss.zats.mimic.ComponentAgent;
+import org.zkoss.zats.mimic.DesktopAgent;
+import org.zkoss.zats.mimic.Zats;
+import org.zkoss.zul.Combobox;
+
+import co.syscoop.soberano.test.helper.TestUtilityCode;
+import co.syscoop.soberano.util.SpringUtility;
+
+@Order(3)
+class O3_WorkerTest_search_showingAll {
+	
+	final private Integer userCount = 16; //amount of users in this testing point
+	final private Integer baseId = 1000; //the id of the first added user is baseId + 1. the last one's id is basedId + userCount
+
+	@BeforeAll
+	static void setUpBeforeClass() throws Exception {
+		
+		Zats.init("./src/main/webapp");
+	}
+
+	@AfterAll
+	static void tearDownAfterClass() throws Exception {
+		
+		Zats.cleanup();
+		Zats.end();
+	}
+
+	@BeforeEach
+	void setUp() throws Exception {
+	}
+
+	@AfterEach
+	void tearDown() throws Exception {
+	}
+	
+	private void testForAllowedUser(Integer userSuffix) {
+		
+		//test for a user
+		SpringUtility.setLoggedUserForTesting("user" + userSuffix);
+		
+		//showing all in search combobox
+		TestUtilityCode.testSearchCombobox("/workers.zul", userCount, userSuffix, baseId);
+		
+		//showing all in tree
+		TestUtilityCode.testShowingAllTree("/workers.zul", userCount, userSuffix, baseId);
+	};
+	
+	private void testForDisallowedUser(Integer userSuffix) {
+		
+		SpringUtility.setLoggedUserForTesting("user" + userSuffix);
+		DesktopAgent desktop = Zats.newClient().connect("/workers.zul");
+		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
+		assertEquals(cmbIntelliSearch.as(Combobox.class).getModel().getSize(), 
+					0, 
+					"User" 
+						+ userSuffix + " must not have access to any workers. However, it sees " 
+						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
+						+ " workers in search combobox.");
+	};
+
+	@Test
+	final void testUser1() {
+		
+		testForAllowedUser(1);
+	}
+	
+	@Test
+	final void testUser2() {
+
+		testForAllowedUser(2);
+	}
+	
+	@Test
+	final void testUser3() {
+
+		testForAllowedUser(3);
+	}
+	
+	@Test
+	final void testUser4() {
+
+		testForAllowedUser(4);
+	}
+	
+	@Test
+	final void testUser5() {
+
+		testForAllowedUser(5);
+	}
+	
+	@Test
+	final void testUser6() {
+
+		testForAllowedUser(6);
+	}
+	
+	@Test
+	final void testUser7() {
+
+		testForAllowedUser(7);
+	}
+	
+	@Test
+	final void testUser8() {
+
+		testForAllowedUser(8);
+	}
+	
+	@Test
+	final void testUser9() {
+
+		testForAllowedUser(9);
+	}
+	
+	@Test
+	final void testUser10() {
+
+		testForDisallowedUser(10);
+	}
+	
+	@Test
+	final void testUser11() {
+
+		testForAllowedUser(11);
+	}
+	
+	@Test
+	final void testUser12() {
+
+		testForAllowedUser(12);
+	}
+	
+	@Test
+	final void testUser13() {
+
+		testForAllowedUser(13);
+	}
+	
+	@Test
+	final void testUser14() {
+
+		testForAllowedUser(14);
+	}
+	
+	@Test
+	final void testUser15() {
+
+		testForAllowedUser(15);
+	}
+	
+	@Test
+	final void testUser16() {
+
+		testForAllowedUser(16);
+	}
+}

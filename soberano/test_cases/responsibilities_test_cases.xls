@@ -1,0 +1,31 @@
+User	2_Manager	3_Accounter	4_Salesclerk	5_ShiftManager	6_Checker	7_Auditor	8_Workshop1Worker	9_Workshop2Worker	10_Storekeeper	11_CatalogMaintainer	12_CommunityManager	13_ProcurementWorker	14_SystemAdmin
+auditor	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+none	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+catalogMaintainer	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned
+workshop1Worker	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+storeKeeper	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned
+shiftManager	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+procurementWorker	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned
+salesclerk	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+communityManager	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned
+checker	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+workshop2Worker	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+manager	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+user	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned
+accounter	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned
+user	assigned	not assigned	assigned	not assigned	assigned	assigned	assigned	not assigned	assigned	assigned	not assigned	not assigned	assigned
+user	assigned	assigned	assigned	assigned	not assigned	assigned	not assigned	assigned	not assigned	not assigned	assigned	assigned	assigned
+user	not assigned	assigned	not assigned	not assigned	not assigned	not assigned	assigned	assigned	assigned	assigned	assigned	assigned	assigned
+user	not assigned	not assigned	not assigned	assigned	assigned	assigned	assigned	assigned	assigned	not assigned	assigned	not assigned	assigned
+user	assigned	assigned	not assigned	assigned	assigned	assigned	assigned	not assigned	assigned	assigned	assigned	assigned	not assigned
+user	assigned	not assigned	assigned	assigned	assigned	not assigned	assigned	assigned	not assigned	assigned	not assigned	assigned	assigned
+user	not assigned	assigned	assigned	assigned	assigned	assigned	not assigned	not assigned	not assigned	assigned	not assigned	assigned	assigned
+user	assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned
+user	assigned	assigned	assigned	assigned	assigned	not assigned	not assigned	assigned	assigned	assigned	assigned	not assigned	not assigned
+user	assigned	assigned	assigned	assigned	not assigned	assigned	not assigned	assigned	assigned	assigned	not assigned	not assigned	assigned
+user	assigned	not assigned	assigned	not assigned	not assigned	assigned	assigned	assigned	assigned	not assigned	assigned	assigned	not assigned
+user	not assigned	assigned	assigned	not assigned	assigned	assigned	not assigned	assigned	assigned	not assigned	not assigned	assigned	not assigned
+systemAdmin	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	not assigned	assigned
+user	not assigned	assigned	assigned	not assigned	assigned	assigned	assigned	not assigned	not assigned	assigned	assigned	not assigned	not assigned
+user	assigned	assigned	not assigned	not assigned	assigned	assigned	assigned	assigned	assigned	not assigned	not assigned	not assigned	assigned
+user	assigned	not assigned	assigned	assigned	not assigned	not assigned	assigned	not assigned	not assigned	assigned	assigned	not assigned	assigned

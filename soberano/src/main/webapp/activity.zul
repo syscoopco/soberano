@@ -1,0 +1,19 @@
+<?page title="${labels.pageActivity.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<!-- TODO: declare activity initiator (tree and sales) -->		
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageActivity.WindowTitle}" sclass="PageTitle"/>
+	
+	<!-- TODO: apply composer timer for updating activity -->
+	<window self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<tree id="treeActivity" xmlns:ca="client/attribute" ca:data-scrollable="false">
+		</tree>
+	</window>	
+	<label id="lblShiftSales" self="@define(decisionButton)" value="${labels.pageActivity.ShiftSales}" sclass="Caption"></label>
+	
+	<!-- TODO: apply composer timer for updating shift sales -->	
+	<textbox readonly="true" id="txtShiftSales" self="@define(decisionButton)" value=""/>
+</zk>
