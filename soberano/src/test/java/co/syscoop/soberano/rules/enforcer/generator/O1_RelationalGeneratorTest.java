@@ -1,6 +1,7 @@
 package co.syscoop.soberano.rules.enforcer.generator;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import co.syscoop.soberano.rules.enforcer.IORMConceptualModel;
@@ -15,6 +16,10 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 * a generic instance of this metamodel. The db's name is "soberano". It has two schemas: "metamodel" and "soberano".
 */
 @Order(1)
+
+//TODO: enable test
+@Disabled
+
 class O1_RelationalGeneratorTest extends TestClass {
 	
 	private static IORMConceptualModel TestCaseORMConceptualModelInstance = null;

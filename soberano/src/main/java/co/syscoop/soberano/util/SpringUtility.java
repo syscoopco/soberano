@@ -13,6 +13,10 @@ import org.springframework.web.context.WebApplicationContext;
 public class SpringUtility {
 	
 	private static String loggedUserForTesting = "UndeterminedUser";
+	
+	public static Boolean underTesting() {
+		return ContextLoader.getCurrentWebApplicationContext() == null;
+	}
 
 	public static String loggedUser() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
