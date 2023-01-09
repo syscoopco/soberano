@@ -1,5 +1,7 @@
 package co.syscoop.soberano.rules.enforcer.generator;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
@@ -35,6 +37,7 @@ class O1_RelationalGeneratorTest extends TestClass {
 		}
 		catch(Exception e){
 			e.printStackTrace();
+			fail("Unpexpected exception.");
 		}
 	}
 	
@@ -44,6 +47,7 @@ class O1_RelationalGeneratorTest extends TestClass {
 			TestCaseORMConceptualModelInstance.readAndParse();
 		} catch (Exception e) {
 			e.printStackTrace();
+			fail("Unpexpected exception.");
 		}
 	}
 	
@@ -53,6 +57,7 @@ class O1_RelationalGeneratorTest extends TestClass {
 			TestCaseORMConceptualModelInstance.generateLogicalModel();
 		} catch (Throwable e) {
 			e.printStackTrace();
+			fail("Unpexpected exception.");
 		}
 	}
 }

@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+
 import co.syscoop.soberano.ui.helper.ProvinceComboboxHelper;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -38,4 +39,14 @@ public class ProvinceSelectionComposer extends SelectorComposer {
 		cmbMunicipality.setSelectedItem(null);
 		cmbMunicipality.setText("");
 	}
+	
+	/*
+	 * Needed to force municipality combo population on province selection under testing. 
+	 * cmbProvince_onSelect event isn't triggered under testing.
+	 */
+	@Listen("onClick = combobox#cmbProvince")
+    public void cmbProvince_onClick() throws SQLException {
+		
+		ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
+    }
 }

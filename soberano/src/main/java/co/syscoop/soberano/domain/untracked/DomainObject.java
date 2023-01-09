@@ -25,6 +25,7 @@ public class DomainObject implements IDomainObject {
 	
 	public DomainObject(Integer id) {
 		this.setId(id);
+		this.setStringId(id.toString());
 	}
 	
 	public DomainObject(String stringId) {
@@ -33,6 +34,7 @@ public class DomainObject implements IDomainObject {
 		
 	public DomainObject(Integer id, String name) {
 		this.setId(id);
+		this.setStringId(id.toString());
 		this.setName(name);
 	}
 	

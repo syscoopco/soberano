@@ -21,6 +21,9 @@ import co.syscoop.soberano.domain.tracked.Worker;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.Responsibility;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -37,15 +40,12 @@ public class RecordWorkerButtonComposer extends SelectorComposer {
     }
     	
 	@Listen("onClick = button#btnRecord")
-    public void btnRecord_onClick() throws Exception {
+    public void btnRecord_onClick() throws Throwable {
 		try{
 			Include incDetails = (Include) btnRecord.getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");		
 			String pwd = ((Textbox) incDetails.query("#txtPassword")).getValue();
 			if (!pwd.equals(((Textbox) incDetails.query("#txtConfirmPassword")).getValue())) {
-				Messagebox.show(Labels.getLabel("message.validation.worker.PasswordsMustMatch"), 
-			  					Labels.getLabel("messageBoxTitle.Warning"), 
-								0, 
-								Messagebox.EXCLAMATION);
+				throw new PasswordsMustMatchException();
 			}
 			else {
 				ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
@@ -77,26 +77,39 @@ public class RecordWorkerButtonComposer extends SelectorComposer {
 													responsibilities,
 													authorities);
 					if (newWorker.record() == -1) {
-						Messagebox.show(Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"), 
-										0, 
-										Messagebox.EXCLAMATION);
+						throw new NotEnoughRightsException();						
 					}
 					else {
 						Executions.sendRedirect("/new_worker.zul");
 					}
 				}
 				else {
-					Messagebox.show(Labels.getLabel("message.validation.worker.WorkerMustBeAssignedToAResponsibility"), 
-		  					Labels.getLabel("messageBoxTitle.Validation"), 
-							0, 
-							Messagebox.EXCLAMATION);
+					throw new WorkerMustBeAssignedToAResponsibilityException();
+					
 				}
 			}
+		}
+		catch(PasswordsMustMatchException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.worker.PasswordsMustMatch"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(WrongValueException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(WorkerMustBeAssignedToAResponsibilityException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.worker.WorkerMustBeAssignedToAResponsibility"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

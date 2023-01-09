@@ -207,49 +207,52 @@ public class Worker extends TrackedObject {
 	
 	@Override
 	public Integer record() throws Exception {
+					
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		recordQuery = "SELECT soberano.\"fn_Worker_create\"(:firstName, "
+				+ "											:lastName, "
+				+ "											:emailAddress, "
+				+ "											:mobilePhoneNumber, "
+				+ "											:countryCode, "
+				+ "											:address, "
+				+ "											:postalCode, "
+				+ "											:town, "
+				+ "											:municipalityId, "
+				+ "											:city, "
+				+ "											:provinceId, "
+				+ "											:latitude, "
+				+ "											:longitude, "
+				+ "											:responsibilities, "
+				+ "											:authorities, "
+				+ "											:loginname) AS queryresult";
+		recordParameters = new MapSqlParameterSource();
+		recordParameters.addValue("firstName", this.firstName);
+		recordParameters.addValue("lastName", this.lastName);
+		recordParameters.addValue("emailAddress", this.getLoginName());
+		recordParameters.addValue("mobilePhoneNumber", this.contactData.getMobilePhoneNumber());
+		recordParameters.addValue("countryCode", this.contactData.getCountryCode());
+		recordParameters.addValue("address", this.contactData.getAddress());
+		recordParameters.addValue("postalCode", this.contactData.getPostalCode());
+		recordParameters.addValue("town", this.contactData.getTown());
+		recordParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
+		recordParameters.addValue("city", this.contactData.getCity());
+		recordParameters.addValue("provinceId", this.contactData.getProvinceId());
+		recordParameters.addValue("latitude", this.contactData.getLatitude());
+		recordParameters.addValue("longitude", this.contactData.getLatitude());
+		recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds));
+		recordParameters.addValue("authorities", createArrayOfSQLType("integer", authorityIds));
 		
-		//add user to directory
-		String errorMessage = addUserToLDAP();
-		if (errorMessage.isEmpty()) {
+		Integer qryResult = super.record();
+		if (qryResult > 0) {
 			
-			//it must be passed loginname. output alias must be queryresult. both in lower case.
-			recordQuery = "SELECT soberano.\"fn_Worker_create\"(:firstName, "
-					+ "											:lastName, "
-					+ "											:emailAddress, "
-					+ "											:mobilePhoneNumber, "
-					+ "											:countryCode, "
-					+ "											:address, "
-					+ "											:postalCode, "
-					+ "											:town, "
-					+ "											:municipalityId, "
-					+ "											:city, "
-					+ "											:provinceId, "
-					+ "											:latitude, "
-					+ "											:longitude, "
-					+ "											:responsibilities, "
-					+ "											:authorities, "
-					+ "											:loginname) AS queryresult";
-			recordParameters = new MapSqlParameterSource();
-			recordParameters.addValue("firstName", this.firstName);
-			recordParameters.addValue("lastName", this.lastName);
-			recordParameters.addValue("emailAddress", this.getLoginName());
-			recordParameters.addValue("mobilePhoneNumber", this.contactData.getMobilePhoneNumber());
-			recordParameters.addValue("countryCode", this.contactData.getCountryCode());
-			recordParameters.addValue("address", this.contactData.getAddress());
-			recordParameters.addValue("postalCode", this.contactData.getPostalCode());
-			recordParameters.addValue("town", this.contactData.getTown());
-			recordParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
-			recordParameters.addValue("city", this.contactData.getCity());
-			recordParameters.addValue("provinceId", this.contactData.getProvinceId());
-			recordParameters.addValue("latitude", this.contactData.getLatitude());
-			recordParameters.addValue("longitude", this.contactData.getLatitude());
-			recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds));
-			recordParameters.addValue("authorities", createArrayOfSQLType("integer", authorityIds));
-			return super.record();
+			//add user to directory
+			String errorMessage = addUserToLDAP();
+			if (!errorMessage.isEmpty()) throw new Exception(errorMessage);
 		}
 		else {
-			throw new Exception(errorMessage);
+			qryResult = -1; //not enough permissions to add worker
 		}
+		return qryResult;
 	}
 	
 	@Override

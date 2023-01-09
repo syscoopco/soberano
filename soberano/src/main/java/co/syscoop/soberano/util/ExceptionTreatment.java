@@ -4,11 +4,17 @@ import java.util.Objects;
 
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
+
 import org.zkoss.zk.ui.WrongValueException;
 
 public class ExceptionTreatment {
 
-	public static void logAndShow(Exception ex, String messageBody, String messageTitle, String messageIcon) {
+	public static void logAndShow(Exception ex, String messageBody, String messageTitle, String messageIcon) throws SoberanoException {
 		
 		String componentMessage = "";
 		if (ex.getClass().getName().equals("org.zkoss.zk.ui.WrongValueException")) {
@@ -25,7 +31,14 @@ public class ExceptionTreatment {
 						0, 
 						messageIcon);
 		if (SpringUtility.underTesting()) 
-			throw new WrongValueException(ex);
+			if (ex.getClass().getName().equals("org.zkoss.zk.ui.WrongValueException"))
+				throw new WrongValueException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))
+				throw new PasswordsMustMatchException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
+				throw new NotEnoughRightsException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException"))
+				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

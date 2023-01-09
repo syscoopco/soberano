@@ -30,8 +30,7 @@ public class ZKUtilitity {
 	public static void setValueWOValidation(Combobox comp, String value) {
 		Constraint constraint = comp.getConstraint();
 		comp.setConstraint((Constraint) null);
-		ComboboxHelper comboboxHelper = new ComboboxHelper();
-		comp.setSelectedItem(comboboxHelper.getItemByValue(comp, value));
+		comp.setSelectedItem(ComboboxHelper.getItemByValue(comp, value));
 		comp.setConstraint(constraint);
 	}
 	

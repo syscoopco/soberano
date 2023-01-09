@@ -3,11 +3,11 @@ package co.syscoop.soberano.exception;
 @SuppressWarnings("serial")
 public class SoberanoException extends Exception {
 	
-	private Exception cause = null;
+	private Throwable cause = null;
 	
-	private SoberanoExceptionCodes code = SoberanoExceptionCodes.UNDETERMINED_ERROR;
+	protected SoberanoExceptionCodes code = SoberanoExceptionCodes.UNDETERMINED_ERROR;
 	
-	public SoberanoException(Exception cause) {
+	public SoberanoException(Throwable cause) {
 		this.cause = cause;
 		this.cause.printStackTrace();
 		this.cause.fillInStackTrace();

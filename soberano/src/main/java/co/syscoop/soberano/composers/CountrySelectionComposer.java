@@ -47,4 +47,14 @@ public class CountrySelectionComposer extends SelectorComposer {
 		cmbMunicipality.setSelectedItem(null);
 		cmbMunicipality.setText("");
 	}
+	
+	/*
+	 * Needed to force province combo population on country selection under testing. 
+	 * cmbCountry_onSelect event isn't triggered under testing.
+	 */
+	@Listen("onClick = combobox#cmbCountry")
+    public void cmbCountry_onClick() throws SQLException {
+		
+		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);	
+    }
 }

@@ -9,9 +9,12 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.ExceptionTreatment;
 
 public class ConstrainedForm {
@@ -41,6 +44,44 @@ public class ConstrainedForm {
 		
 		try {
 			comp.setValue(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Combobox comp, String value) {
+		
+		try {
+			for (Component co : comp.getChildren()) {
+				Comboitem item = (Comboitem) co;
+				if (((DomainObject) item.getValue()).getStringId().equals(value)) {
+					comp.setSelectedItem(item);
+					break;
+				}
+			}
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void selectComboitemByLabel(Combobox comp, String label) {
+		
+		try {
+			for (Component co : comp.getChildren()) {
+				Comboitem item = (Comboitem) co;
+				if (item.getLabel().equals(label)) {
+					comp.setSelectedItem(item);
+					break;
+				}
+			}
 		} 
 		catch(Exception ex) 
 		{

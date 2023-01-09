@@ -1,5 +1,7 @@
 package co.syscoop.soberano.domain.tracked.worker;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.AfterAll;
@@ -39,11 +41,42 @@ class O2_WorkerTest_populate {
 			/////////////////////////////////
 			
 			//clean LDAP of precondition users
+			Worker workerToDelete = null;
 			for (Integer i = 1; i <= 16; i++) {
-				Worker workerToDelete = new Worker("user" + i.toString());
+				workerToDelete = new Worker("user" + i.toString());
 				try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			}
-						
+			
+			//clean other LDAP test users
+			workerToDelete = new Worker("accounter@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("auditor@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("catalog_maintainer@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("checker@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("community_manager@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("manager@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("none@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("procurement_worker@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("sales_clerk@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("shift_manager@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("store_keeper@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("system_admin@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("workshop1_worker@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+			workerToDelete = new Worker("workshop2_worker@soberano.syscoop.co");
+			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
+									
 			ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
 			ArrayList<Authority> authorities = new ArrayList<Authority>();
 			
@@ -564,6 +597,7 @@ class O2_WorkerTest_populate {
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
+			fail("Unpexpected exception.");
 		}	
 	}
 

@@ -7,7 +7,7 @@ import org.zkoss.zul.ListModel;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 
 public class ComboboxHelper {
-	public Comboitem getItemByValue(Combobox box, String value) throws IllegalArgumentException {
+	public static Comboitem getItemByValue(Combobox box, String value) throws IllegalArgumentException {
 		
 		//non intellisense combobox
 		for(Comboitem item : box.getItems()){
