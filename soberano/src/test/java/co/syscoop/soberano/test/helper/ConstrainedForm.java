@@ -91,6 +91,25 @@ public class ConstrainedForm {
 		}
 	}
 	
+	public void selectComboitemByValue(Combobox comp, String value) {
+		
+		try {
+			for (Component co : comp.getChildren()) {
+				Comboitem item = (Comboitem) co;
+				if (item.getValue().toString().equals(value)) {
+					comp.setSelectedItem(item);
+					break;
+				}
+			}
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
 	public void testWrongValueException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals(cause.getClass().getName(), "org.zkoss.zk.ui.WrongValueException","Only org.zkoss.zk.ui.WrongValueException can be caught here.");

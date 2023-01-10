@@ -2,6 +2,7 @@ package co.syscoop.soberano.composers;
 
 import java.util.ArrayList;
 
+import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
@@ -110,6 +111,13 @@ public class RecordWorkerButtonComposer extends SelectorComposer {
 		catch(WorkerMustBeAssignedToAResponsibilityException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										Labels.getLabel("message.validation.worker.WorkerMustBeAssignedToAResponsibility"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(DuplicateKeyException ex)
+		{
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.worker.ThereIsAlreadyAWorkerWithThatId"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

@@ -26,4 +26,9 @@ public class ActionTest {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals(cause.getClass().getName(), "co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException","Only co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException can be caught here.");
 	}
+	
+	public void testDuplicateKeyException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals(cause.getClass().getName(), "org.springframework.dao.DuplicateKeyException","Only org.springframework.dao.DuplicateKeyException can be caught here.");
+	}
 }

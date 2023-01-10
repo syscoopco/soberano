@@ -28,14 +28,14 @@ public class Worker extends TrackedObject {
 	//responsibilities. same lengths arrays.
 	//worker is assigned to responsibility in pos X for the authority in pos X.
 	private ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
-	private Integer[] responsibilityIds = null;
+	private ArrayList<Integer> responsibilityIds = null;
 	private ArrayList<Authority> authorities = new ArrayList<>();
 	private Integer[] authorityIds = null;
 	
 	private void fillResponsiblityIds() {
-		responsibilityIds = new Integer[responsibilities.size()];
-		for (int i = 0; i < responsibilityIds.length; i++) {
-			responsibilityIds[i] = responsibilities.get(i).getId();
+		responsibilityIds = new ArrayList<Integer>();
+		for (Responsibility resp : responsibilities) {
+			responsibilityIds.add(resp.getId());
 		}
 	}
 	
@@ -239,7 +239,7 @@ public class Worker extends TrackedObject {
 		recordParameters.addValue("provinceId", this.contactData.getProvinceId());
 		recordParameters.addValue("latitude", this.contactData.getLatitude());
 		recordParameters.addValue("longitude", this.contactData.getLatitude());
-		recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds));
+		recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds.toArray()));
 		recordParameters.addValue("authorities", createArrayOfSQLType("integer", authorityIds));
 		
 		Integer qryResult = super.record();
@@ -317,5 +317,9 @@ public class Worker extends TrackedObject {
 		contactData = new ContactData(sourceWorker.getContactData());
 		setResponsibilities(sourceWorker.getResponsibilities());
 		setAuthorities(sourceWorker.getAuthorities());
+	}
+
+	public ArrayList<Integer> getResponsibilityIds() {
+		return responsibilityIds;
 	}
 }

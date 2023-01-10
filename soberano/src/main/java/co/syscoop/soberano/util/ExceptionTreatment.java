@@ -10,6 +10,8 @@ import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 
+import org.springframework.dao.DuplicateKeyException;
+
 import org.zkoss.zk.ui.WrongValueException;
 
 public class ExceptionTreatment {
@@ -39,6 +41,8 @@ public class ExceptionTreatment {
 				throw new NotEnoughRightsException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException"))
 				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
+			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
+				throw new DuplicateKeyException("");
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

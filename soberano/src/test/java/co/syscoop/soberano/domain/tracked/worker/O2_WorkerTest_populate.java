@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(2)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O2_WorkerTest_populate {
 
@@ -52,29 +52,27 @@ class O2_WorkerTest_populate {
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			workerToDelete = new Worker("auditor@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("catalog_maintainer@soberano.syscoop.co");
+			workerToDelete = new Worker("catalogMaintainer@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			workerToDelete = new Worker("checker@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("community_manager@soberano.syscoop.co");
+			workerToDelete = new Worker("communityManager@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			workerToDelete = new Worker("manager@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("none@soberano.syscoop.co");
+			workerToDelete = new Worker("procurementWorker@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("procurement_worker@soberano.syscoop.co");
+			workerToDelete = new Worker("salesclerk@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("sales_clerk@soberano.syscoop.co");
+			workerToDelete = new Worker("shiftManager@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("shift_manager@soberano.syscoop.co");
+			workerToDelete = new Worker("storekeeper@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("store_keeper@soberano.syscoop.co");
+			workerToDelete = new Worker("systemadmin@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("system_admin@soberano.syscoop.co");
+			workerToDelete = new Worker("workshop1Worker@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("workshop1_worker@soberano.syscoop.co");
-			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
-			workerToDelete = new Worker("workshop2_worker@soberano.syscoop.co");
+			workerToDelete = new Worker("workshop2Worker@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 									
 			ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
