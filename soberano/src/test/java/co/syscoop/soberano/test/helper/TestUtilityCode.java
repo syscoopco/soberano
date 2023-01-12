@@ -41,7 +41,7 @@ public class TestUtilityCode {
 					"User" 
 						+ userIdSuffix + " must have access to " 
 						+ expectedAccessibleObjectCount 
-						+ " objects. It only sees " 
+						+ " objects. It sees " 
 						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
 						+ " objects in search combobox.");
 		for (Integer i = 1; i <= cmbIntelliSearch.as(Combobox.class).getModel().getSize(); i++) {
@@ -68,7 +68,7 @@ public class TestUtilityCode {
 					"User" 
 						+ userIdSuffix + " must have access to " 
 						+ expectedAccessibleObjectCount 
-						+ " objects. It only sees " 
+						+ " objects. It sees " 
 						+ treeObjects.getTreechildren().getItemCount() 
 						+ " objects in showing-all tree.");
 		DefaultTreeModel treeModel = (DefaultTreeModel) treeObjects.getModel();

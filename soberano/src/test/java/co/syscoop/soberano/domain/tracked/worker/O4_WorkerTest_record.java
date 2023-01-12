@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -29,6 +30,10 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
+
+//TODO: enable test
+//@Disabled
+
 class O4_WorkerTest_record extends ActionTest {
 	
 	WorkerForm workerForm = null;
@@ -85,6 +90,19 @@ class O4_WorkerTest_record extends ActionTest {
 		catch(Throwable ex) {
 			workerForm.testWrongValueException(ex);
 		}
+	}
+	
+	private void assignResponsibility(DesktopAgent desktop, Integer responsibilityId, String responsibilityName) {
+		for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
+			if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == responsibilityId) {
+				InputAgent cmbResponsibilitiesInputAgent = (desktop.query("textbox").query("#cmbResponsibilities")).as(InputAgent.class);
+				cmbResponsibilitiesInputAgent.typing(responsibilityName);
+				workerForm.selectComboitemByValueForcingLabel(workerForm.getCmbResponsibilities(), responsibilityId.toString(), responsibilityName);
+				ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+				btnAssignResponsibility.click();
+				break;
+			}
+		}	
 	}
 	
 	@Test
@@ -1086,6 +1104,8 @@ class O4_WorkerTest_record extends ActionTest {
 	}
 	
 	private void recordWorker(Worker newWorkerData, 
+							Integer responsibilityId,
+							String responsibilityName,
 							String countryName, 
 							String provinceName, 
 							String municipalityName, 
@@ -1120,13 +1140,7 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getTxtLastName(), newWorkerData.getLastName());			
 			
 			//responsibilities combobox
-			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-				if (newWorkerData.getResponsibilityIds().contains(Integer.parseInt(((Comboitem) cmbItem).getValue()))) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
-					btnAssignResponsibility.click();
-					break;
-				}
-			}			
+			assignResponsibility(desktop, responsibilityId, responsibilityName);		
 			
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), newWorkerData.getContactData().getMobilePhoneNumber());
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), newWorkerData.getContactData().getEmailAddress());
@@ -1167,6 +1181,8 @@ class O4_WorkerTest_record extends ActionTest {
 	
 	private void testForAllowedUser(String user,
 										Worker newWorkerData, 
+										Integer responsibilityId,
+										String responsibilityName,
 										String countryName, 
 										String provinceName, 
 										String municipalityName) {
@@ -1175,6 +1191,8 @@ class O4_WorkerTest_record extends ActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		try {
 			recordWorker(newWorkerData, 
+						responsibilityId,
+						responsibilityName,
 						countryName, 
 						provinceName, 
 						municipalityName, 
@@ -1213,6 +1231,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user1",
 								newWorkerData, 
+								3,
+								"Accounter",
 								"Cuba",
 								"La Habana",
 								"Plaza de la Revolución");
@@ -1253,6 +1273,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user2",
 								newWorkerData, 
+								7, 
+								"Auditor",
 								"Cuba",
 								"Pinar del Río",
 								"Viñales");
@@ -1293,6 +1315,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user3",
 								newWorkerData, 
+								11, 
+								"Catalog maintainer",
 								"Cuba",
 								"Matanzas",
 								"Jagüey Grande");
@@ -1333,6 +1357,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user4",
 								newWorkerData, 
+								6, 
+								"Checker",
 								"Cuba",
 								"Villa Clara",
 								"Santa Clara");
@@ -1373,6 +1399,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user5",
 								newWorkerData, 
+								12, 
+								"Community manager",
 								"Cuba",
 								"Isla de la Juventud",
 								"Isla de la Juventud");
@@ -1413,6 +1441,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user6",
 								newWorkerData, 
+								2, 
+								"Manager",
 								"Cuba",
 								"Artemisa",
 								"Artemisa");
@@ -1453,6 +1483,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user7",
 								newWorkerData, 
+								2, 
+								"Manager",
 								"Cuba",
 								"Artemisa",
 								"Artemisa");
@@ -1493,6 +1525,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user8",
 								newWorkerData, 
+								13, 
+								"Procurement worker",
 								"Cuba",
 								"Mayabeque",
 								"Santa Cruz del Norte");
@@ -1533,6 +1567,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user9",
 								newWorkerData, 
+								4, 
+								"Salesclerk",
 								"Cuba",
 								"Guantánamo",
 								"Guantánamo");
@@ -1573,6 +1609,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user10",
 								newWorkerData, 
+								5, 
+								"Shift manager",
 								"Cuba",
 								"Santiago de Cuba",
 								"Santiago de Cuba");
@@ -1613,6 +1651,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user11",
 								newWorkerData, 
+								5, 
+								"Shift manager",
 								"Cuba",
 								"Santiago de Cuba",
 								"Santiago de Cuba");
@@ -1653,6 +1693,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user12",
 								newWorkerData, 
+								10, 
+								"Storekeeper",
 								"Cuba",
 								"Granma",
 								"Pilón");
@@ -1693,6 +1735,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user13",
 								newWorkerData, 
+								10, 
+								"Storekeeper",
 								"Cuba",
 								"Granma",
 								"Pilón");
@@ -1733,6 +1777,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user14",
 								newWorkerData, 
+								10, 
+								"Storekeeper",
 								"Cuba",
 								"Granma",
 								"Pilón");
@@ -1773,6 +1819,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user15",
 								newWorkerData, 
+								10, 
+								"Storekeeper",
 								"Cuba",
 								"Granma",
 								"Pilón");
@@ -1813,6 +1861,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user16",
 								newWorkerData, 
+								14, 
+								"System admin",
 								"Cuba",
 								"Holguín",
 								"Holguín");
@@ -1853,6 +1903,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user16",
 								newWorkerData, 
+								8, 
+								"Workshop 1 worker",
 								"Cuba",
 								"Las Tunas",
 								"Las Tunas");
@@ -1893,6 +1945,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user16",
 								newWorkerData, 
+								9, 
+								"Workshop 2 worker",
 								"Cuba",
 								"Camagüey",
 								"Camagüey");
@@ -1933,6 +1987,8 @@ class O4_WorkerTest_record extends ActionTest {
 										authorities);
 			testForAllowedUser("user16",
 								newWorkerData, 
+								9, 
+								"Workshop 2 worker",
 								"Cuba",
 								"Camagüey",
 								"Camagüey");

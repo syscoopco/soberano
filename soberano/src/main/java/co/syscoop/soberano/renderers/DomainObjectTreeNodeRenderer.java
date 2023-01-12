@@ -1,9 +1,9 @@
 package co.syscoop.soberano.renderers;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import org.springframework.jdbc.BadSqlGrammarException;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
@@ -21,7 +21,20 @@ import co.syscoop.soberano.vocabulary.Labels;
 
 public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>>{
 	
+	@SuppressWarnings("unused")
 	private String pageToRefreshZulURI = "";
+	
+	private enum ActionRequested
+	{
+		NONE(0),
+		DELETE(1);
+		
+	    @SuppressWarnings("unused")
+		private int actionCode;
+	    ActionRequested(int actionCode) {this.actionCode = actionCode;}
+	}
+	
+	private HashMap<Treeitem, ActionRequested> requestedActions = new HashMap<Treeitem, ActionRequested>();
 	
 	public DomainObjectTreeNodeRenderer(String pageToRefreshZulURI) {
 		this.pageToRefreshZulURI = pageToRefreshZulURI;
@@ -86,19 +99,41 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 
 			@Override
 			public void onEvent(Event event) {
-
-				int result = delete(item, data, event);
-				if (result == -1) {
-					Messagebox.show(Labels.getLabel("message.permissions.NotEnoughRights"), 
-				  					Labels.getLabel("messageBoxTitle.Warning"), 
-									0, 
-									Messagebox.EXCLAMATION);
+				
+				if (requestedActions.get(item) != null && requestedActions.get(item).equals(ActionRequested.DELETE)) {
+					int result = delete(item, data, event);
+					if (result == -1) {
+						Messagebox.show(Labels.getLabel("message.permissions.NotEnoughRights"), 
+					  					Labels.getLabel("messageBoxTitle.Warning"), 
+										0, 
+										Messagebox.EXCLAMATION);
+					}
+					else {					
+						//refresh the form
+						//Executions.sendRedirect(pageToRefreshZulURI);
+						
+						//or hide details and disable btnApply instead
+						((Include) item.query("#wndShowingAll").getParent().query("#incDetails")).setVisible(false);
+						((Button) item.query("#wndShowingAll").getParent().getParent().getParent().getParent().query("south").getParent().getParent().query("#incSouth").query("#btnApply")).setDisabled(true);
+						
+						//remove the treeitem
+						item.detach();
+					}
 				}
 				else {
-					//refresh the form
-					Executions.sendRedirect(pageToRefreshZulURI);				
+					requestDeletion(item);
 				}
 			}
 		});
+	}
+	
+	public void requestDeletion(Treeitem item) {
+		requestedActions.put(item, ActionRequested.DELETE);
+		((Treecell) item.query("treecell")).setStyle("background-color:yellow;");
+	}
+	
+	public void cancelRequestedAction(Treeitem item) {
+		requestedActions.remove(item);
+		((Treecell) item.query("treecell")).setStyle("background-color:transparent;");
 	}
 }

@@ -13,7 +13,12 @@ import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.DefaultTreeModel;
+import org.zkoss.zul.Tree;
+import org.zkoss.zul.TreeNode;
 
+import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -71,6 +76,14 @@ class O3_WorkerTest_search_showingAll {
 						+ userSuffix + " must not have access to any workers. However, it sees " 
 						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
 						+ " workers in search combobox.");
+				
+		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
+		assertEquals(treeObjects.getTreechildren().getItemCount(), 
+					0, 
+					"User" 
+						+ userSuffix + " must not have access to any workers. However, it sees " 
+						+ treeObjects.getTreechildren().getItemCount() 
+						+ " objects in showing-all tree.");
 	};
 
 	@Test

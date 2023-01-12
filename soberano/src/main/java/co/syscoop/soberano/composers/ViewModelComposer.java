@@ -28,9 +28,7 @@ public /*abstract*/ class ViewModelComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	@Listen("onChange = combobox#cmbIntelliSearch")
-    public void cmbIntelliSearch_onChange() throws SQLException {
-	
+	private void processItemSelection() {
 		Tree treeObjects = (Tree) cmbIntelliSearch.query("#wndShowingAll").query("#treeObjects");
 		for (Component comp : treeObjects.getTreechildren().getChildren()) {
 			Treeitem ti = (Treeitem) comp;
@@ -48,5 +46,21 @@ public /*abstract*/ class ViewModelComposer extends SelectorComposer {
 				break;
 			}
 		}
+	}
+	
+	@Listen("onChange = combobox#cmbIntelliSearch")
+    public void cmbIntelliSearch_onChange() throws SQLException {
+	
+		processItemSelection();
+	}
+	
+	/*
+	 * Needed for testing. 
+	 * cmbIntelliSearch_onChange event isn't triggered under testing.
+	 */
+	@Listen("onClick = combobox#cmbIntelliSearch")
+    public void cmbIntelliSearch_onClick() throws SQLException {
+	
+		processItemSelection();
 	}
 }
