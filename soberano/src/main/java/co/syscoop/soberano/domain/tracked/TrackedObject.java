@@ -34,6 +34,8 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	//it is expected queries and parameters to be set by subclasses
 	protected String recordQuery = "";
 	protected MapSqlParameterSource recordParameters = null;
+	protected String modifyQuery = "";
+	protected MapSqlParameterSource modifyParameters = null;
 	protected String getQuery = "";
 	protected Map<String,	Object> getParameters = new HashMap<String, Object>();
 	protected ResultSetExtractor<Object> extractor = null;
@@ -108,6 +110,10 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return (query(recordQuery, this.addLoginname(recordQuery, recordParameters) , new QueryResultMapper()).get(0));
 		}
 		
+		public Integer modify(String modifyQuery, MapSqlParameterSource modifyParameters) throws SQLException {			
+			return (query(modifyQuery, this.addLoginname(modifyQuery, modifyParameters) , new QueryResultMapper()).get(0));
+		}
+		
 		private Map<String, Object> addLoginname(String query, Map<String, Object> parameters) {
 			if (query.indexOf("loginname") > -1) {
 				parameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
@@ -161,8 +167,9 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	}
 
 	@Override
-	public void modify() throws SQLException {
-		// TODO Auto-generated method stub		
+	public Integer modify() throws SQLException, Exception {
+		Integer result = trackedObjectDao.modify(modifyQuery, modifyParameters);
+		return result;
 	}
 
 	@Override

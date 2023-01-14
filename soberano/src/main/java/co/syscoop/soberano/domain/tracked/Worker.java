@@ -9,13 +9,13 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-
 import co.syscoop.soberano.ldap.dao.LdapUserDao;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.Responsibility;
+import co.syscoop.soberano.exception.SoberanoLDAPException;
 
 public class Worker extends TrackedObject {
 
@@ -73,6 +73,7 @@ public class Worker extends TrackedObject {
 			Double longitude) {
 		super(id, entityTypeInstanceId, firstName + " " + lastName);
 		this.loginName = loginName;
+		this.setQualifiedName(firstName + " " + lastName + " : " + loginName);		
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -199,6 +200,16 @@ public class Worker extends TrackedObject {
 		return ldapUserDao.insertUser(this);
 	}
 	
+	private void changePassword(String pwd) throws SoberanoLDAPException {
+		
+		//if password isn't empty, change password
+		if (!pwd.isEmpty()) {
+			LdapUserDao userDao  = (LdapUserDao) SpringUtility.webApplicationContext().getBean("ldapUser");
+			String errorMessage = userDao.changePassword(this, pwd);
+			if (!errorMessage.isEmpty()) throw new SoberanoLDAPException(errorMessage);
+		}
+	}
+	
 	public String deleteUserFromLDAP() {
 		
 		LdapUserDao ldapUserDao = (LdapUserDao) SpringUtility.applicationContext().getBean("ldapUser");
@@ -213,13 +224,11 @@ public class Worker extends TrackedObject {
 				+ "											:lastName, "
 				+ "											:emailAddress, "
 				+ "											:mobilePhoneNumber, "
-				+ "											:countryCode, "
 				+ "											:address, "
 				+ "											:postalCode, "
 				+ "											:town, "
 				+ "											:municipalityId, "
 				+ "											:city, "
-				+ "											:provinceId, "
 				+ "											:latitude, "
 				+ "											:longitude, "
 				+ "											:responsibilities, "
@@ -230,13 +239,11 @@ public class Worker extends TrackedObject {
 		recordParameters.addValue("lastName", this.lastName);
 		recordParameters.addValue("emailAddress", this.getLoginName());
 		recordParameters.addValue("mobilePhoneNumber", this.contactData.getMobilePhoneNumber());
-		recordParameters.addValue("countryCode", this.contactData.getCountryCode());
 		recordParameters.addValue("address", this.contactData.getAddress());
 		recordParameters.addValue("postalCode", this.contactData.getPostalCode());
 		recordParameters.addValue("town", this.contactData.getTown());
 		recordParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
 		recordParameters.addValue("city", this.contactData.getCity());
-		recordParameters.addValue("provinceId", this.contactData.getProvinceId());
 		recordParameters.addValue("latitude", this.contactData.getLatitude());
 		recordParameters.addValue("longitude", this.contactData.getLatitude());
 		recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds.toArray()));
@@ -251,6 +258,51 @@ public class Worker extends TrackedObject {
 		}
 		else {
 			qryResult = -1; //not enough permissions to add worker
+		}
+		return qryResult;
+	}
+	
+	@Override
+	public Integer modify() throws SQLException, Exception {
+					
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		modifyQuery = "SELECT soberano.\"fn_Worker_modify\"(:workerId, "
+				+ "											:firstName, "
+				+ "											:lastName, "
+				+ "											:emailAddress, "
+				+ "											:mobilePhoneNumber, "
+				+ "											:address, "
+				+ "											:postalCode, "
+				+ "											:town, "
+				+ "											:municipalityId, "
+				+ "											:city, "
+				+ "											:latitude, "
+				+ "											:longitude, "
+				+ "											:responsibilities, "
+				+ "											:authorities, "
+				+ "											:loginname) AS queryresult";
+		modifyParameters = new MapSqlParameterSource();
+		modifyParameters.addValue("workerId", this.getId());
+		modifyParameters.addValue("firstName", this.firstName);
+		modifyParameters.addValue("lastName", this.lastName);
+		modifyParameters.addValue("emailAddress", this.getLoginName());
+		modifyParameters.addValue("mobilePhoneNumber", this.contactData.getMobilePhoneNumber());
+		modifyParameters.addValue("address", this.contactData.getAddress());
+		modifyParameters.addValue("postalCode", this.contactData.getPostalCode());
+		modifyParameters.addValue("town", this.contactData.getTown());
+		modifyParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
+		modifyParameters.addValue("city", this.contactData.getCity());
+		modifyParameters.addValue("latitude", this.contactData.getLatitude());
+		modifyParameters.addValue("longitude", this.contactData.getLongitude());
+		modifyParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds.toArray()));
+		modifyParameters.addValue("authorities", createArrayOfSQLType("integer", authorityIds));
+		
+		Integer qryResult = super.modify();
+		if (qryResult < 0) {
+			qryResult = -1; //not enough permissions to add worker
+		}
+		else {
+			changePassword(password);
 		}
 		return qryResult;
 	}

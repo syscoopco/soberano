@@ -22,5 +22,5 @@
 		</tree>
 	</window>
 	<include id="incDetails" self="@define(detailsPanel)" src="/worker.zul" visible="false"></include>	
-	<button id="btnApply" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton"></button>
+	<button id="btnApply" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ModifyWorkerButtonComposer"></button>
 </zk>

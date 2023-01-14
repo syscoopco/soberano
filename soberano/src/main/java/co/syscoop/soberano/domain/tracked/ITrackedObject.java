@@ -9,7 +9,7 @@ public interface ITrackedObject {
 
 	abstract public Integer record() throws SQLException, Exception;
 	abstract public void get() throws SQLException;
-	abstract public void modify() throws SQLException;	
+	abstract public Integer modify() throws SQLException, Exception;	
 	abstract public Integer makeDecision(String decision) throws SQLException; //it's passed the name of the decision
 	abstract public Integer disable() throws SQLException;
 	

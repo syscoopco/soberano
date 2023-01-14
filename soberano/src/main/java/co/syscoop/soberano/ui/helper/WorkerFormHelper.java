@@ -1,7 +1,9 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -9,6 +11,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Doublebox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
@@ -18,8 +21,11 @@ import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.domain.tracked.Worker;
+import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.Responsibility;
+import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ZKUtilitity;
 
@@ -61,11 +67,20 @@ public class WorkerFormHelper {
 		Worker worker = new Worker(((DomainObject) data.getData().getValue()).getId());
 		worker.get();
 		
+		//store in the form the ids of shown object for subsequent modification
+		((Intbox) incDetails.getParent().query("#intId")).setValue(worker.getId());
+		((Textbox) incDetails.getParent().query("#txtStringId")).setText(worker.getStringId());
+		
 		incDetails.setVisible(true);
 		Clients.scrollIntoView(incDetails.query("#txtUserName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtUserName"), worker.getLoginName());
+		
+		//disable password constraints
+		((Textbox) incDetails.query("#txtPassword")).setConstraint("");
+		((Textbox) incDetails.query("#txtConfirmPassword")).setConstraint("");
+		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFirstName"), worker.getFirstName());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtLastName"), worker.getLastName());
 		
@@ -92,5 +107,31 @@ public class WorkerFormHelper {
 		ZKUtilitity.setValueWOValidation(cmbMunicipality, worker.getContactData().getMunicipalityId().toString());
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), worker.getContactData().getLatitude());
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), worker.getContactData().getLongitude());
+	}
+	
+	static public String passwordsMatch(Include incDetails) throws PasswordsMustMatchException {
+		String pwd = ((Textbox) incDetails.query("#txtPassword")).getValue();
+		if (!pwd.equals(((Textbox) incDetails.query("#txtConfirmPassword")).getValue())) {
+			throw new PasswordsMustMatchException();
+		}
+		return pwd;
+	}
+	
+	static public void fillAssigmentArrays(ArrayList<Responsibility> responsibilities, 
+											ArrayList<Authority> authorities,
+											Include incDetails) throws WorkerMustBeAssignedToAResponsibilityException {
+		Treechildren tchdnResponsibilities = (Treechildren) incDetails.query("#tchdnResponsibilities");
+		if (tchdnResponsibilities.getChildren().size() > 0) {
+			responsibilities.clear();
+			authorities.clear();
+			for (Component item : tchdnResponsibilities.getChildren()) {
+				Integer respId = Integer.parseInt(((Treeitem) item).getValue());
+				responsibilities.add(new Responsibility(respId, ""));
+				authorities.add(new Authority(1, "soberano.authority.top"));
+			}
+		}
+		else {
+			throw new WorkerMustBeAssignedToAResponsibilityException();	
+		}
 	}
 }
