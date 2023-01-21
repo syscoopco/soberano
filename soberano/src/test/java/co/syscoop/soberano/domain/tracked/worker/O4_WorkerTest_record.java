@@ -25,7 +25,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Worker;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.Responsibility;
-import co.syscoop.soberano.test.helper.ActionTest;
+import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.test.helper.WorkerForm;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -34,7 +34,7 @@ import co.syscoop.soberano.util.SpringUtility;
 //TODO: enable test
 //@Disabled
 
-class O4_WorkerTest_record extends ActionTest {
+class O4_WorkerTest_record extends WorkerActionTest {
 	
 	WorkerForm workerForm = null;
 
@@ -88,21 +88,8 @@ class O4_WorkerTest_record extends ActionTest {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			workerForm.testWrongValueException(ex);
+			fail(ex.getMessage());
 		}
-	}
-	
-	private void assignResponsibility(DesktopAgent desktop, Integer responsibilityId, String responsibilityName) {
-		for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-			if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == responsibilityId) {
-				InputAgent cmbResponsibilitiesInputAgent = (desktop.query("textbox").query("#cmbResponsibilities")).as(InputAgent.class);
-				cmbResponsibilitiesInputAgent.typing(responsibilityName);
-				workerForm.selectComboitemByValueForcingLabel(workerForm.getCmbResponsibilities(), responsibilityId.toString(), responsibilityName);
-				ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
-				btnAssignResponsibility.click();
-				break;
-			}
-		}	
 	}
 	
 	@Test
@@ -176,6 +163,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -256,6 +245,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -336,6 +327,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -416,6 +409,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -496,6 +491,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -576,6 +573,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -635,6 +634,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");		
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -701,6 +702,8 @@ class O4_WorkerTest_record extends ActionTest {
 			cmbCountryAgent.click(); 	//needed to force province combo population. 
 										//cmbCountry's onSelect event isn't triggered under testing		
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -774,6 +777,8 @@ class O4_WorkerTest_record extends ActionTest {
 			cmbProvinceAgent.click(); 	//needed to force municipality combo population. 
 										//cmbProvince's onSelect event isn't triggered under testing
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -854,6 +859,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -934,6 +941,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1014,6 +1023,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1094,6 +1105,8 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
 			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1114,13 +1127,14 @@ class O4_WorkerTest_record extends ActionTest {
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
 		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
 		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbResponsibilities = desktop.query("combobox").query("#cmbResponsibilities");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									cmbResponsibilities.as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -1140,7 +1154,7 @@ class O4_WorkerTest_record extends ActionTest {
 			workerForm.setComponentValue(workerForm.getTxtLastName(), newWorkerData.getLastName());			
 			
 			//responsibilities combobox
-			assignResponsibility(desktop, responsibilityId, responsibilityName);		
+			assignResponsibility(cmbResponsibilities, responsibilityId, responsibilityName);		
 			
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), newWorkerData.getContactData().getMobilePhoneNumber());
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), newWorkerData.getContactData().getEmailAddress());
@@ -1446,6 +1460,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Artemisa",
 								"Artemisa");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1614,6 +1630,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Santiago de Cuba",
 								"Santiago de Cuba");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1698,6 +1716,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Granma",
 								"Pilón");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1740,6 +1760,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Granma",
 								"Pilón");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1782,6 +1804,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Granma",
 								"Pilón");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -1992,6 +2016,8 @@ class O4_WorkerTest_record extends ActionTest {
 								"Cuba",
 								"Camagüey",
 								"Camagüey");
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

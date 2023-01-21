@@ -9,48 +9,29 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
-import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
-import org.zkoss.zats.mimic.operation.InputAgent;
-import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treechildren;
-import org.zkoss.zul.Treeitem;
-
-import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
-class O5_WorkerTest_check_recording {
-	
-	private static ComponentAgent cmbIntelliSearchAgent = null;
-	private static Combobox cmbIntelliSearch = null;
-	private static Textbox txtUserName = null;
-	private static Textbox txtFirstName = null;
-	private static Textbox txtLastName = null;
-	private static Treechildren tchdnResponsibilities = null;
-	private static Textbox txtPhoneNumber = null;
-	private static Textbox txtEmailAddress = null;
-	private static Textbox txtAddress = null;
-	private static Textbox txtPostalCode = null;
-	private static Textbox txtTown = null;
-	private static Textbox txtCity = null;
-	private static Combobox cmbCountry = null;
-	private static Combobox cmbProvince = null;
-	private static Combobox cmbMunicipality = null;
-	private static Doublebox dblLatitude = null;
-	private static Doublebox dblLongitude = null;
+
+//TODO: enable test
+//@Disabled
+
+class O5_WorkerTest_check_recording extends WorkerActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
-		Zats.init("./src/main/webapp");
+		Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("systemadmin@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/workers.zul");
+		
 		cmbIntelliSearchAgent = desktop.query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtUserName = cmbIntelliSearchAgent.query("#incDetails").query("#txtUserName").as(Textbox.class);
@@ -83,67 +64,6 @@ class O5_WorkerTest_check_recording {
 
 	@AfterEach
 	void tearDown() throws Exception {
-	}
-	
-	private void selectComboitemByLabel(Combobox comp, String label) {
-		
-		try {
-			for (Component co : comp.getChildren()) {
-				Comboitem item = (Comboitem) co;
-				if (((DomainObject) item.getValue()).getName().toLowerCase().equals(label.toLowerCase())) {
-					comp.setSelectedItem(item);
-					break;
-				}
-			}
-		} 
-		catch(Exception ex) 
-		{
-			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
-			with detailMessage: Components can be accessed only in event listeners.
-			Line 305 in ZK UiEngineImpl.java file*/
-		}
-	}
-	
-	private void checkUser(String userName,
-							String firstName,
-							String lastName,
-							String responsibility,
-							String phoneNumber,
-							String emailAddress,
-							String country,
-							String province,
-							String municipality,
-							String address,
-							String postalCode,
-							String town,
-							String city,
-							Double latitude,
-							Double longitude) {
-		
-		InputAgent cmbIntelliSearchInputAgent = cmbIntelliSearchAgent.as(InputAgent.class);
-		String qualifiedName = firstName + " " + lastName + " : " + userName;
-		cmbIntelliSearchInputAgent.typing(qualifiedName);
-		selectComboitemByLabel(cmbIntelliSearch, qualifiedName);		
-		cmbIntelliSearchAgent.click(); 	//needed to trigger cmbIntelliSearch's onClick event under testing
-		
-		assertEquals(txtUserName.getText().toLowerCase(), userName.toLowerCase(), "Wrong username shown for user " +  qualifiedName);
-		assertEquals(txtFirstName.getText().toLowerCase(), firstName.toLowerCase(), "Wrong firstName shown for user " +  qualifiedName);
-		assertEquals(txtLastName.getText().toLowerCase(), lastName.toLowerCase(), "Wrong lastName shown for user " +  qualifiedName);
-		
-		assertEquals(tchdnResponsibilities.getChildren().size(), 1, "None or more than one assigments for user " +  qualifiedName + " One and only one is exṕected.");
-		assertEquals(((Treeitem) tchdnResponsibilities.getChildren().get(0)).getLabel(), responsibility, "Wrong responsibility shown for user " +  qualifiedName);
-				
-		assertEquals(txtPhoneNumber.getText(), phoneNumber, "Wrong phoneNumber shown for user " +  qualifiedName);
-		assertEquals(txtEmailAddress.getText().toLowerCase(), emailAddress.toLowerCase(), "Wrong emailAddress shown for user " +  qualifiedName);
-		assertEquals(cmbCountry.getText(), country, "Wrong country shown for user " +  qualifiedName);
-		assertEquals(cmbProvince.getText(), province, "Wrong province shown for user " +  qualifiedName);
-		assertEquals(cmbMunicipality.getText(), municipality, "Wrong municipality shown for user " +  qualifiedName);
-		assertEquals(txtAddress.getText(), address, "Wrong address shown for user " +  qualifiedName);
-		assertEquals(txtPostalCode.getText(), postalCode, "Wrong postalCode shown for user " +  qualifiedName);
-		assertEquals(txtTown.getText(), town, "Wrong town shown for user " +  qualifiedName);
-		assertEquals(txtCity.getText(), city, "Wrong city shown for user " +  qualifiedName);
-		assertEquals(dblLatitude.getValue(), latitude, "Wrong latitude shown for user " +  qualifiedName);
-		assertEquals(dblLongitude.getValue(), longitude, "Wrong longitude shown for user " +  qualifiedName);			
 	}
 
 	@Test

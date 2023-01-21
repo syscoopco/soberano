@@ -38,6 +38,7 @@ public class WorkerFormHelper {
 		Treeitem positionItem = new Treeitem(responsibilityName, responsibilityId);
 		Treecell itemCell = new Treecell();
 		Button btnDelete = new Button();
+		btnDelete.setId("btnRowDeletion" + responsibilityId);
 		btnDelete.setImage("./images/delete.png");
 		btnDelete.setClass("ContextualButton");
 		btnDelete.addEventListener("onClick", new EventListener() {

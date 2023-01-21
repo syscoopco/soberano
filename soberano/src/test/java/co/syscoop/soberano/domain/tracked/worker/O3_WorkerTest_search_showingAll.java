@@ -13,12 +13,7 @@ import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.Tree;
-import org.zkoss.zul.TreeNode;
-
-import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 

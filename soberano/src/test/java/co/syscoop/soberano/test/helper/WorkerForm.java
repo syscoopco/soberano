@@ -6,6 +6,7 @@ import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Treechildren;
 
 public class WorkerForm extends ConstrainedForm {
 	
@@ -16,6 +17,7 @@ public class WorkerForm extends ConstrainedForm {
 	private Textbox txtFirstName;
 	private Textbox txtLastName;
 	private Combobox cmbResponsibilities;
+	private Treechildren tchdnResponsibilities;
 	private Textbox txtPhoneNumber;
 	private Textbox txtEmailAddress;
 	private Textbox txtAddress;
@@ -127,6 +129,47 @@ public class WorkerForm extends ConstrainedForm {
 		this.setDblLongitude(dblLongitude);
 		this.constrainableComponents.add(dblLongitude);
 		this.constrainableComponentById.put("dblLongitude", dblLongitude);
+	}
+	
+	public WorkerForm(DesktopAgent desktop,
+					Textbox txtUserName,
+					Textbox txtPassword,
+					Textbox txtConfirmPassword,
+					Textbox txtFirstName,
+					Textbox txtLastName,
+					Combobox cmbResponsibilities,
+					Treechildren tchdnResponsibilities,
+					Textbox txtPhoneNumber,
+					Textbox txtEmailAddress,
+					Textbox txtAddress,
+					Textbox txtPostalCode,
+					Textbox txtTown,
+					Textbox txtCity,
+					Combobox cmbCountry,
+					Combobox cmbProvince,
+					Combobox cmbMunicipality,
+					Doublebox dblLatitude,
+					Doublebox dblLongitude) {
+		
+		this(desktop,
+				txtUserName,
+				txtPassword,
+				txtConfirmPassword,
+				txtFirstName,
+				txtLastName,
+				cmbResponsibilities,
+				txtPhoneNumber,
+				txtEmailAddress,
+				txtAddress,
+				txtPostalCode,
+				txtTown,
+				txtCity,
+				cmbCountry,
+				cmbProvince,
+				cmbMunicipality,
+				dblLatitude,
+				dblLongitude);
+		this.tchdnResponsibilities = tchdnResponsibilities;
 	}
 
 	public DesktopAgent getDesktop() {
@@ -271,5 +314,13 @@ public class WorkerForm extends ConstrainedForm {
 
 	public void setDblLongitude(Doublebox dblLongitude) {
 		this.dblLongitude = dblLongitude;
+	}
+
+	public Treechildren getTchdnResponsibilities() {
+		return tchdnResponsibilities;
+	}
+
+	public void setTchdnResponsibilities(Treechildren tchdnResponsibilities) {
+		this.tchdnResponsibilities = tchdnResponsibilities;
 	}
 }
