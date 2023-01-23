@@ -39,12 +39,12 @@ public class WorkerActionTest extends ActionTest {
 	
 	protected void testPasswordsMustMatchException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals(cause.getClass().getName(), "co.syscoop.soberano.exception.PasswordsMustMatchException","Only co.syscoop.soberano.exception.PasswordsMustMatchException can be caught here.");
+		assertEquals("co.syscoop.soberano.exception.PasswordsMustMatchException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.PasswordsMustMatchException can be caught here.");
 	}
 	
 	protected void testWorkerMustBeAssignedToAResponsibilityException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals(cause.getClass().getName(), "co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException","Only co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException can be caught here.");
+		assertEquals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException can be caught here.");
 	}
 	
 	protected static WorkerForm setFormComponents(String user, String formZulFilename) {
@@ -79,7 +79,7 @@ public class WorkerActionTest extends ActionTest {
 	protected void checkUser(String userName,
 							String firstName,
 							String lastName,
-							String responsibility,
+							String responsibilities[],
 							String phoneNumber,
 							String emailAddress,
 							String country,
@@ -95,24 +95,27 @@ public class WorkerActionTest extends ActionTest {
 		String qualifiedName = firstName + " " + lastName + " : " + userName;
 		loadObjectDetails(qualifiedName);
 		
-		assertEquals(txtUserName.getText().toLowerCase(), userName.toLowerCase(), "Wrong username shown for user " +  qualifiedName);
-		assertEquals(txtFirstName.getText().toLowerCase(), firstName.toLowerCase(), "Wrong firstName shown for user " +  qualifiedName);
-		assertEquals(txtLastName.getText().toLowerCase(), lastName.toLowerCase(), "Wrong lastName shown for user " +  qualifiedName);
+		assertEquals(userName.toLowerCase(), txtUserName.getText().toLowerCase(), "Wrong username shown for user " +  qualifiedName);
+		assertEquals(firstName.toLowerCase(), txtFirstName.getText().toLowerCase(), "Wrong firstName shown for user " +  qualifiedName);
+		assertEquals(lastName.toLowerCase(), txtLastName.getText().toLowerCase(), "Wrong lastName shown for user " +  qualifiedName);
 		
-		assertEquals(tchdnResponsibilities.getChildren().size(), 1, "None or more than one assigments for user " +  qualifiedName + " One and only one is exṕected.");
-		assertEquals(((Treeitem) tchdnResponsibilities.getChildren().get(0)).getLabel(), responsibility, "Wrong responsibility shown for user " +  qualifiedName);
+		assertEquals(1, tchdnResponsibilities.getChildren().size(), "None or more than one assigments for user " +  qualifiedName + " One and only one is exṕected.");
+		
+		for (int i = 0; i < responsibilities.length; i++) {
+			assertEquals(responsibilities[i], ((Treeitem) tchdnResponsibilities.getChildren().get(0)).getLabel(), "Wrong responsibility shown for user " +  qualifiedName);
+		}
 				
-		assertEquals(txtPhoneNumber.getText(), phoneNumber, "Wrong phoneNumber shown for user " +  qualifiedName);
-		assertEquals(txtEmailAddress.getText().toLowerCase(), emailAddress.toLowerCase(), "Wrong emailAddress shown for user " +  qualifiedName);
-		assertEquals(cmbCountry.getText(), country, "Wrong country shown for user " +  qualifiedName);
-		assertEquals(cmbProvince.getText(), province, "Wrong province shown for user " +  qualifiedName);
-		assertEquals(cmbMunicipality.getText(), municipality, "Wrong municipality shown for user " +  qualifiedName);
-		assertEquals(txtAddress.getText(), address, "Wrong address shown for user " +  qualifiedName);
-		assertEquals(txtPostalCode.getText(), postalCode, "Wrong postalCode shown for user " +  qualifiedName);
-		assertEquals(txtTown.getText(), town, "Wrong town shown for user " +  qualifiedName);
-		assertEquals(txtCity.getText(), city, "Wrong city shown for user " +  qualifiedName);
-		assertEquals(dblLatitude.getValue(), latitude, "Wrong latitude shown for user " +  qualifiedName);
-		assertEquals(dblLongitude.getValue(), longitude, "Wrong longitude shown for user " +  qualifiedName);			
+		assertEquals(phoneNumber, txtPhoneNumber.getText(), "Wrong phoneNumber shown for user " +  qualifiedName);
+		assertEquals(emailAddress.toLowerCase(), txtEmailAddress.getText().toLowerCase(), "Wrong emailAddress shown for user " +  qualifiedName);
+		assertEquals(country, cmbCountry.getText(), "Wrong country shown for user " +  qualifiedName);
+		assertEquals(province, cmbProvince.getText(), "Wrong province shown for user " +  qualifiedName);
+		assertEquals(municipality, cmbMunicipality.getText(), "Wrong municipality shown for user " +  qualifiedName);
+		assertEquals(address, txtAddress.getText(), "Wrong address shown for user " +  qualifiedName);
+		assertEquals(postalCode, txtPostalCode.getText(), "Wrong postalCode shown for user " +  qualifiedName);
+		assertEquals(town, txtTown.getText(), "Wrong town shown for user " +  qualifiedName);
+		assertEquals(city, txtCity.getText(), "Wrong city shown for user " +  qualifiedName);
+		assertEquals(latitude, dblLatitude.getValue(), "Wrong latitude shown for user " +  qualifiedName);
+		assertEquals(longitude, dblLongitude.getValue(), "Wrong longitude shown for user " +  qualifiedName);			
 	}
 	
 	protected void assignResponsibility(ComponentAgent respComboAgent, Integer responsibilityId, String responsibilityName) {

@@ -59,7 +59,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	
 	@Test
 	final void testCase0() {
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
@@ -95,7 +95,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase1() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -177,7 +177,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase2() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -259,7 +259,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase3() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -341,7 +341,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase4() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -423,7 +423,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase5() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -505,7 +505,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase6() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -587,7 +587,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase7() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -648,7 +648,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase8() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -716,7 +716,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase9() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -791,7 +791,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase10() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -873,7 +873,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase11() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -955,7 +955,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase12() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -1037,7 +1037,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 	@Test
 	final void testCase13() {
 
-		SpringUtility.setLoggedUserForTesting("user6");
+		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
 		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
@@ -1243,7 +1243,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										1.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user1",
+			testForAllowedUser("user1@soberano.syscoop.co",
 								newWorkerData, 
 								3,
 								"Accounter",
@@ -1285,7 +1285,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										2.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user2",
+			testForAllowedUser("user2@soberano.syscoop.co",
 								newWorkerData, 
 								7, 
 								"Auditor",
@@ -1327,7 +1327,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										3.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user3",
+			testForAllowedUser("user3@soberano.syscoop.co",
 								newWorkerData, 
 								11, 
 								"Catalog maintainer",
@@ -1369,7 +1369,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										4.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user4",
+			testForAllowedUser("user4@soberano.syscoop.co",
 								newWorkerData, 
 								6, 
 								"Checker",
@@ -1411,7 +1411,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										5.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user5",
+			testForAllowedUser("user5@soberano.syscoop.co",
 								newWorkerData, 
 								12, 
 								"Community manager",
@@ -1453,7 +1453,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										6.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user6",
+			testForAllowedUser("user6@soberano.syscoop.co",
 								newWorkerData, 
 								2, 
 								"Manager",
@@ -1497,7 +1497,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										6.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user7",
+			testForAllowedUser("user7@soberano.syscoop.co",
 								newWorkerData, 
 								2, 
 								"Manager",
@@ -1539,7 +1539,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										7.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user8",
+			testForAllowedUser("user8@soberano.syscoop.co",
 								newWorkerData, 
 								13, 
 								"Procurement worker",
@@ -1581,7 +1581,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										8.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user9",
+			testForAllowedUser("user9@soberano.syscoop.co",
 								newWorkerData, 
 								4, 
 								"Salesclerk",
@@ -1623,7 +1623,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										9.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user10",
+			testForAllowedUser("user10@soberano.syscoop.co",
 								newWorkerData, 
 								5, 
 								"Shift manager",
@@ -1667,7 +1667,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										9.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user11",
+			testForAllowedUser("user11@soberano.syscoop.co",
 								newWorkerData, 
 								5, 
 								"Shift manager",
@@ -1709,7 +1709,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										10.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user12",
+			testForAllowedUser("user12@soberano.syscoop.co",
 								newWorkerData, 
 								10, 
 								"Storekeeper",
@@ -1753,7 +1753,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										10.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user13",
+			testForAllowedUser("user13@soberano.syscoop.co",
 								newWorkerData, 
 								10, 
 								"Storekeeper",
@@ -1797,7 +1797,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										10.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user14",
+			testForAllowedUser("user14@soberano.syscoop.co",
 								newWorkerData, 
 								10, 
 								"Storekeeper",
@@ -1841,7 +1841,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										10.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user15",
+			testForAllowedUser("user15@soberano.syscoop.co",
 								newWorkerData, 
 								10, 
 								"Storekeeper",
@@ -1883,7 +1883,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										11.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user16",
+			testForAllowedUser("user16@soberano.syscoop.co",
 								newWorkerData, 
 								14, 
 								"System admin",
@@ -1925,7 +1925,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										12.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user16",
+			testForAllowedUser("user16@soberano.syscoop.co",
 								newWorkerData, 
 								8, 
 								"Workshop 1 worker",
@@ -1967,7 +1967,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										13.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user16",
+			testForAllowedUser("user16@soberano.syscoop.co",
 								newWorkerData, 
 								9, 
 								"Workshop 2 worker",
@@ -2009,7 +2009,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 										13.0,
 										responsibilities,
 										authorities);
-			testForAllowedUser("user16",
+			testForAllowedUser("user16@soberano.syscoop.co",
 								newWorkerData, 
 								9, 
 								"Workshop 2 worker",

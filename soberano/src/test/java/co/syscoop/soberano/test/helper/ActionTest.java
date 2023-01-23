@@ -28,12 +28,12 @@ public class ActionTest {
 	
 	protected void testNotEnoughRightsException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals(cause.getClass().getName(), "co.syscoop.soberano.exception.NotEnoughRightsException","Only co.syscoop.soberano.exception.NotEnoughRightsException can be caught here.");
+		assertEquals("co.syscoop.soberano.exception.NotEnoughRightsException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.NotEnoughRightsException can be caught here.");
 	}
 	
 	protected void testDuplicateKeyException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals(cause.getClass().getName(), "org.springframework.dao.DuplicateKeyException","Only org.springframework.dao.DuplicateKeyException can be caught here.");
+		assertEquals("org.springframework.dao.DuplicateKeyException", cause.getClass().getName(), "Only org.springframework.dao.DuplicateKeyException can be caught here.");
 	}
 	
 	protected void selectComboitemByLabel(Combobox comp, String label) {

@@ -36,22 +36,22 @@ public class TestUtilityCode {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
-		assertEquals(cmbIntelliSearch.as(Combobox.class).getModel().getSize(), 
-					expectedAccessibleObjectCount, 
+		assertEquals(expectedAccessibleObjectCount, 
+					cmbIntelliSearch.as(Combobox.class).getModel().getSize(), 
 					"User" 
-						+ userIdSuffix + " must have access to " 
+						+ userIdSuffix + "@soberano.syscoop.co" + " must have access to " 
 						+ expectedAccessibleObjectCount 
 						+ " objects. It sees " 
 						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
 						+ " objects in search combobox.");
 		for (Integer i = 1; i <= cmbIntelliSearch.as(Combobox.class).getModel().getSize(); i++) {
 			DomainObject doo = ((DomainObject) cmbIntelliSearch.as(Combobox.class).getModel().getElementAt(i - 1));
-			assertEquals("user" + i + "fn user" + i +"ln : user" + i, doo.getName(), "When populating search combobox, user" 
-																					+ userIdSuffix 
+			assertEquals("user" + i + "fn user" + i +"ln : user" + i + "@soberano.syscoop.co", doo.getName(), "When populating search combobox, user" 
+																					+ userIdSuffix + "@soberano.syscoop.co"
 																					+ " retrieves wrong name for object with name " 
 																					+ doo.getName());
 			assertEquals(objectBaseId + i, doo.getId(), "When populating search combobox, user" 
-													+ userIdSuffix 
+													+ userIdSuffix + "@soberano.syscoop.co"
 													+ " retrieves wrong id for object with id " 
 													+ doo.getId());
 		}
@@ -63,10 +63,10 @@ public class TestUtilityCode {
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");		
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
-		assertEquals(treeObjects.getTreechildren().getItemCount(), 
-					expectedAccessibleObjectCount, 
+		assertEquals(expectedAccessibleObjectCount, 
+					treeObjects.getTreechildren().getItemCount(), 
 					"User" 
-						+ userIdSuffix + " must have access to " 
+						+ userIdSuffix + "@soberano.syscoop.co" + " must have access to " 
 						+ expectedAccessibleObjectCount 
 						+ " objects. It sees " 
 						+ treeObjects.getTreechildren().getItemCount() 
@@ -76,12 +76,12 @@ public class TestUtilityCode {
 		for (Integer i = 1; i <= rootNode.getChildren().size(); i++) {
 			Object objectNode = rootNode.getChildren().get(i - 1);
 			DomainObject doo = (DomainObject) ((NodeData) (((TreeNode) objectNode).getData())).getValue();
-			assertEquals("user" + i + "fn user" + i +"ln : user" + i, doo.getName(), "When populating showing-all tree, user" 
-																				+ userIdSuffix 
+			assertEquals("user" + i + "fn user" + i +"ln : user" + i + "@soberano.syscoop.co", doo.getName(), "When populating showing-all tree, user" 
+																				+ userIdSuffix + "@soberano.syscoop.co"
 																				+ " retrieves wrong name for object with name " 
 																				+ doo.getName());
 			assertEquals(objectBaseId + i, doo.getId(), "When populating showing-all tree, user" 
-																				+ userIdSuffix 
+																				+ userIdSuffix + "@soberano.syscoop.co"
 																				+ " retrieves wrong id for object with id " 
 																				+ doo.getId());
 		}

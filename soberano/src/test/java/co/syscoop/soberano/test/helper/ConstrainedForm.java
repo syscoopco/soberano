@@ -135,7 +135,7 @@ public class ConstrainedForm {
 	
 	public void testWrongValueException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals(cause.getClass().getName(), "org.zkoss.zk.ui.WrongValueException","Only org.zkoss.zk.ui.WrongValueException can be caught here.");
+		assertEquals("org.zkoss.zk.ui.WrongValueException", cause.getClass().getName(), "Only org.zkoss.zk.ui.WrongValueException can be caught here.");
 		if (!this.componentIsConstrained(((WrongValueException) cause).getComponent().getId())) {
 			fail("org.zkoss.zk.ui.WrongValueException catched for an unconstrained component. Compare the elements of ConstrainedForm.constrainedComponents with the zul file.");
 		}

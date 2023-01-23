@@ -43,7 +43,7 @@ class O2_WorkerTest_populate {
 			//clean LDAP of precondition users
 			Worker workerToDelete = null;
 			for (Integer i = 1; i <= 16; i++) {
-				workerToDelete = new Worker("user" + i.toString());
+				workerToDelete = new Worker("user" + i.toString() + "@soberano.syscoop.co");
 				try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			}
 			
@@ -98,7 +98,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 14; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			Worker newWorker = new Worker(0,
 										0,
-										"user1",
+										"user1@soberano.syscoop.co",
 										"user1fn",
 										"user1ln",
 										"12345",
@@ -130,7 +130,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user2",
+									"user2@soberano.syscoop.co",
 									"user2fn",
 									"user2ln",
 									"12345",
@@ -163,7 +163,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user3",
+									"user3@soberano.syscoop.co",
 									"user3fn",
 									"user3ln",
 									"12345",
@@ -195,7 +195,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user4",
+									"user4@soberano.syscoop.co",
 									"user4fn",
 									"user4ln",
 									"12345",
@@ -227,7 +227,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user5",
+									"user5@soberano.syscoop.co",
 									"user5fn",
 									"user5ln",
 									"12345",
@@ -261,7 +261,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 10; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user6",
+									"user6@soberano.syscoop.co",
 									"user6fn",
 									"user6ln",
 									"12345",
@@ -294,7 +294,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user7",
+									"user7@soberano.syscoop.co",
 									"user7fn",
 									"user7ln",
 									"12345",
@@ -326,7 +326,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user8",
+									"user8@soberano.syscoop.co",
 									"user8fn",
 									"user8ln",
 									"12345",
@@ -352,7 +352,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user9",
+									"user9@soberano.syscoop.co",
 									"user9fn",
 									"user9ln",
 									"12345",
@@ -385,7 +385,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user10",
+									"user10@soberano.syscoop.co",
 									"user10fn",
 									"user10ln",
 									"12345",
@@ -418,7 +418,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user11",
+									"user11@soberano.syscoop.co",
 									"user11fn",
 									"user11ln",
 									"12345",
@@ -450,7 +450,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user12",
+									"user12@soberano.syscoop.co",
 									"user12fn",
 									"user12ln",
 									"12345",
@@ -481,7 +481,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 7; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user13",
+									"user13@soberano.syscoop.co",
 									"user13fn",
 									"user13ln",
 									"12345",
@@ -512,7 +512,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 7; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user14",
+									"user14@soberano.syscoop.co",
 									"user14fn",
 									"user14ln",
 									"12345",
@@ -544,7 +544,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user15",
+									"user15@soberano.syscoop.co",
 									"user15fn",
 									"user15ln",
 									"12345",
@@ -575,7 +575,7 @@ class O2_WorkerTest_populate {
 			for (int i = 1; i <= 7; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
-									"user16",
+									"user16@soberano.syscoop.co",
 									"user16fn",
 									"user16ln",
 									"12345",

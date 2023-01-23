@@ -51,7 +51,8 @@ class O3_WorkerTest_search_showingAll {
 	private void testForAllowedUser(Integer userSuffix) {
 		
 		//test for a user
-		SpringUtility.setLoggedUserForTesting("user" + userSuffix);
+		String userName = "user" + userSuffix + "@soberano.syscoop.co";
+		SpringUtility.setLoggedUserForTesting(userName);
 		
 		//showing all in search combobox
 		TestUtilityCode.testSearchCombobox("/workers.zul", userCount, userSuffix, baseId);
@@ -62,23 +63,18 @@ class O3_WorkerTest_search_showingAll {
 	
 	private void testForDisallowedUser(Integer userSuffix) {
 		
-		SpringUtility.setLoggedUserForTesting("user" + userSuffix);
+		String userName = "user" + userSuffix + "@soberano.syscoop.co";
+		SpringUtility.setLoggedUserForTesting(userName);
 		DesktopAgent desktop = Zats.newClient().connect("/workers.zul");
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
-		assertEquals(cmbIntelliSearch.as(Combobox.class).getModel().getSize(), 
-					0, 
-					"User" 
-						+ userSuffix + " must not have access to any workers. However, it sees " 
-						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
-						+ " workers in search combobox.");
-				
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
-		assertEquals(treeObjects.getTreechildren().getItemCount(), 
-					0, 
-					"User" 
-						+ userSuffix + " must not have access to any workers. However, it sees " 
-						+ treeObjects.getTreechildren().getItemCount() 
-						+ " objects in showing-all tree.");
+		assertEquals(0,
+					cmbIntelliSearch.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
+					userName + " must not have access to any workers. However, it sees " 
+							+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
+							+ " workers in search combobox, and " 
+							+ treeObjects.getTreechildren().getItemCount()
+							+ " in showing-all tree.");
 	};
 
 	@Test
