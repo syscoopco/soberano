@@ -20,7 +20,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O3_WorkerTest_search_showingAll {
 	

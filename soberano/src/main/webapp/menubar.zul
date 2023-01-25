@@ -6,7 +6,7 @@
 				<menuseparator/>
 				<menu label="${labels.menuItem.Configuration}" sclass="BarMenu">
 					<menupopup>
-						<menuitem label="${labels.menuItem.Outputs}" href="outputs.zul"/>
+						<menuitem label="${labels.menuItem.Products}" href="products.zul"/>
 						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
 						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
 						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
@@ -25,7 +25,9 @@
 						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
 						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
 					</menupopup>
-				</menu>	
+				</menu>
+				<menuseparator/>
+				<menuitem label="${labels.menuItem.ChangePassword}" href="change_password.zul"/>
 				<menuseparator/>
 				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>
 			</menupopup>

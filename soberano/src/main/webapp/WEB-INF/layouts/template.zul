@@ -4,7 +4,7 @@
 			<north hflex="1" sclass="DefaultBackground">
 				<include src="/WEB-INF/layouts/template-north.zul"/>
 			</north>			
-			<center self="@insert(contentPanel)" autoscroll="true" sclass="DefaultBackground">
+			<center id="center" self="@insert(contentPanel)" autoscroll="true" sclass="DefaultBackground">
 			</center>
 			<south id="south" sclass="DefaultBackground">
 				<include id="incSouth" src="/WEB-INF/layouts/template-south.zul"></include>
