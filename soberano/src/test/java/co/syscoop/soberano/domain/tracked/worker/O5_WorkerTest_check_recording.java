@@ -19,7 +19,7 @@ import org.zkoss.zul.Treechildren;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(4)
+@Order(5)
 
 //TODO: enable test
 //@Disabled

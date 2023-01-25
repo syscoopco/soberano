@@ -50,7 +50,7 @@ public class Worker extends TrackedObject {
 		super(id);
 	}
 	
-	//usefull to delete worker from ldap
+	//useful to delete worker from ldap
 	public Worker(String loginName) {
 		this.loginName = loginName;
 	}
@@ -257,7 +257,7 @@ public class Worker extends TrackedObject {
 			if (!errorMessage.isEmpty()) throw new Exception(errorMessage);
 		}
 		else {
-			qryResult = -1; //not enough permissions to add worker
+			qryResult = -1; //not enough permissions
 		}
 		return qryResult;
 	}
@@ -299,7 +299,26 @@ public class Worker extends TrackedObject {
 		
 		Integer qryResult = super.modify();
 		if (qryResult < 0) {
-			qryResult = -1; //not enough permissions to add worker
+			qryResult = -1; //not enough permissions
+		}
+		else {
+			changePassword(password);
+		}
+		return qryResult;
+	}
+	
+	@Override
+	public Integer disable() throws SQLException, Exception {
+					
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		disableQuery = "SELECT soberano.\"fn_Worker_disable\"(:workerId, "
+				+ "											:loginname) AS queryresult";
+		disableParameters = new MapSqlParameterSource();
+		disableParameters.addValue("workerId", this.getId());
+		
+		Integer qryResult = super.disable();
+		if (qryResult < 0) {
+			qryResult = -1; //not enough permissions
 		}
 		else {
 			changePassword(password);
@@ -373,5 +392,12 @@ public class Worker extends TrackedObject {
 
 	public ArrayList<Integer> getResponsibilityIds() {
 		return responsibilityIds;
+	}
+
+	@Override
+	public Integer print() throws SQLException {
+		
+		// TODO print a report on worker
+		return null;
 	}
 }

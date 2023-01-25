@@ -36,10 +36,11 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	protected MapSqlParameterSource recordParameters = null;
 	protected String modifyQuery = "";
 	protected MapSqlParameterSource modifyParameters = null;
+	protected String disableQuery = "";
+	protected MapSqlParameterSource disableParameters = null;
 	protected String getQuery = "";
 	protected Map<String,	Object> getParameters = new HashMap<String, Object>();
 	protected ResultSetExtractor<Object> extractor = null;
-	
 	
 	public TrackedObject() {};
 	
@@ -114,6 +115,10 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return (query(modifyQuery, this.addLoginname(modifyQuery, modifyParameters) , new QueryResultMapper()).get(0));
 		}
 		
+		public Integer disable(String disableQuery, MapSqlParameterSource disableParameters) throws SQLException {			
+			return (query(disableQuery, this.addLoginname(disableQuery, disableParameters) , new QueryResultMapper()).get(0));
+		}
+		
 		private Map<String, Object> addLoginname(String query, Map<String, Object> parameters) {
 			if (query.indexOf("loginname") > -1) {
 				parameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
@@ -153,12 +158,6 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	@Override
-	public Integer disable() throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ArrayList<TrackedObject> getSet(String criteria, Integer limit, Integer offset) throws SQLException{
@@ -169,6 +168,12 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	@Override
 	public Integer modify() throws SQLException, Exception {
 		Integer result = trackedObjectDao.modify(modifyQuery, modifyParameters);
+		return result;
+	}
+	
+	@Override
+	public Integer disable() throws SQLException, Exception {
+		Integer result = trackedObjectDao.disable(disableQuery, disableParameters);
 		return result;
 	}
 

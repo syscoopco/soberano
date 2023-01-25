@@ -1,5 +1,7 @@
 package co.syscoop.soberano.domain.tracked;
 
+import java.sql.SQLException;
+
 import co.syscoop.soberano.domain.untracked.ContactData;
 
 public class Customer extends TrackedObject {
@@ -47,5 +49,11 @@ public class Customer extends TrackedObject {
 	protected void copyFrom(Object object) {
 		
 		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public Integer print() throws SQLException {
+		// TODO print customer
+		return null;
 	}
 }

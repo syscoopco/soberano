@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.ComponentAgent;
@@ -20,6 +22,8 @@ import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.test.helper.WorkerForm;
+
+@Order(6)
 
 //TODO: enable test
 //@Disabled

@@ -1,19 +1,28 @@
 package co.syscoop.soberano.test.helper;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.DefaultTreeModel;
+import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeNode;
+import org.zkoss.zul.Treecell;
+import org.zkoss.zul.Treechildren;
+import org.zkoss.zul.Treeitem;
+
 import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
+import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ZKUtilitity;
 
 public class TestUtilityCode {
 
@@ -86,4 +95,53 @@ public class TestUtilityCode {
 																				+ doo.getId());
 		}
 	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void testDisablingObject(String formURL, String userToLogin, String objectToDisableTextIdFragment, Integer expectedFinalObjectCount) {
+		
+		SpringUtility.setLoggedUserForTesting(userToLogin);
+		DesktopAgent desktop = Zats.newClient().connect(formURL);
+		ComponentAgent cmbIntelliSearchAgent = desktop.query("combobox");
+		ComponentAgent treeChildrenAgent = cmbIntelliSearchAgent.query("#wndShowingAll").query("#treeObjects").query("Treechildren");
+		Tree treeObjects = (Tree) cmbIntelliSearchAgent.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
+		Treechildren treeChildren = (Treechildren) treeObjects.query("Treechildren");		
+		for (Component comp : treeChildren.getChildren()) {
+			Treeitem item = (Treeitem) comp;
+			if (((Treeitem) comp).getLabel().toLowerCase().contains(objectToDisableTextIdFragment.toLowerCase())) {				
+				DefaultTreeNode<NodeData> nodeData = (DefaultTreeNode<NodeData>) ((TreeNode) ZKUtilitity.getAssociatedNode(item, treeObjects));
+				DomainObject doo = (DomainObject) nodeData.getData().getValue();
+				ComponentAgent btnDisableAgent = treeChildrenAgent.query("#btnDisable" + doo.getId().toString());
+				btnDisableAgent.click();
+				if (!((Treecell) item.query("treecell")).getStyle().equals("background-color:yellow;")) {
+					fail("Disabling button did not change the containing component's style when the button is clicked for the first time.");
+				}
+				btnDisableAgent.click();
+				break;
+			}			
+		}
+		
+		//reload the form and check the object was actually disabled
+		desktop = Zats.newClient().connect(formURL);
+		cmbIntelliSearchAgent = desktop.query("combobox");
+		treeChildrenAgent = cmbIntelliSearchAgent.query("#wndShowingAll").query("#treeObjects").query("Treechildren");
+		treeObjects = (Tree) cmbIntelliSearchAgent.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
+		treeChildren = (Treechildren) treeObjects.query("Treechildren");		
+		
+		//check the tree is enough because every showing up request processing ends up in a selection of the corresponding tree item
+		for (Component comp : treeChildren.getChildren()) {
+			String userNodelabel = ((Treeitem) comp).getLabel();
+			String shownUserName = userNodelabel.substring(userNodelabel.indexOf(": ") + 1);
+			
+			if (shownUserName.toLowerCase().equals(objectToDisableTextIdFragment.toLowerCase())) {				
+				fail("Object was not disabled. It is wrongly being loaded and shown in the showing-all tree. Object: " + objectToDisableTextIdFragment);
+			}			
+		}
+		
+		//expectedFinalObjectCount in intelli search combo and tree
+		assertEquals(2 * expectedFinalObjectCount,
+				cmbIntelliSearchAgent.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
+				"Wrong amount of objects shown after disabling the object: " + objectToDisableTextIdFragment 
+					+ ". Expected amount: " + expectedFinalObjectCount.toString()
+					+ ". Actual amount: " + new Integer(treeObjects.getTreechildren().getItemCount()).toString());
+	};
 }

@@ -2,11 +2,10 @@ package co.syscoop.soberano.renderers;
 
 import java.sql.SQLException;
 
-import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
-import org.zkoss.zul.Treeitem;
-
+import co.syscoop.soberano.domain.tracked.Worker;
+import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.ui.helper.WorkerFormHelper;
 
@@ -23,8 +22,8 @@ public class WorkerTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	}
 
 	@Override
-	protected int delete(Treeitem item, DefaultTreeNode<NodeData> data, Event event) {
-		// TODO Auto-generated method stub
-		return 0;
+	protected int disable(DefaultTreeNode<NodeData> data) throws SQLException, Exception {
+
+		return (new Worker(((DomainObject) data.getData().getValue()).getId())).disable();
 	}
 }
