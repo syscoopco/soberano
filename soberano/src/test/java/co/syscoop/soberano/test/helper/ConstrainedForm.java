@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zul.Combobox;
@@ -19,6 +20,7 @@ import co.syscoop.soberano.util.ExceptionTreatment;
 
 public class ConstrainedForm {
 
+	private DesktopAgent desktop;
 	protected List<Component> constrainableComponents = new ArrayList<Component>(); //store the constrainable components (textbox, combobox, decimalbox, doublebox, intbox, ...)
 	protected HashMap<String, Component> constrainableComponentById = new HashMap<String, Component>();
 	protected List<String> constrainedComponents = null; //store the ids of the zk form's components with constraint attribute set.
@@ -173,5 +175,13 @@ public class ConstrainedForm {
 				fail("A component included in ConstrainedForm.constrainedComponents isn't actually constrained. Check the zul file. Component: " + comp.getId());
 			}
 		}
+	}
+
+	public DesktopAgent getDesktop() {
+		return desktop;
+	}
+
+	public void setDesktop(DesktopAgent desktop) {
+		this.desktop = desktop;
 	}		
 }

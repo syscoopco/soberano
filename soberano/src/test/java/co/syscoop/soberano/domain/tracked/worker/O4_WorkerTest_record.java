@@ -36,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 class O4_WorkerTest_record extends WorkerActionTest {
 	
-	WorkerForm workerForm = null;
+	protected WorkerForm workerForm = null;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

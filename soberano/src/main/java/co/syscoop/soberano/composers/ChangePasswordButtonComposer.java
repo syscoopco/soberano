@@ -45,7 +45,7 @@ public class ChangePasswordButtonComposer extends SelectorComposer {
 				throw new PasswordsMustMatchException();
 			}
 			else {
-				LdapUserDao userDao  = (LdapUserDao) SpringUtility.webApplicationContext().getBean("ldapUser");
+				LdapUserDao userDao  = (LdapUserDao) SpringUtility.applicationContext().getBean("ldapUser");
 				String errorMessage = userDao.changePassword(new Worker(SpringUtility.loggedUser()), txtPassword.getValue());
 				if (!errorMessage.isEmpty()) {
 					throw new SoberanoLDAPException(errorMessage);
@@ -77,13 +77,10 @@ public class ChangePasswordButtonComposer extends SelectorComposer {
 					Messagebox.ERROR);
 		}
 		catch(Exception ex) {
-			Messagebox.show(Labels.getLabel("message.error.LDAP.ErrorChangingPassword") 
-								+ ". " 
-								+ Labels.getLabel("caption.general.details")
-								+ ": " + ex.getMessage(), 
-		  					Labels.getLabel("messageBoxTitle.Error"), 
-							0, 
-							Messagebox.ERROR);
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
 		}
     }
 }

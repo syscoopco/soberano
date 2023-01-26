@@ -13,7 +13,7 @@ public class RESTApplication extends Application {
 		
 		HashSet<Class<?>> set = new HashSet<Class<?>>();
 		
-		//TODO: add REST web service resource
+		set.add(TestResource.class);
 		
 		return set;
    }

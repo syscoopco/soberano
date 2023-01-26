@@ -10,7 +10,6 @@ import org.zkoss.zul.Treechildren;
 
 public class WorkerForm extends ConstrainedForm {
 	
-	private DesktopAgent desktop;
 	private Textbox txtUserName;
 	private Textbox txtPassword;
 	private Textbox txtConfirmPassword;
@@ -170,14 +169,6 @@ public class WorkerForm extends ConstrainedForm {
 				dblLatitude,
 				dblLongitude);
 		this.tchdnResponsibilities = tchdnResponsibilities;
-	}
-
-	public DesktopAgent getDesktop() {
-		return desktop;
-	}
-
-	public void setDesktop(DesktopAgent desktop) {
-		this.desktop = desktop;
 	}
 
 	public Textbox getTxtUserName() {

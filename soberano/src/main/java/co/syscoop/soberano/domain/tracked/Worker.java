@@ -204,7 +204,7 @@ public class Worker extends TrackedObject {
 		
 		//if password isn't empty, change password
 		if (!pwd.isEmpty()) {
-			LdapUserDao userDao  = (LdapUserDao) SpringUtility.webApplicationContext().getBean("ldapUser");
+			LdapUserDao userDao  = (LdapUserDao) SpringUtility.applicationContext().getBean("ldapUser");
 			String errorMessage = userDao.changePassword(this, pwd);
 			if (!errorMessage.isEmpty()) throw new SoberanoLDAPException(errorMessage);
 		}

@@ -37,11 +37,6 @@ public class WorkerActionTest extends ActionTest {
 	protected static Doublebox dblLatitude = null;
 	protected static Doublebox dblLongitude = null;
 	
-	protected void testPasswordsMustMatchException(Throwable ex) {
-		Throwable cause = ExceptionTreatment.getRootCause(ex);
-		assertEquals("co.syscoop.soberano.exception.PasswordsMustMatchException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.PasswordsMustMatchException can be caught here.");
-	}
-	
 	protected void testWorkerMustBeAssignedToAResponsibilityException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException can be caught here.");

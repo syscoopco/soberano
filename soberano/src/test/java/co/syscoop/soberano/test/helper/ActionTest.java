@@ -62,4 +62,9 @@ public class ActionTest {
 		selectComboitemByLabel(cmbIntelliSearch, qualifiedName);		
 		cmbIntelliSearchAgent.click(); 	//needed to trigger cmbIntelliSearch's onClick event under testing
 	}
+	
+	protected void testPasswordsMustMatchException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.PasswordsMustMatchException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.PasswordsMustMatchException can be caught here.");
+	}
 }
