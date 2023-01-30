@@ -2,34 +2,72 @@
 	<menubar>
 		<menu image="./images/menu_38.jpg" sclass="BarMenu">
 			<menupopup>
-				<menuitem id="mniActivity" label="${labels.menuItem.Activity}" href="activity.zul"/>
-				<menuseparator/>
-				<menu label="${labels.menuItem.Configuration}" sclass="BarMenu">
+				<menuitem label="${labels.menuItem.Activity}" href="activity.zul"/>				
+				<menu label="${labels.menuItem.Cashier}" sclass="BarMenu">
 					<menupopup>
-						<menuitem label="${labels.menuItem.Products}" href="products.zul"/>
-						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
-						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
-						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
-							<menupopup>
-								<menuitem label="${labels.menuItem.Warehouses}" href="warehouses.zul"/>
-								<menuitem label="${labels.menuItem.CostCenters}" href="cost_centers.zul"/>
-								<menuitem label="${labels.menuItem.Processes}" href="processes.zul"/>
-							</menupopup>
-						</menu>				
-						<menuitem label="${labels.menuItem.ProductCategories}" href="product_categories.zul"/>
-						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
-						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
-						<menuitem label="${labels.menuItem.RawMaterials}" href="raw_materials.zul"/>
-						<menuitem label="${labels.menuItem.Providers}" href="providers.zul"/>
-						<menuitem label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>
-						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
-						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
+						<menuitem label="${labels.menuItem.Deposit}" href="deposit.zul"/>
+						<menuitem label="${labels.menuItem.Withdraw}" href="withdraw.zul"/>
+						<menuitem label="${labels.menuItem.Count}" href="count.zul"/>
 					</menupopup>
 				</menu>
-				<menuseparator/>
+				<menuitem label="${labels.menuItem.CurrentCatalog}" href="catalog.zul"/>
+				<menuitem label="${labels.menuItem.AccountingClosures}" href="closures.zul"/>				
+				<menu label="${labels.menuItem.Expenditures}" sclass="BarMenu">
+					<menupopup>
+						<menuitem label="${labels.menuItem.Materials}" href="materials.zul"/>
+						<menuitem label="${labels.menuItem.Services}" href="services.zul"/>
+						<menuitem label="${labels.menuItem.Payroll}" href="payroll.zul"/>
+					</menupopup>
+				</menu>
+				<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
+					<menupopup>
+						<menuitem label="${labels.menuItem.Stock}" href="stock.zul" disabled="${pageScope.restrict_access}"/>
+						<menuitem label="${labels.menuItem.Process}" href="process.zul"/>
+						<menuitem label="${labels.menuItem.InventoryOperation}" href="inventory_operation.zul"/>
+					</menupopup>
+				</menu>				
+				<menu label="${labels.menuItem.Reports}" sclass="BarMenu">
+					<menupopup>
+						<menuitem label="${labels.menuItem.OperationsReport}" href="operations_report.zul"/>
+						<menuitem label="${labels.menuItem.SalesReport}" href="sales_report.zul"/>
+						<menuitem label="${labels.menuItem.ExpendituresReport}" href="expenditures_report.zul"/>
+						<menuitem label="${labels.menuItem.StockReport}" href="stock_report.zul"/>
+						<menuitem label="${labels.menuItem.CancelledOrdersReport}" href="cancelled_report.zul"/>
+						<menuitem label="${labels.menuItem.PrintTicket}" href="print_ticket.zul"/>
+					</menupopup>
+				</menu>
+				<menuitem label="${labels.menuItem.Receivables}" href="receivables.zul"/>													
+				<menu label="${labels.menuItem.Configuration}" sclass="BarMenu">
+					<menupopup>						
+						<menu label="${labels.menuItem.Catalog}" sclass="BarMenu">
+							<menupopup>
+								<menuitem label="${labels.menuItem.ProductCategories}" href="product_categories.zul"/>
+								<menuitem label="${labels.menuItem.Products}" href="products.zul"/>
+							</menupopup>
+						</menu>
+						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
+						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
+						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
+							<menupopup>							
+								<menuitem label="${labels.menuItem.Units}" href="units.zul" disabled="true"/>
+								<menuitem label="${labels.menuItem.Providers}" href="providers.zul"/>
+								<menuitem label="${labels.menuItem.AcquirableMaterials}" href="acquirable_materials.zul"/>
+								<menuitem label="${labels.menuItem.Warehouses}" href="warehouses.zul"/>
+								<menuitem label="${labels.menuItem.CostCenters}" href="cost_centers.zul"/>
+								<menuitem label="${labels.menuItem.Processes}" href="processes.zul"/>								
+							</menupopup>
+						</menu>					
+						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
+						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
+						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
+						<menuitem label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>					
+						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
+					</menupopup>					
+				</menu>			
+				<menuitem label="${labels.menuItem.BizLogs}" href="biz_logs.zul"/>
+				<menuitem label="${labels.menuItem.Backup}" href="backup.zul"/>
 				<menuitem label="${labels.menuItem.ChangePassword}" href="change_password.zul"/>
-				<menuseparator/>
-				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>
+				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>				
 			</menupopup>
 		</menu>
 	</menubar>	
