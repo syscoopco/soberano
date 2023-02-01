@@ -56,4 +56,10 @@ public class Customer extends TrackedObject {
 		// TODO print customer
 		return null;
 	}
+
+	@Override
+	public void get() throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 }

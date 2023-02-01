@@ -371,8 +371,7 @@ public class Worker extends TrackedObject {
 		getQuery = "SELECT * FROM soberano.\"fn_Worker_get\"(:workerId, :loginname)";
 		getParameters = new HashMap<String, Object>();
 		getParameters.put("workerId", this.getId());
-		extractor = new WorkerExtractor();
-		super.get();
+		super.get(new WorkerExtractor());
 	}
 
 	@Override

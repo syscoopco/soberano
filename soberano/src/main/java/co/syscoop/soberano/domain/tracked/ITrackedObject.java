@@ -3,12 +3,17 @@ package co.syscoop.soberano.domain.tracked;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
+
 import co.syscoop.soberano.domain.untracked.DomainObject;
 
 public interface ITrackedObject {
 
 	abstract public Integer record() throws SQLException, Exception;
 	abstract public void get() throws SQLException;
+	abstract public void get(ResultSetExtractor<Object> extractor) throws SQLException;
+	abstract public void get(RowMapper<Object> mapper) throws SQLException;
 	abstract public Integer modify() throws SQLException, Exception;	
 	abstract public Integer makeDecision(String decision) throws SQLException; //it's passed the name of the decision
 	abstract public Integer disable() throws SQLException, Exception;
@@ -19,4 +24,5 @@ public interface ITrackedObject {
 	//passing negatives values discard them.
 	abstract public List<TrackedObject> getSet(String criteria, Integer limit, Integer offset) throws SQLException;
 	abstract public List<DomainObject> getAll(Boolean stringId) throws SQLException;
+	
 }

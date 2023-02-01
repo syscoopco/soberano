@@ -256,7 +256,19 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			(3, 'Order', '_BD3DEF99-C7B5-4A31-BD72-FCC02EDB6355'),\n"
 						+ "			(4, 'Configuration', '_CA784430-45B2-4403-9257-1D3906C164D1'),\n"
 						+ "			(5, 'Catalog', '_94C0BD6E-5DED-4F46-95DA-994C881B6271'),\n"
-						+ " 		(6, 'Worker', '_2632E1D8-8D63-4DD4-9FA0-A19C0250A09B');",
+						+ " 		(6, 'Worker', '_2632E1D8-8D63-4DD4-9FA0-A19C0250A09B'),\n"
+						+ "			(7, 'AcquirableMaterial', '_9FEE3FFC-A5FB-423E-8D33-40B22B40022E'),\n"
+						+ "			(8, 'CostCenter', '_BF752D2F-A23F-4764-BFE3-8B3ED196AB88'),\n"
+						+ "			(9, 'Currency', '_D50FB66E-606B-4CE0-8005-6E172E66746B'),\n"
+						+ "			(10, 'MaterialExpenditure', '_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE'),\n"
+						+ "			(11, 'PayrollExpenditure', '_9FE7DA9E-6FB3-4490-A155-E35656C281D7'),\n"
+						+ "			(12, 'Process', '_0AEEE069-E89E-407B-BF1D-B7881EF813B3'),\n"
+						+ "			(13, 'Product', '_18118B72-85F7-47D8-A683-25B366896F80'),\n"
+						+ "			(14, 'ProductCategory', '_819F484A-3996-4398-894B-634B23C2160D'),\n"
+						+ "			(15, 'Provider', '_FD850F63-E17A-4803-B04B-59004C0F6C2D'),\n"
+						+ "			(16, 'Unit', '_8B5F06D3-F307-49D7-99F1-57541D8A2B35'),\n"
+						+ "			(17, 'Warehouse', '_F6E70C11-9ABC-469E-8468-930AAC301E70'),\n"
+						+ "			(18, 'ServiceExpenditure', '_41F021C3-227F-4184-A7F8-6E69DA816D2D');",
 						
 						
 						
@@ -502,7 +514,11 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						//"/* cash register lifecycle. no lifecycle needed. internal-use-only object. nobody makes decisions on it. */\n"
+						"/* cash register lifecycle. no lifecycle needed. internal-use-only object. nobody makes decisions on it. */\n",
+						
+						
+						
+						"/* unit lifecycle. for the time being, measurement units are unchangeable. */\n",
 						
 						
 						
@@ -541,6 +557,111 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "INSERT INTO soberano.\"CashRegister\"(\n"
 						+ "	\"CashRegisterHasCashRegisterId\", \"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "	VALUES (1, 4);",						
+						
+						
+						
+						//measurement units
+						"INSERT INTO soberano.\"Magnitude\"(\n"
+						+ "	\"MagnitudeHasMagnitudeId\")\n"
+						+ "	VALUES (1), (2), (3);",
+						
+						
+						
+						"INSERT INTO soberano.\"MagnitudeHasNameInLanguage\"(\n"
+						+ "	\"Language\", \"Name\", \"MagnitudeHasMagnitudeId\")\n"
+						+ "	VALUES ('es', 'cantidad discreta', '1'),\n"
+						+ "			('es', 'peso', '2'),\n"
+						+ "			('es', 'volumen', '3'),\n"
+						+ "			('en', 'discrete quantity', '1'),\n"
+						+ "			('en', 'weight', '2'),\n"
+						+ "			('en', 'volume', '3');",
+						
+						
+						
+						"INSERT INTO metamodel.\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\",\n"
+						+ "																			\"This_is_created_at_Timestamp\", \n"
+						+ "																			\"This_is_instance_of_EntityType_with_MeaningHasMeaningId\", \n"
+						+ "																			\"This_is_owned_by_Authority_with_AuthorityHasAuthorityId\", \n"
+						+ "																			\"This_is_in_Stage_with_StageHasStageId\", \n"
+						+ "																			\"This_is_created_by_User_with_UserHasUserId\")\n"
+						+ "									VALUES (5, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(6, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(7, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(8, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(9, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(10, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(11, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1),\n"
+						+ "											(12, now(), '_8B5F06D3-F307-49D7-99F1-57541D8A2B35', 1, 2, 1);",
+						
+						
+						
+						"INSERT INTO soberano.\"Unit\"(\n"
+						+ "	\"UnitHasUnitId\", \"This_is_identified_by_EntityTypeInstance_id\", \"This_is_for_Magnitude_with_MagnitudeHasMagnitudeId\")\n"
+						+ "	VALUES (1, 5, 1),\n"
+						+ "			(2, 6, 2),\n"
+						+ "			(3, 7, 2),\n"
+						+ "			(4, 8, 2),\n"
+						+ "			(5, 9, 2),\n"
+						+ "			(6, 10, 2),\n"
+						+ "			(7, 11, 3),\n"
+						+ "			(8, 12, 3);",
+						
+						
+						
+						"INSERT INTO soberano.\"UnitHasAcronymInLanguage\"(\n"
+						+ "	\"Language\", \"Acronym\", \"UnitHasUnitId\")\n"
+						+ "	VALUES ('es', 'U', 1),\n"
+						+ "			('es', 'kg', 2),\n"
+						+ "			('es', 'g', 3),\n"
+						+ "			('es', 'mg', 4),\n"
+						+ "			('es', 'lb', 5),\n"
+						+ "			('es', 'oz', 6),\n"
+						+ "			('es', 'l', 7),\n"
+						+ "			('es', 'ml', 8),\n"
+						+ "			('en', 'pcs', 1),\n"
+						+ "			('en', 'kg', 2),\n"
+						+ "			('en', 'g', 3),\n"
+						+ "			('en', 'mg', 4),\n"
+						+ "			('en', 'lb', 5),\n"
+						+ "			('en', 'oz', 6),\n"
+						+ "			('en', 'l', 7),\n"
+						+ "			('en', 'ml', 8);",
+						
+						
+						
+						"INSERT INTO soberano.\"UnitHasNameInLanguage\"(\n"
+						+ "	\"Language\", \"Name\", \"UnitHasUnitId\")\n"
+						+ "	VALUES ('es', 'unidad', 1),\n"
+						+ "			('es', 'kilogramo', 2),\n"
+						+ "			('es', 'gramo', 3),\n"
+						+ "			('es', 'miligramo', 4),\n"
+						+ "			('es', 'libra', 5),\n"
+						+ "			('es', 'onza', 6),\n"
+						+ "			('es', 'litro', 7),\n"
+						+ "			('es', 'milititro', 8),\n"
+						+ "			('en', 'piece', 1),\n"
+						+ "			('en', 'kilogram', 2),\n"
+						+ "			('en', 'gram', 3),\n"
+						+ "			('en', 'milligram', 4),\n"
+						+ "			('en', 'pound', 5),\n"
+						+ "			('en', 'ounce', 6),\n"
+						+ "			('en', 'liter', 7),\n"
+						+ "			('en', 'milliliter', 8);",
+						
+						
+						
+						"INSERT INTO soberano.\"UnitIsConvertedToUnitMultiplyingByFactor\"(\n"
+						+ "	\"Factor\", \"Unit1_UnitHasUnitId\", \"Unit2_UnitHasUnitId\")\n"
+						+ "	VALUES (1, 1, 1), /*pcs to pcs*/\n"
+						+ "			(1, 2, 2), /*kg to kg*/\n"
+						+ "			(1000, 2, 3), /*kg to g*/\n"
+						+ "			(1000000, 2, 4), /*kg to mg*/\n"
+						+ "			(2.2046226218, 2, 5), /*kg to lb*/\n"
+						+ "			(35.2739619496, 2, 6), /*kg to oz*/\n"
+						+ "			(1, 7, 7), /*l to l*/\n"
+						+ "			(1000, 7, 8); /*l to ml*/",
+						
+						
 						
 						//////////////////////
 						// business queries //

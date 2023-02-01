@@ -40,7 +40,6 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	protected MapSqlParameterSource disableParameters = null;
 	protected String getQuery = "";
 	protected Map<String,	Object> getParameters = new HashMap<String, Object>();
-	protected ResultSetExtractor<Object> extractor = null;
 	
 	public TrackedObject() {};
 	
@@ -130,8 +129,12 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return query(getAllQuery, this.addLoginname(getAllQuery, getAllQueryNamedParameters), stringId ? new DomainObjectMapperWithStringId() : new DomainObjectMapper());
 		}
 		
-		public Object get(String getAllQuery, Map<String, Object> getParameters) throws SQLException {			
+		public Object get(String getAllQuery, Map<String, Object> getParameters, ResultSetExtractor<Object> extractor) throws SQLException {			
 			return query(getQuery, this.addLoginname(getQuery, getParameters), extractor);
+		}
+		
+		public Object get(String getAllQuery, Map<String, Object> getParameters, RowMapper<Object> mapper) throws SQLException {			
+			return query(getQuery, this.addLoginname(getQuery, getParameters), mapper);
 		}
 	}
 	
@@ -149,8 +152,13 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	}
 
 	@Override
-	public void get() throws SQLException {
-		copyFrom(trackedObjectDao.get(getQuery, getParameters));
+	public void get(ResultSetExtractor<Object> extractor) throws SQLException {
+		copyFrom(trackedObjectDao.get(getQuery, getParameters, extractor));
+	}
+	
+	@Override
+	public void get(RowMapper<Object> mapper) throws SQLException {
+		copyFrom(trackedObjectDao.get(getQuery, getParameters, mapper));
 	}
 
 	@Override
