@@ -158,7 +158,7 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	
 	@Override
 	public void get(RowMapper<Object> mapper) throws SQLException {
-		copyFrom(trackedObjectDao.get(getQuery, getParameters, mapper));
+		copyFrom(((ArrayList<Object>) trackedObjectDao.get(getQuery, getParameters, mapper)).get(0));
 	}
 
 	@Override

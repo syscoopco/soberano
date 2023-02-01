@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Doublebox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treeitem;
@@ -21,6 +22,13 @@ public class ZKUtilitity {
 	}
 	
 	public static void setValueWOValidation(Doublebox comp, Double value) {
+		Constraint constraint = comp.getConstraint();
+		comp.setConstraint((Constraint) null);
+		comp.setValue(value);
+		comp.setConstraint(constraint);
+	}
+	
+	public static void setValueWOValidation(Intbox comp, Integer value) {
 		Constraint constraint = comp.getConstraint();
 		comp.setConstraint((Constraint) null);
 		comp.setValue(value);
@@ -52,5 +60,5 @@ public class ZKUtilitity {
 	
 	public static Object getAssociatedNode(Treeitem ti, Tree t) {
 		  return t.getModel().getChild(getTreeitemPath(t, ti));
-		}
+	}
 }

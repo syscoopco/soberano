@@ -27,6 +27,7 @@ public class Counter extends TrackedObject {
 					Boolean isEnabled) {
 		super(id, entityTypeInstanceId, code);
 		this.setStringId(code);
+		this.setQualifiedName(code);		
 		this.setNumberOfReceivers(numberOfReceivers);
 		this.setIsSurcharged(isSurcharged);
 		this.setIsEnabled(isEnabled);
@@ -68,13 +69,13 @@ public class Counter extends TrackedObject {
 				+ "											:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("counterId", this.getId());
-		recordParameters.addValue("counterCode", this.getStringId());
-		recordParameters.addValue("numberOfReceivers", this.numberOfReceivers);
-		recordParameters.addValue("isSurcharged", this.isSurcharged);
-		recordParameters.addValue("isEnabled", this.isEnabled);
+		modifyParameters.addValue("counterCode", this.getStringId());
+		modifyParameters.addValue("numberOfReceivers", this.numberOfReceivers);
+		modifyParameters.addValue("isSurcharged", this.isSurcharged);
+		modifyParameters.addValue("isEnabled", this.isEnabled);
 		
-		Integer qryResult = super.record();
-		return qryResult > 0 ? qryResult : -1;
+		Integer qryResult = super.modify();
+		return qryResult >= 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -86,8 +87,8 @@ public class Counter extends TrackedObject {
 		disableParameters = new MapSqlParameterSource();
 		disableParameters.addValue("counterId", this.getId());
 		
-		Integer qryResult = super.record();
-		return qryResult > 0 ? qryResult : -1;
+		Integer qryResult = super.disable();
+		return qryResult >= 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -122,9 +123,9 @@ public class Counter extends TrackedObject {
 	@Override
 	public void get() throws SQLException {
 		
-		getQuery = "SELECT * FROM soberano.\"fn_Counter_get\"(:workerId, :loginname)";
+		getQuery = "SELECT * FROM soberano.\"fn_Counter_get\"(:counterId, :loginname)";
 		getParameters = new HashMap<String, Object>();
-		getParameters.put("workerId", this.getId());
+		getParameters.put("counterId", this.getId());
 		super.get(new CounterMapper());
 	}
 
@@ -143,7 +144,7 @@ public class Counter extends TrackedObject {
 	@Override
 	public Integer print() throws SQLException {
 		
-		// TODO print a report on worker
+		// TODO print a report on the object
 		return null;
 	}
 

@@ -1,0 +1,14 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.CounterFormComposer">
+		<label value="${labels.form.counter.code}" sclass="Caption"></label>			
+		<textbox id="txtCode" readonly="false" maxlength="64" hflex="1" placeholder="${labels.form.counter.counterCodePlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.form.counter.receivers}" sclass="Caption"></label>			
+		<intbox id="intNumberOfReceivers" hflex="1" placeholder="${labels.form.worker.receiversPlaceholder}" constraint="no empty, no negative"/>
+		<separator></separator>
+		<checkbox id="chkIsSurcharged" checked="false" label="${labels.form.counter.isSurcharged}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkDisabled" checked="false" label="${labels.form.counter.disabled}" sclass="Caption"></checkbox>
+	</vbox>	
+</zk>
