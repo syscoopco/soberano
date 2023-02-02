@@ -33,15 +33,15 @@ public class CounterActionTest extends ActionTest {
 	
 	protected void checkCounter(String code,
 							Integer numberOdReceivers,
-							Boolean isSurchraged,
-							Boolean isEnabled) {
+							Boolean isSurcharged,
+							Boolean isDisabled) {
 		
 		String qualifiedName = code;
 		loadObjectDetails(qualifiedName);
 		
 		assertEquals(code.toLowerCase(), txtCode.getText().toLowerCase(), "Wrong code shown for counter " +  qualifiedName);
 		assertEquals(numberOdReceivers, intNumberOfReceivers.getValue(), "Wrong number of receivers for counter " +  qualifiedName);
-		assertEquals(isSurchraged, chkIsSurcharged.isChecked(), "Counter " + qualifiedName + " is wrongly shown with isSurcharged: " + chkIsSurcharged.isChecked());
-		assertEquals(isEnabled, !chkDisabled.isChecked(), "Counter " + qualifiedName + " is wrongly shown with isEnabled: " + !chkDisabled.isChecked());
+		assertEquals(isSurcharged, chkIsSurcharged.isChecked(), "Counter " + qualifiedName + " is wrongly shown with isSurcharged: " + chkIsSurcharged.isChecked());
+		assertEquals(isDisabled, chkDisabled.isChecked(), "Counter " + qualifiedName + " is wrongly shown with isDisabled: " + chkDisabled.isChecked());
 	}
 }

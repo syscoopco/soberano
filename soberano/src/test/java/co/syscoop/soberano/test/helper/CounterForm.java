@@ -32,6 +32,9 @@ public class CounterForm extends ConstrainedForm {
 		this.setIntNumberOfReceivers(intNumberOfReceivers);
 		this.constrainableComponents.add(intNumberOfReceivers);
 		this.constrainableComponentById.put("intNumberOfReceivers", intNumberOfReceivers);
+		
+		this.setChkIsSurcharged(chkIsSurcharged);
+		this.setChkDisabled(chkDisabled);
 	}
 
 	public Textbox getTxtCode() {

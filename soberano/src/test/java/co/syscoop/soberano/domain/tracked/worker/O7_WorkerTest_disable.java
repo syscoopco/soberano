@@ -85,7 +85,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			//an auditor can list the users but not modifying them
+			//an auditor can list the objects but not modifying nor disabling them
 			testNotEnoughRightsException(ex);
 		}
 	}
@@ -118,7 +118,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			//an auditor can list the users but not modifying them
+			//an auditor can list the objects but not modifying nor disabling them
 			testNotEnoughRightsException(ex);
 		}
 	}
@@ -133,7 +133,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			//an auditor can list the users but not modifying them
+			//an auditor can list the objects but not modifying nor disabling them
 			testNotEnoughRightsException(ex);
 		}
 	}
@@ -148,7 +148,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			//an auditor can list the users but not modifying them
+			//an auditor can list the objects but not modifying nor disabling them
 			testNotEnoughRightsException(ex);
 		}
 	}

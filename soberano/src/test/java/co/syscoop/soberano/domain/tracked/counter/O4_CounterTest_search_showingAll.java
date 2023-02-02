@@ -1,31 +1,32 @@
-package co.syscoop.soberano.domain.tracked.worker;
+package co.syscoop.soberano.domain.tracked.counter;
 
 import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Order;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Tree;
+
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(3)
+@Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O3_WorkerTest_search_showingAll {
+class O4_CounterTest_search_showingAll {
 	
-	final private Integer userCount = 20; //number of users in this testing point
-	final private Integer baseId = 1000; //the id of the first added user is baseId + 1. the last one's id is basedId + userCount
+	final private Integer counterCount = 6; //number of counters in this testing point
+	final private Integer baseId = 1000; //the id of the first added counter is baseId + 1. the last one's id is basedId + counterCount
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -50,31 +51,31 @@ class O3_WorkerTest_search_showingAll {
 	
 	private void testForAllowedUser(Integer userSuffix) {
 		
-		String qualifiedNamePattern = "user#suffix#fn user#suffix#ln : user#suffix#@soberano.syscoop.co";
+		String qualifiedNamePattern = "c#suffix#";
 		
 		//test for a user
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
 		
 		//showing all in search combobox
-		TestUtilityCode.testSearchCombobox("/workers.zul", userCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testSearchCombobox("/counters.zul", counterCount, userSuffix, baseId, qualifiedNamePattern);
 		
 		//showing all in tree
-		TestUtilityCode.testShowingAllTree("/workers.zul", userCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testShowingAllTree("/counters.zul", counterCount, userSuffix, baseId, qualifiedNamePattern);
 	};
 	
 	private void testForDisallowedUser(Integer userSuffix) {
 		
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
-		DesktopAgent desktop = Zats.newClient().connect("/workers.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/counters.zul");
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(0,
 					cmbIntelliSearch.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
-					userName + " must not have access to any workers. However, it sees " 
+					userName + " must not have access to any counters. However, it sees " 
 							+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
-							+ " workers in search combobox, and " 
+							+ " counters in search combobox, and " 
 							+ treeObjects.getTreechildren().getItemCount()
 							+ " in showing-all tree.");
 	};
@@ -136,7 +137,7 @@ class O3_WorkerTest_search_showingAll {
 	@Test
 	final void testUser10() {
 
-		testForDisallowedUser(10);
+		testForAllowedUser(10);
 	}
 	
 	@Test

@@ -41,7 +41,7 @@ public class TestUtilityCode {
 		return (SoberanoDatasource) springContext.getBean("soberanoDatasource");
 	}
 	
-	public static void testSearchCombobox(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId) {
+	public static void testSearchCombobox(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
@@ -55,10 +55,10 @@ public class TestUtilityCode {
 						+ " objects in search combobox.");
 		for (Integer i = 1; i <= cmbIntelliSearch.as(Combobox.class).getModel().getSize(); i++) {
 			DomainObject doo = ((DomainObject) cmbIntelliSearch.as(Combobox.class).getModel().getElementAt(i - 1));
-			assertEquals("user" + i + "fn user" + i +"ln : user" + i + "@soberano.syscoop.co", doo.getName(), "When populating search combobox, user" 
-																					+ userIdSuffix + "@soberano.syscoop.co"
-																					+ " retrieves wrong name for object with name " 
-																					+ doo.getName());
+			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating search combobox, user" 
+																	+ userIdSuffix + "@soberano.syscoop.co"
+																	+ " retrieves wrong name for object with name " 
+																	+ doo.getName());
 			assertEquals(objectBaseId + i, doo.getId(), "When populating search combobox, user" 
 													+ userIdSuffix + "@soberano.syscoop.co"
 													+ " retrieves wrong id for object with id " 
@@ -67,7 +67,7 @@ public class TestUtilityCode {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static void testShowingAllTree(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId) {
+	public static void testShowingAllTree(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");		
@@ -85,14 +85,14 @@ public class TestUtilityCode {
 		for (Integer i = 1; i <= rootNode.getChildren().size(); i++) {
 			Object objectNode = rootNode.getChildren().get(i - 1);
 			DomainObject doo = (DomainObject) ((NodeData) (((TreeNode) objectNode).getData())).getValue();
-			assertEquals("user" + i + "fn user" + i +"ln : user" + i + "@soberano.syscoop.co", doo.getName(), "When populating showing-all tree, user" 
+			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating showing-all tree, user" 
 																				+ userIdSuffix + "@soberano.syscoop.co"
 																				+ " retrieves wrong name for object with name " 
 																				+ doo.getName());
 			assertEquals(objectBaseId + i, doo.getId(), "When populating showing-all tree, user" 
-																				+ userIdSuffix + "@soberano.syscoop.co"
-																				+ " retrieves wrong id for object with id " 
-																				+ doo.getId());
+														+ userIdSuffix + "@soberano.syscoop.co"
+														+ " retrieves wrong id for object with id " 
+														+ doo.getId());
 		}
 	}
 
@@ -140,8 +140,8 @@ public class TestUtilityCode {
 		//expectedFinalObjectCount in intelli search combo and tree
 		assertEquals(2 * expectedFinalObjectCount,
 				cmbIntelliSearchAgent.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
-				"Wrong amount of objects shown after disabling the object: " + objectToDisableTextIdFragment 
-					+ ". Expected amount: " + expectedFinalObjectCount.toString()
-					+ ". Actual amount: " + new Integer(treeObjects.getTreechildren().getItemCount()).toString());
+				"Wrong number of objects shown after disabling the object: " + objectToDisableTextIdFragment 
+					+ ". Expected number: " + expectedFinalObjectCount.toString()
+					+ ". Actual number: " + new Integer(treeObjects.getTreechildren().getItemCount()).toString());
 	};
 }

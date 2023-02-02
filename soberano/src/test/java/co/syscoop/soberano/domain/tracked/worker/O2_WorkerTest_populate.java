@@ -42,7 +42,7 @@ class O2_WorkerTest_populate {
 			
 			//clean LDAP of precondition users
 			Worker workerToDelete = null;
-			for (Integer i = 1; i <= 16; i++) {
+			for (Integer i = 1; i <= 20; i++) {
 				workerToDelete = new Worker("user" + i.toString() + "@soberano.syscoop.co");
 				try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			}
@@ -591,12 +591,112 @@ class O2_WorkerTest_populate {
 									0.0,
 									responsibilities,
 									authorities);
-			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}			
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user17
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(3, "Accounter"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user17@soberano.syscoop.co",
+									"user17fn",
+									"user17ln",
+									"12345",
+									"5355555517",
+									"CU",
+									"Calle user17, entre Y y Z",
+									"10416",
+									"Vedado17",
+									1017,
+									"La Habana17",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user18
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(4, "Salesclerk"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user18@soberano.syscoop.co",
+									"user18fn",
+									"user18ln",
+									"12345",
+									"5355555518",
+									"CU",
+									"Calle user18, entre Y y Z",
+									"10418",
+									"Vedado18",
+									1018,
+									"La Habana18",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user19
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(5, "Shift manager"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user19@soberano.syscoop.co",
+									"user19fn",
+									"user19ln",
+									"12345",
+									"5355555519",
+									"CU",
+									"Calle user19, entre Y y Z",
+									"10419",
+									"Vedado19",
+									1018,
+									"La Habana19",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user20
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(6, "Checker"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user20@soberano.syscoop.co",
+									"user20fn",
+									"user20ln",
+									"12345",
+									"5355555520",
+									"CU",
+									"Calle user20, entre Y y Z",
+									"10420",
+									"Vedado20",
+									1020,
+									"La Habana20",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
 		}
 		catch (Exception ex) {
 			ex.printStackTrace();
 			fail("Unpexpected exception.");
-		}	
+		}
 	}
 
 	@AfterAll

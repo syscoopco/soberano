@@ -45,7 +45,7 @@
 								<menuitem label="${labels.menuItem.Products}" href="products.zul"/>
 							</menupopup>
 						</menu>
-						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
+						<menuitem disabled="true" label="${labels.menuItem.Customers}" href="customers.zul"/>
 						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
 						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
 							<menupopup>							
@@ -60,7 +60,7 @@
 						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
 						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
 						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
-						<menuitem label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>					
+						<menuitem disabled="true" label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>					
 						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
 					</menupopup>					
 				</menu>			
