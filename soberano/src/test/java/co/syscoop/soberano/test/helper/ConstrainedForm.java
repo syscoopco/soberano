@@ -10,9 +10,12 @@ import java.util.List;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -33,6 +36,45 @@ public class ConstrainedForm {
 	
 		try {
 			comp.setValue(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Intbox comp, Integer value) {
+		
+		try {
+			comp.setValue(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Intbox comp, String value) {
+		
+		try {
+			comp.setText(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Checkbox comp, Boolean value) {
+		
+		try {
+			comp.setChecked(value);
 		} 
 		catch(Exception ex) 
 		{
@@ -150,7 +192,17 @@ public class ConstrainedForm {
 				constrained = ((Textbox) comp).getConstraint() != null;
 			}
 			catch(ClassCastException ex) {
-				constrained = ((Doublebox) comp).getConstraint() != null;					
+				try {
+					constrained = ((Doublebox) comp).getConstraint() != null;		
+				}
+				catch(ClassCastException ex1) {
+					try {
+						constrained = ((Intbox) comp).getConstraint() != null;
+					}
+					catch(ClassCastException ex2) {
+						constrained = ((Decimalbox) comp).getConstraint() != null;
+					}							
+				}							
 			}
 			if (constrained) {
 				if (!this.componentIsConstrained(comp.getId())) {
@@ -168,7 +220,17 @@ public class ConstrainedForm {
 					constrained = ((Textbox) comp).getConstraint() != null;
 				}
 				catch(ClassCastException ex) {
-					constrained = ((Doublebox) comp).getConstraint() != null;					
+					try {
+						constrained = ((Doublebox) comp).getConstraint() != null;		
+					}
+					catch(ClassCastException ex1) {
+						try {
+							constrained = ((Intbox) comp).getConstraint() != null;
+						}
+						catch(ClassCastException ex2) {
+							constrained = ((Decimalbox) comp).getConstraint() != null;
+						}							
+					}							
 				}
 			}
 			if (!constrained) {
