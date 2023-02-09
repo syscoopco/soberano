@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -17,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(6)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O6_CounterTest_disable extends CounterActionTest {
 	

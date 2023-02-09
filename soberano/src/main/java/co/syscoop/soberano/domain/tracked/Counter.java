@@ -132,13 +132,13 @@ public class Counter extends TrackedObject {
 	@Override
 	protected void copyFrom(Object sourceObject) {
 		
-		Counter sourcecounter = (Counter) sourceObject;
-		setId(sourcecounter.getId());
-		setEntityTypeInstanceId(sourcecounter.getEntityTypeInstanceId());
-		setStringId(sourcecounter.getStringId());
-		setNumberOfReceivers(sourcecounter.getNumberOfReceivers());
-		setIsSurcharged(sourcecounter.getIsSurcharged());
-		setIsEnabled(sourcecounter.getIsEnabled());
+		Counter sourceCounter = (Counter) sourceObject;
+		setId(sourceCounter.getId());
+		setEntityTypeInstanceId(sourceCounter.getEntityTypeInstanceId());
+		setStringId(sourceCounter.getStringId());
+		setNumberOfReceivers(sourceCounter.getNumberOfReceivers());
+		setIsSurcharged(sourceCounter.getIsSurcharged());
+		setIsEnabled(sourceCounter.getIsEnabled());
 	}
 	
 	@Override

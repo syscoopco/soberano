@@ -30,6 +30,14 @@ import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ZKUtilitity;
 
 public class WorkerFormHelper {
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {
+		
+		Tree treeObjects = treeItem.getTree();
+		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
+		fillTheForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
+	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addResponsibilityItem(String responsibilityName,
@@ -55,15 +63,7 @@ public class WorkerFormHelper {
 		tchdnResponsibilities.appendChild(positionItem);
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	static public void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {
-		
-		Tree treeObjects = treeItem.getTree();
-		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
-		fillTheForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
-	}
-	
-	static public void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	public static void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
 		Worker worker = new Worker(((DomainObject) data.getData().getValue()).getId());
 		worker.get();

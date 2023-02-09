@@ -96,7 +96,7 @@ public class ModifyWorkerButtonComposer extends WorkerFormComposer {
 		}
 		catch(DuplicateKeyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.validation.worker.ThereIsAlreadyAWorkerWithThatId"), 
+										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

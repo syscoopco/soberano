@@ -62,7 +62,7 @@ public class ModifyCounterButtonComposer extends CounterFormComposer {
 		}
 		catch(DuplicateKeyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.validation.counter.ThereIsAlreadyACounterWithThatId"), 
+										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

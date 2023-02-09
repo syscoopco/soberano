@@ -11,14 +11,14 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.domain.tracked.Counter;
+import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings("serial")
-public class RecordCounterButtonComposer extends CounterFormComposer {
+public class RecordProductCategoryButtonComposer extends ProductCategoryFormComposer {
 	
 	@Wire
 	private Button btnRecord;
@@ -27,18 +27,17 @@ public class RecordCounterButtonComposer extends CounterFormComposer {
     public void btnRecord_onClick() throws Throwable {
 		try{
 			Include incDetails = (Include) btnRecord.getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");		
-			Counter newCounter = new Counter(0,
+			ProductCategory newCategory = new ProductCategory(0,
 											0,
-											((Textbox) incDetails.query("#txtCode")).getValue(),
-											((Intbox) incDetails.query("#intNumberOfReceivers")).getValue(),
-											((Checkbox) incDetails.query("#chkIsSurcharged")).isChecked(),
+											((Textbox) incDetails.query("#txtName")).getValue(),
+											((Intbox) incDetails.query("#intPosition")).getValue(),
 											!((Checkbox) incDetails.query("#chkDisabled")).isChecked());
-			if (newCounter.record() == -1) {
+			if (newCategory.record() == -1) {
 				throw new NotEnoughRightsException();						
 			}
 			else {
 				//clean form
-				ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+				ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 			}
 		}
 		catch(WrongValueException ex) {

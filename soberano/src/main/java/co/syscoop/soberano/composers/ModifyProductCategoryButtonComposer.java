@@ -10,35 +10,41 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Tree;
 
-import co.syscoop.soberano.domain.tracked.Counter;
+import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.util.ExceptionTreatment;
-import co.syscoop.soberano.util.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings("serial")
-public class RecordCounterButtonComposer extends CounterFormComposer {
+public class ModifyProductCategoryButtonComposer extends CounterFormComposer {
 	
 	@Wire
-	private Button btnRecord;
+	private Button btnApply;
 	
-	@Listen("onClick = button#btnRecord")
-    public void btnRecord_onClick() throws Throwable {
+	@Listen("onClick = button#btnApply")
+    public void btnApply_onClick() throws Throwable {
 		try{
-			Include incDetails = (Include) btnRecord.getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");		
-			Counter newCounter = new Counter(0,
-											0,
-											((Textbox) incDetails.query("#txtCode")).getValue(),
-											((Intbox) incDetails.query("#intNumberOfReceivers")).getValue(),
-											((Checkbox) incDetails.query("#chkIsSurcharged")).isChecked(),
-											!((Checkbox) incDetails.query("#chkDisabled")).isChecked());
-			if (newCounter.record() == -1) {
+			Include incDetails = (Include) btnApply.getParent().getParent().getParent().query("#incDetails");		
+			
+			ProductCategory category = new ProductCategory(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+															0,
+															((Textbox) incDetails.query("#txtName")).getValue(),
+															((Intbox) incDetails.query("#intPosition")).getValue(),
+															!((Checkbox) incDetails.query("#chkDisabled")).isChecked());
+			if (category.modify() == -1) {
 				throw new NotEnoughRightsException();						
 			}
 			else {
-				//clean form
-				ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+				//update object's treeitem label
+				Tree treeObjects = (Tree) incDetails.getParent().query("#wndShowingAll").query("#treeObjects");
+				treeObjects.getSelectedItem().setLabel(category.getQualifiedName());
+				
+				Messagebox.show(Labels.getLabel("message.notification.ChangesWereApplied"), 
+			  					Labels.getLabel("messageBoxTitle.Information"), 
+								0, 
+								Messagebox.INFORMATION);
 			}
 		}
 		catch(WrongValueException ex) {
@@ -53,8 +59,7 @@ public class RecordCounterButtonComposer extends CounterFormComposer {
 										Labels.getLabel("messageBoxTitle.Warning"),
 										Messagebox.EXCLAMATION);
 		}
-		catch(DuplicateKeyException ex)
-		{
+		catch(DuplicateKeyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
