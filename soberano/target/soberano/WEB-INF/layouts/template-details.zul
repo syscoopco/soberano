@@ -1,0 +1,34 @@
+<zk>
+	<window hflex="1" vflex="1">
+		<borderlayout>
+			<north hflex="1" sclass="DefaultBackground">
+				<include src="/WEB-INF/layouts/template-north.zul"/>
+			</north>			
+			<center autoscroll="true" sclass="DefaultBackground">
+				<borderlayout>
+					<north sclass="MainPanel DefaultBackground" autoscroll="true" height="50%">						
+						<panel border="none" collapsible="true" open="true" sclass="DefaultBackground">
+							<caption self="@insert(showingAllPanelHeader)">
+							</caption>
+							<panelchildren self="@insert(showingAllPanel)" style="overflow: auto">
+							</panelchildren>
+						</panel>
+					</north>
+					<south sclass="MainPanel DefaultBackground" autoscroll="true" height="50%">
+						<panel title="${labels.caption.general.details}" border="none" collapsible="true" open="true" sclass="DefaultBackground">
+							<panelchildren self="@insert(detailsPanel)" style="overflow: auto">
+								
+								<!-- shown object identifiers -->
+								<intbox id="intId" visible="false"/>
+								<textbox id="txtStringId" visible="false"/>
+							</panelchildren>
+						</panel>
+					</south>
+				</borderlayout>									
+			</center>
+			<south sclass="DefaultBackground">
+				<include id="incSouth" src="/WEB-INF/layouts/template-south.zul"></include>
+			</south>			
+		</borderlayout>
+	</window>
+</zk>

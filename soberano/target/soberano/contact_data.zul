@@ -1,0 +1,47 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<groupbox hflex="1">
+		<caption label="${labels.caption.general.contactData}"/>
+		<vbox width="100%" sclass="DefaultBackground DefaultInput">
+			<label value="${labels.caption.field.phoneNumber}" sclass="Caption"></label>		
+			<textbox id="txtPhoneNumber" hflex="1" maxlength="50" constraint="/[0-9]+/: ${labels.validation.constraint.InvalidPhoneNumber}"/>
+			<separator></separator>		
+			<label value="${labels.caption.field.emailAddress}" sclass="Caption"></label>		
+			<textbox id="txtEmailAddress" hflex="1" maxlength="100" placeholder="${labels.validation.constraint.InvalidEmailAddress}" constraint="/\w+[\w.-]*@[\w.-]+\.\w+/: ${labels.validation.constraint.InvalidEmailAddress}"/>
+			<separator></separator>
+			<label value="${labels.caption.field.address}" sclass="Caption"></label>			
+			<textbox id="txtAddress" hflex="1" maxlength="1000"/>
+			<separator></separator>
+			<label value="${labels.caption.field.postalCode}" sclass="Caption"></label>			
+			<textbox id="txtPostalCode" hflex="1" maxlength="20"/>
+			<separator></separator>		
+			<label value="${labels.caption.field.town}" sclass="Caption"></label>			
+			<textbox id="txtTown" hflex="1" maxlength="255"/>
+			<separator></separator>
+			<label value="${labels.caption.field.city}" sclass="Caption"></label>			
+			<textbox id="txtCity" hflex="1" maxlength="100"/>
+			<separator></separator>	
+			<label value="${labels.caption.field.country}" sclass="Caption"></label>
+			<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CountrySelectionViewModel')">
+				<combobox id="cmbCountry" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.country}" apply="co.syscoop.soberano.composers.CountrySelectionComposer" constraint="no empty">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>
+			</hbox>				
+			<separator></separator>	
+			<label value="${labels.caption.field.province}" sclass="Caption"></label>
+			<combobox value="" id="cmbProvince" readonly="true" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.province}" apply="co.syscoop.soberano.composers.ProvinceSelectionComposer" constraint="no empty"/>
+			<separator></separator>
+			<label value="${labels.caption.field.municipality}" sclass="Caption"></label>
+			<combobox value="" id="cmbMunicipality" readonly="true" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.municipality}" constraint="no empty"/>
+			<separator></separator>
+			<label value="${labels.caption.field.latitude}" sclass="Caption"></label>		
+			<doublebox id="dblLatitude" hflex="1"/>
+			<separator></separator>
+			<label value="${labels.caption.field.longitude}" sclass="Caption"></label>		
+			<doublebox id="dblLongitude" hflex="1"/>
+		</vbox>
+	</groupbox>
+</zk>

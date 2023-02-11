@@ -1,0 +1,111 @@
+<zk xmlns="http://www.zkoss.org/2005/zul" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.zkoss.org/2005/zul http://www.zkoss.org/2005/zul/zul.xsd">
+	<style>
+		.BarButton{
+			width: 40px;
+			height: 40px;
+			padding: 0 0 0 0;
+		}
+		.BarMenu{
+			hflex: 1;
+			height: 31px;
+		}
+		.ButtonBar{
+			padding: 5px;
+		}
+		.Caption{
+			font-weight: bolder;
+		}
+		.CashierButton{
+			width: 95%;
+			height: 50px;
+			padding: 0 0 0 0;		
+			font-weight: bolder;
+			font-size: 10pt;
+		}
+		.ClearButton{
+			color: red;
+		}
+		.CollectingButton{
+			width: 95%;
+			height: 50px;
+			padding: 0 0 0 0;		
+			font-weight: bolder;
+			font-size: 10pt;
+		}
+		.CollectingButtonLargeFont{
+			width: 95%;
+			height: 50px;
+			padding: 0 0 0 0;		
+			font-weight: bolder;
+			font-size: 20pt;
+		}
+		.CollectingButtonPushed{
+			width: 95%;
+			height: 50px;
+			padding: 0 0 0 0;		
+			font-weight: bolder;
+			font-size: 10pt;
+			background: blue;
+			color: white;
+		}
+		.CollectingCurrency{
+			font-weight: bolder;
+			font-size: 10pt;
+		}
+		.CollectingLabel{
+			font-weight: bolder;
+			font-size: 10pt;
+		}
+		.CollectingTextbox{
+			width: 99%;
+			height: 50px;
+			text-align: right;
+			font-size: 20pt;
+		}
+		.ContextualButton{
+			height: 23px;
+			width: 35px;
+			padding: 0px;		
+			margin: 0px;
+		}
+		.CountingBalanceBox{
+			width: 95%;
+			text-align: center; 
+			color: blue;
+		}
+		.CountingCountedBox{
+			width: 95%;
+			text-align: center; 
+		}
+		.DecisionButton{
+			font-weight: bolder;
+		}
+		.DefaultBackground{
+			background: window;
+		}	
+		.DefaultInput{
+			padding-left: 10px;
+			padding-right: 10px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		.MainPanel{
+			padding: 5px;
+		}
+		.NewButton{
+			font-weight: bolder;
+			font-size: 20pt;
+		}
+		.NotesTextbox{
+			height: 200px;
+		}
+		.PageTitle{
+			font-weight: bolder;
+			padding-right: 10px;
+		}
+		.SystemTimeBox{
+			font-weight: bolder;
+			font-size: 20pt;			
+		}	
+	</style>
+</zk>
