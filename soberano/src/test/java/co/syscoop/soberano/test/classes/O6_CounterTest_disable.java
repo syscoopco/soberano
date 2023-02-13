@@ -44,19 +44,16 @@ class O6_CounterTest_disable extends CounterActionTest {
 	}
 
 	@Test
-	@Order(1)
 	final void test1() {
 		TestUtilityCode.testDisablingObject("/counters.zul", "user6@soberano.syscoop.co", "mc5", 5);
 	}
 	
 	@Test
-	@Order(2)
 	final void test2() {
 		TestUtilityCode.testDisablingObject("/counters.zul", "user8@soberano.syscoop.co", "mc6", 4);
 	}
 	
 	@Test
-	@Order(3)
 	final void test3() {
 		try {
 			TestUtilityCode.testDisablingObject("/counters.zul", "user13@soberano.syscoop.co", "mc1", 4);

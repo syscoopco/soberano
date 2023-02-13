@@ -234,7 +234,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(11, 'Catalog maintainer'),\n"
 						+ "		(12, 'Community manager'),\n"
 						+ "		(13, 'Procurement worker'),\n"
-						+ "		(14, 'System admin');",
+						+ "		(14, 'System admin'),\n"
+						+ "		(15, 'Technologist');",
 						
 						
 												
