@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
@@ -26,6 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 //TODO: enable test
 //@Disabled
 
+@TestMethodOrder(OrderAnnotation.class)
 class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	protected ProductCategoryForm productCategoryForm = null;
@@ -50,6 +53,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(0)
 	final void testCase0() {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -71,6 +75,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(1)
 	final void testCase1() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -96,6 +101,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(2)
 	final void testCase2() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -121,6 +127,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(3)
 	final void testCase3() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -146,6 +153,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}	
 	
 	@Test
+	@Order(4)
 	final void testCase4() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -169,6 +177,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(5)
 	final void testCase5() {
 
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
@@ -193,6 +202,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(6)
 	final void testCase6() {
 
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
@@ -218,6 +228,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(7)
 	final void testCase7() {
 
 		SpringUtility.setLoggedUserForTesting("user4@soberano.syscoop.co");
@@ -241,6 +252,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(8)
 	final void testCase8() {
 
 		SpringUtility.setLoggedUserForTesting("user5@soberano.syscoop.co");
@@ -267,6 +279,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(9)
 	final void testCase9() {
 
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
@@ -291,6 +304,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(10)
 	final void testCase10() {
 
 		SpringUtility.setLoggedUserForTesting("user7@soberano.syscoop.co");
@@ -314,6 +328,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(11)
 	final void testCas11() {
 
 		SpringUtility.setLoggedUserForTesting("user8@soberano.syscoop.co");
@@ -338,6 +353,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(12)
 	final void testCase12() {
 
 		SpringUtility.setLoggedUserForTesting("user9@soberano.syscoop.co");
@@ -363,6 +379,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(13)
 	final void testCas13() {
 
 		SpringUtility.setLoggedUserForTesting("user10@soberano.syscoop.co");
@@ -386,6 +403,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(14)
 	final void testCas14() {
 
 		SpringUtility.setLoggedUserForTesting("user11@soberano.syscoop.co");
@@ -410,6 +428,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(15)
 	final void testCas15() {
 
 		SpringUtility.setLoggedUserForTesting("user12@soberano.syscoop.co");
@@ -435,6 +454,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(16)
 	final void testCas16() {
 
 		SpringUtility.setLoggedUserForTesting("user13@soberano.syscoop.co");
@@ -460,6 +480,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(17)
 	final void testCas17() {
 
 		SpringUtility.setLoggedUserForTesting("user14@soberano.syscoop.co");
@@ -483,6 +504,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(18)
 	final void testCas18() {
 
 		SpringUtility.setLoggedUserForTesting("user15@soberano.syscoop.co");
@@ -509,6 +531,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(19)
 	final void testCas19() {
 
 		SpringUtility.setLoggedUserForTesting("user16@soberano.syscoop.co");
@@ -533,6 +556,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(20)
 	final void testCas20() {
 
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
@@ -558,6 +582,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(21)
 	final void testCas21() {
 
 		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
@@ -583,6 +608,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(22)
 	final void testCas22() {
 
 		SpringUtility.setLoggedUserForTesting("user19@soberano.syscoop.co");
@@ -608,6 +634,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(23)
 	final void testCas23() {
 
 		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
@@ -633,6 +660,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	}
 	
 	@Test
+	@Order(24)
 	final void testCas24() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");

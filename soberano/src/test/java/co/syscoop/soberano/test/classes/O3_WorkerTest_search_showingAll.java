@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 class O3_WorkerTest_search_showingAll {
 	
-	final private Integer userCount = 20; //number of users in this testing point
+	final private Integer userCount = 21; //number of users in this testing point
 	final private Integer baseId = 1000; //the id of the first added user is baseId + 1. the last one's id is basedId + userCount
 
 	@BeforeAll

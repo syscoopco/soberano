@@ -95,7 +95,7 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser3() {
 		
-		testForDisallowedUser(3);
+		testForAllowedUser(3);
 	}
 	
 	@Test
@@ -107,7 +107,7 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser5() {
 		
-		testForDisallowedUser(5);
+		testForAllowedUser(5);
 	}
 	
 	@Test
@@ -131,7 +131,7 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser9() {
 		
-		testForDisallowedUser(9);
+		testForAllowedUser(9);
 	}
 	
 	@Test
@@ -149,13 +149,13 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser12() {
 		
-		testForDisallowedUser(12);
+		testForAllowedUser(12);
 	}
 	
 	@Test
 	final void testUser13() {
 		
-		testForDisallowedUser(13);
+		testForAllowedUser(13);
 	}
 	
 	@Test
@@ -167,7 +167,7 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser15() {
 		
-		testForDisallowedUser(15);
+		testForAllowedUser(15);
 	}
 	
 	@Test
@@ -179,24 +179,30 @@ class O4_ProductCategoryTest_search_showingAll {
 	@Test
 	final void testUser17() {
 		
-		testForDisallowedUser(17);
+		testForAllowedUser(17);
 	}
 	
 	@Test
 	final void testUser18() {
 		
-		testForDisallowedUser(18);
+		testForAllowedUser(18);
 	}
 	
 	@Test
 	final void testUser19() {
 		
-		testForDisallowedUser(19);
+		testForAllowedUser(19);
 	}
 	
 	@Test
 	final void testUser20() {
 		
-		testForDisallowedUser(20);
+		testForAllowedUser(20);
+	}
+	
+	@Test
+	final void testUser21() {
+		
+		testForDisallowedUser(21);
 	}
 }

@@ -3,6 +3,13 @@ package co.syscoop.soberano.test.helper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 import org.springframework.mock.web.MockServletContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 import org.zkoss.zats.mimic.ComponentAgent;
@@ -12,6 +19,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.DefaultTreeNode;
+import org.zkoss.zul.ListModel;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treecell;
@@ -41,6 +49,25 @@ public class TestUtilityCode {
 		return (SoberanoDatasource) springContext.getBean("soberanoDatasource");
 	}
 	
+	private static Map<Integer, DomainObject> convertListToMap(ListModel<Object> list) {
+	    Map<Integer, DomainObject> map = new HashMap<>();
+	    for (int i = 0; i < list.getSize(); i++) {
+	    	DomainObject doo = (DomainObject) list.getElementAt(i);
+	        map.put(doo.getId(), doo);
+	    }
+	    return map;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static Map<Integer, DomainObject> convertListToMap(List<Object> treeNodes) {
+	    Map<Integer, DomainObject> map = new HashMap<>();
+	    for (Object obj : treeNodes) {
+	    	DomainObject doo = (DomainObject) ((NodeData) (((TreeNode) obj).getData())).getValue();
+	        map.put(((DomainObject) doo).getId(), doo);
+	    }
+	    return map;
+	}
+	
 	public static void testSearchCombobox(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
@@ -53,8 +80,10 @@ public class TestUtilityCode {
 						+ " objects. It sees " 
 						+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
 						+ " objects in search combobox.");
+		
+		Map<Integer, DomainObject> comboModelMap = convertListToMap(cmbIntelliSearch.as(Combobox.class).getModel());		
 		for (Integer i = 1; i <= cmbIntelliSearch.as(Combobox.class).getModel().getSize(); i++) {
-			DomainObject doo = ((DomainObject) cmbIntelliSearch.as(Combobox.class).getModel().getElementAt(i - 1));
+			DomainObject doo = comboModelMap.get(objectBaseId + i);
 			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating search combobox, user" 
 																	+ userIdSuffix + "@soberano.syscoop.co"
 																	+ " retrieves wrong name for object with name " 
@@ -66,7 +95,7 @@ public class TestUtilityCode {
 		}
 	}
 	
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void testShowingAllTree(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
@@ -81,10 +110,10 @@ public class TestUtilityCode {
 						+ treeObjects.getTreechildren().getItemCount() 
 						+ " objects in showing-all tree.");
 		DefaultTreeModel treeModel = (DefaultTreeModel) treeObjects.getModel();
-		TreeNode rootNode = (TreeNode) treeModel.getRoot();	
+		TreeNode rootNode = (TreeNode) treeModel.getRoot();
+		Map<Integer, DomainObject> treeNodesModelMap = convertListToMap(rootNode.getChildren());
 		for (Integer i = 1; i <= rootNode.getChildren().size(); i++) {
-			Object objectNode = rootNode.getChildren().get(i - 1);
-			DomainObject doo = (DomainObject) ((NodeData) (((TreeNode) objectNode).getData())).getValue();
+			DomainObject doo = treeNodesModelMap.get(objectBaseId + i);
 			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating showing-all tree, user" 
 																				+ userIdSuffix + "@soberano.syscoop.co"
 																				+ " retrieves wrong name for object with name " 

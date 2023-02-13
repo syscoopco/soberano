@@ -42,7 +42,7 @@ class O2_WorkerTest_populate {
 			
 			//clean LDAP of precondition users
 			Worker workerToDelete = null;
-			for (Integer i = 1; i <= 20; i++) {
+			for (Integer i = 1; i <= 21; i++) {
 				workerToDelete = new Worker("user" + i.toString() + "@soberano.syscoop.co");
 				try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			}
@@ -659,7 +659,7 @@ class O2_WorkerTest_populate {
 									"Calle user19, entre Y y Z",
 									"10419",
 									"Vedado19",
-									1018,
+									1019,
 									"La Habana19",
 									2,
 									0.0,
@@ -686,6 +686,31 @@ class O2_WorkerTest_populate {
 									"Vedado20",
 									1020,
 									"La Habana20",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user21
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(14, "System admin"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user21@soberano.syscoop.co",
+									"user21fn",
+									"user21ln",
+									"12345",
+									"5355555521",
+									"CU",
+									"Calle user21, entre Y y Z",
+									"10421",
+									"Vedado21",
+									1021,
+									"La Habana21",
 									2,
 									0.0,
 									0.0,

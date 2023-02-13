@@ -48,38 +48,38 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Test
 	@Order(1)
 	final void test1() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user1@soberano.syscoop.co", "accounter@soberano.syscoop.co", 32);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user1@soberano.syscoop.co", "accounter@soberano.syscoop.co", 33);
 	}
 	
 	@Test
 	@Order(2)
 	final void test2() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user2@soberano.syscoop.co", "auditor@soberano.syscoop.co", 31);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user2@soberano.syscoop.co", "auditor@soberano.syscoop.co", 32);
 	}
 	
 	@Test
 	@Order(3)
 	final void test3() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user3@soberano.syscoop.co", "catalogMaintainer@soberano.syscoop.co", 30);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user3@soberano.syscoop.co", "catalogMaintainer@soberano.syscoop.co", 31);
 	}
 	
 	@Test
 	@Order(4)
 	final void test4() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user4@soberano.syscoop.co", "checker@soberano.syscoop.co", 29);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user4@soberano.syscoop.co", "checker@soberano.syscoop.co", 30);
 	}
 	
 	@Test
 	@Order(5)
 	final void test5() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user5@soberano.syscoop.co", "communityManager@soberano.syscoop.co", 28);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user5@soberano.syscoop.co", "communityManager@soberano.syscoop.co", 29);
 	}
 	
 	@Test
 	@Order(6)
 	final void test6() {
 		try {
-			TestUtilityCode.testDisablingObject("/workers.zul", "user6@soberano.syscoop.co", "manager@soberano.syscoop.co", 28);
+			TestUtilityCode.testDisablingObject("/workers.zul", "user6@soberano.syscoop.co", "manager@soberano.syscoop.co", 29);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -93,26 +93,26 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Test
 	@Order(7)
 	final void test7() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user8@soberano.syscoop.co", "manager@soberano.syscoop.co", 27);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user8@soberano.syscoop.co", "manager@soberano.syscoop.co", 28);
 	}
 	
 	@Test
 	@Order(8)
 	final void test8() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user9@soberano.syscoop.co", "procurementWorker@soberano.syscoop.co", 26);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user9@soberano.syscoop.co", "procurementWorker@soberano.syscoop.co", 27);
 	}
 	
 	@Test
 	@Order(9)
 	final void test9() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user11@soberano.syscoop.co", "salesClerk@soberano.syscoop.co", 25);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user11@soberano.syscoop.co", "salesClerk@soberano.syscoop.co", 26);
 	}
 	
 	@Test
 	@Order(10)
 	final void test10() {
 		try {
-			TestUtilityCode.testDisablingObject("/workers.zul", "user12@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 25);
+			TestUtilityCode.testDisablingObject("/workers.zul", "user12@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -127,7 +127,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Order(11)
 	final void test11() {
 		try {
-			TestUtilityCode.testDisablingObject("/workers.zul", "user13@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 25);
+			TestUtilityCode.testDisablingObject("/workers.zul", "user13@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -142,7 +142,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Order(12)
 	final void test12() {
 		try {
-			TestUtilityCode.testDisablingObject("/workers.zul", "user14@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 25);
+			TestUtilityCode.testDisablingObject("/workers.zul", "user14@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -156,30 +156,30 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Test
 	@Order(13)
 	final void test13() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user15@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 24);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user15@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 25);
 	}
 	
 	@Test
 	@Order(14)
 	final void test14() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "storekeeper@soberano.syscoop.co", 23);
+		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "storekeeper@soberano.syscoop.co", 24);
 	}
 	
 	@Test
 	@Order(15)
 	final void test15() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop1Worker@soberano.syscoop.co", 22);
+		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop1Worker@soberano.syscoop.co", 23);
 	}
 	
 	@Test
 	@Order(16)
 	final void test16() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop2Worker@soberano.syscoop.co", 21);
+		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop2Worker@soberano.syscoop.co", 22);
 	}
 	
 	@Test
 	@Order(17)
 	final void test17() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user16@soberano.syscoop.co", "systemAdmin@soberano.syscoop.co", 20);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user16@soberano.syscoop.co", "systemAdmin@soberano.syscoop.co", 21);
 	}
 }
