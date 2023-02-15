@@ -26,7 +26,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
@@ -380,7 +380,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(13)
-	final void testCas13() {
+	final void testCase13() {
 
 		SpringUtility.setLoggedUserForTesting("user10@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -404,7 +404,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(14)
-	final void testCas14() {
+	final void testCase14() {
 
 		SpringUtility.setLoggedUserForTesting("user11@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -429,7 +429,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(15)
-	final void testCas15() {
+	final void testCase15() {
 
 		SpringUtility.setLoggedUserForTesting("user12@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -455,7 +455,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(16)
-	final void testCas16() {
+	final void testCase16() {
 
 		SpringUtility.setLoggedUserForTesting("user13@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -481,7 +481,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(17)
-	final void testCas17() {
+	final void testCase17() {
 
 		SpringUtility.setLoggedUserForTesting("user14@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -505,7 +505,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(18)
-	final void testCas18() {
+	final void testCase18() {
 
 		SpringUtility.setLoggedUserForTesting("user15@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -532,7 +532,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(19)
-	final void testCas19() {
+	final void testCase19() {
 
 		SpringUtility.setLoggedUserForTesting("user16@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -557,7 +557,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(20)
-	final void testCas20() {
+	final void testCase20() {
 
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -583,7 +583,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(21)
-	final void testCas21() {
+	final void testCase21() {
 
 		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -609,7 +609,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(22)
-	final void testCas22() {
+	final void testCase22() {
 
 		SpringUtility.setLoggedUserForTesting("user19@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -635,7 +635,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(23)
-	final void testCas23() {
+	final void testCase23() {
 
 		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -661,7 +661,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(24)
-	final void testCas24() {
+	final void testCase24() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");

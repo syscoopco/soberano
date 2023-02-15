@@ -2,6 +2,7 @@ package co.syscoop.soberano.composers;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -17,8 +18,8 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
-@SuppressWarnings("serial")
-public class ModifyProductCategoryButtonComposer extends CounterFormComposer {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class ModifyProductCategoryButtonComposer extends SelectorComposer {
 	
 	@Wire
 	private Button btnApply;
