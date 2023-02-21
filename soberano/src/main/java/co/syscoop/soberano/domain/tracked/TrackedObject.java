@@ -50,6 +50,10 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	public TrackedObject(String name) {
 		super(name);
 	}
+	
+	public TrackedObject(Integer id, String name) {
+		super(id, name);
+	}
 
 	public TrackedObject(Integer id, Integer entityTypeInstanceId) {
 		super(id);

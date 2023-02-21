@@ -13,7 +13,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 public class ProductCategory extends TrackedObject {
 
 	private Integer position = 0;
-	private Boolean isEnabled = false;
+	private Boolean isEnabled = true;
 	
 	public ProductCategory(Integer id) {
 		super(id);
@@ -33,6 +33,10 @@ public class ProductCategory extends TrackedObject {
 	public ProductCategory() {
 		getAllQuery = "SELECT * FROM soberano.\"" + "fn_ProductCategory_getAll\"" + "(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
+	}
+	
+	public ProductCategory(Integer id, String name) {
+		super(id, name);
 	}
 	
 	@Override

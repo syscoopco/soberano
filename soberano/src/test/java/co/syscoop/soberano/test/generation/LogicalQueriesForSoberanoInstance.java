@@ -14,6 +14,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						// rules not generated. see the notes in the soberano instance conceptual model //
 						//////////////////////////////////////////////////////////////////////////////////
 						
+						/******************/
+						/*RULE_EXISTENCE_1*/
+						/******************/
 						"--assure only one activity instance exists. the default stage is 2 (Enabled)\n"
 						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_tg_Activity_beforeinsert_RULE_EXISTENCE_1\"()\n"
 						+ "						    RETURNS trigger\n"
@@ -51,6 +54,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						/******************/
+						/*RULE_EXISTENCE_2*/
+						/******************/
 						"--assure only one configuration instance exists. the default stage is 2 (Enabled)\n"
 						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_tg_Configuration_beforeinsert_RULE_EXISTENCE_2\"()\n"
 						+ "						    RETURNS trigger\n"
@@ -88,6 +94,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						/******************/
+						/*RULE_EXISTENCE_3*/
+						/******************/
 						"--assure only one catalog instance exists. the default stage is 2 (Enabled)\n"
 						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_tg_Catalog_beforeinsert_RULE_EXISTENCE_3\"()\n"
 						+ "						    RETURNS trigger\n"
@@ -125,6 +134,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						/******************/
+						/*RULE_EXISTENCE_4*/
+						/******************/
 						"--assure only one cash register instance exists. the default stage is 2 (Enabled)\n"
 						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_tg_CashRegister_beforeinsert_RULE_EXISTENCE_4\"()\n"
 						+ "						    RETURNS trigger\n"
@@ -159,6 +171,66 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	ON soberano.\"CashRegister\"\n"
 						+ "	FOR EACH ROW\n"
 						+ "	EXECUTE FUNCTION soberano.\"fn_tg_CashRegister_beforeinsert_RULE_EXISTENCE_4\"();",
+						
+						
+						
+						/****************************************************************************/
+						/*RULE_CONSTRAINT_1: At most one 'Warehouse' can be a procurement warehouse.*/
+						/*RULE_CONSTRAINT_2: At most one 'Warehouse' can be a sales warehouse.		*/
+						/****************************************************************************/
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_tg_Warehouse_RULE_CONSTRAINTS_1_AND_2\"()\n"
+						+ "    RETURNS trigger\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE NOT LEAKPROOF\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		IF NEW.\"Warehouse_is_procurement_warehouse\" AND\n"
+						+ "			NEW.\"Warehouse_is_sales_warehouse\" THEN\n"
+						+ "			UPDATE soberano.\"Warehouse\" \n"
+						+ "				SET \"Warehouse_is_procurement_warehouse\" = false,\n"
+						+ "					\"Warehouse_is_sales_warehouse\" = false\n"
+						+ "				WHERE \"WarehouseHasWarehouseId\" != NEW.\"WarehouseHasWarehouseId\";\n"
+						+ "		ELSIF NEW.\"Warehouse_is_procurement_warehouse\" THEN\n"
+						+ "			UPDATE soberano.\"Warehouse\" \n"
+						+ "				SET \"Warehouse_is_procurement_warehouse\" = false\n"
+						+ "				WHERE \"WarehouseHasWarehouseId\" != NEW.\"WarehouseHasWarehouseId\";\n"
+						+ "		ELSIF NEW.\"Warehouse_is_sales_warehouse\" THEN\n"
+						+ "			UPDATE soberano.\"Warehouse\" \n"
+						+ "				SET \"Warehouse_is_sales_warehouse\" = false\n"
+						+ "				WHERE \"WarehouseHasWarehouseId\" != NEW.\"WarehouseHasWarehouseId\";\n"
+						+ "		END IF;\n"
+						+ "		RETURN NEW;\n"
+						+ "	END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE TRIGGER \"tg_Warehouse_before_insert_RULE_CONSTRAINTS_1_AND_2\"\n"
+						+ "    BEFORE INSERT\n"
+						+ "    ON soberano.\"Warehouse\"\n"
+						+ "    FOR EACH ROW\n"
+						+ "    EXECUTE FUNCTION soberano.\"fn_tg_Warehouse_RULE_CONSTRAINTS_1_AND_2\"();",
+						
+						
+						
+						"CREATE TRIGGER \"tg_Warehouse_before_update_RULE_CONSTRAINTS_1_AND_2\"\n"
+						+ "    BEFORE UPDATE\n"
+						+ "    ON soberano.\"Warehouse\"\n"
+						+ "    FOR EACH ROW\n"
+						+ "    EXECUTE FUNCTION soberano.\"fn_tg_Warehouse_RULE_CONSTRAINTS_1_AND_2\"();",
+						
+						
+						
+						/*********************************************************************/
+						/*RULE_CONSTRAINT_4: At most one 'Currency' can be a system currency.*/
+						/*********************************************************************/
+						
+						
+						
+						/*****************************************************************************/
+						/*RULE_CONSTRAINT_5: At most one 'Currency' can be a price reference currency.*/
+						/*****************************************************************************/
 						
 						
 						
@@ -603,6 +675,88 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(15, 'Accounter', 15004),\n"
 						+ "				(15, 'Storekeeper', 15004),\n"
 						+ "				(15, 'Auditor', 15004);",
+						
+						
+						
+						"/* product lifecycle */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (13001, 'soberano.stage.starting', 13),\n"
+						+ "		(13002, 'Enabled', 13),\n"
+						+ "		(13003, 'Disabled', 13);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (13001, 'Add', 13, 13001, 13002, 'false'),\n"
+						+ "		(13002, 'Apply', 13, 13002, 13002, 'false'),\n"
+						+ "		(13003, 'Disable', 13, 13002, 13003, 'false'),\n"
+						+ "		(13004, 'Check', 13, 13002, 13002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (13, 'Catalog maintainer', 13001),\n"
+						+ "				(13, 'Catalog maintainer', 13002),\n"
+						+ "				(13, 'Catalog maintainer', 13003),\n"
+						+ "				(13, 'Manager', 13004),\n"
+						+ "				(13, 'Accounter', 13004),\n"						
+						+ "				(13, 'Salesclerk', 13004),\n"
+						+ "				(13, 'Shift manager', 13004),\n"
+						+ "				(13, 'Checker', 13004),\n"
+						+ "				(13, 'Workshop 1 worker', 13004),\n"
+						+ "				(13, 'Workshop 2 worker', 13004),\n"
+						+ "				(13, 'Storekeeper', 13004),\n"						
+						+ "				(13, 'Community manager', 13004),\n"
+						+ "				(13, 'Procurement worker', 13004),\n"
+						+ "				(13, 'Technologist', 13004),\n"
+						+ "				(13, 'Auditor', 13004);",
+						
+						
+						
+						"/* warehouse lifecycle */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (17001, 'soberano.stage.starting', 17),\n"
+						+ "		(17002, 'Enabled', 17),\n"
+						+ "		(17003, 'Disabled', 17);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (17001, 'Add', 17, 17001, 17002, 'false'),\n"
+						+ "		(17002, 'Apply', 17, 17002, 17002, 'false'),\n"
+						+ "		(17003, 'Disable', 17, 17002, 17003, 'false'),\n"
+						+ "		(17004, 'Check', 17, 17002, 17002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (17, 'Manager', 17001),\n"
+						+ "				(17, 'Manager', 17002),\n"
+						+ "				(17, 'Manager', 17003),\n"
+						+ "				(17, 'Accounter', 17004),\n"
+						+ "				(17, 'Shift manager', 17004),\n"						
+						+ "				(17, 'Storekeeper', 17004),\n"
+						+ "				(17, 'Shift manager', 17004),\n"
+						+ "				(17, 'Technologist', 17004),\n"
+						+ "				(17, 'Auditor', 17004);",
 				
 						
 												
@@ -847,22 +1001,26 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"CREATE OR REPLACE FUNCTION soberano.\"fn_Worker_getAll\"(loginname character varying)\n"
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Worker_getAll\"(\n"
+						+ "	loginname character varying)\n"
 						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 100\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
 						+ "		--in domainObjectName is returned the qualified name of the worker\n"
-						+ "		RETURN QUERY SELECT DISTINCT \"WorkerHasWorkerId\", \"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || worker.\"This_has_LoginName\" \n"
+						+ "		RETURN QUERY SELECT \"WorkerHasWorkerId\", qualifiedName\n"
+						+ "						FROM (SELECT DISTINCT \"WorkerHasWorkerId\", \n"
+						+ "							  				(\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || worker.\"This_has_LoginName\") qualifiedName\n"
 						+ "						FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(6, 1, loginname) instance\n"
 						+ "							INNER JOIN soberano.\"Worker\" worker\n"
 						+ "								ON instance.\"InstanceId\" = worker.\"This_is_identified_by_EntityTypeInstance_id\"\n"
 						+ "							INNER JOIN metamodel.\"User\" u\n"
-						+ "								ON u.\"This_has_LoginName\" = worker.\"This_has_LoginName\";\n"
+						+ "								ON u.\"This_has_LoginName\" = worker.\"This_has_LoginName\") sq\n"
+						+ "						ORDER BY qualifiedName;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
 						
@@ -1075,7 +1233,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 100\n"
+						+ "    ROWS 200\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
 						+ "		RETURN QUERY SELECT \"MunicipalityHasMunicipalityId\", \"This_has_Name\" \n"
@@ -1112,7 +1270,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 1\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1271,7 +1429,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 1\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1295,7 +1453,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 100\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1484,7 +1642,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 1\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1507,7 +1665,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 50\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1680,7 +1838,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 300\n"
+						+ "    ROWS 1\n"
 						+ "\n"
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
@@ -1783,6 +1941,93 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		END IF;\n"
 						+ "		RETURN providerId;\n"
 						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Unit_getAll\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" character varying) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 50\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT DISTINCT acronym.\"UnitHasUnitId\",\n"
+						+ "									CAST(acronym.\"Language\" || ':' || \"Acronym\" || ' : ' || \"Name\" AS character varying) qn\n"
+						+ "						FROM soberano.\"UnitHasAcronymInLanguage\" acronym\n"
+						+ "							INNER JOIN soberano.\"UnitHasNameInLanguage\" unitname\n"
+						+ "								ON acronym.\"UnitHasUnitId\" = unitname.\"UnitHasUnitId\"\n"
+						+ "									AND acronym.\"Language\" = unitname.\"Language\"\n"
+						+ "						ORDER BY acronym.\"UnitHasUnitId\", qn;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Warehouse_create\"(\n"
+						+ "	warehousename character varying,\n"
+						+ "	warehousecode character varying,\n"
+						+ "	isprocurementwarehouse boolean,\n"
+						+ "	issaleswarehouse boolean,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		entityTypeInstanceId integer;\n"
+						+ "		warehouseId integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		warehouseId = -1;	\n"
+						+ "		\n"
+						+ "		--create entity type instance	\n"
+						+ "		SELECT soberano.\"fn_EntityTypeInstance_create\"('Warehouse', loginname)\n"
+						+ "			INTO entityTypeInstanceId;\n"
+						+ "			\n"
+						+ "		--user has rights to create instance of that entity type\n"
+						+ "		IF entityTypeInstanceId > 0 THEN\n"
+						+ "		\n"
+						+ "			INSERT INTO soberano.\"Warehouse\"(\"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "											 \"This_has_Name\", \n"
+						+ "											 \"This_is_identified_by_Code\", \n"
+						+ "											 \"Warehouse_is_procurement_warehouse\", \n"
+						+ "											 \"Warehouse_is_sales_warehouse\")\n"
+						+ "				VALUES (entityTypeInstanceId,\n"
+						+ "					   warehousename,\n"
+						+ "					   warehousecode,\n"
+						+ "					   isprocurementwarehouse,\n"
+						+ "					   issaleswarehouse)\n"
+						+ "				RETURNING \"WarehouseHasWarehouseId\" INTO warehouseId;\n"
+						+ "		END IF;\n"
+						+ "		RETURN warehouseId;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Warehouse_getAll\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT *\n"
+						+ "						FROM (SELECT DISTINCT \"WarehouseHasWarehouseId\", \n"
+						+ "									\"This_has_Name\" || ':' || \"This_is_identified_by_Code\" \"domainObjectName\"\n"
+						+ "									FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(17, 1, loginname) instance\n"
+						+ "										INNER JOIN soberano.\"Warehouse\" warehouse\n"
+						+ "											ON instance.\"InstanceId\" = warehouse.\"This_is_identified_by_EntityTypeInstance_id\") sq\n"
+						+ "						ORDER BY \"domainObjectName\" ASC;\n"
+						+ "	END;	\n"
 						+ "$BODY$;",
 						
 						

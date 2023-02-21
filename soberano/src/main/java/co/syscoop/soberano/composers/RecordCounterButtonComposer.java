@@ -39,6 +39,8 @@ public class RecordCounterButtonComposer extends CounterFormComposer {
 			else {
 				//clean form
 				ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+				((Checkbox) incDetails.query("#chkIsSurcharged")).setChecked(false);
+				((Checkbox) incDetails.query("#chkDisabled")).setChecked(false);
 			}
 		}
 		catch(WrongValueException ex) {

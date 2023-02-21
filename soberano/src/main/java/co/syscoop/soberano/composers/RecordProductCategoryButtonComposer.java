@@ -38,6 +38,7 @@ public class RecordProductCategoryButtonComposer extends ProductCategoryFormComp
 			else {
 				//clean form
 				ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+				((Checkbox) incDetails.query("#chkDisabled")).setChecked(false);
 			}
 		}
 		catch(WrongValueException ex) {

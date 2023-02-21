@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(6)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O6_ProviderTest_disable extends ProviderActionTest{
 

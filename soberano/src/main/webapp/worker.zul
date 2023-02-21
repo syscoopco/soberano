@@ -31,7 +31,8 @@
 						<comboitem label="${labels.responsibilities.CatalogMaintaner}" value="11"/>
 						<comboitem label="${labels.responsibilities.CommunityManager}" value="12"/>
 						<comboitem label="${labels.responsibilities.ProcurementWorker}" value="13"/>
-						<comboitem label="${labels.responsibilities.SystemAdmin}" value="14"/>					
+						<comboitem label="${labels.responsibilities.SystemAdmin}" value="14"/>
+						<comboitem label="${labels.responsibilities.Technologist}" value="15"/>
 					</combobox>
 					<button id="btnAssignResponsibility" label="+" apply="co.syscoop.soberano.composers.AssignResponsibilityButtonComposer"></button>
 				</treecol>

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -20,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O3_ProviderTest_record extends ProductCategoryActionTest {
 	

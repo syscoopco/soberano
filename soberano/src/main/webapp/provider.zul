@@ -2,6 +2,6 @@
 <zk>
 	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.ProviderFormComposer">
 		<label value="${labels.caption.field.name}" sclass="Caption"></label>			
-		<textbox id="txtName" readonly="false" maxlength="64" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
+		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
 	</vbox>	
 </zk>
