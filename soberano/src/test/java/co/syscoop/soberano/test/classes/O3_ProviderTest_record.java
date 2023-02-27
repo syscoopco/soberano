@@ -545,6 +545,8 @@ class O3_ProviderTest_record extends ProductCategoryActionTest {
 		try {
 			providerForm.setComponentValue(providerForm.getTxtName(), "prov2");
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

@@ -329,7 +329,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 	
 	@Test
 	@Order(11)
-	final void testCas11() {
+	final void testCase11() {
 
 		SpringUtility.setLoggedUserForTesting("user8@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_product_category.zul");
@@ -675,6 +675,8 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 			productCategoryForm.setComponentValue(productCategoryForm.getIntPosition(), 10);	
 			(desktop.query("checkbox").query("#chkDisabled")).as(CheckAgent.class).check(true);
 			clickOnRecordButton(desktop);
+			
+			fail("None exception was thrown when it should.");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
