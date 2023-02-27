@@ -13,9 +13,6 @@ import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zats.mimic.operation.CheckAgent;
 
-import co.syscoop.soberano.domain.tracked.ProductCategory;
-import co.syscoop.soberano.test.helper.CounterActionTest;
-import co.syscoop.soberano.test.helper.CounterForm;
 import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
 import co.syscoop.soberano.test.helper.ProductCategoryForm;
 

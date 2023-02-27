@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.WorkerActionTest;
 
 @Order(7)
 
-//TODO: enable test
+//TODO: enable testCase
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -47,37 +47,37 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 
 	@Test
 	@Order(1)
-	final void test1() {
+	final void testCaseCase1() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user1@soberano.syscoop.co", "accounter@soberano.syscoop.co", 33);
 	}
 	
 	@Test
 	@Order(2)
-	final void test2() {
+	final void testCaseCase2() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user2@soberano.syscoop.co", "auditor@soberano.syscoop.co", 32);
 	}
 	
 	@Test
 	@Order(3)
-	final void test3() {
+	final void testCase3() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user3@soberano.syscoop.co", "catalogMaintainer@soberano.syscoop.co", 31);
 	}
 	
 	@Test
 	@Order(4)
-	final void test4() {
+	final void testCase4() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user4@soberano.syscoop.co", "checker@soberano.syscoop.co", 30);
 	}
 	
 	@Test
 	@Order(5)
-	final void test5() {
+	final void testCase5() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user5@soberano.syscoop.co", "communityManager@soberano.syscoop.co", 29);
 	}
 	
 	@Test
 	@Order(6)
-	final void test6() {
+	final void testCase6() {
 		try {
 			TestUtilityCode.testDisablingObject("/workers.zul", "user6@soberano.syscoop.co", "manager@soberano.syscoop.co", 29);
 		}
@@ -92,25 +92,25 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	
 	@Test
 	@Order(7)
-	final void test7() {
+	final void testCase7() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user8@soberano.syscoop.co", "manager@soberano.syscoop.co", 28);
 	}
 	
 	@Test
 	@Order(8)
-	final void test8() {
+	final void testCase8() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user9@soberano.syscoop.co", "procurementWorker@soberano.syscoop.co", 27);
 	}
 	
 	@Test
 	@Order(9)
-	final void test9() {
+	final void testCase9() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user11@soberano.syscoop.co", "salesClerk@soberano.syscoop.co", 26);
 	}
 	
 	@Test
 	@Order(10)
-	final void test10() {
+	final void testCase10() {
 		try {
 			TestUtilityCode.testDisablingObject("/workers.zul", "user12@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
@@ -125,7 +125,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	
 	@Test
 	@Order(11)
-	final void test11() {
+	final void testCase11() {
 		try {
 			TestUtilityCode.testDisablingObject("/workers.zul", "user13@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
@@ -140,7 +140,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	
 	@Test
 	@Order(12)
-	final void test12() {
+	final void testCase12() {
 		try {
 			TestUtilityCode.testDisablingObject("/workers.zul", "user14@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 26);
 		}
@@ -155,31 +155,31 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	
 	@Test
 	@Order(13)
-	final void test13() {
+	final void testCase13() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user15@soberano.syscoop.co", "shiftManager@soberano.syscoop.co", 25);
 	}
 	
 	@Test
 	@Order(14)
-	final void test14() {
+	final void testCase14() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "storekeeper@soberano.syscoop.co", 24);
 	}
 	
 	@Test
 	@Order(15)
-	final void test15() {
+	final void testCase15() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop1Worker@soberano.syscoop.co", 23);
 	}
 	
 	@Test
 	@Order(16)
-	final void test16() {
+	final void testCase16() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "systemAdmin@soberano.syscoop.co", "workshop2Worker@soberano.syscoop.co", 22);
 	}
 	
 	@Test
 	@Order(17)
-	final void test17() {
+	final void testCase17() {
 		TestUtilityCode.testDisablingObject("/workers.zul", "user16@soberano.syscoop.co", "systemAdmin@soberano.syscoop.co", 21);
 	}
 }

@@ -12,13 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 
-import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(6)
 
-//TODO: enable test
+//TODO: enable testCase
 @Disabled
 
 class O6_ProductCategoryTest_disable  extends ProductCategoryActionTest{
@@ -45,17 +44,17 @@ class O6_ProductCategoryTest_disable  extends ProductCategoryActionTest{
 	}
 
 	@Test
-	final void test1() {
+	final void testCase1() {
 		TestUtilityCode.testDisablingObject("/product_categories.zul", "user1@soberano.syscoop.co", "mcat10", 9);
 	}
 	
 	@Test
-	final void test2() {
+	final void testCase2() {
 		TestUtilityCode.testDisablingObject("/product_categories.zul", "user2@soberano.syscoop.co", "mcat9", 8);
 	}
 	
 	@Test
-	final void test3() {
+	final void testCase3() {
 		try {
 			TestUtilityCode.testDisablingObject("/product_categories.zul", "user3@soberano.syscoop.co", "mcat8", 8);
 		}

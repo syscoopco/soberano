@@ -17,7 +17,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(6)
 
-//TODO: enable test
+//TODO: enable testCase
 @Disabled
 
 class O6_CounterTest_disable extends CounterActionTest {
@@ -44,17 +44,17 @@ class O6_CounterTest_disable extends CounterActionTest {
 	}
 
 	@Test
-	final void test1() {
+	final void testCase1() {
 		TestUtilityCode.testDisablingObject("/counters.zul", "user6@soberano.syscoop.co", "mc5", 5);
 	}
 	
 	@Test
-	final void test2() {
+	final void testCase2() {
 		TestUtilityCode.testDisablingObject("/counters.zul", "user8@soberano.syscoop.co", "mc6", 4);
 	}
 	
 	@Test
-	final void test3() {
+	final void testCase3() {
 		try {
 			TestUtilityCode.testDisablingObject("/counters.zul", "user13@soberano.syscoop.co", "mc1", 4);
 		}
