@@ -1,0 +1,11 @@
+<?page title="${labels.pageNewCostCenter.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageNewCostCenter.WindowTitle}" sclass="PageTitle"/>
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<include id="incDetails" src="/cost_center.zul"></include>
+	</window>
+	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.record}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordCostCenterButtonComposer"></button>
+</zk>

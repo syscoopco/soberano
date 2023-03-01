@@ -106,6 +106,12 @@ public class ModifyWorkerButtonComposer extends WorkerFormComposer {
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 		}
+		catch(NullPointerException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
 		catch(Exception ex)
 		{
 			ExceptionTreatment.logAndShow(ex, 

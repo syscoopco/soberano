@@ -42,6 +42,13 @@ public class ZKUtilitity {
 		comp.setConstraint(constraint);
 	}
 	
+	public static void setValueWOValidation(Combobox comp, Integer value) {
+		Constraint constraint = comp.getConstraint();
+		comp.setConstraint((Constraint) null);
+		comp.setSelectedItem(ComboboxHelper.getItemByValue(comp, value));
+		comp.setConstraint(constraint);
+	}
+	
 	private static int[] getTreeitemPath(Component root, Component lastNode) {
 		List<Integer> l = new ArrayList<Integer>();
 		Component curNode = lastNode;

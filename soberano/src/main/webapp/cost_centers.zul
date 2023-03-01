@@ -4,7 +4,23 @@
 <zk>
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageCostCenters.WindowTitle}" sclass="PageTitle"/>
-	<include src="intellisensecombobox_details.zul"></include>
-	
-	<!-- TODO: populate showing all panel, intellisense combobox in the header, and details logic -->
+	<hbox self="@define(showingAllPanelHeader)" width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
+		<combobox id="cmbIntelliSearch" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.ViewModelComposer">
+			<template name="model">
+				<comboitem label="@load(each.name)" value="@load(each)">
+				</comboitem>
+			</template>
+		</combobox>
+		<button id="btnNew" label="+" href="/new_cost_center.zul" sclass="BarButton NewButton"></button>		
+	</hbox>
+	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
+		<tree id="treeObjects" apply="co.syscoop.soberano.composers.CostCentersTreeComposer">
+			<treecols>
+				<treecol>
+				</treecol>
+			</treecols>
+		</tree>
+	</window>
+	<include id="incDetails" self="@define(detailsPanel)" src="/cost_center.zul" visible="false"></include>	
+	<button id="btnApply" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ModifyCostCenterButtonComposer"></button>
 </zk>
