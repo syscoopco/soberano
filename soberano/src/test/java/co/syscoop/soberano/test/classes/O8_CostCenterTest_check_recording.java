@@ -6,39 +6,36 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
-import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.test.helper.WarehouseActionTest;
+import co.syscoop.soberano.test.helper.CostCenterActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(4)
+@Order(8)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O4_WarehouseTest_check_recording extends WarehouseActionTest {
+class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
 		Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/warehouses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/cost_centers.zul");
 		
 		cmbIntelliSearchAgent = desktop.query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
-		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);
-		chkProcurementWarehouse = cmbIntelliSearchAgent.query("#incDetails").query("#chkProcurementWarehouse").as(Checkbox.class);
-		chkSalesWarehouse = cmbIntelliSearchAgent.query("#incDetails").query("#chkSalesWarehouse").as(Checkbox.class);
+		cmbInputWarehouse = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse").as(Combobox.class);
+		cmbOutputWarehouse = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse").as(Combobox.class);
 	}
 
 	@AfterAll
@@ -57,30 +54,12 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	}
 
 	@Test
-	final void testCase20() {
-		
-		try {
-			checkWarehouse("warehouse1",
-							"w1",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
 	final void testCase21() {
 		
 		try {
-			checkWarehouse("warehouse2",
-							"w2",
-							false,
-							false);
+			checkCostCenter("cc1",
+							"mwarehouse6:mw6",
+							"mwarehouse7:mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -94,10 +73,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase22() {
 		
 		try {
-			checkWarehouse("warehouse3",
-							"w3",
-							false,
-							false);
+			checkCostCenter("cc2",
+							"mwarehouse7:mw7",
+							"mwarehouse8:mw8");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -111,10 +89,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase23() {
 		
 		try {
-			checkWarehouse("warehouse4",
-							"w4",
-							false,
-							false);
+			checkCostCenter("cc3",
+							"mwarehouse8:mw8",
+							"mwarehouse9:mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -128,10 +105,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase24() {
 		
 		try {
-			checkWarehouse("warehouse5",
-							"w5",
-							true,
-							false);
+			checkCostCenter("cc4",
+							"mwarehouse9:mw9",
+							"mwarehouse10:mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -145,10 +121,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase25() {
 		
 		try {
-			checkWarehouse("warehouse6",
-							"w6",
-							false,
-							false);
+			checkCostCenter("cc5",
+							"mwarehouse10:mw10",
+							"mwarehouse10:mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -162,10 +137,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase26() {
 		
 		try {
-			checkWarehouse("warehouse7",
-							"w7",
-							false,
-							true);
+			checkCostCenter("cc6",
+							"mwarehouse10:mw10",
+							"mwarehouse6:mw6");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -179,10 +153,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase27() {
 		
 		try {
-			checkWarehouse("warehouse8",
-							"w8",
-							false,
-							false);
+			checkCostCenter("cc7",
+							"mwarehouse6:mw6",
+							"mwarehouse7:mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -196,10 +169,9 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase28() {
 		
 		try {
-			checkWarehouse("warehouse9",
-							"w9",
-							false,
-							false);
+			checkCostCenter("cc8",
+							"mwarehouse7:mw7",
+							"mwarehouse8:mw8");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -213,10 +185,25 @@ class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 	final void testCase29() {
 		
 		try {
-			checkWarehouse("warehouse10",
-							"w10",
-							false,
-							false);
+			checkCostCenter("cc9",
+							"mwarehouse8:mw8",
+							"mwarehouse9:mw9");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase30() {
+		
+		try {
+			checkCostCenter("cc10",
+							"mwarehouse9:mw9",
+							"mwarehouse9:mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

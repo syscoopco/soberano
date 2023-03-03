@@ -116,6 +116,25 @@ public class ConstrainedForm {
 		}
 	}
 	
+	public void setComponentValue(Combobox comp, Integer value) {
+		
+		try {
+			for (Component co : comp.getChildren()) {
+				Comboitem item = (Comboitem) co;
+				if (((DomainObject) item.getValue()).getId().equals(value)) {
+					comp.setSelectedItem(item);
+					break;
+				}
+			}
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
 	public void selectComboitemByLabel(Combobox comp, String label) {
 		
 		try {

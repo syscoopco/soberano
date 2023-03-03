@@ -17,7 +17,7 @@ import org.zkoss.zats.mimic.operation.CheckAgent;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
+import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class O3_WarehouseTest_record extends ProductCategoryActionTest {
+class O3_WarehouseTest_record extends WarehouseActionTest {
 	
 	protected WarehouseForm warehouseForm = null;
 

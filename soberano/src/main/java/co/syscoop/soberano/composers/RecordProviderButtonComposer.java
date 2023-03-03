@@ -25,10 +25,10 @@ public class RecordProviderButtonComposer extends ProviderFormComposer {
     public void btnRecord_onClick() throws Throwable {
 		try{
 			Include incDetails = (Include) btnRecord.getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");		
-			Provider newCategory = new Provider(0,
+			Provider provider = new Provider(0,
 											0,
 											((Textbox) incDetails.query("#txtName")).getValue());
-			if (newCategory.record() == -1) {
+			if (provider.record() == -1) {
 				throw new NotEnoughRightsException();						
 			}
 			else {

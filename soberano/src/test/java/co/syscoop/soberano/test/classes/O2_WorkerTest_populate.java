@@ -95,6 +95,7 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(12, "Community manager"));
 			responsibilities.add(new Responsibility(13, "Procurement worker"));
 			responsibilities.add(new Responsibility(14, "System admin"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
 			for (int i = 1; i <= 14; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			Worker newWorker = new Worker(0,
 										0,
@@ -160,7 +161,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(12, "Community manager"));
 			responsibilities.add(new Responsibility(13, "Procurement worker"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 10; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user3@soberano.syscoop.co",
@@ -224,7 +226,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(10, "Storekeeper"));
 			responsibilities.add(new Responsibility(12, "Community manager"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user5@soberano.syscoop.co",
@@ -291,7 +294,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(11, "Catalog maintainer"));
 			responsibilities.add(new Responsibility(13, "Procurement worker"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 10; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user7@soberano.syscoop.co",
@@ -349,7 +353,8 @@ class O2_WorkerTest_populate {
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 3; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user9@soberano.syscoop.co",
@@ -415,7 +420,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(10, "Storekeeper"));
 			responsibilities.add(new Responsibility(11, "Catalog maintainer"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 10; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user11@soberano.syscoop.co",
@@ -478,7 +484,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(9, "Workshop 2 worker"));
 			responsibilities.add(new Responsibility(10, "Storekeeper"));
 			responsibilities.add(new Responsibility(13, "Procurement worker"));
-			for (int i = 1; i <= 7; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user13@soberano.syscoop.co",
@@ -541,7 +548,8 @@ class O2_WorkerTest_populate {
 			responsibilities.add(new Responsibility(9, "Workshop 2 worker"));
 			responsibilities.add(new Responsibility(10, "Storekeeper"));
 			responsibilities.add(new Responsibility(14, "System admin"));
-			for (int i = 1; i <= 8; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 9; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user15@soberano.syscoop.co",
@@ -597,7 +605,8 @@ class O2_WorkerTest_populate {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(3, "Accounter"));
-			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user17@soberano.syscoop.co",
@@ -647,7 +656,8 @@ class O2_WorkerTest_populate {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(5, "Shift manager"));
-			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			responsibilities.add(new Responsibility(15, "Technologist"));
+			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user19@soberano.syscoop.co",
