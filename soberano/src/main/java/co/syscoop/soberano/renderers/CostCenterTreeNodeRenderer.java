@@ -17,9 +17,9 @@ public class CostCenterTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	}
 
 	@Override
-	protected void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	protected void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		CostCenterFormHelper.fillTheForm(incDetails, data);
+		(new CostCenterFormHelper()).fillForm(incDetails, data);
 	}
 
 	@Override

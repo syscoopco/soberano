@@ -15,12 +15,12 @@ import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
-@Order(6)
+@Order(7)
 
 //TODO: enable testCase
-@Disabled
+//@Disabled
 
-class O6_ProductCategoryTest_disable  extends ProductCategoryActionTest{
+class O7_ProductCategoryTest_disable  extends ProductCategoryActionTest{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

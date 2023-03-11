@@ -13,6 +13,7 @@ import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zats.mimic.operation.CheckAgent;
 
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 
@@ -21,7 +22,7 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 //TODO: enable test
 //@Disabled
 
-class O5_WarehouseTest_modify extends WarehouseActionTest{
+class O5_WarehouseTest_modify extends WarehouseActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -395,212 +396,6 @@ class O5_WarehouseTest_modify extends WarehouseActionTest{
 		}
 		catch(Throwable ex) {
 			testDuplicateKeyException(ex);
-		}
-	}
-	
-	protected void checkWarehouse(WarehouseForm warehouseForm,
-										String name,
-										String code,
-										Boolean isProcurementWarehouse,
-										Boolean isSalesWarehouse) {
-
-		String qualifiedName = name + ":" + code;
-		loadObjectDetails(qualifiedName);
-		
-		assertEquals(name.toLowerCase(), warehouseForm.getTxtName().getText().toLowerCase(), "Wrong name shown for warehouse " +  qualifiedName);
-		assertEquals(code.toLowerCase(), warehouseForm.getTxtCode().getText().toLowerCase(), "Wrong code shown for warehouse " +  qualifiedName);
-		assertEquals(isProcurementWarehouse, warehouseForm.getChkProcurementWarehouse().isChecked(), "Warehouse " + qualifiedName + " is wrongly shown with isProcurementWarehouse: " + warehouseForm.getChkProcurementWarehouse().isChecked());
-		assertEquals(isSalesWarehouse, warehouseForm.getChkSalesWarehouse().isChecked(), "Warehouse " + qualifiedName + " is wrongly shown with isSalesWarehouse: " + warehouseForm.getChkSalesWarehouse().isChecked());
-	}
-	
-	@Test
-	final void testCase18() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse1",
-							"mw1",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase19() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse2",
-							"mw2",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase20() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse3",
-							"mw3",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase21() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse4",
-							"mw4",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase22() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse5",
-							"mw5",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase23() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse6",
-							"mw6",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase24() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse7",
-							"mw7",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase25() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse8",
-							"mw8",
-							false,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	
-	@Test
-	final void testCase26() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse9",
-							"mw9",
-							false,
-							true);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase27() {
-		
-		try {
-			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");		
-			checkWarehouse(warehouseForm,
-							"mwarehouse10",
-							"mw10",
-							true,
-							false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
 		}
 	}
 }

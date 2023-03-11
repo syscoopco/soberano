@@ -1,11 +1,13 @@
 package co.syscoop.soberano.util;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Constraint;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
@@ -29,6 +31,13 @@ public class ZKUtilitity {
 	}
 	
 	public static void setValueWOValidation(Intbox comp, Integer value) {
+		Constraint constraint = comp.getConstraint();
+		comp.setConstraint((Constraint) null);
+		comp.setValue(value);
+		comp.setConstraint(constraint);
+	}
+	
+	public static void setValueWOValidation(Decimalbox comp, BigDecimal value) {
 		Constraint constraint = comp.getConstraint();
 		comp.setConstraint((Constraint) null);
 		comp.setValue(value);

@@ -19,12 +19,13 @@ import org.zkoss.zul.Intbox;
 
 import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.CounterForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O3_CounterTest_record extends CounterActionTest {
 	
@@ -32,6 +33,7 @@ class O3_CounterTest_record extends CounterActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 		Zats.init("./src/main/webapp");
 	}
 

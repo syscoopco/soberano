@@ -39,4 +39,17 @@ public class CostCenterActionTest extends ActionTest {
 		assertEquals(inputWarehouse, cmbInputWarehouse.getText(), "Wrong input warehouse shown for cost center " +  qualifiedName);
 		assertEquals(outputWarehouse, cmbOutputWarehouse.getText(), "Wrong output warehouse shown for cost center " +  qualifiedName);
 	}
+	
+	protected void checkCostCenter(CostCenterForm costCenterForm,
+					String name,
+					String inputWarehouse,
+					String outputWarehouse) {
+		
+		String qualifiedName = name;
+		loadObjectDetails(qualifiedName);
+		
+		assertEquals(name.toLowerCase(), costCenterForm.getTxtName().getText().toLowerCase(), "Wrong name shown for cost center " +  qualifiedName);
+		assertEquals(inputWarehouse, costCenterForm.getCmbInputWarehouse().getText(), "Wrong input warehouse shown for cost center " +  qualifiedName);
+		assertEquals(outputWarehouse, costCenterForm.getCmbOutputWarehouse().getText(), "Wrong output warehouse shown for cost center " +  qualifiedName);
+	}
 }

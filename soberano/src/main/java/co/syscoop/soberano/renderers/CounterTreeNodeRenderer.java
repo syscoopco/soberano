@@ -17,9 +17,9 @@ public class CounterTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	}
 
 	@Override
-	protected void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	protected void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		CounterFormHelper.fillTheForm(incDetails, data);
+		(new CounterFormHelper()).fillForm(incDetails, data);
 	}
 
 	@Override

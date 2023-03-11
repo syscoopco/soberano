@@ -44,6 +44,7 @@ class O1_RelationalGeneratorTest extends TestClass {
 	
 	@Test
 	final void testReadAndParse() {
+		
 		try {
 			TestCaseORMConceptualModelInstance.readAndParse();
 		} catch (Exception e) {
@@ -54,6 +55,7 @@ class O1_RelationalGeneratorTest extends TestClass {
 	
 	@Test
 	final void testGenerateLogicalModel() {
+		
 		try {
 			TestCaseORMConceptualModelInstance.generateLogicalModel();
 		} catch (Throwable e) {

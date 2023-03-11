@@ -12,16 +12,16 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 
-import co.syscoop.soberano.test.helper.CounterActionTest;
+import co.syscoop.soberano.test.helper.ProviderActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
-@Order(6)
+@Order(7)
 
 //TODO: enable testCase
-@Disabled
+//@Disabled
 
-class O6_CounterTest_disable extends CounterActionTest {
-	
+class O7_ProviderTest_disable extends ProviderActionTest{
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
@@ -45,25 +45,21 @@ class O6_CounterTest_disable extends CounterActionTest {
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/counters.zul", "user6@soberano.syscoop.co", "mc5", 5);
+		TestUtilityCode.testDisablingObject("/providers.zul", "user1@soberano.syscoop.co", "mprov8", 7);
 	}
 	
 	@Test
 	final void testCase2() {
-		TestUtilityCode.testDisablingObject("/counters.zul", "user8@soberano.syscoop.co", "mc6", 4);
-	}
-	
-	@Test
-	final void testCase3() {
 		try {
-			TestUtilityCode.testDisablingObject("/counters.zul", "user13@soberano.syscoop.co", "mc1", 4);
+			TestUtilityCode.testDisablingObject("/providers.zul", "user2@soberano.syscoop.co", "mcat7", 7);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
 			
-			//an auditor can list the objects but not modifying nor disabling them
+			//a user authorized to make any decision on an object can 
+			//retrieve it but not necessarily modifying nor disabling it
 			testNotEnoughRightsException(ex);
 		}
 	}

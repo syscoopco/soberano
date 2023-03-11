@@ -16,9 +16,9 @@ public class WorkerTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	}
 
 	@Override
-	protected void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	protected void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		WorkerFormHelper.fillTheForm(incDetails, data);
+		(new WorkerFormHelper()).fillForm(incDetails, data);
 	}
 
 	@Override

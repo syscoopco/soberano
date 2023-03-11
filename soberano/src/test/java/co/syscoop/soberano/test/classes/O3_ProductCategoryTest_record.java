@@ -21,12 +21,13 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
 import co.syscoop.soberano.test.helper.ProductCategoryForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
@@ -35,6 +36,7 @@ class O3_ProductCategoryTest_record extends ProductCategoryActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 		Zats.init("./src/main/webapp");
 	}
 

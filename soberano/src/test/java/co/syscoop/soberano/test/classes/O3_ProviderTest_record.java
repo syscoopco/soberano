@@ -14,21 +14,23 @@ import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
+import co.syscoop.soberano.test.helper.ProviderActionTest;
 import co.syscoop.soberano.test.helper.ProviderForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O3_ProviderTest_record extends ProductCategoryActionTest {
+class O3_ProviderTest_record extends ProviderActionTest {
 	
 	protected ProviderForm providerForm = null;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 		Zats.init("./src/main/webapp");
 	}
 

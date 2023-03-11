@@ -16,12 +16,13 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.test.helper.ProviderActionTest;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O4_ProviderTest_check_recording extends ProviderActionTest {
 

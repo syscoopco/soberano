@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -14,8 +15,6 @@ import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Tree;
-import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
@@ -29,16 +28,11 @@ import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityExcept
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ZKUtilitity;
 
-public class WorkerFormHelper {
+public class WorkerFormHelper extends TrackedObjectFormHelper {
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {
-		
-		Tree treeObjects = treeItem.getTree();
-		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
-		fillTheForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
-	}
-
+	private ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
+	private ArrayList<Authority> authorities = new ArrayList<Authority>();
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addResponsibilityItem(String responsibilityName,
 											String responsibilityId,
@@ -63,7 +57,34 @@ public class WorkerFormHelper {
 		tchdnResponsibilities.appendChild(positionItem);
 	}
 	
-	public static void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	static public String passwordsMatch(Include incDetails) throws PasswordsMustMatchException {
+		String pwd = ((Textbox) incDetails.query("#txtPassword")).getValue();
+		if (!pwd.equals(((Textbox) incDetails.query("#txtConfirmPassword")).getValue())) {
+			throw new PasswordsMustMatchException();
+		}
+		return pwd;
+	}
+	
+	static public void fillAssigmentArrays(ArrayList<Responsibility> responsibilities, 
+											ArrayList<Authority> authorities,
+											Include incDetails) throws WorkerMustBeAssignedToAResponsibilityException {
+		Treechildren tchdnResponsibilities = (Treechildren) incDetails.query("#tchdnResponsibilities");
+		if (tchdnResponsibilities.getChildren().size() > 0) {
+			responsibilities.clear();
+			authorities.clear();
+			for (Component item : tchdnResponsibilities.getChildren()) {
+				Integer respId = Integer.parseInt(((Treeitem) item).getValue());
+				responsibilities.add(new Responsibility(respId, ""));
+				authorities.add(new Authority(1, "soberano.authority.top"));
+			}
+		}
+		else {
+			throw new WorkerMustBeAssignedToAResponsibilityException();	
+		}
+	}
+
+	@Override
+	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
 		Worker worker = new Worker(((DomainObject) data.getData().getValue()).getId());
 		worker.get();
@@ -109,30 +130,64 @@ public class WorkerFormHelper {
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), worker.getContactData().getLatitude());
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), worker.getContactData().getLongitude());
 	}
-	
-	static public String passwordsMatch(Include incDetails) throws PasswordsMustMatchException {
-		String pwd = ((Textbox) incDetails.query("#txtPassword")).getValue();
-		if (!pwd.equals(((Textbox) incDetails.query("#txtConfirmPassword")).getValue())) {
-			throw new PasswordsMustMatchException();
-		}
-		return pwd;
+
+	@Override
+	public void cleanForm(Include incDetails) {
+		
+		Executions.sendRedirect("/new_worker.zul");
 	}
-	
-	static public void fillAssigmentArrays(ArrayList<Responsibility> responsibilities, 
-											ArrayList<Authority> authorities,
-											Include incDetails) throws WorkerMustBeAssignedToAResponsibilityException {
-		Treechildren tchdnResponsibilities = (Treechildren) incDetails.query("#tchdnResponsibilities");
-		if (tchdnResponsibilities.getChildren().size() > 0) {
-			responsibilities.clear();
-			authorities.clear();
-			for (Component item : tchdnResponsibilities.getChildren()) {
-				Integer respId = Integer.parseInt(((Treeitem) item).getValue());
-				responsibilities.add(new Responsibility(respId, ""));
-				authorities.add(new Authority(1, "soberano.authority.top"));
-			}
-		}
-		else {
-			throw new WorkerMustBeAssignedToAResponsibilityException();	
-		}
+
+	@Override
+	public Integer recordFromForm(Include incDetails) throws Exception {
+		
+		String pwd = passwordsMatch(incDetails);
+		fillAssigmentArrays(responsibilities, authorities, incDetails);
+		Include incContactData = (Include) incDetails.query("#incContactData");
+		return (new Worker(0,
+							0,
+							((Textbox) incDetails.query("#txtUserName")).getValue(),
+							((Textbox) incDetails.query("#txtFirstName")).getValue(),
+							((Textbox) incDetails.query("#txtLastName")).getValue(),
+							pwd,
+							((Textbox) incContactData.query("#txtPhoneNumber")).getValue(),
+							((DomainObject) (((Combobox) incContactData.query("#cmbCountry")).getSelectedItem().getValue())).getStringId(),
+							((Textbox) incContactData.query("#txtAddress")).getValue(),
+							((Textbox) incContactData.query("#txtPostalCode")).getValue(),
+							((Textbox) incContactData.query("#txtTown")).getValue(),
+							((Combobox) incContactData.query("#cmbMunicipality")).getSelectedItem().getValue(),
+							((Textbox) incContactData.query("#txtCity")).getValue(),
+							((Combobox) incContactData.query("#cmbProvince")).getSelectedItem().getValue(),
+							((Doublebox) incContactData.query("#dblLatitude")).getValue(),
+							((Doublebox) incContactData.query("#dblLongitude")).getValue(),
+							responsibilities,
+							authorities))
+					.record();
+	}
+
+	@Override
+	public Integer modifyFromForm(Include incDetails) throws Exception {
+		
+		String pwd = passwordsMatch(incDetails);		
+		fillAssigmentArrays(responsibilities, authorities, incDetails);
+		Include incContactData = (Include) incDetails.query("#incContactData");
+		super.setTrackedObject(new Worker(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+											0,
+											((Textbox) incDetails.query("#txtUserName")).getValue(),
+											((Textbox) incDetails.query("#txtFirstName")).getValue(),
+											((Textbox) incDetails.query("#txtLastName")).getValue(),
+											pwd,
+											((Textbox) incContactData.query("#txtPhoneNumber")).getValue(),
+											((DomainObject) (((Combobox) incContactData.query("#cmbCountry")).getSelectedItem().getValue())).getStringId(),
+											((Textbox) incContactData.query("#txtAddress")).getValue(),
+											((Textbox) incContactData.query("#txtPostalCode")).getValue(),
+											((Textbox) incContactData.query("#txtTown")).getValue(),
+											((Combobox) incContactData.query("#cmbMunicipality")).getSelectedItem().getValue(),
+											((Textbox) incContactData.query("#txtCity")).getValue(),
+											((Combobox) incContactData.query("#cmbProvince")).getSelectedItem().getValue(),
+											((Doublebox) incContactData.query("#dblLatitude")).getValue(),
+											((Doublebox) incContactData.query("#dblLongitude")).getValue(),
+											responsibilities,
+											authorities));
+		return super.getTrackedObject().modify();
 	}
 }

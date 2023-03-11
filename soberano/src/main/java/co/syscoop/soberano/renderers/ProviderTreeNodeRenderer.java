@@ -17,9 +17,9 @@ public class ProviderTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	}
 
 	@Override
-	protected void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	protected void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		ProviderFormHelper.fillTheForm(incDetails, data);
+		(new ProviderFormHelper()).fillForm(incDetails, data);
 	}
 
 	@Override

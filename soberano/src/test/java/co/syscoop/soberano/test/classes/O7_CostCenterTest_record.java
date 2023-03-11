@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -18,8 +19,9 @@ import org.zkoss.zats.mimic.operation.InputAgent;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.test.helper.CostCenterActionTest;
 import co.syscoop.soberano.test.helper.CostCenterForm;
-import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
@@ -28,12 +30,13 @@ import co.syscoop.soberano.util.SpringUtility;
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class O7_CostCenterTest_record extends ProductCategoryActionTest {
+class O7_CostCenterTest_record extends CostCenterActionTest {
 	
 	protected CostCenterForm costCenterForm = null;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 		Zats.init("./src/main/webapp");
 	}
 

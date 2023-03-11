@@ -16,13 +16,15 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treechildren;
+
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_WorkerTest_check_recording extends WorkerActionTest {
 	

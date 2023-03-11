@@ -14,11 +14,12 @@ import org.zkoss.zats.mimic.Zats;
 
 import co.syscoop.soberano.test.helper.ProviderActionTest;
 import co.syscoop.soberano.test.helper.ProviderForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_ProviderTest_modify extends ProviderActionTest{
 
@@ -366,133 +367,6 @@ class O5_ProviderTest_modify extends ProviderActionTest{
 		}
 		catch(Throwable ex) {
 			testDuplicateKeyException(ex);
-		}
-	}
-	
-	protected void checkProvider(ProviderForm providerForm, String name) {
-
-		String qualifiedName = name;
-		loadObjectDetails(qualifiedName);		
-		assertEquals(name.toLowerCase(), providerForm.getTxtName().getText().toLowerCase(), "Wrong name shown for provider " +  qualifiedName);
-	}
-	
-	@Test
-	final void testCase19() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov1");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase20() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov2");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase21() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov3");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase22() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov4");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase23() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov5");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase24() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov6");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase25() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov7");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase26() {
-		
-		try {
-			ProviderForm providerForm = setFormComponents("user1@soberano.syscoop.co", "providers.zul");		
-			checkProvider(providerForm, "mprov8");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
 		}
 	}
 }

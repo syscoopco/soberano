@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.test.helper.ActionTest;
 import co.syscoop.soberano.test.helper.ChangePasswordForm;
 import co.syscoop.soberano.test.helper.ConstrainedForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 
@@ -31,7 +32,7 @@ import org.springframework.ldap.support.LdapUtils;
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_WorkerTest_password_change extends ActionTest {

@@ -20,7 +20,7 @@ public /*abstract*/ class ViewModelComposer extends SelectorComposer {
 	@Wire
 	protected Combobox cmbIntelliSearch;
 	
-	protected /*abstract*/ void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {};
+	protected /*abstract*/ void fillForm(Include incDetails, Treeitem treeItem) throws SQLException {};
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
@@ -37,7 +37,7 @@ public /*abstract*/ class ViewModelComposer extends SelectorComposer {
 			if (tc.getLabel().equals(cmbIntelliSearch.getText()) ) {
 				treeObjects.setSelectedItem(ti);
 				
-				//call if abstract class version fillTheForm((Include) cmbIntelliSearch.query("#incDetails"), ti);
+				//call if abstract class version fillForm((Include) cmbIntelliSearch.query("#incDetails"), ti);
 				
 				//sendEvent is called in non abstract class version
 				Events.sendEvent(Events.ON_CLICK, ti, null);

@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import co.syscoop.soberano.domain.tracked.Worker;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.Responsibility;
+import co.syscoop.soberano.test.helper.TestClass;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 /**
@@ -30,7 +32,7 @@ import co.syscoop.soberano.util.SpringUtility;
 //TODO: enable test
 //@Disabled
 
-class O2_WorkerTest_populate {
+class O2_WorkerTest_populate extends TestClass {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

@@ -131,7 +131,7 @@
  	</bean>
  	
  	<!-- jdbc datasource with connection pooling for logical model generation. -->
- 	<bean id="dataSourceForLogicalModelGeneration" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+ 	<bean id="dataSourceForLogicalModelGeneration" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" scope="singleton">
  		<property name="driverClassName">
             <value>${jdbc.driverClassName}</value> 
         </property> 
@@ -183,7 +183,7 @@
     </bean>
     
     <!-- jdbc datasource with connection pooling for web application. -->
- 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+ 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" scope="singleton">
  		<property name="driverClassName">
             <value>${jdbc.driverClassName}</value> 
         </property> 
@@ -257,7 +257,7 @@
  		<constructor-arg ref="LogicalModelGenerator"/>
  		<constructor-arg value="${rules.soberanoInstanceConceptualModelFileName}"/> 		
  	</bean>
- 	<bean id="soberanoDatasource" class="co.syscoop.soberano.beans.SoberanoDatasource">
+ 	<bean id="soberanoDatasource" class="co.syscoop.soberano.beans.SoberanoDatasource" scope="singleton">
  		<constructor-arg ref="dataSource"/>
  	</bean>
 </beans>

@@ -15,11 +15,12 @@ import org.zkoss.zats.mimic.operation.CheckAgent;
 
 import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.CounterForm;
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_CounterTest_modify extends CounterActionTest {
 	
@@ -217,134 +218,5 @@ class O5_CounterTest_modify extends CounterActionTest {
 		catch(Throwable ex) {
 			testDuplicateKeyException(ex);
 		}	
-	}
-	
-	protected void checkCounter(CounterForm counterForm,
-								String code,
-								Integer numberOdReceivers,
-								Boolean isSurcharged,
-								Boolean isDisabled) {
-					
-		String qualifiedName = code;
-		loadObjectDetails(qualifiedName);
-		
-		assertEquals(code.toLowerCase(), counterForm.getTxtCode().getText().toLowerCase(), "Wrong code shown for counter " +  qualifiedName);
-		assertEquals(numberOdReceivers, counterForm.getIntNumberOfReceivers().getValue(), "Wrong number of receivers for counter " +  qualifiedName);
-		assertEquals(isSurcharged, counterForm.getChkIsSurcharged().isChecked(), "Counter " + qualifiedName + " is wrongly shown with isSurcharged: " + counterForm.getChkIsSurcharged().isChecked());
-		assertEquals(isDisabled, counterForm.getChkDisabled().isChecked(), "Counter " + qualifiedName + " is wrongly shown with isDisabled: " + counterForm.getChkDisabled().isChecked());
-	}
-	
-	@Test
-	final void testCase10() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc1",
-						10,
-						true,
-						true);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase11() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc2",
-						4,
-						false,
-						false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase12() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc3",
-						5,
-						false,
-						true);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase13() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc4",
-						6,
-						true,
-						false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase14() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc5",
-						7,
-						true,
-						true);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase15() {
-		
-		try {
-			CounterForm counterForm = setFormComponents("user1@soberano.syscoop.co", "counters.zul");		
-			checkCounter(counterForm,
-						"mc6",
-						8,
-						false,
-						false);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
 	}
 }

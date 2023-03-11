@@ -17,9 +17,9 @@ public class ProductCategoryTreeNodeRenderer extends DomainObjectTreeNodeRendere
 	}
 
 	@Override
-	protected void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	protected void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		ProductCategoryFormHelper.fillTheForm(incDetails, data);
+		(new ProductCategoryFormHelper()).fillForm(incDetails, data);
 	}
 
 	@Override

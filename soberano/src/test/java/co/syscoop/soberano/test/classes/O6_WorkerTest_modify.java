@@ -20,13 +20,14 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treeitem;
 
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.test.helper.WorkerForm;
 
 @Order(6)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		

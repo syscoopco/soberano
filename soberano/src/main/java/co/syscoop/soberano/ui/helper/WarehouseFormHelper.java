@@ -9,26 +9,15 @@ import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Tree;
-import org.zkoss.zul.TreeNode;
-import org.zkoss.zul.Treeitem;
-
 import co.syscoop.soberano.domain.tracked.Warehouse;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ZKUtilitity;
 
-public class WarehouseFormHelper {
+public class WarehouseFormHelper extends TrackedObjectFormHelper {
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {
-		
-		Tree treeObjects = treeItem.getTree();
-		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
-		fillTheForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
-	}
-
-	public static void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	@Override
+	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
 		Warehouse warehouse = new Warehouse(((DomainObject) data.getData().getValue()).getId());
 		warehouse.get();
@@ -46,5 +35,38 @@ public class WarehouseFormHelper {
 		
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(warehouse.getIsProcurementWarehouse());
 		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(warehouse.getIsSalesWarehouse());
+	}
+
+	@Override
+	public void cleanForm(Include incDetails) {
+		
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(false);
+		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(false);
+	}
+
+	@Override
+	public Integer recordFromForm(Include incDetails) throws Exception {
+		
+		return (new Warehouse(0,
+							0,
+							((Textbox) incDetails.query("#txtName")).getValue(),
+							((Textbox) incDetails.query("#txtCode")).getValue(),
+							((Checkbox) incDetails.query("#chkProcurementWarehouse")).isChecked(),
+							((Checkbox) incDetails.query("#chkSalesWarehouse")).isChecked()))
+					.record();
+	}
+
+	@Override
+	public Integer modifyFromForm(Include incDetails) throws Exception {
+		
+		super.setTrackedObject(new Warehouse(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+											0,
+											((Textbox) incDetails.query("#txtName")).getValue(),
+											((Textbox) incDetails.query("#txtCode")).getValue(),
+											((Checkbox) incDetails.query("#chkProcurementWarehouse")).isChecked(),
+											((Checkbox) incDetails.query("#chkSalesWarehouse")).isChecked()));
+		return super.getTrackedObject().modify();
 	}
 }

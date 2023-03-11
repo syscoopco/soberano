@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -17,6 +18,7 @@ import org.zkoss.zats.mimic.operation.CheckAgent;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 import co.syscoop.soberano.util.SpringUtility;
@@ -33,6 +35,7 @@ class O3_WarehouseTest_record extends WarehouseActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
 		Zats.init("./src/main/webapp");
 	}
 

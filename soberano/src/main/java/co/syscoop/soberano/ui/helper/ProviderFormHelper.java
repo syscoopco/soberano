@@ -8,26 +8,15 @@ import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Tree;
-import org.zkoss.zul.TreeNode;
-import org.zkoss.zul.Treeitem;
-
 import co.syscoop.soberano.domain.tracked.Provider;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ZKUtilitity;
 
-public class ProviderFormHelper {
+public class ProviderFormHelper extends TrackedObjectFormHelper {
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static void fillTheForm(Include incDetails, Treeitem treeItem) throws SQLException {
-		
-		Tree treeObjects = treeItem.getTree();
-		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
-		fillTheForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
-	}
-
-	public static void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	@Override
+	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
 		Provider provider = new Provider(((DomainObject) data.getData().getValue()).getId());
 		provider.get();
@@ -41,5 +30,29 @@ public class ProviderFormHelper {
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), provider.getName());
+	}
+
+	@Override
+	public void cleanForm(Include incDetails) {
+		
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+	}
+
+	@Override
+	public Integer recordFromForm(Include incDetails) throws Exception {
+		
+		return (new Provider(0,
+							0,
+							((Textbox) incDetails.query("#txtName")).getValue()))
+				.record();
+	}
+
+	@Override
+	public Integer modifyFromForm(Include incDetails) throws Exception {
+		
+		super.setTrackedObject(new Provider(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+											0,
+											((Textbox) incDetails.query("#txtName")).getValue()));
+		return super.getTrackedObject().modify();
 	}
 }

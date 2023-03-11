@@ -43,7 +43,7 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 		this.pageToRefreshZulURI = pageToRefreshZulURI;
 	}
 
-	protected abstract void fillTheForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException;
+	protected abstract void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException;
 	
 	protected abstract int disable(DefaultTreeNode<NodeData> data) throws SQLException, Exception;
 	
@@ -71,7 +71,7 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 				
 				try {
 					Include incDetails = (Include) item.query("#wndShowingAll").getParent().query("#incDetails");
-					fillTheForm(incDetails, data);
+					fillForm(incDetails, data);
 				}
 				catch(NullPointerException ex) {
 					ExceptionTreatment.logAndShow(ex, 
