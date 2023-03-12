@@ -3,6 +3,7 @@ package co.syscoop.soberano.test.helper;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,6 +86,19 @@ public class ConstrainedForm {
 	}
 	
 	public void setComponentValue(Doublebox comp, Double value) {
+		
+		try {
+			comp.setValue(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Decimalbox comp, BigDecimal value) {
 		
 		try {
 			comp.setValue(value);

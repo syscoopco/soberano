@@ -5,6 +5,6 @@
 		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
 		<separator></separator>
 		<label value="${labels.caption.field.fixedCost}" sclass="Caption"></label>
-		<decimalbox id="decFixedCost" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
+		<decimalbox id="decFixedCost" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no empty, no negative"/>
 	</vbox>	
 </zk>

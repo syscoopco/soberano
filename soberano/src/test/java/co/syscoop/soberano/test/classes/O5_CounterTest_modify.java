@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(5)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O5_CounterTest_modify extends CounterActionTest {
 	

@@ -2,44 +2,41 @@ package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
-import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Textbox;
-
-import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
+import co.syscoop.soberano.test.helper.ProcessActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
-
+class O4_ProcessTest_check_recording extends ProcessActionTest {
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
 		Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/product_categories.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/processes.zul");
 		
 		cmbIntelliSearchAgent = desktop.query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
-		intPosition = cmbIntelliSearchAgent.query("#incDetails").query("#intPosition").as(Intbox.class);
-		chkDisabled = cmbIntelliSearchAgent.query("#incDetails").query("#chkDisabled").as(Checkbox.class);
+		decFixedCost = cmbIntelliSearchAgent.query("#incDetails").query("#decFixedCost").as(Decimalbox.class);
 	}
 
 	@AfterAll
@@ -61,9 +58,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase25() {
 		
 		try {
-			checkProductCategory("cat1",
-								1,
-								false);
+			checkProcess("pr1",
+						new BigDecimal(1));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -77,9 +73,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase26() {
 		
 		try {
-			checkProductCategory("cat2",
-								2,
-								true);
+			checkProcess("pr2",
+						new BigDecimal(2));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -93,9 +88,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase27() {
 		
 		try {
-			checkProductCategory("cat3",
-								3,
-								false);
+			checkProcess("pr3",
+						new BigDecimal(3));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -109,9 +103,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase28() {
 		
 		try {
-			checkProductCategory("cat4",
-								4,
-								true);
+			checkProcess("pr4",
+						new BigDecimal(4));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -125,9 +118,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase29() {
 		
 		try {
-			checkProductCategory("cat5",
-								5,
-								false);
+			checkProcess("pr5",
+						new BigDecimal(5));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -141,9 +133,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase30() {
 		
 		try {
-			checkProductCategory("cat6",
-								6,
-								true);
+			checkProcess("pr6",
+						new BigDecimal(6));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -157,9 +148,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase31() {
 		
 		try {
-			checkProductCategory("cat7",
-								7,
-								false);
+			checkProcess("pr7",
+						new BigDecimal(7));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -173,9 +163,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase32() {
 		
 		try {
-			checkProductCategory("cat8",
-								8,
-								true);
+			checkProcess("pr8",
+						new BigDecimal(8));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -189,9 +178,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase33() {
 		
 		try {
-			checkProductCategory("cat9",
-								9,
-								false);
+			checkProcess("pr9",
+						new BigDecimal(9));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -205,9 +193,8 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 	final void testCase34() {
 		
 		try {
-			checkProductCategory("cat10",
-								10,
-								true);
+			checkProcess("pr91",
+						new BigDecimal(91));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
