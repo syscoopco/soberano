@@ -10,5 +10,23 @@
 		<checkbox id="chkProcurementWarehouse" checked="false" label="${labels.caption.field.procurementWarehouse}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkSalesWarehouse" checked="false" label="${labels.caption.field.salesWarehouse}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<label value="${labels.form.warehouse.entryProcesses}" sclass="Caption"></label>		
+		<tree id="treeEntryProcesses">
+			<treecols>
+				<treecol>
+					<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProcessSelectionViewModel')">
+						<combobox id="cmbEntryProcesses" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.entryProcess}" constraint="no empty">
+							<template name="model">
+								<comboitem label="@load(each.name)" value="@load(each)">
+								</comboitem>
+							</template>
+						</combobox>
+						<button id="btnAddEntryProcess" label="+" apply="co.syscoop.soberano.composers.AddEntryProcessButtonComposer"></button>
+					</hbox>
+				</treecol>
+			</treecols>
+			<treechildren id="tchdnEntryProcesses"></treechildren>
+		</tree>
 	</vbox>	
 </zk>

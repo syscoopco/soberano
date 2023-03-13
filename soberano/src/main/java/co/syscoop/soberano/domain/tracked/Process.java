@@ -18,6 +18,10 @@ public class Process extends TrackedObject {
 		super(id);
 	}
 	
+	public Process(Integer id, String name) {
+		super(id, name);
+	}
+	
 	public Process(Integer id, 
 					Integer entityTypeInstanceId, 
 					String name,

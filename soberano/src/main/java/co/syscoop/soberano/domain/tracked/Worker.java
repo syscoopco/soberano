@@ -342,21 +342,21 @@ public class Worker extends TrackedObject {
 	        	if (workerCurrentlyBeingExtractedId != rs.getInt("workerId")) {
 	        		workerCurrentlyBeingExtractedId = rs.getInt("workerId");
 	        		worker = new Worker(rs.getInt("workerId"),
-							rs.getInt("entityTypeInstanceId"),
-							rs.getString("loginName"),
-							rs.getString("firstName"),
-							rs.getString("lastName"),
-							rs.getString("password"),
-							rs.getString("mobilePhoneNumber"),
-							rs.getString("countryCode"),
-							rs.getString("address"),
-							rs.getString("postalCode"),
-							rs.getString("town"),
-							rs.getInt("municipalityId"),
-							rs.getString("city"),
-							rs.getInt("provinceId"),
-							rs.getDouble("latitude"),
-							rs.getDouble("longitude"));
+										rs.getInt("entityTypeInstanceId"),
+										rs.getString("loginName"),
+										rs.getString("firstName"),
+										rs.getString("lastName"),
+										rs.getString("password"),
+										rs.getString("mobilePhoneNumber"),
+										rs.getString("countryCode"),
+										rs.getString("address"),
+										rs.getString("postalCode"),
+										rs.getString("town"),
+										rs.getInt("municipalityId"),
+										rs.getString("city"),
+										rs.getInt("provinceId"),
+										rs.getDouble("latitude"),
+										rs.getDouble("longitude"));
 	        	}
 	        	worker.getAuthorities().add(new Authority(rs.getInt("authorityId"), rs.getString("authorityName")));
 	        	worker.getResponsibilities().add(new Responsibility(rs.getInt("responsibilityId"), rs.getString("responsibilityName")));
