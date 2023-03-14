@@ -518,7 +518,7 @@ class O3_ProcessTest_record extends ProcessActionTest {
 									(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 									(desktop.query("decimalbox").query("#decFixedCost")).as(Decimalbox.class));
 		try {
-			processForm.setComponentValue(processForm.getTxtName(), "pr91");
+			processForm.setComponentValue(processForm.getTxtName(), "pr10");
 			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(91));		
 			clickOnRecordButton(desktop);
 			
@@ -542,7 +542,7 @@ class O3_ProcessTest_record extends ProcessActionTest {
 									(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 									(desktop.query("decimalbox").query("#decFixedCost")).as(Decimalbox.class));
 		try {
-			processForm.setComponentValue(processForm.getTxtName(), "pr91");
+			processForm.setComponentValue(processForm.getTxtName(), "pr10");
 			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(91));		
 			clickOnRecordButton(desktop);
 		}
@@ -612,7 +612,7 @@ class O3_ProcessTest_record extends ProcessActionTest {
 									(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 									(desktop.query("decimalbox").query("#decFixedCost")).as(Decimalbox.class));
 		try {
-			processForm.setComponentValue(processForm.getTxtName(), "pr91");
+			processForm.setComponentValue(processForm.getTxtName(), "pr10");
 			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(91));		
 			clickOnRecordButton(desktop);
 			

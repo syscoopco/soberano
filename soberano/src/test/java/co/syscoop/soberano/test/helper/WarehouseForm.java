@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
 public class WarehouseForm extends ConstrainedForm {
@@ -12,6 +13,7 @@ public class WarehouseForm extends ConstrainedForm {
 	private Textbox txtCode;
 	private Checkbox chkProcurementWarehouse;
 	private Checkbox chkSalesWarehouse;
+	private Combobox cmbEntryProcesses;
 
 	public WarehouseForm(DesktopAgent desktop,
 						Textbox txtName,
@@ -34,6 +36,22 @@ public class WarehouseForm extends ConstrainedForm {
 		
 		this.setChkProcurementWarehouse(chkProcurementWarehouse);
 		this.setChkSalesWarehouse(chkSalesWarehouse);
+	}
+	
+	public WarehouseForm(DesktopAgent desktop,
+			Textbox txtName,
+			Textbox txtCode,
+			Checkbox chkProcurementWarehouse,
+			Checkbox chkSalesWarehouse,
+			Combobox cmbEntryProcesses) {
+
+		this(desktop,
+				 txtName,
+				 txtCode,
+				 chkProcurementWarehouse,
+				 chkSalesWarehouse);	
+		
+		this.setCmbEntryProcesses(cmbEntryProcesses);
 	}
 
 	public Textbox getTxtName() {
@@ -66,5 +84,13 @@ public class WarehouseForm extends ConstrainedForm {
 
 	public void setChkSalesWarehouse(Checkbox chkSalesWarehouse) {
 		this.chkSalesWarehouse = chkSalesWarehouse;
+	}
+
+	public Combobox getCmbEntryProcesses() {
+		return cmbEntryProcesses;
+	}
+
+	public void setCmbEntryProcesses(Combobox cmbEntryProcesses) {
+		this.cmbEntryProcesses = cmbEntryProcesses;
 	}
 }

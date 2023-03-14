@@ -193,7 +193,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	final void testCase34() {
 		
 		try {
-			checkProcess("pr91",
+			checkProcess("pr10",
 						new BigDecimal(91));
 		}
 		catch(AssertionFailedError ex) {
