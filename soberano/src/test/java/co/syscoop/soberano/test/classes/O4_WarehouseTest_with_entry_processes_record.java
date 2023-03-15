@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class O4_Warehouse_with_Entry_Processes_Test_record extends WarehouseActionTest {
+class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 	
 	protected WarehouseForm warehouseForm = null;
 

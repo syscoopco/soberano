@@ -59,8 +59,8 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 		
 		Treechildren tchdnEntryProcesses = (Treechildren) incDetails.query("#tchdnEntryProcesses");
 		tchdnEntryProcesses.getChildren().clear();
-		for (Process resp : warehouse.getEntryProcesses()) {
-			addEntryProcessItem(resp.getName(), resp.getId().toString(), tchdnEntryProcesses);
+		for (Process pr : warehouse.getEntryProcesses()) {
+			addEntryProcessItem(pr.getName(), pr.getId().toString(), tchdnEntryProcesses);
 		}
 	}
 

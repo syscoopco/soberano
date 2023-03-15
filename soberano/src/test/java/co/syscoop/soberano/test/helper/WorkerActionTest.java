@@ -97,7 +97,7 @@ public class WorkerActionTest extends ActionTest {
 		assertEquals(1, tchdnResponsibilities.getChildren().size(), "None or more than one assigments for user " +  qualifiedName + " One and only one is exṕected.");
 		
 		for (int i = 0; i < responsibilities.length; i++) {
-			assertEquals(responsibilities[i], ((Treeitem) tchdnResponsibilities.getChildren().get(0)).getLabel(), "Wrong responsibility shown for user " +  qualifiedName);
+			assertEquals(responsibilities[i], ((Treeitem) tchdnResponsibilities.getChildren().get(i)).getLabel(), "Wrong responsibility shown for user " +  qualifiedName);
 		}
 				
 		assertEquals(phoneNumber, txtPhoneNumber.getText(), "Wrong phoneNumber shown for user " +  qualifiedName);
