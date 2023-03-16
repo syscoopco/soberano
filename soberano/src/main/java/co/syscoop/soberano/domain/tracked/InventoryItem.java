@@ -14,10 +14,24 @@ public class InventoryItem extends TrackedObject {
 		super(id);
 	}
 	
+	public InventoryItem(Integer id, String name) {
+		super(id, name);
+	}
+	
 	public InventoryItem(Integer id, 
 					Integer entityTypeInstanceId, 
 					String name) {
 		super(id, entityTypeInstanceId, name);
+	}
+	
+	public InventoryItem(Integer id, 
+						Integer entityTypeInstanceId, 
+						String name,
+						BigDecimal minimumInventoryLevel,
+						Integer unit) {
+		super(id, entityTypeInstanceId, name);
+		this.setMinimumInventoryLevel(minimumInventoryLevel);
+		this.setUnit(unit);
 	}
 
 	@Override

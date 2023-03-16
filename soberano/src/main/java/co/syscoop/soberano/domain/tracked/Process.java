@@ -91,15 +91,15 @@ public class Process extends TrackedObject {
 		public Process mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
 			try {
-				Process Process = null;
+				Process process = null;
 				int id = rs.getInt("processId");
 				if (!rs.wasNull()) {
-					Process = new Process(id,
+					process = new Process(id,
 										rs.getInt("entityTypeInstanceId"),
 										rs.getString("processName"),
 										rs.getBigDecimal("fixedCost"));
 				}
-				return Process;
+				return process;
 			}
 			catch(Exception ex)
 			{

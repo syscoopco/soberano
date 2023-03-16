@@ -1,0 +1,6 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.AcquirableMaterialFormComposer">
+		<include id="incInventoryItem" src="/inventory_item.zul"></include>
+	</vbox>	
+</zk>
