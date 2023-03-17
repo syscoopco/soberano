@@ -32,7 +32,7 @@ public class Process extends TrackedObject {
 	}
 	
 	public Process() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Process_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Process_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

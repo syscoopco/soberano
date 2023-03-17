@@ -77,7 +77,7 @@ public class Product extends InventoryItem {
 	}
 	
 	public Product() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Product_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Product_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

@@ -1,8 +1,9 @@
 <?page title="${labels.pageNewAcquirableMaterial.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.TxtCodeRandomValueInitiator"?>
 
 <zk>
-	<include src="/style.zul"/>
+	<include src="/style.zul" hflex="1"/>
 	<label self="@define(pageTitle)" value="${labels.pageNewAcquirableMaterial.WindowTitle}" sclass="PageTitle"/>
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<include id="incDetails" src="/acquirable_material.zul"></include>

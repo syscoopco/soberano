@@ -24,7 +24,7 @@ public class Provider extends TrackedObject {
 	}
 	
 	public Provider() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Provider_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Provider_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

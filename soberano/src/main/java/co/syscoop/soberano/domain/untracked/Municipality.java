@@ -13,7 +13,7 @@ public class Municipality extends DomainObject {
 	}
 	
 	public List<DomainObject> getAll() throws SQLException {		
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Municipality_getAll\"" + "(:provinceId)";
+		getAllQuery = "SELECT * FROM soberano.\"fn_Municipality_getAll\"(:provinceId)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 		getAllQueryNamedParameters.put("provinceId", provinceId);
 		return super.getAll(false);

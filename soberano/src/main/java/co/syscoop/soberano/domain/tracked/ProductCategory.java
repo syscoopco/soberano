@@ -31,7 +31,7 @@ public class ProductCategory extends TrackedObject {
 	}
 	
 	public ProductCategory() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_ProductCategory_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_ProductCategory_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

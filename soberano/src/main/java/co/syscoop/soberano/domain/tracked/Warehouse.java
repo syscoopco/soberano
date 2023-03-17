@@ -61,7 +61,7 @@ public class Warehouse extends TrackedObject {
 	}
 	
 	public Warehouse() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Warehouse_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Warehouse_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

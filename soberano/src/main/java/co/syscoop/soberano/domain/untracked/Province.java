@@ -13,7 +13,7 @@ public class Province extends DomainObject {
 	}
 	
 	public List<DomainObject> getAll() throws SQLException {		
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Province_getAll\"" + "(:countryCode)";
+		getAllQuery = "SELECT * FROM soberano.\"fn_Province_getAll\"(:countryCode)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 		getAllQueryNamedParameters.put("countryCode", countryCode);
 		return super.getAll(false);

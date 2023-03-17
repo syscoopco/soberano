@@ -31,35 +31,38 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 		((Textbox) incDetails.getParent().query("#txtStringId")).setText(acquirableMaterial.getStringId());
 		
 		incDetails.setVisible(true);
-		Clients.scrollIntoView(incDetails.query("#incInventoryItem").query("#txtName"));
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), acquirableMaterial.getStringId());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), acquirableMaterial.getName());
 		
 		if (acquirableMaterial.getUnit() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#incInventoryItem").query("#cmbUnit"), acquirableMaterial.getUnit());
+			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbUnit"), acquirableMaterial.getUnit());
 		else
-			((Combobox) incDetails.query("#incInventoryItem").query("#cmbInputWarehouse")).setSelectedItem(null);
+			((Combobox) incDetails.query("#cmbUnit")).setSelectedItem(null);
 			
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#incInventoryItem").query("#decMinimumInventoryLevel"), acquirableMaterial.getMinimumInventoryLevel());
+		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), acquirableMaterial.getMinimumInventoryLevel());
 	}
 
 	@Override
 	public void cleanForm(Include incDetails) {
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#incInventoryItem").query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#incInventoryItem").query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#incInventoryItem").query("#cmbUnit"), "");		
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#cmbUnit"), "");		
 	}
 
 	@Override
 	public Integer recordFromForm(Include incDetails) throws Exception {
 		
-		Comboitem iUnitItem = ((Combobox) incDetails.query("#incInventoryItem").query("#cmbUnit")).getSelectedItem();
-		return (new AcquirableMaterial(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
+		return (new AcquirableMaterial(0,
 										0,
-										((Textbox) incDetails.query("#incInventoryItem").query("#txtName")).getValue(),
-										((Decimalbox) incDetails.query("#incInventoryItem").query("#decMinimumInventoryLevel")).getValue(),
+										((Textbox) incDetails.query("#txtCode")).getValue(),
+										((Textbox) incDetails.query("#txtName")).getValue(),
+										((Decimalbox) incDetails.query("#decMinimumInventoryLevel")).getValue(),
 										iUnitItem == null ? null : ((DomainObject) iUnitItem.getValue()).getId()))
 									.record();
 	}
@@ -67,13 +70,14 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public Integer modifyFromForm(Include incDetails) throws Exception {
 		
-		Comboitem iUnitItem = ((Combobox) incDetails.query("#incInventoryItem").query("#cmbUnit")).getSelectedItem();
+		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
 		Integer iUnitId = 0;
 		if (iUnitItem != null) iUnitId = ((DomainObject) iUnitItem.getValue()).getId();	
 		super.setTrackedObject(new AcquirableMaterial(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
-												((Textbox) incDetails.query("#incInventoryItem").query("#txtName")).getValue(),
-												((Decimalbox) incDetails.query("#incInventoryItem").query("#decMinimumInventoryLevel")).getValue(),
+												((Textbox) incDetails.query("#txtCode")).getValue(),
+												((Textbox) incDetails.query("#txtName")).getValue(),
+												((Decimalbox) incDetails.query("#decMinimumInventoryLevel")).getValue(),
 												iUnitId));
 		return super.getTrackedObject().modify();
 	}

@@ -23,20 +23,26 @@ public class AcquirableMaterial extends InventoryItem {
 	
 	public AcquirableMaterial(Integer id, 
 					Integer entityTypeInstanceId, 
+					String code,
 					String name) {
 		super(id, entityTypeInstanceId, name);
+		this.setStringId(code);
+		this.setQualifiedName(name + ":" + code);		
 	}
 	
 	public AcquirableMaterial(Integer id, 
 						Integer entityTypeInstanceId, 
+						String code,
 						String name,
 						BigDecimal minimumInventoryLevel,
 						Integer unit) {
 		super(id, entityTypeInstanceId, name, minimumInventoryLevel, unit);
+		this.setStringId(code);
+		this.setQualifiedName(name + ":" + code);		
 	}
 	
 	public AcquirableMaterial() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_AcquirableMaterial_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"fn_AcquirableMaterial_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	
@@ -44,12 +50,14 @@ public class AcquirableMaterial extends InventoryItem {
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		recordQuery = "SELECT soberano.\"fn_AcquirableMaterial_create\"(:itemName, "
+		recordQuery = "SELECT soberano.\"fn_AcquirableMaterial_create\"(:itemCode, "
+				+ "											:itemName, "
 				+ "											:inventoryLevel, "
 				+ "											:itemUnit, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
-		recordParameters.addValue("materialName", this.getName());
+		recordParameters.addValue("itemCode", this.getStringId());
+		recordParameters.addValue("itemName", this.getName());
 		recordParameters.addValue("inventoryLevel", this.getMinimumInventoryLevel());
 		recordParameters.addValue("itemUnit", this.getUnit());
 		
@@ -62,15 +70,17 @@ public class AcquirableMaterial extends InventoryItem {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		modifyQuery = "SELECT soberano.\"fn_AcquirableMaterial_modify\"(:itemId, "
+						+ " 								:itemCode, "
 						+ " 								:itemName, "
 						+ "									:inventoryLevel, "
 						+ "									:itemUnit, "
 						+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("itemId", this.getId());
+		modifyParameters.addValue("itemCode", this.getStringId());
 		modifyParameters.addValue("itemName", this.getName());
 		modifyParameters.addValue("inventoryLevel", this.getMinimumInventoryLevel());
-		recordParameters.addValue("itemUnit", this.getUnit());
+		modifyParameters.addValue("itemUnit", this.getUnit());
 		
 		Integer qryResult = super.modify();
 		return qryResult >= 0 ? qryResult : -1;
@@ -104,6 +114,7 @@ public class AcquirableMaterial extends InventoryItem {
 				if (!rs.wasNull()) {
 					acquirableMaterial = new AcquirableMaterial(id,
 										rs.getInt("entityTypeInstanceId"),
+										rs.getString("itemCode"),
 										rs.getString("itemName"),
 										rs.getBigDecimal("inventoryLevel"),
 										rs.getInt("itemUnit"));

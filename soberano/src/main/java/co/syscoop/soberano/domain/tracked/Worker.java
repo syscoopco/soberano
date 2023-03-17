@@ -132,7 +132,7 @@ public class Worker extends TrackedObject {
 	}
 	
 	public Worker() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Worker_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Worker_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 

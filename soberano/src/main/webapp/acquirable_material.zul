@@ -1,6 +1,23 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
 	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.AcquirableMaterialFormComposer">
-		<include id="incInventoryItem" src="/inventory_item.zul"></include>
+		<label value="${labels.caption.field.code}" sclass="Caption"></label>
+		<textbox id="txtCode" readonly="false" maxlength="30" hflex="1" placeholder="${labels.caption.field.codePlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.caption.field.name}" sclass="Caption"></label>
+		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.caption.field.unit}" sclass="Caption"></label>		
+		<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.UnitSelectionViewModel')">
+			<combobox id="cmbUnit" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
+				<template name="model">
+					<comboitem label="@load(each.name)" value="@load(each)">
+					</comboitem>
+				</template>
+			</combobox>	
+		</hbox>
+		<separator></separator>
+		<label value="${labels.caption.field.minimumInventoryLevel}" sclass="Caption"></label>
+		<decimalbox id="decMinimumInventoryLevel" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
 	</vbox>	
 </zk>

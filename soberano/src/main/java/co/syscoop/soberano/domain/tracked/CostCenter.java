@@ -30,7 +30,7 @@ public class CostCenter extends TrackedObject {
 	}
 	
 	public CostCenter() {
-		getAllQuery = "SELECT * FROM soberano.\"" + "fn_CostCenter_getAll\"" + "(:loginname)";
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_CostCenter_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	
