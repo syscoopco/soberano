@@ -39,7 +39,7 @@ public class Warehouse extends TrackedObject {
 					Boolean isSalesWarehouse) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(code);
-		this.setQualifiedName(name + ":" + code);		
+		this.setQualifiedName(name + " : " + code);		
 		this.setIsProcurementWarehouse(isProcurementWarehouse);
 		this.setIsSalesWarehouse(isSalesWarehouse);
 	}
@@ -53,7 +53,7 @@ public class Warehouse extends TrackedObject {
 			ArrayList<Process> entryProcesses) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(code);
-		this.setQualifiedName(name + ":" + code);		
+		this.setQualifiedName(name + " : " + code);		
 		this.setIsProcurementWarehouse(isProcurementWarehouse);
 		this.setIsSalesWarehouse(isSalesWarehouse);
 		this.entryProcesses = entryProcesses;

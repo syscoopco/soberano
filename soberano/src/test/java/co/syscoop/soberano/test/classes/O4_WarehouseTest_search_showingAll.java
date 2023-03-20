@@ -21,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O4_WarehouseTest_search_showingAll {
 	
@@ -51,7 +51,7 @@ class O4_WarehouseTest_search_showingAll {
 
 	private void testForAllowedUser(Integer userSuffix) {
 		
-		String qualifiedNamePattern = "warehouse#suffix#:w#suffix#";
+		String qualifiedNamePattern = "warehouse#suffix# : w#suffix#";
 		
 		//test for a user
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";

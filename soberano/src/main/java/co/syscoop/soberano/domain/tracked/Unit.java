@@ -25,9 +25,9 @@ public class Unit extends TrackedObject {
 	}
 	
 	public Unit() {
-		getAllQuery = "SELECT \"domainObjectId\", substring(\"domainObjectName\", 4) \"domainObjectName\" "
+		getAllQuery = "SELECT \"domainObjectId\", substring(\"domainObjectName\", 6) \"domainObjectName\" "
 						+ "FROM (SELECT * FROM soberano.\"fn_Unit_getAll\"(:loginname) " 
-						+ "WHERE position('" + Locales.getCurrent().getLanguage() + ":' in \"domainObjectName\") > 0) sq";
+						+ "WHERE position('" + Locales.getCurrent().getLanguage() + " :' in \"domainObjectName\") > 0) sq";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	

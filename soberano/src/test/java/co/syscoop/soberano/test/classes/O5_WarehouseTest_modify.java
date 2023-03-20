@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_WarehouseTest_modify extends WarehouseActionTest {
 
@@ -50,7 +50,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse1:w1");			
+			loadObjectDetails("warehouse1 : w1");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse1");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw1");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -70,7 +70,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user2@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse2:w2");			
+			loadObjectDetails("warehouse2 : w2");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse2");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw2");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -90,7 +90,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user3@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse3:w3");			
+			loadObjectDetails("warehouse3 : w3");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse3");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw3");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -110,7 +110,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user4@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse4:w4");			
+			loadObjectDetails("warehouse4 : w4");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse4");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw4");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -132,7 +132,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user5@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse4:w4");			
+			loadObjectDetails("warehouse4 : w4");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse4");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw4");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -154,7 +154,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user6@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse4:w4");			
+			loadObjectDetails("warehouse4 : w4");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse4");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw4");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -174,7 +174,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user7@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse5:w5");			
+			loadObjectDetails("warehouse5 : w5");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse5");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw5");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -194,7 +194,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user8@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse6:w6");			
+			loadObjectDetails("warehouse6 : w6");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse6");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw6");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -216,7 +216,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user9@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse6:w6");			
+			loadObjectDetails("warehouse6 : w6");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse6");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw6");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -236,7 +236,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user10@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse7:w7");			
+			loadObjectDetails("warehouse7 : w7");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse7");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw7");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -256,7 +256,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user11@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse8:w8");			
+			loadObjectDetails("warehouse8 : w8");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse8");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw8");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -276,7 +276,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user12@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse9:w9");			
+			loadObjectDetails("warehouse9 : w9");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse9");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw9");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -296,7 +296,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user13@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse10:w10");			
+			loadObjectDetails("warehouse10 : w10");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse10");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw10");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -318,7 +318,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user14@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse10:w10");			
+			loadObjectDetails("warehouse10 : w10");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse10");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw10");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -340,7 +340,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user15@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse10:w10");			
+			loadObjectDetails("warehouse10 : w10");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse10");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw10");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -360,7 +360,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("mwarehouse10:mw10");			
+			loadObjectDetails("mwarehouse10 : mw10");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse7");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw10");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);
@@ -382,7 +382,7 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("mwarehouse10:mw10");			
+			loadObjectDetails("mwarehouse10 : mw10");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse10");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw7");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(true);

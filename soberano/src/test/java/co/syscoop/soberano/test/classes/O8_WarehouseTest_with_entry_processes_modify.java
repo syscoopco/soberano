@@ -19,12 +19,12 @@ import org.zkoss.zul.Combobox;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 
-@Order(6)
+@Order(8)
 
 //TODO: enable test
 //@Disabled
 
-class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
+class O8_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -52,7 +52,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user1@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse21:w21");			
+			loadObjectDetails("warehouse21 : w21");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse21");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw21");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -60,9 +60,9 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
 			
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr3");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr3");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -81,7 +81,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user2@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse22:w22");			
+			loadObjectDetails("warehouse22 : w22");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse22");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw22");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -92,8 +92,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -112,7 +112,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user3@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse23:w23");			
+			loadObjectDetails("warehouse23 : w23");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse23");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw23");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -123,8 +123,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr7");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr7");
+			cmbEntryProcessesInputAgent.typing("mpr7");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr7");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -143,7 +143,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user4@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse24:w24");			
+			loadObjectDetails("warehouse24 : w24");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw24");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -169,7 +169,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user5@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse24:w24");			
+			loadObjectDetails("warehouse24 : w24");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw24");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -195,7 +195,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user6@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse24:w24");			
+			loadObjectDetails("warehouse24 : w24");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw24");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -219,7 +219,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user7@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse25:w25");			
+			loadObjectDetails("warehouse25 : w25");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse25");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw25");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -243,7 +243,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user8@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse26:w26");			
+			loadObjectDetails("warehouse26 : w26");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse26");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw26");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -251,8 +251,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -273,7 +273,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user9@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse26:w26");			
+			loadObjectDetails("warehouse26 : w26");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse26");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw26");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -281,8 +281,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -301,7 +301,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user10@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse27:w27");			
+			loadObjectDetails("warehouse27 : w27");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse27");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw27");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -325,7 +325,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user11@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse28:w28");			
+			loadObjectDetails("warehouse28 : w28");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse28");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw28");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -336,8 +336,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr6");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr6");
+			cmbEntryProcessesInputAgent.typing("mpr6");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr6");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -356,7 +356,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user12@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse29:w29");			
+			loadObjectDetails("warehouse29 : w29");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse29");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw29");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -367,8 +367,8 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr3");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -387,7 +387,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user13@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse30:w30");			
+			loadObjectDetails("warehouse30 : w30");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw30");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -398,13 +398,13 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr5");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr5");
+			cmbEntryProcessesInputAgent.typing("mpr5");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr5");
 			btnAddEntryProcess.click();
 			
 			clickOnApplyButton(warehouseForm.getDesktop());
@@ -424,7 +424,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user14@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse30:w30");			
+			loadObjectDetails("warehouse30 : w30");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw30");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -435,13 +435,13 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr5");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr5");
+			cmbEntryProcessesInputAgent.typing("mpr5");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr5");
 			btnAddEntryProcess.click();
 			
 			clickOnApplyButton(warehouseForm.getDesktop());
@@ -461,7 +461,7 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 	
 		try {
 			WarehouseForm warehouseForm = setFormComponents("user15@soberano.syscoop.co", "warehouses.zul");			
-			loadObjectDetails("warehouse30:w30");			
+			loadObjectDetails("warehouse30 : w30");			
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "mwarehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "mw30");
 			(warehouseForm.getDesktop().query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);
@@ -472,13 +472,13 @@ class O6_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr5");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "pr5");
+			cmbEntryProcessesInputAgent.typing("mpr5");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr5");
 			btnAddEntryProcess.click();
 			
 			clickOnApplyButton(warehouseForm.getDesktop());

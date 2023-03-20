@@ -27,7 +27,7 @@ public class AcquirableMaterial extends InventoryItem {
 					String name) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(code);
-		this.setQualifiedName(name + ":" + code);		
+		this.setQualifiedName(name + " : " + code);		
 	}
 	
 	public AcquirableMaterial(Integer id, 
@@ -38,7 +38,7 @@ public class AcquirableMaterial extends InventoryItem {
 						Integer unit) {
 		super(id, entityTypeInstanceId, name, minimumInventoryLevel, unit);
 		this.setStringId(code);
-		this.setQualifiedName(name + ":" + code);		
+		this.setQualifiedName(name + " : " + code);		
 	}
 	
 	public AcquirableMaterial() {

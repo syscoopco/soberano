@@ -25,13 +25,13 @@ import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(4)
+@Order(6)
 
 //TODO: enable test
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
+class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 	
 	protected WarehouseForm warehouseForm = null;
 
@@ -76,8 +76,8 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -112,13 +112,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -152,17 +152,17 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr4");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr5");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr5");
+			cmbEntryProcessesInputAgent.typing("mpr5");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr5");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr6");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr6");
+			cmbEntryProcessesInputAgent.typing("mpr6");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr6");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -196,21 +196,21 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr7");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr7");
+			cmbEntryProcessesInputAgent.typing("mpr7");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr8");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr8");
+			cmbEntryProcessesInputAgent.typing("mpr8");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr8");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr9");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr9");
+			cmbEntryProcessesInputAgent.typing("mpr9");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr9");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr10");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr10");
+			cmbEntryProcessesInputAgent.typing("mpr10");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr10");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -246,21 +246,21 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr7");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr7");
+			cmbEntryProcessesInputAgent.typing("mpr7");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr8");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr8");
+			cmbEntryProcessesInputAgent.typing("mpr8");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr8");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr9");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr9");
+			cmbEntryProcessesInputAgent.typing("mpr9");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr9");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr10");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr10");
+			cmbEntryProcessesInputAgent.typing("mpr10");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr10");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -296,21 +296,21 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr7");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr7");
+			cmbEntryProcessesInputAgent.typing("mpr7");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr8");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr8");
+			cmbEntryProcessesInputAgent.typing("mpr8");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr8");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr9");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr9");
+			cmbEntryProcessesInputAgent.typing("mpr9");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr9");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr10");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr10");
+			cmbEntryProcessesInputAgent.typing("mpr10");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr10");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -344,8 +344,8 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -380,13 +380,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -422,13 +422,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -462,17 +462,17 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr4");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr4");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr4");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr5");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr5");
+			cmbEntryProcessesInputAgent.typing("mpr5");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr5");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr6");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr6");
+			cmbEntryProcessesInputAgent.typing("mpr6");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr6");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -506,21 +506,21 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr7");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr7");
+			cmbEntryProcessesInputAgent.typing("mpr7");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr8");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr8");
+			cmbEntryProcessesInputAgent.typing("mpr8");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr8");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr9");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr9");
+			cmbEntryProcessesInputAgent.typing("mpr9");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr9");
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr10");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr10");
+			cmbEntryProcessesInputAgent.typing("mpr10");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr10");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -554,8 +554,8 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -590,13 +590,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -632,13 +632,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -674,13 +674,13 @@ class O4_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("pr2");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr2");
+			cmbEntryProcessesInputAgent.typing("mpr2");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
 			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
-			cmbEntryProcessesInputAgent.typing("pr3");
-			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "pr3");
+			cmbEntryProcessesInputAgent.typing("mpr3");
+			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr3");
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);

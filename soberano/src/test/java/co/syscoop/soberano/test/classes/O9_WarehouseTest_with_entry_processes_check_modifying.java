@@ -20,12 +20,12 @@ import org.zkoss.zul.Treechildren;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(5)
+@Order(9)
 
 //TODO: enable test
 //@Disabled
 
-class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseActionTest {
+class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -43,7 +43,7 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 		cmbEntryProcesses = cmbIntelliSearchAgent.query("#incDetails").query("#cmbEntryProcesses").as(Combobox.class);
 		tchdnEntryProcesses = cmbIntelliSearchAgent.query("#incDetails").query("#tchdnEntryProcesses").as(Treechildren.class);
 	}
-
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
@@ -58,16 +58,16 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
+	
 	@Test
 	final void testCase16() {
 		
 		try {
-			checkWarehouse("warehouse21",
-							"w21",
-							false,
-							false,
-							new String[] {"pr2"});
+			checkWarehouse("mwarehouse21",
+					"mw21",
+					false,
+					false,
+					new String[] {"mpr2", "mpr3"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -81,11 +81,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase17() {
 		
 		try {
-			checkWarehouse("warehouse22",
-							"w22",
-							false,
-							false,
-							new String[] {"pr2", "pr3"});
+			checkWarehouse("mwarehouse22",
+					"mw22",
+					false,
+					false,
+					new String[] {"mpr2", "mpr4"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -99,11 +99,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase18() {
 		
 		try {
-			checkWarehouse("warehouse23",
-							"w23",
-							false,
-							false,
-							new String[] {"pr4", "pr5", "pr6"});
+			checkWarehouse("mwarehouse23",
+					"mw23",
+					false,
+					false,
+					new String[] {"mpr4", "mpr5", "mpr7"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -117,11 +117,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase19() {
 		
 		try {
-			checkWarehouse("warehouse24",
-							"w24",
-							false,
-							false,
-							new String[] {"pr7", "pr8", "pr9", "pr10"});
+			checkWarehouse("mwarehouse24",
+					"mw24",
+					false,
+					false,
+					new String[] {"mpr8", "mpr9", "mpr10"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -135,11 +135,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase20() {
 		
 		try {
-			checkWarehouse("warehouse25",
-							"w25",
-							false,
-							false,
-							new String[] {"pr2"});
+			checkWarehouse("mwarehouse25",
+					"mw25",
+					false,
+					false,
+					new String[] {});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -153,11 +153,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase21() {
 		
 		try {
-			checkWarehouse("warehouse26",
-							"w26",
-							false,
-							false,
-							new String[] {"pr2", "pr3"});
+			checkWarehouse("mwarehouse26",
+					"mw26",
+					false,
+					false,
+					new String[] {"mpr2", "mpr3", "mpr4"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -171,11 +171,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase22() {
 		
 		try {
-			checkWarehouse("warehouse27",
-							"w27",
-							false,
-							false,
-							new String[] {"pr4", "pr5", "pr6"});
+			checkWarehouse("mwarehouse27",
+					"mw27",
+					false,
+					false,
+					new String[] {"mpr4", "mpr5"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -189,11 +189,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase23() {
 		
 		try {
-			checkWarehouse("warehouse28",
-							"w28",
-							false,
-							false,
-							new String[] {"pr7", "pr8", "pr9", "pr10"});
+			checkWarehouse("mwarehouse28",
+					"mw28",
+					false,
+					false,
+					new String[] {"mpr6", "mpr7", "mpr8", "mpr9"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -207,11 +207,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase24() {
 		
 		try {
-			checkWarehouse("warehouse29",
-							"w29",
-							false,
-							false,
-							new String[] {"pr2"});
+			checkWarehouse("mwarehouse29",
+					"mw29",
+					false,
+					false,
+					new String[] {"mpr3"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -225,11 +225,11 @@ class O5_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 	final void testCase25() {
 		
 		try {
-			checkWarehouse("warehouse30",
-							"w30",
-							false,
-							false,
-							new String[] {"pr2", "pr3"});
+			checkWarehouse("mwarehouse30",
+					"mw30",
+					false,
+					false,
+					new String[] {"mpr3", "mpr4", "mpr5"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

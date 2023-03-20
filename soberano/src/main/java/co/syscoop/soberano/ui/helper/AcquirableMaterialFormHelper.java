@@ -16,6 +16,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.AcquirableMaterial;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
+import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ZKUtilitity;
 
 public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
@@ -48,7 +49,7 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#cmbUnit"), "");		

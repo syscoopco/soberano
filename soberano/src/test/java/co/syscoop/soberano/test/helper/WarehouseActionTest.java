@@ -40,7 +40,7 @@ public class WarehouseActionTest extends ActionTest {
 							Boolean isProcurementWarehouse,
 							Boolean isSalesWarehouse) {
 		
-		String qualifiedName = name + ":" + code;
+		String qualifiedName = name + " : " + code;
 		loadObjectDetails(qualifiedName);
 		
 		assertEquals(name.toLowerCase(), txtName.getText().toLowerCase(), "Wrong name shown for warehouse " +  qualifiedName);
@@ -61,7 +61,7 @@ public class WarehouseActionTest extends ActionTest {
 						isSalesWarehouse);
 
 		for (int i = 0; i < entryProcesses.length; i++) {
-			assertEquals(entryProcesses[i], ((Treeitem) tchdnEntryProcesses.getChildren().get(i)).getLabel(), "Wrong entry process shown for warehouse " +  name + ":" + code);
+			assertEquals(entryProcesses[i], ((Treeitem) tchdnEntryProcesses.getChildren().get(i)).getLabel(), "Wrong entry process shown for warehouse " +  name + " : " + code);
 		}
 	}
 }
