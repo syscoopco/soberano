@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.ProcessForm;
 @Order(5)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O5_ProcessTest_modify extends ProcessActionTest{
 
@@ -65,6 +65,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 	}
 	
 	@Test
+	final void testCase2() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user2@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr2");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr2");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(3.456));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
 	final void testCase3() {
 	
 		try {
@@ -80,6 +101,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 		}
 		catch(Throwable ex) {
 			throw ex;
+		}
+	}
+	
+	@Test
+	final void testCase4() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user4@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr3");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr3");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(4.789));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
 		}
 	}
 	
@@ -103,6 +145,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 	}
 	
 	@Test
+	final void testCase6() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user6@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr4");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr4");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(5.987));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
 	final void testCase7() {
 	
 		try {
@@ -118,6 +181,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 		}
 		catch(Throwable ex) {
 			throw ex;
+		}
+	}
+	
+	@Test
+	final void testCase8() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user8@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr5");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr5");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(6.654));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
 		}
 	}
 	
@@ -141,6 +225,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 	}
 	
 	@Test
+	final void testCase10() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user10@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr6");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr6");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(7.321));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
 	final void testCase11() {
 	
 		try {
@@ -156,6 +261,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 		}
 		catch(Throwable ex) {
 			throw ex;
+		}
+	}
+	
+	@Test
+	final void testCase12() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user12@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr7");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr7");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(8.111));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
 		}
 	}
 	
@@ -179,6 +305,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 	}
 	
 	@Test
+	final void testCase14() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user14@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr8");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr8");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(9.222));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
 	final void testCase15() {
 	
 		try {
@@ -194,6 +341,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 		}
 		catch(Throwable ex) {
 			throw ex;
+		}
+	}
+	
+	@Test
+	final void testCase16() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user16@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("pr9");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr9");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(10.333));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
 		}
 	}
 	
@@ -215,9 +383,9 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 			throw ex;
 		}
 	}
-	
+			
 	@Test
-	final void testCase19() {
+	final void testCase18() {
 	
 		try {
 			ProcessForm processForm = setFormComponents("user19@soberano.syscoop.co", "processes.zul");			
@@ -232,6 +400,27 @@ class O5_ProcessTest_modify extends ProcessActionTest{
 		}
 		catch(Throwable ex) {
 			throw ex;
+		}
+	}
+		
+	@Test
+	final void testCase19() {
+	
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
+			loadObjectDetails("mpr2");			
+			processForm.setComponentValue(processForm.getTxtName(), "mpr10");
+			processForm.setComponentValue(processForm.getDecFixedCost(), new BigDecimal(11.666));
+			
+			clickOnApplyButton(processForm.getDesktop());
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testDuplicateKeyException(ex);
 		}
 	}
 }

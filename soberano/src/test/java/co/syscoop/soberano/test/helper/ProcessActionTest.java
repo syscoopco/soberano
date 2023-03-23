@@ -29,12 +29,23 @@ public class ProcessActionTest extends ActionTest {
 	}
 	
 	protected void checkProcess(String name,
-							BigDecimal fixedCost) {
+								BigDecimal fixedCost) {
 		
 		String qualifiedName = name;
 		loadObjectDetails(qualifiedName);
 		
 		assertEquals(name.toLowerCase(), txtName.getText().toLowerCase(), "Wrong name shown for process " +  qualifiedName);
 		assertEquals(fixedCost, decFixedCost.getValue(), "Wrong fixed cost shown for process " +  qualifiedName);
+	}
+	
+	protected void checkProcess(ProcessForm processForm,
+								String name,
+								BigDecimal fixedCost) {
+
+		String qualifiedName = name;
+		loadObjectDetails(qualifiedName);
+	
+		assertEquals(name.toLowerCase(), processForm.getTxtName().getText().toLowerCase(), "Wrong name shown for process " +  qualifiedName);
+		assertEquals(fixedCost.subtract(processForm.getDecFixedCost().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong fixed cost shown for process " +  qualifiedName);
 	}
 }

@@ -2669,7 +2669,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "									FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(12, 1, loginname) instance\n"
 						+ "										INNER JOIN soberano.\"Process\" process\n"
 						+ "											ON instance.\"InstanceId\" = process.\"This_is_identified_by_EntityTypeInstance_id\") sq\n"
-						+ "						ORDER BY \"domainObjectName\" ASC;\n"
+						+ "						ORDER BY \"This_has_Name\" ASC;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
 						

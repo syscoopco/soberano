@@ -21,12 +21,12 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O4_ProcessTest_search_showingAll {
+class O4_AcquirableMaterialTest_search_showingAll {
 	
-	final private Integer processCount = 10; //number of processes in this testing point
-	final private Integer baseId = 1000; //the id of the first added process is baseId + 1. the last one's id is basedId + processCount
+	final private Integer acquirableMaterialCount = 9; //number of objects in this testing point
+	final private Integer baseId = 1000; //the id of the first added object is baseId + 1. the last one's id is basedId + acquirableMaterialCount
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -51,31 +51,31 @@ class O4_ProcessTest_search_showingAll {
 	
 	private void testForAllowedUser(Integer userSuffix) {
 		
-		String qualifiedNamePattern = "pr#suffix#";
+		String qualifiedNamePattern = "material#suffix# : m#suffix#";
 		
 		//test for a user
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
 		
 		//showing all in search combobox
-		TestUtilityCode.testSearchCombobox("/processes.zul", processCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testSearchCombobox("/acquirable_materials.zul", acquirableMaterialCount, userSuffix, baseId, qualifiedNamePattern);
 		
 		//showing all in tree
-		TestUtilityCode.testShowingAllTree("/processes.zul", processCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testShowingAllTree("/acquirable_materials.zul", acquirableMaterialCount, userSuffix, baseId, qualifiedNamePattern);
 	};
 	
 	private void testForDisallowedUser(Integer userSuffix) {
 		
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
-		DesktopAgent desktop = Zats.newClient().connect("/processes.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/acquirable_materials.zul");
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(0,
 					cmbIntelliSearch.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
-					userName + " must not have access to any processes. However, it sees " 
+					userName + " must not have access to any acquirable materials. However, it sees " 
 							+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
-							+ " processes in search combobox, and " 
+							+ " acquirable materials in search combobox, and " 
 							+ treeObjects.getTreechildren().getItemCount()
 							+ " in showing-all tree.");
 	};

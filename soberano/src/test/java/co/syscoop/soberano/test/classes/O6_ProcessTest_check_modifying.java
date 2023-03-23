@@ -17,16 +17,18 @@ import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Textbox;
+
 import co.syscoop.soberano.test.helper.ProcessActionTest;
+import co.syscoop.soberano.test.helper.ProcessForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(4)
+@Order(6)
 
 //TODO: enable test
 @Disabled
 
-class O4_ProcessTest_check_recording extends ProcessActionTest {
-	
+class O6_ProcessTest_check_modifying extends ProcessActionTest {
+
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
@@ -39,7 +41,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		decFixedCost = cmbIntelliSearchAgent.query("#incDetails").query("#decFixedCost").as(Decimalbox.class);
 	}
-
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
@@ -54,13 +56,100 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-
+	
+	@Test
+	final void testCase20() {
+		
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr1",
+							new BigDecimal(2.123));
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase21() {
+		
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr2",
+							new BigDecimal(3.456));
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase22() {
+		
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr3",
+							new BigDecimal(4.789));
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase23() {
+		
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr4",
+							new BigDecimal(5.987));
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase24() {
+		
+		try {
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr5",
+							new BigDecimal(6.654));
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
 	@Test
 	final void testCase25() {
 		
 		try {
-			checkProcess("pr1",
-						new BigDecimal(1));
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr6",
+							new BigDecimal(7.321));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -74,8 +163,10 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	final void testCase26() {
 		
 		try {
-			checkProcess("pr2",
-						new BigDecimal(2));
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr7",
+							new BigDecimal(8.111));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -89,8 +180,10 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	final void testCase27() {
 		
 		try {
-			checkProcess("pr3",
-						new BigDecimal(3));
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr8",
+							new BigDecimal(9.222));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -104,8 +197,10 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	final void testCase28() {
 		
 		try {
-			checkProcess("pr4",
-						new BigDecimal(4));
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr9",
+							new BigDecimal(10.333));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -119,83 +214,10 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 	final void testCase29() {
 		
 		try {
-			checkProcess("pr5",
-						new BigDecimal(5));
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase30() {
-		
-		try {
-			checkProcess("pr6",
-						new BigDecimal(6));
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase31() {
-		
-		try {
-			checkProcess("pr7",
-						new BigDecimal(7));
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase32() {
-		
-		try {
-			checkProcess("pr8",
-						new BigDecimal(8));
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase33() {
-		
-		try {
-			checkProcess("pr9",
-						new BigDecimal(9));
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
-		}
-	}
-	
-	@Test
-	final void testCase34() {
-		
-		try {
-			checkProcess("pr10",
-						new BigDecimal(91));
+			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");		
+			checkProcess(processForm,
+							"mpr10",
+							new BigDecimal(11.444));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
