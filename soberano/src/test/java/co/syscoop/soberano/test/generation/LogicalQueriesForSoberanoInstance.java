@@ -203,15 +203,33 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						/*********************************************************************/
-						/*RULE_CONSTRAINT_4: At most one 'Currency' can be a system currency.*/
-						/*********************************************************************/
-						
-						
-						
-						/*****************************************************************************/
-						/*RULE_CONSTRAINT_5: At most one 'Currency' can be a price reference currency.*/
-						/*****************************************************************************/
+						/********************************************************************************/
+						/*RULE_CONSTRAINT_4: At most one 'Currency' can be a system currency.			*/
+						/*RULE_CONSTRAINT_5: At most one 'Currency' can be a price reference currency.	*/
+						/********************************************************************************/
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Currency_RULE_CONSTRAINTS_4_AND_5\"(\n"
+						+ "	issystemcurrency boolean,\n"
+						+ "	ispricereferencecurrency boolean)\n"
+						+ "    RETURNS void\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		IF issystemcurrency AND\n"
+						+ "			ispricereferencecurrency THEN\n"
+						+ "			UPDATE soberano.\"Currency\" \n"
+						+ "				SET \"Currency_is_system_currency\" = false,\n"
+						+ "					\"Currency_is_price_reference_currency\" = false;\n"
+						+ "		ELSIF issystemcurrency THEN\n"
+						+ "			UPDATE soberano.\"Currency\" \n"
+						+ "				SET \"Currency_is_system_currency\" = false;\n"
+						+ "		ELSIF ispricereferencecurrency THEN\n"
+						+ "			UPDATE soberano.\"Currency\" \n"
+						+ "				SET \"Currency_is_price_reference_currency\" = false;\n"
+						+ "		END IF;\n"
+						+ "	END;\n"
+						+ "$BODY$;",
 						
 						
 						
@@ -852,6 +870,43 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(7, 'Storekeeper', 7004),\n"
 						+ "				(7, 'Auditor', 7004);",
 						
+						
+						
+						"/* currency lifecycle */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (9001, 'soberano.stage.starting', 9),\n"
+						+ "		(9002, 'Enabled', 9),\n"
+						+ "		(9003, 'Disabled', 9);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (9001, 'Add', 9, 9001, 9002, 'false'),\n"
+						+ "		(9002, 'Apply', 9, 9002, 9002, 'false'),\n"
+						+ "		(9003, 'Disable', 9, 9002, 9003, 'false'),\n"
+						+ "		(9004, 'Check', 9, 9002, 9002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (9, 'Accounter', 9001),\n"
+						+ "				(9, 'Accounter', 9002),\n"
+						+ "				(9, 'Accounter', 9003),\n"
+						+ "				(9, 'Manager', 9004),\n"
+						+ "				(9, 'Shift manager', 9004),\n"	
+						+ "				(9, 'Salesclerk', 9004),\n"
+						+ "				(9, 'Checker', 9004),\n"
+						+ "				(9, 'Auditor', 9004);",
+						
 				
 												
 						"/* cash register lifecycle. no lifecycle needed. internal-use-only object. nobody makes decisions on it. */\n",
@@ -896,7 +951,14 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "--a trigger implementing RULE_EXISTENCE_4 is responsible for inserting the corresponding entity type instance\n"
 						+ "INSERT INTO soberano.\"CashRegister\"(\n"
 						+ "	\"CashRegisterHasCashRegisterId\", \"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "	VALUES (1, 4);",						
+						+ "	VALUES (1, 4);",
+						
+						
+						
+						"INSERT INTO soberano.\"PaymentProcessor\"(\n"
+						+ "	\"PaymentProcessorHasPaymentProcessorId\", \"This_has_Name\")\n"
+						+ "	VALUES (1, 'Opennode'),\n"
+						+ "			(2, 'Tropipay');",
 						
 						
 						
