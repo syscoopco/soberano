@@ -61,8 +61,8 @@ public class Currency extends TrackedObject {
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		recordQuery = "SELECT soberano.\"fn_Currency_create\"(:currencyName, "
-				+ "											:currencyCode, "
+		recordQuery = "SELECT soberano.\"fn_Currency_create\"(:currencyCode, "
+				+ "											:currencyName, "
 				+ "											:isSystemCurrency, "
 				+ "											:isPriceReferenceCurrency, "
 				+ "											:isCash, "
@@ -147,8 +147,8 @@ public class Currency extends TrackedObject {
 											rs.getBoolean("isPriceReferenceCurrency"),
 											rs.getBoolean("isCash"),
 											rs.getBigDecimal("exchangeRate"),
-											rs.getInt(position),
-											rs.getInt(paymentProcessor));
+											rs.getInt("itemPosition"),
+											rs.getInt("paymentProcessor"));
 				}
 				return currency;
 			}
