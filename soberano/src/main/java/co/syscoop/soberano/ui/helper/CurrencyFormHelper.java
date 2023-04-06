@@ -46,9 +46,10 @@ public class CurrencyFormHelper extends TrackedObjectFormHelper {
 		if (currency.getPaymentProcessor() > 0) 
 			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbPaymentProcessor"), currency.getPaymentProcessor());
 		else
-			((Combobox) incDetails.query("#cmbPaymentProcessor")).setSelectedItem(null);
+			((Combobox) incDetails.query("#cmbPaymentProcessor")).setSelectedIndex(-1);
 		
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decExchangeRate"), currency.getExchangeRate());
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtExchangeRateExpression"), currency.getExchangeRate().toString());
 		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPosition"), currency.getPosition());
 	}
 
@@ -77,7 +78,7 @@ public class CurrencyFormHelper extends TrackedObjectFormHelper {
 					((Checkbox) incDetails.query("#chkIsCash")).isChecked(),
 					((Decimalbox) incDetails.query("#decExchangeRate")).getValue(),
 					((Intbox) incDetails.query("#intPosition")).getValue(),
-					selPPItem == null ? 1 : selPPItem.getIndex())
+					selPPItem == null ? 1 : Integer.parseInt(selPPItem.getValue()))
 			.record();
 	}
 
@@ -94,7 +95,7 @@ public class CurrencyFormHelper extends TrackedObjectFormHelper {
 											((Checkbox) incDetails.query("#chkIsCash")).isChecked(),
 											((Decimalbox) incDetails.query("#decExchangeRate")).getValue(),
 											((Intbox) incDetails.query("#intPosition")).getValue(),
-											selPPItem == null ? 1 : selPPItem.getIndex()));
+											selPPItem == null ? 1 : Integer.parseInt(selPPItem.getValue())));
 		return super.getTrackedObject().modify();
 	}
 }

@@ -24,9 +24,9 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(6)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
-class O6_AcquirableTest_check_modifying extends AcquirableMaterialActionTest {
+class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

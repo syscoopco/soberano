@@ -12,15 +12,15 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 
-import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
+import co.syscoop.soberano.test.helper.CurrencyActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(7)
 
 //TODO: enable testCase
-@Disabled
+//@Disabled
 
-class O7_AcquirableMaterialTest_disable  extends AcquirableMaterialActionTest {
+class O7_CurrencyTest_disable extends CurrencyActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,13 +45,13 @@ class O7_AcquirableMaterialTest_disable  extends AcquirableMaterialActionTest {
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/acquirable_materials.zul", "user1@soberano.syscoop.co", "mm1", 8);
+		TestUtilityCode.testDisablingObject("/currencies.zul", "user1@soberano.syscoop.co", "mc9", 8);
 	}
 	
 	@Test
 	final void testCase2() {
 		try {
-			TestUtilityCode.testDisablingObject("/acquirable_materials.zul", "user2@soberano.syscoop.co", "mm2", 8);
+			TestUtilityCode.testDisablingObject("/currencies.zul", "user2@soberano.syscoop.co", "mm8", 8);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -66,13 +66,18 @@ class O7_AcquirableMaterialTest_disable  extends AcquirableMaterialActionTest {
 	
 	@Test
 	final void testCase3() {
-		TestUtilityCode.testDisablingObject("/acquirable_materials.zul", "user3@soberano.syscoop.co", "mm3", 7);
+		TestUtilityCode.testDisablingObject("/currencies.zul", "user3@soberano.syscoop.co", "mc7", 7);
 	}
 	
 	@Test
 	final void testCase4() {
+		TestUtilityCode.testDisablingObject("/currencies.zul", "user4@soberano.syscoop.co", "mc6", 6);
+	}
+	
+	@Test
+	final void testCase5() {
 		try {
-			TestUtilityCode.testDisablingObject("/acquirable_materials.zul", "user4@soberano.syscoop.co", "mm4", 7);
+			TestUtilityCode.testDisablingObject("/currencies.zul", "user5@soberano.syscoop.co", "mc5", 6);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

@@ -100,14 +100,14 @@ public class Currency extends TrackedObject {
 						+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("currencyId", this.getId());
-		recordParameters.addValue("currencyName", this.getName());
-		recordParameters.addValue("currencyCode", this.getStringId());
-		recordParameters.addValue("isSystemCurrency", this.getIsSystemCurrency());
-		recordParameters.addValue("isPriceReferenceCurrency", this.getIsPriceReferenceCurrency());
-		recordParameters.addValue("isCash", this.getIsCash());
-		recordParameters.addValue("exchangeRate", this.getExchangeRate());
-		recordParameters.addValue("position", this.getPosition());
-		recordParameters.addValue("paymentProcessor", this.getPaymentProcessor());
+		modifyParameters.addValue("currencyName", this.getName());
+		modifyParameters.addValue("currencyCode", this.getStringId());
+		modifyParameters.addValue("isSystemCurrency", this.getIsSystemCurrency());
+		modifyParameters.addValue("isPriceReferenceCurrency", this.getIsPriceReferenceCurrency());
+		modifyParameters.addValue("isCash", this.getIsCash());
+		modifyParameters.addValue("exchangeRate", this.getExchangeRate());
+		modifyParameters.addValue("position", this.getPosition());
+		modifyParameters.addValue("paymentProcessor", this.getPaymentProcessor());
 		
 		Integer qryResult = super.modify();
 		return qryResult >= 0 ? qryResult : -1;

@@ -11,16 +11,16 @@ public class ComboboxHelper {
 	public static Comboitem getItemByValue(Combobox box, String value) throws IllegalArgumentException {
 		
 		//non intellisense combobox
-		for(Comboitem item : box.getItems()){
-			if(item.getValue().toString().equals(value))
+		for (Comboitem item : box.getItems()){
+			if (item.getValue().toString().equals(value))
 				return item;
 		}
 		
 		//intellisense combobox. the value is the corresponding domain object's id recorded in the database
 		ListModel<Object> model = box.getModel();
-		for(int i = 0; i < model.getSize(); i++) {
+		for (int i = 0; i < model.getSize(); i++) {
 			DomainObject doo = (DomainObject) model.getElementAt(i);
-			if(doo.getStringId().equals(value)) {
+			if (doo.getStringId().equals(value)) {
 				box.setText(doo.getName());				
 				Comboitem ci = new Comboitem(doo.getName());
 				ci.setValue(doo);
@@ -34,16 +34,22 @@ public class ComboboxHelper {
 	public static Comboitem getItemByValue(Combobox box, Integer value) throws IllegalArgumentException {
 		
 		//non intellisense combobox
-		for(Comboitem item : box.getItems()){
-			if(item.getValue().equals(value))
-				return item;
+		for (Comboitem item : box.getItems()){
+			if (item.getValue().getClass().getName().contains("DomainObject")) {
+				if (((DomainObject) item.getValue()).getId() == value)
+					return item;
+			}
+			else {			
+				if (Integer.parseInt(item.getValue()) == value)
+					return item;
+			}
 		}
 		
 		//intellisense combobox. the value is the corresponding domain object's id recorded in the database
 		ListModel<Object> model = box.getModel();
 		for(int i = 0; i < model.getSize(); i++) {
 			DomainObject doo = (DomainObject) model.getElementAt(i);
-			if(doo.getId().equals(value)) {
+			if (doo.getId().equals(value)) {
 				box.setText(doo.getName());				
 				Comboitem ci = new Comboitem(doo.getName());
 				ci.setValue(doo);

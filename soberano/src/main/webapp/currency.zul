@@ -20,7 +20,8 @@
 		</combobox>
 		<separator></separator>
 		<label value="${labels.caption.field.exchangeRate}" sclass="Caption"></label>
-		<decimalbox id="decExchangeRate" format="###############.########" hflex="1" placeholder="${labels.caption.field.exchangeRatePlaceholder}" constraint="no empty, no negative"/>
+		<textbox id="txtExchangeRateExpression" hflex="1" placeholder="${labels.caption.field.exchangeRatePlaceholder}" constraint="no empty"/>
+		<decimalbox visible="false" id="decExchangeRate" format="###############.########" hflex="1" placeholder="${labels.caption.field.exchangeRatePlaceholder}" constraint="no empty, no negative"/>
 		<separator></separator>
 		<label value="${labels.caption.field.position}" sclass="Caption"></label>			
 		<intbox id="intPosition" hflex="1" placeholder="${labels.caption.field.positionPlaceholder}" constraint="no empty, no negative"/>
