@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 
-import co.syscoop.soberano.test.helper.CurrencyActionTest;
+import co.syscoop.soberano.test.helper.ServiceActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(7)
@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 //TODO: enable testCase
 @Disabled
 
-class O7_CurrencyTest_disable extends CurrencyActionTest {
+class O7_ServiceTest_disable  extends ServiceActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,13 +45,23 @@ class O7_CurrencyTest_disable extends CurrencyActionTest {
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/currencies.zul", "user1@soberano.syscoop.co", "mc9", 8);
+		TestUtilityCode.testDisablingObject("/services.zul", "user1@soberano.syscoop.co", "ms9", 8);
 	}
 	
 	@Test
 	final void testCase2() {
+		TestUtilityCode.testDisablingObject("/services.zul", "user2@soberano.syscoop.co", "ms8", 7);
+	}
+	
+	@Test
+	final void testCase3() {
+		TestUtilityCode.testDisablingObject("/services.zul", "user3@soberano.syscoop.co", "ms7", 6);
+	}
+	
+	@Test
+	final void testCase4() {
 		try {
-			TestUtilityCode.testDisablingObject("/currencies.zul", "user2@soberano.syscoop.co", "mm8", 8);
+			TestUtilityCode.testDisablingObject("/services.zul", "user4@soberano.syscoop.co", "ms6", 6);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -62,22 +72,12 @@ class O7_CurrencyTest_disable extends CurrencyActionTest {
 			//retrieve it but not necessarily modifying nor disabling it
 			testNotEnoughRightsException(ex);
 		}
-	}
-	
-	@Test
-	final void testCase3() {
-		TestUtilityCode.testDisablingObject("/currencies.zul", "user3@soberano.syscoop.co", "mc7", 7);
-	}
-	
-	@Test
-	final void testCase4() {
-		TestUtilityCode.testDisablingObject("/currencies.zul", "user4@soberano.syscoop.co", "mc6", 6);
 	}
 	
 	@Test
 	final void testCase5() {
 		try {
-			TestUtilityCode.testDisablingObject("/currencies.zul", "user5@soberano.syscoop.co", "mc5", 6);
+			TestUtilityCode.testDisablingObject("/services.zul", "user5@soberano.syscoop.co", "ms6", 6);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -88,5 +88,10 @@ class O7_CurrencyTest_disable extends CurrencyActionTest {
 			//retrieve it but not necessarily modifying nor disabling it
 			testNotEnoughRightsException(ex);
 		}
+	}
+	
+	@Test
+	final void testCase6() {
+		TestUtilityCode.testDisablingObject("/services.zul", "user6@soberano.syscoop.co", "ms6", 5);
 	}
 }

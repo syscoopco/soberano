@@ -15,7 +15,7 @@
 				<menu label="${labels.menuItem.Expenditures}" sclass="BarMenu">
 					<menupopup>
 						<menuitem label="${labels.menuItem.Materials}" href="materials.zul"/>
-						<menuitem label="${labels.menuItem.Services}" href="services.zul"/>
+						<menuitem label="${labels.menuItem.Services}" href="thirdparty_services.zul"/>
 						<menuitem label="${labels.menuItem.Payroll}" href="payroll.zul"/>
 					</menupopup>
 				</menu>
@@ -60,7 +60,7 @@
 						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
 						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
 						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
-						<menuitem disabled="true" label="${labels.menuItem.ShippingServices}" href="shipping_services.zul"/>					
+						<menuitem disabled="true" label="${labels.menuItem.ShippingServices}" href="shipping_thirdparty_services.zul"/>					
 						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
 					</menupopup>					
 				</menu>			

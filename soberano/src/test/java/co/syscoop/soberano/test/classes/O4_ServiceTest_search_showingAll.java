@@ -21,12 +21,12 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O4_CurrencyTest_search_showingAll {
+class O4_ServiceTest_search_showingAll {
 	
-	final private Integer currencyCount = 9; //number of objects in this testing point
-	final private Integer baseId = 1000; //the id of the first added object is baseId + 1. the last one's id is basedId + currencyCount
+	final private Integer serviceCount = 9; //number of objects in this testing point
+	final private Integer baseId = 1000; //the id of the first added object is baseId + 1. the last one's id is basedId + serviceCount
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -51,31 +51,31 @@ class O4_CurrencyTest_search_showingAll {
 	
 	private void testForAllowedUser(Integer userSuffix) {
 		
-		String qualifiedNamePattern = "currency#suffix# : c#suffix#";
+		String qualifiedNamePattern = "service#suffix# : s#suffix#";
 		
 		//test for a user
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
 		
 		//showing all in search combobox
-		TestUtilityCode.testSearchCombobox("/currencies.zul", currencyCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testSearchCombobox("/thirdparty_services.zul", serviceCount, userSuffix, baseId, qualifiedNamePattern);
 		
 		//showing all in tree
-		TestUtilityCode.testShowingAllTree("/currencies.zul", currencyCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testShowingAllTree("/thirdparty_services.zul", serviceCount, userSuffix, baseId, qualifiedNamePattern);
 	};
 	
 	private void testForDisallowedUser(Integer userSuffix) {
 		
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
-		DesktopAgent desktop = Zats.newClient().connect("/currencies.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/thirdparty_services.zul");
 		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(0,
 					cmbIntelliSearch.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
-					userName + " must not have access to any currencies. However, it sees " 
+					userName + " must not have access to any services. However, it sees " 
 							+ cmbIntelliSearch.as(Combobox.class).getModel().getSize() 
-							+ " currencies in search combobox, and " 
+							+ " services in search combobox, and " 
 							+ treeObjects.getTreechildren().getItemCount()
 							+ " in showing-all tree.");
 	};
@@ -185,7 +185,7 @@ class O4_CurrencyTest_search_showingAll {
 	@Test
 	final void testUser18() {
 
-		testForAllowedUser(18);
+		testForDisallowedUser(18);
 	}
 	
 	@Test
@@ -197,7 +197,7 @@ class O4_CurrencyTest_search_showingAll {
 	@Test
 	final void testUser20() {
 
-		testForAllowedUser(20);
+		testForDisallowedUser(20);
 	}
 	
 	@Test
