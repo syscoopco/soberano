@@ -27,19 +27,19 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		Process Process = new Process(((DomainObject) data.getData().getValue()).getId());
-		Process.get();
+		Process process = new Process(((DomainObject) data.getData().getValue()).getId());
+		process.get();
 		
 		//store in the form the ids of shown object for subsequent modification
-		((Intbox) incDetails.getParent().query("#intId")).setValue(Process.getId());
-		((Textbox) incDetails.getParent().query("#txtStringId")).setText(Process.getStringId());
+		((Intbox) incDetails.getParent().query("#intId")).setValue(process.getId());
+		((Textbox) incDetails.getParent().query("#txtStringId")).setText(process.getStringId());
 		
 		incDetails.setVisible(true);
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), Process.getName());
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), Process.getFixedCost());
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), process.getName());
+		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), process.getFixedCost());
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 <?page title="${labels.pageProcesses.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-details.zul"?>
+<?init class="com.syscoop.gastro.initiators.ProcessInitiator"?>
 
 <zk>
 	<include src="/style.zul"/>

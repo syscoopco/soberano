@@ -18,6 +18,8 @@ public class Product extends InventoryItem {
 	private BigDecimal price = new BigDecimal(0.0);
 	private BigDecimal referencePrice = new BigDecimal(0.0);
 	private Boolean isEnabled = false;
+	private Integer costCenter = 0;
+	private Integer process = 0;
 	
 	//product categories
 	private ArrayList<ProductCategory> productCategories = new ArrayList<ProductCategory>();
@@ -35,13 +37,14 @@ public class Product extends InventoryItem {
 	}
 	
 	public Product(Integer id, 
-					Integer entityTypeInstanceId, 
-					String name,
+					Integer entityTypeInstanceId, 					
 					String inventoryItemCode, 
+					String name,
 					BigDecimal price, 
 					BigDecimal referencePrice,
 					BigDecimal minimumInventoryLevel,
 					Integer unit,
+					Integer costCenter,
 					Boolean isEnabled) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(inventoryItemCode);
@@ -50,27 +53,30 @@ public class Product extends InventoryItem {
 		this.setReferencePrice(referencePrice);
 		setMinimumInventoryLevel(minimumInventoryLevel);
 		this.setUnit(unit);
+		this.setCostCenter(costCenter);
 		this.setIsEnabled(isEnabled);
 	}
 	
 	public Product(Integer id, 
 			Integer entityTypeInstanceId, 
-			String name,
-			String inventoryItemCode, 
+			String inventoryItemCode,
+			String name,			 
 			BigDecimal price, 
 			BigDecimal referencePrice,
 			BigDecimal minimumInventoryLevel,
 			Integer unit,
+			Integer costCenter,
 			Boolean isEnabled,
 			ArrayList<ProductCategory> productCategories) {
 		this(id, 
 			entityTypeInstanceId, 
-			name,
 			inventoryItemCode, 
+			name,			
 			price, 
 			referencePrice,
 			minimumInventoryLevel,
 			unit,
+			costCenter,
 			isEnabled);
 		this.productCategories = productCategories;
 		fillProductCategoryIds();
@@ -89,6 +95,7 @@ public class Product extends InventoryItem {
 				+ "											:inventoryCode, "
 				+ "											:minimumInventoryLevel, "
 				+ "											:unit, "
+				+ "											:costCenter, "
 				+ "											:price, "
 				+ "											:referencePrice, "
 				+ "											:isEnabled, "
@@ -99,6 +106,7 @@ public class Product extends InventoryItem {
 		recordParameters.addValue("inventoryCode", this.getStringId());
 		recordParameters.addValue("minimumInventoryLevel", this.getMinimumInventoryLevel());
 		recordParameters.addValue("unit", this.getUnit());
+		recordParameters.addValue("costCenter", this.getCostCenter());
 		recordParameters.addValue("price", this.getPrice());
 		recordParameters.addValue("referencePrice", this.getReferencePrice());
 		recordParameters.addValue("isEnabled", this.isEnabled);
@@ -117,6 +125,7 @@ public class Product extends InventoryItem {
 				+ "											:inventoryCode, "
 				+ "											:minimumInventoryLevel, "
 				+ "											:unit, "
+				+ "											:costCenter, "
 				+ "											:price, "
 				+ "											:referencePrice, "
 				+ "											:isEnabled, "
@@ -128,6 +137,7 @@ public class Product extends InventoryItem {
 		modifyParameters.addValue("inventoryCode", this.getStringId());
 		modifyParameters.addValue("minimumInventoryLevel", this.getMinimumInventoryLevel());
 		modifyParameters.addValue("unit", this.getUnit());
+		modifyParameters.addValue("costCenter", this.getCostCenter());
 		modifyParameters.addValue("price", this.getPrice());
 		modifyParameters.addValue("referencePrice", this.getReferencePrice());
 		modifyParameters.addValue("isEnabled", this.isEnabled);
@@ -173,6 +183,7 @@ public class Product extends InventoryItem {
 											rs.getBigDecimal("productReferencePrice"),
 											rs.getBigDecimal("minimumInventoryLevel"),
 											rs.getInt("productUnit"),
+											rs.getInt("costCenter"),
 											rs.getBoolean("isEnabled"));
 	        	}
 	        	product.getProductCategories().add(new ProductCategory(rs.getInt("categoryId"), rs.getString("categoryName")));
@@ -205,6 +216,7 @@ public class Product extends InventoryItem {
 		setStringId(sourceProduct.getStringId());
 		setMinimumInventoryLevel(sourceProduct.getMinimumInventoryLevel());
 		setUnit(sourceProduct.getUnit());
+		setCostCenter(sourceProduct.getCostCenter());
 		setPrice(sourceProduct.getPrice());
 		setReferencePrice(sourceProduct.getReferencePrice());
 		setIsEnabled(sourceProduct.getIsEnabled());
@@ -241,5 +253,21 @@ public class Product extends InventoryItem {
 	public void setProductCategories(ArrayList<ProductCategory> productCategories) {
 		this.productCategories = productCategories;
 		fillProductCategoryIds();
+	}
+
+	public Integer getCostCenter() {
+		return costCenter;
+	}
+
+	public void setCostCenter(Integer costCenter) {
+		this.costCenter = costCenter;
+	}
+
+	public Integer getProcess() {
+		return process;
+	}
+
+	public void setProcess(Integer process) {
+		this.process = process;
 	}
 }
