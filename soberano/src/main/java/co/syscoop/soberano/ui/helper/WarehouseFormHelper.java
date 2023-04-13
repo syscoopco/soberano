@@ -67,6 +67,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(false);

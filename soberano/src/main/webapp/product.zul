@@ -1,6 +1,4 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
-<?init class="com.syscoop.gastro.initiators.SystemCurrencyInitiator"?>
-<?init class="com.syscoop.gastro.initiators.ReferencePriceCurrencyInitiator"?>
 <zk>
 	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.ProductFormComposer">
 		<label value="${labels.caption.field.category}" sclass="Caption"></label>

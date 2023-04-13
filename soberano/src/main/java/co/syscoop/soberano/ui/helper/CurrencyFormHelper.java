@@ -56,6 +56,7 @@ public class CurrencyFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Checkbox) incDetails.query("#chkIsSystemCurrency")).setChecked(false);

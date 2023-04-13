@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
+import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 
 public class Currency extends TrackedObject {
 
@@ -183,12 +185,43 @@ public class Currency extends TrackedObject {
 		setPosition(sourceCurrency.getPosition());
 		setPaymentProcessor(sourceCurrency.getPaymentProcessor());
 	}
-	
+		
 	@Override
 	public Integer print() throws SQLException {
 		
 		// TODO print a report on the object
 		return null;
+	}
+	
+	public final class SystemCurrenciesMapper implements RowMapper<Object> {
+
+		public SystemCurrencies mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				SystemCurrencies systemCurrencies = null;
+				String systemCurrencyCode = rs.getString("systemCurrencyCode");
+				if (!rs.wasNull()) {
+					systemCurrencies = new SystemCurrencies(systemCurrencyCode, 
+															rs.getString("referenceCurrencyCode"), 
+															rs.getBigDecimal("referenceCurrencyExchangeRate"));
+				}
+				return systemCurrencies;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public SystemCurrencies getSystemCurrencies() throws SQLException, NotCurrenciesConfiguredException {
+		
+		String qry = "SELECT * FROM soberano.\"fn_Currency_getSystemCurrencies\"()";
+		List<Object> results = super.query(qry, null, new SystemCurrenciesMapper());
+		if (results.size() == 0) {
+			throw new NotCurrenciesConfiguredException();
+		}
+		else return (SystemCurrencies) results.get(0);
 	}
 
 	public Boolean getIsSystemCurrency() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Decimalbox;
@@ -76,5 +77,19 @@ public class ZKUtilitity {
 	
 	public static Object getAssociatedNode(Treeitem ti, Tree t) {
 		  return t.getModel().getChild(getTreeitemPath(t, ti));
+	}
+	
+	public static String parseURLQueryStringForParam(String paramName) {
+		try{
+			String paramValue = "";
+			String queryString = Executions.getCurrent().getDesktop().getQueryString();
+			if (queryString!= null && queryString.indexOf(paramName + "=") > -1) {				
+				paramValue = queryString.substring(queryString.indexOf(paramName + "=") + paramName.length() + 1, queryString.length());
+			}
+			return paramValue;
+		}
+		catch(Exception ex) {
+			return "";
+		}
 	}
 }

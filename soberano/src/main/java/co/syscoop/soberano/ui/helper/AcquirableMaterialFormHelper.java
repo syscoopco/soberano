@@ -49,6 +49,7 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));

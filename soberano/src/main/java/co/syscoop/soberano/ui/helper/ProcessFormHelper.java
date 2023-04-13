@@ -20,14 +20,14 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtName"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), new BigDecimal(0.0));
 	}
 	
-	@Override
-	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	public void fillForm(Include incDetails, Integer id) throws SQLException {
 		
-		Process process = new Process(((DomainObject) data.getData().getValue()).getId());
+		Process process = new Process(id);
 		process.get();
 		
 		//store in the form the ids of shown object for subsequent modification
@@ -40,6 +40,12 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), process.getName());
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), process.getFixedCost());
+	}
+	
+	@Override
+	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+		
+		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId());
 	}
 
 	@Override

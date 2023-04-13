@@ -2,6 +2,7 @@ package co.syscoop.soberano.domain.tracked;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -18,6 +19,7 @@ public interface ITrackedObject {
 	abstract public Integer makeDecision(String decision) throws SQLException; //it's passed the name of the decision
 	abstract public Integer disable() throws SQLException, Exception;
 	abstract public Integer print() throws SQLException;
+	abstract public List<Object> query(String queryStr, Map<String, Object> queryParameters, RowMapper<Object> mapper) throws SQLException;
 	
 	//limit and offset are useful for windowed lists, as in paged lists / grids / scrollable trees / etc.
 	//the semantics is the typical, for sql standard.

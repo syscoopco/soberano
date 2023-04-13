@@ -148,6 +148,10 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 		return trackedObjectDao.createArray(sqlStypeName, javaArray);
 	}
 	
+	public List<Object> query(String queryStr, Map<String, Object> queryParameters, RowMapper<Object> mapper) throws SQLException {
+		return trackedObjectDao.query(queryStr, queryParameters, mapper);
+	}
+	
 	@Override
 	public Integer record() throws SQLException, Exception {		
 		Integer newTrackerObjectId = trackedObjectDao.record(recordQuery, recordParameters);

@@ -45,7 +45,8 @@ public class Product extends InventoryItem {
 					BigDecimal minimumInventoryLevel,
 					Integer unit,
 					Integer costCenter,
-					Boolean isEnabled) {
+					Boolean isEnabled,
+					Integer process) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(inventoryItemCode);
 		this.setQualifiedName(name + " : " + inventoryItemCode);
@@ -55,6 +56,7 @@ public class Product extends InventoryItem {
 		this.setUnit(unit);
 		this.setCostCenter(costCenter);
 		this.setIsEnabled(isEnabled);
+		this.setProcess(process);
 	}
 	
 	public Product(Integer id, 
@@ -67,6 +69,7 @@ public class Product extends InventoryItem {
 			Integer unit,
 			Integer costCenter,
 			Boolean isEnabled,
+			Integer process,
 			ArrayList<ProductCategory> productCategories) {
 		this(id, 
 			entityTypeInstanceId, 
@@ -77,7 +80,8 @@ public class Product extends InventoryItem {
 			minimumInventoryLevel,
 			unit,
 			costCenter,
-			isEnabled);
+			isEnabled,
+			process);
 		this.productCategories = productCategories;
 		fillProductCategoryIds();
 	}
@@ -173,21 +177,23 @@ public class Product extends InventoryItem {
 			Product product = null;
 			Integer productCurrentlyBeingExtractedId = -1;
 	        while (rs.next()) {
-	        	if (productCurrentlyBeingExtractedId != rs.getInt("productId")) {
-	        		productCurrentlyBeingExtractedId = rs.getInt("productId");
-	        		product = new Product(rs.getInt("productId"),
+	        	if (productCurrentlyBeingExtractedId != rs.getInt("itemId")) {
+	        		productCurrentlyBeingExtractedId = rs.getInt("itemId");
+	        		product = new Product(rs.getInt("itemId"),
 											rs.getInt("entityTypeInstanceId"),
-											rs.getString("productName"),
-											rs.getString("inventoryItemCode"),
-											rs.getBigDecimal("productPrice"),
-											rs.getBigDecimal("productReferencePrice"),
-											rs.getBigDecimal("minimumInventoryLevel"),
-											rs.getInt("productUnit"),
+											rs.getString("itemCode"),
+											rs.getString("itemName"),
+											rs.getBigDecimal("itemPrice"),
+											rs.getBigDecimal("itemReferencePrice"),
+											rs.getBigDecimal("inventoryLevel"),
+											rs.getInt("itemUnit"),
 											rs.getInt("costCenter"),
-											rs.getBoolean("isEnabled"));
+											rs.getBoolean("isEnabled"),
+											rs.getInt("itemProcess"));
 	        	}
 	        	product.getProductCategories().add(new ProductCategory(rs.getInt("categoryId"), rs.getString("categoryName")));
 	        }
+	        product.fillProductCategoryIds();
 	        return product;
 		}
 	}
@@ -220,6 +226,9 @@ public class Product extends InventoryItem {
 		setPrice(sourceProduct.getPrice());
 		setReferencePrice(sourceProduct.getReferencePrice());
 		setIsEnabled(sourceProduct.getIsEnabled());
+		setProcess(sourceProduct.process);
+		setProductCategories(sourceProduct.getProductCategories());
+		fillProductCategoryIds();
 	}
 
 	public BigDecimal getPrice() {
@@ -248,6 +257,10 @@ public class Product extends InventoryItem {
 
 	public ArrayList<ProductCategory> getProductCategories() {
 		return productCategories;
+	}
+	
+	public Integer[] getProductCategoryIds() {
+		return productCategoryIds;
 	}
 
 	public void setProductCategories(ArrayList<ProductCategory> productCategories) {

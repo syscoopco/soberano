@@ -38,6 +38,7 @@ public class ServiceFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");	
 	}

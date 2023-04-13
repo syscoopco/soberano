@@ -34,11 +34,12 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		((Textbox) incDetails.getParent().query("#txtStringId")).setText(product.getStringId());
 		
 		incDetails.setVisible(true);
-		Clients.scrollIntoView(incDetails.query("#txtCode"));
+		Clients.scrollIntoView(incDetails.query("#cmbCategory"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
+		((Button) incDetails.getParent().query("#incSouth").query("#btnProcess")).setDisabled(false);
 		
-		if (product.getProductCategories().size() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCategory"), product.getProductCategories().get(0).getId());
+		if (product.getProductCategoryIds().length > 0)
+			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCategory"), product.getProductCategoryIds()[0]);
 		else
 			((Combobox) incDetails.query("#cmbCategory")).setSelectedItem(null);
 		
@@ -55,14 +56,17 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), product.getPrice());
 		
 		if (product.getCostCenter() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCostCenter"), product.getUnit());
+			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCostCenter"), product.getCostCenter());
 		else
 			((Combobox) incDetails.query("#cmbCostCenter")).setSelectedItem(null);
+		
+		 ((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
 	}
 
 	@Override
 	public void cleanForm(Include incDetails) {
 		
+		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), new BigDecimal(0.0));
@@ -88,6 +92,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 							iUnitItem == null ? null : ((DomainObject) iUnitItem.getValue()).getId(),
 							iCostCenterItem == null ? null : ((DomainObject) iCostCenterItem.getValue()).getId(),
 							true,
+							0,
 							productCategories))
 						.record();
 	}
@@ -118,6 +123,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 												iUnitId,
 												iCostCenterId,
 												true,
+												0,
 												productCategories));
 		return super.getTrackedObject().modify();
 	}
