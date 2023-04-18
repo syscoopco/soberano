@@ -27,7 +27,12 @@ public abstract class TrackedObjectFormHelper {
 	public void updateObjectTreeitemLabel(Include incDetails) {
 		
 		Tree treeObjects = (Tree) incDetails.getParent().query("#wndShowingAll").query("#treeObjects");
-		treeObjects.getSelectedItem().setLabel(trackedObject.getQualifiedName());
+		
+		//selected item is null when the object is loaded with an id passed
+		//through URL query string, instead of clicking on a tree item.
+		if (treeObjects.getSelectedItem() != null) {
+			treeObjects.getSelectedItem().setLabel(trackedObject.getQualifiedName());
+		}
 	}
 
 	public abstract void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException;

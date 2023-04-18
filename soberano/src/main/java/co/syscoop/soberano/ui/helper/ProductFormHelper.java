@@ -50,17 +50,20 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbUnit"), product.getUnit());
 		else
 			((Combobox) incDetails.query("#cmbUnit")).setSelectedItem(null);
-			
+		
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), product.getMinimumInventoryLevel());
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), product.getPrice());
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), product.getPrice());
+		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), product.getReferencePrice());
 		
+		//testing purpose. this control isn't visible
+		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePriceForTesting"), product.getReferencePrice());
+				
 		if (product.getCostCenter() > 0) 
 			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCostCenter"), product.getCostCenter());
 		else
 			((Combobox) incDetails.query("#cmbCostCenter")).setSelectedItem(null);
 		
-		 ((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
+		((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
 	}
 
 	@Override

@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Decimalbox;
@@ -13,7 +15,9 @@ import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
+import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
+import org.zkoss.zul.Treerow;
 
 public class ZKUtilitity {
 	
@@ -90,6 +94,26 @@ public class ZKUtilitity {
 		}
 		catch(Exception ex) {
 			return "";
+		}
+	}
+	
+	public static void processItemSelection(Combobox cmbIntelliSearch) {
+		Tree treeObjects = (Tree) cmbIntelliSearch.query("#wndShowingAll").query("#treeObjects");
+		for (Component comp : treeObjects.getTreechildren().getChildren()) {
+			Treeitem ti = (Treeitem) comp;
+			Treerow tr = (Treerow) (ti).getChildren().get(0);
+			Treecell tc = (Treecell) (tr).getChildren().get(0);
+			if (tc.getLabel().equals(cmbIntelliSearch.getText()) ) {
+				treeObjects.setSelectedItem(ti);
+				
+				//call if abstract class version fillForm((Include) cmbIntelliSearch.query("#incDetails"), ti);
+				
+				//sendEvent is called in non abstract class version
+				Events.sendEvent(Events.ON_CLICK, ti, null);
+				
+				Clients.scrollIntoView(ti);
+				break;
+			}
 		}
 	}
 }

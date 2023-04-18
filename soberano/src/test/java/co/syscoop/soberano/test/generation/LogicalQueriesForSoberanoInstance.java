@@ -3920,6 +3920,30 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Product_getAll\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT *\n"
+						+ "						FROM (SELECT DISTINCT \"ProductHasProductId\", \n"
+						+ "									\"This_has_Name\" || ' : ' || am.\"InventoryItemHasInventoryItemCode\" \"domainObjectName\"\n"
+						+ "									FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(13, 1, loginname) instance\n"
+						+ "										INNER JOIN soberano.\"Product\" am\n"
+						+ "											ON instance.\"InstanceId\" = am.\"This_is_identified_by_EntityTypeInstance_id\"\n"
+						+ "							 			INNER JOIN soberano.\"InventoryItem\" ii\n"
+						+ "											ON am.\"InventoryItemHasInventoryItemCode\" = ii.\"InventoryItemHasInventoryItemCode\") sq\n"
+						+ "						ORDER BY \"domainObjectName\" ASC;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_Product_get\"(\n"
 						+ "	productid integer,\n"
 						+ "	loginname character varying)\n"
@@ -3967,44 +3991,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "									AND EXISTS (SELECT metamodel.\"fn_EntityTypeInstance_getDecisions\"(am.\"This_is_identified_by_EntityTypeInstance_id\", loginname));\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
-						
-						
-						
-						"CREATE OR REPLACE FUNCTION soberano.\"fn_Product_get\"(\n"
-						+ "	productid integer,\n"
-						+ "	loginname character varying)\n"
-						+ "    RETURNS TABLE(\"itemId\" integer, \"entityTypeInstanceId\" integer, \"itemCode\" character varying, \"itemName\" character varying, \"inventoryLevel\" numeric, \"itemUnit\" integer, \"itemPrice\" numeric, \"itemReferencePrice\" numeric, \"costCenter\" integer, \"isEnabled\" boolean, \"categoryId\" integer, \"categoryName\" character varying) \n"
-						+ "    LANGUAGE 'plpgsql'\n"
-						+ "    COST 100\n"
-						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "    ROWS 1\n"
-						+ "\n"
-						+ "AS $BODY$\n"
-						+ "	BEGIN\n"
-						+ "		RETURN QUERY SELECT DISTINCT am.\"ProductHasProductId\",\n"
-						+ "										am.\"This_is_identified_by_EntityTypeInstance_id\",\n"
-						+ "										ii.\"InventoryItemHasInventoryItemCode\",\n"
-						+ "										ii.\"This_has_Name\",\n"
-						+ "										\"This_has_MinimumInventoryLevel\",\n"
-						+ "										\"This_is_measured_in_Unit_with_UnitHasUnitId\",\n"
-						+ "										\"This_has_Price\",\n"
-						+ "										\"This_has_Price_in_reference_currency\",\n"
-						+ "										\"This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe\",\n"
-						+ "										\"Product_is_enabled\",\n"
-						+ "										cat.\"ProductCategoryHasProductCategoryId\",\n"
-						+ "										cat.\"This_has_Name\"\n"
-						+ "								FROM soberano.\"Product\" am\n"
-						+ "									INNER JOIN soberano.\"InventoryItem\" ii\n"
-						+ "										ON ii.\"InventoryItemHasInventoryItemCode\" = am.\"InventoryItemHasInventoryItemCode\"\n"
-						+ "									LEFT JOIN soberano.\"ProductIsOfProductCategory\" piocat\n"
-						+ "										ON am.\"ProductHasProductId\" = piocat.\"ProductHasProductId\"\n"
-						+ "									LEFT JOIN soberano.\"ProductCategory\" cat\n"
-						+ "										ON piocat.\"ProductCategoryHasProductCategoryId\" = cat.\"ProductCategoryHasProductCategoryId\"\n"
-						+ "								WHERE am.\"ProductHasProductId\" = productid\n"
-						+ "									AND EXISTS (SELECT metamodel.\"fn_EntityTypeInstance_getDecisions\"(am.\"This_is_identified_by_EntityTypeInstance_id\", loginname));\n"
-						+ "	END;	\n"
-						+ "$BODY$;",
-						
+												
 						
 						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_Product_modify\"(\n"

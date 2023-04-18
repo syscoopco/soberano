@@ -42,7 +42,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 	static void setUpBeforeClass() throws Exception {
 		
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
-																//to runtime locale not available during under 
+																//to runtime locale not available under 
 																//testing environment
 		Zats.init("./src/main/webapp");
 	}

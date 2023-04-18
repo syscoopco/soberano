@@ -57,7 +57,7 @@ public class ActionTest {
 	
 	protected void loadObjectDetails(String qualifiedName) {
 		
-		InputAgent cmbIntelliSearchInputAgent = cmbIntelliSearchAgent.as(InputAgent.class);		
+		InputAgent cmbIntelliSearchInputAgent = cmbIntelliSearchAgent.as(InputAgent.class);
 		cmbIntelliSearchInputAgent.typing(qualifiedName);
 		selectComboitemByLabel(cmbIntelliSearch, qualifiedName);		
 		cmbIntelliSearchAgent.click(); 	//needed to trigger cmbIntelliSearch's onClick event under testing
