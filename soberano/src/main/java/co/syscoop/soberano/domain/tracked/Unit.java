@@ -3,6 +3,8 @@ package co.syscoop.soberano.domain.tracked;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -58,5 +60,23 @@ public class Unit extends TrackedObject {
 	@Override
 	protected void copyFrom(Object object) {
 		// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
+	}
+		
+	public List<DomainObject> getAll(Integer materialId) throws SQLException {
+		String qryStr = "SELECT * FROM soberano.\"fn_Unit_getAll\"(:materialId, :lang, :loginname)";
+		HashMap<String, Object> qryNamedParameters = new HashMap<String, Object>();
+		qryNamedParameters.put("materialId", materialId);
+		qryNamedParameters.put("lang",  Locales.getCurrent().getLanguage());
+		return trackedObjectDao.getAll(qryStr, qryNamedParameters, false);
 	}
 }

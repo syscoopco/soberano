@@ -1,0 +1,26 @@
+<zk>
+	<vbox vflex="1" hflex="1">
+		<grid id="grd" vflex="1" mold="paging" model="${arg.gridModel}" rowRenderer="${arg.gridRenderer}">
+			<columns sizable="true">
+				<column align="left" label="${arg.concept}" sort="auto(conceptName)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.description}" sort="auto(description)">
+				</column>
+				<column align="left" label="${arg.payee}" sort="auto(payeeName)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.reference}" sort="auto(reference)">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.expenseDate}" sort="auto(expenseDate)">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)" sortDirection="descending">
+				</column>				
+				<column align="right" label="${labels.caption.columnHeader.amount}" sort="auto(expenseAmount)">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.currency}" sort="auto(expenseCurrency)">
+				</column>
+				<column visible="false" sort="auto(expenseId)">
+				</column>
+			</columns>
+		</grid>
+	</vbox>
+</zk>

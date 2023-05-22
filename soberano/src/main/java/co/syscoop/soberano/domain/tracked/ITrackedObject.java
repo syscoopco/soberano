@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-
 import co.syscoop.soberano.domain.untracked.DomainObject;
 
 public interface ITrackedObject {
@@ -24,7 +23,7 @@ public interface ITrackedObject {
 	//limit and offset are useful for windowed lists, as in paged lists / grids / scrollable trees / etc.
 	//the semantics is the typical, for sql standard.
 	//passing negatives values discard them.
-	abstract public List<TrackedObject> getSet(String criteria, Integer limit, Integer offset) throws SQLException;
+	abstract public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException;
 	abstract public List<DomainObject> getAll(Boolean stringId) throws SQLException;
-	
+	abstract public Integer getCount() throws SQLException;
 }

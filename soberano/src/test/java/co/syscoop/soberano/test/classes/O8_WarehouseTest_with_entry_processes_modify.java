@@ -22,7 +22,7 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 @Order(8)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O8_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 
@@ -60,9 +60,9 @@ class O8_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("mpr3");
+			cmbEntryProcessesInputAgent.typing("mpr4");
 			
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr3");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
@@ -367,8 +367,8 @@ class O8_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {
 			
 			ComponentAgent cmbEntryProcessesAgent = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
-			cmbEntryProcessesInputAgent.typing("mpr3");
-			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr3");
+			cmbEntryProcessesInputAgent.typing("mpr4");
+			warehouseForm.selectComboitemByLabel(cmbEntryProcessesAgent.as(Combobox.class), "mpr4");
 			ComponentAgent btnAddEntryProcess = warehouseForm.getDesktop().query("vbox").query("combobox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			

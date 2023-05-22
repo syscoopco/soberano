@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(7)
 
 //TODO: enable testCase
-@Disabled
+//@Disabled
 
 class O7_ServiceTest_disable  extends ServiceActionTest {
 
@@ -45,23 +45,23 @@ class O7_ServiceTest_disable  extends ServiceActionTest {
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/services.zul", "user1@soberano.syscoop.co", "ms9", 8);
+		TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user1@soberano.syscoop.co", "ms9", 8);
 	}
 	
 	@Test
 	final void testCase2() {
-		TestUtilityCode.testDisablingObject("/services.zul", "user2@soberano.syscoop.co", "ms8", 7);
+		TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user2@soberano.syscoop.co", "ms8", 7);
 	}
 	
 	@Test
 	final void testCase3() {
-		TestUtilityCode.testDisablingObject("/services.zul", "user3@soberano.syscoop.co", "ms7", 6);
+		TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user3@soberano.syscoop.co", "ms7", 6);
 	}
 	
 	@Test
 	final void testCase4() {
 		try {
-			TestUtilityCode.testDisablingObject("/services.zul", "user4@soberano.syscoop.co", "ms6", 6);
+			TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user4@soberano.syscoop.co", "ms6", 6);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -77,7 +77,7 @@ class O7_ServiceTest_disable  extends ServiceActionTest {
 	@Test
 	final void testCase5() {
 		try {
-			TestUtilityCode.testDisablingObject("/services.zul", "user5@soberano.syscoop.co", "ms6", 6);
+			TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user5@soberano.syscoop.co", "ms6", 6);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -92,6 +92,6 @@ class O7_ServiceTest_disable  extends ServiceActionTest {
 	
 	@Test
 	final void testCase6() {
-		TestUtilityCode.testDisablingObject("/services.zul", "user6@soberano.syscoop.co", "ms6", 5);
+		TestUtilityCode.testDisablingObject("/thirdparty_services.zul", "user6@soberano.syscoop.co", "ms6", 5);
 	}
 }

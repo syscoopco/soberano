@@ -12,6 +12,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
 import co.syscoop.soberano.database.relational.DaoBase;
 import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -40,6 +41,9 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	protected MapSqlParameterSource disableParameters = null;
 	protected String getQuery = "";
 	protected Map<String,	Object> getParameters = new HashMap<String, Object>();
+	
+	//it is expected queries and parameters to be set by subclasses
+	protected String getCountQuery = "";
 	
 	public TrackedObject() {};
 	
@@ -75,7 +79,7 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 		this.entityTypeInstanceId = entityTypeInstanceId;
 	}
 	
-	private class TrackedObjectDao extends DaoBase {
+	class TrackedObjectDao extends DaoBase {
 
 		public TrackedObjectDao(BasicDataSource dataSource) {
 			super(dataSource);
@@ -140,9 +144,31 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 		public Object get(String getAllQuery, Map<String, Object> getParameters, RowMapper<Object> mapper) throws SQLException {			
 			return query(getQuery, this.addLoginname(getQuery, getParameters), mapper);
 		}
+		
+		public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+			
+			String qryStr = getAllQuery +
+							" ORDER BY \"" + orderByColumn + "\" ";
+			if (descOrder)
+				qryStr += "DESC ";
+			else 
+				qryStr += "ASC ";
+
+			qryStr += "LIMIT " + Integer.toString(limit);
+			qryStr += " OFFSET " + Integer.toString(offset);			
+			
+			return query(qryStr, this.addLoginname(qryStr, getAllQueryNamedParameters), extractor);
+		}
+		
+		public Integer getCount() throws SQLException {
+			
+			
+			List<Integer> counts = query(getCountQuery, this.addLoginname(getCountQuery, getAllQueryNamedParameters), new CountMapper());
+			return counts.get(0);
+		};
 	}
 	
-	private TrackedObjectDao trackedObjectDao = new TrackedObjectDao(((SoberanoDatasource) SpringUtility.applicationContext().getBean("soberanoDatasource")).getDataSource());
+	protected TrackedObjectDao trackedObjectDao = new TrackedObjectDao(((SoberanoDatasource) SpringUtility.applicationContext().getBean("soberanoDatasource")).getDataSource());
 
 	protected Array createArrayOfSQLType(String sqlStypeName, Object[] javaArray) throws SQLException {		
 		return trackedObjectDao.createArray(sqlStypeName, javaArray);
@@ -172,14 +198,7 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 
 	@Override
 	public Integer makeDecision(String decision) throws SQLException {
-		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public ArrayList<TrackedObject> getSet(String criteria, Integer limit, Integer offset) throws SQLException{
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -198,4 +217,14 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	public List<DomainObject> getAll(Boolean stringId) throws SQLException {
 		return trackedObjectDao.getAll(getAllQuery, getAllQueryNamedParameters, stringId);
 	}
+	
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return trackedObjectDao.getAll(orderByColumn, descOrder, limit, offset, extractor);
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return trackedObjectDao.getCount();
+	};
 }

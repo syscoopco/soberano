@@ -11,8 +11,11 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
+import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
+import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.ui.helper.TrackedObjectFormHelper;
@@ -48,6 +51,24 @@ public class RecordButtonComposer extends SelectorComposer {
 				//clean form
 				trackedObjectFormHelper.cleanForm(incDetails);
 			}
+		}
+		catch(WrongDateTimeException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.wrongBusinessEventOccurrenceDateTime"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(ShiftHasBeenClosedException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(SomeFieldsContainWrongValuesException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
 		}
 		catch(PasswordsMustMatchException ex) {
 			ExceptionTreatment.logAndShow(ex, 

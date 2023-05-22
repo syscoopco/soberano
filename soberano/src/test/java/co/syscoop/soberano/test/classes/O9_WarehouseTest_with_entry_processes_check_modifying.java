@@ -23,7 +23,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(9)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseActionTest {
 
@@ -67,7 +67,7 @@ class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseAct
 					"mw21",
 					false,
 					false,
-					new String[] {"mpr2", "mpr3"});
+					new String[] {"mpr2", "mpr4"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -211,7 +211,7 @@ class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseAct
 					"mw29",
 					false,
 					false,
-					new String[] {"mpr3"});
+					new String[] {"mpr4"});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

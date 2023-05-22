@@ -778,7 +778,7 @@
 				</orm:PlayedRoles>
 				<orm:ConceptualDataType id="_C667ED65-67DF-4698-9767-92364A9677C4" ref="_807DD0F7-1112-4E46-86F9-A7B6C766479F" Scale="0" Length="0" />
 			</orm:ValueType>
-			<orm:EntityType id="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" Name="Expenditure" _ReferenceMode="id">
+			<orm:EntityType id="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" Name="Expense" _ReferenceMode="id">
 				<orm:PlayedRoles>
 					<orm:Role ref="_7A86A323-77DC-4423-B835-3D254BCDBE21" />
 					<orm:Role ref="_C9DD70B9-64FA-4CE9-816E-C1A4771A3270" />
@@ -789,7 +789,7 @@
 				</orm:PlayedRoles>
 				<orm:PreferredIdentifier ref="_D16E288D-E8B6-4101-AC04-7EFB1D605CA3" />
 			</orm:EntityType>
-			<orm:ValueType id="_426EC432-D7BC-4DC4-B0FF-EBF69FBC252B" Name="Expenditure_id">
+			<orm:ValueType id="_426EC432-D7BC-4DC4-B0FF-EBF69FBC252B" Name="Expense_id">
 				<orm:PlayedRoles>
 					<orm:Role ref="_E04F0BD1-0F51-427A-A087-329FFC20D0E5" />
 				</orm:PlayedRoles>
@@ -807,14 +807,14 @@
 				</orm:PlayedRoles>
 				<orm:ConceptualDataType id="_CF3AC12D-D320-4A5A-9676-DD1A80A78281" ref="_807DD0F7-1112-4E46-86F9-A7B6C766479F" Scale="0" Length="0" />
 			</orm:ValueType>
-			<orm:EntityType id="_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE" Name="MaterialExpenditure" _ReferenceMode="">
+			<orm:EntityType id="_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE" Name="MaterialExpense" _ReferenceMode="">
 				<orm:PlayedRoles>
 					<orm:SubtypeMetaRole ref="_598F9703-0800-4836-B8D2-6DE8DBB13A69" />
 					<orm:Role ref="_35BC227F-35FF-48E0-B908-6DE2E6DA1454" />
 					<orm:Role ref="_CDED6F53-5EB4-4DFF-AA8C-3A0CCCE07519" />
 				</orm:PlayedRoles>
 			</orm:EntityType>
-			<orm:EntityType id="_449BAB49-0FF1-4DDB-A72D-39F81E0C8A34" Name="AcquisitionExpenditure" _ReferenceMode="">
+			<orm:EntityType id="_449BAB49-0FF1-4DDB-A72D-39F81E0C8A34" Name="AcquisitionExpense" _ReferenceMode="">
 				<orm:PlayedRoles>
 					<orm:SubtypeMetaRole ref="_DC8FC093-589E-4690-9B4B-8943BCB6B823" />
 					<orm:SupertypeMetaRole ref="_DD7CF0FA-7A2D-4FA2-ACCD-EB09082A1DE9" />
@@ -822,14 +822,14 @@
 					<orm:SupertypeMetaRole ref="_9063EBB4-0569-491F-A165-883D4B2CF217" />
 				</orm:PlayedRoles>
 			</orm:EntityType>
-			<orm:EntityType id="_9FE7DA9E-6FB3-4490-A155-E35656C281D7" Name="PayrollExpenditure" _ReferenceMode="">
+			<orm:EntityType id="_9FE7DA9E-6FB3-4490-A155-E35656C281D7" Name="PayrollExpense" _ReferenceMode="">
 				<orm:PlayedRoles>
 					<orm:SubtypeMetaRole ref="_AFD21004-7305-4666-B110-CEA722FFA8F5" />
 					<orm:Role ref="_9420AB7A-CE02-41AB-AC1D-06E7482146BF" />
 					<orm:Role ref="_A02F050E-253A-4A93-A64F-41542AC9A44A" />
 				</orm:PlayedRoles>
 			</orm:EntityType>
-			<orm:ObjectifiedType id="_0EBE9390-57FC-44D6-9374-324F2DBC24C1" Name="ExpenditureAmount" _ReferenceMode="">
+			<orm:ObjectifiedType id="_0EBE9390-57FC-44D6-9374-324F2DBC24C1" Name="ExpenseAmount" _ReferenceMode="">
 				<orm:PlayedRoles>
 					<orm:Role ref="_D18419EE-C633-4D57-ABF9-D9A5A821E128" />
 					<orm:Role ref="_2D130586-AA02-4725-95F5-D0CD0E103318" />
@@ -848,7 +848,7 @@
 				<orm:PreferredIdentifier ref="_3E733096-4C38-4E67-A2F4-DBDFD55469A2" />
 				<orm:NestedPredicate id="_907BAC7C-5EA5-4EA5-A92E-31266C00BC31" ref="_FB927965-08AE-4122-909D-B5AE55A064E6" />
 			</orm:ObjectifiedType>
-			<orm:EntityType id="_41F021C3-227F-4184-A7F8-6E69DA816D2D" Name="ServiceExpenditure" _ReferenceMode="">
+			<orm:EntityType id="_41F021C3-227F-4184-A7F8-6E69DA816D2D" Name="ServiceExpense" _ReferenceMode="">
 				<orm:PlayedRoles>
 					<orm:SubtypeMetaRole ref="_0E9384B6-6318-402F-8C4A-9509AEF3E5A8" />
 					<orm:Role ref="_35B4BD86-757E-4096-A616-02249AE69151" />
@@ -5688,7 +5688,7 @@
 					<orm:UniquenessConstraint ref="_2DEDA65E-974F-42A3-A9EC-80C8AFD8B8BD" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_C28E0213-7A40-4B9C-822D-5B38ED6EFE8E" _Name="ExpenditureHasExpenditureId">
+			<orm:Fact id="_C28E0213-7A40-4B9C-822D-5B38ED6EFE8E" _Name="ExpenseHasExpenseId">
 				<orm:FactRoles>
 					<orm:Role id="_7A86A323-77DC-4423-B835-3D254BCDBE21" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" />
@@ -5733,7 +5733,7 @@
 					<orm:MandatoryConstraint ref="_416BFE30-1FD1-4571-AECE-1F333530EE55" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_B41F737C-49AD-4243-8241-53730C8FDA35" _Name="ExpenditureIsAtDateTime">
+			<orm:Fact id="_B41F737C-49AD-4243-8241-53730C8FDA35" _Name="ExpenseIsAtDateTime">
 				<orm:FactRoles>
 					<orm:Role id="_C9DD70B9-64FA-4CE9-816E-C1A4771A3270" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" />
@@ -5763,7 +5763,7 @@
 					<orm:UniquenessConstraint ref="_F8480AA5-8D12-483C-9362-F72E625F3287" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_A0A5AEF6-0854-4A65-87D7-5969E4EC2847" _Name="ExpenditureHasReference">
+			<orm:Fact id="_A0A5AEF6-0854-4A65-87D7-5969E4EC2847" _Name="ExpenseHasReference">
 				<orm:FactRoles>
 					<orm:Role id="_59DE0A34-6E0A-4612-B58E-5928CDAA6CA1" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" />
@@ -5792,7 +5792,7 @@
 					<orm:UniquenessConstraint ref="_6ED5350A-F4A5-4B28-B3F9-0B2638FF73A2" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:SubtypeFact id="_2C1D5237-E135-43D0-9997-CDEA1C549388" _Name="AcquisitionExpenditureIsASubtypeOfExpenditure" PreferredIdentificationPath="true">
+			<orm:SubtypeFact id="_2C1D5237-E135-43D0-9997-CDEA1C549388" _Name="AcquisitionExpenseIsASubtypeOfExpense" PreferredIdentificationPath="true">
 				<orm:FactRoles>
 					<orm:SubtypeMetaRole id="_DC8FC093-589E-4690-9B4B-8943BCB6B823" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_449BAB49-0FF1-4DDB-A72D-39F81E0C8A34" />
@@ -5807,7 +5807,7 @@
 					<orm:UniquenessConstraint ref="_DB698FF3-32B7-4040-A0E0-0717A84D23C1" />
 				</orm:InternalConstraints>
 			</orm:SubtypeFact>
-			<orm:SubtypeFact id="_6C9B38C2-30F6-4EB5-AE8A-2A057A4B0811" _Name="PayrollExpenditureIsASubtypeOfExpenditure" PreferredIdentificationPath="true">
+			<orm:SubtypeFact id="_6C9B38C2-30F6-4EB5-AE8A-2A057A4B0811" _Name="PayrollExpenseIsASubtypeOfExpense" PreferredIdentificationPath="true">
 				<orm:FactRoles>
 					<orm:SubtypeMetaRole id="_AFD21004-7305-4666-B110-CEA722FFA8F5" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_9FE7DA9E-6FB3-4490-A155-E35656C281D7" />
@@ -5822,7 +5822,7 @@
 					<orm:UniquenessConstraint ref="_BDC228B1-995B-4437-8160-9B5AC675B81E" />
 				</orm:InternalConstraints>
 			</orm:SubtypeFact>
-			<orm:SubtypeFact id="_E91AD761-28FA-40C7-921B-4FAB78D531E0" _Name="MaterialExpenditureIsASubtypeOfAcquisitionExpenditure" PreferredIdentificationPath="true">
+			<orm:SubtypeFact id="_E91AD761-28FA-40C7-921B-4FAB78D531E0" _Name="MaterialExpenseIsASubtypeOfAcquisitionExpense" PreferredIdentificationPath="true">
 				<orm:FactRoles>
 					<orm:SubtypeMetaRole id="_598F9703-0800-4836-B8D2-6DE8DBB13A69" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE" />
@@ -5837,7 +5837,7 @@
 					<orm:UniquenessConstraint ref="_118D624F-3A7E-4B1E-8068-E417E3269F38" />
 				</orm:InternalConstraints>
 			</orm:SubtypeFact>
-			<orm:Fact id="_9333CC17-249A-4B74-B62C-F1D00587651C" _Name="AcquisitionExpenditurePaysProvider">
+			<orm:Fact id="_9333CC17-249A-4B74-B62C-F1D00587651C" _Name="AcquisitionExpensePaysProvider">
 				<orm:FactRoles>
 					<orm:Role id="_1885132F-965D-47B6-B2D2-2542311212B7" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
 						<orm:RolePlayer ref="_FD850F63-E17A-4803-B04B-59004C0F6C2D" />
@@ -5867,7 +5867,7 @@
 					<orm:UniquenessConstraint ref="_A4C434BE-37E5-478C-BBB9-C26ADC20E990" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_23C2D30A-D101-4B3E-8677-12D0AF7B68A4" _Name="PayrollExpenditurePaysWorker">
+			<orm:Fact id="_23C2D30A-D101-4B3E-8677-12D0AF7B68A4" _Name="PayrollExpensePaysWorker">
 				<orm:FactRoles>
 					<orm:Role id="_9420AB7A-CE02-41AB-AC1D-06E7482146BF" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_9FE7DA9E-6FB3-4490-A155-E35656C281D7" />
@@ -5897,7 +5897,7 @@
 					<orm:UniquenessConstraint ref="_375523F6-F840-4F2F-BE34-A48DA2A21040" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_13422194-ABE1-4E8B-ADC0-87C0B315E1D1" _Name="MaterialExpenditureIsIdentifiedByEntityTypeInstanceId">
+			<orm:Fact id="_13422194-ABE1-4E8B-ADC0-87C0B315E1D1" _Name="MaterialExpenseIsIdentifiedByEntityTypeInstanceId">
 				<orm:FactRoles>
 					<orm:Role id="_35BC227F-35FF-48E0-B908-6DE2E6DA1454" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE" />
@@ -5928,7 +5928,7 @@
 					<orm:MandatoryConstraint ref="_86ECBBD9-687A-4932-B0DC-F6C406EFF3B0" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_B8363595-5252-435D-A56C-135B3733D6CE" _Name="ExpenditureAmount">
+			<orm:Fact id="_B8363595-5252-435D-A56C-135B3733D6CE" _Name="ExpenseAmount">
 				<orm:FactRoles>
 					<orm:Role id="_1D457C36-C5B4-492F-97A8-CBD7B4E3A451" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
 						<orm:RolePlayer ref="_09E8CA69-B497-428A-B4A4-F5D353A0137D" />
@@ -5958,7 +5958,7 @@
 					<orm:MandatoryConstraint ref="_275A5D5F-87CE-4396-8A6C-5031CAF52109" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:ImpliedFact id="_8889487A-FE57-4780-86AE-ECC6A54693C1" _Name="AmountIsInvolvedInExpenditureAmount">
+			<orm:ImpliedFact id="_8889487A-FE57-4780-86AE-ECC6A54693C1" _Name="AmountIsInvolvedInExpenseAmount">
 				<orm:FactRoles>
 					<orm:RoleProxy id="_3F6FE663-95AD-4BC0-85D6-B50570CB470B">
 						<orm:Role ref="_1D457C36-C5B4-492F-97A8-CBD7B4E3A451" />
@@ -6003,7 +6003,7 @@
 				</orm:InternalConstraints>
 				<orm:ImpliedByObjectification ref="_0AAE9ACB-BBC9-48EB-BC0C-EB8F951E0BB7" />
 			</orm:ImpliedFact>
-			<orm:ImpliedFact id="_019FCE8F-0D73-46C3-A869-33CD90C86531" _Name="ExpenditureIsInvolvedInExpenditureAmount">
+			<orm:ImpliedFact id="_019FCE8F-0D73-46C3-A869-33CD90C86531" _Name="ExpenseIsInvolvedInExpenseAmount">
 				<orm:FactRoles>
 					<orm:RoleProxy id="_B6AD72B2-0C23-436A-8979-44CB00C65580">
 						<orm:Role ref="_3E9C9F87-66DE-434B-94B1-D130DAF2D714" />
@@ -6048,7 +6048,7 @@
 				</orm:InternalConstraints>
 				<orm:ImpliedByObjectification ref="_0AAE9ACB-BBC9-48EB-BC0C-EB8F951E0BB7" />
 			</orm:ImpliedFact>
-			<orm:Fact id="_10A15167-8A01-401D-96F0-CAE75A87C176" _Name="ExpenditureAmountIsInCurrency">
+			<orm:Fact id="_10A15167-8A01-401D-96F0-CAE75A87C176" _Name="ExpenseAmountIsInCurrency">
 				<orm:FactRoles>
 					<orm:Role id="_6FD8C926-6FDF-4563-9C48-87D5C72973E5" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
 						<orm:RolePlayer ref="_D50FB66E-606B-4CE0-8005-6E172E66746B" />
@@ -6153,7 +6153,7 @@
 				</orm:InternalConstraints>
 				<orm:ImpliedByObjectification ref="_907BAC7C-5EA5-4EA5-A92E-31266C00BC31" />
 			</orm:ImpliedFact>
-			<orm:ImpliedFact id="_0DE2A6B6-AD8A-40C7-8868-A13726BC69EA" _Name="MaterialExpenditureIsInvolvedInMaterialAcquisition">
+			<orm:ImpliedFact id="_0DE2A6B6-AD8A-40C7-8868-A13726BC69EA" _Name="MaterialExpenseIsInvolvedInMaterialAcquisition">
 				<orm:FactRoles>
 					<orm:RoleProxy id="_FA959179-E32B-4625-BE91-DFE77B3DB659">
 						<orm:Role ref="_CDED6F53-5EB4-4DFF-AA8C-3A0CCCE07519" />
@@ -6258,7 +6258,7 @@
 					<orm:UniquenessConstraint ref="_33A1E7A1-0CFC-4D02-BA42-240A64173AA1" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:SubtypeFact id="_4383C436-9387-479F-8838-4892D55C7658" _Name="ServiceExpenditureIsASubtypeOfAcquisitionExpenditure" PreferredIdentificationPath="true">
+			<orm:SubtypeFact id="_4383C436-9387-479F-8838-4892D55C7658" _Name="ServiceExpenseIsASubtypeOfAcquisitionExpense" PreferredIdentificationPath="true">
 				<orm:FactRoles>
 					<orm:SubtypeMetaRole id="_0E9384B6-6318-402F-8C4A-9509AEF3E5A8" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_41F021C3-227F-4184-A7F8-6E69DA816D2D" />
@@ -6273,7 +6273,7 @@
 					<orm:UniquenessConstraint ref="_E3C366EA-DE4A-4651-9B7D-74D12B53DCD6" />
 				</orm:InternalConstraints>
 			</orm:SubtypeFact>
-			<orm:Fact id="_629513FF-EBE5-4B78-AAAB-3BD601C794EF" _Name="ServiceExpenditureIsIdentifiedByEntityTypeInstanceId">
+			<orm:Fact id="_629513FF-EBE5-4B78-AAAB-3BD601C794EF" _Name="ServiceExpenseIsIdentifiedByEntityTypeInstanceId">
 				<orm:FactRoles>
 					<orm:Role id="_35B4BD86-757E-4096-A616-02249AE69151" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_41F021C3-227F-4184-A7F8-6E69DA816D2D" />
@@ -6304,7 +6304,7 @@
 					<orm:MandatoryConstraint ref="_456835AE-7CC8-4B4C-B655-3CFAB446C2A2" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_8134510A-BC4B-49ED-9BA3-C44188CE2D34" _Name="PayrollExpenditureIsIdentifiedByEntityTypeInstanceId">
+			<orm:Fact id="_8134510A-BC4B-49ED-9BA3-C44188CE2D34" _Name="PayrollExpenseIsIdentifiedByEntityTypeInstanceId">
 				<orm:FactRoles>
 					<orm:Role id="_A02F050E-253A-4A93-A64F-41542AC9A44A" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_9FE7DA9E-6FB3-4490-A155-E35656C281D7" />
@@ -12674,7 +12674,7 @@
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
-	<ormDiagram:ORMDiagram id="_B91EE09D-0CD2-45CF-810C-84BC3173C737" IsCompleteView="true" Name="expenditure" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
+	<ormDiagram:ORMDiagram id="_B91EE09D-0CD2-45CF-810C-84BC3173C737" IsCompleteView="true" Name="Expense" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
 		<ormDiagram:Shapes>
 			<ormDiagram:ObjectTypeShape id="_87A0A0E2-68E9-4DF3-8788-2B4E09346FB3" IsExpanded="true" AbsoluteBounds="3.5832275787989296, 1.2269151533643403, 0.76298951625823974, 0.35900605320930479">
 				<ormDiagram:Subject ref="_1CCDC5CE-BDB8-4837-82DD-9397F0FEDCAD" />
@@ -12768,7 +12768,7 @@
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
-	<ormDiagram:ORMDiagram id="_49A7C51D-C1EB-40F4-BAAF-D1CF23C0AF46" IsCompleteView="true" Name="material expenditure" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
+	<ormDiagram:ORMDiagram id="_49A7C51D-C1EB-40F4-BAAF-D1CF23C0AF46" IsCompleteView="true" Name="material Expense" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
 		<ormDiagram:Shapes>
 			<ormDiagram:ObjectTypeShape id="_67EF0C33-DF42-482A-B8FE-424B9C1377B1" IsExpanded="true" AbsoluteBounds="2.1510607679684952, 1.6520833333333334, 1.1773232173919679, 0.22950302660465241">
 				<ormDiagram:Subject ref="_80FDAA4B-92DB-4A88-89F8-BC11EEFBF0FE" />
@@ -12826,7 +12826,7 @@
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
-	<ormDiagram:ORMDiagram id="_D56AE5DA-6CCF-4481-8C10-C737F93617F9" IsCompleteView="true" Name="service expenditure" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
+	<ormDiagram:ORMDiagram id="_D56AE5DA-6CCF-4481-8C10-C737F93617F9" IsCompleteView="true" Name="service Expense" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
 		<ormDiagram:Shapes>
 			<ormDiagram:ObjectTypeShape id="_6552F1B3-5764-4726-9EE1-56C0FED8C8A9" IsExpanded="true" AbsoluteBounds="0.6875, 0.57291666666666652, 1.3212577056884767, 0.22950302660465241">
 				<ormDiagram:Subject ref="_449BAB49-0FF1-4DDB-A72D-39F81E0C8A34" />

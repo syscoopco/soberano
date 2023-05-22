@@ -12,7 +12,7 @@
 				</menu>
 				<menuitem label="${labels.menuItem.CurrentCatalog}" href="catalog.zul"/>
 				<menuitem label="${labels.menuItem.AccountingClosures}" href="closures.zul"/>				
-				<menu label="${labels.menuItem.Expenditures}" sclass="BarMenu">
+				<menu label="${labels.menuItem.Expenses}" sclass="BarMenu">
 					<menupopup>
 						<menuitem label="${labels.menuItem.Materials}" href="materials.zul"/>
 						<menuitem label="${labels.menuItem.Services}" href="thirdparty_services.zul"/>
@@ -30,7 +30,7 @@
 					<menupopup>
 						<menuitem label="${labels.menuItem.OperationsReport}" href="operations_report.zul"/>
 						<menuitem label="${labels.menuItem.SalesReport}" href="sales_report.zul"/>
-						<menuitem label="${labels.menuItem.ExpendituresReport}" href="expenditures_report.zul"/>
+						<menuitem label="${labels.menuItem.ExpensesReport}" href="Expenses_report.zul"/>
 						<menuitem label="${labels.menuItem.StockReport}" href="stock_report.zul"/>
 						<menuitem label="${labels.menuItem.CancelledOrdersReport}" href="cancelled_report.zul"/>
 						<menuitem label="${labels.menuItem.PrintTicket}" href="print_ticket.zul"/>

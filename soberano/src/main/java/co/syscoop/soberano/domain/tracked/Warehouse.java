@@ -232,4 +232,14 @@ public class Warehouse extends TrackedObject {
 		this.entryProcesses = entryProcesses;
 		fillEntryProcessIds();
 	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
+	}
 }

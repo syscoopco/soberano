@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(2)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O2_WorkerTest_populate extends TestClass {
 

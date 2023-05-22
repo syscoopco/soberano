@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
@@ -130,5 +131,15 @@ public class Service extends TrackedObject {
 		
 		// TODO print a report on the object
 		return null;
+	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
 	}
 }

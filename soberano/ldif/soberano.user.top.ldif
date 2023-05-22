@@ -1,0 +1,13 @@
+version: 1
+
+dn: uid=soberano.user.top,ou=users,ou=system
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+cn: soberano.user.top
+sn: soberano.user.top
+uid: soberano.user.top
+userPassword:: e1NIQTI1Nn10emhHM1ZOWko2eXpuL3lvWEVYMEVaZlFPQXNVZCtORWlnUWJtN
+ VNpSXJFPQ==
+

@@ -2,6 +2,9 @@ package co.syscoop.soberano.domain.tracked;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 public class InventoryItem extends TrackedObject {
 	
@@ -57,5 +60,15 @@ public class InventoryItem extends TrackedObject {
 
 	public void setUnit(Integer unit) {
 		this.unit = unit;
+	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
 	}
 }

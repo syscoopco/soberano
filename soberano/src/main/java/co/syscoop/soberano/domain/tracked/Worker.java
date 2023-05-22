@@ -399,4 +399,14 @@ public class Worker extends TrackedObject {
 		// TODO print a report on worker
 		return null;
 	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
+	}
 }

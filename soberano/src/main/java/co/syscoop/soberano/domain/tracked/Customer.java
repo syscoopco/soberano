@@ -1,6 +1,9 @@
 package co.syscoop.soberano.domain.tracked;
 
 import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 import co.syscoop.soberano.domain.untracked.ContactData;
 
@@ -61,5 +64,15 @@ public class Customer extends TrackedObject {
 	public void get() throws SQLException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
+		return null;
+	}
+	
+	@Override
+	public Integer getCount() throws SQLException {
+		return 0;
 	}
 }

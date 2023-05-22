@@ -25,7 +25,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(10)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 
@@ -65,8 +65,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"cc1",
-							"mwarehouse6:mw6",
-							"mwarehouse7:mw7");
+							"mwarehouse6 : mw6",
+							"mwarehouse7 : mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -83,8 +83,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc2",
-							"mwarehouse8:mw8",
-							"mwarehouse9:mw9");
+							"mwarehouse8 : mw8",
+							"mwarehouse9 : mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -101,8 +101,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc3",
-							"mwarehouse9:mw9",
-							"mwarehouse10:mw10");
+							"mwarehouse9 : mw9",
+							"mwarehouse10 : mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -119,8 +119,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc4",
-							"mwarehouse10:mw10",
-							"mwarehouse10:mw10");
+							"mwarehouse10 : mw10",
+							"mwarehouse10 : mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -137,8 +137,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc5",
-							"mwarehouse10:mw10",
-							"mwarehouse6:mw6");
+							"mwarehouse10 : mw10",
+							"mwarehouse6 : mw6");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -155,8 +155,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc6",
-							"mwarehouse6:mw6",
-							"mwarehouse7:mw7");
+							"mwarehouse6 : mw6",
+							"mwarehouse7 : mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -173,8 +173,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc7",
-							"mwarehouse7:mw7",
-							"mwarehouse8:mw8");
+							"mwarehouse7 : mw7",
+							"mwarehouse8 : mw8");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -191,8 +191,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc8",
-							"mwarehouse8:mw8",
-							"mwarehouse9:mw9");
+							"mwarehouse8 : mw8",
+							"mwarehouse9 : mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -209,8 +209,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc9",
-							"mwarehouse9:mw9",
-							"mwarehouse10:mw10");
+							"mwarehouse9 : mw9",
+							"mwarehouse10 : mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -227,8 +227,8 @@ class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 			CostCenterForm costCenterForm = setFormComponents("user1@soberano.syscoop.co", "cost_centers.zul");		
 			checkCostCenter(costCenterForm,
 							"mcc10",
-							"mwarehouse10:mw10",
-							"mwarehouse6:mw6");
+							"mwarehouse10 : mw10",
+							"mwarehouse6 : mw6");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

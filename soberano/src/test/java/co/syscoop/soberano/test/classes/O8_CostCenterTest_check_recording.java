@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(8)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 
@@ -60,8 +60,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc1",
-							"mwarehouse6:mw6",
-							"mwarehouse7:mw7");
+							"mwarehouse6 : mw6",
+							"mwarehouse7 : mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -76,8 +76,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc2",
-							"mwarehouse7:mw7",
-							"mwarehouse8:mw8");
+							"mwarehouse7 : mw7",
+							"mwarehouse8 : mw8");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -92,8 +92,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc3",
-							"mwarehouse8:mw8",
-							"mwarehouse9:mw9");
+							"mwarehouse8 : mw8",
+							"mwarehouse9 : mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -108,8 +108,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc4",
-							"mwarehouse9:mw9",
-							"mwarehouse10:mw10");
+							"mwarehouse9 : mw9",
+							"mwarehouse10 : mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -124,8 +124,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc5",
-							"mwarehouse10:mw10",
-							"mwarehouse10:mw10");
+							"mwarehouse10 : mw10",
+							"mwarehouse10 : mw10");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -140,8 +140,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc6",
-							"mwarehouse10:mw10",
-							"mwarehouse6:mw6");
+							"mwarehouse10 : mw10",
+							"mwarehouse6 : mw6");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -156,8 +156,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc7",
-							"mwarehouse6:mw6",
-							"mwarehouse7:mw7");
+							"mwarehouse6 : mw6",
+							"mwarehouse7 : mw7");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -172,8 +172,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc8",
-							"mwarehouse7:mw7",
-							"mwarehouse8:mw8");
+							"mwarehouse7 : mw7",
+							"mwarehouse8 : mw8");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -188,8 +188,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc9",
-							"mwarehouse8:mw8",
-							"mwarehouse9:mw9");
+							"mwarehouse8 : mw8",
+							"mwarehouse9 : mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -204,8 +204,8 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		
 		try {
 			checkCostCenter("cc10",
-							"mwarehouse9:mw9",
-							"mwarehouse9:mw9");
+							"mwarehouse9 : mw9",
+							"mwarehouse9 : mw9");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

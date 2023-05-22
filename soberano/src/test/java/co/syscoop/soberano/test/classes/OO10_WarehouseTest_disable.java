@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(10)
 
 //TODO: enable testCase
-@Disabled
+//@Disabled
 
 class OO10_WarehouseTest_disable extends WarehouseActionTest{
 
@@ -45,23 +45,23 @@ class OO10_WarehouseTest_disable extends WarehouseActionTest{
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/warehouses.zul", "user1@soberano.syscoop.co", "mw5", 19);
+		TestUtilityCode.testDisablingObject("/warehouses.zul", "user1@soberano.syscoop.co", "house5 : mw5", 19);
 	}
 	
 	@Test
 	final void testCase2() {
-		TestUtilityCode.testDisablingObject("/warehouses.zul", "user2@soberano.syscoop.co", "mw2", 18);
+		TestUtilityCode.testDisablingObject("/warehouses.zul", "user2@soberano.syscoop.co", "house2 : mw2", 18);
 	}
 	
 	@Test
 	final void testCase3() {
-		TestUtilityCode.testDisablingObject("/warehouses.zul", "user3@soberano.syscoop.co", "mw3", 17);
+		TestUtilityCode.testDisablingObject("/warehouses.zul", "user3@soberano.syscoop.co", "house3 : mw3", 17);
 	}
 	
 	@Test
 	final void testCase4() {
 		try {
-			TestUtilityCode.testDisablingObject("/warehouses.zul", "user4@soberano.syscoop.co", "mw9", 17);
+			TestUtilityCode.testDisablingObject("/warehouses.zul", "user4@soberano.syscoop.co", "house9 : mw9", 17);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -77,7 +77,7 @@ class OO10_WarehouseTest_disable extends WarehouseActionTest{
 	@Test
 	final void testCase5() {
 		try {
-			TestUtilityCode.testDisablingObject("/warehouses.zul", "user5@soberano.syscoop.co", "mw10", 17);
+			TestUtilityCode.testDisablingObject("/warehouses.zul", "user5@soberano.syscoop.co", "house10 : mw10", 17);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -92,6 +92,6 @@ class OO10_WarehouseTest_disable extends WarehouseActionTest{
 	
 	@Test
 	final void testCase6() {
-		TestUtilityCode.testDisablingObject("/warehouses.zul", "user6@soberano.syscoop.co", "mw4", 16);
+		TestUtilityCode.testDisablingObject("/warehouses.zul", "user6@soberano.syscoop.co", "house4 : mw4", 16);
 	}
 }

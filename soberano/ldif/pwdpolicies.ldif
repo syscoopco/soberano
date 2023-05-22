@@ -1,0 +1,17 @@
+version: 1
+
+dn: ads-pwdId=default,ou=passwordPolicies,ads-interceptorId=authenticationIn
+ terceptor,ou=interceptors,ads-directoryServiceId=default,ou=config
+changetype:modify
+replace:ads-pwdFailureCountInterval
+ads-pwdFailureCountInterval: 1000
+-
+replace:ads-pwdlockout
+ads-pwdlockout: FALSE
+-
+replace:ads-pwdMaxFailure
+ads-pwdMaxFailure: 1000
+-
+replace:ads-pwdminlength
+ads-pwdminlength: 5
+

@@ -1,0 +1,140 @@
+How to deploy on Android 7.0 or higher
+--------------------------------------
+
+1) Install F-Droid apk: f-droid.org/en
+
+2) By means of F-Droid, install the following applications:
+
+	termux
+	termux:Api
+	termux:Boot
+
+3) Open termux.
+
+4) In the console, execute the following commands:
+
+	apt-get update
+	apt-get install
+	
+	pkg install postgresql
+	pkg install openjdk-17
+	pkg install openldap
+	pkg install wget
+	pkg install man
+	pkg install fakeroot
+	pkg install termux-services
+	pkg update
+	
+	wget https://archive.apache.org/dist/directory/apacheds/dist/2.0.0-M20/apacheds-2.0.0-M20.tar.gz
+	wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+	
+5) Deploy ApacheDS:
+
+	tar -xvzf apacheds-2.0.0-M20.tar.gz
+	mv apacheds-2.0.0-M20 ../usr/opt/apacheds
+	chmod +x ../usr/opt/apacheds/bin/*.sh
+	
+6) Deploy Tomcat:
+
+	tar -xvzf apache-tomcat-9.0.74.tar.gz
+	mv apache-tomcat-9.0.74 ../usr/opt/tomcat9
+	chmod +x ../usr/opt/tomcat9/bin/*.sh
+	
+7) Set up PostgreSQL environment:
+
+	mkdir postgresql_data
+	initdb ~/postgresql_data
+	pg_ctl -D ~/postgresql_data start
+	createdb soberano
+	createuser --superuser --pwprompt postgres
+	createuser --superuser --pwprompt soberano.user.top
+	
+8) Set up termux storage:
+	
+	mkdir -p $HOME/.termux/boot
+	termux-setup-storage
+	
+9) By means of Bluetooth (or USB), copy to the Android device the system files
+(startup / shutdown scripts, web application deployment .war file, a backup of 
+soberano db backup in tar format, ldif files to import in apacheds):
+
+	termux-startup.sh
+	termux-shutdown.sh
+	soberano.war
+	soberanodb.tar.backup
+	
+	pwdpolicies.ldif
+	soberano.user.top.ldif
+	
+10) Assuming the above files were copied to Android device's Downloads folder,
+execute the following commands:
+	
+	cp $HOME/storage/downloads/termux-startup.sh $HOME
+	cp $HOME/storage/downloads/termux-shutdown.sh $HOME
+	cp $HOME/storage/downloads/soberano.war $HOME
+	cp $HOME/storage/downloads/soberanodb.tar.backup $HOME
+	
+	cp $HOME/storage/downloads/pwdpolicies.ldif $HOME
+	cp $HOME/storage/downloads/soberano.user.top.ldif $HOME
+	
+11) Move some of the above files to their final location within the termux instance:
+
+	mv termux-startup.sh /data/data/com.termux/files/usr/bin
+	mv termux-shutdown.sh /data/data/com.termux/files/usr/bin
+	mv soberano.war /data/data/com.termux/files/usr/opt/tomcat9/webapps/soberano.war
+	
+12) Make the scripts executables:
+
+	chmod +x ../usr/bin/termux-startup.sh
+	chmod +x ../usr/bin/termux-shutdown.sh
+	
+13) In this point, apacheds, tomcat and postgresql services can be started up and 
+	stopped by executing the respective commands termux-startup.sh and termux-shutdown.sh
+	
+14) Enable postgresql to listen on the desired TCP/IP addresses. This is done by setting 
+	listen_addresses parameter in file postgresql.conf. For example,
+	
+	listen_addresses = '*'
+	
+15) Enable connections from local host, by a proper database user (login role). This
+	is done by adding lines to pg_hba.conf file. For example:
+	
+	host all soberano.user.top 127.0.0.1/32 trust
+	host all postgres 127.0.0.1/32 trust
+	
+16) Restore the soberano database:
+
+	pg_restore soberanodb.tar.backup --dbname soberano -e -v -1 -W
+	
+17) Restart the services:
+	
+	termux-shutdown.sh
+	termux-startup.sh
+		
+18) Import the ldif files in the apacheds instance. For example:
+
+	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -a -f soberano.user.top.ldif
+	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -f pwdpolicies.ldif
+
+	
+
+		
+		
+		
+		
+
+
+	
+17) In the mobile device, enable LAN capabilities. This can be done by Wifi portable hotspot,
+	or USB/Bluetooth tethering.
+
+18) Restore an up-to-date soberano database. This can be done by means of PgAdmin.
+
+  ) By means of Play Store, install RawBT print service version 5.70.2 or higher.
+  
+  ) Enable RawBT web socket service, and application auto start. 
+
+
+		
+	
+		
