@@ -11,7 +11,7 @@
 					</menupopup>
 				</menu>
 				<menuitem label="${labels.menuItem.CurrentCatalog}" href="catalog.zul"/>
-				<menuitem label="${labels.menuItem.AccountingClosures}" href="closures.zul"/>				
+				<menuitem label="${labels.menuItem.ShiftClosures}" href="closures.zul"/>				
 				<menu label="${labels.menuItem.Expenses}" sclass="BarMenu">
 					<menupopup>
 						<menuitem label="${labels.menuItem.Materials}" href="materials.zul"/>

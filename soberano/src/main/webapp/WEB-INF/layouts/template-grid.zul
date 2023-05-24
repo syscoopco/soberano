@@ -1,0 +1,11 @@
+<zk>
+	<window hflex="1" vflex="1">
+		<borderlayout id="borderlayout" >
+			<north hflex="1" sclass="DefaultBackground">
+				<include src="/WEB-INF/layouts/template-north.zul"/>
+			</north>			
+			<center id="center" self="@insert(gridPanel)" autoscroll="true" sclass="DefaultBackground">
+			</center>
+		</borderlayout>
+	</window>
+</zk>

@@ -2,16 +2,23 @@ package co.syscoop.soberano.renderers;
 
 import java.text.SimpleDateFormat;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
-import org.zkoss.zul.RowRenderer;
+import org.zkoss.zul.Vbox;
+
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.domain.tracked.MaterialExpense;
+import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.ExpenseRowData;
 
 @SuppressWarnings("rawtypes")
-public class MaterialExpensesGridRenderer implements RowRenderer {
+public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 
 	@SuppressWarnings("unchecked")
 	public void prepareRow(Row row, Object data) {
@@ -44,20 +51,58 @@ public class MaterialExpensesGridRenderer implements RowRenderer {
 		//currency
 		row.appendChild(new Label(expense.getCurrency()));
 		
-		//id
-		Label lblId = new Label(expense.getExpenseId().toString());
-		lblId.setId("lblExpenseId" + expense.getExpenseId().toString());
-		row.appendChild(lblId);
+		//action column
+		Vbox actionCell = new Vbox();
+		actionCell.setHflex("1");
+		actionCell.setVflex("1");
+		actionCell.setAlign("center");
+		actionCell.setPack("center");
+		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setWidth("90%");
+		btnPrint.setDisabled(true);
+		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
+		btnUpload.setWidth("90%");
+		btnUpload.setDisabled(true);
+		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
+		btnDocument.setWidth("90%");
+		btnDocument.setDisabled(true);
+		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
+		btnCancel.setWidth("90%");
 		
-		//add listener to click event on row
-		row.addEventListener("onClick", new EventListener() {
+		//add listener to cancel the expenditure
+		btnCancel.addEventListener("onClick", new EventListener() {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
 
-				//TODO
+				try {
+					if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
+						int result = (new MaterialExpense(expense.getExpenseId())).disable();
+						if (result == -1) {
+							throw new NotEnoughRightsException();
+						}
+						else {					
+							row.detach();
+						}
+					}
+					else {
+						requestDeletion(row);
+					}
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
 			}
 		});
+				
+		actionCell.appendChild(btnPrint);
+		actionCell.appendChild(btnUpload);
+		actionCell.appendChild(btnDocument);
+		actionCell.appendChild(btnCancel);
+		row.appendChild(actionCell);
 	}
 	
 	@Override

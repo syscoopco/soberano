@@ -25,6 +25,10 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 	
+	public MaterialExpense(Integer id) {
+		this.setId(id);
+	}
+	
 	public MaterialExpense(Date expenseDate,
 							Integer provider,
 							Integer material,

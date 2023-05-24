@@ -18,7 +18,7 @@
 				</column>
 				<column align="right" label="${labels.caption.columnHeader.currency}" sort="auto(expenseCurrency)">
 				</column>
-				<column visible="false" sort="auto(expenseId)">
+				<column align="center" label="${labels.caption.columnHeader.action}">
 				</column>
 			</columns>
 		</grid>

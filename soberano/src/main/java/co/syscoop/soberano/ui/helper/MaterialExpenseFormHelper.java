@@ -10,6 +10,7 @@ import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.ListModel;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.MaterialExpense;
@@ -17,6 +18,8 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
+import co.syscoop.soberano.models.MaterialExpensesGridModel;
+import co.syscoop.soberano.util.ExpenseRowData;
 
 public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectFormHelper {
 
@@ -27,10 +30,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 		((Decimalbox) hboxDetails.query("#decQuantity")).setValue((BigDecimal) null);
 		((Decimalbox) hboxDetails.query("#decAmount")).setValue((BigDecimal) null);
 		((Textbox) hboxDetails.query("#txtReference")).setText("");
-		
-		Grid grd = (Grid) hboxDetails.query("#incGrid").query("grid").query("#grd");
-		grd.invalidate();
-		grd.renderAll();
+		super.cleanForm(hboxDetails);
 	}
 	
 	@Override

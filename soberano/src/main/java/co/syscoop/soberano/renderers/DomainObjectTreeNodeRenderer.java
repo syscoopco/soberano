@@ -27,16 +27,6 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 	@SuppressWarnings("unused")
 	private String pageToRefreshZulURI = "";
 	
-	private enum ActionRequested
-	{
-		NONE(0),
-		DISABLE(1);
-		
-	    @SuppressWarnings("unused")
-		private int actionCode;
-	    ActionRequested(int actionCode) {this.actionCode = actionCode;}
-	}
-	
 	private HashMap<Treeitem, ActionRequested> requestedActions = new HashMap<Treeitem, ActionRequested>();
 	
 	public DomainObjectTreeNodeRenderer(String pageToRefreshZulURI) {

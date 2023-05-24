@@ -1,10 +1,10 @@
 <?page title="${labels.pageMaterialExpenses.WindowTitle}" contentType="text/html;charset=UTF-8"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-grid.zul"?>
 
 <zk>
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageMaterialExpenses.WindowTitle}" sclass="PageTitle"/>
-	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+	<window id="wndContentPanel" self="@define(gridPanel)" height="100%" contentStyle="overflow:auto">
 		<hbox id="hboxDetails" width="100%" apply="co.syscoop.soberano.composers.MaterialsViewModelComposer">
 			<datebox id="dateExpenseDate" compact="false" buttonVisible="true" placeholder="${labels.placeholder.date}"/>
 			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProviderSelectionViewModel')">
@@ -39,6 +39,4 @@
 		</hbox>
 		<include id="incGrid" src="/material_expense.zul"></include>
 	</window>
-	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
-	<button id="btnCancel" self="@define(decisionButton)" label="${labels.caption.action.cancel}" sclass="DecisionButton"></button>
 </zk>
