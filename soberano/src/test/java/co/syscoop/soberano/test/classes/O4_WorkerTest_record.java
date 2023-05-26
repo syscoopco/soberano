@@ -25,7 +25,6 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Worker;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.Responsibility;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.test.helper.WorkerForm;
 import co.syscoop.soberano.util.SpringUtility;

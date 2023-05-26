@@ -18,7 +18,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Checkbox;
 
 import co.syscoop.soberano.test.helper.CounterActionTest;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)

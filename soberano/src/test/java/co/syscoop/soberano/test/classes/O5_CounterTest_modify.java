@@ -15,7 +15,6 @@ import org.zkoss.zats.mimic.operation.CheckAgent;
 
 import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.CounterForm;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(5)
 

@@ -13,7 +13,6 @@ import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zats.mimic.operation.CheckAgent;
 
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 

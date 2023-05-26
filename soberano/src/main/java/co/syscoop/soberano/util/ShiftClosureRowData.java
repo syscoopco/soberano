@@ -1,0 +1,37 @@
+package co.syscoop.soberano.util;
+
+import java.util.Date;
+
+public class ShiftClosureRowData {
+	private Integer shiftClosureId = 0;
+	private Date shift = null;
+	private Date recordingDate = null;
+	
+	public ShiftClosureRowData(Integer shiftClosureId) {
+		this.shiftClosureId = shiftClosureId;
+	}
+	
+	public Date getShift() {
+		return shift;
+	}
+
+	public void setShift(Date shift) {
+		this.shift = shift;
+	}
+
+	public Date getRecordingDate() {
+		return recordingDate;
+	}
+
+	public void setRecordingDate(Date recordingDate) {
+		this.recordingDate = recordingDate;
+	}
+
+	public Integer getShiftClosureId() {
+		return shiftClosureId;
+	}
+
+	public void setShiftId(Integer shiftClosureId) {
+		this.shiftClosureId = shiftClosureId;
+	}
+}

@@ -18,7 +18,6 @@ import org.zkoss.zats.mimic.operation.CheckAgent;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
 import co.syscoop.soberano.test.helper.WarehouseForm;
 import co.syscoop.soberano.util.SpringUtility;

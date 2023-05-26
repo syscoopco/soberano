@@ -18,6 +18,7 @@ public interface ITrackedObject {
 	abstract public Integer makeDecision(String decision) throws SQLException; //it's passed the name of the decision
 	abstract public Integer disable() throws SQLException, Exception;
 	abstract public Integer print() throws SQLException;
+	abstract public String getReport() throws SQLException;
 	abstract public List<Object> query(String queryStr, Map<String, Object> queryParameters, RowMapper<Object> mapper) throws SQLException;
 	
 	//limit and offset are useful for windowed lists, as in paged lists / grids / scrollable trees / etc.

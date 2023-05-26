@@ -4,7 +4,13 @@
 			<north hflex="1" sclass="DefaultBackground">
 				<include src="/WEB-INF/layouts/template-north.zul"/>
 			</north>			
-			<center id="center" self="@insert(gridPanel)" autoscroll="true" sclass="DefaultBackground">
+			<center id="center" sclass="DefaultBackground">
+				<borderlayout>
+					<north self="@insert(inputForm)" sclass="DefaultBackground"  vflex="1"/>
+					<center autoscroll="true" sclass="DefaultBackground" vflex="1">
+						<window self="@insert(grid)"/>
+					</center>					
+				</borderlayout>
 			</center>
 		</borderlayout>
 	</window>

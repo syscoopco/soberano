@@ -4,13 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Box;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
-import org.zkoss.zul.Grid;
-import org.zkoss.zul.Hbox;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.MaterialExpense;
@@ -18,32 +16,30 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
-import co.syscoop.soberano.models.MaterialExpensesGridModel;
-import co.syscoop.soberano.util.ExpenseRowData;
 
 public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectFormHelper {
 
 	@Override
-	public void cleanForm(Hbox hboxDetails) {
+	public void cleanForm(Box boxDetails) {
 		
-		Clients.scrollIntoView(hboxDetails.query("#dateExpenseDate"));
-		((Decimalbox) hboxDetails.query("#decQuantity")).setValue((BigDecimal) null);
-		((Decimalbox) hboxDetails.query("#decAmount")).setValue((BigDecimal) null);
-		((Textbox) hboxDetails.query("#txtReference")).setText("");
-		super.cleanForm(hboxDetails);
+		Clients.scrollIntoView(boxDetails.query("#dateExpenseDate"));
+		((Decimalbox) boxDetails.query("#decQuantity")).setValue((BigDecimal) null);
+		((Decimalbox) boxDetails.query("#decAmount")).setValue((BigDecimal) null);
+		((Textbox) boxDetails.query("#txtReference")).setText("");
+		super.cleanForm(boxDetails);
 	}
 	
 	@Override
-	public Integer recordFromForm(Hbox hboxDetails) throws Exception {
+	public Integer recordFromForm(Box boxDetails) throws Exception {
 		
-		Comboitem cmbiProvider = ((Combobox) hboxDetails.query("#cmbProvider")).getSelectedItem();
-		Comboitem cmbiMaterial = ((Combobox) hboxDetails.query("#cmbMaterial")).getSelectedItem();
-		Comboitem cmbiUnit = ((Combobox) hboxDetails.query("#cmbUnit")).getSelectedItem();
-		Comboitem cmbiCurrency = ((Combobox) hboxDetails.query("#cmbCurrency")).getSelectedItem();
-		Date dateExpenseDate = ((Datebox) hboxDetails.query("#dateExpenseDate")).getValue();
-		Decimalbox decQuantity = (Decimalbox) hboxDetails.query("#decQuantity");
-		Decimalbox decAmount = (Decimalbox) hboxDetails.query("#decAmount");
-		Textbox txtReference = (Textbox) hboxDetails.query("#txtReference");
+		Comboitem cmbiProvider = ((Combobox) boxDetails.query("#cmbProvider")).getSelectedItem();
+		Comboitem cmbiMaterial = ((Combobox) boxDetails.query("#cmbMaterial")).getSelectedItem();
+		Comboitem cmbiUnit = ((Combobox) boxDetails.query("#cmbUnit")).getSelectedItem();
+		Comboitem cmbiCurrency = ((Combobox) boxDetails.query("#cmbCurrency")).getSelectedItem();
+		Date dateExpenseDate = ((Datebox) boxDetails.query("#dateExpenseDate")).getValue();
+		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
+		Decimalbox decAmount = (Decimalbox) boxDetails.query("#decAmount");
+		Textbox txtReference = (Textbox) boxDetails.query("#txtReference");
 		
 		if (cmbiProvider == null ||
 			cmbiMaterial == null ||

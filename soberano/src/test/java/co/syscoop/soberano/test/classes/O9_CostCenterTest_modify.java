@@ -16,7 +16,6 @@ import org.zkoss.zats.mimic.operation.InputAgent;
 
 import co.syscoop.soberano.test.helper.CostCenterActionTest;
 import co.syscoop.soberano.test.helper.CostCenterForm;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(9)
 

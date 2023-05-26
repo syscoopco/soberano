@@ -41,6 +41,8 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	protected MapSqlParameterSource disableParameters = null;
 	protected String getQuery = "";
 	protected Map<String,	Object> getParameters = new HashMap<String, Object>();
+	protected String getReportQuery = "";
+	protected Map<String,	Object> getReportParameters = new HashMap<String, Object>();
 	
 	//it is expected queries and parameters to be set by subclasses
 	protected String getCountQuery = "";
@@ -137,13 +139,19 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return query(getAllQuery, this.addLoginname(getAllQuery, getAllQueryNamedParameters), stringId ? new DomainObjectMapperWithStringId() : new DomainObjectMapper());
 		}
 		
-		public Object get(String getAllQuery, Map<String, Object> getParameters, ResultSetExtractor<Object> extractor) throws SQLException {			
+		public Object get(Map<String, Object> getParameters, ResultSetExtractor<Object> extractor) throws SQLException {			
 			return query(getQuery, this.addLoginname(getQuery, getParameters), extractor);
 		}
 		
-		public Object get(String getAllQuery, Map<String, Object> getParameters, RowMapper<Object> mapper) throws SQLException {			
+		public Object get(Map<String, Object> getParameters, RowMapper<Object> mapper) throws SQLException {			
 			return query(getQuery, this.addLoginname(getQuery, getParameters), mapper);
 		}
+		
+		public String getReport() throws SQLException {			
+			
+			List<String> reports = query(getReportQuery, this.addLoginname(getReportQuery, getReportParameters), new ReportMapper());
+			return reports.get(0);
+		};
 		
 		public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
 			
@@ -160,8 +168,7 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return query(qryStr, this.addLoginname(qryStr, getAllQueryNamedParameters), extractor);
 		}
 		
-		public Integer getCount() throws SQLException {
-			
+		public Integer getCount() throws SQLException {			
 			
 			List<Integer> counts = query(getCountQuery, this.addLoginname(getCountQuery, getAllQueryNamedParameters), new CountMapper());
 			return counts.get(0);
@@ -187,13 +194,13 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 
 	@Override
 	public void get(ResultSetExtractor<Object> extractor) throws SQLException {
-		copyFrom(trackedObjectDao.get(getQuery, getParameters, extractor));
+		copyFrom(trackedObjectDao.get(getParameters, extractor));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void get(RowMapper<Object> mapper) throws SQLException {
-		copyFrom(((ArrayList<Object>) trackedObjectDao.get(getQuery, getParameters, mapper)).get(0));
+		copyFrom(((ArrayList<Object>) trackedObjectDao.get(getParameters, mapper)).get(0));
 	}
 
 	@Override
@@ -226,5 +233,10 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	@Override
 	public Integer getCount() throws SQLException {
 		return trackedObjectDao.getCount();
-	};
+	}
+	
+	@Override
+	public String getReport() throws SQLException {
+		return trackedObjectDao.getReport();
+	}
 }

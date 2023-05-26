@@ -14,7 +14,6 @@ import org.zkoss.zats.mimic.Zats;
 
 import co.syscoop.soberano.test.helper.ProviderActionTest;
 import co.syscoop.soberano.test.helper.ProviderForm;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(5)
 

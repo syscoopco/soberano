@@ -60,6 +60,21 @@ public class DaoBase {
 	    }
 	}
 	
+	public class ReportMapper implements RowMapper<String> {
+
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				String report = new String(rs.getString("report"));
+		        return report;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
 	public class LoginNameMapper implements RowMapper<String> {
 
 		public String mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -32,7 +32,7 @@
 						<menuitem label="${labels.menuItem.SalesReport}" href="sales_report.zul"/>
 						<menuitem label="${labels.menuItem.ExpensesReport}" href="Expenses_report.zul"/>
 						<menuitem label="${labels.menuItem.StockReport}" href="stock_report.zul"/>
-						<menuitem label="${labels.menuItem.CancelledOrdersReport}" href="cancelled_report.zul"/>
+						<menuitem label="${labels.menuItem.CanceledOrdersReport}" href="canceled_report.zul"/>
 						<menuitem label="${labels.menuItem.PrintTicket}" href="print_ticket.zul"/>
 					</menupopup>
 				</menu>

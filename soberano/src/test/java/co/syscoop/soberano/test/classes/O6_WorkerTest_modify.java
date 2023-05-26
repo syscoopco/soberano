@@ -20,7 +20,6 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treeitem;
 
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 import co.syscoop.soberano.test.helper.WorkerForm;
 

@@ -1,0 +1,15 @@
+<?page title="${labels.pageShiftClosures.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-grid.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageShiftClosures.WindowTitle}" sclass="PageTitle"/>
+	
+	<window self="@define(inputForm)" contentStyle="overflow:auto">
+		<vbox id="boxDetails" height="100px" width="100%">
+			<textbox id="txtReport" multiline="true" height="80px" hflex="1" readonly="true" placeholder="${labels.placeholder.report}"/>
+			<button id="btnRecord" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
+		</vbox>
+	</window>
+	<include id="incGrid" self="@define(grid)" src="/shift_closures_history.zul"></include>
+</zk>

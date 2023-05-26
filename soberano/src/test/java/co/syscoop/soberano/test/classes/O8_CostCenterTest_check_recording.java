@@ -16,7 +16,6 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.test.helper.CostCenterActionTest;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)

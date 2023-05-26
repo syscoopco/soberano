@@ -16,7 +16,6 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.test.helper.ProviderActionTest;
 import co.syscoop.soberano.test.helper.ProviderForm;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)

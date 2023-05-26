@@ -49,4 +49,9 @@ public class BusinessActivityTrackedObject extends TrackedObject {
 	public Integer getCount() throws SQLException {
 		return super.getCount();
 	}
+
+	@Override
+	public String getReport() throws SQLException {
+		return super.getReport();
+	}
 }

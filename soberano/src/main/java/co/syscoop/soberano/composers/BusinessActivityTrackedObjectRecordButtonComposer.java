@@ -6,9 +6,11 @@ import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Messagebox;
+
+import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -24,7 +26,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorComposer {
 
 	private BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
-	private Hbox hboxDetails = null;
+	private Box boxDetails = null;
 	
 	@Wire
 	private Button btnRecord;
@@ -37,20 +39,23 @@ public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorC
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-          hboxDetails = (Hbox) btnRecord.query("#hboxDetails");
+          boxDetails = (Box) btnRecord.query("#boxDetails");
     }
 	
 	@Listen("onClick = button#btnRecord")
     public void btnRecord_onClick() throws Throwable {
 		
 		try{
-			if (trackedObjectFormHelper.recordFromForm(hboxDetails) == -1) {
+			if (trackedObjectFormHelper.recordFromForm(boxDetails) == -1) {
 				throw new NotEnoughRightsException();						
 			}
 			else {
 				//clean form
-				trackedObjectFormHelper.cleanForm(hboxDetails);
+				trackedObjectFormHelper.cleanForm(boxDetails);
 			}
+		}
+		catch(ConfirmationRequiredException ex) {
+			return;
 		}
 		catch(WrongDateTimeException ex) {
 			ExceptionTreatment.logAndShow(ex, 

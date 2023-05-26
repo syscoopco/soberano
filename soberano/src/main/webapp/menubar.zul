@@ -11,11 +11,11 @@
 					</menupopup>
 				</menu>
 				<menuitem label="${labels.menuItem.CurrentCatalog}" href="catalog.zul"/>
-				<menuitem label="${labels.menuItem.ShiftClosures}" href="closures.zul"/>				
+				<menuitem label="${labels.menuItem.ShiftClosures}" href="shift_closures.zul"/>				
 				<menu label="${labels.menuItem.Expenses}" sclass="BarMenu">
 					<menupopup>
-						<menuitem label="${labels.menuItem.Materials}" href="materials.zul"/>
-						<menuitem label="${labels.menuItem.Services}" href="thirdparty_services.zul"/>
+						<menuitem label="${labels.menuItem.Materials}" href="material_expenses.zul"/>
+						<menuitem label="${labels.menuItem.Services}" href="thirdparty_service_expenses.zul"/>
 						<menuitem label="${labels.menuItem.Payroll}" href="payroll.zul"/>
 					</menupopup>
 				</menu>
@@ -32,7 +32,7 @@
 						<menuitem label="${labels.menuItem.SalesReport}" href="sales_report.zul"/>
 						<menuitem label="${labels.menuItem.ExpensesReport}" href="Expenses_report.zul"/>
 						<menuitem label="${labels.menuItem.StockReport}" href="stock_report.zul"/>
-						<menuitem label="${labels.menuItem.CancelledOrdersReport}" href="cancelled_report.zul"/>
+						<menuitem label="${labels.menuItem.CanceledOrdersReport}" href="canceled_report.zul"/>
 						<menuitem label="${labels.menuItem.PrintTicket}" href="print_ticket.zul"/>
 					</menupopup>
 				</menu>

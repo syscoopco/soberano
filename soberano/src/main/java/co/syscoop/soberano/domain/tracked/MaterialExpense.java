@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 
 public class MaterialExpense extends BusinessActivityTrackedObject {
 	
@@ -106,7 +107,10 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 		disableParameters.addValue("materialExpenseId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		if (qryResult == -3) {
+			throw new ShiftHasBeenClosedException();
+		}
+		return qryResult;
 	}
 	
 	@Override

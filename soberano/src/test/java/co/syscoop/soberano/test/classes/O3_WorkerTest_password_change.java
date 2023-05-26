@@ -19,7 +19,6 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.test.helper.ActionTest;
 import co.syscoop.soberano.test.helper.ChangePasswordForm;
 import co.syscoop.soberano.test.helper.ConstrainedForm;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 

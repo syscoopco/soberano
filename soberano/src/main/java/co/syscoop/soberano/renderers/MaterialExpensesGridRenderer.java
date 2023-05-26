@@ -25,32 +25,31 @@ public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 		
 		ExpenseRowData expense = (ExpenseRowData) data;
 		
+		//expense date
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		row.appendChild(new Label(dateFormat.format(expense.getExpenseDate())));
+		
+		//payee
+		row.appendChild(new Label(expense.getPayeeName()));
+		
 		//concept
 		row.appendChild(new Label(expense.getConceptName()));
 		
 		//description
 		row.appendChild(new Label(expense.getDescription()));
 		
-		//payee
-		row.appendChild(new Label(expense.getPayeeName()));
-		
-		//reference
-		row.appendChild(new Label(expense.getReference()));
-		
-		//expense date
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		row.appendChild(new Label(dateFormat.format(expense.getExpenseDate())));
-		
-		//recording date
-		row.appendChild(new Label(dateFormat.format(expense.getRecordingDate())));
-		
 		//amount
 		row.appendChild(new Label(expense.getAmount().toPlainString()));
-		
 		
 		//currency
 		row.appendChild(new Label(expense.getCurrency()));
 		
+		//reference
+		row.appendChild(new Label(expense.getReference()));		
+		
+		//recording date
+		row.appendChild(new Label(dateFormat.format(expense.getRecordingDate())));
+				
 		//action column
 		Vbox actionCell = new Vbox();
 		actionCell.setHflex("1");

@@ -18,7 +18,6 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.test.helper.ProductCategoryActionTest;
-import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
