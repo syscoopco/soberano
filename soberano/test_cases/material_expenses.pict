@@ -1,0 +1,8 @@
+User: authorized user, unauthorized user
+Provider: mprov1,mprov2
+Material: mm2,mm4,mm6,mm7
+Quantity: 0.000001,1,2000,3000000,1.000001,-2000
+Unit: pcs,mg,lb,ml,l
+Amount: 0.000001,1,2000,3000000,1.000001,-2000
+Currency: mc1,mc2,mc3
+Reference: abc123,

@@ -117,6 +117,8 @@
 				<orm:PlayedRoles>
 					<orm:Role ref="_6CED312D-4378-489E-8E89-99E62C851F78" />
 					<orm:Role ref="_B5820C6F-D795-4BCE-B97A-2D575BEE1F62" />
+					<orm:Role ref="_A2434015-8DDC-4231-94AB-3DB714E85A66" />
+					<orm:Role ref="_874DFEA6-24C2-4891-ADF5-397C11FA92AE" />
 				</orm:PlayedRoles>
 				<orm:PreferredIdentifier ref="_20F2DC08-2EE8-4BB4-A3F6-78D97ED74947" />
 			</orm:EntityType>
@@ -1170,10 +1172,11 @@
 					<orm:Role ref="_1499B91E-52CD-4FF5-BF5B-7236574C19DB" />
 					<orm:Role ref="_8389B8D3-8B55-49A2-8F90-9DFB914A3DF0" />
 					<orm:Role ref="_F949E0E7-1AF0-48D8-B790-2FE3D0E7732E" />
+					<orm:Role ref="_5EA69C33-4EA4-427E-8B35-3D54948BF07D" />
 				</orm:PlayedRoles>
 				<orm:PreferredIdentifier ref="_31B50AA6-3189-4E5C-83E8-EFB80971945D" />
 			</orm:EntityType>
-			<orm:ValueType id="_A5EAA4E0-A630-4630-8CAA-E8B78E7D4C1C" Name="Day">
+			<orm:ValueType id="_A5EAA4E0-A630-4630-8CAA-E8B78E7D4C1C" Name="Shift">
 				<orm:PlayedRoles>
 					<orm:Role ref="_64423837-08AA-4391-9B76-031125774F95" />
 				</orm:PlayedRoles>
@@ -1184,6 +1187,24 @@
 					<orm:Role ref="_859BFC6F-61B4-46FD-8F68-02660A9CE68A" />
 				</orm:PlayedRoles>
 				<orm:ConceptualDataType id="_FBCA3073-02B3-4E6D-BBBC-99A19A0669E9" ref="_E56F3D50-8C23-47C9-997A-0E02D158AA93" Scale="0" Length="0" />
+			</orm:ValueType>
+			<orm:ValueType id="_7707D414-36CD-4409-AB21-B5BDFC1AD467" Name="Report">
+				<orm:PlayedRoles>
+					<orm:Role ref="_AE99B40C-D1B6-49BB-86D3-51E6C52F9C1F" />
+				</orm:PlayedRoles>
+				<orm:ConceptualDataType id="_CAEDF3BC-F136-4C25-8C0C-370C7D62A705" ref="_A52DC184-C2D9-47F5-9752-19778E8F1E4D" Scale="0" Length="0" />
+			</orm:ValueType>
+			<orm:ValueType id="_3B21B4E9-EAA8-45D7-9DFF-4111B7F61ABB" Name="ShiftClosureHours">
+				<orm:PlayedRoles>
+					<orm:Role ref="_1A85420E-B752-4A08-873F-70A05E385AB9" />
+				</orm:PlayedRoles>
+				<orm:ConceptualDataType id="_8C69F21E-9089-422B-A201-F6AEE9C801C5" ref="_81208AAF-D21B-4D79-A700-780C88F54F55" Scale="0" Length="0" />
+			</orm:ValueType>
+			<orm:ValueType id="_518198B9-EE87-489C-BDE8-DDE415A9BBF3" Name="ShiftClosureMinutes">
+				<orm:PlayedRoles>
+					<orm:Role ref="_46699336-8E4E-4275-B581-7B46090E6C04" />
+				</orm:PlayedRoles>
+				<orm:ConceptualDataType id="_A30F5B44-17FC-4657-87F9-BCA68B118B73" ref="_81208AAF-D21B-4D79-A700-780C88F54F55" Scale="0" Length="0" />
 			</orm:ValueType>
 		</orm:Objects>
 		<orm:Facts>
@@ -8956,7 +8977,7 @@
 					<orm:MandatoryConstraint ref="_71AB8205-ED80-466A-9B0E-0A74EE9CE55C" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_04FAF599-9308-4FBF-B8DD-A9974C6385EF" _Name="ShiftClosureHasDay">
+			<orm:Fact id="_04FAF599-9308-4FBF-B8DD-A9974C6385EF" _Name="ShiftClosureIsOfShift">
 				<orm:FactRoles>
 					<orm:Role id="_1499B91E-52CD-4FF5-BF5B-7236574C19DB" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_26546A60-384E-49D7-912B-D5D174CEEE14" />
@@ -8969,9 +8990,9 @@
 					<orm:ReadingOrder id="_387C826F-7F23-45E5-ABFC-1E062CE9C063">
 						<orm:Readings>
 							<orm:Reading id="_476116FC-101F-48FF-BD7F-DC33F1B63D4C">
-								<orm:Data>{0} has {1}</orm:Data>
+								<orm:Data>{0} is of {1}</orm:Data>
 								<orm:ExpandedData>
-									<orm:RoleText RoleIndex="0" FollowingText=" has " />
+									<orm:RoleText RoleIndex="0" FollowingText=" is of " />
 								</orm:ExpandedData>
 							</orm:Reading>
 						</orm:Readings>
@@ -9061,6 +9082,96 @@
 					<orm:MandatoryConstraint ref="_3F291B71-E4C1-4E0F-BE4A-FF7A78A1E0EE" />
 					<orm:UniquenessConstraint ref="_2FA6872C-03ED-49F3-BF28-4EEABE7154D4" />
 					<orm:UniquenessConstraint ref="_8AC17789-E437-4AA1-B85B-6F822EA6CC15" />
+				</orm:InternalConstraints>
+			</orm:Fact>
+			<orm:Fact id="_46BDB253-0DB3-450C-B94A-145CAA8ADFF0" _Name="ReportIsOfShiftClosure">
+				<orm:FactRoles>
+					<orm:Role id="_5EA69C33-4EA4-427E-8B35-3D54948BF07D" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
+						<orm:RolePlayer ref="_26546A60-384E-49D7-912B-D5D174CEEE14" />
+					</orm:Role>
+					<orm:Role id="_AE99B40C-D1B6-49BB-86D3-51E6C52F9C1F" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
+						<orm:RolePlayer ref="_7707D414-36CD-4409-AB21-B5BDFC1AD467" />
+					</orm:Role>
+				</orm:FactRoles>
+				<orm:ReadingOrders>
+					<orm:ReadingOrder id="_529B70C3-A1CC-47AA-9805-05AD38DA4C2F">
+						<orm:Readings>
+							<orm:Reading id="_F646FD3E-7EAC-4FDC-8364-FD894C24D506">
+								<orm:Data>{0} is of {1}</orm:Data>
+								<orm:ExpandedData>
+									<orm:RoleText RoleIndex="0" FollowingText=" is of " />
+								</orm:ExpandedData>
+							</orm:Reading>
+						</orm:Readings>
+						<orm:RoleSequence>
+							<orm:Role ref="_AE99B40C-D1B6-49BB-86D3-51E6C52F9C1F" />
+							<orm:Role ref="_5EA69C33-4EA4-427E-8B35-3D54948BF07D" />
+						</orm:RoleSequence>
+					</orm:ReadingOrder>
+				</orm:ReadingOrders>
+				<orm:InternalConstraints>
+					<orm:MandatoryConstraint ref="_E6B1A564-118A-4289-8898-0BAD721F2975" />
+					<orm:UniquenessConstraint ref="_18A4C3B9-322B-409A-8497-1C3B6CBA6FB5" />
+				</orm:InternalConstraints>
+			</orm:Fact>
+			<orm:Fact id="_A79AC3D0-EAF5-4C48-B1DB-C61A61003A01" _Name="ConfigurationHasShiftClosureHours">
+				<orm:FactRoles>
+					<orm:Role id="_A2434015-8DDC-4231-94AB-3DB714E85A66" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
+						<orm:RolePlayer ref="_CA784430-45B2-4403-9257-1D3906C164D1" />
+					</orm:Role>
+					<orm:Role id="_1A85420E-B752-4A08-873F-70A05E385AB9" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
+						<orm:RolePlayer ref="_3B21B4E9-EAA8-45D7-9DFF-4111B7F61ABB" />
+					</orm:Role>
+				</orm:FactRoles>
+				<orm:ReadingOrders>
+					<orm:ReadingOrder id="_9DCE9B4F-9242-4E71-96E0-C24A4FC7EE67">
+						<orm:Readings>
+							<orm:Reading id="_CA12F696-4970-4B73-A50E-8EA5292D25C1">
+								<orm:Data>{0} has {1}</orm:Data>
+								<orm:ExpandedData>
+									<orm:RoleText RoleIndex="0" FollowingText=" has " />
+								</orm:ExpandedData>
+							</orm:Reading>
+						</orm:Readings>
+						<orm:RoleSequence>
+							<orm:Role ref="_A2434015-8DDC-4231-94AB-3DB714E85A66" />
+							<orm:Role ref="_1A85420E-B752-4A08-873F-70A05E385AB9" />
+						</orm:RoleSequence>
+					</orm:ReadingOrder>
+				</orm:ReadingOrders>
+				<orm:InternalConstraints>
+					<orm:MandatoryConstraint ref="_7B8F527F-3BB4-4261-814D-B42CD14A5208" />
+					<orm:UniquenessConstraint ref="_6FFA64A6-B2B8-4BC7-BAC2-3EE0826F1526" />
+				</orm:InternalConstraints>
+			</orm:Fact>
+			<orm:Fact id="_F3A426AF-03FD-406A-A889-9FF2074D4E9F" _Name="ConfigurationHasShiftClosureMinutes">
+				<orm:FactRoles>
+					<orm:Role id="_874DFEA6-24C2-4891-ADF5-397C11FA92AE" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
+						<orm:RolePlayer ref="_CA784430-45B2-4403-9257-1D3906C164D1" />
+					</orm:Role>
+					<orm:Role id="_46699336-8E4E-4275-B581-7B46090E6C04" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
+						<orm:RolePlayer ref="_518198B9-EE87-489C-BDE8-DDE415A9BBF3" />
+					</orm:Role>
+				</orm:FactRoles>
+				<orm:ReadingOrders>
+					<orm:ReadingOrder id="_17CE40E8-0CAF-431F-A077-AEA4800994AF">
+						<orm:Readings>
+							<orm:Reading id="_9DB43C45-19DE-4401-93A5-59A25C7B1779">
+								<orm:Data>{0} has {1}</orm:Data>
+								<orm:ExpandedData>
+									<orm:RoleText RoleIndex="0" FollowingText=" has " />
+								</orm:ExpandedData>
+							</orm:Reading>
+						</orm:Readings>
+						<orm:RoleSequence>
+							<orm:Role ref="_874DFEA6-24C2-4891-ADF5-397C11FA92AE" />
+							<orm:Role ref="_46699336-8E4E-4275-B581-7B46090E6C04" />
+						</orm:RoleSequence>
+					</orm:ReadingOrder>
+				</orm:ReadingOrders>
+				<orm:InternalConstraints>
+					<orm:MandatoryConstraint ref="_3F598C2E-3A0B-4863-8262-D7FD95521134" />
+					<orm:UniquenessConstraint ref="_2A330297-9EC5-4B9D-A5F3-3985A1253824" />
 				</orm:InternalConstraints>
 			</orm:Fact>
 		</orm:Facts>
@@ -12186,6 +12297,54 @@
 					<orm:Role id="_1C28E39C-AFAA-4848-9C23-683DEA047D99" ref="_C4227D23-3471-4611-B85B-81D8A128B2B3" />
 				</orm:RoleSequence>
 			</orm:UniquenessConstraint>
+			<orm:MandatoryConstraint id="_E6B1A564-118A-4289-8898-0BAD721F2975" Name="SimpleMandatoryConstraint186" IsSimple="true">
+				<orm:RoleSequence>
+					<orm:Role id="_6C1C5B3D-A41B-442C-93F1-9F4E558F4EA7" ref="_5EA69C33-4EA4-427E-8B35-3D54948BF07D" />
+				</orm:RoleSequence>
+			</orm:MandatoryConstraint>
+			<orm:UniquenessConstraint id="_18A4C3B9-322B-409A-8497-1C3B6CBA6FB5" Name="InternalUniquenessConstraint299" IsInternal="true">
+				<orm:RoleSequence>
+					<orm:Role id="_518E8A46-6FD6-45E0-B2A4-FA2DF602DE4D" ref="_5EA69C33-4EA4-427E-8B35-3D54948BF07D" />
+				</orm:RoleSequence>
+			</orm:UniquenessConstraint>
+			<orm:MandatoryConstraint id="_F4B46646-413B-411E-9A16-C1312BB18154" Name="ImpliedMandatoryConstraint80" IsImplied="true">
+				<orm:RoleSequence>
+					<orm:Role id="_ACB01FFD-C887-4B3E-AD04-CA1D0BABFE45" ref="_AE99B40C-D1B6-49BB-86D3-51E6C52F9C1F" />
+				</orm:RoleSequence>
+				<orm:ImpliedByObjectType ref="_7707D414-36CD-4409-AB21-B5BDFC1AD467" />
+			</orm:MandatoryConstraint>
+			<orm:MandatoryConstraint id="_7B8F527F-3BB4-4261-814D-B42CD14A5208" Name="SimpleMandatoryConstraint187" IsSimple="true">
+				<orm:RoleSequence>
+					<orm:Role id="_01053CE1-3DB2-4949-BE33-6E698F2AA31C" ref="_A2434015-8DDC-4231-94AB-3DB714E85A66" />
+				</orm:RoleSequence>
+			</orm:MandatoryConstraint>
+			<orm:UniquenessConstraint id="_6FFA64A6-B2B8-4BC7-BAC2-3EE0826F1526" Name="InternalUniquenessConstraint300" IsInternal="true">
+				<orm:RoleSequence>
+					<orm:Role id="_041642DA-CA6F-4D1A-A47A-8917DB2EC7F4" ref="_A2434015-8DDC-4231-94AB-3DB714E85A66" />
+				</orm:RoleSequence>
+			</orm:UniquenessConstraint>
+			<orm:MandatoryConstraint id="_3F598C2E-3A0B-4863-8262-D7FD95521134" Name="SimpleMandatoryConstraint188" IsSimple="true">
+				<orm:RoleSequence>
+					<orm:Role id="_73859903-BE64-4E63-B490-F64DE401148A" ref="_874DFEA6-24C2-4891-ADF5-397C11FA92AE" />
+				</orm:RoleSequence>
+			</orm:MandatoryConstraint>
+			<orm:UniquenessConstraint id="_2A330297-9EC5-4B9D-A5F3-3985A1253824" Name="InternalUniquenessConstraint301" IsInternal="true">
+				<orm:RoleSequence>
+					<orm:Role id="_104BE9A2-B06C-4936-B1B3-4A8A9B6E6088" ref="_874DFEA6-24C2-4891-ADF5-397C11FA92AE" />
+				</orm:RoleSequence>
+			</orm:UniquenessConstraint>
+			<orm:MandatoryConstraint id="_972D655B-7B08-4CE9-9740-B47958E16464" Name="ImpliedMandatoryConstraint84" IsImplied="true">
+				<orm:RoleSequence>
+					<orm:Role id="_24D17D3D-5688-4983-A828-BBD7AE221F79" ref="_1A85420E-B752-4A08-873F-70A05E385AB9" />
+				</orm:RoleSequence>
+				<orm:ImpliedByObjectType ref="_3B21B4E9-EAA8-45D7-9DFF-4111B7F61ABB" />
+			</orm:MandatoryConstraint>
+			<orm:MandatoryConstraint id="_328F4CAD-DF22-4DA3-8AB7-2C97D905E3E5" Name="ImpliedMandatoryConstraint85" IsImplied="true">
+				<orm:RoleSequence>
+					<orm:Role id="_26EB8748-8EE4-40F5-8DDE-D3881A3441BD" ref="_46699336-8E4E-4275-B581-7B46090E6C04" />
+				</orm:RoleSequence>
+				<orm:ImpliedByObjectType ref="_518198B9-EE87-489C-BDE8-DDE415A9BBF3" />
+			</orm:MandatoryConstraint>
 		</orm:Constraints>
 		<orm:DataTypes>
 			<orm:SignedIntegerNumericDataType id="_0AEDDC59-678B-411A-A109-66C5C0513256" />
@@ -12199,6 +12358,7 @@
 			<orm:DateAndTimeTemporalDataType id="_D210FD74-EB03-489F-B3E8-AB4D5D1857C0" />
 			<orm:UnsignedTinyIntegerNumericDataType id="_81208AAF-D21B-4D79-A700-780C88F54F55" />
 			<orm:DateTemporalDataType id="_16317E6D-EC8B-42AC-A514-195F6A95DC0D" />
+			<orm:LargeLengthTextDataType id="_A52DC184-C2D9-47F5-9752-19778E8F1E4D" />
 		</orm:DataTypes>
 		<orm:ModelNotes>
 			<orm:ModelNote id="_6C6697D7-6D2A-40E2-99FB-AB49CCBC0E79">
@@ -12277,6 +12437,12 @@
 				<orm:Text>RULE_CONSTRAINT_9: At least one 'Warehouse' must be a sales warehouse.</orm:Text>
 				<orm:ReferencedBy>
 					<orm:FactType ref="_CC1A90A5-2E7E-4542-A259-EAC01C4A8CA1" />
+				</orm:ReferencedBy>
+			</orm:ModelNote>
+			<orm:ModelNote id="_A4FF5071-2FBA-45A1-9244-C1B99FD571C9">
+				<orm:Text>RULE_CONSTRAINT_10: Quantity is expressed in the unit the corresponding inventory item is measured.</orm:Text>
+				<orm:ReferencedBy>
+					<orm:ObjectType ref="_0DA07664-8BB2-4C37-81A3-E562F18EC125" />
 				</orm:ReferencedBy>
 			</orm:ModelNote>
 		</orm:ModelNotes>
@@ -12474,6 +12640,28 @@
 			<ormDiagram:ModelNoteShape id="_8546B312-6E1B-46A2-9A69-03F601CB79FC" IsExpanded="true" AbsoluteBounds="1.0312500794728594, 1.3541667064030964, 3.5710863227844238, 0.14150302660465242">
 				<ormDiagram:Subject ref="_52B55F8F-377F-4CC3-B66E-876A2BACDD04" />
 			</ormDiagram:ModelNoteShape>
+			<ormDiagram:FactTypeShape id="_24B92E13-AF46-49C1-926F-FC412FE41081" IsExpanded="true" AbsoluteBounds="4.9859375000000021, 0.93416674613952555, 0.38388888899236917, 0.24388888899236916">
+				<ormDiagram:RelativeShapes>
+					<ormDiagram:ReadingShape id="_F84AD2EC-2A6B-4C26-B805-8C26A46F1656" IsExpanded="true" AbsoluteBounds="4.9859375000000021, 1.2428071484342209, 0.18545643985271454, 0.12950302660465241">
+						<ormDiagram:Subject ref="_9DCE9B4F-9242-4E71-96E0-C24A4FC7EE67" />
+					</ormDiagram:ReadingShape>
+				</ormDiagram:RelativeShapes>
+				<ormDiagram:Subject ref="_A79AC3D0-EAF5-4C48-B1DB-C61A61003A01" />
+			</ormDiagram:FactTypeShape>
+			<ormDiagram:FactTypeShape id="_AB28444A-4DF3-45EA-B18E-62731E17A8EA" IsExpanded="true" AbsoluteBounds="4.9859375000000021, 1.538333253860475, 0.38388888899236917, 0.24388888899236916">
+				<ormDiagram:RelativeShapes>
+					<ormDiagram:ReadingShape id="_F2C94BED-BA38-457B-AEE4-ACF3768B392C" IsExpanded="true" AbsoluteBounds="4.9859375000000021, 1.8469736561551704, 0.18545643985271454, 0.12950302660465241">
+						<ormDiagram:Subject ref="_17CE40E8-0CAF-431F-A077-AEA4800994AF" />
+					</ormDiagram:ReadingShape>
+				</ormDiagram:RelativeShapes>
+				<ormDiagram:Subject ref="_F3A426AF-03FD-406A-A889-9FF2074D4E9F" />
+			</ormDiagram:FactTypeShape>
+			<ormDiagram:ObjectTypeShape id="_0E559387-5572-4143-A613-A09B74D74A94" IsExpanded="true" AbsoluteBounds="6.0896096229553223, 0.97916668653488159, 1.0648626041412355, 0.22950302660465241">
+				<ormDiagram:Subject ref="_3B21B4E9-EAA8-45D7-9DFF-4111B7F61ABB" />
+			</ormDiagram:ObjectTypeShape>
+			<ormDiagram:ObjectTypeShape id="_F79AA998-AE47-4CFA-B61F-31782B1507F2" IsExpanded="true" AbsoluteBounds="6.0380790233612061, 1.5805261850543333, 1.1679238033294679, 0.22950302660465241">
+				<ormDiagram:Subject ref="_518198B9-EE87-489C-BDE8-DDE415A9BBF3" />
+			</ormDiagram:ObjectTypeShape>
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
@@ -12898,90 +13086,93 @@
 	</ormDiagram:ORMDiagram>
 	<ormDiagram:ORMDiagram id="_6293615D-80EA-4B96-8EA1-71D8BA01C977" IsCompleteView="true" Name="inventory item" BaseFontName="Tahoma" BaseFontSize="0.0972222238779068">
 		<ormDiagram:Shapes>
-			<ormDiagram:ObjectTypeShape id="_7DCE29F0-4A7E-42E6-8E47-5CEDC2366761" IsExpanded="true" AbsoluteBounds="5.2417670985062914, 2.0810818200310068, 0.89591055631637573, 0.35900605320930479">
+			<ormDiagram:ObjectTypeShape id="_7DCE29F0-4A7E-42E6-8E47-5CEDC2366761" IsExpanded="true" AbsoluteBounds="5.4291197651872105, 2.8482435455681494, 0.89591055631637573, 0.35900605320930479">
 				<ormDiagram:Subject ref="_50F617B9-40B4-4635-92C0-B830A2322FF1" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:FactTypeShape id="_99305A6E-1A84-4533-81C5-8401F7893176" IsExpanded="true" AbsoluteBounds="6.8078126589457195, 1.4807237354728073, 0.38388888899236917, 0.24388888899236916">
+			<ormDiagram:FactTypeShape id="_99305A6E-1A84-4533-81C5-8401F7893176" IsExpanded="true" AbsoluteBounds="6.9951653256266386, 2.2478854610099503, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_172FA76F-682A-4DC4-A8F2-7CFAB6DFA800" IsExpanded="true" AbsoluteBounds="6.6723959922790526, 1.7789474711008373, 0.67522287368774414, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_172FA76F-682A-4DC4-A8F2-7CFAB6DFA800" IsExpanded="true" AbsoluteBounds="6.8597486589599717, 2.54610919663798, 0.67522287368774414, 0.12950302660465241">
 						<ormDiagram:Subject ref="_D52E7E59-E808-4F9E-9716-5F8764B8CEC7" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_1CB6A74D-3A89-46E6-9A4B-D3FF44CA25E9" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:ObjectTypeShape id="_C9BF33F1-8F21-42F2-B5FE-C0B00B59311A" IsExpanded="true" AbsoluteBounds="7.791145833333335, 1.4581651533643396, 0.36792931973934173, 0.35900605320930479">
+			<ormDiagram:ObjectTypeShape id="_C9BF33F1-8F21-42F2-B5FE-C0B00B59311A" IsExpanded="true" AbsoluteBounds="7.9784985000142541, 2.2253268789014831, 0.36792931973934173, 0.35900605320930479">
 				<ormDiagram:Subject ref="_8B5F06D3-F307-49D7-99F1-57541D8A2B35" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:ObjectTypeShape id="_A69824DB-DAA2-4CA1-8046-4067A3194E7D" IsExpanded="true" AbsoluteBounds="7.7900301880824081, 2.145833333333333, 0.44445383071899414, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_A69824DB-DAA2-4CA1-8046-4067A3194E7D" IsExpanded="true" AbsoluteBounds="7.9773828547633272, 2.9129950588704756, 0.44445383071899414, 0.22950302660465241">
 				<ormDiagram:Subject ref="_8D1B05B6-B61C-482A-9793-134B0B0BDB7A" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:FactTypeShape id="_68DE9993-F7B0-419A-B4BF-BB15009CB916" IsExpanded="true" AbsoluteBounds="6.7869791666666668, 2.1736404021394748, 0.38388888899236917, 0.24388888899236916" ConstraintDisplayPosition="Bottom">
+			<ormDiagram:FactTypeShape id="_68DE9993-F7B0-419A-B4BF-BB15009CB916" IsExpanded="true" AbsoluteBounds="6.9743318333475859, 2.9408021276766179, 0.38388888899236917, 0.24388888899236916" ConstraintDisplayPosition="Bottom">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_5F761201-DCC5-4E40-92A9-9B4C226DA209" IsExpanded="true" AbsoluteBounds="6.9744791666666668, 2.0106358622324962, 0.18545643985271454, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_5F761201-DCC5-4E40-92A9-9B4C226DA209" IsExpanded="true" AbsoluteBounds="7.1618318333475859, 2.7777975877696393, 0.18545643985271454, 0.12950302660465241">
 						<ormDiagram:Subject ref="_27994DC4-B25F-4E49-A260-69661D494B76" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_36C6AE26-7882-4EF0-8FD4-538C8133FF98" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:ObjectTypeShape id="_D3FBC2FB-C159-4901-A32C-14AE98B8E58F" IsExpanded="true" AbsoluteBounds="6.0148308763901337, 3.2581651533643403, 1.1017956686019899, 0.35900605320930479">
+			<ormDiagram:ObjectTypeShape id="_D3FBC2FB-C159-4901-A32C-14AE98B8E58F" IsExpanded="true" AbsoluteBounds="6.2021835430710528, 4.0253268789014829, 1.1017956686019899, 0.35900605320930479">
 				<ormDiagram:Subject ref="_9FEE3FFC-A5FB-423E-8D33-40B22B40022E" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:ObjectTypeShape id="_22CCAD9B-4714-42DE-AB0E-D2129BC21029" IsExpanded="true" AbsoluteBounds="4.6432291666666661, 3.2581651533643403, 0.54499908804893493, 0.35900605320930479">
+			<ormDiagram:ObjectTypeShape id="_22CCAD9B-4714-42DE-AB0E-D2129BC21029" IsExpanded="true" AbsoluteBounds="4.8305818333475852, 4.0253268789014829, 0.54499908804893493, 0.35900605320930479">
 				<ormDiagram:Subject ref="_18118B72-85F7-47D8-A683-25B366896F80" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:ExternalConstraintShape id="_A2C19399-C4D7-4D2C-9D60-FBE62AA0549C" IsExpanded="true" AbsoluteBounds="5.6348958333333332, 3.0104166666666661, 0.16, 0.16">
+			<ormDiagram:ExternalConstraintShape id="_A2C19399-C4D7-4D2C-9D60-FBE62AA0549C" IsExpanded="true" AbsoluteBounds="5.8222485000142523, 3.7775783922038086, 0.16, 0.16">
 				<ormDiagram:Subject ref="_2523A0EE-A3C4-4029-A7A7-F461D3FCE8DD" />
 			</ormDiagram:ExternalConstraintShape>
-			<ormDiagram:ObjectTypeShape id="_096E944B-B543-40B0-A0CF-05849433EE25" IsExpanded="true" AbsoluteBounds="2.4267185449600204, 2.145833333333333, 1.3843952369689943, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_096E944B-B543-40B0-A0CF-05849433EE25" IsExpanded="true" AbsoluteBounds="2.6140712116409395, 2.9129950588704756, 1.3843952369689943, 0.22950302660465241">
 				<ormDiagram:Subject ref="_5D5E73ED-DFA2-4F4D-96EE-5DE4137C40C3" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:FactTypeShape id="_D6EE3F44-B952-4797-810F-A86F0C8C8D81" IsExpanded="true" AbsoluteBounds="4.3182293256123856, 2.1036404021394746, 0.38388888899236917, 0.24388888899236916">
+			<ormDiagram:FactTypeShape id="_D6EE3F44-B952-4797-810F-A86F0C8C8D81" IsExpanded="true" AbsoluteBounds="4.5055819922933047, 2.8708021276766176, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_35EBB9DF-0FC5-4C21-BD5F-EC48BC8BB246" IsExpanded="true" AbsoluteBounds="4.3182293256123856, 2.41228080443417, 0.23545643985271453, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_35EBB9DF-0FC5-4C21-BD5F-EC48BC8BB246" IsExpanded="true" AbsoluteBounds="4.5055819922933047, 3.1794425299713129, 0.23545643985271453, 0.12950302660465241">
 						<ormDiagram:Subject ref="_78DD5B9A-DB56-4008-B8C6-4DEB4F47B06C" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_F13E6989-C19D-4C13-8663-15FE5F0EE4CD" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:FactTypeShape id="_428FB4AF-944C-4640-B17D-70C7BD5E1770" IsExpanded="true" AbsoluteBounds="4.4193750000000005, 1.399, 0.6738888889923691, 0.30588888899236916">
+			<ormDiagram:FactTypeShape id="_428FB4AF-944C-4640-B17D-70C7BD5E1770" IsExpanded="true" AbsoluteBounds="4.60672766668092, 2.166161725537143, 0.6738888889923691, 0.30588888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_63275F33-2C70-48EC-BE83-7B7D45901315" IsExpanded="true" AbsoluteBounds="3.5964583333333335, 1.1972237356280286, 2.238278865814209, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_63275F33-2C70-48EC-BE83-7B7D45901315" IsExpanded="true" AbsoluteBounds="3.7838110000142526, 1.9643854611651717, 2.238278865814209, 0.12950302660465241">
 						<ormDiagram:Subject ref="_AA26D63E-F521-4D8F-8A74-AD33D8681CF2" />
 					</ormDiagram:ReadingShape>
-					<ormDiagram:ObjectifiedFactTypeNameShape id="_94A9C2DC-FCB6-4C6F-A1B7-B22873914EE3" IsExpanded="true" AbsoluteBounds="4.5547916666666666, 1.7776621267596879, 0.35255712270736694, 0.12950302660465241">
+					<ormDiagram:ObjectifiedFactTypeNameShape id="_94A9C2DC-FCB6-4C6F-A1B7-B22873914EE3" IsExpanded="true" AbsoluteBounds="4.7421443333475857, 2.5448238522968309, 0.35255712270736694, 0.12950302660465241">
 						<ormDiagram:Subject ref="_519D5B92-4E4D-4F27-AAFD-1BA655BB4000" />
 					</ormDiagram:ObjectifiedFactTypeNameShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_D431C407-E1F0-4396-AD0C-2414C5224AD0" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:ObjectTypeShape id="_EB9DD5F3-EC5C-4984-BB70-1BF557307A9C" IsExpanded="true" AbsoluteBounds="3.1177083333333337, 1.4074414178915322, 0.71912556409835815, 0.35900605320930479">
+			<ormDiagram:ObjectTypeShape id="_EB9DD5F3-EC5C-4984-BB70-1BF557307A9C" IsExpanded="true" AbsoluteBounds="3.3050610000142528, 2.1746031434286754, 0.71912556409835815, 0.35900605320930479">
 				<ormDiagram:Subject ref="_F6E70C11-9ABC-469E-8468-930AAC301E70" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:ObjectTypeShape id="_6CF31BD2-6F28-4D5B-B2CD-D0DB7186D73B" IsExpanded="true" AbsoluteBounds="4.4594280461470284, 0.69791662693023682, 0.588768060207367, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_6CF31BD2-6F28-4D5B-B2CD-D0DB7186D73B" IsExpanded="true" AbsoluteBounds="4.6467807128279475, 1.46507835246738, 0.588768060207367, 0.22950302660465241">
 				<ormDiagram:Subject ref="_0DA07664-8BB2-4C37-81A3-E562F18EC125" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:ObjectTypeShape id="_BAD44680-2AD4-457A-A89D-91D8B3B40C38" IsExpanded="true" AbsoluteBounds="6.4182230532169342, 1.1458333730697632, 0.433677728176117, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_BAD44680-2AD4-457A-A89D-91D8B3B40C38" IsExpanded="true" AbsoluteBounds="6.6055757198978533, 1.9129950986069064, 0.433677728176117, 0.22950302660465241">
 				<ormDiagram:Subject ref="_537E04FA-3CE5-46F8-B5D9-26C86F6E70B0" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:FactTypeShape id="_DC1AD1A1-0FDB-405A-9E3F-1BCBA20CBF6F" IsExpanded="true" AbsoluteBounds="5.540625, 1.3924999999999999, 0.38388888899236917, 0.24388888899236916">
+			<ormDiagram:FactTypeShape id="_DC1AD1A1-0FDB-405A-9E3F-1BCBA20CBF6F" IsExpanded="true" AbsoluteBounds="5.7279776666809195, 2.1596617255371431, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_D8C72F87-7E45-42A4-9330-C0AB18CDC417" IsExpanded="true" AbsoluteBounds="5.540625, 1.7011404022946952, 0.18545643985271454, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_D8C72F87-7E45-42A4-9330-C0AB18CDC417" IsExpanded="true" AbsoluteBounds="5.7279776666809195, 2.4683021278318384, 0.18545643985271454, 0.12950302660465241">
 						<ormDiagram:Subject ref="_1977A366-4723-46C9-86A0-E5475F66F777" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_407114F8-63F6-4AF1-856E-CC8E3F24B1D1" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:ObjectTypeShape id="_F6B8ED64-F4BD-4D61-9595-71F0E7A5E733" IsExpanded="true" AbsoluteBounds="8.9390624999999986, 3.322916666666667, 1.2896889400482179, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_F6B8ED64-F4BD-4D61-9595-71F0E7A5E733" IsExpanded="true" AbsoluteBounds="9.1264151666809177, 4.0900783922038091, 1.2896889400482179, 0.22950302660465241">
 				<ormDiagram:Subject ref="_27872DD1-50EC-4C2D-81FB-C3C239C083A9" />
 			</ormDiagram:ObjectTypeShape>
-			<ormDiagram:FactTypeShape id="_42C8BECE-47EA-40A7-A418-B37406BF5729" IsExpanded="true" AbsoluteBounds="7.82031265894572, 3.2807237354728085, 0.38388888899236917, 0.24388888899236916">
+			<ormDiagram:FactTypeShape id="_42C8BECE-47EA-40A7-A418-B37406BF5729" IsExpanded="true" AbsoluteBounds="8.00766532562664, 4.0478854610099511, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_6366ACD6-7D57-427E-A505-32513AE51892" IsExpanded="true" AbsoluteBounds="7.82031265894572, 3.5893641377675038, 0.67375123500823975, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_6366ACD6-7D57-427E-A505-32513AE51892" IsExpanded="true" AbsoluteBounds="8.00766532562664, 4.3565258633046469, 0.67375123500823975, 0.12950302660465241">
 						<ormDiagram:Subject ref="_9638EDA3-9C34-44D3-9A17-8BC1E69CC245" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_ADA2BEAC-1913-46D5-AB8E-EF92C192C2A6" />
 			</ormDiagram:FactTypeShape>
+			<ormDiagram:ModelNoteShape id="_55DD5CAD-5B6C-4C9F-A781-F3F27ABA537F" IsExpanded="true" AbsoluteBounds="3.98377092156779, 0.85939415687867338, 4.6827806587219234, 0.14150302660465242">
+				<ormDiagram:Subject ref="_A4FF5071-2FBA-45A1-9244-C1B99FD571C9" />
+			</ormDiagram:ModelNoteShape>
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
@@ -14025,13 +14216,13 @@
 			</ormDiagram:ObjectTypeShape>
 			<ormDiagram:FactTypeShape id="_56A9FC9F-5A9E-419A-BEA1-A2DDFA108430" IsExpanded="true" AbsoluteBounds="3.1666666666666665, 1.3640570688061415, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_F510CCD3-0495-4D94-A77A-1AB82F198630" IsExpanded="true" AbsoluteBounds="3.1666666666666665, 1.6726974711008369, 0.18545643985271454, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_F510CCD3-0495-4D94-A77A-1AB82F198630" IsExpanded="true" AbsoluteBounds="3.1666666666666665, 1.6726974711008369, 0.21749989688396454, 0.12950302660465241">
 						<ormDiagram:Subject ref="_387C826F-7F23-45E5-ABFC-1E062CE9C063" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_04FAF599-9308-4FBF-B8DD-A9974C6385EF" />
 			</ormDiagram:FactTypeShape>
-			<ormDiagram:ObjectTypeShape id="_8BAC6CE8-5DA4-4B3E-8FD8-F040A1867FE2" IsExpanded="true" AbsoluteBounds="4.4340094506740577, 1.40625, 0.34585493326187133, 0.22950302660465241">
+			<ormDiagram:ObjectTypeShape id="_8BAC6CE8-5DA4-4B3E-8FD8-F040A1867FE2" IsExpanded="true" AbsoluteBounds="4.4119113415479667, 1.40625, 0.39005115151405334, 0.22950302660465241">
 				<ormDiagram:Subject ref="_A5EAA4E0-A630-4630-8CAA-E8B78E7D4C1C" />
 			</ormDiagram:ObjectTypeShape>
 			<ormDiagram:ObjectTypeShape id="_06B3B12E-FA95-4DCF-9FB1-E4BA710CC6F0" IsExpanded="true" AbsoluteBounds="2.7137666411387422, 2.645833333333333, 1.2896889400482179, 0.22950302660465241">
@@ -14045,6 +14236,17 @@
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_19022C09-70B3-4D0C-BEAC-687AF2A48F88" />
 			</ormDiagram:FactTypeShape>
+			<ormDiagram:FactTypeShape id="_FE2BB1DC-8DF1-471C-AB4B-B92358C77555" IsExpanded="true" AbsoluteBounds="3.75, 2.0675000000000003, 0.38388888899236917, 0.24388888899236916">
+				<ormDiagram:RelativeShapes>
+					<ormDiagram:ReadingShape id="_F5466AE6-48CD-4BBE-B289-42489B52A541" IsExpanded="true" AbsoluteBounds="3.75, 2.3761404022946957, 0.26749989688396453, 0.12950302660465241">
+						<ormDiagram:Subject ref="_529B70C3-A1CC-47AA-9805-05AD38DA4C2F" />
+					</ormDiagram:ReadingShape>
+				</ormDiagram:RelativeShapes>
+				<ormDiagram:Subject ref="_46BDB253-0DB3-450C-B94A-145CAA8ADFF0" />
+			</ormDiagram:FactTypeShape>
+			<ormDiagram:ObjectTypeShape id="_1FFFCCF9-FB85-43DC-8EAC-1951437D0894" IsExpanded="true" AbsoluteBounds="5.351358875632287, 2.0854167461395265, 0.49448909878730779, 0.22950302660465241">
+				<ormDiagram:Subject ref="_7707D414-36CD-4409-AB21-B5BDFC1AD467" />
+			</ormDiagram:ObjectTypeShape>
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>

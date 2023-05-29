@@ -87,8 +87,10 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 	public String getReport() throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getReport\"(:loginname) AS queryresult";
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getReport\"(:lang, :closureId, :loginname) AS report";
 		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
 		return super.getReport();
 	}
 }

@@ -558,6 +558,33 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				
 				
 				
+				"CREATE OR REPLACE FUNCTION metamodel.\"fn_EntityTypeInstance_create\"(\n"
+				+ "	entitytypename character varying,\n"
+				+ "	loginname character varying)\n"
+				+ "    RETURNS integer\n"
+				+ "    LANGUAGE 'plpgsql'\n"
+				+ "    COST 100\n"
+				+ "    VOLATILE PARALLEL UNSAFE\n"
+				+ "AS $BODY$\n"
+				+ "	DECLARE\n"
+				+ "		entityTypeInstanceId integer;\n"
+				+ "	BEGIN\n"
+				+ "		SELECT \"metamodel\".\"fn_EntityTypeInstance_create\"(1, \n"
+				+ "														\"MeaningHasMeaningId\",\n"
+				+ "														loginname)\n"
+				+ "			FROM \"metamodel\".\"Meaning\"\n"
+				+ "			WHERE \"This_has_Name\" = entityTypeName\n"
+				+ "			INTO entityTypeInstanceId;\n"
+				+ "		IF entityTypeInstanceId > 0 THEN \n"
+				+ "			RETURN entityTypeInstanceId;\n"
+				+ "		ELSE \n"
+				+ "			RETURN -1;\n"
+				+ "		END IF;\n"
+				+ "	END;	\n"
+				+ "$BODY$;",
+				
+				
+				
 				"--withdraws a vote made by a user on an entity type instance\n"
 				+ "CREATE OR REPLACE FUNCTION \"metamodel\".\"fn_Vote_withdraw\"(\n"
 				+ "    loginname character varying,\n"

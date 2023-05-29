@@ -1,0 +1,39 @@
+User	Provider	Material	Quantity	Unit	Amount	Currency	Reference
+authorized user	mprov1	mm2	1.000001	pcs	-2000	mc1	abc123
+authorized user	mprov2	mm4	0.000001	ml	0.000001	mc2	
+unauthorized user	mprov1	mm7	1	lb	-2000	mc3	
+unauthorized user	mprov2	mm6	-2000	l	2000	mc2	abc123
+unauthorized user	mprov1	mm4	-2000	mg	-2000	mc1	
+authorized user	mprov2	mm6	1	mg	0.000001	mc3	abc123
+unauthorized user	mprov2	mm2	3000000	l	3000000	mc1	
+unauthorized user	mprov1	mm7	0.000001	ml	1	mc3	abc123
+authorized user	mprov1	mm4	3000000	lb	1.000001	mc2	abc123
+unauthorized user	mprov1	mm6	0.000001	pcs	2000	mc1	
+authorized user	mprov2	mm7	-2000	pcs	1	mc2	
+authorized user	mprov1	mm4	1	l	2000	mc3	
+authorized user	mprov2	mm6	3000000	lb	1	mc1	abc123
+unauthorized user	mprov1	mm7	3000000	ml	0.000001	mc1	
+authorized user	mprov1	mm2	1	mg	3000000	mc2	abc123
+unauthorized user	mprov2	mm6	3000000	pcs	-2000	mc3	abc123
+unauthorized user	mprov2	mm4	1.000001	mg	1	mc3	
+authorized user	mprov1	mm7	1.000001	l	0.000001	mc2	abc123
+authorized user	mprov1	mm6	1.000001	ml	3000000	mc3	
+authorized user	mprov1	mm2	2000	lb	3000000	mc3	
+unauthorized user	mprov2	mm4	-2000	pcs	3000000	mc3	
+authorized user	mprov1	mm2	-2000	lb	0.000001	mc2	abc123
+unauthorized user	mprov2	mm2	2000	ml	2000	mc1	abc123
+unauthorized user	mprov2	mm4	2000	l	-2000	mc2	
+authorized user	mprov1	mm7	3000000	mg	2000	mc3	
+authorized user	mprov2	mm7	2000	pcs	0.000001	mc2	abc123
+unauthorized user	mprov2	mm6	1.000001	l	1.000001	mc3	
+unauthorized user	mprov1	mm4	1.000001	lb	2000	mc3	
+authorized user	mprov2	mm2	0.000001	mg	1.000001	mc1	abc123
+authorized user	mprov2	mm7	0.000001	lb	3000000	mc3	abc123
+unauthorized user	mprov1	mm6	0.000001	l	-2000	mc1	abc123
+unauthorized user	mprov2	mm7	2000	pcs	1.000001	mc2	abc123
+unauthorized user	mprov2	mm6	-2000	ml	1.000001	mc3	abc123
+authorized user	mprov1	mm2	1	ml	1	mc1	
+unauthorized user	mprov1	mm4	1	pcs	1.000001	mc3	abc123
+unauthorized user	mprov2	mm6	2000	l	1	mc2	
+unauthorized user	mprov1	mm2	1	ml	-2000	mc2	
+authorized user	mprov1	mm6	2000	mg	0.000001	mc3	abc123

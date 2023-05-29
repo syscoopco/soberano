@@ -70,7 +70,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial1",
 									"mm1",
-									2,
+									1,
 									new BigDecimal(12800.00128));
 		}
 		catch(AssertionFailedError ex) {
@@ -87,7 +87,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial2",
 									"mm2",
-									1,
+									2,
 									new BigDecimal(1));
 		}
 		catch(AssertionFailedError ex) {
@@ -121,7 +121,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial4",
 									"mm4",
-									8,
+									4,
 									new BigDecimal(2));
 		}
 		catch(AssertionFailedError ex) {
@@ -138,7 +138,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial5",
 									"mm5",
-									1,
+									5,
 									new BigDecimal(4));
 		}
 		catch(AssertionFailedError ex) {
@@ -172,7 +172,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial7",
 									"mm7",
-									5,
+									8,
 									new BigDecimal(100));
 		}
 		catch(AssertionFailedError ex) {
@@ -189,7 +189,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial8",
 									"mm8",
-									6,
+									8,
 									new BigDecimal(3));
 		}
 		catch(AssertionFailedError ex) {
@@ -206,7 +206,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		try {
 			checkAcquirableMaterial("mmaterial9",
 									"mm9",
-									5,
+									1,
 									new BigDecimal(100.00001));
 		}
 		catch(AssertionFailedError ex) {
