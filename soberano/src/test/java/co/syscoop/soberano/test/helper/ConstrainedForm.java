@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Intbox;
@@ -35,6 +37,19 @@ public class ConstrainedForm {
 	
 	public void setComponentValue(Textbox comp, String value) {
 	
+		try {
+			comp.setValue(value);
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	public void setComponentValue(Datebox comp, Date value) {
+		
 		try {
 			comp.setValue(value);
 		} 

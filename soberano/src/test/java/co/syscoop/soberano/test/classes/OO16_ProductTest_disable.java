@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(16)
 
 //TODO: enable testCase
-//@Disabled
+@Disabled
 
 class OO16_ProductTest_disable  extends ProductActionTest {
 

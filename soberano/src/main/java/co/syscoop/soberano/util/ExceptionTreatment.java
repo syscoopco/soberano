@@ -7,8 +7,11 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
+import co.syscoop.soberano.exception.WrongDateTimeException;
 
 import org.springframework.dao.DuplicateKeyException;
 
@@ -43,6 +46,12 @@ public class ExceptionTreatment {
 				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
 				throw new DuplicateKeyException("");
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WrongDateTimeException"))
+				throw new WrongDateTimeException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ShiftHasBeenClosedException"))
+				throw new ShiftHasBeenClosedException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException"))
+				throw new SomeFieldsContainWrongValuesException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

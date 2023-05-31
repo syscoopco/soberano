@@ -6,7 +6,7 @@
 	<label self="@define(pageTitle)" value="${labels.pageMaterialExpenses.WindowTitle}" sclass="PageTitle"/>
 	
 	<window self="@define(inputForm)" contentStyle="overflow:auto">
-		<hbox id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.MaterialsViewModelComposer">
+		<hbox id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.MaterialExpensesComposer">
 			<datebox id="dateExpenseDate" compact="false" buttonVisible="true" placeholder="${labels.placeholder.date}"/>
 			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProviderSelectionViewModel')">
 				<combobox id="cmbProvider" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.provider}">
@@ -24,9 +24,11 @@
 					</template>
 				</combobox>		
 			</hbox>
-			<decimalbox format="####.######" id="decQuantity" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+			<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+			<decimalbox visible="false" format="####.######" id="decQuantity" hflex="1" placeholder="${labels.placeholder.quantity}"/>
 			<combobox readonly="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
-			<decimalbox format="####.########" id="decAmount" hflex="1" placeholder="${labels.placeholder.amount}"/>
+			<textbox id="txtAmountExpression" hflex="1" placeholder="${labels.placeholder.amount}"/>
+			<decimalbox visible="false" format="####.########" id="decAmount" hflex="1" placeholder="${labels.placeholder.amount}"/>
 			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CurrencySelectionViewModel')">
 				<combobox id="cmbCurrency" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.currency}">
 					<template name="model">

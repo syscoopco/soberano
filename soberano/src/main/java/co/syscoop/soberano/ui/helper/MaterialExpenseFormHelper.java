@@ -1,8 +1,6 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
-import java.util.Date;
-
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Combobox;
@@ -36,7 +34,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 		Comboitem cmbiMaterial = ((Combobox) boxDetails.query("#cmbMaterial")).getSelectedItem();
 		Comboitem cmbiUnit = ((Combobox) boxDetails.query("#cmbUnit")).getSelectedItem();
 		Comboitem cmbiCurrency = ((Combobox) boxDetails.query("#cmbCurrency")).getSelectedItem();
-		Date dateExpenseDate = ((Datebox) boxDetails.query("#dateExpenseDate")).getValue();
+		Datebox dateExpenseDate = ((Datebox) boxDetails.query("#dateExpenseDate"));
 		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
 		Decimalbox decAmount = (Decimalbox) boxDetails.query("#decAmount");
 		Textbox txtReference = (Textbox) boxDetails.query("#txtReference");
@@ -45,13 +43,13 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 			cmbiMaterial == null ||
 			cmbiUnit == null ||
 			cmbiCurrency == null ||
-			dateExpenseDate == null ||
+			dateExpenseDate.getValue() == null ||
 			decQuantity.getValue() == null ||
 			decAmount.getValue() == null) {
 			throw new SomeFieldsContainWrongValuesException();
 		}
 		else {
-			Integer qryResult = (new MaterialExpense(dateExpenseDate,
+			Integer qryResult = (new MaterialExpense(dateExpenseDate.getValue(),
 										((DomainObject) cmbiProvider.getValue()).getId(),
 										((DomainObject) cmbiMaterial.getValue()).getId(),
 										decQuantity.getValue(),

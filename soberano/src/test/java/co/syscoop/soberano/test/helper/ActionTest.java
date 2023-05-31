@@ -7,6 +7,7 @@ import org.zkoss.zats.mimic.operation.InputAgent;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
+import org.zkoss.zul.Hbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.ExceptionTreatment;
@@ -15,9 +16,17 @@ public class ActionTest {
 	
 	protected static ComponentAgent cmbIntelliSearchAgent = null;
 	protected static Combobox cmbIntelliSearch = null;
+	
+	protected static ComponentAgent boxDetailsAgent = null;
+	protected static Hbox boxDetails = null;
 
 	protected void clickOnRecordButton(DesktopAgent desktop) {
 		ComponentAgent btnRecord = desktop.query("south").query("button");
+		btnRecord.click();			
+	}
+	
+	protected void clickOnInputFormRecordButton(DesktopAgent desktop) {
+		ComponentAgent btnRecord = desktop.query("datebox").query("#boxDetails").query("#btnRecord");
 		btnRecord.click();			
 	}
 	
@@ -66,5 +75,10 @@ public class ActionTest {
 	protected void testPasswordsMustMatchException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.PasswordsMustMatchException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.PasswordsMustMatchException can be caught here.");
+	}
+	
+	protected void testSomeFieldsContainWrongValuesException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException can be caught here.");
 	}
 }
