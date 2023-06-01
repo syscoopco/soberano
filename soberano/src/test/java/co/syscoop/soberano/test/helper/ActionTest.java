@@ -81,4 +81,14 @@ public class ActionTest {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException can be caught here.");
 	}
+	
+	protected void testShiftHasBeenClosedException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.ShiftHasBeenClosedException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.ShiftHasBeenClosedException can be caught here.");
+	}
+	
+	protected void testWrongDateTimeException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.WrongDateTimeException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WrongDateTimeException can be caught here.");
+	}
 }

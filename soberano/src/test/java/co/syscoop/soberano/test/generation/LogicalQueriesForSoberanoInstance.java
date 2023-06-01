@@ -4893,7 +4893,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				report := report || expRecord.\"payeeName\" || chr(13);\n"
 						+ "				report := report || expRecord.\"conceptName\" || chr(13);\n"
 						+ "				report := report || expRecord.\"description\" || chr(13);\n"
-						+ "				report := report || expRecord.\"expenseAmount\" || chr(13);\n"
+						+ "				report := report || expRecord.\"expenseAmount\" || ' ';\n"
 						+ "				report := report || expRecord.\"expenseCurrency\" || chr(13);\n"
 						+ "				report := report || expRecord.\"reference\" || chr(13) || chr(13);\n"
 						+ "			END LOOP;\n"

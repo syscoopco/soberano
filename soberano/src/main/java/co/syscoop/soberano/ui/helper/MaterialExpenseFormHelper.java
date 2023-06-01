@@ -53,7 +53,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 										((DomainObject) cmbiProvider.getValue()).getId(),
 										((DomainObject) cmbiMaterial.getValue()).getId(),
 										decQuantity.getValue(),
-										cmbiUnit.getValue(),
+										Integer.parseInt(cmbiUnit.getValue()),
 										decAmount.getValue(),
 										((DomainObject) cmbiCurrency.getValue()).getId(),
 										txtReference.getText())).record();
