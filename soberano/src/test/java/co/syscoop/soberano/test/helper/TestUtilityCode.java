@@ -15,7 +15,9 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.DefaultTreeNode;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.ListModel;
+import org.zkoss.zul.Row;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treecell;
@@ -169,4 +171,43 @@ public class TestUtilityCode {
 					+ ". Expected number: " + expectedFinalObjectCount.toString()
 					+ ". Actual number: " + new Integer(treeObjects.getTreechildren().getItemCount()).toString());
 	};
+	
+	public static void testExpense(Row row, 
+									String expectedPayeeName,
+									String expectedConceptName,
+									String expectedDescription,
+									Double expectedAmount,
+									String expectedCurrency,
+									String expectedReference) {
+	
+		//payee
+		if (!((Label) row.getChildren().get(1)).getValue().equals(expectedPayeeName)) {
+			fail("Wrong payee for expense with row index " + row.getIndex() + ". Expected: " + expectedPayeeName + ". It was: " + ((Label) row.getChildren().get(1)).getValue());
+		}
+		
+		//concept
+		if (!((Label) row.getChildren().get(2)).getValue().equals(expectedConceptName)) {
+			fail("Wrong concept for expense with row index " + row.getIndex() + ". Expected: " + expectedConceptName + ". It was: " + ((Label) row.getChildren().get(2)).getValue());
+		}
+		
+		//description
+		if (!((Label) row.getChildren().get(3)).getValue().equals(expectedDescription)) {
+			fail("Wrong description for expense with row index " + row.getIndex() + ". Expected: " + expectedDescription + ". It was: " + ((Label) row.getChildren().get(3)).getValue());
+		}
+		
+		//amount
+		if (Math.abs(Double.parseDouble(((Label) row.getChildren().get(4)).getValue()) - expectedAmount) > 0.00000001) {
+			fail("Wrong amount for expense with row index " + row.getIndex() + ". Expected: " + expectedAmount + ". It was: " + ((Label) row.getChildren().get(4)).getValue());
+		}
+
+		//currency
+		if (!((Label) row.getChildren().get(5)).getValue().equals(expectedCurrency)) {
+			fail("Wrong currency for expense with row index " + row.getIndex() + ". Expected: " + expectedCurrency + ". It was: " + ((Label) row.getChildren().get(5)).getValue());
+		}
+		
+		//reference
+		if (!((Label) row.getChildren().get(6)).getValue().equals(expectedReference)) {
+			fail("Wrong reference for expense with row index " + row.getIndex() + ". Expected: " + expectedReference + ". It was: " + ((Label) row.getChildren().get(6)).getValue());
+		}
+	}
 }
