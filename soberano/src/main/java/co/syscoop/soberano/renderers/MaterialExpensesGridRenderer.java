@@ -59,14 +59,18 @@ public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
 		btnPrint.setWidth("90%");
 		btnPrint.setDisabled(true);
+		btnPrint.setId(btnPrint.getUuid());
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
 		btnUpload.setWidth("90%");
 		btnUpload.setDisabled(true);
+		btnUpload.setId(btnUpload.getUuid());
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
+		btnDocument.setId(btnDocument.getUuid());
 		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
 		btnCancel.setWidth("90%");
+		btnCancel.setId(btnCancel.getUuid());
 		
 		//add listener to cancel the expenditure
 		btnCancel.addEventListener("onClick", new EventListener() {
