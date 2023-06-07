@@ -462,7 +462,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date(); //in closedShift, current day
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -5);
+			cal.add(Calendar.DAY_OF_YEAR, -6);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			

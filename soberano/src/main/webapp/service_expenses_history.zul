@@ -4,13 +4,13 @@
 	<include src="/style.zul"/>
 	<zscript>
 		<![CDATA[
-	  		co.syscoop.soberano.models.MaterialExpensesGridModel model = new co.syscoop.soberano.models.MaterialExpensesGridModel();
-	  		co.syscoop.soberano.renderers.MaterialExpensesGridRenderer renderer = new co.syscoop.soberano.renderers.MaterialExpensesGridRenderer();
+	  		co.syscoop.soberano.models.ServiceExpensesGridModel model = new co.syscoop.soberano.models.ServiceExpensesGridModel();
+	  		co.syscoop.soberano.renderers.ServiceExpensesGridRenderer renderer = new co.syscoop.soberano.renderers.ServiceExpensesGridRenderer();
 		]]>
 	</zscript>
 	<expensesgrid gridModel="${model}" 
 					gridRenderer="${renderer}" 
-					concept="${labels.caption.columnHeader.material}"
-					conceptVisible="true"
+					concept="${labels.caption.columnHeader.service}"
+					conceptVisible="false"
 					payee="${labels.caption.columnHeader.provider}"></expensesgrid>
 </zk>

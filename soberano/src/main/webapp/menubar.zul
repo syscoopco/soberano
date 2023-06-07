@@ -15,7 +15,7 @@
 				<menu label="${labels.menuItem.Expenses}" sclass="BarMenu">
 					<menupopup>
 						<menuitem label="${labels.menuItem.Materials}" href="material_expenses.zul"/>
-						<menuitem label="${labels.menuItem.Services}" href="thirdparty_service_expenses.zul"/>
+						<menuitem label="${labels.menuItem.Services}" href="service_expenses.zul"/>
 						<menuitem label="${labels.menuItem.Payroll}" href="payroll.zul"/>
 					</menupopup>
 				</menu>

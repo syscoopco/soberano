@@ -1,0 +1,6 @@
+User: authorized user,unauthorized user able to read providers,unauthorized user unable to read providers
+Provider: mprov1,mprov2
+Service: ms1,ms2,ms3
+Amount: 0.000001,1,2000,3000000,1.000001,-2000
+Currency: mc1,mc2,mc3
+Reference: abc123,

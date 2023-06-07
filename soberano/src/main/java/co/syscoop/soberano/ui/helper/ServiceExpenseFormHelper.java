@@ -10,55 +10,46 @@ import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.domain.tracked.MaterialExpense;
+import co.syscoop.soberano.domain.tracked.ServiceExpense;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
-import co.syscoop.soberano.models.MaterialExpensesGridModel;
+import co.syscoop.soberano.models.ServiceExpensesGridModel;
 
-public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectFormHelper {
+public class ServiceExpenseFormHelper extends BusinessActivityTrackedObjectFormHelper {
 
 	@Override
 	public void cleanForm(Box boxDetails) {
 		
 		Clients.scrollIntoView(boxDetails.query("#dateExpenseDate"));
-		((Decimalbox) boxDetails.query("#decQuantity")).setValue((BigDecimal) null);
-		((Textbox) boxDetails.query("#txtQuantityExpression")).setValue("");
 		((Decimalbox) boxDetails.query("#decAmount")).setValue((BigDecimal) null);
 		((Textbox) boxDetails.query("#txtAmountExpression")).setValue("");
 		((Textbox) boxDetails.query("#txtReference")).setText("");
-		Grid grd = (Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid");
-		grd.setModel(new MaterialExpensesGridModel());
+		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new ServiceExpensesGridModel());
 	}
 	
 	@Override
 	public Integer recordFromForm(Box boxDetails) throws Exception {
 		
 		Comboitem cmbiProvider = ((Combobox) boxDetails.query("#cmbProvider")).getSelectedItem();
-		Comboitem cmbiMaterial = ((Combobox) boxDetails.query("#cmbMaterial")).getSelectedItem();
-		Comboitem cmbiUnit = ((Combobox) boxDetails.query("#cmbUnit")).getSelectedItem();
+		Comboitem cmbiService = ((Combobox) boxDetails.query("#cmbService")).getSelectedItem();
 		Comboitem cmbiCurrency = ((Combobox) boxDetails.query("#cmbCurrency")).getSelectedItem();
 		Datebox dateExpenseDate = ((Datebox) boxDetails.query("#dateExpenseDate"));
-		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
 		Decimalbox decAmount = (Decimalbox) boxDetails.query("#decAmount");
 		Textbox txtReference = (Textbox) boxDetails.query("#txtReference");
 		
 		if (cmbiProvider == null ||
-			cmbiMaterial == null ||
-			cmbiUnit == null ||
+			cmbiService == null ||
 			cmbiCurrency == null ||
 			dateExpenseDate.getValue() == null ||
-			decQuantity.getValue() == null ||
 			decAmount.getValue() == null) {
 			throw new SomeFieldsContainWrongValuesException();
 		}
 		else {
-			Integer qryResult = (new MaterialExpense(dateExpenseDate.getValue(),
+			Integer qryResult = (new ServiceExpense(dateExpenseDate.getValue(),
 										((DomainObject) cmbiProvider.getValue()).getId(),
-										((DomainObject) cmbiMaterial.getValue()).getId(),
-										decQuantity.getValue(),
-										Integer.parseInt(cmbiUnit.getValue()),
+										((DomainObject) cmbiService.getValue()).getId(),
 										decAmount.getValue(),
 										((DomainObject) cmbiCurrency.getValue()).getId(),
 										txtReference.getText())).record();

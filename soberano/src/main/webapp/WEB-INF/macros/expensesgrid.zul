@@ -1,12 +1,12 @@
 <zk>
 	<vbox vflex="1" hflex="1">
-		<grid id="grd" vflex="1" mold="paging" model="${arg.gridModel}" rowRenderer="${arg.gridRenderer}">
+		<grid id="grd" height="100%" mold="paging" model="${arg.gridModel}" rowRenderer="${arg.gridRenderer}">
 			<columns sizable="true">
 				<column align="right" label="${labels.caption.columnHeader.expenseDate}" sort="auto(expenseDate)">
 				</column>
 				<column align="left" label="${arg.payee}" sort="auto(payeeName)">
 				</column>
-				<column align="left" label="${arg.concept}" sort="auto(conceptName)">
+				<column align="left" label="${arg.concept}" sort="auto(conceptName)" visible="${arg.conceptVisible}">
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.description}" sort="auto(description)">
 				</column>

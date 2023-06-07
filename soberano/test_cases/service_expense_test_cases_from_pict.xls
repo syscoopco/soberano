@@ -1,0 +1,20 @@
+User	Provider	Service	Amount	Currency	Reference
+unauthorized user able to read providers	mprov2	ms1	-2000	mc1	abc123
+unauthorized user unable to read providers	mprov1	ms2	-2000	mc3	
+unauthorized user able to read providers	mprov1	ms3	0.000001	mc2	
+unauthorized user unable to read providers	mprov2	ms2	0.000001	mc1	abc123
+authorized user	mprov1	ms1	0.000001	mc3	abc123
+authorized user	mprov2	ms3	2000	mc2	abc123
+authorized user	mprov1	ms3	-2000	mc1	
+unauthorized user unable to read providers	mprov2	ms1	3000000	mc2	
+unauthorized user able to read providers	mprov2	ms3	3000000	mc3	abc123
+unauthorized user able to read providers	mprov1	ms2	1.000001	mc1	abc123
+unauthorized user unable to read providers	mprov2	ms3	1.000001	mc3	
+authorized user	mprov1	ms2	3000000	mc1	
+unauthorized user unable to read providers	mprov1	ms2	1	mc2	
+unauthorized user unable to read providers	mprov2	ms2	-2000	mc2	
+unauthorized user unable to read providers	mprov1	ms2	2000	mc1	
+authorized user	mprov1	ms1	1.000001	mc2	
+authorized user	mprov2	ms3	1	mc3	abc123
+unauthorized user able to read providers	mprov1	ms1	2000	mc3	
+unauthorized user able to read providers	mprov2	ms1	1	mc1	

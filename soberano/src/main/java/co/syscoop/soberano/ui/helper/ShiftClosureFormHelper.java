@@ -3,11 +3,13 @@ package co.syscoop.soberano.ui.helper;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Grid;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
+import co.syscoop.soberano.models.ShiftClosuresGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -18,7 +20,7 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 		
 		Clients.scrollIntoView(boxDetails);
 		((Textbox) boxDetails.query("#txtReport")).setText("");
-		super.cleanForm(boxDetails);
+		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new ShiftClosuresGridModel());
 	}
 	
 	@Override
