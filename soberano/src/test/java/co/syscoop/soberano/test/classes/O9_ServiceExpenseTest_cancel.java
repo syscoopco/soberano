@@ -21,17 +21,17 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Row;
 
-import co.syscoop.soberano.test.helper.MaterialExpenseActionTest;
+import co.syscoop.soberano.test.helper.ServiceExpenseActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(12)
+@Order(9)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
+class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -62,12 +62,12 @@ class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
 	final void testCase1() {
 
 		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
-			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(8).query("vbox").getChildren().get(3);
+			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(5).query("vbox").getChildren().get(3);
 			ComponentAgent btnCancelAgent = desktop.query("grid").query("#" + btnCancel.getId());
 			btnCancelAgent.click();
 			btnCancelAgent.click();
@@ -87,12 +87,12 @@ class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
 	final void testCase2() {
 
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
-			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(8).query("vbox").getChildren().get(3);
+			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(5).query("vbox").getChildren().get(3);
 			ComponentAgent btnCancelAgent = desktop.query("grid").query("#" + btnCancel.getId());
 			btnCancelAgent.click();
 			btnCancelAgent.click();
@@ -112,12 +112,12 @@ class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
 	final void testCase3() {
 
 		SpringUtility.setLoggedUserForTesting("user14@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
-			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(8).query("vbox").getChildren().get(3);
+			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(5).query("vbox").getChildren().get(3);
 			ComponentAgent btnCancelAgent = desktop.query("grid").query("#" + btnCancel.getId());
 			btnCancelAgent.click();
 			btnCancelAgent.click();
@@ -136,13 +136,13 @@ class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
 	@Order(4)
 	final void testCase4() {
 
-		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
+		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
-			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(8).query("vbox").getChildren().get(3);
+			Button btnCancel = (Button) grd.getRows().getChildren().get(4).getChildren().get(5).query("vbox").getChildren().get(3);
 			ComponentAgent btnCancelAgent = desktop.query("grid").query("#" + btnCancel.getId());
 			btnCancelAgent.click();
 			btnCancelAgent.click();
@@ -160,60 +160,39 @@ class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
 	final void testCase5() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(7, grd.getRows().getChildren().size(), "Wrong count of recorded material expenses.");
+			assertEquals(4, grd.getRows().getChildren().size(), "Wrong count of recorded service expenses.");
 			
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(0), 
-										"mprov1",
-										"mmaterial6",
-										"2000.00000000 mg",
-										0.000001,
+										"mprov2",
+										"",
+										"mservice3 : ms3",
+										1.0,
 										"mc3",
 										"abc123");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(1), 
-										"mprov2",
-										"mmaterial2",
-										"0.00000100 mg",
+										"mprov1",
+										"",
+										"mservice1 : ms1",
 										1.000001,
-										"mc1",
-										"abc123");
+										"mc2",
+										"");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(2), 
 										"mprov1",
-										"mmaterial2",
-										"2000.00000000 lb",
+										"",
+										"mservice2 : ms2",
 										3000000.0,
-										"mc3",
+										"mc1",
 										"");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(3), 
-										"mprov1",
-										"mmaterial7",
-										"1.00000100 l",
-										0.000001,
-										"mc2",
-										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(4), 
 										"mprov2",
-										"mmaterial6",
-										"3000000.00000000 lb",
-										1.0,
-										"mc1",
-										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(5), 
-										"mprov1",
-										"mmaterial4",
-										"3000000.00000000 lb",
-										1.000001,
+										"",
+										"mservice3 : ms3",
+										2000.0,
 										"mc2",
-										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(6), 
-										"mprov2",
-										"mmaterial6",
-										"1.00000000 mg",
-										0.000001,
-										"mc3",
 										"abc123");
 		}
 		catch(AssertionFailedError ex) {
