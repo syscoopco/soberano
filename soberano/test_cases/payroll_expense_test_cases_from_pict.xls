@@ -1,0 +1,20 @@
+User	Worker	Amount	Currency	Reference
+unauthorized user able to read workers	user1	-2000	mc1	abc123
+unauthorized user unable to read workers	user2	1	mc3	
+unauthorized user able to read workers	user3	0.000001	mc2	
+authorized user	user2	2000	mc2	abc123
+unauthorized user unable to read workers	user1	3000000	mc2	abc123
+authorized user	user3	1	mc1	
+unauthorized user able to read workers	user1	1	mc3	abc123
+authorized user	user3	-2000	mc3	
+unauthorized user unable to read workers	user3	1.000001	mc2	abc123
+authorized user	user1	1.000001	mc1	
+unauthorized user unable to read workers	user2	-2000	mc2	
+unauthorized user able to read workers	user2	3000000	mc1	
+unauthorized user unable to read workers	user3	2000	mc1	
+unauthorized user able to read workers	user2	1.000001	mc3	abc123
+unauthorized user able to read workers	user2	1	mc2	
+authorized user	user3	3000000	mc3	
+unauthorized user unable to read workers	user1	0.000001	mc3	abc123
+unauthorized user able to read workers	user1	2000	mc3	
+authorized user	user2	0.000001	mc1	

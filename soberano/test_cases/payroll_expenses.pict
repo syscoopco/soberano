@@ -1,0 +1,5 @@
+User: authorized user,unauthorized user able to read workers,unauthorized user unable to read workers
+Worker: user1,user2,user3
+Amount: 0.000001,1,2000,3000000,1.000001,-2000
+Currency: mc1,mc2,mc3
+Reference: abc123,

@@ -14,7 +14,7 @@ import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public /*abstract*/ class ServiceExpensesComposer extends SelectorComposer {
+public /*abstract*/ class ExpenseAmountComposer extends SelectorComposer {
 	
 	@Wire
 	private Decimalbox decAmount;

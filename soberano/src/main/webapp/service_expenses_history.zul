@@ -12,5 +12,6 @@
 					gridRenderer="${renderer}" 
 					concept="${labels.caption.columnHeader.service}"
 					conceptVisible="false"
+					descriptionVisible="true"
 					payee="${labels.caption.columnHeader.provider}"></expensesgrid>
 </zk>

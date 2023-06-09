@@ -1,0 +1,17 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<?component name="expensesgrid" macroURI="./WEB-INF/macros/expensesgrid.zul"?>
+<zk>
+	<include src="/style.zul"/>
+	<zscript>
+		<![CDATA[
+	  		co.syscoop.soberano.models.PayrollExpensesGridModel model = new co.syscoop.soberano.models.PayrollExpensesGridModel();
+	  		co.syscoop.soberano.renderers.PayrollExpensesGridRenderer renderer = new co.syscoop.soberano.renderers.PayrollExpensesGridRenderer();
+		]]>
+	</zscript>
+	<expensesgrid gridModel="${model}" 
+					gridRenderer="${renderer}" 
+					concept="${labels.caption.columnHeader.payroll}"
+					conceptVisible="false"
+					descriptionVisible="false"
+					payee="${labels.caption.columnHeader.worker}"></expensesgrid>
+</zk>

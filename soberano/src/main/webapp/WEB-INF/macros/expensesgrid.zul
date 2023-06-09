@@ -8,7 +8,7 @@
 				</column>
 				<column align="left" label="${arg.concept}" sort="auto(conceptName)" visible="${arg.conceptVisible}">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.description}" sort="auto(description)">
+				<column align="left" label="${labels.caption.columnHeader.description}" sort="auto(description)" visible="${arg.descriptionVisible}">
 				</column>
 				<column align="right" label="${labels.caption.columnHeader.amount}" sort="auto(expenseAmount)">
 				</column>

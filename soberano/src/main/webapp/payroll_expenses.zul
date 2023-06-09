@@ -1,23 +1,15 @@
-<?page title="${labels.pageServiceExpenses.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?page title="${labels.pagePayrollExpenses.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-grid.zul"?>
 
 <zk>
 	<include src="/style.zul"/>
-	<label self="@define(pageTitle)" value="${labels.pageServiceExpenses.WindowTitle}" sclass="PageTitle"/>
+	<label self="@define(pageTitle)" value="${labels.pagePayrollExpenses.WindowTitle}" sclass="PageTitle"/>
 	
 	<window self="@define(inputForm)" contentStyle="overflow:auto">
 		<hbox id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.ExpenseAmountComposer">
 			<datebox id="dateExpenseDate" compact="false" buttonVisible="true" placeholder="${labels.placeholder.date}"/>
-			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProviderSelectionViewModel')">
-				<combobox id="cmbProvider" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.provider}">
-					<template name="model">
-						<comboitem label="@load(each.name)" value="@load(each)">
-						</comboitem>
-					</template>
-				</combobox>		
-			</hbox>
-			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ServiceSelectionViewModel')">
-				<combobox id="cmbService" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.service}">
+			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModel')">
+				<combobox id="cmbWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
 					<template name="model">
 						<comboitem label="@load(each.name)" value="@load(each)">
 						</comboitem>
@@ -35,8 +27,8 @@
 				</combobox>		
 			</hbox>
 			<textbox maxlength="100" id="txtReference" hflex="1" placeholder="${labels.placeholder.reference}"/>
-			<button id="btnRecord" label="+" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.RecordServiceExpenseButtonComposer"></button>
+			<button id="btnRecord" label="+" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.RecordPayrollExpenseButtonComposer"></button>
 		</hbox>
 	</window>
-	<include id="incGrid" self="@define(grid)" src="/service_expenses_history.zul"></include>
+	<include id="incGrid" self="@define(grid)" src="/payroll_expenses_history.zul"></include>
 </zk>
