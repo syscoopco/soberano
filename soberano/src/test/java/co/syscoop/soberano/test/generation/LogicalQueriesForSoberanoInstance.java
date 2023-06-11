@@ -660,7 +660,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (6, 'System admin', 6001),\n"
 						+ "				(6, 'System admin', 6002),\n"
-						+ "				(6, 'System admin', 6003),\n"
+						+ "				(6, 'System admin', 6003),\n"						
+						+ "				(6, 'Shift manager', 6004),\n"	
+						+ "				(6, 'Manager', 6004),\n"
+						+ "				(6, 'Accounter', 6004),\n"
 						+ "				(6, 'Auditor', 6004);",
 						
 						

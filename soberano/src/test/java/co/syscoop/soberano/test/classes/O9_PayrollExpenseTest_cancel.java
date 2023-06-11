@@ -21,17 +21,17 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Row;
 
-import co.syscoop.soberano.test.helper.ServiceExpenseActionTest;
+import co.syscoop.soberano.test.helper.PayrollExpenseActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(9)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
+class O9_PayrollExpenseTest_cancel extends PayrollExpenseActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -62,7 +62,7 @@ class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	final void testCase1() {
 
 		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
@@ -87,7 +87,7 @@ class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	final void testCase2() {
 
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
@@ -112,7 +112,7 @@ class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	final void testCase3() {
 
 		SpringUtility.setLoggedUserForTesting("user14@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
@@ -137,7 +137,7 @@ class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	final void testCase4() {
 
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
@@ -160,40 +160,40 @@ class O9_ServiceExpenseTest_cancel extends ServiceExpenseActionTest {
 	final void testCase5() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(4, grd.getRows().getChildren().size(), "Wrong count of recorded service expenses.");
+			assertEquals(4, grd.getRows().getChildren().size(), "Wrong count of recorded payroll expenses.");
 			
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(0), 
-										"mprov2",
-										"",
-										"mservice3 : ms3",
-										1.0,
-										"mc3",
-										"abc123");
+					"user2fn user2ln : user2@soberano.syscoop.co",
+					"",
+					"",
+					0.000001,
+					"mc1",
+					"");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(1), 
-										"mprov1",
-										"",
-										"mservice1 : ms1",
-										1.000001,
-										"mc2",
-										"");
+								"user3fn user3ln : user3@soberano.syscoop.co",
+								"",
+								"",
+								3000000.0,
+								"mc3",
+								"");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(2), 
-										"mprov1",
-										"",
-										"mservice2 : ms2",
-										3000000.0,
-										"mc1",
-										"");
+								"user1fn user1ln : user1@soberano.syscoop.co",
+								"",
+								"",
+								1.000001,
+								"mc1",
+								"");
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(3), 
-										"mprov2",
-										"",
-										"mservice3 : ms3",
-										2000.0,
-										"mc2",
-										"abc123");
+								"user3fn user3ln : user3@soberano.syscoop.co",
+								"",
+								"",
+								1.0,
+								"mc1",
+								"");
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
