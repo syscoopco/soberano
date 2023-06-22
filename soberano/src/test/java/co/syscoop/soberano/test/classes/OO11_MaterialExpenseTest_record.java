@@ -38,7 +38,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(11)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
@@ -462,7 +462,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date(); //in closedShift, current day
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -6);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			

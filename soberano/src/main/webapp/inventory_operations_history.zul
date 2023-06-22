@@ -1,0 +1,30 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<include src="/style.zul"/>
+	<zscript>
+		<![CDATA[
+	  		co.syscoop.soberano.models.InventoryOperationsGridModel model = new co.syscoop.soberano.models.InventoryOperationsGridModel();
+	  		co.syscoop.soberano.renderers.InventoryOperationsGridRenderer renderer = new co.syscoop.soberano.renderers.InventoryOperationsGridRenderer();
+		]]>
+	</zscript>
+	<vbox hflex="1">
+		<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+			<columns sizable="true">
+				<column align="right" label="${labels.caption.columnHeader.operationId}" sort="auto(operationId)" sortDirection="descending">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.fromWarehouse}" sort="auto(fromWarehouse)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.toWarehouse}" sort="auto(toWarehouse)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.worker}" sort="auto(worker)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.description}">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)">
+				</column>				
+				<column align="center" label="${labels.caption.columnHeader.action}">
+				</column>
+			</columns>
+		</grid>
+	</vbox>
+</zk>

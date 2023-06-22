@@ -10,6 +10,7 @@ import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 
+import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
@@ -26,10 +27,10 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorComposer {
 
 	private BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
-	private Box boxDetails = null;
+	protected Box boxDetails = null;
 	
 	@Wire
-	private Button btnRecord;
+	protected Button btnRecord;
 	
 	public BusinessActivityTrackedObjectRecordButtonComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {
 		this.trackedObjectFormHelper = trackedObjectFormHelper;
@@ -56,6 +57,12 @@ public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorC
 		}
 		catch(ConfirmationRequiredException ex) {
 			return;
+		}
+		catch(AtLeastOneInventoryItemMustBeMovedException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.atLeastOneInventoryItemMustBeMoved"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
 		}
 		catch(WrongDateTimeException ex) {
 			ExceptionTreatment.logAndShow(ex, 

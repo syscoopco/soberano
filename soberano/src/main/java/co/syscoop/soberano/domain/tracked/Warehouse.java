@@ -57,7 +57,7 @@ public class Warehouse extends TrackedObject {
 		this.setIsProcurementWarehouse(isProcurementWarehouse);
 		this.setIsSalesWarehouse(isSalesWarehouse);
 		this.entryProcesses = entryProcesses;
-		fillEntryProcessIds();;	
+		fillEntryProcessIds();
 	}
 	
 	public Warehouse() {

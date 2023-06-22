@@ -23,7 +23,7 @@
 					<menupopup>
 						<menuitem label="${labels.menuItem.Stock}" href="stock.zul" disabled="${pageScope.restrict_access}"/>
 						<menuitem label="${labels.menuItem.Process}" href="process.zul"/>
-						<menuitem label="${labels.menuItem.InventoryOperation}" href="inventory_operation.zul"/>
+						<menuitem label="${labels.menuItem.InventoryOperation}" href="inventory_operations.zul"/>
 					</menupopup>
 				</menu>				
 				<menu label="${labels.menuItem.Reports}" sclass="BarMenu">

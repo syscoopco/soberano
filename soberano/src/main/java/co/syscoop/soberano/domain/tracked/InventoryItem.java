@@ -2,6 +2,7 @@ package co.syscoop.soberano.domain.tracked;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -11,13 +12,20 @@ public class InventoryItem extends TrackedObject {
 	private BigDecimal minimumInventoryLevel = new BigDecimal(0.0);
 	private Integer unit = 1;
 	
-	public InventoryItem() {}
+	public InventoryItem() {
+		getAllQuery = "SELECT * FROM soberano.\"" + "fn_InventoryItem_getAll\"(:loginname)";
+		getAllQueryNamedParameters = new HashMap<String, Object>();
+	}
 	
 	public InventoryItem(Integer id) {
 		super(id);
 	}
 	
 	public InventoryItem(Integer id, String name) {
+		super(id, name);
+	}
+	
+	public InventoryItem(String id, String name) {
 		super(id, name);
 	}
 	

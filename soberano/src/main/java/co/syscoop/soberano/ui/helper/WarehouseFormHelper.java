@@ -27,7 +27,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 	
 	private ArrayList<Process> entryProcesses = new ArrayList<Process>();
 	
-	static public void fillEntryProcessesArray(ArrayList<Process> entryProcesses,
+	static private void fillEntryProcessesArray(ArrayList<Process> entryProcesses,
 											Include incDetails) {
 		Treechildren tchdnEntryProcesses = (Treechildren) incDetails.query("#tchdnEntryProcesses");
 		entryProcesses.clear();

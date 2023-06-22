@@ -17,6 +17,10 @@ public class Unit extends TrackedObject {
 		super(id);
 	}
 	
+	public Unit(Integer id, String name) {
+		super(id, name);
+	}
+	
 	public Unit(Integer id, 
 					Integer entityTypeInstanceId, 
 					String name,
@@ -71,11 +75,19 @@ public class Unit extends TrackedObject {
 	public Integer getCount() throws SQLException {
 		return 0;
 	}
-		
+	
 	public List<DomainObject> getAll(Integer materialId) throws SQLException {
 		String qryStr = "SELECT * FROM soberano.\"fn_Unit_getAll\"(:materialId, :lang, :loginname)";
 		HashMap<String, Object> qryNamedParameters = new HashMap<String, Object>();
 		qryNamedParameters.put("materialId", materialId);
+		qryNamedParameters.put("lang",  Locales.getCurrent().getLanguage());
+		return trackedObjectDao.getAll(qryStr, qryNamedParameters, false);
+	}
+		
+	public List<DomainObject> getAllForInventoryItem(String inventoryItemCode) throws SQLException {
+		String qryStr = "SELECT * FROM soberano.\"fn_Unit_getAllForInventoryItem\"(:inventoryItemCode, :lang, :loginname)";
+		HashMap<String, Object> qryNamedParameters = new HashMap<String, Object>();
+		qryNamedParameters.put("inventoryItemCode", inventoryItemCode);
 		qryNamedParameters.put("lang",  Locales.getCurrent().getLanguage());
 		return trackedObjectDao.getAll(qryStr, qryNamedParameters, false);
 	}

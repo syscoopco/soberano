@@ -21,4 +21,6 @@ public abstract class BusinessActivityTrackedObjectFormHelper {
 	public void setTrackedObject(BusinessActivityTrackedObject trackedObject) {
 		this.trackedObject = trackedObject;
 	}
+
+	
 }

@@ -65,7 +65,7 @@ public class WorkerFormHelper extends TrackedObjectFormHelper {
 		return pwd;
 	}
 	
-	static public void fillAssigmentArrays(ArrayList<Responsibility> responsibilities, 
+	static private void fillAssigmentArrays(ArrayList<Responsibility> responsibilities, 
 											ArrayList<Authority> authorities,
 											Include incDetails) throws WorkerMustBeAssignedToAResponsibilityException {
 		Treechildren tchdnResponsibilities = (Treechildren) incDetails.query("#tchdnResponsibilities");

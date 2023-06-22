@@ -1,0 +1,66 @@
+<?page title="${labels.pageInventoryOperation.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageInventoryOperation.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.InventoryOperationsComposer">
+			<hbox width="100%">
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
+					<combobox id="cmbFromWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.from}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
+					<combobox id="cmbToWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.to}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModel')">
+					<combobox id="cmbWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+			</hbox>
+			<separator></separator>
+			<label id="lblItemsToMove" value="${labels.pageInventoryOperation.itemsToMove}" sclass="Caption"></label>			
+			<tree id="treeMove">
+				<treecols>
+					<treecol>
+						<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.InventoryItemSelectionViewModel')">
+							<combobox id="cmbMaterial" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.inventoryItem}">
+								<template name="model">
+									<comboitem label="@load(each.name)" value="@load(each)">
+									</comboitem>
+								</template>
+							</combobox>		
+						</hbox>					
+					</treecol>
+					<treecol label="${labels.pageInventoryOperation.Quantity}">
+						<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+						<decimalbox visible="false" format="####.########" id="decQuantity" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+						<combobox readonly="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
+					</treecol>
+					<treecol>
+						<button id="btnAddItemToMoveRow" label="+" apply="co.syscoop.soberano.composers.AddInventoryItemToMoveRowButtonComposer"></button>
+					</treecol>
+				</treecols>
+				<treechildren id="tchdnMove"></treechildren>
+			</tree>
+			<separator></separator>
+			<include id="incGrid" src="/inventory_operations_history.zul"></include>	
+		</vbox>
+	</window>
+	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.record}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordInventoryOperationButtonComposer"></button>
+</zk>
