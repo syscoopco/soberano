@@ -52,7 +52,7 @@ public /*abstract*/ class MaterialExpensesComposer extends ExpenseAmountComposer
 	}
 	
 	@Listen("onChange = combobox#cmbMaterial")
-    public void cmb_onChange() throws SQLException {
+    public void cmbMaterial_onChange() throws SQLException {
 		processMaterialSelection();
 	}
 	
@@ -61,7 +61,7 @@ public /*abstract*/ class MaterialExpensesComposer extends ExpenseAmountComposer
 	 * combo_onChange event isn't triggered under testing.
 	 */
 	@Listen("onClick = combobox#cmbMaterial")
-    public void cmb_onClick() throws SQLException {
+    public void cmbMaterial_onClick() throws SQLException {
 		processMaterialSelection();
 	}
 	

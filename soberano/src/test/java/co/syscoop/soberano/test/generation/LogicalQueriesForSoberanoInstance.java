@@ -5726,6 +5726,65 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "$BODY$;",
 						
 						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryOperation_getStockCount\"(\n"
+						+ "	warehouseId integer,\n"
+						+ "	lang character,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "DECLARE\n"
+						+ "	count integer;\n"
+						+ "BEGIN\n"
+						+ "	SELECT COUNT(*) FROM soberano.\"fn_InventoryOperation_getStock\"(warehouseId, lang, loginname) INTO count;\n"
+						+ "	RETURN count;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryOperation_getStock\"(\n"
+						+ "	warehouseId integer,\n"
+						+ "	lang character,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"inventoryItemCode\" character varying, \n"
+						+ "				  \"inventoryItemName\" character varying, \n"
+						+ "				  \"quantity\" numeric, \n"
+						+ "				  unit character varying, \n"
+						+ "				  \"unitValue\" numeric) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 1000\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT *\n"
+						+ "						FROM (SELECT DISTINCT stock.\"InventoryItemHasInventoryItemCode\",\n"
+						+ "							  				inventoryItem.\"This_has_Name\",\n"
+						+ "							  				SUM(stock.\"Quantity\"),\n"
+						+ "							  				unit.\"Acronym\",\n"
+						+ "							  				CASE WHEN SUM(stock.\"Quantity\") <= 0 THEN 0 \n"
+						+ "							  						ELSE SUM(stock.\"Quantity\" * stock.\"This_has_Value\") / SUM(stock.\"Quantity\") END\n"
+						+ "									FROM soberano.\"Stock\" stock\n"
+						+ "							  			INNER JOIN soberano.\"InventoryItem\" inventoryItem\n"
+						+ "							  				ON inventoryItem.\"InventoryItemHasInventoryItemCode\" = stock.\"InventoryItemHasInventoryItemCode\"\n"
+						+ "							  			INNER JOIN soberano.\"UnitHasAcronymInLanguage\" unit\n"
+						+ "							  				ON unit.\"UnitHasUnitId\" = inventoryItem.\"This_is_measured_in_Unit_with_UnitHasUnitId\"\n"
+						+ "							  					AND unit.\"Language\" = lang\n"
+						+ "							  		WHERE EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(21, 1, loginname))\n"
+						+ "										AND (stock.\"WarehouseHasWarehouseId\" = warehouseId OR warehouseId = 0)						  \n"
+						+ "							 	GROUP BY stock.\"InventoryItemHasInventoryItemCode\",\n"
+						+ "										inventoryItem.\"This_has_Name\",\n"
+						+ "										unit.\"Acronym\") sq\n"
+						+ "						ORDER BY \"This_has_Name\" ASC;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
 										
 						////////////////////
 						// business facts //

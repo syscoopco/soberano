@@ -1,0 +1,28 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<include src="/style.zul"/>
+	<zscript>
+		<![CDATA[
+	  		co.syscoop.soberano.models.StockGridModel model = new co.syscoop.soberano.models.StockGridModel();
+	  		co.syscoop.soberano.renderers.StockGridRenderer renderer = new co.syscoop.soberano.renderers.StockGridRenderer();
+		]]>
+	</zscript>
+	<vbox hflex="1">
+		<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+			<columns sizable="true">
+				<column align="right" label="${labels.caption.columnHeader.code}" sort="auto(inventoryItemCode)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.name}" sort="auto(inventoryItemName)" sortDirection="ascending">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.quantity}" sort="auto(quantity)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.unit}" sort="auto(unit)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.unitValue}" sort="auto(unitValue)"> 
+				</column>
+				<column align="center" label="${labels.caption.columnHeader.action}">
+				</column>
+			</columns>
+		</grid>
+	</vbox>
+</zk>
