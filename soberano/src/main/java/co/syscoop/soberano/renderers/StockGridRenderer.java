@@ -2,6 +2,7 @@ package co.syscoop.soberano.renderers;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
@@ -22,13 +23,21 @@ public class StockGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(stockRowData.getInventoryItemName()));
 		
 		//quantity
-		row.appendChild(new Label(stockRowData.getQuantity().toPlainString()));
+		Decimalbox decQuantity = new Decimalbox(stockRowData.getQuantity());
+		decQuantity.setFormat("####.########");
+		decQuantity.setReadonly(true);
+		decQuantity.setWidth("100%");
+		row.appendChild(decQuantity);
 		
 		//unit
 		row.appendChild(new Label(stockRowData.getUnit()));
 		
 		//unit value
-		row.appendChild(new Label(stockRowData.getUnitValue().toPlainString()));
+		Decimalbox decUnitValue = new Decimalbox(stockRowData.getUnitValue());
+		decUnitValue.setFormat("####.########");
+		decUnitValue.setReadonly(true);
+		decUnitValue.setWidth("100%");
+		row.appendChild(decUnitValue);
 		
 		//action column
 		Vbox actionCell = new Vbox();
