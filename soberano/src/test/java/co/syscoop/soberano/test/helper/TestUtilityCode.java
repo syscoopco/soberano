@@ -13,6 +13,7 @@ import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Label;
@@ -208,6 +209,39 @@ public class TestUtilityCode {
 		//reference
 		if (!((Label) row.getChildren().get(6)).getValue().equals(expectedReference)) {
 			fail("Wrong reference for expense with row index " + row.getIndex() + ". Expected: " + expectedReference + ". It was: " + ((Label) row.getChildren().get(6)).getValue());
+		}
+	}
+	
+	public static void testStockRecord(Row row, 
+										String expectedItemCode,
+										String expectedItemName,
+										Double expectedQuantity,
+										String expectedUnit,
+										Double expectedUnitValue) {
+
+		//item code
+		if (!((Label) row.getChildren().get(0)).getValue().equals(expectedItemCode)) {
+		fail("Wrong item code for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemCode + ". It was: " + ((Label) row.getChildren().get(0)).getValue());
+		}
+		
+		//item name
+		if (!((Label) row.getChildren().get(1)).getValue().equals(expectedItemName)) {
+		fail("Wrong item name for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemName + ". It was: " + ((Label) row.getChildren().get(1)).getValue());
+		}
+		
+		//quantity
+		if (Math.abs(((Decimalbox) row.getChildren().get(2)).getValue().doubleValue() - expectedQuantity) > 0.00000001) {
+		fail("Wrong quantity for stock record with row index " + row.getIndex() + ". Expected: " + expectedQuantity + ". It was: " + ((Decimalbox) row.getChildren().get(2)).getValue().doubleValue());
+		}
+		
+		//unit
+		if (!((Label) row.getChildren().get(3)).getValue().equals(expectedUnit)) {
+		fail("Wrong unit for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnit + ". It was: " + ((Label) row.getChildren().get(3)).getValue());
+		}
+		
+		//unit value
+		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.00000001) {
+		fail("Wrong unit value for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnitValue + ". It was: " + ((Decimalbox) row.getChildren().get(4)).getValue().doubleValue());
 		}
 	}
 }
