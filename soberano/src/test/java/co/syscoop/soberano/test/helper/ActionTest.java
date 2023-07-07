@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.ExceptionTreatment;
@@ -19,6 +20,7 @@ public class ActionTest {
 	
 	protected static ComponentAgent boxDetailsAgent = null;
 	protected static Hbox boxDetails = null;
+	protected static Vbox vboxDetails = null;
 
 	protected void clickOnRecordButton(DesktopAgent desktop) {
 		ComponentAgent btnRecord = desktop.query("south").query("button");
@@ -90,5 +92,10 @@ public class ActionTest {
 	protected void testWrongDateTimeException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.WrongDateTimeException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WrongDateTimeException can be caught here.");
+	}
+	
+	protected void testAtLeastOneInventoryItemMustBeMovedException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException can be caught here.");
 	}
 }

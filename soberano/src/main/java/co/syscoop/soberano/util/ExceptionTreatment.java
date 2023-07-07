@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -35,23 +36,25 @@ public class ExceptionTreatment {
 						messageTitle, 
 						0, 
 						messageIcon);
-		if (SpringUtility.underTesting()) 
-			if (ex.getClass().getName().equals("org.zkoss.zk.ui.WrongValueException"))
-				throw new WrongValueException(ex);
-			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))
-				throw new PasswordsMustMatchException(ex);
-			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
-				throw new NotEnoughRightsException(ex);
-			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException"))
-				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
+		if (SpringUtility.underTesting())
+			if (ex.getClass().getName().equals("co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException"))
+				throw new AtLeastOneInventoryItemMustBeMovedException(ex);
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
 				throw new DuplicateKeyException("");
-			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WrongDateTimeException"))
-				throw new WrongDateTimeException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
+				throw new NotEnoughRightsException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))
+				throw new PasswordsMustMatchException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ShiftHasBeenClosedException"))
 				throw new ShiftHasBeenClosedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException"))
 				throw new SomeFieldsContainWrongValuesException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException"))
+				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WrongDateTimeException"))
+				throw new WrongDateTimeException(ex);
+			else if (ex.getClass().getName().equals("org.zkoss.zk.ui.WrongValueException"))
+				throw new WrongValueException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

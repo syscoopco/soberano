@@ -12,7 +12,7 @@
 						${labels.caption.field.emailAddress}
 					</row>
 					<row>
-						<textbox id="username" name="username" constraint="${labels.regex.ValidEmailAddress}: ${labels.validation.constraint.InvalidEmailAddress}" hflex="1"/>
+						<textbox focus="true" id="username" name="username" constraint="${labels.regex.ValidEmailAddress}: ${labels.validation.constraint.InvalidEmailAddress}" hflex="1"/>
 					</row>
 					<row>
 						${labels.caption.field.password}

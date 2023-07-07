@@ -1,0 +1,4 @@
+from: mw8,mw9,mw10
+to: mw6,mw9,mw10
+item: mm2-mm4-mm6,mm5,mm2-mm7
+quantity: 1000,10000

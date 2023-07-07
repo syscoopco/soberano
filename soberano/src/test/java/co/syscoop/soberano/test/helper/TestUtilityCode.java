@@ -221,27 +221,27 @@ public class TestUtilityCode {
 
 		//item code
 		if (!((Label) row.getChildren().get(0)).getValue().equals(expectedItemCode)) {
-		fail("Wrong item code for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemCode + ". It was: " + ((Label) row.getChildren().get(0)).getValue());
+			fail("Wrong item code for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemCode + ". It was: " + ((Label) row.getChildren().get(0)).getValue());
 		}
 		
 		//item name
 		if (!((Label) row.getChildren().get(1)).getValue().equals(expectedItemName)) {
-		fail("Wrong item name for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemName + ". It was: " + ((Label) row.getChildren().get(1)).getValue());
+			fail("Wrong item name for stock record with row index " + row.getIndex() + ". Expected: " + expectedItemName + ". It was: " + ((Label) row.getChildren().get(1)).getValue());
 		}
 		
 		//quantity
 		if (Math.abs(((Decimalbox) row.getChildren().get(2)).getValue().doubleValue() - expectedQuantity) > 0.00000001) {
-		fail("Wrong quantity for stock record with row index " + row.getIndex() + ". Expected: " + expectedQuantity + ". It was: " + ((Decimalbox) row.getChildren().get(2)).getValue().doubleValue());
+			fail("Wrong quantity for stock record with row index " + row.getIndex() + ". Expected: " + expectedQuantity + ". It was: " + ((Decimalbox) row.getChildren().get(2)).getValue().doubleValue());
 		}
 		
 		//unit
 		if (!((Label) row.getChildren().get(3)).getValue().equals(expectedUnit)) {
-		fail("Wrong unit for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnit + ". It was: " + ((Label) row.getChildren().get(3)).getValue());
+			fail("Wrong unit for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnit + ". It was: " + ((Label) row.getChildren().get(3)).getValue());
 		}
 		
 		//unit value
 		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.00000001) {
-		fail("Wrong unit value for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnitValue + ". It was: " + ((Decimalbox) row.getChildren().get(4)).getValue().doubleValue());
+			fail("Wrong unit value for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnitValue + ". It was: " + ((Decimalbox) row.getChildren().get(4)).getValue().doubleValue());
 		}
 	}
 }

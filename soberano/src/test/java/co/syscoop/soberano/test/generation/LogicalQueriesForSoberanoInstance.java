@@ -5638,10 +5638,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryOperation_create\"(\n"
-						+ "	fromWarehouse integer,\n"
-						+ "	toWarehouse integer,\n"
+						+ "	fromwarehouse integer,\n"
+						+ "	towarehouse integer,\n"
 						+ "	worker integer,\n"
-						+ "	inventoryItems character varying[],\n"
+						+ "	inventoryitems character varying[],\n"
 						+ "	units integer[],\n"
 						+ "	quantities numeric[],\n"
 						+ "	loginname character varying)\n"
@@ -5712,8 +5712,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				SELECT \"This_has_Value\"\n"
 						+ "					FROM soberano.\"Stock\" stock\n"
 						+ "						INNER JOIN soberano.\"Warehouse\" origin\n"
-						+ "							ON origin.\"WarehouseHasWarehouseId\" = origin.\"WarehouseHasWarehouseId\"\n"
-						+ "					WHERE stock.\"InventoryItemHasInventoryItemCode\" = inventoryItems[i]\n"
+						+ "							ON stock.\"WarehouseHasWarehouseId\" = origin.\"WarehouseHasWarehouseId\"\n"
+						+ "								AND stock.\"WarehouseHasWarehouseId\" = fromWarehouse\n"
+						+ "									AND stock.\"InventoryItemHasInventoryItemCode\" = inventoryItems[i]\n"
 						+ "					INTO inventoryItemValueAtOrigin;\n"
 						+ "													\n"
 						+ "				PERFORM soberano.\"fn_Stock_change\"(inventoryItems[i], \n"
@@ -5724,7 +5725,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		END IF;\n"
 						+ "		RETURN operationId;\n"
 						+ "END;\n"
-						+ "$BODY$;",
+						+ "$BODY$;\n"
+						+ "",
 						
 						
 						
