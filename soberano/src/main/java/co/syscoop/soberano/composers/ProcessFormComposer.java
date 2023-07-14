@@ -69,8 +69,8 @@ public class ProcessFormComposer extends SelectorComposer {
 	private void processOutputItemSelection() throws SQLException {
 		
 		cmbOutputUnit.getChildren().clear();
-		if (cmbOutputUnit.getSelectedItem() != null) {
-			String inventoryItemCode = ((DomainObject) cmbOutputUnit.getSelectedItem().getValue()).getStringId();
+		if (cmbOutput.getSelectedItem() != null) {
+			String inventoryItemCode = ((DomainObject) cmbOutput.getSelectedItem().getValue()).getStringId();
 			for (DomainObject unit : new Unit().getAllForInventoryItem(inventoryItemCode)) {
 				Comboitem newItem = new Comboitem(unit.getName());
 				newItem.setValue(unit.getId().toString());

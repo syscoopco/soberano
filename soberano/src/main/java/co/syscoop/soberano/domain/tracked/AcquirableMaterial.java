@@ -100,8 +100,11 @@ public class AcquirableMaterial extends InventoryItem {
 	}
 	
 	@Override
-	public List<DomainObject> getAll(Boolean stringId) throws SQLException {	
-		return super.getAll(false);
+	public List<DomainObject> getAll(Boolean stringId) throws SQLException {
+		if (stringId) {
+			getAllQuery = "SELECT * FROM soberano.\"fn_AcquirableMaterial_getAllWithStringId\"(:loginname)";
+		}
+		return super.getAll(stringId);
 	}
 		
 	public final class AcquirableMaterialMapper implements RowMapper<Object> {

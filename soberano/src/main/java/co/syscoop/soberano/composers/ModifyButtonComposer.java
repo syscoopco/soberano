@@ -14,6 +14,7 @@ import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
+import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.ui.helper.TrackedObjectFormHelper;
@@ -57,19 +58,19 @@ public class ModifyButtonComposer extends SelectorComposer {
 						Messagebox.INFORMATION);
 			}
 		}
-		catch(WrongDateTimeException ex) {
+		catch(DuplicateKeyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("message.validation.wrongBusinessEventOccurrenceDateTime"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
+										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
 		}
-		catch(ShiftHasBeenClosedException ex) {
+		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
 		}
-		catch(SomeFieldsContainWrongValuesException ex) {
+		catch(NullPointerException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
@@ -81,29 +82,11 @@ public class ModifyButtonComposer extends SelectorComposer {
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}
-		catch(WrongValueException ex) {
+		catch(ShiftHasBeenClosedException ex) {
 			ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Validation"),
-										Messagebox.EXCLAMATION);
-		}
-		catch(NotEnoughRightsException ex) {
-			ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-		}
-		catch(WorkerMustBeAssignedToAResponsibilityException ex) {
-			ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.validation.worker.WorkerMustBeAssignedToAResponsibility"), 
-										Labels.getLabel("messageBoxTitle.Validation"),
-										Messagebox.EXCLAMATION);
-		}
-		catch(DuplicateKeyException ex) {
-			ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
-										Labels.getLabel("messageBoxTitle.Validation"),
-										Messagebox.EXCLAMATION);
+					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
 		}
 		catch(SoberanoLDAPException ex) {
 			ExceptionTreatment.logAndShow(ex, 
@@ -111,14 +94,37 @@ public class ModifyButtonComposer extends SelectorComposer {
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 		}
-		catch(NullPointerException ex) {
+		catch(SomeFieldsContainWrongValuesException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
 		}
-		catch(Exception ex)
-		{
+		catch(WeightsMustSum100 ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.weightsMustSum100"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(WorkerMustBeAssignedToAResponsibilityException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.worker.WorkerMustBeAssignedToAResponsibility"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(WrongDateTimeException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.wrongBusinessEventOccurrenceDateTime"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(WrongValueException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
 			ExceptionTreatment.logAndShow(ex, 
 										ex.getMessage(), 
 										Labels.getLabel("messageBoxTitle.Error"),

@@ -3,17 +3,62 @@ package co.syscoop.soberano.domain.tracked;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.zkoss.util.Locales;
+
+import co.syscoop.soberano.util.ProcessIORowData;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 
 public class Process extends TrackedObject {
 
 	private BigDecimal fixedCost = new BigDecimal(0.0);
+	private ArrayList<InventoryItem> inputInventoryItems = new ArrayList<InventoryItem>();
+	private ArrayList<String> inputInventoryItemCodes = null;
+	private ArrayList<Unit> inputUnits = new ArrayList<Unit>();
+	private ArrayList<Integer> inputUnitIds = null;
+	private ArrayList<BigDecimal> inputQuantities = new ArrayList<BigDecimal>();
+	private ArrayList<InventoryItem> outputInventoryItems = new ArrayList<InventoryItem>();
+	private ArrayList<String> outputInventoryItemCodes = null;
+	private ArrayList<Unit> outputUnits = new ArrayList<Unit>();
+	private ArrayList<Integer> outputUnitIds = null;
+	private ArrayList<BigDecimal> outputQuantities = new ArrayList<BigDecimal>();
+	private ArrayList<Integer> weights = new ArrayList<Integer>();
+	
+	private void fillInputInventoryItemIds() {
+		inputInventoryItemCodes = new ArrayList<String>();
+		for (InventoryItem inventoryItem : inputInventoryItems) {
+			inputInventoryItemCodes.add(inventoryItem.getStringId());
+		}
+	}
+	
+	private void fillInputUnitIds() {
+		inputUnitIds = new ArrayList<Integer>();
+		for (Unit unit : inputUnits) {
+			inputUnitIds.add(unit.getId());
+		}
+	}
+	
+	private void fillOutputInventoryItemIds() {
+		outputInventoryItemCodes = new ArrayList<String>();
+		for (InventoryItem inventoryItem : outputInventoryItems) {
+			outputInventoryItemCodes.add(inventoryItem.getStringId());
+		}
+	}
+	
+	private void fillOutputUnitIds() {
+		outputUnitIds = new ArrayList<Integer>();
+		for (Unit unit : outputUnits) {
+			outputUnitIds.add(unit.getId());
+		}
+	}
 	
 	public Process(Integer id) {
 		super(id);
@@ -24,12 +69,39 @@ public class Process extends TrackedObject {
 	}
 	
 	public Process(Integer id, 
-					Integer entityTypeInstanceId, 
-					String name,
-					BigDecimal fixedCost) {
+			Integer entityTypeInstanceId, 
+			String name,
+			BigDecimal fixedCost) {
 		super(id, entityTypeInstanceId, name);
 		this.setQualifiedName(name);		
 		this.setFixedCost(fixedCost);
+	}
+	
+	public Process(Integer id, 
+					Integer entityTypeInstanceId, 
+					String name,
+					BigDecimal fixedCost,
+					ArrayList<InventoryItem> inputInventoryItems,
+					ArrayList<Unit> inputUnits,
+					ArrayList<BigDecimal> inputQuantities,
+					ArrayList<InventoryItem> outputInventoryItems,
+					ArrayList<Unit> outputUnits,
+					ArrayList<BigDecimal> outputQuantities,
+					ArrayList<Integer> weights) {
+		super(id, entityTypeInstanceId, name);
+		this.setQualifiedName(name);		
+		this.setFixedCost(fixedCost);
+		this.inputInventoryItems = inputInventoryItems;
+		fillInputInventoryItemIds();	
+		this.inputUnits = inputUnits;
+		fillInputUnitIds();	
+		this.inputQuantities = inputQuantities;
+		this.outputInventoryItems = outputInventoryItems;
+		fillOutputInventoryItemIds();	
+		this.outputUnits = outputUnits;
+		fillOutputUnitIds();	
+		this.outputQuantities = outputQuantities;
+		this.weights = weights;
 	}
 	
 	public Process() {
@@ -42,11 +114,27 @@ public class Process extends TrackedObject {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		recordQuery = "SELECT soberano.\"fn_Process_create\"(:processName, "
-				+ "											:fixedCost, "
+				+ "											:fixedCost, "				
+				+ "											:inputItems, "
+				+ "											:inputQuantities, "
+				+ "											:inputUnits, "
+				+ "											:outputItems, "
+				+ "											:outputQuantities, "
+				+ "											:outputUnits, "
+				+ "											:weights, "				
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("processName", this.getName());
-		recordParameters.addValue("fixedCost", this.getFixedCost());
+		recordParameters.addValue("fixedCost", this.getFixedCost());	
+		
+		recordParameters.addValue("inputItems", createArrayOfSQLType("varchar", this.getInputInventoryItemCodes().toArray()));
+		recordParameters.addValue("inputQuantities", createArrayOfSQLType("numeric", this.inputQuantities.toArray()));
+		recordParameters.addValue("inputUnits", createArrayOfSQLType("integer", this.getInputUnitIds().toArray()));
+		
+		recordParameters.addValue("outputItems", createArrayOfSQLType("varchar", this.getOutputInventoryItemCodes().toArray()));
+		recordParameters.addValue("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
+		recordParameters.addValue("outputUnits", createArrayOfSQLType("integer", this.getOutputUnitIds().toArray()));
+		recordParameters.addValue("weights", createArrayOfSQLType("integer", this.getWeights().toArray()));
 		
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -58,12 +146,28 @@ public class Process extends TrackedObject {
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		modifyQuery = "SELECT soberano.\"fn_Process_modify\"(:processId, "
 						+ " 								:processName, "
-						+ "									:fixedCost, "
+						+ "									:fixedCost, "				
+						+ "									:inputItems, "
+						+ "									:inputQuantities, "
+						+ "									:inputUnits, "
+						+ "									:outputItems, "
+						+ "									:outputQuantities, "
+						+ "									:outputUnits, "
+						+ "									:weights, "		
 						+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("processId", this.getId());
 		modifyParameters.addValue("processName", this.getName());
 		modifyParameters.addValue("fixedCost", this.getFixedCost());
+		
+		modifyParameters.addValue("inputItems", createArrayOfSQLType("varchar", this.getInputInventoryItemCodes().toArray()));
+		modifyParameters.addValue("inputQuantities", createArrayOfSQLType("numeric", this.inputQuantities.toArray()));
+		modifyParameters.addValue("inputUnits", createArrayOfSQLType("integer", this.getInputUnitIds().toArray()));
+		
+		modifyParameters.addValue("outputItems", createArrayOfSQLType("varchar", this.getOutputInventoryItemCodes().toArray()));
+		modifyParameters.addValue("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
+		modifyParameters.addValue("outputUnits", createArrayOfSQLType("integer", this.getOutputUnitIds().toArray()));
+		modifyParameters.addValue("weights", createArrayOfSQLType("integer", this.getWeights().toArray()));
 		
 		Integer qryResult = super.modify();
 		return qryResult >= 0 ? qryResult : -1;
@@ -109,6 +213,30 @@ public class Process extends TrackedObject {
 	    }
 	}
 	
+	private final class ProcessIOMapper implements RowMapper<Object> {
+
+		public ProcessIORowData mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				ProcessIORowData processIORow = new ProcessIORowData();
+				String itemId = rs.getString("itemId");
+				if (!rs.wasNull()) {
+					processIORow.setItemId(itemId);
+					processIORow.setItemName(rs.getString("itemName"));
+					processIORow.setUnitAcron(rs.getString("unitAcron"));
+					processIORow.setUnitId(rs.getInt("unitId"));
+					processIORow.setQuantity(rs.getBigDecimal("quantity"));
+					processIORow.setWeight(rs.getInt("weight"));
+				}
+				return processIORow;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
 	@Override
 	public void get() throws SQLException {
 		
@@ -116,6 +244,26 @@ public class Process extends TrackedObject {
 		getParameters = new HashMap<String, Object>();
 		getParameters.put("processId", this.getId());
 		super.get(new ProcessMapper());
+	}
+	
+	public List<Object> getProcessInputs(Integer processId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Process_getInputs\"(:processId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processId", processId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
+	}
+	
+	public List<Object> getProcessOutputs(Integer processId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Process_getOutputs\"(:processId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processId", processId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
 	}
 
 	@Override
@@ -127,6 +275,17 @@ public class Process extends TrackedObject {
 		setName(sourceProcess.getName());
 		setStringId(sourceProcess.getStringId());
 		setFixedCost(sourceProcess.getFixedCost());
+		setInputInventoryItems(sourceProcess.getInputInventoryItems());
+		setInputInventoryItemCodes(sourceProcess.getInputInventoryItemCodes());		
+		setInputQuantities(sourceProcess.getInputQuantities());
+		setInputUnits(sourceProcess.getInputUnits());
+		setInputUnitIds(sourceProcess.getInputUnitIds());
+		setOutputInventoryItems(sourceProcess.getOutputInventoryItems());
+		setOutputInventoryItemCodes(sourceProcess.getOutputInventoryItemCodes());		
+		setOutputQuantities(sourceProcess.getOutputQuantities());
+		setOutputUnits(sourceProcess.getOutputUnits());
+		setOutputUnitIds(sourceProcess.getOutputUnitIds());
+		setWeights(sourceProcess.getWeights());
 	}
 	
 	@Override
@@ -152,5 +311,93 @@ public class Process extends TrackedObject {
 	@Override
 	public Integer getCount() throws SQLException {
 		return 0;
+	}
+
+	public ArrayList<InventoryItem> getInputInventoryItems() {
+		return inputInventoryItems;
+	}
+
+	public void setInputInventoryItems(ArrayList<InventoryItem> inputInventoryItems) {
+		this.inputInventoryItems = inputInventoryItems;
+	}
+
+	public ArrayList<String> getInputInventoryItemCodes() {
+		return inputInventoryItemCodes;
+	}
+
+	public void setInputInventoryItemCodes(ArrayList<String> inputInventoryItemCodes) {
+		this.inputInventoryItemCodes = inputInventoryItemCodes;
+	}
+
+	public ArrayList<Unit> getInputUnits() {
+		return inputUnits;
+	}
+
+	public void setInputUnits(ArrayList<Unit> inputUnits) {
+		this.inputUnits = inputUnits;
+	}
+
+	public ArrayList<Integer> getInputUnitIds() {
+		return inputUnitIds;
+	}
+
+	public void setInputUnitIds(ArrayList<Integer> inputUnitIds) {
+		this.inputUnitIds = inputUnitIds;
+	}
+
+	public ArrayList<BigDecimal> getInputQuantities() {
+		return inputQuantities;
+	}
+
+	public void setInputQuantities(ArrayList<BigDecimal> inputQuantities) {
+		this.inputQuantities = inputQuantities;
+	}
+
+	public ArrayList<InventoryItem> getOutputInventoryItems() {
+		return outputInventoryItems;
+	}
+
+	public void setOutputInventoryItems(ArrayList<InventoryItem> outputInventoryItems) {
+		this.outputInventoryItems = outputInventoryItems;
+	}
+
+	public ArrayList<String> getOutputInventoryItemCodes() {
+		return outputInventoryItemCodes;
+	}
+
+	public void setOutputInventoryItemCodes(ArrayList<String> outputInventoryItemCodes) {
+		this.outputInventoryItemCodes = outputInventoryItemCodes;
+	}
+
+	public ArrayList<Unit> getOutputUnits() {
+		return outputUnits;
+	}
+
+	public void setOutputUnits(ArrayList<Unit> outputUnits) {
+		this.outputUnits = outputUnits;
+	}
+
+	public ArrayList<Integer> getOutputUnitIds() {
+		return outputUnitIds;
+	}
+
+	public void setOutputUnitIds(ArrayList<Integer> outputUnitIds) {
+		this.outputUnitIds = outputUnitIds;
+	}
+
+	public ArrayList<BigDecimal> getOutputQuantities() {
+		return outputQuantities;
+	}
+
+	public void setOutputQuantities(ArrayList<BigDecimal> outputQuantities) {
+		this.outputQuantities = outputQuantities;
+	}
+
+	public ArrayList<Integer> getWeights() {
+		return weights;
+	}
+
+	public void setWeights(ArrayList<Integer> weights) {
+		this.weights = weights;
 	}
 }

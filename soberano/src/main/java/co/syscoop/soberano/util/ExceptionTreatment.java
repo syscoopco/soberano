@@ -11,6 +11,7 @@ import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
+import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 
@@ -49,6 +50,8 @@ public class ExceptionTreatment {
 				throw new ShiftHasBeenClosedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException"))
 				throw new SomeFieldsContainWrongValuesException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WeightsMustSum100"))
+				throw new WeightsMustSum100(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException"))
 				throw new WorkerMustBeAssignedToAResponsibilityException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.WrongDateTimeException"))
