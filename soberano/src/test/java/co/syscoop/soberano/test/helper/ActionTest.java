@@ -98,4 +98,9 @@ public class ActionTest {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException can be caught here.");
 	}
+	
+	protected void testWeightsMustSum100(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.WeightsMustSum100", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WeightsMustSum100 can be caught here.");
+	}
 }

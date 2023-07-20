@@ -20,7 +20,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O3_WorkerTest_search_showingAll {
 	
@@ -136,7 +136,7 @@ class O3_WorkerTest_search_showingAll {
 	@Test
 	final void testUser10() {
 
-		testForDisallowedUser(10);
+		testForAllowedUser(10);
 	}
 	
 	@Test
@@ -178,7 +178,7 @@ class O3_WorkerTest_search_showingAll {
 	@Test
 	final void testUser17() {
 
-		testForDisallowedUser(17);
+		testForAllowedUser(17);
 	}
 	
 	@Test
@@ -190,7 +190,7 @@ class O3_WorkerTest_search_showingAll {
 	@Test
 	final void testUser19() {
 
-		testForDisallowedUser(19);
+		testForAllowedUser(19);
 	}
 		
 	@Test

@@ -26,7 +26,7 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 @Order(6)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		
@@ -354,25 +354,24 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 	@Test
 	final void testCase12() {
 		
+		WorkerForm workerForm = null;
 		try {
-			String userName = "user10@soberano.syscoop.co";
-			setFormComponents(userName, "workers.zul");	
+			workerForm = setFormComponents("user10@soberano.syscoop.co", "workers.zul");			
+			loadObjectDetails("fn ln : communityManager@soberano.syscoop.co");
 			
-			//the user can not even list the objects
-			Tree treeObjects = (Tree) cmbIntelliSearchAgent.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");
-			assertEquals(0,
-						cmbIntelliSearchAgent.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 
-						userName + " must not have access to any workers. However, it sees " 
-								+ cmbIntelliSearchAgent.as(Combobox.class).getModel().getSize() 
-								+ " workers in search combobox, and " 
-								+ treeObjects.getTreechildren().getItemCount()
-								+ " in showing-all tree.");
+			ComponentAgent btnRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnRowDeletion12");
+			btnRowDeletion.click();
+			clickOnApplyButton(workerForm.getDesktop());
+			
+			setFieldsForTesting(workerForm);
+			clickOnApplyButton(workerForm.getDesktop());
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
 		}
 		catch(Throwable ex) {
-			fail(ex.getMessage());
+			//user10 can list the users but not modifying them
+			testNotEnoughRightsException(ex);
 		}	
 	}
 	
