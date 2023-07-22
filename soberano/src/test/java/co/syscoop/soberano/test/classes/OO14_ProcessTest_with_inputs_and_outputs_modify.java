@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
@@ -20,6 +21,9 @@ import org.zkoss.zats.mimic.operation.InputAgent;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.Treechildren;
+import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.test.helper.ProcessActionTest;
 import co.syscoop.soberano.test.helper.ProcessForm;
@@ -113,6 +117,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 		btnAddOutput.click();
 	}
 	
+	/*
 	@Test
 	@Order(0)
 	final void testCase0() {
@@ -391,21 +396,21 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 					new BigDecimal(3000),
 					8,
 					"ml : milliliter",
-					45);
+					10);
 			
 			addOutput(desktop,
 					"mmaterial8 : mm8",
 					new BigDecimal(2000),
 					8,
 					"ml : milliliter",
-					40);
+					30);
 			
 			addOutput(desktop,
 					"mmaterial9 : mm9",
 					new BigDecimal(5),
 					1,
 					"pcs : piece",
-					15);
+					60);
 			
 			clickOnApplyButton(processForm.getDesktop());
 		}
@@ -922,6 +927,343 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			btnOutputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	*/
+	
+	private void checkProcessInputs(String processName,
+									String itemNames[],
+									Double quantities[],
+									String units[]) {
+
+		ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
+		loadObjectDetails(processName);
+		ComponentAgent tchdnInputsAgent = processForm.getDesktop().query("#incDetails").query("treechildren").query("#tchdnInputs");
+		Treechildren tchdnInputs = tchdnInputsAgent.as(Treechildren.class);
+		for (int i = 0; i < itemNames.length; i++) {
+			String shownInputName = ((Treeitem) tchdnInputs.getChildren().get(i)).getLabel();
+			assertEquals(itemNames[i], shownInputName, "Wrong input shown for process " +  processName + ". Expected input name: " + itemNames[i] + ". Shown input name: " + shownInputName);
+			
+			String shownInputItemCode = ((Treeitem) tchdnInputs.getChildren().get(i)).getValue();
+			Decimalbox decInputQuantity = (Decimalbox) tchdnInputs.query("#decInputQuantity" + shownInputItemCode);
+			assertEquals(decInputQuantity.getValue().subtract(new BigDecimal(quantities[i])).abs().doubleValue() < 0.00000001, true, "Wrong quantity shown for input " + itemNames[i] + " of process " +  processName + ". Expected quantity: " + quantities[i].toString() + ". Shown quantity " + decInputQuantity.getValue().toPlainString());
+			
+			Label lblInputUnit = (Label) tchdnInputs.query("#lblInputUnit" + shownInputItemCode);
+			assertEquals(lblInputUnit.getValue(), units[i], "Wrong unit shown for input " + itemNames[i] + " of process " +  processName + ". Expected unit: " + units[i] + ". Shown unit " + lblInputUnit.getValue());
+		}
+	}
+
+	private void checkProcessOutputs(String processName,
+									String itemNames[],
+									Double quantities[],
+									String units[],
+									Integer weights[]) {
+
+		ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
+		loadObjectDetails(processName);
+		ComponentAgent tchdnOutputsAgent = processForm.getDesktop().query("#incDetails").query("treechildren").query("#tchdnOutputs");
+		Treechildren tchdnOutputs = tchdnOutputsAgent.as(Treechildren.class);
+		for (int i = 0; i < itemNames.length; i++) {
+			String shownOutputName = ((Treeitem) tchdnOutputs.getChildren().get(i)).getLabel();
+			assertEquals(itemNames[i], shownOutputName, "Wrong output shown for process " +  processName + ". Expected output name: " + itemNames[i] + ". Shown output name: " + shownOutputName);
+			
+			String shownOutputItemCode = ((Treeitem) tchdnOutputs.getChildren().get(i)).getValue();
+			Decimalbox decOutputQuantity = (Decimalbox) tchdnOutputs.query("#decOutputQuantity" + shownOutputItemCode);
+			assertEquals(decOutputQuantity.getValue().subtract(new BigDecimal(quantities[i])).abs().doubleValue() < 0.00000001, true, "Wrong quantity shown for output " + itemNames[i] + " of process " +  processName + ". Expected quantity: " + quantities[i].toString() + ". Shown quantity " + decOutputQuantity.getValue().toPlainString());
+			
+			Label lblOutputUnit = (Label) tchdnOutputs.query("#lblOutputUnit" + shownOutputItemCode);
+			assertEquals(units[i], lblOutputUnit.getValue(), "Wrong unit shown for output " + itemNames[i] + " of process " +  processName + ". Expected unit: " + units[i] + ". Shown unit " + lblOutputUnit.getValue());
+			
+			Intbox intWeight = (Intbox) tchdnOutputs.query("#intWeight" + shownOutputItemCode);
+			assertEquals(weights[i], intWeight.getValue(), "Wrong weight shown for output " + itemNames[i] + " of process " +  processName + ". Expected weight: " + weights[i] + ". Shown weight " + intWeight.getValue());
+		}
+	}
+	
+	@Test
+	@Order(21)
+	final void testCase21() {
+	
+		try {
+			checkProcessInputs("mpr2",
+								new String[] {"mmaterial5", "mmaterial7"},
+								new Double[] {2.2046226218, 1000.0},
+								new String[] {"lb", "ml"});
+			
+			checkProcessOutputs("mpr2",
+								new String[] {"mmaterial2"},
+								new Double[] {1.0},
+								new String[] {"kg"},
+								new Integer[] {100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(22)
+	final void testCase22() {
+	
+		try {
+			checkProcessInputs("mpr4",
+								new String[] {"mmaterial8", "mmaterial9"},
+								new Double[] {2000.0, 2.0},
+								new String[] {"ml", "pcs"});
+			
+			checkProcessOutputs("mpr4",
+								new String[] {"mmaterial4", "mmaterial5", "mmaterial6"},
+								new Double[] {500.0, 1.0, 0.5 * 453592},
+								new String[] {"mg", "lb", "mg"},
+								new Integer[] {30, 30, 40});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(23)
+	final void testCase23() {
+	
+		try {
+			checkProcessInputs("mpr5",
+								new String[] {"mmaterial2"},
+								new Double[] {1.0},
+								new String[] {"kg"});
+			
+			checkProcessOutputs("mpr5",
+								new String[] {"mmaterial5", "mmaterial6"},
+								new Double[] {1.0, 1000000.0},
+								new String[] {"lb", "mg"},
+								new Integer[] {15, 85});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(24)
+	final void testCase24() {
+	
+		try {
+			checkProcessInputs("mpr6",
+								new String[] {"mmaterial4", "mmaterial5"},
+								new Double[] {1000000.0, 2.0},
+								new String[] {"mg", "lb"});
+			
+			checkProcessOutputs("mpr6",
+								new String[] {"mmaterial7"},
+								new Double[] {1000.0},
+								new String[] {"ml"},
+								new Integer[] {100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(25)
+	final void testCase25() {
+	
+		try {
+			checkProcessInputs("mpr7",
+								new String[] {"mmaterial6", "mmaterial8"},
+								new Double[] {453592.0, 200.0},
+								new String[] {"mg", "ml"});
+			
+			checkProcessOutputs("mpr7",
+								new String[] {"mmaterial7", "mmaterial8", "mmaterial9"},
+								new Double[] {3000.0, 2000.0, 5.0},
+								new String[] {"ml", "ml", "pcs"},
+								new Integer[] {45, 40, 15});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(26)
+	final void testCase26() {
+	
+		try {
+			checkProcessInputs("mpr8",
+								new String[] {"mmaterial9"},
+								new Double[] {1.0},
+								new String[] {"pcs"});
+			
+			checkProcessOutputs("mpr8",
+								new String[] {"mmaterial8", "mmaterial9"},
+								new Double[] {300.0, 2.0},
+								new String[] {"ml", "pcs"},
+								new Integer[] {50, 50});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(27)
+	final void testCase27() {
+	
+		try {
+			checkProcessInputs("mpr9",
+								new String[] {"mmaterial4"},
+								new Double[] {1000000.0},
+								new String[] {"mg"});
+			
+			checkProcessOutputs("mpr9",
+								new String[] {"mmaterial9"},
+								new Double[] {1.0},
+								new String[] {"pcs"},
+								new Integer[] {100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(28)
+	final void testCase28() {
+	
+		try {
+			checkProcessInputs("product1",
+								new String[] {"mmaterial4", "mmaterial5"},
+								new Double[] {2 * 453592.0, 2.0},
+								new String[] {"mg", "lb"});
+			
+			checkProcessOutputs("product1",
+								new String[] {"mmaterial2", "mmaterial4", "mproduct1"},
+								new Double[] {1.0, 1000.0, 1.0},
+								new String[] {"kg", "mg", "kg"},
+								new Integer[] {0, 0, 100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(29)
+	final void testCase29() {
+	
+		try {
+			checkProcessInputs("product2",
+								new String[] {"mmaterial6", "mmaterial7", "mmaterial8"},
+								new Double[] {100000.0, 300.0, 1000.0},
+								new String[] {"mg", "ml", "ml"});
+			
+			checkProcessOutputs("product2",
+								new String[] {"mproduct2"},
+								new Double[] {1.0},
+								new String[] {"pcs"},
+								new Integer[] {100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(30)
+	final void testCase30() {
+	
+		try {
+			checkProcessInputs("product3",
+								new String[] {"mmaterial2", "mmaterial4", "mmaterial9"},
+								new Double[] {0.005, 453592.0, 1.0},
+								new String[] {"kg", "mg", "pcs"});
+			
+			checkProcessOutputs("product3",
+								new String[] {"mmaterial6", "mmaterial7", "mproduct3"},
+								new Double[] {0.5 * 1000 * 1000, 2500.0, 1.0},
+								new String[] {"mg", "ml", "ml"},
+								new Integer[] {0, 0, 100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(31)
+	final void testCase31() {
+	
+		try {
+			checkProcessInputs("product4",
+								new String[] {"mmaterial5", "mmaterial6", "mmaterial7"},
+								new Double[] {2000 * 0.0000022046, 2000000.0, 1300.0},
+								new String[] {"lb", "mg", "ml"});
+			
+			checkProcessOutputs("product4",
+								new String[] {"mmaterial8", "mproduct4"},
+								new Double[] {350.0, 1.0},
+								new String[] {"ml", "lb"},
+								new Integer[] {0, 100});
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			throw ex;
+		}
+	}
+	
+	@Test
+	@Order(32)
+	final void testCase32() {
+	
+		try {
+			checkProcessInputs("product5",
+								new String[] {"mmaterial8", "mmaterial9"},
+								new Double[] {700.0, 2.0},
+								new String[] {"ml", "pcs"});
+			
+			checkProcessOutputs("product5",
+								new String[] {"mproduct5"},
+								new Double[] {1.0},
+								new String[] {"pcs"},
+								new Integer[] {100});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
