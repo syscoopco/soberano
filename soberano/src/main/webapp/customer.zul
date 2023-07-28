@@ -1,0 +1,18 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.CustomerFormComposer">
+		<label value="${labels.form.worker.firstName}" sclass="Caption"></label>			
+		<textbox id="txtFirstName" maxlength="255" hflex="1" placeholder="${labels.form.worker.firstNamePlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.form.worker.lastName}" sclass="Caption"></label>			
+		<textbox id="txtLastName" maxlength="255" hflex="1" placeholder="${labels.form.worker.lastNamePlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.caption.field.discount}" sclass="Caption"></label>		
+		<hbox width="100%">
+			<decimalbox id="decDiscount" value="0" constraint="no negative, no empty"/>
+			<label value=" % "></label>
+		</hbox>		
+		<separator></separator>				
+		<include id="incContactData" src="/contact_data.zul"></include>				
+	</vbox>	
+</zk>

@@ -44,7 +44,7 @@
 								<menuitem label="${labels.menuItem.Products}" href="products.zul"/>
 							</menupopup>
 						</menu>
-						<menuitem disabled="true" label="${labels.menuItem.Customers}" href="customers.zul"/>
+						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
 						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
 						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
 							<menupopup>							

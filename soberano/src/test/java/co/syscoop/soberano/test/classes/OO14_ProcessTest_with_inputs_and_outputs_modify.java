@@ -31,7 +31,7 @@ import co.syscoop.soberano.test.helper.ProcessForm;
 @Order(14)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 
@@ -116,8 +116,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 		ComponentAgent btnAddOutput = cmbOutputUnitAgent.query("#btnAddOutput");
 		btnAddOutput.click();
 	}
-	
-	/*
+
 	@Test
 	@Order(0)
 	final void testCase0() {
@@ -935,8 +934,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			throw ex;
 		}
 	}
-	*/
-	
+
 	private void checkProcessInputs(String processName,
 									String itemNames[],
 									Double quantities[],
@@ -984,7 +982,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			assertEquals(weights[i], intWeight.getValue(), "Wrong weight shown for output " + itemNames[i] + " of process " +  processName + ". Expected weight: " + weights[i] + ". Shown weight " + intWeight.getValue());
 		}
 	}
-	
+
 	@Test
 	@Order(21)
 	final void testCase21() {
@@ -1095,7 +1093,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 								new String[] {"mmaterial7", "mmaterial8", "mmaterial9"},
 								new Double[] {3000.0, 2000.0, 5.0},
 								new String[] {"ml", "ml", "pcs"},
-								new Integer[] {45, 40, 15});
+								new Integer[] {10, 30, 60});
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

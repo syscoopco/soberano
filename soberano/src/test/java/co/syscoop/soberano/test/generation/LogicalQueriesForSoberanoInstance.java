@@ -299,6 +299,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						///////////////////////////////
 						// foreign keys to metamodel //
 						///////////////////////////////
+						"ALTER TABLE soberano.\"AcquirableMaterial\" \n"
+						+ "			ADD CONSTRAINT \"AcquirableMaterial_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
 						"ALTER TABLE soberano.\"Activity\"\n"
 						+ "  ADD CONSTRAINT \"Activity_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
@@ -306,15 +313,15 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"ALTER TABLE soberano.\"Counter\"\n"
-						+ "  ADD CONSTRAINT \"Counter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						"ALTER TABLE soberano.\"CashRegister\"\n"
+						+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-								
-								
-								
-						"ALTER TABLE soberano.\"Order\"\n"
-						+ "  ADD CONSTRAINT \"Order_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						
+						
+						
+						"ALTER TABLE soberano.\"Catalog\"\n"
+						+ "  ADD CONSTRAINT \"Catalog_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 						
@@ -324,27 +331,131 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "  ADD CONSTRAINT \"Configuration_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-								
-								
-								
-						"ALTER TABLE soberano.\"Catalog\"\n"
-						+ "  ADD CONSTRAINT \"Catalog_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						
+						
+						
+						"ALTER TABLE soberano.\"CostCenter\" \n"
+						+ "			ADD CONSTRAINT \"CostCenter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Counter\"\n"
+						+ "  ADD CONSTRAINT \"Counter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",						
+						
+						
+						
+						"ALTER TABLE soberano.\"Currency\" \n"
+						+ "			ADD CONSTRAINT \"Currency_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Customer\" \n"
+						+ "			ADD CONSTRAINT \"Customer_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+				
+						
+						
+						"ALTER TABLE soberano.\"InventoryOperation\" \n"
+						+ "			ADD CONSTRAINT \"InventoryOperation_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"MaterialExpense\" \n"
+						+ "			ADD CONSTRAINT \"MaterialExpense_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Order\"\n"
+						+ "  ADD CONSTRAINT \"Order_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-								
-						
-								
-						"ALTER TABLE soberano.\"CashRegister\"\n"
-						+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
+						"ALTER TABLE soberano.\"PayrollExpense\" \n"
+						+ "			ADD CONSTRAINT \"PayrollExpense_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Process\" \n"
+						+ "			ADD CONSTRAINT \"Process_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"ProcessRun\" \n"
+						+ "			ADD CONSTRAINT \"ProcessRun_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Product\" \n"
+						+ "			ADD CONSTRAINT \"Product_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						"ALTER TABLE soberano.\"ProductCategory\" \n"
+						+ "			ADD CONSTRAINT \"ProductCategory_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Service\" \n"
+						+ "			ADD CONSTRAINT \"Service_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"ServiceExpense\" \n"
+						+ "			ADD CONSTRAINT \"ServiceExpense_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"ShiftClosure\" \n"
+						+ "			ADD CONSTRAINT \"ShiftClosure_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Unit\" \n"
+						+ "			ADD CONSTRAINT \"Unit_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"Warehouse\" \n"
+						+ "			ADD CONSTRAINT \"Warehouse_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+									
+									
+									
 						"ALTER TABLE soberano.\"Worker\"\n"
-								+ "  ADD CONSTRAINT \"Worker_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+						+ "  ADD CONSTRAINT \"Worker_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
@@ -406,7 +517,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			(18, 'ServiceExpense', '_41F021C3-227F-4184-A7F8-6E69DA816D2D'),\n"
 						+ "			(19, 'Service', '_E4414D7E-5ACB-45F9-9E78-33AC6CD619C4'),\n"
 						+ "			(20, 'ShiftClosure', '_26546A60-384E-49D7-912B-D5D174CEEE14'),\n"
-						+ "			(21, 'InventoryOperation', '_E439FAF1-C89D-4C86-A1F7-0A970074FA02');",
+						+ "			(21, 'InventoryOperation', '_E439FAF1-C89D-4C86-A1F7-0A970074FA02'),\n"
+						+ "			(22, 'Customer', '_C3E2DB34-945A-407B-84B3-64CC14A6E48B');",
 						
 						
 						
@@ -433,8 +545,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	 (18, 1),\n"
 						+ "	 (19, 1),\n"
 						+ "	 (20, 1),\n"
-						+ "	 (21, 1);",
-								
+						+ "	 (21, 1),\n"
+						+ "	 (22, 1);",
+						
 						
 						
 						"--add lifecycle stages under top authority jurisdiction\n"
@@ -1183,7 +1296,43 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(21, 'Shift manager', 21004),\n"
 						+ "				(21, 'Manager', 21004),\n"
 						+ "				(21, 'Accounter', 21004),\n"
-						+ "				(21, 'Auditor', 21004);",						
+						+ "				(21, 'Auditor', 21004);",
+						
+						
+						
+						"/* customer lifecycle */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (22001, 'soberano.stage.starting', 22),\n"
+						+ "		(22002, 'Enabled', 22),\n"
+						+ "		(22003, 'Disabled', 22);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (22001, 'Add', 22, 22001, 22002, 'false'),\n"
+						+ "		(22002, 'Apply', 22, 22002, 22002, 'false'),\n"
+						+ "		(22003, 'Disable', 22, 22002, 22003, 'false'),\n"
+						+ "		(22004, 'Check', 22, 22002, 22002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (22, 'Community manager', 22001),\n"
+						+ "				(22, 'Community manager', 22002),\n"
+						+ "				(22, 'Community manager', 22003),\n"
+						+ "				(22, 'Salesclerk', 22004),\n"
+						+ "				(22, 'Shift manager', 22004),\n"	
+						+ "				(22, 'Manager', 22004),\n"
+						+ "				(22, 'Auditor', 22004);",
 						
 						
 												
@@ -6017,6 +6166,329 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "										inventoryItem.\"This_has_Name\",\n"
 						+ "										unit.\"Acronym\") sq\n"
 						+ "						ORDER BY \"This_has_Name\" ASC;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_getAll\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		--in domainObjectName is returned the qualified name of the customer\n"
+						+ "		RETURN QUERY SELECT \"CustomerHasCustomerId\", qualifiedName\n"
+						+ "						FROM (SELECT DISTINCT \"CustomerHasCustomerId\", \n"
+						+ "							  				(\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || u.\"This_includes_EmailAddress\") qualifiedName\n"
+						+ "						FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(22, 1, loginname) instance\n"
+						+ "							INNER JOIN soberano.\"Customer\" customer\n"
+						+ "								ON instance.\"InstanceId\" = customer.\"This_is_identified_by_EntityTypeInstance_id\"\n"
+						+ "							INNER JOIN soberano.\"ContactData\" u\n"
+						+ "								ON u.\"ContactDataHasContactDataId\" = customer.\"This_has_ContactData_with_ContactDataHasContactDataId\") sq\n"
+						+ "						ORDER BY qualifiedName;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_create\"(\n"
+						+ "	firstname character varying,\n"
+						+ "	lastname character varying,\n"
+						+ "	emailaddress character varying,\n"
+						+ "	mobilephonenumber character varying,\n"
+						+ "	address character varying,\n"
+						+ "	postalcode character varying,\n"
+						+ "	town character varying,\n"
+						+ "	municipalityid integer,\n"
+						+ "	city character varying,\n"
+						+ "	latitude double precision,\n"
+						+ "	longitude double precision,\n"
+						+ "	discount numeric,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		entityTypeInstanceId integer;\n"
+						+ "		postalAddressId integer;\n"
+						+ "		contactDataId integer;\n"
+						+ "		customerId integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		customerId = -1;	\n"
+						+ "		\n"
+						+ "		--create entity type instance	\n"
+						+ "		SELECT metamodel.\"fn_EntityTypeInstance_create\"('Customer', loginname)\n"
+						+ "			INTO entityTypeInstanceId;\n"
+						+ "			\n"
+						+ "		--user has rights to create instance of that entity type\n"
+						+ "		IF entityTypeInstanceId > 0 THEN\n"
+						+ "		\n"
+						+ "			--create postal address\n"
+						+ "			INSERT INTO soberano.\"PostalAddress\"(\"This_includes_Town\", \n"
+						+ "												 \"This_includes_PostalCode\", \n"
+						+ "												 \"This_includes_AddressString\", \n"
+						+ "												 \"This_includes_Latitute\", \n"
+						+ "												 \"This_includes_Longitude\", \n"
+						+ "												 \"This_includes_City\", \n"
+						+ "												 \"This_includes_Municipality_with_MunicipalityHasMunicipalityId\")\n"
+						+ "				VALUES (town,\n"
+						+ "					   postalCode,\n"
+						+ "					   address,\n"
+						+ "					   latitude,\n"
+						+ "					   longitude,\n"
+						+ "					   city,\n"
+						+ "					   municipalityId) \n"
+						+ "				RETURNING \"PostalAddressHasPostalAddressId\" INTO postalAddressId;\n"
+						+ "				\n"
+						+ "			--create contact data\n"
+						+ "			INSERT INTO soberano.\"ContactData\"(\"This_includes_PhoneNumber\", \n"
+						+ "											   \"This_includes_EmailAddress\", \n"
+						+ "											   \"This_includes_PostalAddress_with_PostalAddressHasPostalAddressI\")\n"
+						+ "				VALUES (mobilePhoneNumber,\n"
+						+ "					   emailAddress,\n"
+						+ "					   postalAddressId) \n"
+						+ "				RETURNING \"ContactDataHasContactDataId\" INTO contactDataId;\n"
+						+ "				\n"
+						+ "			--create customer\n"
+						+ "			INSERT INTO soberano.\"Customer\"(\"This_has_FirstName\", \n"
+						+ "											\"This_has_LastName\", \n"
+						+ "											\"This_is_identified_by_EntityTypeInstance_id\", \n"
+						+ "											\"This_is_granted_a_DiscountRate\", \n"
+						+ "											\"This_has_ContactData_with_ContactDataHasContactDataId\")\n"
+						+ "				VALUES (firstName,\n"
+						+ "					   lastName,\n"
+						+ "					   entityTypeInstanceId,\n"
+						+ "					   discount,\n"
+						+ "					   contactDataId) \n"
+						+ "				RETURNING \"CustomerHasCustomerId\" INTO customerId;\n"
+						+ "		END IF;\n"
+						+ "		RETURN customerId;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_modify\"(\n"
+						+ "	customerid integer,\n"
+						+ "	firstname character varying,\n"
+						+ "	lastname character varying,\n"
+						+ "	emailaddress character varying,\n"
+						+ "	mobilephonenumber character varying,\n"
+						+ "	address character varying,\n"
+						+ "	postalcode character varying,\n"
+						+ "	town character varying,\n"
+						+ "	municipalityid integer,\n"
+						+ "	city character varying,\n"
+						+ "	latitude double precision,\n"
+						+ "	longitude double precision,\n"
+						+ "	discount numeric,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		entityTypeInstanceId integer;\n"
+						+ "		postalAddressId integer;\n"
+						+ "		contactDataId integer;\n"
+						+ "		decisionId integer;\n"
+						+ "		qryResult integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		qryResult = -1;\n"
+						+ "		\n"
+						+ "		SELECT objectdata.*,\n"
+						+ "				decision.\"DecisionHasDecisionId\" \n"
+						+ "			FROM (SELECT \"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "						\"This_includes_PostalAddress_with_PostalAddressHasPostalAddressI\",\n"
+						+ "						\"ContactDataHasContactDataId\"\n"
+						+ "					FROM soberano.\"Customer\" objecttable\n"
+						+ "						INNER JOIN soberano.\"ContactData\" contactdata\n"
+						+ "							ON objecttable.\"This_has_ContactData_with_ContactDataHasContactDataId\" = contactdata.\"ContactDataHasContactDataId\"\n"
+						+ "					WHERE \"CustomerHasCustomerId\" = customerid) objectdata\n"
+						+ "				INNER JOIN (SELECT \"DecisionHasDecisionId\", \n"
+						+ "									\"This_has_Name\" \n"
+						+ "								FROM metamodel.\"Decision\") decision\n"
+						+ "					ON decision.\"DecisionHasDecisionId\" = \n"
+						+ "						(SELECT \"DecisionId\" \n"
+						+ "						 	FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(\n"
+						+ "										objectdata.\"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "										loginname)\n"
+						+ "							WHERE \"DecisionName\" =\n"
+						+ "						   \n"
+						+ "								/************/\n"
+						+ "									'Apply'\n"
+						+ "						   		/************/						   \n"
+						+ "						   \n"
+						+ "						   )\n"
+						+ "			INTO entityTypeInstanceId,\n"
+						+ "				postalAddressId,\n"
+						+ "				contactDataId,\n"
+						+ "				decisionId;		\n"
+						+ "			\n"
+						+ "		--user has rights\n"
+						+ "		IF decisionId IS NOT NULL THEN\n"
+						+ "		\n"
+						+ "			--update the customer\n"
+						+ "			UPDATE soberano.\"Customer\" \n"
+						+ "				SET \"This_has_LastName\" = lastname, \n"
+						+ "					\"This_has_FirstName\" = firstname,\n"
+						+ "					\"This_is_granted_a_DiscountRate\" = discount\n"
+						+ "				WHERE \"CustomerHasCustomerId\" = customerid;\n"
+						+ "		\n"
+						+ "			--update postal address\n"
+						+ "			UPDATE soberano.\"PostalAddress\" SET \"This_includes_Town\" = town, \n"
+						+ "												 \"This_includes_PostalCode\" = postalcode, \n"
+						+ "												 \"This_includes_AddressString\" = address, \n"
+						+ "												 \"This_includes_Latitute\" = latitude, \n"
+						+ "												 \"This_includes_Longitude\" = longitude, \n"
+						+ "												 \"This_includes_City\" = city, \n"
+						+ "												 \"This_includes_Municipality_with_MunicipalityHasMunicipalityId\" = municipalityid \n"
+						+ "				WHERE \"PostalAddressHasPostalAddressId\" = postalAddressId;\n"
+						+ "				\n"
+						+ "			--update contact data\n"
+						+ "			UPDATE soberano.\"ContactData\" SET \"This_includes_PhoneNumber\" = mobilePhoneNumber, \n"
+						+ "											   \"This_includes_EmailAddress\" = emailAddress, \n"
+						+ "											   \"This_includes_PostalAddress_with_PostalAddressHasPostalAddressI\" = postalAddressId\n"
+						+ "				WHERE \"ContactDataHasContactDataId\" = contactDataId;\n"
+						+ "				\n"
+						+ "			--make the decision\n"
+						+ "			PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
+						+ "											entityTypeInstanceId, \n"
+						+ "											decisionId, \n"
+						+ "											'#TO_TRANSLATE(CUSTOMER)# ' || CAST(customerId AS text) || ' : ' || firstname || ' ' || lastname || ' #TO_TRANSLATE(MODIFIED_BY)# ' || loginname);\n"
+						+ "				\n"
+						+ "			qryResult := 0;\n"
+						+ "		END IF;\n"
+						+ "		RETURN qryResult;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_disable\"(\n"
+						+ "	customerid integer,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		entityTypeInstanceId integer;\n"
+						+ "		decisionId integer;\n"
+						+ "		qualifiedName text;\n"
+						+ "		qryResult integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		qryResult = -1;\n"
+						+ "		\n"
+						+ "		SELECT objectdata.*,\n"
+						+ "				decision.\"DecisionHasDecisionId\" \n"
+						+ "			FROM (SELECT \"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "				  		\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || \"This_includes_EmailAddress\"\n"
+						+ "					FROM soberano.\"Customer\" objecttable\n"
+						+ "						INNER JOIN soberano.\"ContactData\" contactdata\n"
+						+ "							ON objecttable.\"This_has_ContactData_with_ContactDataHasContactDataId\" = contactdata.\"ContactDataHasContactDataId\"\n"
+						+ "					WHERE \"CustomerHasCustomerId\" = customerid) objectdata\n"
+						+ "				INNER JOIN (SELECT \"DecisionHasDecisionId\", \n"
+						+ "									\"This_has_Name\" \n"
+						+ "								FROM metamodel.\"Decision\") decision\n"
+						+ "					ON decision.\"DecisionHasDecisionId\" = \n"
+						+ "						(SELECT \"DecisionId\" \n"
+						+ "						 	FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(\n"
+						+ "										objectdata.\"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "										loginname)\n"
+						+ "							WHERE \"DecisionName\" =\n"
+						+ "						   \n"
+						+ "								/************/\n"
+						+ "									'Disable'\n"
+						+ "						   		/************/						   \n"
+						+ "						   \n"
+						+ "						   )\n"
+						+ "			INTO entityTypeInstanceId,\n"
+						+ "				qualifiedName,\n"
+						+ "				decisionId;		\n"
+						+ "			\n"
+						+ "		--user has rights\n"
+						+ "		IF decisionId IS NOT NULL THEN\n"
+						+ "				\n"
+						+ "			--make the decision\n"
+						+ "			PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
+						+ "											entityTypeInstanceId, \n"
+						+ "											decisionId, \n"
+						+ "											'#TO_TRANSLATE(CUSTOMER)# ' || CAST(customerid AS text) || ' : ' || qualifiedName || ' #TO_TRANSLATE(DISABLED_BY)# ' || loginname);\n"
+						+ "				\n"
+						+ "			qryResult := 0;\n"
+						+ "		END IF;\n"
+						+ "		RETURN qryResult;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_get\"(\n"
+						+ "	customerid integer,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"itemId\" integer, \n"
+						+ "				  \"entityTypeInstanceId\" integer, \n"
+						+ "				  \"emailAddress\" character varying,\n"
+						+ "				  \"firstName\" character varying, \n"
+						+ "				  \"lastName\" character varying,\n"
+						+ "				  \"mobilePhoneNumber\" character varying, \n"
+						+ "				  \"countryCode\" character, \n"
+						+ "				  address character varying, \n"
+						+ "				  \"postalCode\" character varying, \n"
+						+ "				  town character varying, \n"
+						+ "				  \"municipalityId\" integer, \n"
+						+ "				  city character varying, \n"
+						+ "				  \"provinceId\" integer, \n"
+						+ "				  latitude double precision, \n"
+						+ "				  longitude double precision, \n"
+						+ "				  discount numeric) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 1\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT DISTINCT \"CustomerHasCustomerId\",\n"
+						+ "										\"This_is_identified_by_EntityTypeInstance_id\",\n"
+						+ "										\"This_includes_EmailAddress\",\n"
+						+ "										\"This_has_FirstName\",\n"
+						+ "										\"This_has_LastName\",\n"
+						+ "										\"This_includes_PhoneNumber\",\n"
+						+ "										\"This_belongs_to_Country_with_CountryHasCountryCode\",\n"
+						+ "										\"This_includes_AddressString\",\n"
+						+ "										\"This_includes_PostalCode\",\n"
+						+ "										\"This_includes_Town\",\n"
+						+ "										\"This_includes_Municipality_with_MunicipalityHasMunicipalityId\",\n"
+						+ "										\"This_includes_City\",\n"
+						+ "										\"This_belongs_to_Province_with_ProvinceHasProvinceId\",\n"
+						+ "										\"This_includes_Latitute\",\n"
+						+ "										\"This_includes_Longitude\",\n"
+						+ "									 	\"This_is_granted_a_DiscountRate\"\n"
+						+ "								FROM soberano.\"Customer\" customer\n"
+						+ "									INNER JOIN soberano.\"ContactData\" contact\n"
+						+ "										ON customer.\"This_has_ContactData_with_ContactDataHasContactDataId\" = contact.\"ContactDataHasContactDataId\"\n"
+						+ "									INNER JOIN soberano.\"PostalAddress\" address\n"
+						+ "										ON contact.\"This_includes_PostalAddress_with_PostalAddressHasPostalAddressI\" = address.\"PostalAddressHasPostalAddressId\"\n"
+						+ "									INNER JOIN soberano.\"Municipality\" municipality\n"
+						+ "										ON address.\"This_includes_Municipality_with_MunicipalityHasMunicipalityId\" = municipality.\"MunicipalityHasMunicipalityId\"\n"
+						+ "									INNER JOIN soberano.\"Province\" province\n"
+						+ "										ON municipality.\"This_belongs_to_Province_with_ProvinceHasProvinceId\" = province.\"ProvinceHasProvinceId\"\n"
+						+ "								WHERE \"CustomerHasCustomerId\" = customerid\n"
+						+ "									AND EXISTS (SELECT metamodel.\"fn_EntityTypeInstance_getDecisions\"(\"This_is_identified_by_EntityTypeInstance_id\", loginname));\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
 						

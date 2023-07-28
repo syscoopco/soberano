@@ -90,15 +90,15 @@ public class Service extends TrackedObject {
 		public Service mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
 			try {
-				Service Service = null;
+				Service service = null;
 				int id = rs.getInt("itemId");
 				if (!rs.wasNull()) {
-					Service = new Service(id,
+					service = new Service(id,
 										rs.getInt("entityTypeInstanceId"),
 										rs.getString("itemCode"),
 										rs.getString("itemName"));
 				}
-				return Service;
+				return service;
 			}
 			catch(Exception ex)
 			{
