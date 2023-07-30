@@ -9,7 +9,7 @@
 		<separator></separator>
 		<label value="${labels.caption.field.discount}" sclass="Caption"></label>		
 		<hbox width="100%">
-			<decimalbox id="decDiscount" value="0" constraint="no negative, no empty"/>
+			<decimalbox id="decDiscount" format="####.########" value="0" constraint="no negative, no empty"/>
 			<label value=" % "></label>
 		</hbox>		
 		<separator></separator>				

@@ -4,19 +4,15 @@ import java.util.Arrays;
 
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
-import org.zkoss.zul.Treechildren;
 
-public class WorkerForm extends ConstrainedForm {
+public class CustomerForm extends ConstrainedForm {
 	
-	private Textbox txtUserName;
-	private Textbox txtPassword;
-	private Textbox txtConfirmPassword;
 	private Textbox txtFirstName;
 	private Textbox txtLastName;
-	private Combobox cmbResponsibilities;
-	private Treechildren tchdnResponsibilities;
+	private Decimalbox decDiscount;
 	private Textbox txtPhoneNumber;
 	private Textbox txtEmailAddress;
 	private Textbox txtAddress;
@@ -29,13 +25,10 @@ public class WorkerForm extends ConstrainedForm {
 	private Doublebox dblLatitude;
 	private Doublebox dblLongitude;	
 
-	public WorkerForm(DesktopAgent desktop,
-					Textbox txtUserName,
-					Textbox txtPassword,
-					Textbox txtConfirmPassword,
+	public CustomerForm(DesktopAgent desktop,
 					Textbox txtFirstName,
 					Textbox txtLastName,
-					Combobox cmbResponsibilities,
+					Decimalbox decDiscount,
 					Textbox txtPhoneNumber,
 					Textbox txtEmailAddress,
 					Textbox txtAddress,
@@ -48,11 +41,9 @@ public class WorkerForm extends ConstrainedForm {
 					Doublebox dblLatitude,
 					Doublebox dblLongitude) {
 		
-		this.constrainedComponents = Arrays.asList("txtUserName",
-													"txtPassword", 
-													"txtConfirmPassword",
-													"txtFirstName",
+		this.constrainedComponents = Arrays.asList("txtFirstName",
 													"txtLastName",
+													"decDiscount",
 													"txtPhoneNumber",
 													"txtEmailAddress",
 													"cmbCountry",
@@ -60,18 +51,6 @@ public class WorkerForm extends ConstrainedForm {
 													"cmbMunicipality");
 		
 		this.setDesktop(desktop);
-		
-		this.setTxtUserName(txtUserName);
-		this.constrainableComponents.add(txtUserName);
-		this.constrainableComponentById.put("txtUserName", txtUserName);
-		
-		this.setTxtPassword(txtPassword);
-		this.constrainableComponents.add(txtPassword);
-		this.constrainableComponentById.put("txtPassword", txtPassword);
-		
-		this.setTxtConfirmPassword(txtConfirmPassword);
-		this.constrainableComponents.add(txtConfirmPassword);
-		this.constrainableComponentById.put("txtConfirmPassword", txtConfirmPassword);
 		
 		this.setTxtFirstName(txtFirstName);
 		this.constrainableComponents.add(txtFirstName);
@@ -81,7 +60,9 @@ public class WorkerForm extends ConstrainedForm {
 		this.constrainableComponents.add(txtLastName);
 		this.constrainableComponentById.put("txtLastName", txtLastName);
 		
-		this.setCmbResponsibilities(cmbResponsibilities);
+		this.setDecDiscount(decDiscount);
+		this.constrainableComponents.add(decDiscount);
+		this.constrainableComponentById.put("decDiscount", decDiscount);
 		
 		this.setTxtPhoneNumber(txtPhoneNumber);
 		this.constrainableComponents.add(txtPhoneNumber);
@@ -115,71 +96,6 @@ public class WorkerForm extends ConstrainedForm {
 		
 		this.setDblLongitude(dblLongitude);
 	}
-	
-	public WorkerForm(DesktopAgent desktop,
-					Textbox txtUserName,
-					Textbox txtPassword,
-					Textbox txtConfirmPassword,
-					Textbox txtFirstName,
-					Textbox txtLastName,
-					Combobox cmbResponsibilities,
-					Treechildren tchdnResponsibilities,
-					Textbox txtPhoneNumber,
-					Textbox txtEmailAddress,
-					Textbox txtAddress,
-					Textbox txtPostalCode,
-					Textbox txtTown,
-					Textbox txtCity,
-					Combobox cmbCountry,
-					Combobox cmbProvince,
-					Combobox cmbMunicipality,
-					Doublebox dblLatitude,
-					Doublebox dblLongitude) {
-		
-		this(desktop,
-				txtUserName,
-				txtPassword,
-				txtConfirmPassword,
-				txtFirstName,
-				txtLastName,
-				cmbResponsibilities,
-				txtPhoneNumber,
-				txtEmailAddress,
-				txtAddress,
-				txtPostalCode,
-				txtTown,
-				txtCity,
-				cmbCountry,
-				cmbProvince,
-				cmbMunicipality,
-				dblLatitude,
-				dblLongitude);
-		this.tchdnResponsibilities = tchdnResponsibilities;
-	}
-
-	public Textbox getTxtUserName() {
-		return txtUserName;
-	}
-
-	public void setTxtUserName(Textbox txtUserName) {
-		this.txtUserName = txtUserName;
-	}
-
-	public Textbox getTxtPassword() {
-		return txtPassword;
-	}
-
-	public void setTxtPassword(Textbox txtPassword) {
-		this.txtPassword = txtPassword;
-	}
-
-	public Textbox getTxtConfirmPassword() {
-		return txtConfirmPassword;
-	}
-
-	public void setTxtConfirmPassword(Textbox txtConfirmPassword) {
-		this.txtConfirmPassword = txtConfirmPassword;
-	}
 
 	public Textbox getTxtFirstName() {
 		return txtFirstName;
@@ -196,13 +112,13 @@ public class WorkerForm extends ConstrainedForm {
 	public void setTxtLastName(Textbox txtLastName) {
 		this.txtLastName = txtLastName;
 	}
-
-	public Combobox getCmbResponsibilities() {
-		return cmbResponsibilities;
+	
+	public Decimalbox getDecDiscount() {
+		return decDiscount;
 	}
 
-	public void setCmbResponsibilities(Combobox cmbResponsibilities) {
-		this.cmbResponsibilities = cmbResponsibilities;
+	public void setDecDiscount(Decimalbox decDiscount) {
+		this.decDiscount = decDiscount;
 	}
 
 	public Textbox getTxtPhoneNumber() {
@@ -291,13 +207,5 @@ public class WorkerForm extends ConstrainedForm {
 
 	public void setDblLongitude(Doublebox dblLongitude) {
 		this.dblLongitude = dblLongitude;
-	}
-
-	public Treechildren getTchdnResponsibilities() {
-		return tchdnResponsibilities;
-	}
-
-	public void setTchdnResponsibilities(Treechildren tchdnResponsibilities) {
-		this.tchdnResponsibilities = tchdnResponsibilities;
 	}
 }

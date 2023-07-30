@@ -162,7 +162,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -244,7 +244,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -326,7 +326,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -408,7 +408,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -490,7 +490,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -572,7 +572,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);			
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);			
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -858,7 +858,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -940,7 +940,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -1022,7 +1022,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -1104,7 +1104,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
 			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
 			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLatitude(), -81.0);
+			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
 			clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
@@ -1183,7 +1183,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			cmbMunicipalityInputAgent.typing(municipalityName);
 			workerForm.selectComboitemByValue(workerForm.getCmbMunicipality(), newWorkerData.getContactData().getMunicipalityId().toString());
 			workerForm.setComponentValue(workerForm.getDblLatitude(), newWorkerData.getContactData().getLatitude());
-			workerForm.setComponentValue(workerForm.getDblLatitude(), newWorkerData.getContactData().getLongitude());
+			workerForm.setComponentValue(workerForm.getDblLongitude(), newWorkerData.getContactData().getLongitude());
 			clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {

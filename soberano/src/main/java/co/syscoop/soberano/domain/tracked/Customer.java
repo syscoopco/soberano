@@ -99,7 +99,7 @@ public class Customer extends TrackedObject {
 		recordParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
 		recordParameters.addValue("city", this.contactData.getCity());
 		recordParameters.addValue("latitude", this.contactData.getLatitude());
-		recordParameters.addValue("longitude", this.contactData.getLatitude());
+		recordParameters.addValue("longitude", this.contactData.getLongitude());
 		recordParameters.addValue("discount", this.getDiscount());
 		
 		Integer qryResult = super.record();

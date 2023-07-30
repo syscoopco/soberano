@@ -245,7 +245,7 @@ public class Worker extends TrackedObject {
 		recordParameters.addValue("municipalityId", this.contactData.getMunicipalityId());
 		recordParameters.addValue("city", this.contactData.getCity());
 		recordParameters.addValue("latitude", this.contactData.getLatitude());
-		recordParameters.addValue("longitude", this.contactData.getLatitude());
+		recordParameters.addValue("longitude", this.contactData.getLongitude());
 		recordParameters.addValue("responsibilities", createArrayOfSQLType("integer", responsibilityIds.toArray()));
 		recordParameters.addValue("authorities", createArrayOfSQLType("integer", authorityIds));
 		
