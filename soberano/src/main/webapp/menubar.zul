@@ -2,14 +2,8 @@
 	<menubar>
 		<menu image="./images/menu_38.jpg" sclass="BarMenu">
 			<menupopup>
-				<menuitem label="${labels.menuItem.Activity}" href="activity.zul"/>				
-				<menu label="${labels.menuItem.Cashier}" sclass="BarMenu">
-					<menupopup>
-						<menuitem label="${labels.menuItem.Deposit}" href="deposit.zul"/>
-						<menuitem label="${labels.menuItem.Withdraw}" href="withdraw.zul"/>
-						<menuitem label="${labels.menuItem.Count}" href="count.zul"/>
-					</menupopup>
-				</menu>
+				<menuitem label="${labels.menuItem.Activity}" href="activity.zul"/>
+				<menuitem label="${labels.menuItem.CashRegister}" href="cash_register.zul"/>				
 				<menuitem label="${labels.menuItem.CurrentCatalog}" href="catalog.zul"/>
 				<menuitem label="${labels.menuItem.ShiftClosures}" href="shift_closures.zul"/>				
 				<menu label="${labels.menuItem.Expenses}" sclass="BarMenu">

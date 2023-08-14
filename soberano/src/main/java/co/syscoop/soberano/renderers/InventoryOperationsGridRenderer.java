@@ -24,7 +24,7 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		
 		InventoryOperationRowData inventoryOperation = (InventoryOperationRowData) data;
 		
-		//operation date
+		//operation id
 		row.appendChild(new Label(inventoryOperation.getInventoryOperationId().toString()));
 		
 		//from warehouse
@@ -61,44 +61,10 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 		btnDocument.setId(btnDocument.getUuid());
-		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
-		btnCancel.setWidth("90%");
-		btnCancel.setDisabled(true);
-		btnCancel.setId(btnCancel.getUuid());
-		
-		//add listener to cancel the expenditure
-		btnCancel.addEventListener("onClick", new EventListener() {
-
-			@Override
-			public void onEvent(Event event) throws Exception {
-
-				try {
-					if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
-						int result = (new InventoryOperation(inventoryOperation.getInventoryOperationId())).disable();
-						if (result == -1) {
-							throw new NotEnoughRightsException();
-						}
-						else {					
-							row.detach();
-						}
-					}
-					else {
-						requestDeletion(row);
-					}
-				}
-				catch(NotEnoughRightsException ex) {
-					ExceptionTreatment.logAndShow(ex, 
-							Labels.getLabel("message.permissions.NotEnoughRights"), 
-							Labels.getLabel("messageBoxTitle.Warning"),
-							Messagebox.EXCLAMATION);
-				}
-			}
-		});
 				
 		actionCell.appendChild(btnPrint);
 		actionCell.appendChild(btnUpload);
 		actionCell.appendChild(btnDocument);
-		actionCell.appendChild(btnCancel);
 		row.appendChild(actionCell);
 	}
 	

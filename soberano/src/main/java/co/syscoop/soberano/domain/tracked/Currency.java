@@ -10,8 +10,10 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import co.syscoop.soberano.database.relational.CurrencyMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
+import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 
 public class Currency extends TrackedObject {
@@ -126,6 +128,9 @@ public class Currency extends TrackedObject {
 		disableParameters.addValue("currencyId", this.getId());
 		
 		Integer qryResult = super.disable();
+		if (qryResult == -2) {
+			throw new CurrencyHasBalanceException();
+		}
 		return qryResult >= 0 ? qryResult : -1;
 	}
 	
@@ -134,33 +139,7 @@ public class Currency extends TrackedObject {
 		return super.getAll(false);
 	}
 		
-	public final class CurrencyMapper implements RowMapper<Object> {
-
-		public Currency mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
-			try {
-				Currency currency = null;
-				int id = rs.getInt("itemId");
-				if (!rs.wasNull()) {
-					currency = new Currency(id,
-											rs.getInt("entityTypeInstanceId"),											
-											rs.getString("itemCode"),
-											rs.getString("itemName"),
-											rs.getBoolean("isSystemCurrency"),
-											rs.getBoolean("isPriceReferenceCurrency"),
-											rs.getBoolean("isCash"),
-											rs.getBigDecimal("exchangeRate"),
-											rs.getInt("itemPosition"),
-											rs.getInt("paymentProcessor"));
-				}
-				return currency;
-			}
-			catch(Exception ex)
-			{
-				throw ex;
-			}			
-	    }
-	}
+	
 	
 	@Override
 	public void get() throws SQLException {

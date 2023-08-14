@@ -6,6 +6,8 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
+import co.syscoop.soberano.exception.CurrencyHasBalanceException;
+import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -40,8 +42,12 @@ public class ExceptionTreatment {
 		if (SpringUtility.underTesting())
 			if (ex.getClass().getName().equals("co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException"))
 				throw new AtLeastOneInventoryItemMustBeMovedException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.CurrencyHasBalanceException"))
+				throw new CurrencyHasBalanceException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DisabledCurrencyException"))
+				throw new DisabledCurrencyException(ex);
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
-				throw new DuplicateKeyException("");
+				throw new DuplicateKeyException("");			
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))

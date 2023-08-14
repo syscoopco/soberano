@@ -4,11 +4,15 @@ import java.sql.SQLException;
 
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
+import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.ui.helper.CurrencyFormHelper;
+import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.vocabulary.Labels;
 
 public class CurrencyTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 
@@ -25,6 +29,15 @@ public class CurrencyTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 	@Override
 	protected int disable(DefaultTreeNode<NodeData> data) throws SQLException, Exception {
 
-		return (new Currency(((DomainObject) data.getData().getValue()).getId())).disable();
+		try {
+			return (new Currency(((DomainObject) data.getData().getValue()).getId())).disable();
+		}
+		catch(CurrencyHasBalanceException ex) { 
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.currencyWithBalanceCannotBeDisabled"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+			return -2;
+		}
 	}
 }

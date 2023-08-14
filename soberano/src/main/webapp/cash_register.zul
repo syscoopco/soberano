@@ -1,0 +1,53 @@
+<?page title="${labels.pageCashRegister.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.CashRegisterInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageCashRegister.WindowTitle}" sclass="PageTitle"/>
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto" apply="co.syscoop.soberano.composers.CashRegisterComposer">
+		<intbox id="intSelectedCashRegister" value="1" visible="false" readonly="true"/>
+		<textbox id="txtSelectedCurrencyCode" value="" visible="false" readonly="true"/>
+		<hlayout id="hlayCurrencies" style="overflow: auto" width="100%"></hlayout>
+		<separator></separator>
+		<hbox id="boxDetails" width="100%">
+			<cell hflex="1" align="center">
+				<decimalbox id="decInput" constraint="no negative" format="####.########" sclass="CollectingTextbox" placeholder="${labels.placeholder.amountInSelectedCurrency}"/>
+			</cell>
+			<cell width="20%" align="center">
+				<button id="btnCalc" label="$" sclass="CollectingButtonLargeFont"></button>
+			</cell>
+		</hbox>
+		<separator></separator>
+		<hbox width="100%" align="center">
+			<cell align="left">
+				<label value="${labels.caption.field.Counted}" sclass="CollectingLabel"></label>
+			</cell>
+			<cell hflex="1" align="center">
+				<decimalbox id="decCounted" format="####.########" readonly="true" sclass="CollectingTextbox" value="0.00"/>
+			</cell>
+			<separator></separator>
+			<label id="lblSystemCurrency" sclass="CollectingCurrency"></label>
+			<separator></separator>
+			<cell width="20%" align="center">
+				<button id="btnClear" label="X" sclass="CollectingButtonLargeFont ClearButton"></button>
+			</cell>
+		</hbox>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<separator></separator>
+		<include id="incGrid" src="/cash_register_history.zul"></include>
+	</window>
+	<hlayout id="hlayDecisionBar" self="@define(decisionButton)" style="overflow: auto" width="100%"></hlayout>
+	<button id="btnRecord" visible="false" disabled="true" self="@define(decisionButton)"></button>
+	<button id="btnDeposit" self="@define(decisionButton)" label="${labels.caption.action.deposit}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.DepositButtonComposer"></button>
+	<button id="btnWithdraw" self="@define(decisionButton)" label="${labels.caption.action.withdraw}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.WithdrawButtonComposer"></button>
+	<button id="btnCount" self="@define(decisionButton)" label="${labels.caption.action.count}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CountButtonComposer"></button>
+</zk>

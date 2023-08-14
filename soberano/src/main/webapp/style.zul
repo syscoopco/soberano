@@ -15,7 +15,7 @@
 		.Caption{
 			font-weight: bolder;
 		}
-		.CashierButton{
+		.CashRegisterButton{
 			width: 95%;
 			height: 50px;
 			padding: 0 0 0 0;		
@@ -45,7 +45,7 @@
 			padding: 0 0 0 0;		
 			font-weight: bolder;
 			font-size: 10pt;
-			background: blue;
+			background: green;
 			color: white;
 		}
 		.CollectingCurrency{

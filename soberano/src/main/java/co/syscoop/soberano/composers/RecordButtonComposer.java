@@ -24,7 +24,7 @@ import co.syscoop.soberano.ui.helper.TrackedObjectFormHelper;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class RecordButtonComposer extends SelectorComposer {
 
-	private TrackedObjectFormHelper trackedObjectFormHelper = null;;
+	private TrackedObjectFormHelper trackedObjectFormHelper = null;
 	private Include incDetails = null;
 	
 	@Wire

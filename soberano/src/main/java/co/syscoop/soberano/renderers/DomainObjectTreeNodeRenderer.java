@@ -100,7 +100,7 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 						if (result == -1) {
 							throw new NotEnoughRightsException();
 						}
-						else {					
+						else if (result == 0) {					
 							//refresh the form
 							//Executions.sendRedirect(pageToRefreshZulURI);
 							

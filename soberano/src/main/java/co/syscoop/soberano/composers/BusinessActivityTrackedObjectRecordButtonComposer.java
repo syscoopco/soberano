@@ -26,7 +26,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorComposer {
 
-	private BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
+	protected BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
 	protected Box boxDetails = null;
 	
 	@Wire
