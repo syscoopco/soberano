@@ -3,23 +3,16 @@ package co.syscoop.soberano.renderers;
 import java.text.SimpleDateFormat;
 
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
-import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.domain.tracked.InventoryOperation;
-import co.syscoop.soberano.exception.NotEnoughRightsException;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.InventoryOperationRowData;
 
 public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void prepareRow(Row row, Object data) {
 		
 		InventoryOperationRowData inventoryOperation = (InventoryOperationRowData) data;
@@ -40,7 +33,7 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(inventoryOperation.getDescription()));
 		
 		//recording date
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		row.appendChild(new Label(dateFormat.format(inventoryOperation.getRecordingDate())));
 				
 		//action column

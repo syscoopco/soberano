@@ -14,7 +14,7 @@
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.worker}" sort="auto(worker)">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.description}">
+				<column align="left" label="${labels.caption.columnHeader.description}" sort="auto(description)">
 				</column>
 				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)">
 				</column>				

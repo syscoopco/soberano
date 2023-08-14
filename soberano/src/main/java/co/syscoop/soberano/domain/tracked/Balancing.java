@@ -62,7 +62,7 @@ public class Balancing extends BusinessActivityTrackedObject {
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		recordQuery = "SELECT soberano.\"fn_Balancingl_create\"(:cashRegister, "
+		recordQuery = "SELECT soberano.\"fn_Balancing_create\"(:cashRegister, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
 				+ "											:loginname) AS queryresult";

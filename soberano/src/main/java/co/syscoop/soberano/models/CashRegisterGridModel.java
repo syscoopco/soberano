@@ -10,8 +10,8 @@ public class CashRegisterGridModel extends SoberanoAbstractListModel<Object>
 {
 	public CashRegisterGridModel() {
 		
-		//the set is sorted by operationId from major to minor (newer ones go first).
-		super("operationId", false, true);
+		//the set is sorted by entityTypeInstanceId from major to minor (newer ones go first).
+		super("entityTypeInstanceId", false, true);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class CashRegisterGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = new CashRegister().getAll(_orderBy == null?"operationId":_orderBy,
+				_cache = new CashRegister().getAll(_orderBy == null?"entityTypeInstanceId":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 

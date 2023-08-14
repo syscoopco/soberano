@@ -20,10 +20,10 @@ public final class CashRegisterOperationExtractor implements ResultSetExtractor<
         while (rs.next()) {
         	cashRegisterOperationRowData = new CashRegisterOperationRowData(rs.getInt("operationId"));
         	cashRegisterOperationRowData.setEntityTypeInstanceId(rs.getInt("entityTypeInstanceId"));
-        	cashRegisterOperationRowData.setDescription(rs.getString("operation"));
+        	cashRegisterOperationRowData.setOperation(rs.getString("operation"));
         	cashRegisterOperationRowData.setWorker(rs.getString("worker"));
         	cashRegisterOperationRowData.setDescription(rs.getString("description"));
-        	cashRegisterOperationRowData.setRecordingDate(rs.getDate("recordingDate"));
+        	cashRegisterOperationRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
         	cashRegisterOperationTableData.add(cashRegisterOperationRowData);
         }
         return cashRegisterOperationTableData;

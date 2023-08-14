@@ -66,7 +66,8 @@ public class CashRegisterComposer extends SelectorComposer {
     public void btnCalc_onClick() throws SoberanoException {
 		
 		try {
-			updateAmounts();	
+			updateAmounts();
+			decInput.focus();
 		}
 		catch(Exception ex) {
 			decCounted.setValue(new BigDecimal(0.0));

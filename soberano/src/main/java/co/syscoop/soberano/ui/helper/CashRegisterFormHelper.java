@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
@@ -104,6 +105,9 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			decEnteredAmount.setReadonly(true);
 			decEnteredAmount.setSclass("CountingCountedBox");
 			cellEnteredAmount.appendChild(decEnteredAmount);
+			
+			Clients.scrollIntoView(hlayCurrencies);
+			((Decimalbox) hlayCurrencies.query("#decInput")).focus();
 		}
 	}
 

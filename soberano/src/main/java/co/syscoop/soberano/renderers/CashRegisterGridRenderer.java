@@ -28,7 +28,7 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(cashRegisterOperation.getDescription()));
 		
 		//recording date
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		row.appendChild(new Label(dateFormat.format(cashRegisterOperation.getRecordingDate())));
 				
 		//action column

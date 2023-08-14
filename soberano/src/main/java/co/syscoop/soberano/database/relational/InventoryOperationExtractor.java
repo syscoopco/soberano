@@ -23,8 +23,8 @@ public final class InventoryOperationExtractor implements ResultSetExtractor<Lis
         	inventoryOperationRowData.setToWarehouse(rs.getString("toWarehouse"));
         	inventoryOperationRowData.setWorker(rs.getString("worker"));
         	inventoryOperationRowData.setDescription(rs.getString("description"));
-        	inventoryOperationRowData.setOperationDate(rs.getDate("operationDate"));
-        	inventoryOperationRowData.setRecordingDate(rs.getDate("recordingDate"));
+        	inventoryOperationRowData.setOperationDate(rs.getTimestamp("operationDate"));
+        	inventoryOperationRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
         	inventoryOperationTableData.add(inventoryOperationRowData);
         }
         return inventoryOperationTableData;
