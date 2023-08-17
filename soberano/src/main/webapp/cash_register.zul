@@ -12,7 +12,8 @@
 		<separator></separator>
 		<hbox id="boxDetails" width="100%">
 			<cell hflex="1" align="center">
-				<decimalbox id="decInput" constraint="no negative" format="####.########" sclass="CollectingTextbox" placeholder="${labels.placeholder.amountInSelectedCurrency}"/>
+				<textbox id="txtInputExpression" placeholder="${labels.placeholder.amountInSelectedCurrency}" sclass="CollectingTextbox"/>
+				<decimalbox visible="false" format="####.########" id="decInput"/>
 			</cell>
 			<cell width="20%" align="center">
 				<button id="btnCalc" label="$" sclass="CollectingButtonLargeFont"></button>

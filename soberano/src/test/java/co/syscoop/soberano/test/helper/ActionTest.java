@@ -37,6 +37,21 @@ public class ActionTest {
 		btnApply.click();			
 	}
 	
+	protected void clickOnDepositButton(DesktopAgent desktop) {
+		ComponentAgent btnDeposit = desktop.query("#incSouth").query("#btnDeposit");
+		btnDeposit.click();			
+	}
+	
+	protected void clickOnWithdrawButton(DesktopAgent desktop) {
+		ComponentAgent btnWithdraw = desktop.query("#incSouth").query("#btnWithdraw");
+		btnWithdraw.click();			
+	}
+	
+	protected void clickOnCountButton(DesktopAgent desktop) {
+		ComponentAgent btnCount = desktop.query("#incSouth").query("#btnCount");
+		btnCount.click();			
+	}
+	
 	protected void testNotEnoughRightsException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.NotEnoughRightsException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.NotEnoughRightsException can be caught here.");
@@ -102,5 +117,10 @@ public class ActionTest {
 	protected void testWeightsMustSum100(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.WeightsMustSum100", cause.getClass().getName(), "Only co.syscoop.soberano.exception.WeightsMustSum100 can be caught here.");
+	}
+	
+	protected void testDisabledCurrencyException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.DisabledCurrencyException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.DisabledCurrencyException can be caught here.");
 	}
 }

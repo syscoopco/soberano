@@ -28,7 +28,8 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		row.appendChild(new Label(dateFormat.format(shift.getShift())));	
 		
-		//recording date
+		//recording date		
+		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		row.appendChild(new Label(dateFormat.format(shift.getRecordingDate())));
 				
 		//action column

@@ -47,6 +47,7 @@ public class PayrollExpensesGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(expense.getReference()));		
 		
 		//recording date
+		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		row.appendChild(new Label(dateFormat.format(expense.getRecordingDate())));
 				
 		//action column

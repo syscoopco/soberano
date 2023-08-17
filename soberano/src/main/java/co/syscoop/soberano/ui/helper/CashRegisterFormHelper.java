@@ -58,6 +58,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			
 			Currency curr = (Currency) item;
 			Button button = new Button(curr.getStringId());
+			button.setId("btn" + curr.getStringId());
 			if (curr.getIsSystemCurrency()) {
 				((Textbox) wndContentPanel.query("#txtSelectedCurrencyCode")).setValue(button.getLabel());
 				button.setSclass("CollectingButtonPushed");
@@ -77,7 +78,9 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 					((Textbox) targetCurrencyButton.query("#txtSelectedCurrencyCode")).setValue(targetCurrencyButton.getLabel());
 					Decimalbox decInput = (Decimalbox) targetCurrencyButton.query("#decInput");
 					decInput.setValue(new BigDecimal(0.0));
-					decInput.focus();
+					Textbox txtInputExpression = (Textbox) targetCurrencyButton.query("#txtInputExpression");
+					txtInputExpression.setValue("");
+					txtInputExpression.focus();
 				}
 			});
 			cellButton.appendChild(button);
@@ -88,6 +91,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			vbox.appendChild(cellBalance);
 			
 			Decimalbox decBalance = new Decimalbox(cashRegister.getBalances().get(curr.getStringId()));
+			decBalance.setId("decBalance" + curr.getStringId());
 			decBalance.setFormat("####.########");
 			decBalance.setReadonly(true);
 			decBalance.setSclass("CountingBalanceBox");
@@ -107,7 +111,10 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			cellEnteredAmount.appendChild(decEnteredAmount);
 			
 			Clients.scrollIntoView(hlayCurrencies);
-			((Decimalbox) hlayCurrencies.query("#decInput")).focus();
+			Decimalbox decInput = (Decimalbox) hlayCurrencies.query("#decInput");
+			decInput.setValue(new BigDecimal(0.0));
+			Textbox txtInputExpression = (Textbox) hlayCurrencies.query("#txtInputExpression");
+			txtInputExpression.focus();		
 		}
 	}
 

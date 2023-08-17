@@ -10,6 +10,7 @@
 		<commons-io>2.6</commons-io>
 		<commons-lang3>3.12.0</commons-lang3>
 		<jasypt>1.9.3</jasypt>
+		<javaluator>3.0.3</javaluator>
 		<javax.servlet-api>4.0.1</javax.servlet-api>
 		<javax-ws-rs>2.1.1</javax-ws-rs>
 		<jersey>2.36</jersey>
@@ -85,7 +86,14 @@
 		    <groupId>org.jasypt</groupId>
 		    <artifactId>jasypt-spring4</artifactId>
 		    <version>${jasypt}</version>
-		</dependency>	
+		</dependency>
+		
+		<!-- javaluator -->
+		<dependency>
+			<groupId>com.fathzer</groupId>
+		    <artifactId>javaluator</artifactId>
+		    <version>${javaluator}</version>
+		</dependency>
 		
 		<!-- Javax dependencies -->
 		<dependency>

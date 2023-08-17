@@ -12,17 +12,23 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Currency;
+import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class CashRegisterComposer extends SelectorComposer {
+	
+	@Wire
+	private Label lblSystemCurrency;
 	
 	@Wire
 	private Hbox boxDetails;
@@ -37,12 +43,17 @@ public class CashRegisterComposer extends SelectorComposer {
 	private Decimalbox decInput;
 	
 	@Wire
+	private Textbox txtInputExpression;
+	
+	@Wire
 	private Decimalbox decCounted;
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
+          SystemCurrencies sysCurrs = (new Currency()).getSystemCurrencies();
+			lblSystemCurrency.setValue(sysCurrs.getSystemCurrencyCode());
     }
 	
 	private void updateAmounts() throws SQLException {
@@ -59,7 +70,8 @@ public class CashRegisterComposer extends SelectorComposer {
 			totalEnteredAmountInSystemCurrency = totalEnteredAmountInSystemCurrency.add(decEnteredAmount.getValue().multiply(currExchRate));
 		}
 		decCounted.setValue(totalEnteredAmountInSystemCurrency);
-		decInput.setValue(new BigDecimal(0.0));
+		decInput.setValue(new BigDecimal(0.0));		
+		txtInputExpression.setValue("");
 	}
 
 	@Listen("onClick = button#btnCalc")
@@ -67,7 +79,7 @@ public class CashRegisterComposer extends SelectorComposer {
 		
 		try {
 			updateAmounts();
-			decInput.focus();
+			txtInputExpression.focus();
 		}
 		catch(Exception ex) {
 			decCounted.setValue(new BigDecimal(0.0));
@@ -84,4 +96,20 @@ public class CashRegisterComposer extends SelectorComposer {
 		
 		Executions.sendRedirect("/cash_register.zul?id=" + intSelectedCashRegister.getValue().toString());
     }
+	
+	@Listen("onChange = textbox#txtInputExpression")
+    public void txtInputExpression_onChange() throws Throwable {
+		
+		try {
+			Double evalResult = Double.parseDouble(Utils.evaluate(txtInputExpression.getValue()));
+			decInput.setValue(new BigDecimal(evalResult));
+			txtInputExpression.setValue(decInput.getValue().toString());
+		}
+		catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.typeAValidArithmeticExpression"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+	}
 }
