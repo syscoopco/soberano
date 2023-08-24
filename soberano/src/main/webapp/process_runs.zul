@@ -1,0 +1,43 @@
+<?page title="${labels.pageProcessRun.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageProcessRun.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.ProcessRunsComposer">
+			<hbox width="100%">
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProcessSelectionViewModel')">
+					<combobox id="cmbProcess" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.process}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
+					<combobox id="cmbCostCenter" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.costCenter}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+				<intbox id="intRuns" hflex="1" placeholder="${labels.placeholder.runs}" constraint="no negative, no zero, no empty"/>
+			</hbox>
+			<separator></separator>
+			<include id="incProcessIOs" src="/process_ios.zul"></include>
+			<separator></separator>
+			<include id="incGrid" src="/process_runs_history.zul"></include>
+		</vbox>
+	</window>	
+	<label id="lblEstimatedCost" self="@define(decisionButton)" value="${labels.caption.field.estimatedCost}" sclass="Caption"></label>
+	<decimalbox disabled="true" id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" readonly="true"/>
+	<separator self="@define(decisionButton)"></separator>
+	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCostSheetButtonComposer"></button>
+	<separator self="@define(decisionButton)"></separator>
+	<button id="btnRun" visible="false" self="@define(decisionButton)" label="${labels.caption.action.run}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RunProcessRunButtonComposer"></button>
+	<button id="btnCancel" visible="false" self="@define(decisionButton)" label="${labels.caption.action.cancel}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CancelProcessRunButtonComposer"></button>
+	<button id="btnEnd" visible="false" self="@define(decisionButton)" label="${labels.caption.action.end}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.EndProcessRunButtonComposer"></button>
+</zk>

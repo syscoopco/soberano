@@ -1,7 +1,6 @@
 package co.syscoop.soberano.domain.tracked;
 
 import java.sql.Array;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.database.relational.DaoBase;
+import co.syscoop.soberano.database.relational.QueryResultMapper;
 import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectMapper;
@@ -89,28 +89,6 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 
 		public TrackedObjectDao(BasicDataSource dataSource) {
 			super(dataSource);
-		}
-			
-		private final class QueryResultMapper implements RowMapper<Integer> {
-
-			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				
-				try {
-					//always returns 0, or a new object id, whenever everything is right.
-					//otherwise, returns a negative code error.
-					Integer queryResult = rs.getInt("queryresult");
-					if (!rs.wasNull()) {
-						return queryResult;
-					}
-					else {
-						return 0;
-					}
-				}
-				catch(Exception ex)
-				{
-					throw ex;
-				}			
-		    }
 		}
 		
 		private MapSqlParameterSource addLoginname(String query, MapSqlParameterSource parameters) {

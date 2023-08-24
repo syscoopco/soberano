@@ -17,7 +17,7 @@ import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial" })
-public /*abstract*/ class MaterialExpensesComposer extends ExpenseAmountComposer {
+public class MaterialExpensesComposer extends ExpenseAmountComposer {
 	
 	@Wire
 	private Combobox cmbMaterial;

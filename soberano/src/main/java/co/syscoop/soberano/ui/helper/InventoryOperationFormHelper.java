@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
@@ -31,6 +29,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.models.InventoryOperationsGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -39,7 +38,6 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 	private ArrayList<Unit> units = new ArrayList<Unit>();
 	private ArrayList<BigDecimal> quantities = new ArrayList<BigDecimal>();
 		
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addItemToMove(String inventoryItemName,
 									String inventoryItemId,
 									BigDecimal quantity,
@@ -76,20 +74,7 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 			intUnitId.setVisible(false);
 			hbox.appendChild(intUnitId);
 			
-			Button btnDelete = new Button();
-			btnDelete.setId("btnRowDeletion" + inventoryItemId);
-			btnDelete.setImage("./images/delete.png");
-			btnDelete.setClass("ContextualButton");
-			btnDelete.addEventListener("onClick", new EventListener() {
-
-				@Override
-				public void onEvent(Event event) throws Exception {
-
-					Button btnDelete = (Button) event.getTarget();
-					btnDelete.getParent().getParent().getParent().getParent().detach();
-				}
-			});		
-			hbox.appendChild(btnDelete);
+			ZKUtilitity.addRowDeletionButton("btnRowDeletion" + inventoryItemId, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnMove.appendChild(treeItem);

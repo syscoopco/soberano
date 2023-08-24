@@ -51,7 +51,8 @@ public class AddProcessOutputButtonComposer extends SelectorComposer {
 											cmbOutputUnit.getSelectedItem().getLabel(), 
 											Integer.parseInt(cmbOutputUnit.getSelectedItem().getValue()),
 											intWeight.getValue(),
-											tchdnOutputs);
+											tchdnOutputs,
+											false);
 			}
 			else {
 				int i = 0;
@@ -72,7 +73,8 @@ public class AddProcessOutputButtonComposer extends SelectorComposer {
 												cmbOutputUnit.getSelectedItem().getLabel(), 
 												Integer.parseInt(cmbOutputUnit.getSelectedItem().getValue()),
 												intWeight.getValue(),
-												tchdnOutputs);
+												tchdnOutputs,
+												false);
 				}
 			}
 		}

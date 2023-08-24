@@ -11,12 +11,12 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.util.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public /*abstract*/ class ViewModelComposer extends SelectorComposer {
+public class ViewModelComposer extends SelectorComposer {
 	
 	@Wire
 	protected Combobox cmbIntelliSearch;
 	
-	protected /*abstract*/ void fillForm(Include incDetails, Treeitem treeItem) throws SQLException {};
+	protected void fillForm(Include incDetails, Treeitem treeItem) throws SQLException {};
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {

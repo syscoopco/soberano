@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.event.Event;
-import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Decimalbox;
@@ -42,13 +40,13 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	private ArrayList<BigDecimal> outputQuantities = new ArrayList<BigDecimal>();
 	private ArrayList<Integer> weights = new ArrayList<Integer>();
 		
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addInput(String inventoryItemName,
 								String inventoryItemId,
 								BigDecimal quantity,
 								String unitName,
 								Integer unitId,
-								Treechildren tchdnInputs) throws SomeFieldsContainWrongValuesException {
+								Treechildren tchdnInputs,
+								Boolean runMode) throws SomeFieldsContainWrongValuesException {
 		if (quantity.compareTo(new BigDecimal(0)) <= 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
@@ -79,34 +77,23 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			intUnitId.setVisible(false);
 			hbox.appendChild(intUnitId);
 			
-			Button btnDelete = new Button();
-			btnDelete.setId("btnInputRowDeletion" + inventoryItemId);
-			btnDelete.setImage("./images/delete.png");
-			btnDelete.setClass("ContextualButton");
-			btnDelete.addEventListener("onClick", new EventListener() {
-
-				@Override
-				public void onEvent(Event event) throws Exception {
-
-					Button btnDelete = (Button) event.getTarget();
-					btnDelete.getParent().getParent().getParent().getParent().detach();
-				}
-			});		
-			hbox.appendChild(btnDelete);
+			if (!runMode) {
+				ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + inventoryItemId, hbox);
+			}
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnInputs.appendChild(treeItem);
 		}
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addOutput(String inventoryItemName,
 								String inventoryItemId,
 								BigDecimal quantity,
 								String unitName,
 								Integer unitId,
 								Integer weight,
-								Treechildren tchdnOutputs) throws SomeFieldsContainWrongValuesException {
+								Treechildren tchdnOutputs,
+								Boolean runMode) throws SomeFieldsContainWrongValuesException {
 		if (quantity.compareTo(new BigDecimal(0)) <= 0 || weight < 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
@@ -120,7 +107,8 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			Decimalbox decQuantity = new Decimalbox(quantity);
+			Decimalbox decQuantity = new Decimalbox(runMode ? new BigDecimal(0) : quantity);
+			decQuantity.setReadonly(!runMode);
 			decQuantity.setId("decOutputQuantity" + inventoryItemId);
 			decQuantity.setReadonly(true);
 			decQuantity.setFormat("####.########");
@@ -138,6 +126,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			hbox.appendChild(intUnitId);
 			
 			Intbox intWeight = new Intbox(weight);
+			decQuantity.setReadonly(!runMode);
 			intWeight.setId("intWeight" + inventoryItemId);
 			intWeight.setReadonly(true);
 			hbox.appendChild(intWeight);
@@ -146,20 +135,9 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			lblWeightUnit.setId("lblWeightUnit" + inventoryItemId);
 			hbox.appendChild(lblWeightUnit);
 			
-			Button btnDelete = new Button();
-			btnDelete.setId("btnOutputRowDeletion" + inventoryItemId);
-			btnDelete.setImage("./images/delete.png");
-			btnDelete.setClass("ContextualButton");
-			btnDelete.addEventListener("onClick", new EventListener() {
-
-				@Override
-				public void onEvent(Event event) throws Exception {
-
-					Button btnDelete = (Button) event.getTarget();
-					btnDelete.getParent().getParent().getParent().getParent().detach();
-				}
-			});		
-			hbox.appendChild(btnDelete);
+			if (!runMode) {
+				ZKUtilitity.addRowDeletionButton("btnOutputRowDeletion" + inventoryItemId, hbox);
+			}			
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnOutputs.appendChild(treeItem);
@@ -174,7 +152,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 									ArrayList<BigDecimal> outputQuantities,
 									ArrayList<Integer> weights,
 									Include incDetails) {
-		Treechildren tchdnInputs = (Treechildren) incDetails.query("#tchdnInputs");
+		Treechildren tchdnInputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs");
 		inputInventoryItems.clear();
 		inputUnits.clear();
 		inputQuantities.clear();
@@ -187,7 +165,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			inputQuantities.add(((Decimalbox) item.query("#decInputQuantity" +  inventoryItemId)).getValue());
 		}
 		
-		Treechildren tchdnOutputs = (Treechildren) incDetails.query("#tchdnOutputs");
+		Treechildren tchdnOutputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnOutputs");
 		outputInventoryItems.clear();
 		outputUnits.clear();
 		outputQuantities.clear();
@@ -209,11 +187,11 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), new BigDecimal(0.0));
-		((Treechildren) incDetails.query("#tchdnInputs")).getChildren().clear();
-		((Treechildren) incDetails.query("#tchdnOutputs")).getChildren().clear();
+		((Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs")).getChildren().clear();
+		((Treechildren) incDetails.query("#incProcessIOs").query("#tchdnOutputs")).getChildren().clear();
 	}
 	
-	public void fillForm(Include incDetails, Integer id) throws SQLException {
+	public void fillForm(Include incDetails, Integer id, Boolean runMode) throws SQLException {
 		
 		Process process = new Process(id);
 		process.get();
@@ -229,7 +207,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), process.getName());
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), process.getFixedCost());
 		
-		Treechildren tchdnInputs = (Treechildren) incDetails.query("#tchdnInputs");
+		Treechildren tchdnInputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs");
 		tchdnInputs.getChildren().clear();
 		for (Object input : process.getProcessInputs(id)) {
 			try {
@@ -238,13 +216,14 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 						((ProcessIORowData) input).getQuantity(),
 						((ProcessIORowData) input).getUnitAcron(),
 						((ProcessIORowData) input).getUnitId(),
-						tchdnInputs);
+						tchdnInputs,
+						runMode);
 			} catch (SomeFieldsContainWrongValuesException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		Treechildren tchdnOutputs = (Treechildren) incDetails.query("#tchdnOutputs");
+		Treechildren tchdnOutputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnOutputs");
 		tchdnOutputs.getChildren().clear();
 		for (Object output : process.getProcessOutputs(id)) {
 			try {
@@ -254,7 +233,8 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 						((ProcessIORowData) output).getUnitAcron(),
 						((ProcessIORowData) output).getUnitId(),
 						((ProcessIORowData) output).getWeight(),
-						tchdnOutputs);
+						tchdnOutputs,
+						runMode);
 			} catch (SomeFieldsContainWrongValuesException e) {
 				e.printStackTrace();
 			}
@@ -264,7 +244,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId());
+		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId(), false);
 	}
 	
 	private Boolean weightsSum100() {

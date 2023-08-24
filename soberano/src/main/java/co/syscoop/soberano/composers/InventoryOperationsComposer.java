@@ -2,6 +2,8 @@ package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+
+import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
@@ -16,8 +18,8 @@ import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
-@SuppressWarnings({ "serial" })
-public /*abstract*/ class InventoryOperationsComposer extends ExpenseAmountComposer {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class InventoryOperationsComposer extends SelectorComposer {
 	
 	@Wire
 	private Combobox cmbMaterial;

@@ -18,30 +18,12 @@ public class DaoBase {
 
 	private BasicDataSource dataSource = null;
 	
+	public DaoBase() {}
+	
 	public class NonResultMapper implements RowMapper<Integer> {
 
 		public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
 	        return 0;
-	    }
-	}
-	
-	public final class QueryResultMapper implements RowMapper<Integer> {
-
-		public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
-			try {
-				Integer queryResult = rs.getInt("queryResult");
-				if (!rs.wasNull()) {
-					return queryResult;
-				}
-				else {
-					return 0;
-				}
-			}
-			catch(Exception ex)
-			{
-				throw ex;
-			}			
 	    }
 	}
 	

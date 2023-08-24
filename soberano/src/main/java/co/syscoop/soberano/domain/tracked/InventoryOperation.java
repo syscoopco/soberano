@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 
 public class InventoryOperation extends BusinessActivityTrackedObject {
 	
@@ -122,12 +121,9 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 				+ "											:loginname) AS queryresult";
 		disableParameters = new MapSqlParameterSource();
 		disableParameters.addValue("inventoryOperationId", this.getId());
-		
+
 		Integer qryResult = super.disable();
-		if (qryResult == -3) {
-			throw new ShiftHasBeenClosedException();
-		}
-		return qryResult;
+		return qryResult >= 0 ? qryResult : -1;
 	}
 	
 	@Override

@@ -10,26 +10,32 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.util.CashRegisterOperationRowData;
+import co.syscoop.soberano.util.ProcessRunRowData;
 
-public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
+public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 
 	public void prepareRow(Row row, Object data) {
 		
-		CashRegisterOperationRowData cashRegisterOperation = (CashRegisterOperationRowData) data;
+		ProcessRunRowData processRunRowData = (ProcessRunRowData) data;
 		
-		//operation
-		row.appendChild(new Label(cashRegisterOperation.getOperation()));
+		//operation id
+		row.appendChild(new Label(processRunRowData.getProcessRunId().toString()));
 		
-		//worker
-		row.appendChild(new Label(cashRegisterOperation.getWorker()));
+		//process
+		row.appendChild(new Label(processRunRowData.getProcess()));
+		
+		//cost center
+		row.appendChild(new Label(processRunRowData.getCostCenter()));
 		
 		//description
-		row.appendChild(new Label(cashRegisterOperation.getDescription()));
+		row.appendChild(new Label(processRunRowData.getDescription()));
+		
+		//history
+		row.appendChild(new Label(processRunRowData.getHistory()));
 		
 		//recording date
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-		row.appendChild(new Label(dateFormat.format(cashRegisterOperation.getRecordingDate())));
+		row.appendChild(new Label(dateFormat.format(processRunRowData.getRecordingDate())));
 				
 		//action column
 		Vbox actionCell = new Vbox();
@@ -55,11 +61,8 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 		actionCell.appendChild(btnDocument);
 		row.appendChild(actionCell);
 		
-		//operation id
-		row.appendChild(new Intbox(cashRegisterOperation.getCashRegisterOperationId()));
-		
 		//entity type instance id
-		row.appendChild(new Intbox(cashRegisterOperation.getEntityTypeInstanceId()));
+		row.appendChild(new Intbox(processRunRowData.getEntityTypeInstanceId()));
 	}
 	
 	@Override

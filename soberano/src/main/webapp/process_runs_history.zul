@@ -1,0 +1,32 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<include src="/style.zul"/>
+	<zscript>
+		<![CDATA[
+	  		co.syscoop.soberano.models.ProcessRunsGridModel model = new co.syscoop.soberano.models.ProcessRunsGridModel();
+	  		co.syscoop.soberano.renderers.ProcessRunsGridRenderer renderer = new co.syscoop.soberano.renderers.ProcessRunsGridRenderer();
+		]]>
+	</zscript>
+	<vbox hflex="1">
+		<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+			<columns sizable="true">
+				<column align="right" label="${labels.caption.columnHeader.operationId}" sort="auto(operationId)" sortDirection="descending">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.process}" sort="auto(process)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.costCenter}" sort="auto(costCenter)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.description}">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.history}">
+				</column>
+				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)">
+				</column>
+				<column align="center" label="${labels.caption.columnHeader.action}">
+				</column>
+				<column visible="false" sort="auto(entityTypeInstanceId)">
+				</column>
+			</columns>
+		</grid>
+	</vbox>
+</zk>

@@ -10,7 +10,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.StockGridModel;
 
 @SuppressWarnings({ "serial" })
-public /*abstract*/ class StockComposer extends ExpenseAmountComposer {
+public class StockComposer extends ExpenseAmountComposer {
 	
 	@Wire
 	private Combobox cmbWarehouse;

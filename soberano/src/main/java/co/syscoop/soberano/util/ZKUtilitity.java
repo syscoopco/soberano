@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Decimalbox;
@@ -115,5 +118,24 @@ public class ZKUtilitity {
 				break;
 			}
 		}
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void addRowDeletionButton(String buttonId, Component parentComponent) {
+		
+		Button btnDelete = new Button();
+		btnDelete.setId(buttonId);
+		btnDelete.setImage("./images/delete.png");
+		btnDelete.setClass("ContextualButton");
+		btnDelete.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				Button btnDelete = (Button) event.getTarget();
+				btnDelete.getParent().getParent().getParent().getParent().detach();
+			}
+		});		
+		parentComponent.appendChild(btnDelete);
 	}
 }
