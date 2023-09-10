@@ -13,9 +13,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
-import co.syscoop.soberano.util.ProcessIORowData;
 import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.database.relational.ProcessIOMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ProcessRunningException;
 
 public class Process extends TrackedObject {
 
@@ -170,6 +171,9 @@ public class Process extends TrackedObject {
 		modifyParameters.addValue("weights", createArrayOfSQLType("integer", this.getWeights().toArray()));
 		
 		Integer qryResult = super.modify();
+		if (qryResult == -2) {
+			throw new ProcessRunningException();
+		}
 		return qryResult >= 0 ? qryResult : -1;
 	}
 	
@@ -205,30 +209,6 @@ public class Process extends TrackedObject {
 										rs.getBigDecimal("fixedCost"));
 				}
 				return process;
-			}
-			catch(Exception ex)
-			{
-				throw ex;
-			}			
-	    }
-	}
-	
-	private final class ProcessIOMapper implements RowMapper<Object> {
-
-		public ProcessIORowData mapRow(ResultSet rs, int rowNum) throws SQLException {
-			
-			try {
-				ProcessIORowData processIORow = new ProcessIORowData();
-				String itemId = rs.getString("itemId");
-				if (!rs.wasNull()) {
-					processIORow.setItemId(itemId);
-					processIORow.setItemName(rs.getString("itemName"));
-					processIORow.setUnitAcron(rs.getString("unitAcron"));
-					processIORow.setUnitId(rs.getInt("unitId"));
-					processIORow.setQuantity(rs.getBigDecimal("quantity"));
-					processIORow.setWeight(rs.getInt("weight"));
-				}
-				return processIORow;
 			}
 			catch(Exception ex)
 			{

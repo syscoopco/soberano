@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ProcessRunningException;
 
 public class Product extends InventoryItem { 
 	
@@ -148,6 +149,9 @@ public class Product extends InventoryItem {
 		modifyParameters.addValue("productCategories", createArrayOfSQLType("integer", productCategoryIds));
 		
 		Integer qryResult = super.modify();
+		if (qryResult == -2) {
+			throw new ProcessRunningException();
+		}
 		return qryResult >= 0 ? qryResult : -1;
 	}
 	

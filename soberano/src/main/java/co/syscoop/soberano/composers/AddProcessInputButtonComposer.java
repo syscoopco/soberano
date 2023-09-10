@@ -47,7 +47,8 @@ public class AddProcessInputButtonComposer extends SelectorComposer {
 											cmbInputUnit.getSelectedItem().getLabel(), 
 											Integer.parseInt(cmbInputUnit.getSelectedItem().getValue()),
 											tchdnInputs,
-											false);
+											false,
+											1);
 			}
 			else {
 				int i = 0;
@@ -68,7 +69,8 @@ public class AddProcessInputButtonComposer extends SelectorComposer {
 												cmbInputUnit.getSelectedItem().getLabel(), 
 												Integer.parseInt(cmbInputUnit.getSelectedItem().getValue()),
 												tchdnInputs,
-												false);
+												false,
+												1);
 				}
 			}
 		}

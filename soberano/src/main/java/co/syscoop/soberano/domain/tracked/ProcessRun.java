@@ -1,6 +1,7 @@
 package co.syscoop.soberano.domain.tracked;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,12 +10,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.DaoBase;
-import co.syscoop.soberano.database.relational.QueryResultMapper;
-import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.database.relational.ProcessIOMapper;
+import co.syscoop.soberano.database.relational.QueryResultMapper;import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class ProcessRun extends BusinessActivityTrackedObject {
@@ -74,7 +76,8 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		this.setId(id);
 	}
 	
-	public ProcessRun(Integer process,
+	public ProcessRun(String code,
+						Integer process,
 						Integer costCenter,
 						ArrayList<InventoryItem> inputItems,
 						ArrayList<BigDecimal> inputQuantities,
@@ -83,14 +86,16 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 						ArrayList<BigDecimal> outputQuantities,
 						ArrayList<Unit> outputUnits,
 						ArrayList<Integer> weights) {
+		
 		super.setOccurrenceTime(new Date());
+		super.setStringId(code);
 		this.process.setId(process);
 		this.costCenter.setId(costCenter);
 		this.inputItems = inputItems;
 		fillInputItemIds();	
 		this.inputUnits = inputUnits;
 		fillInputUnitIds();	
-		this.outputQuantities = outputQuantities;
+		this.inputQuantities = inputQuantities;
 		this.outputItems = outputItems;
 		fillOutputItemIds();	
 		this.outputUnits = outputUnits;
@@ -98,9 +103,70 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		this.outputQuantities = outputQuantities;
 		this.weights = weights;
 	}
+	
+	public ProcessRun(Integer id,
+					String code,
+					Integer entityTypeInstanceId, 
+					Integer process,
+					Integer costCenter) {
+		
+		super.setId(id);
+		super.setStringId(code);
+		super.setEntityTypeInstanceId(entityTypeInstanceId);
+		this.process.setId(process);
+		this.costCenter.setId(costCenter);
+	}
+	
+	public final class ProcessRunMapper implements RowMapper<Object> {
+
+		public ProcessRun mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				ProcessRun processRun = null;
+				int id = rs.getInt("itemId");
+				if (!rs.wasNull()) {
+					processRun = new ProcessRun(id,
+										rs.getString("code"),
+										rs.getInt("entityTypeInstanceId"),
+										rs.getInt("process"),
+										rs.getInt("costCenter"));
+				}
+				return processRun;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
 
 	@Override
 	public void get() throws SQLException {
+		
+		getQuery = "SELECT * FROM soberano.\"fn_ProcessRun_get\"(:itemId, :loginname)";
+		getParameters = new HashMap<String, Object>();
+		getParameters.put("itemId", this.getId());
+		super.get(new ProcessRunMapper());
+	}
+	
+	public List<Object> getProcessRunInputs(Integer processRunId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getInputs\"(:processId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
+	}
+	
+	public List<Object> getProcessRunOutputs(Integer processRunId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getOutputs\"(:processId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
 	}
 
 	@Override
@@ -126,7 +192,8 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		recordQuery = "SELECT soberano.\"fn_ProcessRun_create\"(:process, "
+		recordQuery = "SELECT soberano.\"fn_ProcessRun_create\"(:itemCode, "
+				+ "											:process, "
 				+ "											:costCenter, "
 				+ "											:inputItems, "
 				+ "											:inputQuantities, "
@@ -137,29 +204,38 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 				+ "											:weights, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
+		recordParameters.addValue("itemCode", this.getStringId());
 		recordParameters.addValue("process", this.process.getId());
 		recordParameters.addValue("costCenter", this.costCenter.getId());
 		recordParameters.addValue("inputItems", createArrayOfSQLType("varchar", this.inputItemCodes.toArray()));
 		recordParameters.addValue("inputQuantities", createArrayOfSQLType("numeric", this.inputQuantities.toArray()));
-		recordParameters.addValue("inputUnits", createArrayOfSQLType("integer", this.inputUnits.toArray()));
+		recordParameters.addValue("inputUnits", createArrayOfSQLType("integer", this.inputUnitIds.toArray()));
 		recordParameters.addValue("outputItems", createArrayOfSQLType("varchar", this.outputItemCodes.toArray()));
 		recordParameters.addValue("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
-		recordParameters.addValue("outputUnits", createArrayOfSQLType("integer", this.outputUnits.toArray()));
-		recordParameters.addValue("weights", this.weights);
+		recordParameters.addValue("outputUnits", createArrayOfSQLType("integer", this.outputUnitIds.toArray()));
+		recordParameters.addValue("weights", createArrayOfSQLType("integer", this.weights.toArray()));
 		return super.record();
 	}
 	
-	@Override
-	public Integer disable() throws SQLException, Exception {
-					
+	public Integer close() throws SQLException, Exception {
+	
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		disableQuery = "SELECT soberano.\"fn_ProcessRun_disable\"(:processRunId, "
+		String qryStr = "SELECT soberano.\"fn_ProcessRun_close\"(:itemId, "
+				+ "											:itemCode, "
+				+ "											:outputItems, "
+				+ "											:outputQuantities, "
+				+ "											:outputUnits, "
+				+ "											:weights, "
 				+ "											:loginname) AS queryresult";
-		disableParameters = new MapSqlParameterSource();
-		disableParameters.addValue("processRunId", this.getId());
 		
-		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("itemId", this.getId());
+		parametersMap.put("itemCode", this.getStringId());
+		parametersMap.put("outputItems", createArrayOfSQLType("varchar", this.outputItemCodes.toArray()));
+		parametersMap.put("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
+		parametersMap.put("outputUnits", createArrayOfSQLType("integer", this.outputUnitIds.toArray()));
+		parametersMap.put("weights", this.weights);parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return ((new DaoBase()).query(qryStr, parametersMap , new QueryResultMapper()).get(0));
 	}
 	
 	public Integer cancel() throws SQLException, Exception {

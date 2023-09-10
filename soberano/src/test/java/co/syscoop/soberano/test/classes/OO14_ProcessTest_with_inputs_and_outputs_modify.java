@@ -74,7 +74,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 		cmbInputAgent.click(); 	//needed to force cmbUnit population. 
 									//combobox onChange event isn't triggered under testing
 		
-		ComponentAgent decInputQuantityAgent = desktop.query("#incDetails").query("decimalbox").query("#decInputQuantity");
+		ComponentAgent decInputQuantityAgent = desktop.query("#incDetails").query("#incProcessIOs").query("#decInputQuantity");
 		Decimalbox decInputQuantity = decInputQuantityAgent.as(Decimalbox.class);			
 		setComponentValue(decInputQuantity, quantity);
 		
@@ -101,7 +101,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 		cmbOutputAgent.click(); 	//needed to force cmbUnit population. 
 								//combobox onChange event isn't triggered under testing
 		
-		ComponentAgent decOutputQuantityAgent = desktop.query("#incDetails").query("decimalbox").query("#decOutputQuantity");
+		ComponentAgent decOutputQuantityAgent = desktop.query("#incDetails").query("#incProcessIOs").query("#decOutputQuantity");
 		Decimalbox decOutputQuantity = decOutputQuantityAgent.as(Decimalbox.class);			
 		setComponentValue(decOutputQuantity, quantity);
 		
@@ -741,10 +741,10 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("mpr2");
 			
-			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnInputRowDeletion" + "mm6");
+			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnInputRowDeletion" + "mm6");
 			btnInputRowDeletion.click();
 			
-			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm4");
+			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm4");
 			btnOutputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
@@ -767,14 +767,14 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("mpr2");
 			
-			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnInputRowDeletion" + "mm6");
+			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnInputRowDeletion" + "mm6");
 			btnInputRowDeletion.click();
 			
-			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm4");
+			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm4");
 			btnOutputRowDeletion.click();
 			
 			//update weights to sum 100%
-			btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm2");
+			btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm2");
 			btnOutputRowDeletion.click();
 			
 			DesktopAgent desktop = processForm.getDesktop();
@@ -804,11 +804,11 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("mpr6");
 			
-			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm6");
+			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm6");
 			btnOutputRowDeletion.click();
 			
 			//update weights to sum 100%
-			btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm7");
+			btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm7");
 			btnOutputRowDeletion.click();
 			
 			DesktopAgent desktop = processForm.getDesktop();
@@ -838,7 +838,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("mpr7");
 			
-			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnInputRowDeletion" + "mm7");
+			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnInputRowDeletion" + "mm7");
 			btnInputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
@@ -859,7 +859,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("mpr9");
 			
-			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnInputRowDeletion" + "mm2");
+			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnInputRowDeletion" + "mm2");
 			btnInputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
@@ -880,7 +880,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("product1");
 			
-			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnInputRowDeletion" + "mm2");
+			ComponentAgent btnInputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnInputRowDeletion" + "mm2");
 			btnInputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
@@ -901,7 +901,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("product2");
 			
-			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm5");
+			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm5");
 			btnOutputRowDeletion.click();
 						
 			clickOnApplyButton(processForm.getDesktop());
@@ -922,7 +922,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 			ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 			loadObjectDetails("product5");
 			
-			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#btnOutputRowDeletion" + "mm9");
+			ComponentAgent btnOutputRowDeletion = cmbIntelliSearchAgent.query("#incDetails").query("#incProcessIOs").query("#btnOutputRowDeletion" + "mm9");
 			btnOutputRowDeletion.click();
 			
 			clickOnApplyButton(processForm.getDesktop());
@@ -942,7 +942,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 
 		ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 		loadObjectDetails(processName);
-		ComponentAgent tchdnInputsAgent = processForm.getDesktop().query("#incDetails").query("treechildren").query("#tchdnInputs");
+		ComponentAgent tchdnInputsAgent = processForm.getDesktop().query("#incDetails").query("#incProcessIOs").query("treechildren").query("#tchdnInputs");
 		Treechildren tchdnInputs = tchdnInputsAgent.as(Treechildren.class);
 		for (int i = 0; i < itemNames.length; i++) {
 			String shownInputName = ((Treeitem) tchdnInputs.getChildren().get(i)).getLabel();
@@ -965,7 +965,7 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 
 		ProcessForm processForm = setFormComponents("user1@soberano.syscoop.co", "processes.zul");			
 		loadObjectDetails(processName);
-		ComponentAgent tchdnOutputsAgent = processForm.getDesktop().query("#incDetails").query("treechildren").query("#tchdnOutputs");
+		ComponentAgent tchdnOutputsAgent = processForm.getDesktop().query("#incDetails").query("#incProcessIOs").query("treechildren").query("#tchdnOutputs");
 		Treechildren tchdnOutputs = tchdnOutputsAgent.as(Treechildren.class);
 		for (int i = 0; i < itemNames.length; i++) {
 			String shownOutputName = ((Treeitem) tchdnOutputs.getChildren().get(i)).getLabel();

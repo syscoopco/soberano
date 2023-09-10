@@ -10,8 +10,8 @@ public class ProcessRunsGridModel extends SoberanoAbstractListModel<Object>
 {
 	public ProcessRunsGridModel() {
 		
-		//the set is sorted by operationId from major to minor (newer ones go first).
-		super("operationId", false, true);
+		//the set is sorted by stage from major to minor (ongoing ones go first).
+		super("stage", false, true);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class ProcessRunsGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = new ProcessRun().getAll(_orderBy == null?"operationId":_orderBy,
+				_cache = new ProcessRun().getAll(_orderBy == null?"stage":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 

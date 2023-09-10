@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(8)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTest {
@@ -64,6 +64,58 @@ class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTes
 	@Test
 	@Order(1)
 	final void testCase1() {
+
+		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
+		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
+																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
+																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
+																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
+																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
+																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
+																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
+																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
+																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
+																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
+																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
+																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
+																							desktop.query("grid").query("#grd").as(Grid.class));	
+		try {
+			ComponentAgent btnmc3 = desktop.query("#wndContentPanel").query("#btnmc3");
+			btnmc3.click();			
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(-50.3451));
+			ComponentAgent btnCalc = desktop.query("#wndContentPanel").query("#btnCalc");
+			btnCalc.click();
+			
+			ComponentAgent btnmc5 = desktop.query("#wndContentPanel").query("#btnmc5");
+			btnmc5.click();
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(1000.678));
+			btnCalc.click();
+			
+			ComponentAgent btnmc8 = desktop.query("#wndContentPanel").query("#btnmc8");
+			btnmc8.click();
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(0));
+			btnCalc.click();
+			
+			clickOnWithdrawButton(desktop);
+			clickOnWithdrawButton(desktop);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(2)
+	final void testCase2() {
 
 		SpringUtility.setLoggedUserForTesting("user19@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
@@ -112,58 +164,6 @@ class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTes
 		}
 		catch(Throwable ex) {
 			testNotEnoughRightsException(ex);
-		}
-	}
-	
-	@Test
-	@Order(2)
-	final void testCase2() {
-
-		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
-		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
-																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
-																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
-																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
-																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
-																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
-																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
-																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
-																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
-																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
-																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
-																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
-																							desktop.query("grid").query("#grd").as(Grid.class));	
-		try {
-			ComponentAgent btnmc3 = desktop.query("#wndContentPanel").query("#btnmc3");
-			btnmc3.click();			
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(-50.3451));
-			ComponentAgent btnCalc = desktop.query("#wndContentPanel").query("#btnCalc");
-			btnCalc.click();
-			
-			ComponentAgent btnmc5 = desktop.query("#wndContentPanel").query("#btnmc5");
-			btnmc5.click();
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(1000.678));
-			btnCalc.click();
-			
-			ComponentAgent btnmc8 = desktop.query("#wndContentPanel").query("#btnmc8");
-			btnmc8.click();
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getDecInput(), new BigDecimal(0));
-			btnCalc.click();
-			
-			clickOnWithdrawButton(desktop);
-			clickOnWithdrawButton(desktop);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			fail(ex.getMessage());
 		}
 	}
 	

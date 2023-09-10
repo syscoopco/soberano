@@ -19,6 +19,7 @@ import co.syscoop.soberano.exception.SoberanoLDAPException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
+import co.syscoop.soberano.exception.WrongProcessSpecificationException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
@@ -115,6 +116,12 @@ public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorC
 		catch(WrongDateTimeException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 					Labels.getLabel("message.validation.wrongBusinessEventOccurrenceDateTime"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(WrongProcessSpecificationException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.wrongProcessSpecification"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
 		}

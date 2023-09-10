@@ -1,5 +1,6 @@
 <?page title="${labels.pageProcessRun.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.TxtCodeRandomValueInitiator"?>
 
 <zk>
 	<include src="/style.zul"/>
@@ -7,6 +8,9 @@
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.ProcessRunsComposer">
+			<label value="${labels.caption.field.code}" sclass="Caption"></label>
+			<textbox id="txtCode" readonly="false" maxlength="30" hflex="1" placeholder="${labels.caption.field.codePlaceholder}" constraint="no empty"/>
+			<separator></separator>
 			<hbox width="100%">
 				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProcessSelectionViewModel')">
 					<combobox id="cmbProcess" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.process}">
@@ -37,7 +41,5 @@
 	<separator self="@define(decisionButton)"></separator>
 	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCostSheetButtonComposer"></button>
 	<separator self="@define(decisionButton)"></separator>
-	<button id="btnRun" visible="false" self="@define(decisionButton)" label="${labels.caption.action.run}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RunProcessRunButtonComposer"></button>
-	<button id="btnCancel" visible="false" self="@define(decisionButton)" label="${labels.caption.action.cancel}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CancelProcessRunButtonComposer"></button>
-	<button id="btnEnd" visible="false" self="@define(decisionButton)" label="${labels.caption.action.end}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.EndProcessRunButtonComposer"></button>
+	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.run}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordProcessRunButtonComposer"></button>
 </zk>

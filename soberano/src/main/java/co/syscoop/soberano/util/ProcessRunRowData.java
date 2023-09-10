@@ -7,6 +7,7 @@ public class ProcessRunRowData {
 	private Integer entityTypeInstanceId = 0;
 	private String process = "";
 	private String costCenter = "";
+	private String Stage = "";
 	private String description = "";
 	private String history = "";
 	private Date recordingDate = null;
@@ -69,5 +70,13 @@ public class ProcessRunRowData {
 
 	public void setHistory(String history) {
 		this.history = history;
+	}
+
+	public String getStage() {
+		return Stage;
+	}
+
+	public void setStage(String stage) {
+		Stage = stage;
 	}
 }

@@ -15051,6 +15051,18 @@
 					<orm:FactType ref="_758A20F7-A7FC-4654-BFBF-BD51A346529E" />
 				</orm:ReferencedBy>
 			</orm:ModelNote>
+			<orm:ModelNote id="_29611EF0-856C-4267-B822-6707DE84C6D2">
+				<orm:Text>RULE_CONSTRAINT_13: An inventory item can not be modified if it is an input or output of a running process.</orm:Text>
+				<orm:ReferencedBy>
+					<orm:ObjectType ref="_50F617B9-40B4-4635-92C0-B830A2322FF1" />
+				</orm:ReferencedBy>
+			</orm:ModelNote>
+			<orm:ModelNote id="_1DDB6E2D-9162-4EE4-8677-1F895BA84814">
+				<orm:Text>RULE_CONSTRAINT_14: A process with running instances can not be modified.</orm:Text>
+				<orm:ReferencedBy>
+					<orm:ObjectType ref="_0AEEE069-E89E-407B-BF1D-B7881EF813B3" />
+				</orm:ReferencedBy>
+			</orm:ModelNote>
 		</orm:ModelNotes>
 		<orm:ReferenceModeKinds>
 			<orm:ReferenceModeKind id="_3C60C594-CB94-4814-850C-4FE72AA6BDA3" FormatString="{1}" ReferenceModeType="General" />
@@ -15976,6 +15988,9 @@
 			<ormDiagram:ModelNoteShape id="_55DD5CAD-5B6C-4C9F-A781-F3F27ABA537F" IsExpanded="true" AbsoluteBounds="3.98377092156779, 0.85939415687867338, 4.6827806587219234, 0.14150302660465242">
 				<ormDiagram:Subject ref="_A4FF5071-2FBA-45A1-9244-C1B99FD571C9" />
 			</ormDiagram:ModelNoteShape>
+			<ormDiagram:ModelNoteShape id="_5FC7DC8E-3018-4726-960E-DB7058C61004" IsExpanded="true" AbsoluteBounds="2.7968749999999991, 4.9895833333333339, 4.9284471626281734, 0.14150302660465242">
+				<ormDiagram:Subject ref="_29611EF0-856C-4267-B822-6707DE84C6D2" />
+			</ormDiagram:ModelNoteShape>
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>
@@ -16519,6 +16534,9 @@
 				</ormDiagram:RelativeShapes>
 				<ormDiagram:Subject ref="_0ACB3537-D446-415A-90D1-D2D7CAA06326" />
 			</ormDiagram:FactTypeShape>
+			<ormDiagram:ModelNoteShape id="_71A8758F-8F67-4D49-ACBB-685C113B7594" IsExpanded="true" AbsoluteBounds="0.94791666666666652, 0.5, 3.5541390533447266, 0.14150302660465242">
+				<ormDiagram:Subject ref="_1DDB6E2D-9162-4EE4-8677-1F895BA84814" />
+			</ormDiagram:ModelNoteShape>
 		</ormDiagram:Shapes>
 		<ormDiagram:Subject ref="_9BB4ACAB-6170-4EF4-828A-554A6607AA4C" />
 	</ormDiagram:ORMDiagram>

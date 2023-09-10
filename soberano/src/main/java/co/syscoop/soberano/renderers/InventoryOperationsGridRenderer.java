@@ -7,6 +7,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.util.InventoryOperationRowData;
@@ -30,7 +31,11 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(inventoryOperation.getWorker()));
 		
 		//description
-		row.appendChild(new Label(inventoryOperation.getDescription()));
+		Textbox txtDescription = new Textbox(inventoryOperation.getDescription());
+		txtDescription.setMultiline(true);
+		txtDescription.setRows(15);
+		txtDescription.setReadonly(true);		
+		row.appendChild(txtDescription);
 		
 		//recording date
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

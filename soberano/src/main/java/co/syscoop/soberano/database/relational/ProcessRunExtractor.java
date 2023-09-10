@@ -22,6 +22,7 @@ public class ProcessRunExtractor implements ResultSetExtractor<List<Object>> {
         	processRunRowData.setEntityTypeInstanceId(rs.getInt("entityTypeInstanceId"));
         	processRunRowData.setProcess(rs.getString("process"));
         	processRunRowData.setCostCenter(rs.getString("costCenter"));
+        	processRunRowData.setStage(rs.getString("stage"));
         	processRunRowData.setDescription(rs.getString("description"));
         	processRunRowData.setHistory(rs.getString("history"));
         	processRunRowData.setRecordingDate(rs.getTimestamp("recordingDate"));

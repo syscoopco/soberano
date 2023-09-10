@@ -16,8 +16,14 @@ public class TxtCodeRandomValueInitiator implements Initiator, InitiatorExt {
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		
 		try{
+			Textbox txtCode;
 			StringIdCodeGenerator sidcodeg = new StringIdCodeGenerator();
-			Textbox txtCode = (Textbox) comps[2].query("#incDetails").query("#txtCode");
+			try {
+				txtCode = (Textbox) comps[2].query("#incDetails").query("#txtCode");
+			}
+			catch(Exception ex) {
+				txtCode = (Textbox) comps[2].query("#boxDetails").query("#txtCode");
+			}
 			txtCode.setValue((sidcodeg.getTenCharsRandomString("")));
 		}
 		catch(Exception ex) {

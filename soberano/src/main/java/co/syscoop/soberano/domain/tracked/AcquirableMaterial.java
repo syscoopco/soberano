@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ProcessRunningException;
 
 public class AcquirableMaterial extends InventoryItem { 
 
@@ -83,6 +84,9 @@ public class AcquirableMaterial extends InventoryItem {
 		modifyParameters.addValue("itemUnit", this.getUnit());
 		
 		Integer qryResult = super.modify();
+		if (qryResult == -2) {
+			throw new ProcessRunningException();
+		}
 		return qryResult >= 0 ? qryResult : -1;
 	}
 	
