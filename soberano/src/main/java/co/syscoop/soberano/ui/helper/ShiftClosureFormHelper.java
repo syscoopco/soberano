@@ -43,4 +43,14 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 		return qryResult;	
 	}
+
+	@Override
+	public Integer cancelFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
 }

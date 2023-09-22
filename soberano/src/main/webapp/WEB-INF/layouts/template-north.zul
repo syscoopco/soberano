@@ -23,7 +23,7 @@
 			<!-- TODO: apply composer to splitting popup-->
 			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Split}"></barbuttonpopup>
 			<separator></separator>
-			<button label="${labels.layout.template.shortcut.Process}" href="/process.zul" sclass="BarButton NewButton"></button>
+			<button label="${labels.layout.template.shortcut.Process}" href="/process_runs.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>		
 			
 			<!-- TODO: apply composer -->					

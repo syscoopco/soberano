@@ -47,6 +47,8 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	//it is expected queries and parameters to be set by subclasses
 	protected String getCountQuery = "";
 	
+	private Integer printer = 0;
+	
 	public TrackedObject() {};
 	
 	public TrackedObject(Integer id) {
@@ -220,5 +222,13 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 	@Override
 	public String getReport() throws SQLException {
 		return trackedObjectDao.getReport();
+	}
+
+	public Integer getPrinter() {
+		return printer;
+	}
+
+	public void setPrinter(Integer printer) {
+		this.printer = printer;
 	}
 }

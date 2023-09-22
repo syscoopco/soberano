@@ -14,9 +14,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
-import co.syscoop.soberano.database.relational.DaoBase;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
-import co.syscoop.soberano.database.relational.QueryResultMapper;import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
+import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class ProcessRun extends BusinessActivityTrackedObject {
@@ -33,7 +34,8 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 	private ArrayList<BigDecimal> outputQuantities = null;
 	private ArrayList<Unit> outputUnits = new ArrayList<Unit>();
 	private ArrayList<Integer> outputUnitIds= null;
-	private ArrayList<Integer> weights = null;	
+	private ArrayList<Integer> weights = null;
+	private String currentStageName = "";
 	
 	private void fillInputItemIds() {
 		inputItemCodes = new ArrayList<String>();
@@ -104,6 +106,22 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		this.weights = weights;
 	}
 	
+	public ProcessRun(Integer processRunId,
+					ArrayList<InventoryItem> outputItems,
+					ArrayList<BigDecimal> outputQuantities,
+					ArrayList<Unit> outputUnits,
+					ArrayList<Integer> weights) {
+
+		super.setOccurrenceTime(new Date());
+		super.setId(processRunId);
+		this.outputItems = outputItems;
+		fillOutputItemIds();	
+		this.outputUnits = outputUnits;
+		fillOutputUnitIds();	
+		this.outputQuantities = outputQuantities;
+		this.weights = weights;
+	}
+	
 	public ProcessRun(Integer id,
 					String code,
 					Integer entityTypeInstanceId, 
@@ -117,6 +135,25 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		this.costCenter.setId(costCenter);
 	}
 	
+	public ProcessRun(Integer id,
+			String code,
+			Integer entityTypeInstanceId, 
+			Integer process,
+			String processName,
+			Integer costCenter,
+			String costCenterName,
+			String currentStageName) {
+
+		super.setId(id);
+		super.setStringId(code);
+		super.setEntityTypeInstanceId(entityTypeInstanceId);
+		this.process.setId(process);
+		this.process.setName(processName);
+		this.costCenter.setId(costCenter);
+		this.costCenter.setName(costCenterName);
+		this.setCurrentStageName(currentStageName);
+	}
+	
 	public final class ProcessRunMapper implements RowMapper<Object> {
 
 		public ProcessRun mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -126,10 +163,13 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 				int id = rs.getInt("itemId");
 				if (!rs.wasNull()) {
 					processRun = new ProcessRun(id,
-										rs.getString("code"),
+										rs.getString("itemCode"),
 										rs.getInt("entityTypeInstanceId"),
-										rs.getInt("process"),
-										rs.getInt("costCenter"));
+										rs.getInt("processId"),
+										rs.getString("processName"),
+										rs.getInt("costCenterId"),
+										rs.getString("costCenterName"),
+										rs.getString("currentStageName"));
 				}
 				return processRun;
 			}
@@ -175,7 +215,16 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 	}
 
 	@Override
-	protected void copyFrom(Object object) {
+	protected void copyFrom(Object sourceObject) {
+		
+		ProcessRun sourceProcessRun = (ProcessRun) sourceObject;
+		setId(sourceProcessRun.getId());
+		setStringId(sourceProcessRun.getStringId());
+		setEntityTypeInstanceId(sourceProcessRun.getEntityTypeInstanceId());
+		setPrinter(sourceProcessRun.getPrinter());
+		setProcess(sourceProcessRun.getProcess());
+		setCostCenter(sourceProcessRun.getCostCenter());
+		setCurrentStageName(sourceProcessRun.getCurrentStageName());
 	}
 	
 	@Override
@@ -221,7 +270,6 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 	
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_ProcessRun_close\"(:itemId, "
-				+ "											:itemCode, "
 				+ "											:outputItems, "
 				+ "											:outputQuantities, "
 				+ "											:outputUnits, "
@@ -230,21 +278,51 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("itemId", this.getId());
-		parametersMap.put("itemCode", this.getStringId());
 		parametersMap.put("outputItems", createArrayOfSQLType("varchar", this.outputItemCodes.toArray()));
 		parametersMap.put("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
 		parametersMap.put("outputUnits", createArrayOfSQLType("integer", this.outputUnitIds.toArray()));
-		parametersMap.put("weights", this.weights);parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return ((new DaoBase()).query(qryStr, parametersMap , new QueryResultMapper()).get(0));
+		parametersMap.put("weights", createArrayOfSQLType("integer", this.weights.toArray()));
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
 	public Integer cancel() throws SQLException, Exception {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_cancel\"(:processRunId, :loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_cancel\"(:processRunId, :loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("processId", this.getId());
+		parametersMap.put("processRunId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return ((new DaoBase()).query(qryStr, parametersMap , new QueryResultMapper()).get(0));
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public List<Object> getProcessInputs(Integer processRunId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getInputs\"(:processRunId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
+	}
+	
+	public List<Object> getProcessOutputs(Integer processRunId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getOutputs\"(:processRunId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessIOMapper());
+	}
+	
+	public BigDecimal estimateCost(Integer processId, Integer costCenterId) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Process_estimateCost\"(:processId, :costCenterId, :loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processId", processId);
+		parametersMap.put("costCenterId", costCenterId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}
 	
 	@Override
@@ -290,5 +368,13 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 
 	public void setWeights(ArrayList<Integer> weights) {
 		this.weights = weights;
+	}
+
+	public String getCurrentStageName() {
+		return currentStageName;
+	}
+
+	public void setCurrentStageName(String currentStageName) {
+		this.currentStageName = currentStageName;
 	}
 }

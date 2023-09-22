@@ -1,0 +1,34 @@
+<?page title="${labels.pageProcessRun.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.ProcessRunInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageProcessRun.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<intbox id="intObjectId" value="1" visible="false" readonly="true"/>
+		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.ProcessRunsComposer">
+			<label value="${labels.caption.field.code}" sclass="Caption"></label>
+			<textbox id="txtCode" readonly="true" maxlength="30" hflex="1" placeholder="${labels.caption.field.codePlaceholder}"/>
+			<separator></separator>
+			<textbox id="txtProcess" readonly="true" hflex="1" placeholder="${labels.caption.field.process}"/>
+			<separator></separator>
+			<textbox id="txtCostCenter" readonly="true" hflex="1" placeholder="${labels.caption.field.process}"/>
+			<separator></separator>
+			<separator></separator>
+			<include id="incProcessIOs" src="/process_ios.zul"></include>
+			<separator></separator>
+		</vbox>
+	</window>	
+	<label id="lblEstimatedCost" self="@define(decisionButton)" value="${labels.caption.field.estimatedCost}" sclass="Caption"></label>
+	<decimalbox id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" readonly="true"/>
+	<separator self="@define(decisionButton)"></separator>
+	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCostSheetButtonComposer"></button>
+	<separator self="@define(decisionButton)"></separator>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
+	<separator self="@define(decisionButton)"></separator>
+	<button visible="false" id="btnEnd" self="@define(decisionButton)" label="${labels.caption.action.end}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.EndProcessRunButtonComposer"></button>
+	<separator self="@define(decisionButton)"></separator>
+	<button visible="false" id="btnCancel" self="@define(decisionButton)" label="${labels.caption.action.cancel}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CancelProcessRunButtonComposer"></button>
+</zk>

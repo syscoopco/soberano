@@ -27,7 +27,8 @@ public class TxtCodeRandomValueInitiator implements Initiator, InitiatorExt {
 			txtCode.setValue((sidcodeg.getTenCharsRandomString("")));
 		}
 		catch(Exception ex) {
-			return;
+			ex.printStackTrace();
+			ex.fillInStackTrace();
 		}
 	}
 

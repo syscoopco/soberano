@@ -1,10 +1,10 @@
-<?page title="${labels.pageProcessRun.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?page title="${labels.pageProcessRuns.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
 <?init class="co.syscoop.soberano.initiators.TxtCodeRandomValueInitiator"?>
 
 <zk>
 	<include src="/style.zul"/>
-	<label self="@define(pageTitle)" value="${labels.pageProcessRun.WindowTitle}" sclass="PageTitle"/>
+	<label self="@define(pageTitle)" value="${labels.pageProcessRuns.WindowTitle}" sclass="PageTitle"/>
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.ProcessRunsComposer">
@@ -37,7 +37,7 @@
 		</vbox>
 	</window>	
 	<label id="lblEstimatedCost" self="@define(decisionButton)" value="${labels.caption.field.estimatedCost}" sclass="Caption"></label>
-	<decimalbox disabled="true" id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" readonly="true"/>
+	<decimalbox id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" readonly="true"/>
 	<separator self="@define(decisionButton)"></separator>
 	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCostSheetButtonComposer"></button>
 	<separator self="@define(decisionButton)"></separator>

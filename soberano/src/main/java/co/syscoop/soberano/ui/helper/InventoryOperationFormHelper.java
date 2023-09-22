@@ -154,4 +154,14 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 		requestedAction = ActionRequested.NONE;
 		((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
 	}
+
+	@Override
+	public Integer cancelFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
 }

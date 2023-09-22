@@ -8,18 +8,18 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Window;
 
-import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
+import co.syscoop.soberano.ui.helper.ProcessRunFormHelper;
 import co.syscoop.soberano.util.ZKUtilitity;
 
-public class CashRegisterInitiator implements Initiator, InitiatorExt {
+public class ProcessRunInitiator implements Initiator, InitiatorExt {
 	
-	Integer cashRegisterId = 1;
+	Integer processRunId = 1;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
-			CashRegisterFormHelper form = new CashRegisterFormHelper();
-			form.initForm((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), cashRegisterId);
+			ProcessRunFormHelper form = new ProcessRunFormHelper();
+			form.initForm((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), processRunId);
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
@@ -39,10 +39,10 @@ public class CashRegisterInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			cashRegisterId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
+			processRunId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
 		}
 		catch(Exception ex) {
-			cashRegisterId = 1; 
+			processRunId = 1; 
 		}
 	}
 }

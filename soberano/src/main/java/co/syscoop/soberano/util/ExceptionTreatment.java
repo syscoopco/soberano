@@ -11,6 +11,7 @@ import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ProcessRunningException;
+import co.syscoop.soberano.exception.RunningOutOfInventoryException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
@@ -55,7 +56,9 @@ public class ExceptionTreatment {
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))
 				throw new PasswordsMustMatchException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ProcessRunningException"))
-				throw new ProcessRunningException(ex);
+				throw new ProcessRunningException(ex);			
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.RunningOutOfInventoryException"))
+				throw new RunningOutOfInventoryException(ex);			
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ShiftHasBeenClosedException"))
 				throw new ShiftHasBeenClosedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException"))

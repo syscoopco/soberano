@@ -1,16 +1,19 @@
 package co.syscoop.soberano.composers;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.ui.helper.ProcessFormHelper;
@@ -38,8 +41,14 @@ public class ProcessRunsComposer extends SelectorComposer {
 	@Wire
 	private Textbox txtCode;
 	
-	private void estimateCost() {
-		//TODO:
+	private void estimateCost() throws SQLException, Exception {
+		
+		if (cmbProcess.getSelectedItem() != null && cmbCostCenter.getSelectedItem() != null) {
+			ProcessRun processRun = new ProcessRun();
+			BigDecimal estimateCost = processRun.estimateCost(((DomainObject) cmbProcess.getSelectedItem().getValue()).getId(), 
+														((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getId());
+			((Decimalbox) cmbProcess.query("#wndContentPanel").getParent().query("#incSouth").query("#hboxDecisionButtons").query("#decEstimatedCost")).setValue(estimateCost);
+		}
 	}
 	
 	private void updateProcessSpec() throws SQLException {
@@ -50,11 +59,19 @@ public class ProcessRunsComposer extends SelectorComposer {
 	}
 	
 	@Listen("onChange = combobox#cmbProcess")
-    public void cmbProcess_onChange() throws SQLException {
+    public void cmbProcess_onChange() throws Exception {
 		
-		updateProcessSpec();
-		intRuns.setValue(1);
-		estimateCost();
+		try {
+			updateProcessSpec();
+			intRuns.setValue(1);
+			estimateCost();
+		} catch (SQLException e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		
 	}
 	
 	/*
@@ -62,16 +79,35 @@ public class ProcessRunsComposer extends SelectorComposer {
 	 * combo_onChange event isn't triggered under testing.
 	 */
 	@Listen("onClick = combobox#cmbProcess")
-    public void cmbProcess_onClick() throws SQLException {
+    public void cmbProcess_onClick() throws SoberanoException {
 		
-		updateProcessSpec();
-		intRuns.setValue(1);
-		estimateCost();
+		try {
+			updateProcessSpec();
+			intRuns.setValue(1);
+			estimateCost();
+		} catch (SQLException e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		} catch (Exception e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
 	}
 	
 	@Listen("onChange = combobox#cmbCostCenter")
-    public void cmbCostCenter_onChange() {
-		estimateCost();
+    public void cmbCostCenter_onChange() throws SoberanoException {
+		try {
+			estimateCost();
+		} catch (Exception e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
 	}
 	
 	/*
@@ -79,8 +115,20 @@ public class ProcessRunsComposer extends SelectorComposer {
 	 * combo_onChange event isn't triggered under testing.
 	 */
 	@Listen("onClick = combobox#cmbCostCenter")
-    public void cmbCostCenter_onClick() {
-		estimateCost();
+    public void cmbCostCenter_onClick() throws SoberanoException {
+		try {
+			estimateCost();
+		} catch (SQLException e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		} catch (Exception e) {
+			ExceptionTreatment.logAndShow(e, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
 	}
 	
 	@Listen("onChange = intbox#intRuns")

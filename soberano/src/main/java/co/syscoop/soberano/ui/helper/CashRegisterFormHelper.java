@@ -237,4 +237,14 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 	public void setCurrencyIds(ArrayList<Integer> currencyIds) {
 		this.currencyIds = currencyIds;
 	}
+
+	@Override
+	public Integer cancelFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
 }

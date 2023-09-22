@@ -133,7 +133,7 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				
 				
 				"--retrieves the distinct names of the responsibilities assigned to the user with a given login name\n"
-				+ "CREATE OR REPLACE FUNCTION metamodel.\"fn_User_getResponsabilities\"(\n"
+				+ "CREATE OR REPLACE FUNCTION metamodel.\"fn_User_getResponsibilities\"(\n"
 				+ "	loginname character varying)\n"
 				+ "    RETURNS SETOF character varying \n"
 				+ "    LANGUAGE 'plpgsql'\n"
@@ -504,7 +504,7 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				+ "	initialStageId integer;\n"
 				+ "	userId integer;\n"
 				+ "\n"
-				+ "	--this function returns the id of the new instance, or 0 in case the user does not have rights for create it\n"
+				+ "	--this function returns the id of the new instance, or 0 in case the user does not have rights for creating it\n"
 				+ "	returnValue integer;\n"
 				+ "BEGIN\n"
 				+ "	--get the destination stage filter expression\n"
@@ -585,7 +585,8 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				
 				
 				
-				"CREATE OR REPLACE FUNCTION metamodel.\"fn_EntityTypeInstance_getHistory\"(entityTypeInstanceId integer)\n"
+				"CREATE OR REPLACE FUNCTION metamodel.\"fn_EntityTypeInstance_getHistory\"(\n"
+				+ "	entitytypeinstanceid integer)\n"
 				+ "    RETURNS text\n"
 				+ "    LANGUAGE 'plpgsql'\n"
 				+ "    COST 100\n"
@@ -596,7 +597,7 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				+ "	BEGIN\n"
 				+ "		SELECT STRING_AGG(CAST(\"This_is_created_at_Timestamp\" AS text) || ' ' \n"
 				+ "						  	|| decision || ' ' \n"
-				+ "						  	|| \"This_has_LoginName\",\n"
+				+ "						  	|| \"This_has_LoginName\" || chr(13),\n"
 				+ "						  chr(13) ORDER BY \"This_is_created_at_Timestamp\")\n"
 				+ "			FROM (SELECT \"This_is_created_at_Timestamp\", \n"
 				+ "				  			'#TO_TRANSLATE(CREATED)#' decision, \n"
@@ -964,6 +965,43 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				
 				
 				
+				"CREATE OR REPLACE FUNCTION metamodel.\"fn_User_InstanceCreationDecision\"(\n"
+				+ "	ownerauthority integer,\n"
+				+ "	entitytype character varying,\n"
+				+ "	loginname character varying)\n"
+				+ "    RETURNS TABLE(\"DecisionName\" character varying) \n"
+				+ "    LANGUAGE 'plpgsql'\n"
+				+ "    COST 100\n"
+				+ "    VOLATILE PARALLEL UNSAFE\n"
+				+ "    ROWS 10\n"
+				+ "\n"
+				+ "AS $BODY$\n"
+				+ "BEGIN\n"
+				+ "	RETURN QUERY SELECT decision.\"This_has_Name\"\n"
+				+ "		FROM \"metamodel\".\"StageFilter\" destinationFilter,\n"
+				+ "			\"metamodel\".\"Decision\" decision,\n"
+				+ "			\"metamodel\".\"StageFilter\" originFilter,\n"
+				+ "			\"metamodel\".\"LifeCycle\" lifeCycle,\n"
+				+ "			\"metamodel\".\"LifeCycleIsDeployedAcrossAuthority\" deployment,\n"
+				+ "			\"metamodel\".\"ResponsibilityFilter\" responsibilityFilter,\n"
+				+ "			\"metamodel\".\"User\" users\n"
+				+ "		WHERE destinationFilter.\"StageFilterHasStageFilterId\" = decision.\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\"\n"
+				+ "			AND originFilter.\"StageFilterHasStageFilterId\" = decision.\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\"\n"
+				+ "			AND decision.\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\" = lifeCycle.\"LifeCycleHasLifeCycleId\"\n"
+				+ "			AND deployment.\"LifeCycleHasLifeCycleId\" = lifeCycle.\"LifeCycleHasLifeCycleId\"\n"
+				+ "			AND responsibilityFilter.\"This_filters_by_Decision_with_DecisionHasDecisionId\" = decision.\"DecisionHasDecisionId\"\n"
+				+ "			AND users.\"This_has_LoginName\" = loginName\n"
+				+ "			AND users.\"User_is_enabled\" = true\n"
+				+ "			AND deployment.\"AuthorityHasAuthorityId\" = ownerAuthority\n"
+				+ "			AND lifeCycle.\"This_is_for_EntityType_with_MeaningHasMeaningId\" = entityType\n"
+				+ "			AND originFilter.\"This_filters_by_FilterExpression\" = 'soberano.stage.starting'\n"
+				+ "			AND \"metamodel\".\"fn_User_matches_responsibilityFilter\"(ownerAuthority, loginName, responsibilityFilter.\"This_filters_by_FilterExpression\")\n"
+				+ "		ORDER BY decision.\"DecisionHasDecisionId\" ASC;\n"
+				+ "END;\n"
+				+ "$BODY$;",
+				
+				
+				
 				"CREATE OR REPLACE FUNCTION metamodel.\"fn_User_canCreateInstance\"(\n"
 				+ "	ownerauthority integer,\n"
 				+ "	entitytype character varying,\n"
@@ -978,7 +1016,7 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				+ "	initialStageId integer;\n"
 				+ "	userId integer;\n"
 				+ "\n"
-				+ "	--this function returns the id of the new instance, or 0 in case the user does not have rights for create it\n"
+				+ "	--this function returns 1 in case the user has rights for creating instances, or 0 otherwise\n"
 				+ "	returnValue integer;\n"
 				+ "BEGIN\n"
 				+ "	--get the destination stage filter expression\n"

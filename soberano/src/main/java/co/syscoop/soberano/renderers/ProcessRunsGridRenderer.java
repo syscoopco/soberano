@@ -3,6 +3,9 @@ package co.syscoop.soberano.renderers;
 import java.text.SimpleDateFormat;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Intbox;
@@ -15,6 +18,7 @@ import co.syscoop.soberano.util.ProcessRunRowData;
 
 public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void prepareRow(Row row, Object data) {
 		
 		ProcessRunRowData processRunRowData = (ProcessRunRowData) data;
@@ -56,15 +60,17 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
 		
-		Button btnEnd = new Button(Labels.getLabel("caption.action.end"));
-		btnEnd.setWidth("90%");
-		btnEnd.setDisabled(true);
-		btnEnd.setId(btnEnd.getUuid());
-		
-		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
-		btnCancel.setWidth("90%");
-		btnCancel.setDisabled(true);
-		btnCancel.setId(btnCancel.getUuid());
+		Button btnManage = new Button(Labels.getLabel("caption.action.manage"));
+		btnManage.setWidth("90%");
+		btnManage.setId(btnManage.getUuid());
+		btnManage.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				Executions.getCurrent().sendRedirect("/process_run.zul?id=" + processRunRowData.getProcessRunId().toString(), "_blank");
+			}
+		});		
 		
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
 		btnPrint.setWidth("90%");
@@ -80,7 +86,8 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 		btnDocument.setId(btnDocument.getUuid());
-			
+		
+		actionCell.appendChild(btnManage);
 		actionCell.appendChild(btnPrint);
 		actionCell.appendChild(btnUpload);
 		actionCell.appendChild(btnDocument);

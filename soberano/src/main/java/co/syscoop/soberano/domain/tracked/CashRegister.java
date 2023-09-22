@@ -17,7 +17,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 public class CashRegister extends TrackedObject {
 
-	private Integer printer = 0;
 	private HashMap<String, BigDecimal> balances = new HashMap<String, BigDecimal>();
 	
 	public CashRegister() {
@@ -80,14 +79,6 @@ public class CashRegister extends TrackedObject {
 		getParameters = new HashMap<String, Object>();
 		getParameters.put("cashRegisterId", this.getId());
 		super.get(new CashRegisterExtractor());
-	}
-
-	public Integer getPrinter() {
-		return printer;
-	}
-
-	public void setPrinter(Integer printer) {
-		this.printer = printer;
 	}
 
 	public HashMap<String, BigDecimal> getBalances() {

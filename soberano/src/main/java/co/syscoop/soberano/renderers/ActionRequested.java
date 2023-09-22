@@ -4,7 +4,9 @@ public enum ActionRequested
 {
 	NONE(0),
 	DISABLE(1),
-	RECORD(2);
+	RECORD(2),
+	CANCEL(3),
+	CLOSE(4);
 	
     @SuppressWarnings("unused")
 	private int actionCode;

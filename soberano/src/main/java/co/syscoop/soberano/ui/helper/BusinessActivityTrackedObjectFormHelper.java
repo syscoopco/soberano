@@ -11,6 +11,10 @@ public abstract class BusinessActivityTrackedObjectFormHelper {
 	private BusinessActivityTrackedObject trackedObject = null;
 
 	public abstract Integer recordFromForm(Box boxDetails) throws Exception;
+	
+	public abstract Integer cancelFromForm(Box boxDetails) throws Exception;
+	
+	public abstract Integer closeFromForm(Box boxDetails) throws Exception;
 
 	public abstract void cleanForm(Box boxDetails);
 
@@ -20,7 +24,5 @@ public abstract class BusinessActivityTrackedObjectFormHelper {
 
 	public void setTrackedObject(BusinessActivityTrackedObject trackedObject) {
 		this.trackedObject = trackedObject;
-	}
-
-	
+	}	
 }

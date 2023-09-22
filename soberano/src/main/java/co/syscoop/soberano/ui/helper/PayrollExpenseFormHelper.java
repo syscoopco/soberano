@@ -62,4 +62,14 @@ public class PayrollExpenseFormHelper extends BusinessActivityTrackedObjectFormH
 			return qryResult;
 		}
 	}
+
+	@Override
+	public Integer cancelFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
 }
