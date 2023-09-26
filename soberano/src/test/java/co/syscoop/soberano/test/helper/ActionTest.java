@@ -23,7 +23,7 @@ public class ActionTest {
 	protected static Vbox vboxDetails = null;
 
 	protected void clickOnRecordButton(DesktopAgent desktop) {
-		ComponentAgent btnRecord = desktop.query("south").query("button");
+		ComponentAgent btnRecord = desktop.query("south").query("button").query("#btnRecord");
 		btnRecord.click();			
 	}
 	

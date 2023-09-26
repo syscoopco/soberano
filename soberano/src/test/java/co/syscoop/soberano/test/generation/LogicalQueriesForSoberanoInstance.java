@@ -1061,7 +1061,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(8, 'Accounter', 8004),\n"
 						+ "				(8, 'Shift manager', 8004),\n"	
 						+ "				(8, 'Technologist', 8004),\n"
-						+ "				(8, 'Auditor', 8004);",
+						+ "				(8, 'Auditor', 8004),\n"
+						+ "				(8, 'Workshop 2 worker', 8004),\n"
+						+ "				(8, 'Workshop 1 worker', 8004),\n;",
 						
 						
 						
@@ -3871,7 +3873,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	DECLARE\n"
 						+ "		estimate numeric;\n"
 						+ "BEGIN\n"
-						+ "	SELECT COALESCE(SUM(\"Value\" / \"Quantity\"), 0)\n"
+						+ "	SELECT COALESCE(SUM(\"Value\" / \"Quantity\"), 0) + \"This_has_FixedCost\"\n"
 						+ "		FROM (SELECT * \n"
 						+ "			  	FROM soberano.\"ProcessRun\" pru\n"
 						+ "			 		INNER JOIN metamodel.\"EntityTypeInstance\" eti\n"
@@ -3893,6 +3895,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "					ON pro.\"ProcessRunHasProcessRunId\" = pr.\"ProcessRunHasProcessRunId\"\n"
 						+ "				INNER JOIN soberano.\"ProcessRunOutputValue\" prov\n"
 						+ "					ON prov.\"ProcessRunHasProcessRunId\" = pr.\"ProcessRunHasProcessRunId\"\n"
+						+ "		GROUP BY \"This_has_FixedCost\"\n"
 						+ "		INTO estimate;\n"
 						+ "	RETURN estimate;\n"
 						+ "END;\n"
@@ -7464,9 +7467,15 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "														--cost center is enabled\n"
 						+ "														AND eti.\"This_is_in_Stage_with_StageHasStageId\" = 2) sq\n"
 						+ "											WHERE \"CostCenterHasCostCenterId\" = costcenter) cc\n"
-						+ "								INNER JOIN (SELECT ROW_NUMBER () OVER () rownumber \n"
-						+ "												FROM metamodel.\"fn_User_InstanceCreationDecision\"(1, '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA', 'soberano.user.top')) de\n"
-						+ "									ON cc.rownumber = de.rownumber) THEN\n"
+						+ "								INNER JOIN (SELECT ROW_NUMBER () OVER () rownumber, \"DecisionName\"\n"
+						+ "												FROM metamodel.\"fn_User_InstanceCreationDecision\"(1, '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA', 'soberano.user.top')) allde\n"
+						+ "									ON cc.rownumber = allde.rownumber\n"
+						+ "				 \n"
+						+ "				  				--the user must be authorized to create object specifically in that cost center.\n"
+						+ "				  				--that is controlled by decision name index \n"
+						+ "				 				INNER JOIN (SELECT \"DecisionName\"\n"
+						+ "												FROM metamodel.\"fn_User_InstanceCreationDecision\"(1, '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA', loginname)) userde\n"
+						+ "									ON allde.\"DecisionName\" = userde.\"DecisionName\") THEN\n"
 						+ "									\n"
 						+ "			--create entity type instance	\n"
 						+ "			SELECT metamodel.\"fn_EntityTypeInstance_create\"('ProcessRun', loginname)\n"

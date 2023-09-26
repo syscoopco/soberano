@@ -1,7 +1,6 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -134,7 +133,7 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 		Executions.sendRedirect("/process_runs.zul");
 	}
 	
-	public void initForm(Window wndContentPanel, Integer processRunId) throws SQLException {
+	public void initForm(Window wndContentPanel, Integer processRunId) throws Exception {
 		
 		ProcessRun processRun = new ProcessRun(processRunId);
 		processRun.get();
@@ -150,6 +149,10 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnEnd")).setVisible(true);
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCancel")).setVisible(true);
 		}
+		
+		BigDecimal estimateCost = processRun.estimateCost(processRun.getProcess().getId(), 
+															processRun.getCostCenter().getId());
+		((Decimalbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#decEstimatedCost")).setValue(estimateCost);
 		
 		Treechildren tchdnInputs = (Treechildren) boxDetails.query("#incProcessIOs").query("#tchdnInputs");
 		((Button) tchdnInputs.query("#btnAddInput")).setDisabled(true);

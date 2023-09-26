@@ -113,6 +113,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			decQuantity.setReadonly(!runMode);
 			decQuantity.setId("decOutputQuantity" + inventoryItemId);
 			decQuantity.setFormat("####.########");
+			decQuantity.setConstraint("no negative, no empty");
 			hbox.appendChild(decQuantity);
 			
 			Label lblUnit = new Label(unitName);
@@ -129,6 +130,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			Intbox intWeight = new Intbox(weight);
 			intWeight.setReadonly(!runMode);
 			intWeight.setId("intWeight" + inventoryItemId);
+			intWeight.setConstraint("no negative, no empty");
 			hbox.appendChild(intWeight);
 			
 			Label lblWeightUnit = new Label("%");

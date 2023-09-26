@@ -1,0 +1,4 @@
+process: mmpr2,mpr4,mpr5,mpr7
+costcenter: mcc4,mcc5,mcc6
+runs: 1,3
+user: unauthorized,workshop1worker,workshop2worker
