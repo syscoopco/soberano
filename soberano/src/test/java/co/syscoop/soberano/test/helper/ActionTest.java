@@ -21,10 +21,20 @@ public class ActionTest {
 	protected static ComponentAgent boxDetailsAgent = null;
 	protected static Hbox boxDetails = null;
 	protected static Vbox vboxDetails = null;
+	
+	protected void clickOnEndButton(DesktopAgent desktop) {
+		ComponentAgent btnEnd = desktop.query("south").query("button").query("#btnEnd");
+		btnEnd.click();			
+	}
 
 	protected void clickOnRecordButton(DesktopAgent desktop) {
 		ComponentAgent btnRecord = desktop.query("south").query("button").query("#btnRecord");
 		btnRecord.click();			
+	}
+	
+	protected void clickOnCancelButton(DesktopAgent desktop) {
+		ComponentAgent btnCancel = desktop.query("south").query("button").query("#btnCancel");
+		btnCancel.click();			
 	}
 	
 	protected void clickOnInputFormRecordButton(DesktopAgent desktop) {

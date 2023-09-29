@@ -32,13 +32,13 @@ import co.syscoop.soberano.test.helper.MaterialExpenseActionTest;
 import co.syscoop.soberano.test.helper.MaterialExpenseForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(15)
+@Order(16)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO15_ProcessRunTest_record_several_more_material_expenses_as_precondition extends MaterialExpenseActionTest {
+class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition extends MaterialExpenseActionTest {
 	
 	protected MaterialExpenseForm materialExpenseForm = null;
 
