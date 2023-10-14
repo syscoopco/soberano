@@ -159,6 +159,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (qryResult == -2) {
 				throw new DisabledCurrencyException();
 			}
+			requestedAction = ActionRequested.NONE;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnDeposit")).setLabel(Labels.getLabel("caption.action.deposit"));
 			return qryResult;
 		}
 		else {
@@ -186,6 +188,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (qryResult == -2) {
 				throw new DisabledCurrencyException();
 			}
+			requestedAction = ActionRequested.NONE;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnWithdraw")).setLabel(Labels.getLabel("caption.action.withdraw"));
 			return qryResult;
 		}
 		else {
@@ -211,6 +215,9 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (qryResult == -2) {
 				throw new DisabledCurrencyException();
 			}
+			requestedAction = ActionRequested.NONE;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCount")).setLabel(Labels.getLabel("caption.action.count"));
+			
 			return qryResult;
 		}
 		else {
@@ -245,6 +252,16 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 
 	@Override
 	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer billFromForm(Box boxDetails) {
+		return null;
+	}
+
+	@Override
+	public Integer makeFromForm(Box boxDetails) {
 		return null;
 	}
 }

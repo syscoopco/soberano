@@ -8,13 +8,17 @@ import java.util.List;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+import co.syscoop.soberano.database.relational.DaoBase;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Counter extends TrackedObject {
 
 	private Integer numberOfReceivers = 0;
 	private Boolean isSurcharged = false;
 	private Boolean isEnabled = false;
+	private Boolean isFree = true;
 	
 	public Counter(Integer id) {
 		super(id);
@@ -175,11 +179,34 @@ public class Counter extends TrackedObject {
 
 	@Override
 	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
-		return null;
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Counter_getAllForOrder\"(:loginname) " +
+				" ORDER BY \"" + orderByColumn + "\" ";
+		if (descOrder)
+			qryStr += "DESC ";
+		else 
+			qryStr += "ASC ";		
+		qryStr += "LIMIT " + Integer.toString(limit);
+		qryStr += " OFFSET " + Integer.toString(offset);
+		
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		
+		return trackedObjectDao.query(qryStr, getAllQueryNamedParameters, extractor);
 	}
 	
 	@Override
 	public Integer getCount() throws SQLException {
-		return 0;
+		
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		List<Integer> counts = trackedObjectDao.query("SELECT soberano.\"fn_Counter_getCountForOrder\"(:loginname) AS count", getAllQueryNamedParameters, (new DaoBase()).new CountMapper());
+		return counts.get(0);
+	}
+
+	public Boolean getIsFree() {
+		return isFree;
+	}
+
+	public void setIsFree(Boolean isFree) {
+		this.isFree = isFree;
 	}
 }

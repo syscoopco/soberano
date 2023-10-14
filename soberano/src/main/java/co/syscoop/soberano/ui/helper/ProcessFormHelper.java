@@ -18,7 +18,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
-
 import co.syscoop.soberano.domain.tracked.InventoryItem;
 import co.syscoop.soberano.domain.tracked.Process;
 import co.syscoop.soberano.domain.tracked.Unit;
@@ -319,5 +318,12 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			return super.getTrackedObject().modify();
 		}
 		else throw new WeightsMustSum100();
+	}
+	
+	public void initForm(Include incDetails, Integer processId) throws Exception {
+		
+		Process process = new Process(processId);
+		process.get();		
+		fillForm(incDetails, process.getId(), false, 1);
 	}
 }

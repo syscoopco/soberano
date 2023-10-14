@@ -2,6 +2,8 @@ package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Box;
@@ -116,7 +118,9 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 				
 				if (qryResult == -2) {
 					throw new WrongProcessSpecificationException();
-				}				
+				}
+				requestedAction = ActionRequested.NONE;
+				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.run"));
 				return qryResult;
 			}
 		}
@@ -150,9 +154,15 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCancel")).setVisible(true);
 		}
 		
-		BigDecimal estimateCost = processRun.estimateCost(processRun.getProcess().getId(), 
-															processRun.getCostCenter().getId());
-		((Decimalbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#decEstimatedCost")).setValue(estimateCost);
+		try {
+			BigDecimal estimateCost = processRun.estimateCost(processRun.getProcess().getId(), 
+																processRun.getCostCenter().getId());
+			((Decimalbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#decEstimatedCost")).setValue(estimateCost);
+		}
+		//to avoid division-by-zero halt due to quantities equal to zero
+		catch(DataIntegrityViolationException ex) {
+			((Decimalbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#decEstimatedCost")).setValue(new BigDecimal(0));
+		}
 		
 		Treechildren tchdnInputs = (Treechildren) boxDetails.query("#incProcessIOs").query("#tchdnInputs");
 		((Button) tchdnInputs.query("#btnAddInput")).setDisabled(true);
@@ -242,5 +252,15 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnEnd")).setLabel(Labels.getLabel("caption.action.confirm"));
 			throw new ConfirmationRequiredException();
 		}
+	}
+
+	@Override
+	public Integer billFromForm(Box boxDetails) {
+		return null;
+	}
+
+	@Override
+	public Integer makeFromForm(Box boxDetails) {
+		return null;
 	}
 }

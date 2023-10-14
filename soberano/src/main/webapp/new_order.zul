@@ -1,0 +1,41 @@
+<?page title="${labels.pageNewOrder.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageNewOrder.WindowTitle}" sclass="PageTitle"/>
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">		
+		<vbox vflex="1" id="boxDetails" width="100%">
+			<label value="${labels.caption.field.label}" sclass="Caption"></label>			
+			<textbox id="txtLabel" readonly="false" maxlength="128" hflex="1" placeholder="${labels.placeholder.label}"/>
+			<separator></separator>
+			<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel')">
+				<combobox id="cmbCustomer" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.customer}" apply="co.syscoop.soberano.composers.ViewModelComposer">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>
+				<button id="btnNew" label="+" href="/new_customer.zul" sclass="BarButton NewButton"></button>		
+			</hbox>
+			<zscript>
+				<![CDATA[
+			  		co.syscoop.soberano.models.CountersGridModel model = new co.syscoop.soberano.models.CountersGridModel();
+			  		co.syscoop.soberano.renderers.CountersGridRenderer renderer = new co.syscoop.soberano.renderers.CountersGridRenderer();
+				]]>
+			</zscript>
+			<separator></separator>
+			<grid id="grdCounters" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+				<columns sizable="false">
+					<column align="right">
+					</column>
+					<column label="${labels.caption.columnHeader.counter}" sort="auto(counterCode)" sortDirection="ascending">
+					</column>
+				</columns>
+			</grid>
+			<separator></separator>
+			<include id="incGrid" src="/orders_history.zul"></include>
+		</vbox>
+	</window>
+	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.record}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordOrderButtonComposer"></button>
+</zk>

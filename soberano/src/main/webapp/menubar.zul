@@ -27,6 +27,7 @@
 						<menuitem label="${labels.menuItem.ExpensesReport}" href="Expenses_report.zul"/>
 						<menuitem label="${labels.menuItem.CanceledOrdersReport}" href="canceled_report.zul"/>
 						<menuitem label="${labels.menuItem.PrintTicket}" href="print_ticket.zul"/>
+						<menuitem label="${labels.menuItem.ShoppingList}" href="shopping_list.zul"/>
 					</menupopup>
 				</menu>
 				<menuitem label="${labels.menuItem.Receivables}" href="receivables.zul"/>													

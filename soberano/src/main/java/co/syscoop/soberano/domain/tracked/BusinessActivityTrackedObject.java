@@ -7,10 +7,16 @@ import java.util.List;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 public class BusinessActivityTrackedObject extends TrackedObject {
-
+	
 	private Date occurrenceTime = null;
 	private String reference = null;
 	
+	public BusinessActivityTrackedObject() {};
+	
+	public BusinessActivityTrackedObject(Integer id) {
+		super(id);
+	}
+		
 	public Date getOccurrenceTime() {
 		return occurrenceTime;
 	}

@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
@@ -79,11 +78,6 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 
 	@Override
 	protected void copyFrom(Object object) {
-	}
-	
-	@Override
-	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
-		return super.getAll(orderByColumn, descOrder, limit, offset, extractor);
 	}
 	
 	@Override

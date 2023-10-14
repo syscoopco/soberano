@@ -34,6 +34,9 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (qryResult == -3) {
 				throw new ShiftHasBeenClosedException();
 			}
+			requestedAction = ActionRequested.NONE;
+			((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
+			return qryResult;	
 		}
 		else {
 			requestedAction = ActionRequested.RECORD;
@@ -41,7 +44,6 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 			((Textbox) boxDetails.query("#txtReport")).setText((new ShiftClosure()).getReport());
 			throw new ConfirmationRequiredException();
 		}
-		return qryResult;	
 	}
 
 	@Override
@@ -51,6 +53,16 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 
 	@Override
 	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer billFromForm(Box boxDetails) {
+		return null;
+	}
+
+	@Override
+	public Integer makeFromForm(Box boxDetails) {
 		return null;
 	}
 }

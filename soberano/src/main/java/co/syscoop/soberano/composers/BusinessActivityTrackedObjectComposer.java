@@ -27,9 +27,10 @@ import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorComposer {
+public class BusinessActivityTrackedObjectComposer extends SelectorComposer {
 
 	protected BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
+	
 	protected Box boxDetails = null;
 	
 	@Wire
@@ -39,9 +40,12 @@ public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorC
 	protected Button btnEnd;
 	
 	@Wire
+	protected Button btnBill;
+	
+	@Wire
 	protected Button btnCancel;
 	
-	public BusinessActivityTrackedObjectRecordButtonComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {
+	public BusinessActivityTrackedObjectComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {
 		this.trackedObjectFormHelper = trackedObjectFormHelper;
 	}
 	
@@ -299,5 +303,11 @@ public class BusinessActivityTrackedObjectRecordButtonComposer extends SelectorC
 										Labels.getLabel("messageBoxTitle.Error"),
 										Messagebox.ERROR);
 		}
+	}
+	
+	@Listen("onClick = button#btnBill")
+    public void btnBill_onClick() {
+		
+		trackedObjectFormHelper.billFromForm(boxDetails);
 	}
 }

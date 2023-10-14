@@ -7,7 +7,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.InventoryOperationFormHelper;
 
 @SuppressWarnings("serial")
-public class RecordInventoryOperationButtonComposer extends BusinessActivityTrackedObjectRecordButtonComposer {
+public class RecordInventoryOperationButtonComposer extends BusinessActivityTrackedObjectComposer {
 
 	public RecordInventoryOperationButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new InventoryOperationFormHelper());

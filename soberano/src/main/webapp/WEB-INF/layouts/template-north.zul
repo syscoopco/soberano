@@ -9,7 +9,7 @@
 			<include src="./././menubar.zul"></include>
 			
 			<!-- TODO: apply composer -->				
-			<button id="btnNewOrder" label="+" sclass="BarButton NewButton"></button>
+			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>						
 			
 			<!-- TODO: apply composer to activity popup-->

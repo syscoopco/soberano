@@ -21,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O4_CounterTest_search_showingAll {
 	
@@ -185,7 +185,7 @@ class O4_CounterTest_search_showingAll {
 	@Test
 	final void testUser18() {
 
-		testForDisallowedUser(18);
+		testForAllowedUser(18);
 	}
 	
 	@Test

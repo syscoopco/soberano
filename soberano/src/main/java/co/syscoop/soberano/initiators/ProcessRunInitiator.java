@@ -42,7 +42,7 @@ public class ProcessRunInitiator implements Initiator, InitiatorExt {
 			processRunId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
 		}
 		catch(Exception ex) {
-			processRunId = 1; 
+			processRunId = 0; 
 		}
 	}
 }

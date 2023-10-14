@@ -135,6 +135,8 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+				requestedAction = ActionRequested.NONE;
+				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
 				return qryResult;
 			}
 		}
@@ -162,6 +164,16 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 
 	@Override
 	public Integer closeFromForm(Box boxDetails) throws Exception {
+		return null;
+	}
+
+	@Override
+	public Integer billFromForm(Box boxDetails) {
+		return null;
+	}
+
+	@Override
+	public Integer makeFromForm(Box boxDetails) {
 		return null;
 	}
 }
