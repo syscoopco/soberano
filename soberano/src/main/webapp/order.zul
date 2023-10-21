@@ -8,9 +8,26 @@
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<intbox id="intObjectId" value="1" visible="false" readonly="true"/>
-		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.OrderComposer">
-			<label id="lblDeliveryTo" visible="false" value="${labels.caption.field.deliverTo}" sclass="Caption"></label>			
-			<textbox id="txtDeliveryTo" visible="false" readonly="true" maxlength="2000" multiline="true" width="100%" height="10%" sclass="NotesTextbox"/>
+		<vbox vflex="1" id="boxDetails" hflex="1" apply="co.syscoop.soberano.composers.OrderComposer">
+			<hbox hflex="1">
+				<vbox hflex="1">
+					<label value="${labels.caption.field.label}" sclass="Caption" hflex="1"></label>			
+					<textbox id="txtLabel" readonly="true" value="" hflex="1"/>
+				</vbox>
+				<separator></separator>
+				<vbox hflex="1">
+					<label value="${labels.caption.field.counters}" sclass="Caption" hflex="1"></label>			
+					<textbox id="txtCounters" readonly="true" value="" hflex="1"/>
+				</vbox>
+				<separator></separator>
+				<vbox hflex="1">
+					<label value="${labels.caption.field.customer}" sclass="Caption" hflex="1"></label>			
+					<textbox id="txtCustomer" readonly="true" value="" hflex="1"/>
+				</vbox>
+			</hbox>
+			<separator></separator>
+			<label id="lblDeliverTo" visible="false" value="${labels.caption.field.deliverTo}" sclass="Caption"></label>			
+			<textbox id="txtDeliverTo" visible="false" readonly="true" maxlength="2000" multiline="true" width="100%" height="10%" sclass="NotesTextbox"/>
 			<separator></separator>
 			<groupbox width="100%">
 				<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProductSelectionViewModel')">
@@ -62,5 +79,8 @@
 			</hbox>
 		</vbox>
 	</window>
+	<label id="lblStage" value="${labels.caption.field.stage}" self="@define(decisionButton)" sclass="Caption"/>
+	<textbox id="txtStage" self="@define(decisionButton)" readonly="true" value=""/>
+	<separator self="@define(decisionButton)"></separator>
 	<button id="btnBill" self="@define(decisionButton)" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillButtonComposer"></button>
 </zk>

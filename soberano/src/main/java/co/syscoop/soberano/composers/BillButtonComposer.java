@@ -7,7 +7,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 
 @SuppressWarnings({ "serial" })
-public class BillButtonComposer extends BusinessActivityTrackedObjectComposer {
+public class BillButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
 
 	public BillButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new OrderFormHelper());

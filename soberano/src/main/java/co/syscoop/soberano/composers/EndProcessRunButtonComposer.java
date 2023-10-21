@@ -7,7 +7,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.ProcessRunFormHelper;
 
 @SuppressWarnings({ "serial" })
-public class EndProcessRunButtonComposer extends BusinessActivityTrackedObjectComposer {
+public class EndProcessRunButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
 
 	public EndProcessRunButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new ProcessRunFormHelper());

@@ -27,7 +27,7 @@ import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class BusinessActivityTrackedObjectComposer extends SelectorComposer {
+public class BusinessActivityTrackedObjectButtonComposer extends SelectorComposer {
 
 	protected BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
 	
@@ -45,7 +45,7 @@ public class BusinessActivityTrackedObjectComposer extends SelectorComposer {
 	@Wire
 	protected Button btnCancel;
 	
-	public BusinessActivityTrackedObjectComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {
+	public BusinessActivityTrackedObjectButtonComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {
 		this.trackedObjectFormHelper = trackedObjectFormHelper;
 	}
 	

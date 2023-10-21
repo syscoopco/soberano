@@ -4,7 +4,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.MaterialExpenseFormHelper;
 
 @SuppressWarnings("serial")
-public class RecordMaterialExpenseButtonComposer extends BusinessActivityTrackedObjectComposer {
+public class RecordMaterialExpenseButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
 
 	public RecordMaterialExpenseButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new MaterialExpenseFormHelper());
