@@ -96,7 +96,7 @@ public class Order extends BusinessActivityTrackedObject {
 			Order order = null;
 			Integer orderCurrentlyBeingExtractedId = -1;
 			String categoryCurrentlyBeingExtracted = "";
-			String descriptionCurrentlyBeingExtracted = "";
+			String descriptionCurrentlyBeingExtracted = null;
 	        while (rs.next()) {
 	        	if (orderCurrentlyBeingExtractedId != rs.getInt("orderId")) {
 	        		orderCurrentlyBeingExtractedId = rs.getInt("orderId");
@@ -112,13 +112,13 @@ public class Order extends BusinessActivityTrackedObject {
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
 	        		order.getCategories().add(categoryCurrentlyBeingExtracted);
-	        		descriptions.put(categoryCurrentlyBeingExtracted, new ArrayList<String>());
-	        		orderItems.put(categoryCurrentlyBeingExtracted, new ArrayList<OrderItem>());
+	        		order.getDescriptions().put(categoryCurrentlyBeingExtracted, new ArrayList<String>());
+	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted, new ArrayList<OrderItem>());
 	        	}
-	        	if (!descriptionCurrentlyBeingExtracted.equals(descriptionCurrentlyBeingExtracted)) {
+	        	if (descriptionCurrentlyBeingExtracted == null || !descriptionCurrentlyBeingExtracted.equals(rs.getString("description"))) {
 	        		descriptionCurrentlyBeingExtracted = rs.getString("description");
-	        		descriptions.get(categoryCurrentlyBeingExtracted).add(descriptionCurrentlyBeingExtracted);	        		
-	        		orderItems.put(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
+	        		order.getDescriptions().get(categoryCurrentlyBeingExtracted).add(descriptionCurrentlyBeingExtracted);	        		
+	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
 	        	}
 	        	OrderItem orderItem = new OrderItem();
 	        	orderItem.setProcessRunId(rs.getInt("processRunId"));
@@ -131,7 +131,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setDiscountedRuns(rs.getInt("discountedRuns"));
 	        	orderItem.setEndedRuns(rs.getInt("endedRuns"));	
 	        	orderItem.setCurrency(rs.getString("currency"));
-	        	orderItems.get(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted).add(orderItem);
+	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted).add(orderItem);
 	        }
 	        return order;
 		}
@@ -158,18 +158,18 @@ public class Order extends BusinessActivityTrackedObject {
 		Order sourceOrder = (Order) sourceObject;
 		setId(sourceOrder.getId());
 		setEntityTypeInstanceId(sourceOrder.getEntityTypeInstanceId());
-		setLabel(((Order) sourceObject).getLabel());
-		setCounters(((Order) sourceObject).getCounters());
-		setCountersStr(((Order) sourceObject).getCountersStr());
-		setCustomer(((Order) sourceObject).getCustomer());
-		setCustomerStr(((Order) sourceObject).getCustomerStr());
-		setDeliverTo(((Order) sourceObject).getDeliverTo());
-		setDiscount(((Order) sourceObject).getDiscount());
-		setAmount(((Order) sourceObject).getAmount());
-		setCategories(((Order) sourceObject).getCategories());
-		setStage(((Order) sourceObject).getStage());
-		setDescriptions(((Order) sourceObject).getDescriptions());
-		setOrderItems(((Order) sourceObject).getOrderItems());
+		setLabel((sourceOrder).getLabel());
+		setCounters((sourceOrder).getCounters());
+		setCountersStr((sourceOrder).getCountersStr());
+		setCustomer((sourceOrder).getCustomer());
+		setCustomerStr((sourceOrder).getCustomerStr());
+		setDeliverTo((sourceOrder).getDeliverTo());
+		setDiscount((sourceOrder).getDiscount());
+		setAmount((sourceOrder).getAmount());
+		setCategories((sourceOrder).getCategories());
+		setStage((sourceOrder).getStage());
+		setDescriptions((sourceOrder).getDescriptions());
+		setOrderItems((sourceOrder).getOrderItems());
 	}
 	
 	public Integer make(Integer itemId, String description, Integer runs) throws Exception {

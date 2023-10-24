@@ -4,15 +4,23 @@ import org.zkoss.zul.Box;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
-import org.zkoss.zul.Grid;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Tree;
+import org.zkoss.zul.Treecell;
+import org.zkoss.zul.Treechildren;
+import org.zkoss.zul.Treecol;
+import org.zkoss.zul.Treecols;
+import org.zkoss.zul.Treeitem;
+import org.zkoss.zul.Treerow;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.helper.OrderItem;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -50,7 +58,45 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
 		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
 		
-		Grid gridOrderItems = (Grid) wndContentPanel.query("#gridOrderItems");
+		Div divOrderItems = (Div) wndContentPanel.query("#divOrderItems");		
+		for (String cat : order.getCategories()) {
+			Tree catTree = new Tree();
+			divOrderItems.appendChild(catTree);
+			Treecols treeCols = new Treecols();
+			catTree.appendChild(treeCols);
+			Treecol treeCol = new Treecol();
+			treeCols.appendChild(treeCol);
+			Treechildren catChdn = new Treechildren();
+			catTree.appendChild(catChdn);
+			Treeitem catItem = new Treeitem();
+			catChdn.appendChild(catItem);
+			Treerow catRow = new Treerow();
+			catItem.appendChild(catRow);
+			Treecell catCell = new Treecell(cat);
+			catRow.appendChild(catCell);
+			Treechildren descChdn = new Treechildren();
+			catItem.appendChild(descChdn);
+			catItem.setOpen(true);
+			for (String desc : order.getDescriptions().get(cat)) {
+				Treeitem descItem = new Treeitem();
+				descChdn.appendChild(descItem);
+				Treerow descRow = new Treerow();
+				descItem.appendChild(descRow);
+				Treecell descCell = new Treecell(desc);
+				descRow.appendChild(descCell);
+				Treechildren oicChdn = new Treechildren();
+				descItem.appendChild(oicChdn);
+				descItem.setOpen(true);
+				for (OrderItem oi : order.getOrderItems().get(cat + desc)) {
+					Treeitem oiItem = new Treeitem();
+					oicChdn.appendChild(oiItem);
+					Treerow oiRow = new Treerow();
+					oiItem.appendChild(oiRow);
+					Treecell oiCell = new Treecell(oi.getProductName());
+					oiRow.appendChild(oiCell);
+				}
+			}
+		}
 	}
 
 	@Override

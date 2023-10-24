@@ -61,7 +61,7 @@
 				</hbox>	
 			</hbox>
 			<separator></separator>		
-			<grid id="gridOrderItems"/>
+			<div id="divOrderItems"/>
 			<separator></separator>
 			<hbox width="100%" align="center">
 				<hbox hflex="1" align="center" pack="start">
