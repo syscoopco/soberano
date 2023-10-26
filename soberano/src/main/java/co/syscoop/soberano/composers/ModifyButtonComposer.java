@@ -11,6 +11,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
+import co.syscoop.soberano.exception.ProcessRunningException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
@@ -82,10 +83,16 @@ public class ModifyButtonComposer extends SelectorComposer {
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}
+		catch(ProcessRunningException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.aProcessReferencingTheObjectIsRunning"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+		}
 		catch(ShiftHasBeenClosedException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
+					Labels.getLabel("messageBoxTitle.Warning"),
 					Messagebox.EXCLAMATION);
 		}
 		catch(SoberanoLDAPException ex) {

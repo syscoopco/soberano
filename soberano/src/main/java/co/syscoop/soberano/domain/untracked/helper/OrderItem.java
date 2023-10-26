@@ -13,8 +13,7 @@ public class OrderItem {
 	private Integer canceledRuns;
 	private Integer discountedRuns;
 	private Integer endedRuns;
-	private String currency;
-	
+	private String currency;	
 	
 	public Integer getProcessRunId() {
 		return processRunId;

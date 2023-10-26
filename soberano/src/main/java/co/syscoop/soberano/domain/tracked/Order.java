@@ -118,7 +118,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	if (descriptionCurrentlyBeingExtracted == null || !descriptionCurrentlyBeingExtracted.equals(rs.getString("description"))) {
 	        		descriptionCurrentlyBeingExtracted = rs.getString("description");
 	        		order.getDescriptions().get(categoryCurrentlyBeingExtracted).add(descriptionCurrentlyBeingExtracted);	        		
-	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
+	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
 	        	}
 	        	OrderItem orderItem = new OrderItem();
 	        	orderItem.setProcessRunId(rs.getInt("processRunId"));
@@ -131,7 +131,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setDiscountedRuns(rs.getInt("discountedRuns"));
 	        	orderItem.setEndedRuns(rs.getInt("endedRuns"));	
 	        	orderItem.setCurrency(rs.getString("currency"));
-	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + descriptionCurrentlyBeingExtracted).add(orderItem);
+	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
 	        }
 	        return order;
 		}
@@ -172,7 +172,7 @@ public class Order extends BusinessActivityTrackedObject {
 		setOrderItems((sourceOrder).getOrderItems());
 	}
 	
-	public Integer make(Integer itemId, String description, Integer runs) throws Exception {
+	public Integer make(Integer itemId, String description, BigDecimal runs) throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_Order_make\"(:orderId, "

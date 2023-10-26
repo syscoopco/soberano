@@ -1432,7 +1432,7 @@
 					<orm:Role ref="_4C01C2F8-02C7-4399-AA5C-27686E52AF89" />
 					<orm:Role ref="_8804802F-DA1D-4843-AF93-9C44E1DF855B" />
 				</orm:PlayedRoles>
-				<orm:ConceptualDataType id="_504DF3D6-B685-47B1-8926-D6C701953A97" ref="_00F70D78-F99A-4D74-82E7-F9EC7B7FEF72" Scale="0" Length="0" />
+				<orm:ConceptualDataType id="_504DF3D6-B685-47B1-8926-D6C701953A97" ref="_807DD0F7-1112-4E46-86F9-A7B6C766479F" Scale="0" Length="0" />
 			</orm:ValueType>
 			<orm:ObjectifiedType id="_7AD1D0CB-6DDF-4DA5-AEC2-B18648E9A99F" Name="CustomerOrder" _ReferenceMode="">
 				<orm:PlayedRoles>

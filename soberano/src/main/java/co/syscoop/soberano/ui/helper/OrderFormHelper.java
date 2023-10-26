@@ -1,10 +1,13 @@
 package co.syscoop.soberano.ui.helper;
 
+import java.math.BigDecimal;
+
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
@@ -15,6 +18,7 @@ import org.zkoss.zul.Treecols;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Treerow;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Separator;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
@@ -87,12 +91,27 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				Treechildren oicChdn = new Treechildren();
 				descItem.appendChild(oicChdn);
 				descItem.setOpen(true);
-				for (OrderItem oi : order.getOrderItems().get(cat + desc)) {
+				for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
 					Treeitem oiItem = new Treeitem();
 					oicChdn.appendChild(oiItem);
 					Treerow oiRow = new Treerow();
 					oiItem.appendChild(oiRow);
-					Treecell oiCell = new Treecell(oi.getProductName());
+					Treecell oiCell = new Treecell();
+					Hbox oiBox = new Hbox();
+					oiBox.setAlign("center");
+					
+					Decimalbox decQty = new Decimalbox(oi.getProductQuantity().stripTrailingZeros());
+					decQty.setReadonly(true);
+					oiBox.appendChild(new Label(oi.getEndedRuns().toString()));
+					oiBox.appendChild(new Label("/"));
+					oiBox.appendChild(new Label(new Double((oi.getOrderedRuns() - oi.getCanceledRuns())).toString()));
+					oiBox.appendChild((new Separator("horizontal")));
+					oiBox.appendChild(new Label(oi.getProductUnit()));
+					oiBox.appendChild(new Separator("horizontal"));
+					oiBox.appendChild(new Label(oi.getProductName()));
+					
+					oiBox.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
+					oiCell.appendChild(oiBox);
 					oiRow.appendChild(oiCell);
 				}
 			}
@@ -118,16 +137,18 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	public Integer makeFromForm(Box boxDetails) throws Exception {
 		
 		Comboitem cmbiItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder")).getSelectedItem();
-		Intbox intRuns = (Intbox) boxDetails.query("#intRuns");
+		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
+		Decimalbox decOneRunQuantity = (Decimalbox) boxDetails.query("#decOneRunQuantity");
 		Textbox txtSpecialInstructions = (Textbox) boxDetails.query("#txtSpecialInstructions");
-		if (cmbiItemToOrder == null || intRuns.getValue() <= 0) {
+		BigDecimal runs = decQuantity.getValue().divide(decOneRunQuantity.getValue());
+		if (cmbiItemToOrder == null || runs.compareTo(new BigDecimal(0)) <= 0) {
 			throw new SomeFieldsContainWrongValuesException();
 		}
 		else {
 			return new Order(((Intbox) boxDetails.query("#intObjectId")).getValue())
 						.make(((DomainObject) cmbiItemToOrder.getValue()).getId(),
 								txtSpecialInstructions.getValue(),
-								intRuns.getValue());
+								runs);
 		}		
 	}
 }

@@ -80,7 +80,7 @@ public class RecordButtonComposer extends SelectorComposer {
 		catch(ShiftHasBeenClosedException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
+					Labels.getLabel("messageBoxTitle.Warning"),
 					Messagebox.EXCLAMATION);
 		}
 		catch(SoberanoLDAPException ex) {

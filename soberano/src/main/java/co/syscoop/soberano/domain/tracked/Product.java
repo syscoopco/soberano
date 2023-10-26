@@ -9,10 +9,12 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Product extends InventoryItem { 
 	
@@ -21,6 +23,7 @@ public class Product extends InventoryItem {
 	private Boolean isEnabled = false;
 	private Integer costCenter = 0;
 	private Integer process = 0;
+	private BigDecimal oneRunQuantity = new BigDecimal(0);
 	
 	//product categories
 	private ArrayList<ProductCategory> productCategories = new ArrayList<ProductCategory>();
@@ -169,8 +172,43 @@ public class Product extends InventoryItem {
 	}
 	
 	@Override
-	public List<DomainObject> getAll(Boolean stringId) throws SQLException {	
-		return super.getAll(false);
+	public List<DomainObject> getAll(Boolean stringId) throws SQLException {
+		
+		if (stringId) {
+			getAllQuery = "SELECT * FROM soberano.\"fn_Product_getAllWithStringId\"(:loginname)";
+		}
+		return super.getAll(stringId);
+	}
+	
+	public final class ProductMapperWithStringId implements RowMapper<Object> {
+
+		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				Product domainObject = new Product();
+				Integer id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					domainObject.setId(id);
+					domainObject.setStringId(rs.getString("domainObjectStringId"));
+					domainObject.setName(rs.getString("domainObjectName"));
+					domainObject.setUnit(rs.getInt("unit"));
+					domainObject.setOneRunQuantity(rs.getBigDecimal("oneRunQuantity"));
+				}
+				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAllWithUnit() throws SQLException {
+		
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Product_getAllWithStringId\"(:loginname)", 
+					getAllQueryNamedParameters, 
+					new ProductMapperWithStringId());
 	}
 	
 	public final class ProductExtractor implements ResultSetExtractor<Object> {
@@ -286,5 +324,13 @@ public class Product extends InventoryItem {
 
 	public void setProcess(Integer process) {
 		this.process = process;
+	}
+
+	public BigDecimal getOneRunQuantity() {
+		return oneRunQuantity;
+	}
+
+	public void setOneRunQuantity(BigDecimal oneRunQuantity) {
+		this.oneRunQuantity = oneRunQuantity;
 	}
 }
