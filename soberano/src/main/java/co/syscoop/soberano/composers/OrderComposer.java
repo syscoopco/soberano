@@ -17,6 +17,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.Unit;
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
@@ -56,6 +57,18 @@ public class OrderComposer extends SelectorComposer {
 	
 	@Wire
 	private Decimalbox decOneRunQuantity;
+	
+	@Wire 
+	Intbox intDiscountTop;
+	
+	@Wire 
+	Intbox intDiscountBottom;
+	
+	@Wire
+	Decimalbox decAmountTop;
+	
+	@Wire
+	Decimalbox decAmountBottom;
 	
 	private void checkRuns() {
 		
@@ -125,6 +138,9 @@ public class OrderComposer extends SelectorComposer {
 			checkRuns();
 		}
 		catch(Exception ex) {
+			decQuantity.setValue(new BigDecimal(0));
+			txtQuantityExpression.setValue("0");
+			btnDec.setDisabled(true);
 			ExceptionTreatment.logAndShow(ex, 
 										Labels.getLabel("message.validation.typeAValidArithmeticExpression"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
@@ -141,19 +157,35 @@ public class OrderComposer extends SelectorComposer {
 	@Listen("onClick = button#btnInc")
     public void btnInc_onClick() throws Throwable {
 		
-		BigDecimal currentQuantity = decQuantity.getValue();
-		txtQuantityExpression.setValue(currentQuantity.add(decOneRunQuantity.getValue()).toString());
-		txtQuantityExpression_onChange();
-		checkRuns();
+		try {
+			BigDecimal currentQuantity = decQuantity.getValue();
+			txtQuantityExpression.setValue(currentQuantity.add(decOneRunQuantity.getValue()).toString());
+			txtQuantityExpression_onChange();
+			checkRuns();
+		}
+		catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
     }
 	
 	@Listen("onClick = button#btnDec")
     public void btnDec_onClick() throws Throwable {
 		
-		BigDecimal currentQuantity = decQuantity.getValue();
-		txtQuantityExpression.setValue(currentQuantity.subtract(decOneRunQuantity.getValue()).toString());
-		txtQuantityExpression_onChange();
-		checkRuns();
+		try {
+			BigDecimal currentQuantity = decQuantity.getValue();
+			txtQuantityExpression.setValue(currentQuantity.subtract(decOneRunQuantity.getValue()).toString());
+			txtQuantityExpression_onChange();
+			checkRuns();
+		}
+		catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
     }
 	
 	@Listen("onClick = button#btnMake")
@@ -192,6 +224,69 @@ public class OrderComposer extends SelectorComposer {
 										ex.getMessage(), 
 										Labels.getLabel("messageBoxTitle.Error"),
 										Messagebox.ERROR);
+		}
+    }
+	
+	private void updateAmounts(BigDecimal amount) throws NotEnoughRightsException {
+													
+		if (amount.compareTo(new BigDecimal(0)) < 0) {
+			throw new NotEnoughRightsException();
+		}
+		else {
+			decAmountTop.setValue(amount);
+			decAmountBottom.setValue(amount);
+		}
+	}
+	
+	@Listen("onChange = intbox#intDiscountTop")
+    public void intDiscountTop_onChange() throws SoberanoException {
+		
+		try {
+			Order order = new Order(intObjectId.getValue());
+			if (order.discount(intDiscountTop.getValue()) == -1) {
+				throw new NotEnoughRightsException();
+			}
+			else {						
+				updateAmounts(order.retrieveAmount());				
+			}
+		}
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+		}
+    }
+	
+	@Listen("onChange = intbox#intDiscountBottom")
+    public void intDiscountBottom_onChange() throws SoberanoException {
+		
+		try {
+			Order order = new Order(intObjectId.getValue());
+			if (order.discount(intDiscountBottom.getValue()) == -1) {
+				throw new NotEnoughRightsException();
+			}
+			else {						
+				updateAmounts(order.retrieveAmount());				
+			}
+		}
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
 		}
     }
 }

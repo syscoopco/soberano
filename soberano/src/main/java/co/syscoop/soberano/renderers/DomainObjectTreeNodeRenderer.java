@@ -22,7 +22,7 @@ import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
-public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>>{
+public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {
 	
 	@SuppressWarnings("unused")
 	private String pageToRefreshZulURI = "";

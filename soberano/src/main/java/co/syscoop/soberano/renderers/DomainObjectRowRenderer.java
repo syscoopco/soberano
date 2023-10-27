@@ -6,7 +6,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.RowRenderer;
 
 @SuppressWarnings("rawtypes")
-public abstract class DomainObjectRowRenderer implements RowRenderer{
+public abstract class DomainObjectRowRenderer implements RowRenderer {
 	
 	protected HashMap<Row, ActionRequested> requestedActions = new HashMap<Row, ActionRequested>();
 

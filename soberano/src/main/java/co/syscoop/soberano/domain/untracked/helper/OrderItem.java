@@ -13,7 +13,8 @@ public class OrderItem {
 	private Integer canceledRuns;
 	private Integer discountedRuns;
 	private Integer endedRuns;
-	private String currency;	
+	private String currency;
+	private BigDecimal oneRunQuantity = new BigDecimal(0);
 	
 	public Integer getProcessRunId() {
 		return processRunId;
@@ -93,5 +94,13 @@ public class OrderItem {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+
+	public BigDecimal getOneRunQuantity() {
+		return oneRunQuantity;
+	}
+
+	public void setOneRunQuantity(BigDecimal oneRunQuantity) {
+		this.oneRunQuantity = oneRunQuantity;
 	}
 }

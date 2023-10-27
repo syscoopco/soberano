@@ -2,7 +2,11 @@ package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
 
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
@@ -18,6 +22,7 @@ import org.zkoss.zul.Treecols;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Treerow;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Separator;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
@@ -25,7 +30,10 @@ import org.zkoss.zul.Window;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
+import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.ExceptionTreatment;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
@@ -37,32 +45,78 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	@Override
 	public void cleanForm(Box boxDetails) {}
 	
-	public void initForm(Window wndContentPanel, Integer orderId) throws Exception {
+	private enum ItemOperation
+	{
+		CANCEL(0),
+		REORDER(1);
 		
-		Order order = new Order(orderId);
-		order.get();
+	    @SuppressWarnings("unused")
+		private int actionCode;
+	    ItemOperation(int actionCode) {this.actionCode = actionCode;}
+	}
+	
+	private void updateServedItems(ItemOperation itemOperation, Event event) throws Exception {
 		
-		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
+		String buttonId = event.getTarget().getId();
+		Integer processRunId = Integer.parseInt(buttonId.substring(buttonId.indexOf("s") + 1, buttonId.length()));
+		ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
+		Decimalbox decOneRunQuantity = (Decimalbox) event.getTarget().query("#decOneRunQuantity" + processRunId.toString());
+		Label lblServedItems = (Label) event.getTarget().query("#lblServedItems" + processRunId.toString());
+		Label lblOrderedItems = (Label) event.getTarget().query("#lblOrderedItems" + processRunId.toString());
 		
-		Vbox boxDetails = (Vbox) wndContentPanel.query("#boxDetails");
-		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
-		((Textbox) wndContentPanel.query("#txtLabel")).setValue(order.getLabel());
-		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
-		((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
-		
-		//it's a delivery
-		if (order.getDeliverTo() != null) {
-			((Textbox) wndContentPanel.query("#txtDeliverTo")).setValue(order.getDeliverTo());
-			((Label) wndContentPanel.query("#lblDeliverTo")).setVisible(true);
-			((Textbox) wndContentPanel.query("#txtDeliverTo")).setVisible(true);
+		if (confTreeitem.getRequestedAction() != null && confTreeitem.getRequestedAction().equals(ActionRequested.SOME)) {
+			
+			confTreeitem.cancelRequestedAction();
+			
+			//reorder items
+			if (itemOperation.equals(ItemOperation.REORDER)) {
+				if (confTreeitem.getOrder().reorder(processRunId) == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else {						
+					Double servedItems = Double.parseDouble(lblServedItems.getValue()) + decOneRunQuantity.getValue().doubleValue();
+					if (servedItems > Double.parseDouble(lblOrderedItems.getValue())) {
+						lblServedItems.setValue(lblOrderedItems.getValue());
+					}
+					else {
+						lblServedItems.setValue(servedItems.toString());
+					}
+				}
+			}
+			//cancel items
+			else {
+				if (confTreeitem.getOrder().cancel(processRunId) == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else {
+					Double servedItems = Double.parseDouble(lblServedItems.getValue()) - decOneRunQuantity.getValue().doubleValue();
+					if (servedItems < 0.0) {
+						lblServedItems.setValue("0");
+					}
+					else {
+						lblServedItems.setValue(servedItems.toString());
+					}
+				}
+			}
+			
+			//update amount fields
+			BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
+			if (amount.compareTo(new BigDecimal(0)) < 0) {
+				throw new NotEnoughRightsException();
+			}
+			else {
+				((Decimalbox) event.getTarget().query("#decAmountTop")).setValue(amount);
+				((Decimalbox) event.getTarget().query("#decAmountBottom")).setValue(amount);
+			}
 		}
-		((Intbox) wndContentPanel.query("#intDiscountTop")).setValue(order.getDiscount());
-		((Decimalbox) wndContentPanel.query("#decAmountTop")).setValue(order.getAmount());
-		((Intbox) wndContentPanel.query("#intDiscountBottom")).setValue(order.getDiscount());
-		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
-		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
+		else {
+			confTreeitem.requestAction();
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void renderOrderItems(Order order, Div divOrderItems) {
 		
-		Div divOrderItems = (Div) wndContentPanel.query("#divOrderItems");		
 		for (String cat : order.getCategories()) {
 			Tree catTree = new Tree();
 			divOrderItems.appendChild(catTree);
@@ -92,7 +146,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				descItem.appendChild(oicChdn);
 				descItem.setOpen(true);
 				for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
-					Treeitem oiItem = new Treeitem();
+					ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
 					oicChdn.appendChild(oiItem);
 					Treerow oiRow = new Treerow();
 					oiItem.appendChild(oiRow);
@@ -100,15 +154,136 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Hbox oiBox = new Hbox();
 					oiBox.setAlign("center");
 					
-					Decimalbox decQty = new Decimalbox(oi.getProductQuantity().stripTrailingZeros());
-					decQty.setReadonly(true);
-					oiBox.appendChild(new Label(oi.getEndedRuns().toString()));
+					Decimalbox decOneRunQuantity = new Decimalbox();
+					decOneRunQuantity.setValue(oi.getOneRunQuantity());
+					decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
+					decOneRunQuantity.setVisible(false);
+					oiBox.appendChild(decOneRunQuantity);
+					
+					Button btnIncServedItems = new Button("+");
+					btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
+					if (oi.getCanceledRuns() > 0) {
+						btnIncServedItems.setDisabled(false);
+					}
+					else {
+						btnIncServedItems.setDisabled(true);
+					}
+					oiBox.appendChild(btnIncServedItems);
+					btnIncServedItems.addEventListener("onClick", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							
+							try {
+								updateServedItems(ItemOperation.REORDER, event);
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});	
+					
+					Button btnDecServedItems = new Button("-");
+					btnDecServedItems.setId("btnDecServedItems" + oi.getProcessRunId().toString());
+					if (oi.getCanceledRuns() < oi.getOrderedRuns()) {
+						btnDecServedItems.setDisabled(false);
+					}
+					else {
+						btnDecServedItems.setDisabled(true);
+					}
+					oiBox.appendChild(btnDecServedItems);
+					btnDecServedItems.addEventListener("onClick", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							
+							try {
+								updateServedItems(ItemOperation.CANCEL, event);
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});	
+					
+					Label lblServedItems = new Label(new Double((oi.getOrderedRuns() - oi.getCanceledRuns())).toString());
+					lblServedItems.setId("lblServedItems" + oi.getProcessRunId().toString());
+					oiBox.appendChild(lblServedItems);
 					oiBox.appendChild(new Label("/"));
-					oiBox.appendChild(new Label(new Double((oi.getOrderedRuns() - oi.getCanceledRuns())).toString()));
+					Label lblOrderedItems = new Label(new Double((oi.getOrderedRuns())).toString());
+					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
+					oiBox.appendChild(lblOrderedItems);
 					oiBox.appendChild((new Separator("horizontal")));
 					oiBox.appendChild(new Label(oi.getProductUnit()));
 					oiBox.appendChild(new Separator("horizontal"));
 					oiBox.appendChild(new Label(oi.getProductName()));
+					oiBox.appendChild((new Separator("horizontal")));
+					oiBox.appendChild((new Separator("horizontal")));
+					
+					oiBox.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
+					Decimalbox decDiscount = new Decimalbox();
+					decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
+					decDiscount.setConstraint("no empty, no negative");
+					decDiscount.setValue(new BigDecimal(0));
+					decDiscount.addEventListener("onChange", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+
+							try {
+								String targetId = event.getTarget().getId();
+								Integer processRunId = Integer.parseInt(targetId.substring(targetId.indexOf("t") + 1, targetId.length()));
+								ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
+								if (confTreeitem.getOrder().itemDiscount(processRunId, ((Decimalbox) event.getTarget()).getValue()) == -1) {
+									throw new NotEnoughRightsException();
+								}
+								else {						
+									//update amount fields
+									BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
+									if (amount.compareTo(new BigDecimal(0)) < 0) {
+										throw new NotEnoughRightsException();
+									}
+									else {
+										((Decimalbox) event.getTarget().query("#decAmountTop")).setValue(amount);
+										((Decimalbox) event.getTarget().query("#decAmountBottom")).setValue(amount);
+									}
+								}
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});
+					oiBox.appendChild(decDiscount);
+					oiBox.appendChild((new Separator("horizontal")));
+					oiBox.appendChild(new Label(oi.getProductUnit()));					
 					
 					oiBox.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 					oiCell.appendChild(oiBox);
@@ -116,6 +291,34 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				}
 			}
 		}
+	}
+	
+	public void initForm(Window wndContentPanel, Integer orderId) throws Exception {
+		
+		Order order = new Order(orderId);
+		order.get();
+		
+		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
+		
+		Vbox boxDetails = (Vbox) wndContentPanel.query("#boxDetails");
+		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
+		((Textbox) wndContentPanel.query("#txtLabel")).setValue(order.getLabel());
+		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
+		((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
+		
+		//it's a delivery
+		if (order.getDeliverTo() != null) {
+			((Textbox) wndContentPanel.query("#txtDeliverTo")).setValue(order.getDeliverTo());
+			((Label) wndContentPanel.query("#lblDeliverTo")).setVisible(true);
+			((Textbox) wndContentPanel.query("#txtDeliverTo")).setVisible(true);
+		}
+		((Intbox) wndContentPanel.query("#intDiscountTop")).setValue(order.getDiscount());
+		((Decimalbox) wndContentPanel.query("#decAmountTop")).setValue(order.getAmount());
+		((Intbox) wndContentPanel.query("#intDiscountBottom")).setValue(order.getDiscount());
+		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
+		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
+		
+		renderOrderItems(order, (Div) wndContentPanel.query("#divOrderItems"));
 	}
 
 	@Override
