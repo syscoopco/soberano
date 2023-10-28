@@ -246,7 +246,8 @@ public class OrderComposer extends SelectorComposer {
 			if (order.discount(intDiscountTop.getValue()) == -1) {
 				throw new NotEnoughRightsException();
 			}
-			else {						
+			else {
+				intDiscountBottom.setValue(intDiscountTop.getValue());
 				updateAmounts(order.retrieveAmount());				
 			}
 		}
@@ -272,7 +273,8 @@ public class OrderComposer extends SelectorComposer {
 			if (order.discount(intDiscountBottom.getValue()) == -1) {
 				throw new NotEnoughRightsException();
 			}
-			else {						
+			else {
+				intDiscountTop.setValue(intDiscountBottom.getValue());
 				updateAmounts(order.retrieveAmount());				
 			}
 		}

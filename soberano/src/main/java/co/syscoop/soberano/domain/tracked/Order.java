@@ -123,6 +123,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	}
 	        	OrderItem orderItem = new OrderItem();
 	        	orderItem.setProcessRunId(rs.getInt("processRunId"));
+	        	orderItem.setInventoryItemCode(rs.getString("inventoryItemCode"));
 	        	orderItem.setProductName(rs.getString("productName"));
 	        	orderItem.setProductQuantity(rs.getBigDecimal("productQuantity"));
 	        	orderItem.setProductUnit(rs.getString("productUnit"));
@@ -191,28 +192,40 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
-	public Integer cancel(Integer processRunId) throws Exception {
+	public Integer cancel(Integer processRunId, String inventoryItemCode, BigDecimal runsToCancel) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_cancel\"(:orderId, "
+		String qryStr = "SELECT soberano.\"fn_Order_cancel\"(:lang, "
+							+ "								:orderId, "
 							+ "								:processRunId, "
+							+ "								:inventoryItemCode, "
+							+ "								:runsToCancel, "
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
 		parametersMap.put("orderId", this.getId());
 		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("inventoryItemCode", inventoryItemCode);
+		parametersMap.put("runsToCancel", runsToCancel);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
-	public Integer reorder(Integer processRunId) throws Exception {
+	public Integer reorder(Integer processRunId, String inventoryItemCode, BigDecimal runsToReorder) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_reorder\"(:orderId, "
+		String qryStr = "SELECT soberano.\"fn_Order_reorder\"(:lang, "
+							+ "								:orderId, "
 							+ "								:processRunId, "
+							+ "								:inventoryItemCode, "
+							+ "								:runsToReorder, "
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
 		parametersMap.put("orderId", this.getId());
 		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("inventoryItemCode", inventoryItemCode);
+		parametersMap.put("runsToReorder", runsToReorder);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}

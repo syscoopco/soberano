@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class OrderItem {
 
 	private Integer processRunId;
+	private String inventoryItemCode;
 	private String productName;
 	private BigDecimal productQuantity;
 	private String productUnit;
@@ -102,5 +103,13 @@ public class OrderItem {
 
 	public void setOneRunQuantity(BigDecimal oneRunQuantity) {
 		this.oneRunQuantity = oneRunQuantity;
+	}
+
+	public String getInventoryItemCode() {
+		return inventoryItemCode;
+	}
+
+	public void setInventoryItemCode(String inventoryItemCode) {
+		this.inventoryItemCode = inventoryItemCode;
 	}
 }

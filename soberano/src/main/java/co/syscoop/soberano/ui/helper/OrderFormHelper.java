@@ -48,7 +48,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	private enum ItemOperation
 	{
 		CANCEL(0),
-		REORDER(1);
+		REORDER(1),
+		CANCELALL(2);
 		
 	    @SuppressWarnings("unused")
 		private int actionCode;
@@ -59,10 +60,13 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		
 		String buttonId = event.getTarget().getId();
 		Integer processRunId = Integer.parseInt(buttonId.substring(buttonId.indexOf("s") + 1, buttonId.length()));
+		String inventoryItemCode =  ((Label) event.getTarget().query("#lblInventoryItemCode" + processRunId.toString())).getValue();
 		ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
 		Decimalbox decOneRunQuantity = (Decimalbox) event.getTarget().query("#decOneRunQuantity" + processRunId.toString());
 		Label lblServedItems = (Label) event.getTarget().query("#lblServedItems" + processRunId.toString());
 		Label lblOrderedItems = (Label) event.getTarget().query("#lblOrderedItems" + processRunId.toString());
+		Button btnDecServedItems = (Button) event.getTarget().query("#btnDecServedItems" + processRunId.toString());
+		Button btnIncServedItems = (Button) event.getTarget().query("#btnIncServedItems" + processRunId.toString());
 		
 		if (confTreeitem.getRequestedAction() != null && confTreeitem.getRequestedAction().equals(ActionRequested.SOME)) {
 			
@@ -70,7 +74,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			
 			//reorder items
 			if (itemOperation.equals(ItemOperation.REORDER)) {
-				if (confTreeitem.getOrder().reorder(processRunId) == -1) {
+				if (confTreeitem.getOrder().reorder(processRunId, inventoryItemCode, new BigDecimal(1)) == -1) {
 					throw new NotEnoughRightsException();
 				}
 				else {						
@@ -83,9 +87,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					}
 				}
 			}
-			//cancel items
-			else {
-				if (confTreeitem.getOrder().cancel(processRunId) == -1) {
+			//cancel 1 item
+			else if (itemOperation.equals(ItemOperation.CANCEL)) {
+				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, new BigDecimal(1)) == -1) {
 					throw new NotEnoughRightsException();
 				}
 				else {
@@ -97,6 +101,32 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						lblServedItems.setValue(servedItems.toString());
 					}
 				}
+			}
+			//cancel all items
+			else {
+				Double orderedItems = Double.parseDouble(lblOrderedItems.getValue());
+				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, new BigDecimal(orderedItems)) == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else {
+					lblServedItems.setValue("0");
+				}
+			}
+			
+			Double servedItems = Double.parseDouble(lblServedItems.getValue());
+			Double orderedItems = Double.parseDouble(lblOrderedItems.getValue());			
+			if (servedItems > 0) {
+				btnDecServedItems.setDisabled(false);
+				if (orderedItems.equals(servedItems)) {
+					btnIncServedItems.setDisabled(true);
+				}
+				else {
+					btnIncServedItems.setDisabled(false);
+				}
+			}//servedItems == 0
+			else {
+				btnDecServedItems.setDisabled(true);
+				btnIncServedItems.setDisabled(false);
 			}
 			
 			//update amount fields
@@ -154,11 +184,15 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Hbox oiBox = new Hbox();
 					oiBox.setAlign("center");
 					
-					Decimalbox decOneRunQuantity = new Decimalbox();
-					decOneRunQuantity.setValue(oi.getOneRunQuantity());
+					Decimalbox decOneRunQuantity = new Decimalbox(oi.getOneRunQuantity());
 					decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
 					decOneRunQuantity.setVisible(false);
 					oiBox.appendChild(decOneRunQuantity);
+					
+					Label lblInventoryItemCode = new Label(oi.getInventoryItemCode());
+					lblInventoryItemCode.setId("lblInventoryItemCode" + oi.getProcessRunId().toString());
+					lblInventoryItemCode.setVisible(false);
+					oiBox.appendChild(lblInventoryItemCode);
 					
 					Button btnIncServedItems = new Button("+");
 					btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
@@ -222,7 +256,34 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 										Messagebox.ERROR);
 							}
 						}
-					});	
+					});
+					
+					Button btnCancelAllItems = new Button();
+					btnCancelAllItems.setImage("./images/delete.png");
+					btnCancelAllItems.setId("btnCancelAllItems" + oi.getProcessRunId().toString());
+					oiBox.appendChild(btnCancelAllItems);
+					btnCancelAllItems.addEventListener("onClick", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							
+							try {
+								updateServedItems(ItemOperation.CANCELALL, event);
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});
 					
 					Label lblServedItems = new Label(new Double((oi.getOrderedRuns() - oi.getCanceledRuns())).toString());
 					lblServedItems.setId("lblServedItems" + oi.getProcessRunId().toString());
