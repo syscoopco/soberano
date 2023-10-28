@@ -128,10 +128,10 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setProductQuantity(rs.getBigDecimal("productQuantity"));
 	        	orderItem.setProductUnit(rs.getString("productUnit"));
 	        	orderItem.setDescription(rs.getString("description"));
-	        	orderItem.setOrderedRuns(rs.getInt("orderedRuns"));
-	        	orderItem.setCanceledRuns(rs.getInt("canceledRuns"));
-	        	orderItem.setDiscountedRuns(rs.getInt("discountedRuns"));
-	        	orderItem.setEndedRuns(rs.getInt("endedRuns"));	
+	        	orderItem.setOrderedRuns(rs.getBigDecimal("orderedRuns"));
+	        	orderItem.setCanceledRuns(rs.getBigDecimal("canceledRuns"));
+	        	orderItem.setDiscountedRuns(rs.getBigDecimal("discountedRuns"));
+	        	orderItem.setEndedRuns(rs.getBigDecimal("endedRuns"));	
 	        	orderItem.setCurrency(rs.getString("currency"));
 	        	orderItem.setOneRunQuantity(rs.getBigDecimal("oneRunQuantity"));
 	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
@@ -230,25 +230,27 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
-	public Integer itemDiscount(Integer processRunId, BigDecimal discount) throws Exception {
+	public Integer applyItemDiscount(Integer processRunId, String inventoryItemCode, BigDecimal discount) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_itemDiscount\"(:orderId, "
+		String qryStr = "SELECT soberano.\"fn_Order_applyItemDiscount\"(:orderId, "
 							+ "								:processRunId, "
+							+ "								:inventoryItemCode, "
 							+ "								:discount, "
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("orderId", this.getId());
 		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("inventoryItemCode", inventoryItemCode);
 		parametersMap.put("discount", discount);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
-	public Integer discount(Integer discount) throws Exception {
+	public Integer applyDiscount(Integer discount) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_discount\"(:orderId, "
+		String qryStr = "SELECT soberano.\"fn_Order_applyDiscount\"(:orderId, "
 							+ "								:discount, "
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();

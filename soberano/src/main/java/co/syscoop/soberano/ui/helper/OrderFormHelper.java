@@ -196,7 +196,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					Button btnIncServedItems = new Button("+");
 					btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
-					if (oi.getCanceledRuns() > 0) {
+					if ((oi.getCanceledRuns()).compareTo(new BigDecimal(0)) > 0) {
 						btnIncServedItems.setDisabled(false);
 					}
 					else {
@@ -228,7 +228,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					Button btnDecServedItems = new Button("-");
 					btnDecServedItems.setId("btnDecServedItems" + oi.getProcessRunId().toString());
-					if (oi.getCanceledRuns() < oi.getOrderedRuns()) {
+					if (oi.getCanceledRuns().compareTo(oi.getOrderedRuns()) < 0) {
 						btnDecServedItems.setDisabled(false);
 					}
 					else {
@@ -285,11 +285,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						}
 					});
 					
-					Label lblServedItems = new Label(new Double((oi.getOrderedRuns() - oi.getCanceledRuns())).toString());
+					Label lblServedItems = new Label((oi.getOrderedRuns().subtract(oi.getCanceledRuns())).toString());
 					lblServedItems.setId("lblServedItems" + oi.getProcessRunId().toString());
 					oiBox.appendChild(lblServedItems);
 					oiBox.appendChild(new Label("/"));
-					Label lblOrderedItems = new Label(new Double((oi.getOrderedRuns())).toString());
+					Label lblOrderedItems = new Label((oi.getOrderedRuns().toString()));
 					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 					oiBox.appendChild(lblOrderedItems);
 					oiBox.appendChild((new Separator("horizontal")));
@@ -303,17 +303,31 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Decimalbox decDiscount = new Decimalbox();
 					decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
 					decDiscount.setConstraint("no empty, no negative");
-					decDiscount.setValue(new BigDecimal(0));
+					decDiscount.setValue(oi.getDiscountedRuns());
+					decDiscount.setFormat("####.########");
 					decDiscount.addEventListener("onChange", new EventListener() {
 
 						@Override
 						public void onEvent(Event event) throws Exception {
 
 							try {
-								String targetId = event.getTarget().getId();
+								Decimalbox decDiscount = (Decimalbox) event.getTarget();
+								String targetId = decDiscount.getId();
 								Integer processRunId = Integer.parseInt(targetId.substring(targetId.indexOf("t") + 1, targetId.length()));
-								ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
-								if (confTreeitem.getOrder().itemDiscount(processRunId, ((Decimalbox) event.getTarget()).getValue()) == -1) {
+								ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) decDiscount.getParent().getParent().getParent().getParent();
+								String inventoryItemCode =  ((Label) decDiscount.query("#lblInventoryItemCode" + processRunId.toString())).getValue();
+								Label lblServedItems = (Label) decDiscount.query("#lblServedItems" + processRunId.toString());
+								Double discountableRuns = Double.parseDouble(lblServedItems.getValue());
+								Double runsToDiscounts = ((Decimalbox) decDiscount).getValue().doubleValue();
+								if (runsToDiscounts < 0) {
+									runsToDiscounts = 0.0;
+									decDiscount.setValue(new BigDecimal(0));
+								}
+								else if (runsToDiscounts > discountableRuns) {
+									runsToDiscounts = discountableRuns;
+									decDiscount.setValue(new BigDecimal(discountableRuns));
+								}
+								if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, new BigDecimal(runsToDiscounts)) == -1) {
 									throw new NotEnoughRightsException();
 								}
 								else {						
@@ -323,8 +337,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 										throw new NotEnoughRightsException();
 									}
 									else {
-										((Decimalbox) event.getTarget().query("#decAmountTop")).setValue(amount);
-										((Decimalbox) event.getTarget().query("#decAmountBottom")).setValue(amount);
+										((Decimalbox) decDiscount.query("#decAmountTop")).setValue(amount);
+										((Decimalbox) decDiscount.query("#decAmountBottom")).setValue(amount);
 									}
 								}
 							}

@@ -243,11 +243,20 @@ public class OrderComposer extends SelectorComposer {
 		
 		try {
 			Order order = new Order(intObjectId.getValue());
-			if (order.discount(intDiscountTop.getValue()) == -1) {
+			Integer discountToApply = intDiscountTop.getValue();
+			if (discountToApply < 0) {
+				discountToApply = 0;
+				intDiscountTop.setValue(0);
+			}
+			else if (discountToApply > 100) {
+				discountToApply = 100;
+				intDiscountTop.setValue(100);
+			}
+			if (order.applyDiscount(discountToApply) == -1) {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				intDiscountBottom.setValue(intDiscountTop.getValue());
+				intDiscountBottom.setValue(discountToApply);
 				updateAmounts(order.retrieveAmount());				
 			}
 		}
@@ -270,11 +279,20 @@ public class OrderComposer extends SelectorComposer {
 		
 		try {
 			Order order = new Order(intObjectId.getValue());
-			if (order.discount(intDiscountBottom.getValue()) == -1) {
+			Integer discountToApply = intDiscountBottom.getValue();
+			if (discountToApply < 0) {
+				discountToApply = 0;
+				intDiscountBottom.setValue(0);
+			}
+			else if (discountToApply > 100) {
+				discountToApply = 100;
+				intDiscountBottom.setValue(100);
+			}
+			if (order.applyDiscount(discountToApply) == -1) {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				intDiscountTop.setValue(intDiscountBottom.getValue());
+				intDiscountTop.setValue(discountToApply);
 				updateAmounts(order.retrieveAmount());				
 			}
 		}

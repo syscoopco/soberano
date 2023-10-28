@@ -10,10 +10,10 @@ public class OrderItem {
 	private BigDecimal productQuantity;
 	private String productUnit;
 	private String description;
-	private Integer orderedRuns;
-	private Integer canceledRuns;
-	private Integer discountedRuns;
-	private Integer endedRuns;
+	private BigDecimal orderedRuns;
+	private BigDecimal canceledRuns;
+	private BigDecimal discountedRuns;
+	private BigDecimal endedRuns;
 	private String currency;
 	private BigDecimal oneRunQuantity = new BigDecimal(0);
 	
@@ -41,35 +41,35 @@ public class OrderItem {
 		this.description = description;
 	}
 
-	public Integer getOrderedRuns() {
+	public BigDecimal getOrderedRuns() {
 		return orderedRuns;
 	}
 
-	public void setOrderedRuns(Integer orderedRuns) {
+	public void setOrderedRuns(BigDecimal orderedRuns) {
 		this.orderedRuns = orderedRuns;
 	}
 
-	public Integer getCanceledRuns() {
+	public BigDecimal getCanceledRuns() {
 		return canceledRuns;
 	}
 
-	public void setCanceledRuns(Integer canceledRuns) {
+	public void setCanceledRuns(BigDecimal canceledRuns) {
 		this.canceledRuns = canceledRuns;
 	}
 
-	public Integer getDiscountedRuns() {
+	public BigDecimal getDiscountedRuns() {
 		return discountedRuns;
 	}
 
-	public void setDiscountedRuns(Integer discountedRuns) {
+	public void setDiscountedRuns(BigDecimal discountedRuns) {
 		this.discountedRuns = discountedRuns;
 	}
 
-	public Integer getEndedRuns() {
+	public BigDecimal getEndedRuns() {
 		return endedRuns;
 	}
 
-	public void setEndedRuns(Integer endedRuns) {
+	public void setEndedRuns(BigDecimal endedRuns) {
 		this.endedRuns = endedRuns;
 	}
 
