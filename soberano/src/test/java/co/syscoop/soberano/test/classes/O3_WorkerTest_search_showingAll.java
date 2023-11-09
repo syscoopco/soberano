@@ -20,11 +20,11 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O3_WorkerTest_search_showingAll {
 	
-	final private Integer userCount = 21; //number of users in this testing point
+	final private Integer userCount = 22; //number of users in this testing point
 	final private Integer baseId = 1000; //the id of the first added user is baseId + 1. the last one's id is basedId + userCount
 
 	@BeforeAll

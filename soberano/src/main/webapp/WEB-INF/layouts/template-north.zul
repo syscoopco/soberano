@@ -8,12 +8,10 @@
 		<hbox hflex="1" sclass="ButtonBar">
 			<include src="./././menubar.zul"></include>
 			
-			<!-- TODO: apply composer -->				
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>						
 			
-			<!-- TODO: apply composer to activity popup-->
-			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Activity}"></barbuttonpopup>
+			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivitySummaryTreeComposer"></barbuttonpopup>
 			<separator></separator>
 			<button id="btnWorkshop1" label="${labels.layout.template.shortcut.Workshop1}" href="/workshop1.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>

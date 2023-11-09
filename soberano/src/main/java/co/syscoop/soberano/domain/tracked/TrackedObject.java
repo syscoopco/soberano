@@ -112,7 +112,7 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 			return (query(disableQuery, this.addLoginname(disableQuery, disableParameters) , new QueryResultMapper()).get(0));
 		}
 		
-		private Map<String, Object> addLoginname(String query, Map<String, Object> parameters) {
+		public Map<String, Object> addLoginname(String query, Map<String, Object> parameters) {
 			if (query.indexOf("loginname") > -1) {
 				parameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
 			}

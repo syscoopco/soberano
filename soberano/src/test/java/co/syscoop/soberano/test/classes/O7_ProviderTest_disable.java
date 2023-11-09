@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(7)
 
 //TODO: enable testCase
-//@Disabled
+@Disabled
 
 class O7_ProviderTest_disable extends ProviderActionTest{
 

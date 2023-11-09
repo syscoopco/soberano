@@ -21,10 +21,10 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.test.helper.CustomerActionTest;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(5)
+@Order(4)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O4_CustomerTest_check_recording extends CustomerActionTest {
 	

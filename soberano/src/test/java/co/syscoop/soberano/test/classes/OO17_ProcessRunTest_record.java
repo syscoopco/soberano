@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(17)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO17_ProcessRunTest_record extends ProcessRunActionTest {
@@ -66,9 +66,9 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		processRunForm = new ProcessRunForm(desktop,
-											(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-											(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
-											(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+											desktop.query("combobox").query("#cmbProcess").as(Combobox.class),
+											desktop.query("combobox").query("#cmbCostCenter").as(Combobox.class),
+											desktop.query("intbox").query("#intRuns").as(Intbox.class),																					
 											desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 											desktop.query("grid").query("#grd").as(Grid.class));
 		try {

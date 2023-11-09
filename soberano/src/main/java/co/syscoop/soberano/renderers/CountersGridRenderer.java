@@ -13,6 +13,7 @@ public class CountersGridRenderer extends DomainObjectRowRenderer {
 		CounterRowData counterRowData = (CounterRowData) data;
 		
 		Checkbox chkAddTable = new Checkbox();
+		chkAddTable.setId("chk" + counterRowData.getCounterCode());
 		chkAddTable.setChecked(false);
 		row.appendChild(chkAddTable);
 		

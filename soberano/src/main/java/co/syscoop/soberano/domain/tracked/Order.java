@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.OrderMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
@@ -122,18 +124,19 @@ public class Order extends BusinessActivityTrackedObject {
 	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
 	        	}
 	        	OrderItem orderItem = new OrderItem();
-	        	orderItem.setProcessRunId(rs.getInt("processRunId"));
-	        	orderItem.setInventoryItemCode(rs.getString("inventoryItemCode"));
-	        	orderItem.setProductName(rs.getString("productName"));
-	        	orderItem.setProductQuantity(rs.getBigDecimal("productQuantity"));
-	        	orderItem.setProductUnit(rs.getString("productUnit"));
-	        	orderItem.setDescription(rs.getString("description"));
-	        	orderItem.setOrderedRuns(rs.getBigDecimal("orderedRuns"));
-	        	orderItem.setCanceledRuns(rs.getBigDecimal("canceledRuns"));
-	        	orderItem.setDiscountedRuns(rs.getBigDecimal("discountedRuns"));
-	        	orderItem.setEndedRuns(rs.getBigDecimal("endedRuns"));	
-	        	orderItem.setCurrency(rs.getString("currency"));
-	        	orderItem.setOneRunQuantity(rs.getBigDecimal("oneRunQuantity"));
+	        	Integer processRunId = rs.getInt("processRunId");
+	        	orderItem.setProcessRunId(processRunId);
+	        	orderItem.setInventoryItemCode(processRunId == 0 ? "" : rs.getString("inventoryItemCode"));
+	        	orderItem.setProductName(processRunId == 0 ? "" : rs.getString("productName"));
+	        	orderItem.setProductQuantity(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("productQuantity"));
+	        	orderItem.setProductUnit(processRunId == 0 ? "" : rs.getString("productUnit"));
+	        	orderItem.setDescription(processRunId == 0 ? "" : rs.getString("description"));
+	        	orderItem.setOrderedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("orderedRuns"));
+	        	orderItem.setCanceledRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("canceledRuns"));
+	        	orderItem.setDiscountedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("discountedRuns"));
+	        	orderItem.setEndedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("endedRuns"));	
+	        	orderItem.setCurrency(processRunId == 0 ? "" : rs.getString("currency"));
+	        	orderItem.setOneRunQuantity(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("oneRunQuantity"));
 	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
 	        }
 	        return order;
@@ -269,6 +272,12 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("orderId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
+	}
+	
+	public List<Object> getOngoing() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getOngoing\"(:lang, :loginname)";	
+		return query(qryStr, trackedObjectDao.addLoginname(qryStr, getAllQueryNamedParameters), new OrderMapper());
 	}
 	
 	public ArrayList<String> getCounters() {

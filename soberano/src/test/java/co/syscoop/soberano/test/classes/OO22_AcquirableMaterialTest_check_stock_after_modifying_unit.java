@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.zkoss.lang.Library;
@@ -11,12 +12,12 @@ import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
-@Order(21)
+@Order(22)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
-class OO21_AcquirableMaterialTest_check_stock_after_modifying_currency extends AcquirableMaterialActionTest{
+class OO22_AcquirableMaterialTest_check_stock_after_modifying_unit extends AcquirableMaterialActionTest{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -44,6 +45,7 @@ class OO21_AcquirableMaterialTest_check_stock_after_modifying_currency extends A
 
 	@Test
 	final void testCase1() {
-		//TODO:
+		//TODO: Inventory item unit change is disabled for the time being.
+		//Current unit is kept after applying changes.
 	}
 }

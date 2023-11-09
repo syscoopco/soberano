@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(20)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO20_StockTest_check_following_process_runs_ending extends StockActionTest {

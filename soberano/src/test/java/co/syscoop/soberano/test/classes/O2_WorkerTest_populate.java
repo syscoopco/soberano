@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(2)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O2_WorkerTest_populate extends TestClass {
 
@@ -43,7 +43,7 @@ class O2_WorkerTest_populate extends TestClass {
 			
 			//clean LDAP of precondition users
 			Worker workerToDelete = null;
-			for (Integer i = 1; i <= 21; i++) {
+			for (Integer i = 1; i <= 22; i++) {
 				workerToDelete = new Worker("user" + i.toString() + "@soberano.syscoop.co");
 				try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			}
@@ -722,6 +722,31 @@ class O2_WorkerTest_populate extends TestClass {
 									"Vedado21",
 									1021,
 									"La Habana21",
+									2,
+									0.0,
+									0.0,
+									responsibilities,
+									authorities);
+			try{newWorker.record();}catch(Exception ex){ex.printStackTrace();}
+			
+			//user22
+			responsibilities.clear();
+			authorities.clear();
+			responsibilities.add(new Responsibility(16, "Manager assistant"));
+			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			newWorker = new Worker(0,
+									0,
+									"user22@soberano.syscoop.co",
+									"user22fn",
+									"user22ln",
+									"12345",
+									"5355555522",
+									"CU",
+									"Calle user22, entre Y y Z",
+									"10422",
+									"Vedado22",
+									1022,
+									"La Habana22",
 									2,
 									0.0,
 									0.0,

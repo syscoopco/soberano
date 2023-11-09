@@ -1,0 +1,9 @@
+counter_surcharged: false, true
+customer: no_customer, discount_not_granted, discount_granted
+item1_unit: default, non_default
+item2_unit: default, non_default
+item1_instructions: none, some
+item2_instructions: none, some
+canceled_runs: none, some
+discounted_runs: none, some
+order_discount: not_granted, granted
