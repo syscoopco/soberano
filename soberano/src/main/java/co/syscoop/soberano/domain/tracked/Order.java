@@ -114,6 +114,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	}
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
+	        		descriptionCurrentlyBeingExtracted = null;
 	        		order.getCategories().add(categoryCurrentlyBeingExtracted);
 	        		order.getDescriptions().put(categoryCurrentlyBeingExtracted, new ArrayList<String>());
 	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted, new ArrayList<OrderItem>());

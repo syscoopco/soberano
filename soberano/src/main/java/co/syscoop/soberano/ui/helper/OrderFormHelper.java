@@ -78,8 +78,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {						
-					Double servedItems = Double.parseDouble(lblServedItems.getValue()) + decOneRunQuantity.getValue().doubleValue();
-					if (servedItems > Double.parseDouble(lblOrderedItems.getValue())) {
+					BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue())).add(decOneRunQuantity.getValue()).stripTrailingZeros();
+					if (servedItems.compareTo(new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()))) > 0) {
 						lblServedItems.setValue(lblOrderedItems.getValue());
 					}
 					else {
@@ -93,8 +93,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					Double servedItems = Double.parseDouble(lblServedItems.getValue()) - decOneRunQuantity.getValue().doubleValue();
-					if (servedItems < 0.0) {
+					BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue())).subtract(decOneRunQuantity.getValue()).stripTrailingZeros();
+					if (servedItems.compareTo(new BigDecimal(0)) < 0) {
 						lblServedItems.setValue("0");
 					}
 					else {
@@ -104,8 +104,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			}
 			//cancel all items
 			else {
-				Double orderedItems = Double.parseDouble(lblOrderedItems.getValue());
-				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, new BigDecimal(orderedItems)) == -1) {
+				BigDecimal orderedItems = new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()));
+				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, orderedItems) == -1) {
 					throw new NotEnoughRightsException();
 				}
 				else {
@@ -113,9 +113,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				}
 			}
 			
-			Double servedItems = Double.parseDouble(lblServedItems.getValue());
-			Double orderedItems = Double.parseDouble(lblOrderedItems.getValue());			
-			if (servedItems > 0) {
+			BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue()));
+			BigDecimal orderedItems = new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()));			
+			if (servedItems.compareTo(new BigDecimal(0)) > 0) {
 				btnDecServedItems.setDisabled(false);
 				if (orderedItems.equals(servedItems)) {
 					btnIncServedItems.setDisabled(true);
@@ -285,13 +285,19 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						}
 					});
 					
-					Label lblServedItems = new Label((oi.getOrderedRuns().subtract(oi.getCanceledRuns())).toString());
+					BigDecimal servedItems = oi.getOrderedRuns().subtract(oi.getCanceledRuns());
+					servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();					
+					Label lblServedItems = new Label((servedItems).toString());
 					lblServedItems.setId("lblServedItems" + oi.getProcessRunId().toString());
 					oiBox.appendChild(lblServedItems);
+					
 					oiBox.appendChild(new Label("/"));
-					Label lblOrderedItems = new Label((oi.getOrderedRuns().toString()));
+					
+					
+					Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toString()));
 					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 					oiBox.appendChild(lblOrderedItems);
+					
 					oiBox.appendChild((new Separator("horizontal")));
 					oiBox.appendChild(new Label(oi.getProductUnit()));
 					oiBox.appendChild(new Separator("horizontal"));
@@ -318,16 +324,16 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 								String inventoryItemCode =  ((Label) decDiscount.query("#lblInventoryItemCode" + processRunId.toString())).getValue();
 								Label lblServedItems = (Label) decDiscount.query("#lblServedItems" + processRunId.toString());
 								Double discountableRuns = Double.parseDouble(lblServedItems.getValue());
-								Double runsToDiscounts = ((Decimalbox) decDiscount).getValue().doubleValue();
-								if (runsToDiscounts < 0) {
-									runsToDiscounts = 0.0;
+								BigDecimal runsToDiscounts = decDiscount.getValue();
+								if (runsToDiscounts.compareTo(new BigDecimal(0)) < 0) {
+									runsToDiscounts = new BigDecimal(0);
 									decDiscount.setValue(new BigDecimal(0));
 								}
-								else if (runsToDiscounts > discountableRuns) {
-									runsToDiscounts = discountableRuns;
+								else if (runsToDiscounts.compareTo(new BigDecimal(discountableRuns)) > 0) {
+									runsToDiscounts = new BigDecimal(discountableRuns);
 									decDiscount.setValue(new BigDecimal(discountableRuns));
 								}
-								if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, new BigDecimal(runsToDiscounts)) == -1) {
+								if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, runsToDiscounts) == -1) {
 									throw new NotEnoughRightsException();
 								}
 								else {						
