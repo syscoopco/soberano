@@ -25,6 +25,7 @@ import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -125,7 +126,7 @@ public class OrderComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbItemToOrder")
     public void cmbItemToOrder_onClick() throws SQLException {
-		processItemToOrderSelection();
+		if (SpringUtility.underTesting()) processItemToOrderSelection();
 	}
 	
 	@Listen("onChange = textbox#txtQuantityExpression")
@@ -238,25 +239,24 @@ public class OrderComposer extends SelectorComposer {
 		}
 	}
 	
-	@Listen("onChange = intbox#intDiscountTop")
-    public void intDiscountTop_onChange() throws SoberanoException {
+	private void applyOrderDiscount(Boolean top) throws SoberanoException {
 		
 		try {
 			Order order = new Order(intObjectId.getValue());
 			Integer discountToApply = intDiscountTop.getValue();
 			if (discountToApply < 0) {
 				discountToApply = 0;
-				intDiscountTop.setValue(0);
+				if (top) intDiscountTop.setValue(0); else intDiscountBottom.setValue(0);
 			}
 			else if (discountToApply > 100) {
 				discountToApply = 100;
-				intDiscountTop.setValue(100);
+				if (top) intDiscountTop.setValue(100); else intDiscountBottom.setValue(100);
 			}
 			if (order.applyDiscount(discountToApply) == -1) {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				intDiscountBottom.setValue(discountToApply);
+				if (top) intDiscountBottom.setValue(discountToApply); else intDiscountTop.setValue(discountToApply);
 				updateAmounts(order.retrieveAmount());				
 			}
 		}
@@ -272,41 +272,37 @@ public class OrderComposer extends SelectorComposer {
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 		}
+	}
+	
+	@Listen("onChange = intbox#intDiscountTop")
+    public void intDiscountTop_onChange() throws SoberanoException {
+		
+		applyOrderDiscount(true);
     }
 	
 	@Listen("onChange = intbox#intDiscountBottom")
     public void intDiscountBottom_onChange() throws SoberanoException {
 		
-		try {
-			Order order = new Order(intObjectId.getValue());
-			Integer discountToApply = intDiscountBottom.getValue();
-			if (discountToApply < 0) {
-				discountToApply = 0;
-				intDiscountBottom.setValue(0);
-			}
-			else if (discountToApply > 100) {
-				discountToApply = 100;
-				intDiscountBottom.setValue(100);
-			}
-			if (order.applyDiscount(discountToApply) == -1) {
-				throw new NotEnoughRightsException();
-			}
-			else {
-				intDiscountTop.setValue(discountToApply);
-				updateAmounts(order.retrieveAmount());				
-			}
-		}
-		catch(NotEnoughRightsException ex) {
-			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("message.permissions.NotEnoughRights"), 
-					Labels.getLabel("messageBoxTitle.Warning"),
-					Messagebox.EXCLAMATION);
-		}
-		catch(Exception ex)	{
-			ExceptionTreatment.logAndShow(ex, 
-					ex.getMessage(), 
-					Labels.getLabel("messageBoxTitle.Error"),
-					Messagebox.ERROR);
-		}
+		applyOrderDiscount(false);
+    }
+	
+	/*
+	 * Needed for testing. 
+	 * onChange event isn't triggered under testing.
+	 */
+	@Listen("onClick = intbox#intDiscountTop")
+	public void intDiscountTop_onClick() throws SoberanoException {
+		
+		if (SpringUtility.underTesting()) applyOrderDiscount(true);
+    }
+	
+	/*
+	 * Needed for testing. 
+	 * onChange event isn't triggered under testing.
+	 */
+	@Listen("onClick = intbox#intDiscountBottom")
+	public void intDiscountBottom_onClick() throws SoberanoException {
+		
+		if (SpringUtility.underTesting()) applyOrderDiscount(false);
     }
 }

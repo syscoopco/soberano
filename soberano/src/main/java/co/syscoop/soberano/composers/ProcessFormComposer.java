@@ -16,6 +16,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Unit;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -97,7 +98,7 @@ public class ProcessFormComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbInput")
     public void cmbInput_onClick() throws SQLException {
-		processInputMaterialSelection();
+		if (SpringUtility.underTesting()) processInputMaterialSelection();
 	}
 	
 	@Listen("onChange = combobox#cmbOutput")
@@ -111,7 +112,7 @@ public class ProcessFormComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbOutput")
     public void cmbOutput_onClick() throws SQLException {
-		processOutputItemSelection();
+		if (SpringUtility.underTesting()) processOutputItemSelection();
 	}
 	
 	@SuppressWarnings("unchecked")

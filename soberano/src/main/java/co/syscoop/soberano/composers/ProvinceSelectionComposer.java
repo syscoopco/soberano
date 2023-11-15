@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 
 import co.syscoop.soberano.ui.helper.ProvinceComboboxHelper;
+import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ProvinceSelectionComposer extends SelectorComposer {
@@ -47,6 +48,6 @@ public class ProvinceSelectionComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbProvince")
     public void cmbProvince_onClick() throws SQLException {
 		
-		ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
+		if (SpringUtility.underTesting()) ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
     }
 }

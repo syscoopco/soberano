@@ -8,6 +8,8 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Treeitem;
+
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -37,6 +39,6 @@ public class ViewModelComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbIntelliSearch")
     public void cmbIntelliSearch_onClick() throws SQLException {
 	
-		ZKUtilitity.processItemSelection(cmbIntelliSearch);
+		if (SpringUtility.underTesting()) ZKUtilitity.processItemSelection(cmbIntelliSearch);
 	}
 }

@@ -18,6 +18,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.ui.helper.ProcessFormHelper;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -81,20 +82,22 @@ public class ProcessRunsComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbProcess")
     public void cmbProcess_onClick() throws SoberanoException {
 		
-		try {
-			updateProcessSpec();
-			intRuns.setValue(1);
-			estimateCost();
-		} catch (SQLException e) {
-			ExceptionTreatment.logAndShow(e, 
-					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
-		} catch (Exception e) {
-			ExceptionTreatment.logAndShow(e, 
-					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
+		if (SpringUtility.underTesting()) {			
+			try {
+				updateProcessSpec();
+				intRuns.setValue(1);
+				estimateCost();
+			} catch (SQLException e) {
+				ExceptionTreatment.logAndShow(e, 
+						Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+						Labels.getLabel("messageBoxTitle.Validation"),
+						Messagebox.EXCLAMATION);
+			} catch (Exception e) {
+				ExceptionTreatment.logAndShow(e, 
+						Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+						Labels.getLabel("messageBoxTitle.Validation"),
+						Messagebox.EXCLAMATION);
+			}			
 		}
 	}
 	
@@ -116,18 +119,21 @@ public class ProcessRunsComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbCostCenter")
     public void cmbCostCenter_onClick() throws SoberanoException {
-		try {
-			estimateCost();
-		} catch (SQLException e) {
-			ExceptionTreatment.logAndShow(e, 
-					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
-		} catch (Exception e) {
-			ExceptionTreatment.logAndShow(e, 
-					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
-					Labels.getLabel("messageBoxTitle.Validation"),
-					Messagebox.EXCLAMATION);
+		
+		if (SpringUtility.underTesting()) {
+			try {
+				estimateCost();
+			} catch (SQLException e) {
+				ExceptionTreatment.logAndShow(e, 
+						Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+						Labels.getLabel("messageBoxTitle.Validation"),
+						Messagebox.EXCLAMATION);
+			} catch (Exception e) {
+				ExceptionTreatment.logAndShow(e, 
+						Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+						Labels.getLabel("messageBoxTitle.Validation"),
+						Messagebox.EXCLAMATION);
+			}
 		}
 	}
 	

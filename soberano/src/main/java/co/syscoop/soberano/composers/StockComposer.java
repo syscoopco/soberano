@@ -8,6 +8,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.StockGridModel;
+import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial" })
 public class StockComposer extends ExpenseAmountComposer {
@@ -44,6 +45,6 @@ public class StockComposer extends ExpenseAmountComposer {
 	 */
 	@Listen("onClick = combobox#cmbWarehouse")
     public void cmbWarehouse_onClick() throws SQLException {
-		processWarehouseSelection();
+		if (SpringUtility.underTesting()) processWarehouseSelection();
 	}
 }

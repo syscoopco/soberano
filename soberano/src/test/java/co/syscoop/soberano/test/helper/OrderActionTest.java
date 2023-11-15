@@ -1,5 +1,9 @@
 package co.syscoop.soberano.test.helper;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zul.Button;
@@ -51,5 +55,21 @@ public class OrderActionTest extends ActionTest {
 											boxDetailsAgent.query("#divOrderItems").as(Div.class),
 											boxDetailsAgent.query("#txtStage").as(Textbox.class));
 		return orderForm;
+	}
+	
+	protected void checkOrder(Integer orderId,
+								String label,
+								Integer discount,
+								BigDecimal amount,
+								String counter,
+								String customer,
+								ArrayList<Integer> processRuns,
+								HashMap<Integer, String> itemNames,
+								HashMap<Integer, String> instructions,								
+								HashMap<Integer, BigDecimal> processRunServed,
+								HashMap<Integer, BigDecimal> processRunOrdered,
+								HashMap<Integer, BigDecimal> processRunDiscounted
+								) {
+		
 	}
 }

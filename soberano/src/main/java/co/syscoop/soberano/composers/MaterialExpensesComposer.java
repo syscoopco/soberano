@@ -13,6 +13,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Unit;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -62,7 +63,7 @@ public class MaterialExpensesComposer extends ExpenseAmountComposer {
 	 */
 	@Listen("onClick = combobox#cmbMaterial")
     public void cmbMaterial_onClick() throws SQLException {
-		processMaterialSelection();
+		if (SpringUtility.underTesting()) processMaterialSelection();
 	}
 	
 	@Listen("onChange = textbox#txtQuantityExpression")

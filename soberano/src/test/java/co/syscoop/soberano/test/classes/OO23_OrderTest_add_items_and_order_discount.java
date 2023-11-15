@@ -128,7 +128,10 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
+			
 			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 						
@@ -173,7 +176,10 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
+			
 			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 						
@@ -218,7 +224,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -261,7 +266,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(2));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -272,49 +276,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(5)
-//	final void testCase5() {
-//
-//		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1002");
-//		orderForm = new OrderForm(desktop, 
-//				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
-//				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
-//				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
-//				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-//				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-//				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
-//				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
-//				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
-//				desktop.query("div").query("#divOrderItems").as(Div.class),
-//				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
-//		try {
-//			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
-//			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
-//			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-//			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
-//			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
-//			
-//			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-//			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(2));
-//			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "5", "lb : pound");
-//			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 1);
-//			
-//			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
 	
 	@Test
 	@Order(6)
@@ -347,7 +308,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 1");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(3));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 1);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -358,49 +318,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(7)
-//	final void testCase7() {
-//
-//		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1003");
-//		orderForm = new OrderForm(desktop, 
-//				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
-//				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
-//				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
-//				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-//				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-//				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
-//				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
-//				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
-//				desktop.query("div").query("#divOrderItems").as(Div.class),
-//				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
-//		try {
-//			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
-//			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
-//			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-//			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
-//			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
-//			
-//			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 2");			
-//			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(500.123));
-//			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "3", "g : gram");
-//			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 2);
-//			
-//			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
 	
 	@Test
 	@Order(8)
@@ -433,7 +350,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(4));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 2);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -476,7 +392,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 3");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(543.321));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 5);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -519,7 +434,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 5);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -562,7 +476,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 4");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -605,7 +518,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 5");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -648,7 +560,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 6");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -691,7 +602,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 7");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(7));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -702,50 +612,7 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(15)
-//	final void testCase15() {
-//
-//		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1007");
-//		orderForm = new OrderForm(desktop, 
-//				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
-//				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
-//				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
-//				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-//				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-//				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
-//				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
-//				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
-//				desktop.query("div").query("#divOrderItems").as(Div.class),
-//				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
-//		try {
-//			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
-//			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
-//			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-//			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
-//			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
-//			
-//			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-//			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1000));
-//			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "6", "oz : ounce");
-//			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 8);
-//			
-//			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
+		
 	@Test
 	@Order(16)
 	final void testCase16() {
@@ -777,7 +644,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 8");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(8));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 8);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -788,49 +654,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(17)
-//	final void testCase17() {
-//
-//		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1008");
-//		orderForm = new OrderForm(desktop, 
-//				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
-//				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
-//				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
-//				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-//				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-//				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
-//				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
-//				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
-//				desktop.query("div").query("#divOrderItems").as(Div.class),
-//				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
-//		try {
-//			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
-//			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
-//			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-//			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
-//			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
-//			
-//			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 9");			
-//			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(456.789));
-//			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "5", "lb : pound");
-//			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
-//			
-//			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
 	
 	@Test
 	@Order(18)
@@ -863,7 +686,6 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(9));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
 		}
@@ -874,50 +696,7 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(19)
-//	final void testCase19() {
-//
-//		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1009");
-//		orderForm = new OrderForm(desktop, 
-//				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-//				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
-//				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
-//				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
-//				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-//				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-//				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
-//				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
-//				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
-//				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
-//				desktop.query("div").query("#divOrderItems").as(Div.class),
-//				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
-//		try {
-//			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
-//			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
-//			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-//			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
-//			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
-//			
-//			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-//			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1000000));
-//			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "4", "mg : milligram");
-//			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 100);
-//			
-//			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
+		
 	@Test
 	@Order(20)
 	final void testCase20() {
@@ -949,9 +728,488 @@ class OO23_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 10");			
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
-			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 100);
 			
 			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(21)
+	final void testCase21() {
+
+		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1001");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1009");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(100));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
+	@Order(22)
+	final void testCase22() {
+
+		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1001");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1010");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(1));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			fail("None exception was thrown when it should.");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
+	@Order(23)
+	final void testCase23() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1002");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 1);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+			
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1011");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(2));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1011");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(2));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(24)
+	final void testCase24() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1004");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {			
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 5);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+						
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1013");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(543.321 - 300.123));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1013");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(400));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(25)
+	final void testCase25() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1004");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1014");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(1));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1014");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(1));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(26)
+	final void testCase26() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1005");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {			
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+			
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1015");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(0));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1015");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(0));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(27)
+	final void testCase27() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1005");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1016");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(0));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1016");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(3));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(28)
+	final void testCase28() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1006");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {		
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+			
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1017");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(5));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1017");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(1));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(29)
+	final void testCase29() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1006");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1018");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(3));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1018");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(7));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(30)
+	final void testCase30() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1008");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {			
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+			
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1020");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(2));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1020");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(3));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(31)
+	final void testCase31() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/order.zul?id=1009");
+		orderForm = new OrderForm(desktop, 
+				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
+				desktop.query("textbox").query("#txtCustomer").as(Textbox.class),
+				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
+				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
+				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
+				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
+				desktop.query("decimalbox").query("#decAmountBottom").as(Decimalbox.class),
+				desktop.query("div").query("#divOrderItems").as(Div.class),
+				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
+		try {			
+			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 100);
+			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
+			intDiscountTopAgent.click();
+			
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			
+			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1021");
+			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decDiscount, new BigDecimal(5));
+			decDiscountAgent.click(); //needed to force decimalbox value change handling under testing
+
+			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1021");
+			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
+			orderForm.setComponentValue(decServedItems, new BigDecimal(10));
+			decServedItemsAgent.click(); //needed to force decimalbox value change handling under testing
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

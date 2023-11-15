@@ -26,7 +26,7 @@ public class OrderForm extends ConstrainedForm {
 	private Decimalbox decAmountBottom;
 	private Div divOrderItems;
 	private Textbox txtStage;
-
+	
 	public OrderForm(DesktopAgent desktop,
 					Textbox txtLabel,
 					Textbox txtCounters,

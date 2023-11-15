@@ -34,6 +34,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
@@ -49,7 +50,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	{
 		CANCEL(0),
 		REORDER(1),
-		CANCELALL(2);
+		CANCELALL(2),
+		SETQTY(3);
 		
 	    @SuppressWarnings("unused")
 		private int actionCode;
@@ -63,14 +65,18 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		String inventoryItemCode =  ((Label) event.getTarget().query("#lblInventoryItemCode" + processRunId.toString())).getValue();
 		ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
 		Decimalbox decOneRunQuantity = (Decimalbox) event.getTarget().query("#decOneRunQuantity" + processRunId.toString());
-		Label lblServedItems = (Label) event.getTarget().query("#lblServedItems" + processRunId.toString());
+		Decimalbox decServedItems = (Decimalbox) event.getTarget().query("#decServedItems" + processRunId.toString());
+		Decimalbox decDiscount = (Decimalbox) event.getTarget().query("#decDiscount" + processRunId.toString());
 		Label lblOrderedItems = (Label) event.getTarget().query("#lblOrderedItems" + processRunId.toString());
 		Button btnDecServedItems = (Button) event.getTarget().query("#btnDecServedItems" + processRunId.toString());
 		Button btnIncServedItems = (Button) event.getTarget().query("#btnIncServedItems" + processRunId.toString());
 		
-		if (confTreeitem.getRequestedAction() != null && confTreeitem.getRequestedAction().equals(ActionRequested.SOME)) {
+		if ((confTreeitem.getRequestedAction() != null && confTreeitem.getRequestedAction().equals(ActionRequested.SOME)) ||
+				itemOperation.equals(ItemOperation.SETQTY)) {
 			
 			confTreeitem.cancelRequestedAction();
+			
+			BigDecimal orderedItems = new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()));
 			
 			//reorder items
 			if (itemOperation.equals(ItemOperation.REORDER)) {
@@ -78,12 +84,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {						
-					BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue())).add(decOneRunQuantity.getValue()).stripTrailingZeros();
+					BigDecimal servedItems = decServedItems.getValue().add(decOneRunQuantity.getValue()).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
 					if (servedItems.compareTo(new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()))) > 0) {
-						lblServedItems.setValue(lblOrderedItems.getValue());
+						decServedItems.setValue(new BigDecimal(Double.parseDouble(lblOrderedItems.getValue())));
 					}
 					else {
-						lblServedItems.setValue(servedItems.toString());
+						decServedItems.setValue(servedItems);
 					}
 				}
 			}
@@ -93,31 +99,51 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue())).subtract(decOneRunQuantity.getValue()).stripTrailingZeros();
+					BigDecimal servedItems = decServedItems.getValue().subtract(decOneRunQuantity.getValue()).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
 					if (servedItems.compareTo(new BigDecimal(0)) < 0) {
-						lblServedItems.setValue("0");
+						decServedItems.setValue(new BigDecimal(0));
 					}
 					else {
-						lblServedItems.setValue(servedItems.toString());
+						decServedItems.setValue(servedItems);
+					}
+					if (decDiscount.getValue().compareTo(servedItems) > 0) {
+						decDiscount.setValue(servedItems);
 					}
 				}
 			}
 			//cancel all items
-			else {
-				BigDecimal orderedItems = new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()));
+			else if (itemOperation.equals(ItemOperation.CANCELALL)) {
 				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, orderedItems) == -1) {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					lblServedItems.setValue("0");
+					decServedItems.setValue(new BigDecimal(0));
+					decDiscount.setValue(new BigDecimal(0));
+				}
+			}
+			//set item quantity
+			else {
+				if (confTreeitem.getOrder().cancel(processRunId, inventoryItemCode, orderedItems) == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else {
+					decDiscount.setValue(new BigDecimal(0));
+					if (confTreeitem.getOrder().reorder(processRunId, inventoryItemCode, decServedItems.getValue()) == -1) {
+						throw new NotEnoughRightsException();
+					}
+					else {
+						if (decServedItems.getValue().compareTo(new BigDecimal(0)) < 0) {
+							decServedItems.setValue(new BigDecimal(0));
+						} else if (decServedItems.getValue().compareTo(new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()))) > 0) {
+							decServedItems.setValue(new BigDecimal(Double.parseDouble(lblOrderedItems.getValue())));
+						}
+					}
 				}
 			}
 			
-			BigDecimal servedItems = new BigDecimal(Double.parseDouble(lblServedItems.getValue()));
-			BigDecimal orderedItems = new BigDecimal(Double.parseDouble(lblOrderedItems.getValue()));			
-			if (servedItems.compareTo(new BigDecimal(0)) > 0) {
+			if (decServedItems.getValue().compareTo(new BigDecimal(0)) > 0) {
 				btnDecServedItems.setDisabled(false);
-				if (orderedItems.equals(servedItems)) {
+				if (orderedItems.equals(decServedItems.getValue())) {
 					btnIncServedItems.setDisabled(true);
 				}
 				else {
@@ -130,7 +156,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			}
 			
 			//update amount fields
-			BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
+			BigDecimal amount = confTreeitem.getOrder().retrieveAmount();											
 			if (amount.compareTo(new BigDecimal(0)) < 0) {
 				throw new NotEnoughRightsException();
 			}
@@ -141,6 +167,54 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 		else {
 			confTreeitem.requestAction();
+		}
+	}
+	
+	private void discountBoxHandler(Event event) throws Exception {
+		
+		try {
+			Decimalbox decDiscount = (Decimalbox) event.getTarget();
+			String targetId = decDiscount.getId();
+			Integer processRunId = Integer.parseInt(targetId.substring(targetId.indexOf("t") + 1, targetId.length()));
+			ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) decDiscount.getParent().getParent().getParent().getParent();
+			String inventoryItemCode =  ((Label) decDiscount.query("#lblInventoryItemCode" + processRunId.toString())).getValue();
+			Decimalbox decServedItems = (Decimalbox) decDiscount.query("#decServedItems" + processRunId.toString());
+			BigDecimal discountableRuns = decServedItems.getValue();
+			BigDecimal runsToDiscounts = decDiscount.getValue();
+			if (runsToDiscounts.compareTo(new BigDecimal(0)) < 0) {
+				runsToDiscounts = new BigDecimal(0);
+				decDiscount.setValue(new BigDecimal(0));
+			}
+			else if (runsToDiscounts.compareTo(discountableRuns) > 0) {
+				runsToDiscounts = discountableRuns;
+				decDiscount.setValue(discountableRuns);
+			}
+			if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, runsToDiscounts) == -1) {
+				throw new NotEnoughRightsException();
+			}
+			else {						
+				//update amount fields
+				BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
+				if (amount.compareTo(new BigDecimal(0)) < 0) {
+					throw new NotEnoughRightsException();
+				}
+				else {
+					((Decimalbox) decDiscount.query("#decAmountTop")).setValue(amount);
+					((Decimalbox) decDiscount.query("#decAmountBottom")).setValue(amount);
+				}
+			}
+		}
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
 		}
 	}
 	
@@ -286,15 +360,61 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					});
 					
 					BigDecimal servedItems = oi.getOrderedRuns().subtract(oi.getCanceledRuns());
-					servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();					
-					Label lblServedItems = new Label((servedItems).toString());
-					lblServedItems.setId("lblServedItems" + oi.getProcessRunId().toString());
-					oiBox.appendChild(lblServedItems);
+					servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
+					Decimalbox decServedItems = new Decimalbox(servedItems);
+					decServedItems.setFormat("####.########");
+					decServedItems.setId("decServedItems" + oi.getProcessRunId().toString());
+					oiBox.appendChild(decServedItems);
+					decServedItems.addEventListener("onChange", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							
+							try {
+								updateServedItems(ItemOperation.SETQTY, event);
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});
+					
+					decServedItems.addEventListener("onClick", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+							
+							try {
+								if (SpringUtility.underTesting()) updateServedItems(ItemOperation.SETQTY, event);
+							}
+							catch(NotEnoughRightsException ex) {
+								ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+							}
+							catch(Exception ex)	{
+								ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+							}
+						}
+					});
 					
 					oiBox.appendChild(new Label("/"));
 					
 					
-					Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toString()));
+					Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
 					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 					oiBox.appendChild(lblOrderedItems);
 					
@@ -316,52 +436,17 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						@Override
 						public void onEvent(Event event) throws Exception {
 
-							try {
-								Decimalbox decDiscount = (Decimalbox) event.getTarget();
-								String targetId = decDiscount.getId();
-								Integer processRunId = Integer.parseInt(targetId.substring(targetId.indexOf("t") + 1, targetId.length()));
-								ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) decDiscount.getParent().getParent().getParent().getParent();
-								String inventoryItemCode =  ((Label) decDiscount.query("#lblInventoryItemCode" + processRunId.toString())).getValue();
-								Label lblServedItems = (Label) decDiscount.query("#lblServedItems" + processRunId.toString());
-								Double discountableRuns = Double.parseDouble(lblServedItems.getValue());
-								BigDecimal runsToDiscounts = decDiscount.getValue();
-								if (runsToDiscounts.compareTo(new BigDecimal(0)) < 0) {
-									runsToDiscounts = new BigDecimal(0);
-									decDiscount.setValue(new BigDecimal(0));
-								}
-								else if (runsToDiscounts.compareTo(new BigDecimal(discountableRuns)) > 0) {
-									runsToDiscounts = new BigDecimal(discountableRuns);
-									decDiscount.setValue(new BigDecimal(discountableRuns));
-								}
-								if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, runsToDiscounts) == -1) {
-									throw new NotEnoughRightsException();
-								}
-								else {						
-									//update amount fields
-									BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
-									if (amount.compareTo(new BigDecimal(0)) < 0) {
-										throw new NotEnoughRightsException();
-									}
-									else {
-										((Decimalbox) decDiscount.query("#decAmountTop")).setValue(amount);
-										((Decimalbox) decDiscount.query("#decAmountBottom")).setValue(amount);
-									}
-								}
-							}
-							catch(NotEnoughRightsException ex) {
-								ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-							}
-							catch(Exception ex)	{
-								ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Error"),
-										Messagebox.ERROR);
-							}
+							discountBoxHandler(event);
 						}
 					});
+					decDiscount.addEventListener("onClick", new EventListener() {
+
+						@Override
+						public void onEvent(Event event) throws Exception {
+
+							if (SpringUtility.underTesting()) discountBoxHandler(event);
+						}
+					});					
 					oiBox.appendChild(decDiscount);
 					oiBox.appendChild((new Separator("horizontal")));
 					oiBox.appendChild(new Label(oi.getProductUnit()));					

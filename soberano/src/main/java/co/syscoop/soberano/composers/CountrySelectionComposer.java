@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import co.syscoop.soberano.ui.helper.CountryComboboxHelper;
+import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class CountrySelectionComposer extends SelectorComposer {
@@ -55,6 +56,6 @@ public class CountrySelectionComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbCountry")
     public void cmbCountry_onClick() throws SQLException {
 		
-		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);	
+		if (SpringUtility.underTesting()) CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);	
     }
 }
