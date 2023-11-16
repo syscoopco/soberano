@@ -222,51 +222,53 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	private void renderOrderItems(Order order, Div divOrderItems) {
 		
 		for (String cat : order.getCategories()) {
-			Tree catTree = new Tree();
-			divOrderItems.appendChild(catTree);
+			Tree treeCat = new Tree();
+			divOrderItems.appendChild(treeCat);
 			Treecols treeCols = new Treecols();
-			catTree.appendChild(treeCols);
+			treeCat.appendChild(treeCols);
 			Treecol treeCol = new Treecol();
 			treeCols.appendChild(treeCol);
-			Treechildren catChdn = new Treechildren();
-			catTree.appendChild(catChdn);
-			Treeitem catItem = new Treeitem();
-			catChdn.appendChild(catItem);
-			Treerow catRow = new Treerow();
-			catItem.appendChild(catRow);
-			Treecell catCell = new Treecell(cat);
-			catRow.appendChild(catCell);
-			Treechildren descChdn = new Treechildren();
-			catItem.appendChild(descChdn);
-			catItem.setOpen(true);
+			Treechildren chdnCat = new Treechildren();
+			treeCat.appendChild(chdnCat);
+			Treeitem titemCat = new Treeitem();
+			chdnCat.appendChild(titemCat);
+			Treerow rowCat = new Treerow();
+			titemCat.appendChild(rowCat);
+			Treecell cellCat = new Treecell(cat);
+			rowCat.appendChild(cellCat);
+			Treechildren chdnDesc = new Treechildren();
+			titemCat.appendChild(chdnDesc);
+			titemCat.setOpen(true);
 			for (String desc : order.getDescriptions().get(cat)) {
-				Treeitem descItem = new Treeitem();
-				descChdn.appendChild(descItem);
-				Treerow descRow = new Treerow();
-				descItem.appendChild(descRow);
-				Treecell descCell = new Treecell(desc);
-				descRow.appendChild(descCell);
-				Treechildren oicChdn = new Treechildren();
-				descItem.appendChild(oicChdn);
-				descItem.setOpen(true);
+				Treeitem titemDesc = new Treeitem();
+				chdnDesc.appendChild(titemDesc);
+				Treerow rowDesc = new Treerow();
+				titemDesc.appendChild(rowDesc);
+				Treecell cellDesc = new Treecell(desc);
+				cellDesc.setId("cell" + cat + "_desc");
+				rowDesc.appendChild(cellDesc);
+				Treechildren chdnOic = new Treechildren();
+				titemDesc.appendChild(chdnOic);
+				titemDesc.setOpen(true);
 				for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
 					ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
-					oicChdn.appendChild(oiItem);
-					Treerow oiRow = new Treerow();
-					oiItem.appendChild(oiRow);
-					Treecell oiCell = new Treecell();
-					Hbox oiBox = new Hbox();
-					oiBox.setAlign("center");
+					chdnOic.appendChild(oiItem);
+					Treerow rowOi = new Treerow();
+					rowOi.setId(oi.getProcessRunId().toString());
+					oiItem.appendChild(rowOi);
+					Treecell cellOi = new Treecell();
+					Hbox boxOi = new Hbox();
+					boxOi.setAlign("center");
 					
 					Decimalbox decOneRunQuantity = new Decimalbox(oi.getOneRunQuantity());
 					decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
 					decOneRunQuantity.setVisible(false);
-					oiBox.appendChild(decOneRunQuantity);
+					boxOi.appendChild(decOneRunQuantity);
 					
 					Label lblInventoryItemCode = new Label(oi.getInventoryItemCode());
 					lblInventoryItemCode.setId("lblInventoryItemCode" + oi.getProcessRunId().toString());
 					lblInventoryItemCode.setVisible(false);
-					oiBox.appendChild(lblInventoryItemCode);
+					boxOi.appendChild(lblInventoryItemCode);
 					
 					Button btnIncServedItems = new Button("+");
 					btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
@@ -276,7 +278,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					else {
 						btnIncServedItems.setDisabled(true);
 					}
-					oiBox.appendChild(btnIncServedItems);
+					boxOi.appendChild(btnIncServedItems);
 					btnIncServedItems.addEventListener("onClick", new EventListener() {
 
 						@Override
@@ -308,7 +310,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					else {
 						btnDecServedItems.setDisabled(true);
 					}
-					oiBox.appendChild(btnDecServedItems);
+					boxOi.appendChild(btnDecServedItems);
 					btnDecServedItems.addEventListener("onClick", new EventListener() {
 
 						@Override
@@ -335,7 +337,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Button btnCancelAllItems = new Button();
 					btnCancelAllItems.setImage("./images/delete.png");
 					btnCancelAllItems.setId("btnCancelAllItems" + oi.getProcessRunId().toString());
-					oiBox.appendChild(btnCancelAllItems);
+					boxOi.appendChild(btnCancelAllItems);
 					btnCancelAllItems.addEventListener("onClick", new EventListener() {
 
 						@Override
@@ -364,7 +366,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Decimalbox decServedItems = new Decimalbox(servedItems);
 					decServedItems.setFormat("####.########");
 					decServedItems.setId("decServedItems" + oi.getProcessRunId().toString());
-					oiBox.appendChild(decServedItems);
+					boxOi.appendChild(decServedItems);
 					decServedItems.addEventListener("onChange", new EventListener() {
 
 						@Override
@@ -411,21 +413,28 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						}
 					});
 					
-					oiBox.appendChild(new Label("/"));
-					
+					boxOi.appendChild(new Label("/"));					
 					
 					Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
 					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
-					oiBox.appendChild(lblOrderedItems);
+					boxOi.appendChild(lblOrderedItems);
 					
-					oiBox.appendChild((new Separator("horizontal")));
-					oiBox.appendChild(new Label(oi.getProductUnit()));
-					oiBox.appendChild(new Separator("horizontal"));
-					oiBox.appendChild(new Label(oi.getProductName()));
-					oiBox.appendChild((new Separator("horizontal")));
-					oiBox.appendChild((new Separator("horizontal")));
+					boxOi.appendChild((new Separator("horizontal")));
 					
-					oiBox.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
+					Label lblProductUnit = new Label(oi.getProductUnit());
+					lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
+					boxOi.appendChild(lblProductUnit);	
+					
+					boxOi.appendChild(new Separator("horizontal"));
+					
+					Label lblProductName = new Label(oi.getProductName());
+					lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
+					boxOi.appendChild(lblProductName);
+					
+					boxOi.appendChild((new Separator("horizontal")));
+					boxOi.appendChild((new Separator("horizontal")));
+					
+					boxOi.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
 					Decimalbox decDiscount = new Decimalbox();
 					decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
 					decDiscount.setConstraint("no empty, no negative");
@@ -447,13 +456,16 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 							if (SpringUtility.underTesting()) discountBoxHandler(event);
 						}
 					});					
-					oiBox.appendChild(decDiscount);
-					oiBox.appendChild((new Separator("horizontal")));
-					oiBox.appendChild(new Label(oi.getProductUnit()));					
+					boxOi.appendChild(decDiscount);
+					boxOi.appendChild((new Separator("horizontal")));
 					
-					oiBox.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
-					oiCell.appendChild(oiBox);
-					oiRow.appendChild(oiCell);
+					Label lblProductUnit1 = new Label(oi.getProductUnit());
+					lblProductUnit1.setId("lblProductUnit1" + oi.getProcessRunId().toString());					
+					boxOi.appendChild(lblProductUnit1);					
+					
+					boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
+					cellOi.appendChild(boxOi);
+					rowOi.appendChild(cellOi);
 				}
 			}
 		}
