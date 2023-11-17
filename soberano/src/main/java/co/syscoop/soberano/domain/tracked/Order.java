@@ -275,6 +275,34 @@ public class Order extends BusinessActivityTrackedObject {
 		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}
 	
+	public BigDecimal getCanceledRunsCount() throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_getCanceledRunsCount\"(:orderId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
+	}
+	
+	public Integer endCanceledRuns(Integer processRunId, String inventoryItemCode, BigDecimal runsToEnd) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_endCanceledRuns\"(:orderId, "
+							+ "								:processRunId, "
+							+ "								:inventoryItemCode, "
+							+ "								:runsToEnd, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("inventoryItemCode", inventoryItemCode);
+		parametersMap.put("runsToEnd", runsToEnd);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public List<Object> getOngoing() throws SQLException {
 		
 		String qryStr = "SELECT * FROM soberano.\"fn_Order_getOngoing\"(:lang, :loginname)";	

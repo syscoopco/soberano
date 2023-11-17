@@ -34,7 +34,7 @@ public class WithdrawButtonComposer extends CashRegisterTrackedObjectRecordButto
     }
 	
 	@Listen("onClick = button#btnWithdraw")
-    public void btnRecord_onClick() throws Throwable {
+    public void btnWithdraw_onClick() throws Throwable {
 		
 		try{
 			((CashRegisterFormHelper) trackedObjectFormHelper).withdraw(boxDetails);

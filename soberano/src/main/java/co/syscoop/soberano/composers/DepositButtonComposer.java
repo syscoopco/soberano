@@ -33,7 +33,7 @@ public class DepositButtonComposer extends CashRegisterTrackedObjectRecordButton
     }
 	
 	@Listen("onClick = button#btnDeposit")
-    public void btnRecord_onClick() throws Throwable {
+    public void btnDeposit_onClick() throws Throwable {
 		
 		try{
 			((CashRegisterFormHelper) trackedObjectFormHelper).deposit(boxDetails);

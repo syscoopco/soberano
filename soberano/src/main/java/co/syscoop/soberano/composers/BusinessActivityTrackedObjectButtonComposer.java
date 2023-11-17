@@ -43,6 +43,9 @@ public class BusinessActivityTrackedObjectButtonComposer extends SelectorCompose
 	protected Button btnBill;
 	
 	@Wire
+	protected Button btnCollect;
+	
+	@Wire
 	protected Button btnCancel;
 	
 	public BusinessActivityTrackedObjectButtonComposer(BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper) {

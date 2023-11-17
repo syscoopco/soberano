@@ -10,9 +10,9 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 
 @SuppressWarnings({ "serial" })
-public class BillButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
+public class CollectButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
 	
-	public BillButtonComposer() {
+	public CollectButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new OrderFormHelper());
 	}
 	
@@ -20,12 +20,12 @@ public class BillButtonComposer extends BusinessActivityTrackedObjectButtonCompo
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-          boxDetails = (Box) btnBill.query("#wndContentPanel").query("#boxDetails");
+          boxDetails = (Box) btnCollect.query("#wndContentPanel").query("#boxDetails");
     }
 	
-	@Listen("onClick = button#btnBill")
-    public void btnBill_onClick() {
+	@Listen("onClick = button#btnCollect")
+    public void btnCollect_onClick() {
 	
-		Executions.sendRedirect("/bill.zul?id=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString());
+		Executions.sendRedirect("/collect.zul?id=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString());
 	}
 }
