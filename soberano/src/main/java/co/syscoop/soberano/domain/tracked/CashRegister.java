@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.CurrencyMapper;
-import co.syscoop.soberano.database.relational.PaymentProcessorMapper;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class CashRegister extends TrackedObject {
@@ -105,21 +104,13 @@ public class CashRegister extends TrackedObject {
 		setBalances(sourceCashRegister.getBalances());
 	}
 	
-	public List<Object> getCurrencies() throws SQLException {
+	public List<Object> getCurrencies(Boolean excludeCash) throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_CashRegister_getCurrencies\"(:cashRegisterId, :loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_CashRegister_getCurrencies\"(:cashRegisterId, :excludecash, :loginname)";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("cashRegisterId", this.getId());
+		parametersMap.put("excludecash", excludeCash);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new CurrencyMapper());
-	}
-	
-	public List<Object> getPaymentProcessors() throws SQLException {
-		
-		String qryStr = "SELECT * FROM soberano.\"fn_CashRegister_getPaymentProcessors\"(:cashRegisterId, :loginname)";
-		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("cashRegisterId", this.getId());
-		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return super.query(qryStr, parametersMap, new PaymentProcessorMapper());
 	}
 }

@@ -43,6 +43,7 @@ public class Order extends BusinessActivityTrackedObject {
 				String label,
 				String counters,
 				String customer,
+				Integer customerId,
 				String deliverTo,
 				Integer orderDiscount,
 				BigDecimal orderAmount,
@@ -51,6 +52,7 @@ public class Order extends BusinessActivityTrackedObject {
 		this.label = label;
 		this.countersStr = counters;
 		this.customerStr = customer;
+		this.customer = customerId;
 		this.deliverTo = deliverTo;
 		this.discount = orderDiscount;
 		this.amount = orderAmount;
@@ -107,6 +109,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        							rs.getString("orderLabel"),
 	        							rs.getString("counters"),
 	        							rs.getString("customer"),
+	        							rs.getInt("customerId"),
 	        							rs.getString("deliverTo"),
 	        							rs.getInt("orderDiscount"),
 	        							rs.getBigDecimal("orderAmount"),

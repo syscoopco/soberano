@@ -26,6 +26,6 @@ public class CollectButtonComposer extends BusinessActivityTrackedObjectButtonCo
 	@Listen("onClick = button#btnCollect")
     public void btnCollect_onClick() {
 	
-		Executions.sendRedirect("/collect.zul?id=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString());
+		Executions.sendRedirect("/cash_register.zul?oid=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString());
 	}
 }

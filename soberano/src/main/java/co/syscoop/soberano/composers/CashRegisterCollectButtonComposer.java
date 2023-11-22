@@ -16,12 +16,12 @@ import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings("serial")
-public class DepositButtonComposer extends CashRegisterTrackedObjectRecordButtonComposer {
+public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObjectRecordButtonComposer {
 	
 	@Wire
 	private Button btnDeposit;
 	
-	public DepositButtonComposer() {
+	public CashRegisterCollectButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new CashRegisterFormHelper());
 	}
 	
@@ -32,10 +32,12 @@ public class DepositButtonComposer extends CashRegisterTrackedObjectRecordButton
           boxDetails = (Box) btnDeposit.query("#wndContentPanel").query("#boxDetails");
     }
 	
-	@Listen("onClick = button#btnDeposit")
-    public void btnDeposit_onClick() throws Throwable {
+	@Listen("onClick = button#btnCollect")
+    public void btnCollect_onClick() throws Throwable {
 		
 		try{
+			//TODO
+			
 			((CashRegisterFormHelper) trackedObjectFormHelper).deposit(boxDetails, false);
 			
 			//clean form

@@ -37,7 +37,7 @@ public class CountButtonComposer extends CashRegisterTrackedObjectRecordButtonCo
     public void btnCount_onClick() throws Throwable {
 		
 		try{
-			((CashRegisterFormHelper) trackedObjectFormHelper).count(boxDetails);
+			((CashRegisterFormHelper) trackedObjectFormHelper).count(boxDetails, false);
 			
 			//clean form
 			trackedObjectFormHelper.cleanForm(boxDetails);

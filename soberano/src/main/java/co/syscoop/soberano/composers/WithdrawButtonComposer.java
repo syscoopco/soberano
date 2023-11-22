@@ -37,7 +37,7 @@ public class WithdrawButtonComposer extends CashRegisterTrackedObjectRecordButto
     public void btnWithdraw_onClick() throws Throwable {
 		
 		try{
-			((CashRegisterFormHelper) trackedObjectFormHelper).withdraw(boxDetails);
+			((CashRegisterFormHelper) trackedObjectFormHelper).withdraw(boxDetails, false);
 			
 			//clean form
 			trackedObjectFormHelper.cleanForm(boxDetails);

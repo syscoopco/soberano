@@ -27,7 +27,7 @@ public class BillInitiator implements Initiator, InitiatorExt {
 				form.initFormForBilling((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), orderId);
 			}
 			else {
-				Executions.sendRedirect("/collect.zul?id=" + orderId);
+				Executions.sendRedirect("/cash_register.zul?oid=" + orderId);
 			}
 		}
 		catch(Exception ex) {
@@ -48,7 +48,7 @@ public class BillInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			orderId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
+			orderId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
 		}
 		catch(Exception ex) {
 			orderId = 0; 

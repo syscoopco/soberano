@@ -13,7 +13,9 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Cell;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
+import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
@@ -24,27 +26,76 @@ import co.syscoop.soberano.domain.tracked.Balancing;
 import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.tracked.Deposit;
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Withdrawal;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
 	private ArrayList<Integer> currencyIds = new ArrayList<Integer>();
 	private ArrayList<BigDecimal> amounts = new ArrayList<BigDecimal>();
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void showOrderCollectingComponents(Window wndContentPanel, CashRegister cashRegister, Integer orderId) throws SQLException {
+		
+		if (orderId != null) {
+			wndContentPanel.query("#hboxToCollect").setVisible(true);
+			((Intbox) wndContentPanel.query("#intSelectedOrder")).setValue(orderId);
+			wndContentPanel.query("#hboxChange").setVisible(true);
+			Hbox hboxDecisionButtons = (Hbox) wndContentPanel.getParent().query("#incSouth").query("#hboxDecisionButtons");
+			hboxDecisionButtons.query("#btnDeposit").setVisible(false);
+			hboxDecisionButtons.query("#btnWithdraw").setVisible(false);
+			hboxDecisionButtons.query("#btnCount").setVisible(false);
+			Hbox hboxCustomer = (Hbox) hboxDecisionButtons.query("#hboxCustomer");
+			hboxCustomer.setVisible(true);
+			Button btnCollect = (Button) hboxDecisionButtons.query("#btnCollect");
+			btnCollect.setVisible(true);
+			
+			List<Object> noCashcurrencies = cashRegister.getCurrencies(true);
+			for (Object item : noCashcurrencies) {
+				Button btnNoCashCurrencyButton = new Button(((Currency) item).getName());
+				btnNoCashCurrencyButton.setAttribute("currencyId", ((Currency) item).getId());
+				btnNoCashCurrencyButton.setSclass("DecisionButton");
+				btnNoCashCurrencyButton.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+
+						Button btnNoCashCurrencyButton = (Button) event.getTarget();
+						Integer noCashcurrencyId = (Integer) btnNoCashCurrencyButton.getAttribute("currencyId");					
+						
+						//use currency id to instantiate the proper payment processor bean
+						
+						//use the bean to generate and show the payment link
+					}
+				});
+				hboxDecisionButtons.insertBefore(btnNoCashCurrencyButton, hboxCustomer);
+			}
+			Order order = new Order(orderId);
+			order.get();
+			((Decimalbox) wndContentPanel.query("#decToCollect")).setValue(order.getAmount());
+			if (order.getCustomer() != 0) {
+				ZKUtilitity.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
+			}
+		}
+	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void initForm(Window wndContentPanel, Integer cashRegisterId) throws SQLException {
+	public void initForm(Window wndContentPanel, Integer cashRegisterId, Integer orderId) throws SQLException {
 		
+		CashRegister cashRegister = new CashRegister(cashRegisterId);	
+		showOrderCollectingComponents(wndContentPanel, cashRegister, orderId);		
+			
 		((Intbox) wndContentPanel.query("#intSelectedCashRegister")).setValue(cashRegisterId);
 		Hlayout hlayCurrencies = (Hlayout) wndContentPanel.query("#hlayCurrencies");
-		CashRegister cashRegister = new CashRegister(cashRegisterId);
 		cashRegister.get();
-		List<Object> currencies = cashRegister.getCurrencies();
-		for (Object item : currencies) {
+		List<Object> currencies = cashRegister.getCurrencies(false);
+		for (Object item : currencies) {			
 			
 			Vbox vbox = new Vbox();
 			vbox.setHflex("1");
@@ -98,6 +149,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			decBalance.setStyle("color:blue;");
 			cellBalance.appendChild(decBalance);
 			
+			cellBalance.setVisible(orderId == null);
+			
 			Cell cellEnteredAmount = new Cell();
 			cellEnteredAmount.setHflex("1");
 			cellEnteredAmount.setAlign("center");
@@ -114,7 +167,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			Decimalbox decInput = (Decimalbox) hlayCurrencies.query("#decInput");
 			decInput.setValue(new BigDecimal(0.0));
 			Textbox txtInputExpression = (Textbox) hlayCurrencies.query("#txtInputExpression");
-			txtInputExpression.focus();		
+			txtInputExpression.focus();
 		}
 	}
 
@@ -130,10 +183,10 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 				((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue().toString());
 	}
 	
-	private void fillAmounts(Box boxDetails) throws SQLException {
+	private void fillAmounts(Box boxDetails, Boolean excludeCash) throws SQLException {
 		
 		CashRegister cashRegister = new CashRegister(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue());
-		List<Object> currencies = cashRegister.getCurrencies();
+		List<Object> currencies = cashRegister.getCurrencies(excludeCash);
 		currencyIds.clear();
 		amounts.clear();
 		for (Object item : currencies) {
@@ -143,11 +196,11 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
-	public Integer deposit(Box boxDetails) throws Exception {
+	public Integer deposit(Box boxDetails, Boolean excludeCash) throws Exception {
 		
 		Integer qryResult = 0;
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			fillAmounts(boxDetails);			
+			fillAmounts(boxDetails, excludeCash);			
 			qryResult = (new Deposit(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(), 
 									null, 
 									null,
@@ -172,11 +225,11 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
-	public Integer withdraw(Box boxDetails) throws Exception {
+	public Integer withdraw(Box boxDetails, Boolean excludeCash) throws Exception {
 		
 		Integer qryResult = 0;
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			fillAmounts(boxDetails);			
+			fillAmounts(boxDetails, excludeCash);			
 			qryResult = (new Withdrawal(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(), 
 									null, 
 									null,
@@ -201,11 +254,11 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
-	public Integer count(Box boxDetails) throws Exception {
+	public Integer count(Box boxDetails, Boolean excludeCash) throws Exception {
 		
 		Integer qryResult = 0;
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			fillAmounts(boxDetails);			
+			fillAmounts(boxDetails, excludeCash);			
 			qryResult = (new Balancing(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(), 
 									currencyIds, 
 									amounts)).record();
@@ -227,6 +280,12 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCount")).setLabel(Labels.getLabel("caption.action.confirmBalancing"));
 			throw new ConfirmationRequiredException();
 		}
+	}
+	
+	public Integer collect(Box boxDetails) {
+		
+		//TODO
+		return 0;
 	}
 
 	public ArrayList<BigDecimal> getAmounts() {

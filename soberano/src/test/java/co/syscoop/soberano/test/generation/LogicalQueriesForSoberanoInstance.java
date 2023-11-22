@@ -6913,6 +6913,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_CashRegister_getCurrencies\"(\n"
 						+ "	cashregisterid integer,\n"
+						+ "	excludeCash boolean,\n"
 						+ "	loginname character varying)\n"
 						+ "    RETURNS TABLE(\"itemId\" integer, \"entityTypeInstanceId\" integer, \"itemName\" character varying, \"itemCode\" character varying, \"isSystemCurrency\" boolean, \"isPriceReferenceCurrency\" boolean, \"isCash\" boolean, \"exchangeRate\" numeric, \"itemPosition\" integer, \"paymentProcessor\" integer) \n"
 						+ "    LANGUAGE 'plpgsql'\n"
@@ -6942,7 +6943,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "												\n"
 						+ "												--only enabled currencies\n"
 						+ "												AND eti.\"This_is_in_Stage_with_StageHasStageId\" = 2\n"
-						+ "								WHERE curr.\"Currency_is_cash\"\n"
+						+ "								WHERE (curr.\"Currency_is_cash\" AND NOT excludeCash)\n"
+						+ "										OR NOT curr.\"Currency_is_cash\"\n"
 						+ "									AND (--user is allowed to deposit, withdraw, balance, or it is an auditor\n"
 						+ "											1 IN (SELECT * FROM metamodel.\"fn_User_canCreateInstance\"(1, '_87225364-61F0-4563-B1BC-E601F83D0B6E', loginname))	\n"
 						+ "											OR 1 IN (SELECT * FROM metamodel.\"fn_User_canCreateInstance\"(1, '_5C00E9C9-05FC-4B07-A1F4-A679E4A52D6D', loginname))\n"
@@ -7128,8 +7130,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_CashRegister_RULE_CONSTRAINT_12\"(\n"
-						+ "	currencyIds integer[], \n"
+						+ "	currencyids integer[],\n"
 						+ "	cashregisterid integer,\n"
+						+ "	excludeCash boolean,\n"
 						+ "	loginname character varying)\n"
 						+ "    RETURNS boolean\n"
 						+ "    LANGUAGE 'plpgsql'\n"
@@ -7138,7 +7141,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "AS $BODY$\n"
 						+ "	BEGIN\n"
 						+ "		RETURN currencyIds = ARRAY(SELECT \"itemId\" \n"
-						+ "								   	FROM soberano.\"fn_CashRegister_getCurrencies\"(cashregisterid, loginname));\n"
+						+ "								   	FROM soberano.\"fn_CashRegister_getCurrencies\"(cashregisterid, excludeCash, loginname));\n"
 						+ "	END;\n"
 						+ "$BODY$;",
 						
@@ -8471,7 +8474,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	lang character,\n"
 						+ "	orderid integer,\n"
 						+ "	loginname character varying)\n"
-						+ "    RETURNS TABLE(\"orderId\" integer, \"orderLabel\" character varying, counters text, customer text, \"deliverTo\" text, \"orderDiscount\" numeric, \"orderAmount\" numeric, category character varying, description character varying, \"processRunId\" integer, \"productName\" character varying, \"productQuantity\" numeric, \"productUnit\" character varying, \"orderedRuns\" numeric, \"canceledRuns\" numeric, \"discountedRuns\" numeric, \"endedRuns\" numeric, currency character varying, stage character varying, \"oneRunQuantity\" numeric, \"inventoryItemCode\" character varying) \n"
+						+ "    RETURNS TABLE(\"orderId\" integer, \"orderLabel\" character varying, counters text, customer text, \"customerId\" integer, \"deliverTo\" text, \"orderDiscount\" numeric, \"orderAmount\" numeric, category character varying, description character varying, \"processRunId\" integer, \"productName\" character varying, \"productQuantity\" numeric, \"productUnit\" character varying, \"orderedRuns\" numeric, \"canceledRuns\" numeric, \"discountedRuns\" numeric, \"endedRuns\" numeric, currency character varying, stage character varying, \"oneRunQuantity\" numeric, \"inventoryItemCode\" character varying) \n"
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
@@ -8486,6 +8489,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						o.\"This_is_identified_by_Label\",\n"
 						+ "						occ.counters,\n"
 						+ "						c.\"This_has_FirstName\" || ' ' || c.\"This_has_LastName\" || ' : ' || cdata.\"This_includes_EmailAddress\",\n"
+						+ "						c.\"CustomerHasCustomerId\",\n"
 						+ "						'Tel: ' || ddata.\"This_includes_PhoneNumber\" || chr(13) ||\n"
 						+ "						'Email: ' || ddata.\"This_includes_EmailAddress\" || chr(13) ||\n"
 						+ "						'Address: ' || addr.\"This_includes_AddressString\" || ', ' || \n"
@@ -8575,6 +8579,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							o.\"This_is_identified_by_Label\",\n"
 						+ "							occ.counters,\n"
 						+ "							c.\"This_has_FirstName\" || ' ' || c.\"This_has_LastName\" || ' : ' || cdata.\"This_includes_EmailAddress\",\n"
+						+ "							c.\"CustomerHasCustomerId\",\n"
 						+ "							o.\"This_is_granted_a_DiscountRate\",\n"
 						+ "							cat.\"This_has_Name\",\n"
 						+ "							opr.\"This_has_Description\",\n"

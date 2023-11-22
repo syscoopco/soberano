@@ -13,13 +13,14 @@ import co.syscoop.soberano.util.ZKUtilitity;
 
 public class CashRegisterInitiator implements Initiator, InitiatorExt {
 	
-	Integer cashRegisterId = 1;
+	private Integer cashRegisterId = 1;
+	private Integer orderId = 0;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
 			CashRegisterFormHelper form = new CashRegisterFormHelper();
-			form.initForm((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), cashRegisterId);
+			form.initForm((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), cashRegisterId, orderId);
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
@@ -39,10 +40,17 @@ public class CashRegisterInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			cashRegisterId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
+			if (ZKUtilitity.splitQuery().get("crid") == null) {
+				cashRegisterId = 1;
+			}
+			else {
+				cashRegisterId = Integer.parseInt(ZKUtilitity.splitQuery().get("crid").get(0));
+			}
+			orderId = Integer.parseInt(ZKUtilitity.splitQuery().get("oid").get(0));
 		}
 		catch(Exception ex) {
 			cashRegisterId = 1; 
+			orderId = null; 
 		}
 	}
 }

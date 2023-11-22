@@ -37,6 +37,9 @@ public class CashRegisterComposer extends SelectorComposer {
 	private Intbox intSelectedCashRegister;
 	
 	@Wire
+	private Intbox intSelectedOrder;
+	
+	@Wire
 	private Textbox txtSelectedCurrencyCode;
 	
 	@Wire
@@ -47,6 +50,12 @@ public class CashRegisterComposer extends SelectorComposer {
 	
 	@Wire
 	private Decimalbox decCounted;
+	
+	@Wire
+	private Decimalbox decToCollect;
+	
+	@Wire
+	private Decimalbox decChange;
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
@@ -61,7 +70,7 @@ public class CashRegisterComposer extends SelectorComposer {
 		Decimalbox decEnteredAmount = (Decimalbox) txtSelectedCurrencyCode.query("#decEnteredAmount" + txtSelectedCurrencyCode.getValue());
 		decEnteredAmount.setValue(decEnteredAmount.getValue().add(decInput.getValue()));
 		CashRegister cashRegister = new CashRegister(intSelectedCashRegister.getValue());
-		List<Object> currencies = cashRegister.getCurrencies();
+		List<Object> currencies = cashRegister.getCurrencies(false);
 		BigDecimal totalEnteredAmountInSystemCurrency = new BigDecimal(0.0);
 		for (Object item : currencies) {
 			String currCode = ((Currency) item).getStringId();
@@ -70,7 +79,8 @@ public class CashRegisterComposer extends SelectorComposer {
 			totalEnteredAmountInSystemCurrency = totalEnteredAmountInSystemCurrency.add(decEnteredAmount.getValue().multiply(currExchRate));
 		}
 		decCounted.setValue(totalEnteredAmountInSystemCurrency);
-		decInput.setValue(new BigDecimal(0.0));		
+		decInput.setValue(new BigDecimal(0.0));
+		decChange.setValue(decCounted.getValue().subtract(decToCollect.getValue()));
 		txtInputExpression.setValue("");
 	}
 
@@ -94,7 +104,10 @@ public class CashRegisterComposer extends SelectorComposer {
 	@Listen("onClick = button#btnClear")
     public void btnClear_onClick() throws SoberanoException {
 		
-		Executions.sendRedirect("/cash_register.zul?id=" + intSelectedCashRegister.getValue().toString());
+		if (intSelectedOrder.getValue() > 0) 
+			Executions.sendRedirect("/cash_register.zul?id=" + intSelectedCashRegister.getValue() + "&oid=" + intSelectedOrder.getValue());
+		else
+			Executions.sendRedirect("/cash_register.zul?id=" + intSelectedCashRegister.getValue());
     }
 	
 	@Listen("onChange = textbox#txtInputExpression")

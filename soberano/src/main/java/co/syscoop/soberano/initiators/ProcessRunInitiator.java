@@ -39,7 +39,12 @@ public class ProcessRunInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			processRunId = Integer.parseInt(ZKUtilitity.parseURLQueryStringForParam("id"));
+			if (ZKUtilitity.splitQuery().get("id") == null) {
+				processRunId = 0; 
+			}
+			else {
+				processRunId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
+			}
 		}
 		catch(Exception ex) {
 			processRunId = 0; 
