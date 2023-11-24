@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -18,6 +19,7 @@ import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Hlayout;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
@@ -44,7 +46,6 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 	private void showOrderCollectingComponents(Window wndContentPanel, CashRegister cashRegister, Integer orderId) throws SQLException {
 		
 		if (orderId != null) {
-			wndContentPanel.query("#hboxToCollect").setVisible(true);
 			((Intbox) wndContentPanel.query("#intSelectedOrder")).setValue(orderId);
 			wndContentPanel.query("#hboxChange").setVisible(true);
 			Hbox hboxDecisionButtons = (Hbox) wndContentPanel.getParent().query("#incSouth").query("#hboxDecisionButtons");
@@ -53,8 +54,6 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			hboxDecisionButtons.query("#btnCount").setVisible(false);
 			Hbox hboxCustomer = (Hbox) hboxDecisionButtons.query("#hboxCustomer");
 			hboxCustomer.setVisible(true);
-			Button btnCollect = (Button) hboxDecisionButtons.query("#btnCollect");
-			btnCollect.setVisible(true);
 			
 			List<Object> noCashcurrencies = cashRegister.getCurrencies(true);
 			for (Object item : noCashcurrencies) {
@@ -78,9 +77,17 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			}
 			Order order = new Order(orderId);
 			order.get();
-			((Decimalbox) wndContentPanel.query("#decToCollect")).setValue(order.getAmount());
+			((Decimalbox) wndContentPanel.query("#decToCollect")).setValue(order.getAmountToCollect());
 			if (order.getCustomer() != 0) {
 				ZKUtilitity.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
+			}
+			if (!order.wasCollected()) {
+				wndContentPanel.query("#hboxToCollect").setVisible(false);
+				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(false);
+			}
+			else {
+				wndContentPanel.query("#hboxToCollect").setVisible(true); 
+				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(true);
 			}
 		}
 	}
@@ -282,10 +289,47 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
-	public Integer collect(Box boxDetails) {
+	public String collect(Box boxDetails) throws WrongValueException, Exception {
 		
-		//TODO
-		return 0;
+		Decimalbox decCounted = (Decimalbox) boxDetails.query("#decCounted");
+		Decimalbox decToCollect = (Decimalbox) boxDetails.query("#decToCollect");
+		String ticket = "";
+		
+		//not enough money entered
+		if (decCounted.getValue().compareTo(decToCollect.getValue()) < 0) {
+			
+			Combobox cmbCustomer = ((Combobox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#cmbCustomer"));
+			
+			//customer left in blank
+			if (cmbCustomer.getSelectedItem() == null) {
+				Messagebox.show(Labels.getLabel("message.validation.selectADebtor"), 
+								Labels.getLabel("messageBoxTitle.Warning"),
+								0,
+								Messagebox.EXCLAMATION);
+			}
+		}
+		else {
+			if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
+				fillAmounts(boxDetails, false);			
+				ticket = (new Order().collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
+												((Intbox) boxDetails.query("#intSelectedOrder")).getValue(),
+												currencyIds, 
+												amounts));
+				if (ticket.equals("-1")) {
+					throw new NotEnoughRightsException();						
+				}
+				if (ticket.equals("-2")) {
+					throw new DisabledCurrencyException();
+				}
+				requestedAction = ActionRequested.NONE;
+			}
+			else {
+				requestedAction = ActionRequested.RECORD;
+				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCollect")).setLabel(Labels.getLabel("caption.action.confirm"));
+				throw new ConfirmationRequiredException();
+			}		
+		}
+		return ticket;
 	}
 
 	public ArrayList<BigDecimal> getAmounts() {

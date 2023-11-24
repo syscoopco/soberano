@@ -66,6 +66,7 @@
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
 					<decimalbox id="decAmountTop" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<label id="lblCurrencyTop" value=""></label>
 					<separator></separator>
 				</hbox>	
 			</hbox>
@@ -83,6 +84,7 @@
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
 					<decimalbox id="decAmountBottom" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<label id="lblCurrencyBottom" value=""></label>
 					<separator></separator>
 				</hbox>	
 			</hbox>

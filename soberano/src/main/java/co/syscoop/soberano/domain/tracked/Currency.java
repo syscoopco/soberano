@@ -15,6 +15,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
+import co.syscoop.soberano.exception.OrdersOngoingException;
 
 public class Currency extends TrackedObject {
 
@@ -115,6 +116,9 @@ public class Currency extends TrackedObject {
 		modifyParameters.addValue("paymentProcessor", this.getPaymentProcessor());
 		
 		Integer qryResult = super.modify();
+		if (qryResult == -2) {
+			throw new OrdersOngoingException();
+		}
 		return qryResult >= 0 ? qryResult : -1;
 	}
 	

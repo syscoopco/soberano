@@ -9,6 +9,7 @@ import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OrdersOngoingException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ProcessRunningException;
 import co.syscoop.soberano.exception.RunningOutOfInventoryException;
@@ -53,6 +54,8 @@ public class ExceptionTreatment {
 				throw new DuplicateKeyException("");			
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrdersOngoingException"))
+				throw new OrdersOngoingException(ex);	
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))
 				throw new PasswordsMustMatchException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ProcessRunningException"))

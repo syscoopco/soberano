@@ -16,6 +16,7 @@ import org.zkoss.util.Locales;
 import co.syscoop.soberano.database.relational.OrderMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
+import co.syscoop.soberano.database.relational.QueryStringResultMapper;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
@@ -29,9 +30,16 @@ public class Order extends BusinessActivityTrackedObject {
 	private String customerStr = "";
 	private String deliverTo = "";
 	private Integer discount = 0;
-	private BigDecimal amount = new BigDecimal(0);	
+	private BigDecimal amount = new BigDecimal(0); //in order currency
+	private BigDecimal collectedAmount = new BigDecimal(0); //in order currency
+	private BigDecimal amountToCollect = new BigDecimal(0); //in current system currency
 	private ArrayList<String> categories = new ArrayList<String>();
 	private String stage = "";
+	private Boolean collected = false;
+	
+	//currently it's prevented to change the system currency while some order is ongoing (RULE_CONSTRAINT_15), so
+	//order's process runs share the currency
+	private String currencyCode = "";
 	
 	//the key is a category
 	private HashMap<String, ArrayList<String>> descriptions = new HashMap<String, ArrayList<String>>();
@@ -47,7 +55,10 @@ public class Order extends BusinessActivityTrackedObject {
 				String deliverTo,
 				Integer orderDiscount,
 				BigDecimal orderAmount,
-				String stage) {
+				BigDecimal collectedAmount,
+				BigDecimal amountToCollect,
+				String stage,
+				Boolean wasCollected) {
 		super(id);
 		this.label = label;
 		this.countersStr = counters;
@@ -56,7 +67,10 @@ public class Order extends BusinessActivityTrackedObject {
 		this.deliverTo = deliverTo;
 		this.discount = orderDiscount;
 		this.amount = orderAmount;
+		this.collectedAmount = collectedAmount;
+		this.amountToCollect = amountToCollect;
 		this.stage = stage;
+		this.collected = wasCollected;
 	}
 	
 	public Order() {
@@ -113,7 +127,10 @@ public class Order extends BusinessActivityTrackedObject {
 	        							rs.getString("deliverTo"),
 	        							rs.getInt("orderDiscount"),
 	        							rs.getBigDecimal("orderAmount"),
-	        							Labels.getLabel("translation.stage." + rs.getString("stage")));
+	        							rs.getBigDecimal("collectedAmount"),
+	        							rs.getBigDecimal("amountToCollect"),
+	        							Labels.getLabel("translation.stage." + rs.getString("stage")),
+	        							rs.getBoolean("wasCollected"));
 	        	}
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
@@ -140,6 +157,11 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setDiscountedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("discountedRuns"));
 	        	orderItem.setEndedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("endedRuns"));	
 	        	orderItem.setCurrency(processRunId == 0 ? "" : rs.getString("currency"));
+	        	
+	        	//currently it's prevented to change the system currency while some order is ongoing (RULE_CONSTRAINT_15), so
+	        	//order's process runs share the currency
+	        	order.setCurrencyCode(orderItem.getCurrency());
+	        	
 	        	orderItem.setOneRunQuantity(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("oneRunQuantity"));
 	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
 	        }
@@ -176,8 +198,12 @@ public class Order extends BusinessActivityTrackedObject {
 		setDeliverTo((sourceOrder).getDeliverTo());
 		setDiscount((sourceOrder).getDiscount());
 		setAmount((sourceOrder).getAmount());
+		setCollectedAmount((sourceOrder).getCollectedAmount());
+		setAmountToCollect((sourceOrder).getAmountToCollect());
+		setCurrencyCode((sourceOrder).getCurrencyCode());
 		setCategories((sourceOrder).getCategories());
 		setStage((sourceOrder).getStage());
+		setCollected((sourceOrder).wasCollected());
 		setDescriptions((sourceOrder).getDescriptions());
 		setOrderItems((sourceOrder).getOrderItems());
 	}
@@ -267,10 +293,12 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	//retrieve amount in order currency
 	public BigDecimal retrieveAmount() throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_Order_getAmount\"(:orderId, "
+							+ "								:systemCurrency,"
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("orderId", this.getId());
@@ -310,6 +338,27 @@ public class Order extends BusinessActivityTrackedObject {
 		
 		String qryStr = "SELECT * FROM soberano.\"fn_Order_getOngoing\"(:lang, :loginname)";	
 		return query(qryStr, trackedObjectDao.addLoginname(qryStr, getAllQueryNamedParameters), new OrderMapper());
+	}
+	
+	public String collect(Integer cashRegisterId,
+							Integer orderId,
+							ArrayList<Integer> currencyIds, 
+							ArrayList<BigDecimal> amounts) throws SQLException, Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_collect\"(:cashRegisterId, "
+				+ "											:orderId, "
+				+ "											:currencyIds, "
+				+ "											:amounts, "
+				+ "											:loginname) AS queryresult";
+		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("cashRegisterId", cashRegisterId);
+		parametersMap.put("orderId", orderId);
+		parametersMap.put("currencyIds", createArrayOfSQLType("integer", currencyIds.toArray()));
+		parametersMap.put("amounts", createArrayOfSQLType("numeric", amounts.toArray()));
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (String) super.query(qryStr, parametersMap, new QueryStringResultMapper()).get(0);
 	}
 	
 	public ArrayList<String> getCounters() {
@@ -406,5 +455,37 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setStage(String stage) {
 		this.stage = stage;
+	}
+
+	public BigDecimal getCollectedAmount() {
+		return collectedAmount;
+	}
+
+	public void setCollectedAmount(BigDecimal collectedAmount) {
+		this.collectedAmount = collectedAmount;
+	}
+
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
+	}
+
+	public BigDecimal getAmountToCollect() {
+		return amountToCollect;
+	}
+
+	public void setAmountToCollect(BigDecimal amountToCollect) {
+		this.amountToCollect = amountToCollect;
+	}
+
+	public Boolean wasCollected() {
+		return collected;
+	}
+
+	public void setCollected(Boolean collected) {
+		this.collected = collected;
 	}
 }

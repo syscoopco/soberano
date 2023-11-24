@@ -657,8 +657,10 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 		((Intbox) wndContentPanel.query("#intDiscountTop")).setValue(order.getDiscount());
 		((Decimalbox) wndContentPanel.query("#decAmountTop")).setValue(order.getAmount());
+		((Label) wndContentPanel.query("#lblCurrencyTop")).setValue(order.getCurrencyCode());
 		((Intbox) wndContentPanel.query("#intDiscountBottom")).setValue(order.getDiscount());
 		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
+		((Label) wndContentPanel.query("#lblCurrencyBottom")).setValue(order.getCurrencyCode());
 		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
 		
 		return order;

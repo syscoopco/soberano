@@ -10,6 +10,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OrdersOngoingException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ProcessRunningException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -76,6 +77,12 @@ public class ModifyButtonComposer extends SelectorComposer {
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
+		}
+		catch(OrdersOngoingException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.thereCanNotBeOngoingOrdersToProceed"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(PasswordsMustMatchException ex) {
 			ExceptionTreatment.logAndShow(ex, 

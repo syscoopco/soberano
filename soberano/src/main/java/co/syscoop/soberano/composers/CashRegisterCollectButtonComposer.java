@@ -1,10 +1,12 @@
 package co.syscoop.soberano.composers;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
@@ -19,7 +21,7 @@ import co.syscoop.soberano.vocabulary.Labels;
 public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObjectRecordButtonComposer {
 	
 	@Wire
-	private Button btnDeposit;
+	private Button btnCollect;
 	
 	public CashRegisterCollectButtonComposer() {
 		super((BusinessActivityTrackedObjectFormHelper) new CashRegisterFormHelper());
@@ -29,19 +31,22 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-          boxDetails = (Box) btnDeposit.query("#wndContentPanel").query("#boxDetails");
+          boxDetails = (Box) btnCollect.query("#wndContentPanel").query("#boxDetails");
     }
 	
 	@Listen("onClick = button#btnCollect")
     public void btnCollect_onClick() throws Throwable {
 		
 		try{
-			//TODO
+			String ticket = ((CashRegisterFormHelper) trackedObjectFormHelper).collect(boxDetails);
 			
-			((CashRegisterFormHelper) trackedObjectFormHelper).deposit(boxDetails, false);
+			if (!ticket.isEmpty()) {
+				//TODO: print ticket
+			}				
 			
-			//clean form
-			trackedObjectFormHelper.cleanForm(boxDetails);
+			Executions.sendRedirect("/cash_register.zul?id=" + 
+					((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue().toString() + "&oid=" +
+					((Intbox) boxDetails.query("#intSelectedOrder")).getValue().toString());
 		}
 		catch(ConfirmationRequiredException ex) {
 			return;

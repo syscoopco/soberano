@@ -80,5 +80,6 @@
 		<button id="btnNew" label="+" href="/new_customer.zul" sclass="BarButton NewButton"></button>		
 	</hbox>
 	<separator></separator>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
 	<button id="btnCollect" visible="false" self="@define(decisionButton)" label="${labels.caption.action.collect}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CashRegisterCollectButtonComposer"></button>
 </zk>
