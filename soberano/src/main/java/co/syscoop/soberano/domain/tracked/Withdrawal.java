@@ -58,6 +58,7 @@ public class Withdrawal extends BusinessActivityTrackedObject {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		recordQuery = "SELECT soberano.\"fn_Withdrawal_create\"(:cashRegister, "
+				+ "											:excludeCash, "
 				+ "											:order, "
 				+ "											:receivable, "
 				+ "											:currencyIds, "
@@ -65,6 +66,7 @@ public class Withdrawal extends BusinessActivityTrackedObject {
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("cashRegister", this.getCashRegister());
+		recordParameters.addValue("excludeCash", false);
 		recordParameters.addValue("order", this.getOrder());
 		recordParameters.addValue("receivable", this.getReceivable());
 		recordParameters.addValue("currencyIds", createArrayOfSQLType("integer", this.currencyIds.toArray()));

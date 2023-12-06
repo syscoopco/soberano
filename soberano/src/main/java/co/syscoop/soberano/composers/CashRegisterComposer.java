@@ -80,7 +80,10 @@ public class CashRegisterComposer extends SelectorComposer {
 		}
 		decCounted.setValue(totalEnteredAmountInSystemCurrency);
 		decInput.setValue(new BigDecimal(0.0));
-		decChange.setValue(decCounted.getValue().subtract(decToCollect.getValue()));
+		if (decCounted.getValue().subtract(decToCollect.getValue()).compareTo(new BigDecimal(0)) < 0) {
+			decChange.setValue(new BigDecimal(0));
+		}
+		else decChange.setValue(decCounted.getValue().subtract(decToCollect.getValue()));
 		txtInputExpression.setValue("");
 	}
 

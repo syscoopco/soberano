@@ -52,11 +52,13 @@ public class Balancing extends BusinessActivityTrackedObject {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		recordQuery = "SELECT soberano.\"fn_Balancing_create\"(:cashRegister, "
+				+ "											:excludeCash, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("cashRegister", this.getCashRegister());
+		recordParameters.addValue("excludeCash", false);
 		recordParameters.addValue("currencyIds", createArrayOfSQLType("integer", this.currencyIds.toArray()));
 		recordParameters.addValue("amounts", createArrayOfSQLType("numeric", this.amounts.toArray()));
 		

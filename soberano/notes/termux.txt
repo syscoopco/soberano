@@ -115,24 +115,15 @@ execute the following commands:
 
 	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -a -f soberano.user.top.ldif
 	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -f pwdpolicies.ldif
-
 	
-
-		
-		
-		
-		
-
-
-	
-17) In the mobile device, enable LAN capabilities. This can be done by Wifi portable hotspot,
+19) In the mobile device, enable LAN capabilities. This can be done by Wifi portable hotspot,
 	or USB/Bluetooth tethering.
 
-18) Restore an up-to-date soberano database. This can be done by means of PgAdmin.
+20) Restore an up-to-date soberano database. This can be done by means of PgAdmin.
 
-  ) By means of Play Store, install RawBT print service version 5.70.2 or higher.
+21) By means of Play Store, install RawBT print service version 5.70.2 or higher.
   
-  ) Enable RawBT web socket service, and application auto start. 
+22) Enable RawBT web socket service, and application auto start. 
 
 
 		

@@ -7,8 +7,11 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
+import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
+import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.ProcessRunningException;
@@ -48,12 +51,18 @@ public class ExceptionTreatment {
 				throw new AtLeastOneInventoryItemMustBeMovedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.CurrencyHasBalanceException"))
 				throw new CurrencyHasBalanceException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DebtorRequiredException"))
+				throw new DebtorRequiredException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DisabledCurrencyException"))
 				throw new DisabledCurrencyException(ex);
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
 				throw new DuplicateKeyException("");			
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrderAlreadyCollectedException"))
+				throw new OrderAlreadyCollectedException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrderCanceledException"))
+				throw new OrderCanceledException(ex);	
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrdersOngoingException"))
 				throw new OrdersOngoingException(ex);	
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.PasswordsMustMatchException"))

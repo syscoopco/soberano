@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
-import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
@@ -24,15 +23,23 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
+import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.domain.tracked.Balancing;
 import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.tracked.Deposit;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Withdrawal;
+import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.enums.Stage;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
+import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
+import co.syscoop.soberano.exception.OrderCanceledException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
+import co.syscoop.soberano.exception.UndeterminedErrorException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
@@ -81,13 +88,14 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (order.getCustomer() != 0) {
 				ZKUtilitity.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
 			}
-			if (!order.wasCollected()) {
-				wndContentPanel.query("#hboxToCollect").setVisible(false);
-				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(false);
+			if (order.getStageId() == Stage.ONGOING || order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
+				wndContentPanel.query("#hboxToCollect").setVisible(true);
+				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(true);
 			}
 			else {
-				wndContentPanel.query("#hboxToCollect").setVisible(true); 
-				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(true);
+				wndContentPanel.query("#hboxToCollect").setVisible(false); 
+				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(false);
+				if (order.getStageId() != Stage.CANCELED)   ((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
 			}
 		}
 	}
@@ -289,16 +297,14 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
-	public String collect(Box boxDetails) throws WrongValueException, Exception {
+	public QueryResultWithReport collect(Box boxDetails) throws Exception {
 		
-		Decimalbox decCounted = (Decimalbox) boxDetails.query("#decCounted");
-		Decimalbox decToCollect = (Decimalbox) boxDetails.query("#decToCollect");
-		String ticket = "";
+		Combobox cmbCustomer = ((Combobox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#cmbCustomer"));
+		QueryResultWithReport qrwr;
 		
 		//not enough money entered
-		if (decCounted.getValue().compareTo(decToCollect.getValue()) < 0) {
-			
-			Combobox cmbCustomer = ((Combobox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#cmbCustomer"));
+		if (((Decimalbox) boxDetails.query("#decCounted")).getValue().
+				compareTo(((Decimalbox) boxDetails.query("#decToCollect")).getValue()) < 0) {
 			
 			//customer left in blank
 			if (cmbCustomer.getSelectedItem() == null) {
@@ -308,28 +314,64 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 								Messagebox.EXCLAMATION);
 			}
 		}
-		else {
-			if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-				fillAmounts(boxDetails, false);			
-				ticket = (new Order().collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
-												((Intbox) boxDetails.query("#intSelectedOrder")).getValue(),
-												currencyIds, 
-												amounts));
-				if (ticket.equals("-1")) {
-					throw new NotEnoughRightsException();						
-				}
-				if (ticket.equals("-2")) {
-					throw new DisabledCurrencyException();
-				}
-				requestedAction = ActionRequested.NONE;
+		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
+			fillAmounts(boxDetails, false);			
+			qrwr = (new Order().collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
+										((Intbox) boxDetails.query("#intSelectedOrder")).getValue(),
+										currencyIds, 
+										amounts,
+										cmbCustomer.getSelectedItem() == null ? null : ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId()));
+			if (qrwr.getResult() == -1) {
+				throw new NotEnoughRightsException();						
 			}
-			else {
-				requestedAction = ActionRequested.RECORD;
-				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCollect")).setLabel(Labels.getLabel("caption.action.confirm"));
-				throw new ConfirmationRequiredException();
-			}		
+			if (qrwr.getResult() == -2) {
+				throw new DisabledCurrencyException();
+			}
+			if (qrwr.getResult() == -3) {
+				throw new DebtorRequiredException();
+			}
+			if (qrwr.getResult() == -4) {
+				throw new OrderAlreadyCollectedException();
+			}
+			if (qrwr.getResult() == -5) {
+				throw new OrderCanceledException();
+			}
+			if (qrwr.getResult() == null) {
+				throw new UndeterminedErrorException();
+			}
+			requestedAction = ActionRequested.NONE;
 		}
-		return ticket;
+		else {
+			requestedAction = ActionRequested.RECORD;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCollect")).setLabel(Labels.getLabel("caption.action.confirm"));
+			throw new ConfirmationRequiredException();
+		}
+		return qrwr;
+	}
+	
+	public QueryResultWithReport cancel(Box boxDetails) throws Exception {
+		
+		QueryResultWithReport qrwr;
+		
+		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
+			qrwr = (new Order().cancel(((Intbox) boxDetails.query("#intSelectedOrder")).getValue()));
+			if (qrwr.getResult() == -1) {
+				throw new NotEnoughRightsException();						
+			}
+			if (qrwr.getResult() == -2) {
+				throw new ShiftHasBeenClosedException();
+			}			
+			if (qrwr.getResult() == null) {
+				throw new UndeterminedErrorException();
+			}
+			requestedAction = ActionRequested.NONE;
+		}
+		else {
+			requestedAction = ActionRequested.RECORD;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnCancel")).setLabel(Labels.getLabel("caption.action.confirm"));
+			throw new ConfirmationRequiredException();
+		}
+		return qrwr;
 	}
 
 	public ArrayList<BigDecimal> getAmounts() {

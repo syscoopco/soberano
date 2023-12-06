@@ -8,9 +8,14 @@ import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
+
+import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
+import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
+import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
@@ -38,9 +43,9 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
     public void btnCollect_onClick() throws Throwable {
 		
 		try{
-			String ticket = ((CashRegisterFormHelper) trackedObjectFormHelper).collect(boxDetails);
+			QueryResultWithReport qrwr = ((CashRegisterFormHelper) trackedObjectFormHelper).collect(boxDetails);
 			
-			if (!ticket.isEmpty()) {
+			if (!qrwr.getReport().isEmpty()) {
 				//TODO: print ticket
 			}				
 			
@@ -50,6 +55,12 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 		}
 		catch(ConfirmationRequiredException ex) {
 			return;
+		}
+		catch(DebtorRequiredException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.selectADebtor"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(DisabledCurrencyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
@@ -68,6 +79,18 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
+		}
+		catch(OrderAlreadyCollectedException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.orderAlreadyCollected"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(OrderCanceledException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.orderCanceled"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(SomeFieldsContainWrongValuesException ex) {
 			ExceptionTreatment.logAndShow(ex, 

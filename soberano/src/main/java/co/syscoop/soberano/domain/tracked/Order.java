@@ -16,8 +16,10 @@ import org.zkoss.util.Locales;
 import co.syscoop.soberano.database.relational.OrderMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
-import co.syscoop.soberano.database.relational.QueryStringResultMapper;
+import co.syscoop.soberano.database.relational.QueryResultWithReport;
+import co.syscoop.soberano.database.relational.QueryResultWithReportMapper;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
+import co.syscoop.soberano.enums.Stage;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -35,7 +37,7 @@ public class Order extends BusinessActivityTrackedObject {
 	private BigDecimal amountToCollect = new BigDecimal(0); //in current system currency
 	private ArrayList<String> categories = new ArrayList<String>();
 	private String stage = "";
-	private Boolean collected = false;
+	private Stage stageId = Stage.ONGOING;
 	
 	//currently it's prevented to change the system currency while some order is ongoing (RULE_CONSTRAINT_15), so
 	//order's process runs share the currency
@@ -58,7 +60,7 @@ public class Order extends BusinessActivityTrackedObject {
 				BigDecimal collectedAmount,
 				BigDecimal amountToCollect,
 				String stage,
-				Boolean wasCollected) {
+				Stage stageId) {
 		super(id);
 		this.label = label;
 		this.countersStr = counters;
@@ -70,7 +72,7 @@ public class Order extends BusinessActivityTrackedObject {
 		this.collectedAmount = collectedAmount;
 		this.amountToCollect = amountToCollect;
 		this.stage = stage;
-		this.collected = wasCollected;
+		this.stageId = stageId;
 	}
 	
 	public Order() {
@@ -130,7 +132,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        							rs.getBigDecimal("collectedAmount"),
 	        							rs.getBigDecimal("amountToCollect"),
 	        							Labels.getLabel("translation.stage." + rs.getString("stage")),
-	        							rs.getBoolean("wasCollected"));
+	        							Stage.values()[rs.getInt("stageId")]);
 	        	}
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
@@ -203,7 +205,7 @@ public class Order extends BusinessActivityTrackedObject {
 		setCurrencyCode((sourceOrder).getCurrencyCode());
 		setCategories((sourceOrder).getCategories());
 		setStage((sourceOrder).getStage());
-		setCollected((sourceOrder).wasCollected());
+		setStageId((sourceOrder).getStageId());
 		setDescriptions((sourceOrder).getDescriptions());
 		setOrderItems((sourceOrder).getOrderItems());
 	}
@@ -340,25 +342,42 @@ public class Order extends BusinessActivityTrackedObject {
 		return query(qryStr, trackedObjectDao.addLoginname(qryStr, getAllQueryNamedParameters), new OrderMapper());
 	}
 	
-	public String collect(Integer cashRegisterId,
+	public QueryResultWithReport collect(Integer cashRegisterId,
 							Integer orderId,
 							ArrayList<Integer> currencyIds, 
-							ArrayList<BigDecimal> amounts) throws SQLException, Exception {
+							ArrayList<BigDecimal> amounts,
+							Integer customer) throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_collect\"(:cashRegisterId, "
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_collect\"(:cashRegisterId, "
 				+ "											:orderId, "
+				+ "											:lang, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
+				+ "											:customer, "
 				+ "											:loginname) AS queryresult";
 		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("cashRegisterId", cashRegisterId);
 		parametersMap.put("orderId", orderId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());	
 		parametersMap.put("currencyIds", createArrayOfSQLType("integer", currencyIds.toArray()));
 		parametersMap.put("amounts", createArrayOfSQLType("numeric", amounts.toArray()));
+		parametersMap.put("customer", customer);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return (String) super.query(qryStr, parametersMap, new QueryStringResultMapper()).get(0);
+		return (QueryResultWithReport) super.query(qryStr, parametersMap, new QueryResultWithReportMapper()).get(0);
+	}
+	
+	public QueryResultWithReport cancel(Integer orderId) throws SQLException, Exception {
+
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_cancelOrder\"(:orderId, "
+		+ "													:loginname) AS queryresult";
+		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", orderId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (QueryResultWithReport) super.query(qryStr, parametersMap, new QueryResultWithReportMapper()).get(0);
 	}
 	
 	public ArrayList<String> getCounters() {
@@ -481,11 +500,11 @@ public class Order extends BusinessActivityTrackedObject {
 		this.amountToCollect = amountToCollect;
 	}
 
-	public Boolean wasCollected() {
-		return collected;
+	public Stage getStageId() {
+		return stageId;
 	}
 
-	public void setCollected(Boolean collected) {
-		this.collected = collected;
+	public void setStageId(Stage stageId) {
+		this.stageId = stageId;
 	}
 }

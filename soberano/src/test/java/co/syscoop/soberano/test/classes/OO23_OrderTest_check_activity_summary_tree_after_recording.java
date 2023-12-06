@@ -12,12 +12,12 @@ import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
-@Order(8)
+@Order(23)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class O8_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
+class OO23_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
