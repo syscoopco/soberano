@@ -2,6 +2,7 @@ package co.syscoop.soberano.test.helper;
 
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Textbox;
@@ -25,6 +26,11 @@ public class CashRegisterOperationForm extends ConstrainedForm {
 	private Button btnWithdraw;
 	private Button btnCount;
 	private Grid grd;
+	private Decimalbox decToCollect;
+	private Decimalbox decChange;
+	private Combobox cmbCustomer;
+	private Button btnCollect;
+	private Button btnCancel;
 
 	public CashRegisterOperationForm(DesktopAgent desktop,
 									Button btnmc3,
@@ -63,6 +69,55 @@ public class CashRegisterOperationForm extends ConstrainedForm {
 		this.setBtnWithdraw(btnWithdraw);
 		this.setBtnCount(btnCount);
 		this.grd = grd;
+	}
+	
+	public CashRegisterOperationForm(DesktopAgent desktop,
+			Button btnmc3,
+			Button btnmc5,
+			Button btnmc8,
+			Decimalbox decBalancemc3,
+			Decimalbox decBalancemc5,
+			Decimalbox decBalancemc8,
+			Decimalbox decEnteredAmountmc3,
+			Decimalbox decEnteredAmountmc5,
+			Decimalbox decEnteredAmountmc8,
+			Textbox txtInputExpression,
+			Decimalbox decInput,
+			Button btnCalc,
+			Decimalbox decCounted,
+			Button btnDeposit,
+			Button btnWithdraw,
+			Button btnCount,
+			Decimalbox decToCollect,
+			Decimalbox decChange,
+			Combobox cmbCustomer,
+			Button btnCollect,
+			Button btnCancel,
+			Grid grd) {
+
+		this(desktop,
+			btnmc3,
+			btnmc5,
+			btnmc8,
+			decBalancemc3,
+			decBalancemc5,
+			decBalancemc8,
+			decEnteredAmountmc3,
+			decEnteredAmountmc5,
+			decEnteredAmountmc8,
+			txtInputExpression,
+			decInput,
+			btnCalc,
+			decCounted,
+			btnDeposit,
+			btnWithdraw,
+			btnCount,
+			grd);
+		this.setDecToCollect(decToCollect);
+		this.setDecChange(decChange);
+		this.setCmbCustomer(cmbCustomer);
+		this.setBtnCollect(btnCollect);
+		this.setBtnCancel(btnCancel);
 	}
 
 	public Grid getGrd() {
@@ -199,5 +254,45 @@ public class CashRegisterOperationForm extends ConstrainedForm {
 
 	public void setBtnCount(Button btnCount) {
 		this.btnCount = btnCount;
+	}
+
+	public Combobox getCmbCustomer() {
+		return cmbCustomer;
+	}
+
+	public void setCmbCustomer(Combobox cmbCustomer) {
+		this.cmbCustomer = cmbCustomer;
+	}
+
+	public Button getBtnCollect() {
+		return btnCollect;
+	}
+
+	public void setBtnCollect(Button btnCollect) {
+		this.btnCollect = btnCollect;
+	}
+
+	public Button getBtnCancel() {
+		return btnCancel;
+	}
+
+	public void setBtnCancel(Button btnCancel) {
+		this.btnCancel = btnCancel;
+	}
+
+	public Decimalbox getDecToCollect() {
+		return decToCollect;
+	}
+
+	public void setDecToCollect(Decimalbox decToCollect) {
+		this.decToCollect = decToCollect;
+	}
+
+	public Decimalbox getDecChange() {
+		return decChange;
+	}
+
+	public void setDecChange(Decimalbox decChange) {
+		this.decChange = decChange;
 	}
 }

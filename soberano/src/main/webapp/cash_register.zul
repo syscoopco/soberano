@@ -65,7 +65,6 @@
 		<separator></separator>
 		<include id="incGrid" src="/cash_register_history.zul"></include>
 	</window>
-	<hlayout id="hlayDecisionBar" self="@define(decisionButton)" style="overflow: auto" width="100%"></hlayout>
 	<button id="btnDeposit" self="@define(decisionButton)" label="${labels.caption.action.deposit}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.DepositButtonComposer"></button>
 	<button id="btnWithdraw" self="@define(decisionButton)" label="${labels.caption.action.withdraw}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.WithdrawButtonComposer"></button>
 	<button id="btnCount" self="@define(decisionButton)" label="${labels.caption.action.count}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CountButtonComposer"></button>

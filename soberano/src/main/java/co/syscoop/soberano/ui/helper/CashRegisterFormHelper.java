@@ -91,11 +91,16 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (order.getStageId() == Stage.ONGOING || order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
 				wndContentPanel.query("#hboxToCollect").setVisible(true);
 				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(true);
+				if (order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
+					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
+				}
 			}
 			else {
 				wndContentPanel.query("#hboxToCollect").setVisible(false); 
 				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(false);
-				if (order.getStageId() != Stage.CANCELED)   ((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
+				if (order.getStageId() == Stage.CLOSED) {
+					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
+				}
 			}
 		}
 	}

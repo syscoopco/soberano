@@ -62,6 +62,11 @@ public class ActionTest {
 		btnCount.click();			
 	}
 	
+	protected void clickOnCollectButton(DesktopAgent desktop) {
+		ComponentAgent btnCollect = desktop.query("#incSouth").query("#btnCollect");
+		btnCollect.click();			
+	}
+	
 	protected void testNotEnoughRightsException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.NotEnoughRightsException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.NotEnoughRightsException can be caught here.");
@@ -132,5 +137,15 @@ public class ActionTest {
 	protected void testDisabledCurrencyException(Throwable ex) {
 		Throwable cause = ExceptionTreatment.getRootCause(ex);
 		assertEquals("co.syscoop.soberano.exception.DisabledCurrencyException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.DisabledCurrencyException can be caught here.");
+	}
+	
+	protected void testOrderAlreadyCollectedException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.OrderAlreadyCollectedException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.OrderAlreadyCollectedException can be caught here.");
+	}
+	
+	protected void testDebtorRequiredException(Throwable ex) {
+		Throwable cause = ExceptionTreatment.getRootCause(ex);
+		assertEquals("co.syscoop.soberano.exception.DebtorRequiredException", cause.getClass().getName(), "Only co.syscoop.soberano.exception.DebtorRequiredException can be caught here.");
 	}
 }
