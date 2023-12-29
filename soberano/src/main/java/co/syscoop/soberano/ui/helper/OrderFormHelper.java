@@ -332,29 +332,6 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 								}
 							}
 						});
-						
-						decCanceledButEndedItems.addEventListener("onClick", new EventListener() {
-
-							@Override
-							public void onEvent(Event event) throws Exception {
-								
-								try {
-									if (SpringUtility.underTesting()) updateCanceledButEndedItems(event);
-								}
-								catch(NotEnoughRightsException ex) {
-									ExceptionTreatment.logAndShow(ex, 
-											Labels.getLabel("message.permissions.NotEnoughRights"), 
-											Labels.getLabel("messageBoxTitle.Warning"),
-											Messagebox.EXCLAMATION);
-								}
-								catch(Exception ex)	{
-									ExceptionTreatment.logAndShow(ex, 
-											ex.getMessage(), 
-											Labels.getLabel("messageBoxTitle.Error"),
-											Messagebox.ERROR);
-								}
-							}
-						});
 																		
 						boxOi.appendChild(new Label("/"));					
 						

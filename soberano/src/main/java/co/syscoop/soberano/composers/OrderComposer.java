@@ -47,20 +47,29 @@ public class OrderComposer extends SelectorComposer {
 		
 		try {
 			Order order = new Order(intObjectId.getValue());
-			Integer discountToApply = intDiscountTop.getValue();
+			Integer discountToApply = top ? intDiscountTop.getValue() : intDiscountBottom.getValue();
 			if (discountToApply < 0) {
 				discountToApply = 0;
-				if (top) intDiscountTop.setValue(0); else intDiscountBottom.setValue(0);
+				if (top) 
+					intDiscountTop.setValue(0); 
+				else 
+					intDiscountBottom.setValue(0);
 			}
 			else if (discountToApply > 100) {
 				discountToApply = 100;
-				if (top) intDiscountTop.setValue(100); else intDiscountBottom.setValue(100);
+				if (top) 
+					intDiscountTop.setValue(100); 
+				else 
+					intDiscountBottom.setValue(100);
 			}
 			if (order.applyDiscount(discountToApply) == -1) {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				if (top) intDiscountBottom.setValue(discountToApply); else intDiscountTop.setValue(discountToApply);
+				if (top) 
+					intDiscountBottom.setValue(discountToApply); 
+				else 
+					intDiscountTop.setValue(discountToApply);
 				updateAmounts(order.retrieveAmount());				
 			}
 		}

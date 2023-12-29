@@ -1088,4 +1088,92 @@ class OO25_OrderTest_collect extends CashRegisterOperationActionTest {
 			fail(ex.getMessage());
 		}
 	}
+	
+	@Test
+	@Order(19)
+	final void testCase19() {
+
+		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/bill.zul?id=1004");
+		try {
+			ComponentAgent decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1013");
+			InputAgent decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+			
+			decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1014");
+			decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
+	
+	@Test
+	@Order(20)
+	final void testCase20() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/bill.zul?id=1004");
+		try {
+			ComponentAgent decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1013");
+			InputAgent decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+			
+			decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1014");
+			decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(21)
+	final void testCase21() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/bill.zul?id=1005");
+		try {
+			ComponentAgent decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1015");
+			InputAgent decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+			
+			decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1016");
+			decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	@Order(22)
+	final void testCase22() {
+
+		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/bill.zul?id=1008");
+		try {
+			ComponentAgent decCanceledButEndedItemsAgent = desktop.query("#wndContentPanel").query("#decCanceledButEndedItems1020");
+			InputAgent decCanceledButEndedItemsInputAgent = decCanceledButEndedItemsAgent.as(InputAgent.class);
+			decCanceledButEndedItemsInputAgent.type("3");
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
 }

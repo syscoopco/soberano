@@ -300,7 +300,6 @@ public class Order extends BusinessActivityTrackedObject {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_Order_getAmount\"(:orderId, "
-							+ "								:systemCurrency,"
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("orderId", this.getId());
