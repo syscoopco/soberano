@@ -19,6 +19,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
+import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.Utils;
@@ -59,10 +60,23 @@ public class CashRegisterComposer extends SelectorComposer {
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
-    	
+    	try {
           super.doAfterCompose(comp);
           SystemCurrencies sysCurrs = (new Currency()).getSystemCurrencies();
 			lblSystemCurrency.setValue(sysCurrs.getSystemCurrencyCode());
+    	}
+    	catch(NotCurrenciesConfiguredException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.error.NotCurrenciesConfiguredException"), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+		}
+    	catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.error.Undetermined"), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+		}
     }
 	
 	private void updateAmounts() throws SQLException {
