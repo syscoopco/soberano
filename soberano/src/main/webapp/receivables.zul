@@ -36,6 +36,8 @@
 	<vbox hflex="1">
 		<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
 			<columns sizable="true">
+				<column visible="false" sort="auto(receivableId)">
+				</column>
 				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)">
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.daysDelayed}" sort="auto(daysDelayed)" sortDirection="descending">

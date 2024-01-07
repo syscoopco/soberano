@@ -15,7 +15,7 @@ public class OrderExtractor implements ResultSetExtractor<List<Object>> {
 	@Override
 	public List<Object> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		
-		List<Object> processRunTableData = new ArrayList<Object>();
+		List<Object> orderTableData = new ArrayList<Object>();
 		OrderRowData orderRowData = null;
         while (rs.next()) {
         	orderRowData = new OrderRowData(rs.getInt("operationId"));
@@ -27,8 +27,8 @@ public class OrderExtractor implements ResultSetExtractor<List<Object>> {
         	orderRowData.setDescription(rs.getString("description"));
         	orderRowData.setHistory(rs.getString("history"));
         	orderRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
-        	processRunTableData.add(orderRowData);
+        	orderTableData.add(orderRowData);
         }
-        return processRunTableData;
+        return orderTableData;
 	}
 }

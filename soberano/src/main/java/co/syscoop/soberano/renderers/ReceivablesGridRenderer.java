@@ -3,6 +3,7 @@ package co.syscoop.soberano.renderers;
 import java.text.SimpleDateFormat;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
@@ -25,12 +26,15 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 		
 		ReceivableRowData receivable = (ReceivableRowData) data;
 		
+		//receivable id
+		row.appendChild(new Label(receivable.getReceivableId().toString()));
+		
 		//recording date
-		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		row.appendChild(new Label(dateFormat.format(receivable.getRecordingDate())));
 		
 		//days delayed
-		row.appendChild(new Label(receivable.getDaysDelayed()));
+		row.appendChild(new Label(receivable.getDaysDelayed().toString()));
 		
 		//customer
 		row.appendChild(new Label(receivable.getCustomer()));
@@ -39,7 +43,7 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(receivable.getDebtor()));
 		
 		//order
-		row.appendChild(new Label(receivable.getOrder()));
+		row.appendChild(new Label(receivable.getOrder().toString()));
 		
 		//amount due
 		row.appendChild(new Label(receivable.getAmountDue().toPlainString()));
@@ -53,6 +57,20 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setVflex("1");
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
+		Button btnCollect = new Button(Labels.getLabel("caption.action.collect"));
+		btnCollect.setWidth("90%");
+		btnCollect.setId(btnCollect.getUuid());
+		
+		//add listener to collect receivable
+		btnCollect.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				
+				Executions.getCurrent().sendRedirect("/cash_register.zul?oid=" + receivable.getOrder().toString(), "_blank");
+			}
+		});
+		
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
 		btnPrint.setWidth("90%");
 		btnPrint.setDisabled(true);
@@ -69,7 +87,7 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 
 				try {
 					if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
-						int result = (new Receivable(receivable.getId())).dishonor();
+						int result = (new Receivable(receivable.getReceivableId())).dishonor();
 						if (result == -1) {
 							throw new NotEnoughRightsException();
 						}
@@ -89,7 +107,8 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 				}
 			}
 		});
-				
+			
+		actionCell.appendChild(btnCollect);
 		actionCell.appendChild(btnPrint);
 		actionCell.appendChild(btnDishonor);
 		row.appendChild(actionCell);
