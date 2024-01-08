@@ -10225,6 +10225,33 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Receivable_getCount\"(\n"
+						+ "	lang character,\n"
+						+ "	\"delayedDays\" integer,\n"
+						+ "	customer integer,\n"
+						+ "	debtor integer,\n"
+						+ "	dishonored boolean,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "DECLARE\n"
+						+ "	count integer;\n"
+						+ "BEGIN\n"
+						+ "	SELECT COUNT(*) FROM soberano.\"fn_Receivable_getAll\"(lang, \n"
+						+ "														 \"delayedDays\",\n"
+						+ "														 customer,\n"
+						+ "														 debtor,\n"
+						+ "														 dishonored, \n"
+						+ "														 loginname) INTO count;\n"
+						+ "	RETURN count;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
 						////////////////////
 						// business facts //
 						////////////////////

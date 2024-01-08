@@ -15,11 +15,26 @@ public class Receivable extends BusinessActivityTrackedObject {
 	
 	public Receivable() {
 		getAllQuery = "SELECT * FROM soberano.\"" 
-							+ "fn_Receivable_getAll\"" 
-							+ "(:lang, :loginname)";
-		getCountQuery = "SELECT soberano.\"fn_Receivable_getCount\"(:lang, :loginname) AS count";
+							+ "fn_Receivable_getAll\"(:lang, "
+													+ ":delayedDays, "
+													+ ":custome, "
+													+ ":debto, "
+													+ ":dishonored, "
+													+ ":loginname)";
+		getCountQuery = "SELECT soberano.\"fn_Receivable_getCount\"(:lang, "
+																+ ":delayedDays, "
+																+ ":custome, "
+																+ ":debto, "
+																+ ":dishonored, "
+																+ ":loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
-		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
+		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());
+		
+		//filterable params 
+		getAllQueryNamedParameters.put("delayedDays", null);
+		getAllQueryNamedParameters.put("custome", null);
+		getAllQueryNamedParameters.put("debto", null);
+		getAllQueryNamedParameters.put("dishonored", null);
 	}
 	
 	public Receivable(Integer id) {

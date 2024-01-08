@@ -18,6 +18,7 @@ import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectMapper;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectMapperWithStringId;
+import co.syscoop.soberano.util.SQLQueryFilterParam;
 import co.syscoop.soberano.util.SpringUtility;
 
 /**
@@ -230,5 +231,11 @@ public abstract class TrackedObject extends DomainObject implements ITrackedObje
 
 	public void setPrinter(Integer printer) {
 		this.printer = printer;
+	}
+	
+	public void applyQueryAllFilter(ArrayList<SQLQueryFilterParam> getAllQueryFilterParams) {
+		for (SQLQueryFilterParam param : getAllQueryFilterParams) {
+			getAllQueryNamedParameters.put(param.getParamName(), param.getParamValue());
+		}
 	}
 }

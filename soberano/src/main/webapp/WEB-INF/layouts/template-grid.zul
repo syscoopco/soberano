@@ -8,7 +8,7 @@
 				<borderlayout>
 					<north self="@insert(inputForm)" sclass="DefaultBackground"  vflex="1"/>
 					<center autoscroll="true" sclass="DefaultBackground" vflex="1">
-						<window self="@insert(grid)"/>
+						<window id="wndGrid" self="@insert(grid)"/>
 					</center>					
 				</borderlayout>
 			</center>

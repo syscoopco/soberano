@@ -27,6 +27,7 @@ public class ReceivableExtractor implements ResultSetExtractor<List<Object>> {
         	receivableRowData.setAmountDue(rs.getBigDecimal("amountDue"));
         	receivableRowData.setHistory(rs.getString("history"));
         	receivableRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
+        	receivableTableData.add(receivableRowData);
         }
         return receivableTableData;
 	}

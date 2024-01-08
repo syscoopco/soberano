@@ -1,5 +1,6 @@
 package co.syscoop.soberano.models;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -8,6 +9,8 @@ import org.zkoss.zul.AbstractListModel;
 import org.zkoss.zul.FieldComparator;
 import org.zkoss.zul.event.ListDataEvent;
 import org.zkoss.zul.ext.Sortable;
+
+import co.syscoop.soberano.util.SQLQueryFilterParam;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class SoberanoAbstractListModel<T> extends AbstractListModel<T> implements Sortable<T>
@@ -19,6 +22,7 @@ public class SoberanoAbstractListModel<T> extends AbstractListModel<T> implement
 	protected boolean _ascending;
 	protected boolean _descending;
 	protected FieldComparator _sorting;
+	protected ArrayList<SQLQueryFilterParam> filterParams = null;
 	
 	public SoberanoAbstractListModel(String _orderBy, boolean _ascending, boolean _descending) {
 		this._orderBy = _orderBy;
@@ -73,5 +77,13 @@ public class SoberanoAbstractListModel<T> extends AbstractListModel<T> implement
 
 	public boolean is_descending() {
 		return _descending;
+	}
+	
+	public ArrayList<SQLQueryFilterParam> getFilterParams() {
+		return filterParams;
+	}
+
+	public void setFilterParams(ArrayList<SQLQueryFilterParam> filterParams) {
+		this.filterParams = filterParams;
 	}
 }
