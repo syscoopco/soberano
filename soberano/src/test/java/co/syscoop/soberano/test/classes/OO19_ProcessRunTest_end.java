@@ -33,7 +33,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(19)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO19_ProcessRunTest_end extends ProcessRunActionTest {

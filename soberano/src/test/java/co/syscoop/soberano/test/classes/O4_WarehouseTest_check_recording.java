@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O4_WarehouseTest_check_recording extends WarehouseActionTest {
 

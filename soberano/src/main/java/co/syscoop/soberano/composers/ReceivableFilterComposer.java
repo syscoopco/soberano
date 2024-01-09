@@ -11,12 +11,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Intbox;
 
-import com.syscoop.gastro.models.StockGridModel;
-import com.syscoop.gastro.renderers.InventoryGridRenderer;
-
 import co.syscoop.soberano.domain.tracked.Customer;
 import co.syscoop.soberano.models.ReceivablesGridModel;
-import co.syscoop.soberano.renderers.ReceivablesGridRenderer;
 import co.syscoop.soberano.util.SQLQueryFilterParam;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -56,7 +52,6 @@ public class ReceivableFilterComposer extends SelectorComposer {
 		model.setFilterParams(getFilterParamsArray());
 		Grid grd = (Grid) intDelayedDays.getParent().getParent().query("window").getParent().query("#wndGrid").query("#grd");
 		grd.setModel(model);
-		ReceivablesGridRenderer renderer = new ReceivablesGridRenderer();
 		grd.setRowRenderer(grd.getRowRenderer());
 		grd.invalidate();
 	}

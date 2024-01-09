@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(12)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO12_StockTest_check_following_material_expenses_recording extends StockActionTest {
