@@ -34,7 +34,7 @@ public class Receivable extends BusinessActivityTrackedObject {
 		getAllQueryNamedParameters.put("delayedDays", null);
 		getAllQueryNamedParameters.put("custome", null);
 		getAllQueryNamedParameters.put("debto", null);
-		getAllQueryNamedParameters.put("dishonored", null);
+		getAllQueryNamedParameters.put("dishonored", false);
 	}
 	
 	public Receivable(Integer id) {

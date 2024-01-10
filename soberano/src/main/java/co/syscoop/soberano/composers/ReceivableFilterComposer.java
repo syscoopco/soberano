@@ -11,7 +11,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Intbox;
 
-import co.syscoop.soberano.domain.tracked.Customer;
+import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.ReceivablesGridModel;
 import co.syscoop.soberano.util.SQLQueryFilterParam;
 
@@ -40,8 +40,8 @@ public class ReceivableFilterComposer extends SelectorComposer {
 		
 		ArrayList<SQLQueryFilterParam> params = new ArrayList<SQLQueryFilterParam>();
 		params.add(new SQLQueryFilterParam("delayedDays", intDelayedDays.getValue()));
-		params.add(new SQLQueryFilterParam("customer", cmbCustomer.getSelectedItem() != null ? ((Customer) cmbCustomer.getSelectedItem().getValue()).getId() : null));
-		params.add(new SQLQueryFilterParam("debtor", cmbDebtor.getSelectedItem() != null ? ((Customer) cmbDebtor.getSelectedItem().getValue()).getId() : null));
+		params.add(new SQLQueryFilterParam("custome", cmbCustomer.getSelectedItem() != null ? ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId() : null));
+		params.add(new SQLQueryFilterParam("debto", cmbDebtor.getSelectedItem() != null ? ((DomainObject) cmbDebtor.getSelectedItem().getValue()).getId() : null));
 		params.add(new SQLQueryFilterParam("dishonored", chkDishonored.isChecked()));
 		return params;
 	}
