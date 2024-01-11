@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
-import co.syscoop.soberano.database.relational.OrderMapper;
+import co.syscoop.soberano.database.relational.ActivityMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
@@ -337,8 +337,8 @@ public class Order extends BusinessActivityTrackedObject {
 	
 	public List<Object> getOngoing() throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_Order_getOngoing\"(:lang, :loginname)";	
-		return query(qryStr, trackedObjectDao.addLoginname(qryStr, getAllQueryNamedParameters), new OrderMapper());
+		String qryStr = "SELECT * FROM soberano.\"fn_Activity_getOngoing\"(:lang, :loginname)";	
+		return query(qryStr, trackedObjectDao.addLoginname(qryStr, getAllQueryNamedParameters), new ActivityMapper());
 	}
 	
 	public QueryResultWithReport collect(Integer cashRegisterId,

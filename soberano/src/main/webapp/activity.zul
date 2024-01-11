@@ -8,7 +8,7 @@
 	<label self="@define(pageTitle)" value="${labels.pageActivity.WindowTitle}" sclass="PageTitle"/>
 	
 	<!-- TODO: apply composer timer for updating activity -->
-	<window self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+	<window self="@define(contentPanel)" apply="co.syscoop.soberano.composers.ActivityTreeComposer" height="100%" contentStyle="overflow:auto">
 		<tree id="treeActivity" xmlns:ca="client/attribute" ca:data-scrollable="false">
 		</tree>
 	</window>	

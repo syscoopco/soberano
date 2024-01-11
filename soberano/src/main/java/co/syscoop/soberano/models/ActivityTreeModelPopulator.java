@@ -16,9 +16,9 @@ import co.syscoop.soberano.util.OrderRowData;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.exception.SoberanoException;
-import co.syscoop.soberano.renderers.ActivitySummaryTreeNodeRenderer;
+import co.syscoop.soberano.renderers.ActivityTreeNodeRenderer;
 
-public class ActivitySummaryTreeModelPopulator {
+public class ActivityTreeModelPopulator {
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static TreeModel populateTreeModel() throws BeansException, SQLException {
@@ -34,7 +34,7 @@ public class ActivitySummaryTreeModelPopulator {
 			OrderRowData order = (OrderRowData) orderObject;			
 			String orderId = order.getOrderId().toString(); 
 			String orderLabel = order.getLabel() == null || order.getLabel().isEmpty() ? orderId : orderId + " (" + order.getLabel() + ")";
-			TreeNode orderNode = new DefaultTreeNode(new NodeData(orderLabel, orderId));
+			TreeNode orderNode = new DefaultTreeNode(new NodeData(orderLabel, order));
 			if (!currentCounter.equals(order.getCounter())) {
 				currentCounter = order.getCounter();
 				currentNode = new DefaultTreeNode(new NodeData(currentCounter, null), (TreeNode[]) null);
@@ -47,8 +47,8 @@ public class ActivitySummaryTreeModelPopulator {
 	public static void rerenderActivityTree(Tree activityTree) {
 		
 		try{
-			activityTree.setModel(ActivitySummaryTreeModelPopulator.populateTreeModel());
-			activityTree.setItemRenderer(new ActivitySummaryTreeNodeRenderer());
+			activityTree.setModel(ActivityTreeModelPopulator.populateTreeModel());
+			activityTree.setItemRenderer(new ActivityTreeNodeRenderer());
 		}
 		catch(Exception ex){
 			try {

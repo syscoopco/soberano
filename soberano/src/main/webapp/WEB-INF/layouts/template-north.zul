@@ -11,11 +11,13 @@
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>						
 			
-			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivitySummaryTreeComposer"></barbuttonpopup>
+			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposer"></barbuttonpopup>
 			<separator></separator>
-			<button id="btnWorkshop1" label="${labels.layout.template.shortcut.Workshop1}" href="/workshop1.zul" sclass="BarButton NewButton"></button>
+			<!-- TODO: apply redirect href="/workshop1.zul"-->
+			<button id="btnWorkshop1" label="${labels.layout.template.shortcut.Workshop1}" sclass="BarButton NewButton"></button>
 			<separator></separator>
-			<button id="btnWorkshop2" label="${labels.layout.template.shortcut.Workshop2}" href="/workshop2.zul" sclass="BarButton NewButton"></button>
+			<!-- TODO: apply redirect href="/workshop2.zul"-->
+			<button id="btnWorkshop2" label="${labels.layout.template.shortcut.Workshop2}" sclass="BarButton NewButton"></button>
 			<separator></separator>
 			
 			<!-- TODO: apply composer to splitting popup-->

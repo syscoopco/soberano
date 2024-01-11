@@ -3,6 +3,7 @@ package co.syscoop.soberano.util;
 import java.util.Date;
 
 public class OrderRowData {
+	private Integer objectType = 0; //0: the row is related to an order. 1: the row is related to a process run.
 	private Integer orderId = 0;
 	private Integer entityTypeInstanceId = 0;
 	private String label = "";
@@ -87,5 +88,13 @@ public class OrderRowData {
 
 	public void setCounter(String counter) {
 		this.counter = counter;
+	}
+
+	public Integer getObjectType() {
+		return objectType;
+	}
+
+	public void setObjectType(Integer objectType) {
+		this.objectType = objectType;
 	}
 }

@@ -4,17 +4,17 @@ import org.zkoss.zk.ui.util.GenericForwardComposer;
 import org.zkoss.zul.Tree;
 import org.zkoss.zul.Window;
 
-import co.syscoop.soberano.models.ActivitySummaryTreeModelPopulator;
+import co.syscoop.soberano.models.ActivityTreeModelPopulator;
 
 @SuppressWarnings("serial")
-public class ActivitySummaryTreeComposer extends GenericForwardComposer<Window> {
+public class ActivityTreeComposer extends GenericForwardComposer<Window> {
 	
-	private Tree treeActivitySummary;
+	private Tree treeActivity;
 	
 	@Override
 	public void doAfterCompose(Window div) throws Exception{
 		
 		super.doAfterCompose(div);		
-		ActivitySummaryTreeModelPopulator.rerenderActivityTree(treeActivitySummary);
+		ActivityTreeModelPopulator.rerenderActivityTree(treeActivity);
 	}
 }

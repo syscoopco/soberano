@@ -57,8 +57,9 @@
 						<menuitem disabled="true" label="${labels.menuItem.ShippingServices}" href="shipping_thirdparty_services.zul"/>					
 						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
 					</menupopup>					
-				</menu>			
-				<menuitem label="${labels.menuItem.BizLogs}" href="biz_logs.zul"/>
+				</menu>
+				<!-- TODO: apply redirect href="biz_logs.zul"-->
+				<menuitem label="${labels.menuItem.BizLogs}"/>
 				<menuitem label="${labels.menuItem.Backup}" href="backup.zul"/>
 				<menuitem label="${labels.menuItem.ChangePassword}" href="change_password.zul"/>
 				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>				

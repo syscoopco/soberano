@@ -10,8 +10,9 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 
 import co.syscoop.soberano.models.NodeData;
+import co.syscoop.soberano.util.OrderRowData;
 
-public class ActivitySummaryTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {
+public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
@@ -26,7 +27,11 @@ public class ActivitySummaryTreeNodeRenderer implements TreeitemRenderer<Default
 
 				@Override
 				public void onEvent(Event event) throws Exception {
-					Executions.sendRedirect("/order.zul?id=" + nodeData.getValue());	
+					OrderRowData ord = (OrderRowData) nodeData.getValue();
+					if (ord.getObjectType() == 0)
+						Executions.sendRedirect("/order.zul?id=" + ord.getOrderId());
+					else if (ord.getObjectType() == 1)
+						Executions.sendRedirect("/process_run.zul?id=" + ord.getOrderId());
 				}
 			});
 		}
