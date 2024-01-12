@@ -1,7 +1,7 @@
 <?page title="${labels.pageActivity.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
 
-<!-- TODO: declare activity initiator (tree and sales) -->		
+<!-- TODO: shift sales -->		
 
 <zk>
 	<include src="/style.zul"/>

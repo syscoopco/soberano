@@ -1,0 +1,12 @@
+<?page title="${labels.pageCatalog.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageCatalog.WindowTitle}" sclass="PageTitle"/>
+	
+	<window self="@define(contentPanel)" apply="co.syscoop.soberano.composers.CatalogTreeComposer" height="100%" contentStyle="overflow:auto">
+		<tree id="treeCatalog" xmlns:ca="client/attribute" ca:data-scrollable="false">
+		</tree>
+	</window>
+</zk>
