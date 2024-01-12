@@ -9,6 +9,7 @@ import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
+import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
 import co.syscoop.soberano.exception.OrderCanceledException;
@@ -56,7 +57,9 @@ public class ExceptionTreatment {
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DisabledCurrencyException"))
 				throw new DisabledCurrencyException(ex);
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
-				throw new DuplicateKeyException("");			
+				throw new DuplicateKeyException("");		
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException"))
+				throw new ExchangeRateEqualsToZeroException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrderAlreadyCollectedException"))

@@ -18,7 +18,6 @@ public class CatalogEntryMapper implements RowMapper<Object> {
 				catalogEntryRow.setCategoryName(rs.getString("categoryName"));
 				catalogEntryRow.setEntityTypeInstanceId(rs.getInt("entityTypeInstanceId"));
 				catalogEntryRow.setItemEnabled(rs.getBoolean("itemEnabled"));
-				catalogEntryRow.setItemEnabled(rs.getBoolean("itemEnabled"));
 				catalogEntryRow.setItemPrice(rs.getBigDecimal("itemPrice"));
 				catalogEntryRow.setItemReferencePrice(rs.getBigDecimal("itemReferencePrice"));
 				catalogEntryRow.setSysCurrency(rs.getString("sysCurrency"));

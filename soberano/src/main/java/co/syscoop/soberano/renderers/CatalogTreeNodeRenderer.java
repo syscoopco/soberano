@@ -30,6 +30,7 @@ public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode
 		
 		Treerow tr = new Treerow();
 		item.appendChild(tr);
+		item.setOpen(true);
 		
 		//category node
 		if (data.getData().getValue() == null) {			
@@ -56,7 +57,7 @@ public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode
 						Decimalbox decPrice = (Decimalbox) event.getTarget();
 						
 						//update the reference price
-						Decimalbox decRefPrice = (Decimalbox) decPrice.query("decRefPrice" + catalogEntryRowData.getItemId().toString());
+						Decimalbox decRefPrice = (Decimalbox) decPrice.query("#decRefPrice" + catalogEntryRowData.getItemId().toString());
 						
 						//update the price of the item
 						BigDecimal refPrice = (new Product(catalogEntryRowData.getItemId())).setItemPrice(decPrice.getValue());						
@@ -86,6 +87,7 @@ public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode
 			tc.appendChild(new Separator("vertical"));
 			tc.appendChild(new Label(catalogEntryRowData.getRefCurrency().toString()));		
 			Decimalbox decRefPrice = new Decimalbox(catalogEntryRowData.getItemReferencePrice());
+			decRefPrice.setId("decRefPrice" + catalogEntryRowData.getItemId().toString());
 			decRefPrice.setConstraint("no negative, no empty");
 			decRefPrice.addEventListener("onChange", new EventListener() {
 
@@ -96,7 +98,7 @@ public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode
 						Decimalbox decRefPrice = (Decimalbox) event.getTarget();
 						
 						//update the official price
-						Decimalbox decPrice = (Decimalbox) decRefPrice.query("decPrice" + catalogEntryRowData.getItemId().toString());
+						Decimalbox decPrice = (Decimalbox) decRefPrice.query("#decPrice" + catalogEntryRowData.getItemId().toString());
 												
 						//update the price of the item
 						BigDecimal itemPrice = (new Product(catalogEntryRowData.getItemId())).setItemReferencePrice(decRefPrice.getValue());	

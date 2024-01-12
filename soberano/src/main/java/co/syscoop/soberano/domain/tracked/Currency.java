@@ -14,6 +14,7 @@ import co.syscoop.soberano.database.relational.CurrencyMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
+import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
 
@@ -87,7 +88,10 @@ public class Currency extends TrackedObject {
 		recordParameters.addValue("paymentProcessor", this.getPaymentProcessor());
 		
 		Integer qryResult = super.record();
-		return qryResult > 0 ? qryResult : -1;
+		if (qryResult == -3) {
+			throw new ExchangeRateEqualsToZeroException();
+		}
+		return qryResult >= 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -118,6 +122,9 @@ public class Currency extends TrackedObject {
 		Integer qryResult = super.modify();
 		if (qryResult == -2) {
 			throw new OrdersOngoingException();
+		}
+		else if (qryResult == -3) {
+			throw new ExchangeRateEqualsToZeroException();
 		}
 		return qryResult >= 0 ? qryResult : -1;
 	}

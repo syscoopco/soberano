@@ -9,6 +9,8 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Messagebox;
+
+import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
@@ -63,6 +65,12 @@ public class ModifyButtonComposer extends SelectorComposer {
 		catch(DuplicateKeyException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(ExchangeRateEqualsToZeroException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.exchangeRateCannotBeZero"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

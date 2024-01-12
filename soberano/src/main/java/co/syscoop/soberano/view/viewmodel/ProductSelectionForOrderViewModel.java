@@ -16,7 +16,7 @@ public class ProductSelectionForOrderViewModel extends IntellisenseViewModel {
 	public ListModel getModel() throws SQLException {
 		
 		if (_model == null) {
-			List l = new Product().getAllWithUnit();
+			List l = new Product().getAllWithUnitForOrder();
 			_model = new ListModelList(l);
 		}
 		return ListModels.toListSubModel(new ListModelList(_model), new AutocompletionComparator(), 15);

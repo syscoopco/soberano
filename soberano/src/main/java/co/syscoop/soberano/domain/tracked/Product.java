@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
@@ -176,36 +177,36 @@ public class Product extends InventoryItem {
 	public BigDecimal setItemPrice(BigDecimal itemPrice) throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Product_setPrice\"(:productId, "
+		String qryStr = "SELECT soberano.\"fn_Product_setPrice\"(:itemId, "
 				+ "											:itemPrice, "
 				+ "											:loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("productId", this.getId());
+		parametersMap.put("itemId", this.getId());
 		parametersMap.put("itemPrice", itemPrice);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return (BigDecimal) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}
 	
 	public BigDecimal setItemReferencePrice(BigDecimal itemReferencePrice) throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Product_setReferencePrice\"(:productId, "
+		String qryStr = "SELECT soberano.\"fn_Product_setReferencePrice\"(:itemId, "
 				+ "											:itemReferencePrice, "
 				+ "											:loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("productId", this.getId());
+		parametersMap.put("itemId", this.getId());
 		parametersMap.put("itemReferencePrice", itemReferencePrice);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return (BigDecimal) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}
 	
 	public Integer showInCatalog() throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Product_showInCatalog\"(:productId, "
+		String qryStr = "SELECT soberano.\"fn_Product_showInCatalog\"(:itemId, "
 				+ "											:loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("productId", this.getId());
+		parametersMap.put("itemId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
@@ -213,10 +214,10 @@ public class Product extends InventoryItem {
 	public Integer hideInCatalog() throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Product_hideInCatalog\"(:productId, "
+		String qryStr = "SELECT soberano.\"fn_Product_hideInCatalog\"(:itemId, "
 				+ "											:loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("productId", this.getId());
+		parametersMap.put("itemId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
@@ -257,6 +258,14 @@ public class Product extends InventoryItem {
 		
 		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
 		return query("SELECT * FROM soberano.\"fn_Product_getAllWithStringId\"(:loginname)", 
+					getAllQueryNamedParameters, 
+					new ProductMapperWithStringId());
+	}
+	
+	public List<Object> getAllWithUnitForOrder() throws SQLException {
+		
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Product_getAllWithStringIdForOrder\"(:loginname)", 
 					getAllQueryNamedParameters, 
 					new ProductMapperWithStringId());
 	}
