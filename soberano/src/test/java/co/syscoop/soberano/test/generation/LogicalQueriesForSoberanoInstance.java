@@ -3834,6 +3834,32 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Process_getAllToRun\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" character varying) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT *\n"
+						+ "						FROM (SELECT DISTINCT process.\"ProcessHasProcessId\" processId, \n"
+						+ "									\"This_has_Name\"\n"
+						+ "									FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(12, 1, loginname) instance\n"
+						+ "										INNER JOIN soberano.\"Process\" process\n"
+						+ "											ON instance.\"InstanceId\" = process.\"This_is_identified_by_EntityTypeInstance_id\") sq\n"
+						+ "						WHERE processId NOT IN (SELECT poutput.\"ProcessHasProcessId\" \n"
+						+ "													FROM soberano.\"Product\" product\n"
+						+ "														INNER JOIN soberano.\"ProcessOutput\" poutput\n"
+						+ "															ON poutput.\"InventoryItemHasInventoryItemCode\" = product.\"InventoryItemHasInventoryItemCode\")\n"
+						+ "						ORDER BY \"This_has_Name\" ASC;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_Process_modify\"(\n"
 						+ "	processid integer,\n"
 						+ "	processname character varying,\n"

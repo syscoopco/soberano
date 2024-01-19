@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.database.relational.ObjectMapper;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
@@ -215,6 +216,14 @@ public class Process extends TrackedObject {
 				throw ex;
 			}			
 	    }
+	}
+	
+	public List<Object> getAllToRun() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Process_getAllToRun\"(:loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ObjectMapper());
 	}
 	
 	@Override

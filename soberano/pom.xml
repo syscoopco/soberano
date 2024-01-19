@@ -208,6 +208,26 @@
 				
 		<!-- ZK dependencies -->
 		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>breeze</artifactId>
+		  	<version>${zk.version}</version>
+	  	</dependency>
+	  	<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>atlantic</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>sapphire</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>silvertail</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
 	    	<groupId>org.zkoss.zats</groupId>
 	      	<artifactId>zats-mimic-ext7</artifactId>
 	      	<version>${zats-mimic}</version>

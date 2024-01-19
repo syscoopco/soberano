@@ -59,7 +59,7 @@
 					</menupopup>					
 				</menu>
 				<!-- TODO: apply redirect href="biz_logs.zul"-->
-				<menuitem label="${labels.menuItem.BizLogs}"/>
+				<menuitem label="${labels.menuItem.BizLogs}" disabled="true"/>
 				<menuitem label="${labels.menuItem.Backup}" href="backup.zul"/>
 				<menuitem label="${labels.menuItem.ChangePassword}" href="change_password.zul"/>
 				<menuitem label="${labels.menuItem.Logout}" href="/logout"/>				

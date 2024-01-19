@@ -72,7 +72,7 @@ public class Query {
 		this.paramValues.add(paramValue);
 	}
 	
-	@SuppressWarnings({ "rawtypes", "restriction"})
+	@SuppressWarnings({ "rawtypes"})
 	public CachedRowSet executeQuery(boolean transactional) throws SQLException {
 		
 		Connection dbConnection = null;
