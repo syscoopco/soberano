@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(6)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {

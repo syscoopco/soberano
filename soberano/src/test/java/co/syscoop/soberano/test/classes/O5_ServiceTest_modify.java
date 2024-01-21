@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.ServiceForm;
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_ServiceTest_modify extends ServiceActionTest{
 
