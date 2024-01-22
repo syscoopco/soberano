@@ -19,6 +19,7 @@ public class Counter extends TrackedObject {
 	private Boolean isSurcharged = false;
 	private Boolean isEnabled = false;
 	private Boolean isFree = true;
+	private Boolean onlyOneOrderIsPermitted = false;
 	
 	public Counter(Integer id) {
 		super(id);
@@ -29,13 +30,15 @@ public class Counter extends TrackedObject {
 					String code, 
 					Integer numberOfReceivers, 
 					Boolean isSurcharged, 
-					Boolean isEnabled) {
+					Boolean isEnabled,
+					Boolean onlyOneOrderIsPermitted) {
 		super(id, entityTypeInstanceId, code);
 		this.setStringId(code);
 		this.setQualifiedName(code);		
 		this.setNumberOfReceivers(numberOfReceivers);
 		this.setIsSurcharged(isSurcharged);
 		this.setIsEnabled(isEnabled);
+		this.setOnlyOneOrderIsPermitted(onlyOneOrderIsPermitted);
 	}
 	
 	public Counter() {
@@ -51,12 +54,14 @@ public class Counter extends TrackedObject {
 				+ "											:numberOfReceivers, "
 				+ "											:isSurcharged, "
 				+ "											:isEnabled, "
+				+ "											:onlyOneOrderIsPermitted, "										
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("counterCode", this.getStringId());
 		recordParameters.addValue("numberOfReceivers", this.numberOfReceivers);
 		recordParameters.addValue("isSurcharged", this.isSurcharged);
 		recordParameters.addValue("isEnabled", this.isEnabled);
+		recordParameters.addValue("onlyOneOrderIsPermitted", this.onlyOneOrderIsPermitted);
 		
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -71,6 +76,7 @@ public class Counter extends TrackedObject {
 				+ "											:numberOfReceivers, "
 				+ "											:isSurcharged, "
 				+ "											:isEnabled, "
+				+ "											:onlyOneOrderIsPermitted, "	
 				+ "											:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("counterId", this.getId());
@@ -78,6 +84,7 @@ public class Counter extends TrackedObject {
 		modifyParameters.addValue("numberOfReceivers", this.numberOfReceivers);
 		modifyParameters.addValue("isSurcharged", this.isSurcharged);
 		modifyParameters.addValue("isEnabled", this.isEnabled);
+		modifyParameters.addValue("onlyOneOrderIsPermitted", this.onlyOneOrderIsPermitted);
 		
 		Integer qryResult = super.modify();
 		return qryResult >= 0 ? qryResult : -1;
@@ -114,7 +121,8 @@ public class Counter extends TrackedObject {
 										rs.getString("counterCode"),
 										rs.getInt("numberOfReceivers"),
 										rs.getBoolean("isSurcharged"),
-										rs.getBoolean("isEnabled"));
+										rs.getBoolean("isEnabled"),
+										rs.getBoolean("onlyOneOrderIsPermitted"));
 				}
 				return counter;
 			}
@@ -144,6 +152,7 @@ public class Counter extends TrackedObject {
 		setNumberOfReceivers(sourceCounter.getNumberOfReceivers());
 		setIsSurcharged(sourceCounter.getIsSurcharged());
 		setIsEnabled(sourceCounter.getIsEnabled());
+		setOnlyOneOrderIsPermitted(sourceCounter.getOnlyOneOrderIsPermitted());
 	}
 	
 	@Override
@@ -208,5 +217,13 @@ public class Counter extends TrackedObject {
 
 	public void setIsFree(Boolean isFree) {
 		this.isFree = isFree;
+	}
+
+	public Boolean getOnlyOneOrderIsPermitted() {
+		return onlyOneOrderIsPermitted;
+	}
+
+	public void setOnlyOneOrderIsPermitted(Boolean onlyOneOrderIsPermitted) {
+		this.onlyOneOrderIsPermitted = onlyOneOrderIsPermitted;
 	}
 }

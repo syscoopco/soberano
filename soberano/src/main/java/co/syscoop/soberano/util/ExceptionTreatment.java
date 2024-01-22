@@ -11,6 +11,7 @@ import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
 import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
 import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
@@ -62,6 +63,8 @@ public class ExceptionTreatment {
 				throw new ExchangeRateEqualsToZeroException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException"))
+				throw new OnlyOneOrderPerCounterIsPermittedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrderAlreadyCollectedException"))
 				throw new OrderAlreadyCollectedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OrderCanceledException"))

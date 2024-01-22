@@ -34,6 +34,7 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intNumberOfReceivers"), counter.getNumberOfReceivers());
 		((Checkbox) incDetails.query("#chkIsSurcharged")).setChecked(counter.getIsSurcharged());
 		((Checkbox) incDetails.query("#chkDisabled")).setChecked(!counter.getIsEnabled());
+		((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).setChecked(counter.getOnlyOneOrderIsPermitted());
 	}
 
 	@Override
@@ -42,7 +43,8 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
 		((Checkbox) incDetails.query("#chkIsSurcharged")).setChecked(false);
-		((Checkbox) incDetails.query("#chkDisabled")).setChecked(false);	
+		((Checkbox) incDetails.query("#chkDisabled")).setChecked(false);
+		((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).setChecked(false);
 	}
 
 	@Override
@@ -53,7 +55,8 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 							((Textbox) incDetails.query("#txtCode")).getValue(),
 							((Intbox) incDetails.query("#intNumberOfReceivers")).getValue(),
 							((Checkbox) incDetails.query("#chkIsSurcharged")).isChecked(),
-							!((Checkbox) incDetails.query("#chkDisabled")).isChecked()))
+							!((Checkbox) incDetails.query("#chkDisabled")).isChecked(),
+							((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).isChecked()))
 					.record();
 	}
 
@@ -65,7 +68,8 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 											((Textbox) incDetails.query("#txtCode")).getValue(),
 											((Intbox) incDetails.query("#intNumberOfReceivers")).getValue(),
 											((Checkbox) incDetails.query("#chkIsSurcharged")).isChecked(),
-											!((Checkbox) incDetails.query("#chkDisabled")).isChecked()));
+											!((Checkbox) incDetails.query("#chkDisabled")).isChecked(),
+											((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).isChecked()));
 		return super.getTrackedObject().modify();
 	}
 }

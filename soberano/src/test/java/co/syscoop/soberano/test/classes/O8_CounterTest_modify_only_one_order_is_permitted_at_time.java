@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
 import org.zkoss.zats.mimic.Zats;
 
-import co.syscoop.soberano.test.helper.ProviderActionTest;
+import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(7)
@@ -20,8 +20,8 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 //TODO: enable testCase
 @Disabled
 
-class O7_ProviderTest_disable extends ProviderActionTest{
-
+class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterActionTest {
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		
@@ -45,22 +45,6 @@ class O7_ProviderTest_disable extends ProviderActionTest{
 
 	@Test
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/providers.zul", "user1@soberano.syscoop.co", "mprov8", 7);
-	}
-	
-	@Test
-	final void testCase2() {
-		try {
-			TestUtilityCode.testDisablingObject("/providers.zul", "user2@soberano.syscoop.co", "mcat7", 7);
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			
-			//a user authorized to make any decision on an object can 
-			//retrieve it but not necessarily modifying nor disabling it
-			testNotEnoughRightsException(ex);
-		}
+		//TODO:
 	}
 }

@@ -10,5 +10,7 @@
 		<checkbox id="chkIsSurcharged" checked="false" label="${labels.caption.field.isSurcharged}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkDisabled" checked="false" label="${labels.caption.field.disabled}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkOnlyOneOrderIsPermitted" checked="false" label="${labels.caption.field.onlyOneOrderIsPermitted}" sclass="Caption"></checkbox>
 	</vbox>	
 </zk>

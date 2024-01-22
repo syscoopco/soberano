@@ -13,6 +13,7 @@ import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.RunningOutOfInventoryException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -97,6 +98,12 @@ public class BusinessActivityTrackedObjectButtonComposer extends SelectorCompose
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
+		}
+		catch(OnlyOneOrderPerCounterIsPermittedException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.onlyOneOrderPerCounterIsPermitted"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(PasswordsMustMatchException ex) {
 			ExceptionTreatment.logAndShow(ex, 
