@@ -15,7 +15,7 @@ import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.CounterActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 
-@Order(7)
+@Order(8)
 
 //TODO: enable testCase
 @Disabled
