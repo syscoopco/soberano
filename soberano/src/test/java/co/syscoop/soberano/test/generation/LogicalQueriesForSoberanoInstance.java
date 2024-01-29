@@ -11177,6 +11177,20 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "CREATE INDEX IF NOT EXISTS index1\n"
 						+ "    ON soberano.\"Worker\" USING btree\n"
 						+ "    (\"This_has_LoginName\" COLLATE pg_catalog.\"default\" ASC NULLS LAST)\n"
+						+ "    TABLESPACE pg_default;",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS index2\n"
+						+ "    ON soberano.\"StockChange\" USING btree\n"
+						+ "    (\"This_is_at_DateTime\" ASC NULLS LAST, \"This_is_called_with_InventoryItem_with_InventoryItemHasInventor\" COLLATE pg_catalog.\"default\" ASC NULLS LAST)\n"
+						+ "    TABLESPACE pg_default;",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS index3\n"
+						+ "    ON soberano.\"Stock\" USING btree\n"
+						+ "    (\"InventoryItemHasInventoryItemCode\" COLLATE pg_catalog.\"default\" ASC NULLS LAST, \"WarehouseHasWarehouseId\" ASC NULLS LAST)\n"
 						+ "    TABLESPACE pg_default;"
 					}
 				)
