@@ -5,6 +5,7 @@ import java.util.Date;
 public class ShiftClosureRowData {
 	private Integer shiftClosureId = 0;
 	private Date shift = null;
+	private Date closureTime = null;
 	private Date recordingDate = null;
 	
 	public ShiftClosureRowData(Integer shiftClosureId) {
@@ -33,5 +34,13 @@ public class ShiftClosureRowData {
 
 	public void setShiftId(Integer shiftClosureId) {
 		this.shiftClosureId = shiftClosureId;
+	}
+
+	public Date getClosureTime() {
+		return closureTime;
+	}
+
+	public void setClosureTime(Date closureTime) {
+		this.closureTime = closureTime;
 	}
 }

@@ -10,8 +10,8 @@ public class ShiftClosuresGridModel extends SoberanoAbstractListModel<Object>
 {
 	public ShiftClosuresGridModel() {
 		
-		//the set is sorted by recordingDate from major to minor (newer ones go first).
-		super("recordingDate", false, true);
+		//the set is sorted by shiftClosureId from major to minor (newer ones go first).
+		super("shiftClosureId", false, true);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ public class ShiftClosuresGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = new ShiftClosure().getAll(_orderBy == null?"recordingDate":_orderBy,
+				_cache = new ShiftClosure().getAll(_orderBy == null?"shiftClosureId":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 

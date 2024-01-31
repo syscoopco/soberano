@@ -8,6 +8,7 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.models.ShiftClosuresGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
@@ -31,7 +32,10 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 		Integer qryResult = 0;
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
 			qryResult = (new ShiftClosure()).record();
-			if (qryResult == -3) {
+			if (qryResult == -1) {
+				throw new NotEnoughRightsException();
+			}
+			else if (qryResult == -2) {
 				throw new ShiftHasBeenClosedException();
 			}
 			requestedAction = ActionRequested.NONE;

@@ -46,8 +46,9 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		recordQuery = "SELECT soberano.\"fn_ShiftClosure_create\"(:loginname) AS queryresult";
-		recordParameters = new MapSqlParameterSource();		
+		recordQuery = "SELECT soberano.\"fn_ShiftClosure_create\"(:lang, :loginname) AS queryresult";
+		recordParameters = new MapSqlParameterSource();	
+		recordParameters.addValue("lang", Locales.getCurrent().getLanguage());	
 		return super.record();
 	}
 	
@@ -55,7 +56,7 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 	public Integer disable() throws SQLException, Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		disableQuery = "SELECT soberano.\"fn_ShiftClosure_disable\"(:shiftId, "
+		disableQuery = "SELECT soberano.\"fn_ShiftClosure_cancel\"(:shiftId, "
 				+ "											:loginname) AS queryresult";
 		disableParameters = new MapSqlParameterSource();
 		disableParameters.addValue("shiftId", this.getId());

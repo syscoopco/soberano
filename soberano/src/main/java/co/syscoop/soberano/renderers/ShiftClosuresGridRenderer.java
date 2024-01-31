@@ -24,9 +24,16 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		
 		ShiftClosureRowData shift = (ShiftClosureRowData) data;
 		
+		//id
+		row.appendChild(new Label(shift.getShiftClosureId().toString()));
+		
 		//shift
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		row.appendChild(new Label(dateFormat.format(shift.getShift())));	
+		
+		//closure time		
+		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		row.appendChild(new Label(dateFormat.format(shift.getClosureTime())));
 		
 		//recording date		
 		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
