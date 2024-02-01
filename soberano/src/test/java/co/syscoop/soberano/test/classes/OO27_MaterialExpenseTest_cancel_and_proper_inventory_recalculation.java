@@ -25,13 +25,13 @@ import co.syscoop.soberano.test.helper.MaterialExpenseActionTest;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(12)
+@Order(27)
 
 //TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO12_MaterialExpenseTest_cancel extends MaterialExpenseActionTest {
+class OO27_MaterialExpenseTest_cancel_and_proper_inventory_recalculation extends MaterialExpenseActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
