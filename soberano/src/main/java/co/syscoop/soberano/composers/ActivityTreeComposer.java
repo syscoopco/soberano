@@ -14,7 +14,7 @@ public class ActivityTreeComposer extends GenericForwardComposer<Window> {
 	@Override
 	public void doAfterCompose(Window div) throws Exception{
 		
-		super.doAfterCompose(div);		
+		super.doAfterCompose(div);
 		ActivityTreeModelPopulator.rerenderActivityTree(treeActivity);
 	}
 }

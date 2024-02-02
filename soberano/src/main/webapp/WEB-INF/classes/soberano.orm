@@ -9174,7 +9174,7 @@
 			</orm:Fact>
 			<orm:Fact id="_04FAF599-9308-4FBF-B8DD-A9974C6385EF" _Name="ShiftClosureIsOfShift">
 				<orm:FactRoles>
-					<orm:Role id="_1499B91E-52CD-4FF5-BF5B-7236574C19DB" _IsMandatory="true" _Multiplicity="ZeroToOne" Name="">
+					<orm:Role id="_1499B91E-52CD-4FF5-BF5B-7236574C19DB" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_26546A60-384E-49D7-912B-D5D174CEEE14" />
 					</orm:Role>
 					<orm:Role id="_64423837-08AA-4391-9B76-031125774F95" _IsMandatory="false" _Multiplicity="ExactlyOne" Name="">
@@ -9198,7 +9198,6 @@
 					</orm:ReadingOrder>
 				</orm:ReadingOrders>
 				<orm:InternalConstraints>
-					<orm:UniquenessConstraint ref="_DB11AB78-D39C-4CB1-826A-3F545943A172" />
 					<orm:UniquenessConstraint ref="_4E858F71-666B-41B4-B03C-8ACF54B7B267" />
 					<orm:MandatoryConstraint ref="_DFCA61E9-FC1F-4CEA-A88D-31A5600B55ED" />
 				</orm:InternalConstraints>
@@ -15890,11 +15889,6 @@
 				</orm:RoleSequence>
 				<orm:ImpliedByObjectType ref="_4AE2F449-261A-4618-BD21-DA027A5E31F3" />
 			</orm:MandatoryConstraint>
-			<orm:UniquenessConstraint id="_DB11AB78-D39C-4CB1-826A-3F545943A172" Name="InternalUniquenessConstraint295" IsInternal="true">
-				<orm:RoleSequence>
-					<orm:Role id="_7E9A8E50-81CF-429F-A501-53412B420A59" ref="_64423837-08AA-4391-9B76-031125774F95" />
-				</orm:RoleSequence>
-			</orm:UniquenessConstraint>
 			<orm:UniquenessConstraint id="_4E858F71-666B-41B4-B03C-8ACF54B7B267" Name="InternalUniquenessConstraint296" IsInternal="true">
 				<orm:RoleSequence>
 					<orm:Role id="_D6D82C7D-7CBF-4057-A061-0A2D28F2506D" ref="_1499B91E-52CD-4FF5-BF5B-7236574C19DB" />

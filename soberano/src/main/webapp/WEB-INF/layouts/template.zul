@@ -1,5 +1,5 @@
 <zk>
-	<window hflex="1" vflex="1">
+	<window id="wndTemplate" hflex="1" vflex="1">
 		<borderlayout id="borderlayout" >
 			<north hflex="1" sclass="DefaultBackground">
 				<include src="/WEB-INF/layouts/template-north.zul"/>

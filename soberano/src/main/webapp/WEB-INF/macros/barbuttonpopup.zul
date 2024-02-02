@@ -1,7 +1,7 @@
 <zk>
 	<popup id="pp" width="80%">	
 		<window height="100%" contentStyle="overflow:auto" apply="${arg.composer}">
-			<tree id="treeActivity" xmlns:ca="client/attribute" ca:data-scrollable="false">
+			<tree id="${arg.tree}" xmlns:ca="client/attribute" ca:data-scrollable="false">
 			</tree>
 		</window>
 	</popup>

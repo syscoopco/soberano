@@ -9,23 +9,22 @@
 			<include src="./././menubar.zul"></include>
 			
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
-			<separator></separator>						
-			
-			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposer"></barbuttonpopup>
+			<separator></separator>
+			<barbuttonpopup tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposer"></barbuttonpopup>
 			<separator></separator>
 			<!-- TODO: apply redirect href="/workshop1.zul"-->
 			<button id="btnWorkshop1" label="${labels.layout.template.shortcut.Workshop1}" sclass="BarButton NewButton"></button>
 			<separator></separator>
 			<!-- TODO: apply redirect href="/workshop2.zul"-->
 			<button id="btnWorkshop2" label="${labels.layout.template.shortcut.Workshop2}" sclass="BarButton NewButton"></button>
-			<separator></separator>
-			
+			<separator></separator>			
 			<!-- TODO: apply composer to splitting popup-->
 			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Split}"></barbuttonpopup>
 			<separator></separator>
+			<barbuttonpopup tree="treeInventory" shortcutCaption="${labels.layout.template.shortcut.Inventory}" composer="co.syscoop.soberano.composers.InventoryTreeComposer"></barbuttonpopup>
+			<separator></separator>
 			<button label="${labels.layout.template.shortcut.Process}" href="/process_runs.zul" sclass="BarButton NewButton"></button>
-			<separator></separator>		
-			
+			<separator></separator>				
 			<!-- TODO: apply composer -->					
 			<button id="btnNewDeliveryBarButton" image="./images/delivery.jpg" sclass="BarButton NewButton"></button>
 			<timer id="timerAlerts" delay="300000" repeats="true" apply="co.syscoop.soberano.composers.AlertsTimerComposer"></timer>

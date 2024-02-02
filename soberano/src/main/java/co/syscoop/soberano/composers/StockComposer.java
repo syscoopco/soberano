@@ -1,6 +1,8 @@
 package co.syscoop.soberano.composers;
 
 import java.sql.SQLException;
+
+import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
@@ -10,8 +12,8 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.StockGridModel;
 import co.syscoop.soberano.util.SpringUtility;
 
-@SuppressWarnings({ "serial" })
-public class StockComposer extends ExpenseAmountComposer {
+@SuppressWarnings({ "serial", "rawtypes" })
+public class StockComposer extends SelectorComposer {
 	
 	@Wire
 	private Combobox cmbWarehouse;
