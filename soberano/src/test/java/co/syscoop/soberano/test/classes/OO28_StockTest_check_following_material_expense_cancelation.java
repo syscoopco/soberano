@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(28)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_StockTest_check_following_material_expense_cancelation extends StockActionTest {

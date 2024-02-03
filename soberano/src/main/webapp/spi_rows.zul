@@ -1,0 +1,30 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<include src="/style.zul"/>
+	<zscript>
+		<![CDATA[
+	  		co.syscoop.soberano.models.SPIGridModel model = new co.syscoop.soberano.models.SPIGridModel();
+	  		co.syscoop.soberano.renderers.SPIGridRenderer renderer = new co.syscoop.soberano.renderers.SPIGridRenderer();
+		]]>
+	</zscript>
+	<vbox hflex="1">
+		<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+			<columns sizable="true">
+				<column align="left" label="${labels.caption.columnHeader.name}" sort="auto(inventoryItemName)" sortDirection="ascending">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.unit}" sort="auto(unit)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.opening}" sort="auto(opening)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.input}" sort="auto(input)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.available}" sort="auto(available)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.output}" sort="auto(output)">
+				</column>
+				<column align="left" label="${labels.caption.columnHeader.ending}" sort="auto(ending)">
+				</column>
+			</columns>
+		</grid>
+	</vbox>
+</zk>

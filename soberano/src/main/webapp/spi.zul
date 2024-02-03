@@ -1,0 +1,28 @@
+<?page title="${labels.pageSPI.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.SPIInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageSPI.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.SPIComposer">
+			<hbox width="100%">
+				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
+					<combobox id="cmbWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.warehouse}">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>		
+				</hbox>
+			</hbox>
+			<separator></separator>			
+			<include id="incGrid" src="/spi_rows.zul"></include>	
+		</vbox>
+	</window>
+	<button id="btnReport" self="@define(decisionButton)" label="${labels.caption.action.report}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.PrintSPIReportButtonComposer" -->
+	<button id="btnTakeSnapshot" self="@define(decisionButton)" label="${labels.caption.action.takeSnapshot}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.TakeSPISnapshotButtonComposer" -->
+	<button id="btnPrintBuyList" self="@define(decisionButton)" label="${labels.caption.action.printBuyList}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.PrintBuyListButtonComposer" -->
+</zk>
