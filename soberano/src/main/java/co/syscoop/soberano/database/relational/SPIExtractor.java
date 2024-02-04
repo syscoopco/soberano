@@ -22,9 +22,9 @@ public final class SPIExtractor implements ResultSetExtractor<List<Object>> {
         	spiRowData.setInventoryItemName(rs.getString("inventoryItemName"));
         	spiRowData.setUnit(rs.getString("unit"));
         	spiRowData.setOpening(rs.getBigDecimal("opening"));
-        	spiRowData.setInput(rs.getBigDecimal("input"));
+        	spiRowData.setInput(rs.getBigDecimal("input_"));
         	spiRowData.setAvailable(rs.getBigDecimal("available"));
-        	spiRowData.setOutput(rs.getBigDecimal("output"));
+        	spiRowData.setOutput(rs.getBigDecimal("output_"));
         	spiRowData.setEnding(rs.getBigDecimal("ending"));
         	spiTableData.add(spiRowData);
         }

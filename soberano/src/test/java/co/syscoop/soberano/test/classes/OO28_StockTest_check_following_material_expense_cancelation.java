@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(28)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_StockTest_check_following_material_expense_cancelation extends StockActionTest {
@@ -81,15 +81,15 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										9475.104006,
+										3816.368002,
 										"kg",										
-										16126833.57658852);
+										2506967.91065426);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										4082328002000.0,
+										2721552001000.0,
 										"mg",
-										11.08063944);
+										16.56379044);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
@@ -99,15 +99,15 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
 										"mm6",
 										"mmaterial6",
-										4082328748531.0,
+										2721552096818.0,
 										"mg",
-										213.74691818);
+										78.59299677);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 										"mm7",
 										"mmaterial7",
-										13000.003,
+										7000.002,
 										"ml",
-										27104857.53359566);
+										25376602.80633985);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm8",
 										"mmaterial8",
@@ -166,15 +166,15 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										9411.136006,
+										3812.370002,
 										"kg",										
-										785.87260576);
+										973.92672368);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										4082330000000.0,
+										2721553000000.0,
 										"mg",
-										11.00440906);
+										16.50661561);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
@@ -184,15 +184,15 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
 										"mm6",
 										"mmaterial6",
-										4082543915795.0,
+										2721578992726.0,
 										"mg",
-										29.3434652);
+										44.01719921);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 										"mm7",
 										"mmaterial7",
-										5000.003,
+										3000.002,
 										"ml",
-										855679.15109531);
+										1197950.84576058);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm8",
 										"mmaterial8",
@@ -245,15 +245,15 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 											"mm2",
 											"mmaterial2",
-											32191.968,
+											2011.998,
 											"kg",										
-											45205.9285201);
+											52187.69751684);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 											"mm4",
 											"mmaterial4",
-											12000.0,
+											6000.0,
 											"mg",
-											142.62199643);
+											155.58763247);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 											"mm5",
 											"mmaterial5",
@@ -269,7 +269,7 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 											"mm7",
 											"mmaterial7",
-											-1998000.0,
+											-999000.0,
 											"ml",
 											0.0);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 

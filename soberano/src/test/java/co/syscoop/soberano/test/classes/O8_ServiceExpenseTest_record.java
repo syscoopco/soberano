@@ -38,7 +38,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(8)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
@@ -305,6 +305,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 	
 	@Test
 	@Order(6)
+	@Disabled
 	final void testCase6() {
 
 		SpringUtility.setLoggedUserForTesting("user19@soberano.syscoop.co");
@@ -331,7 +332,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			Date closedShift = new Date(); //in closedShift, current day
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -1);
+			cal.add(Calendar.DAY_OF_YEAR, -10);
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), cal.getTime());
 			

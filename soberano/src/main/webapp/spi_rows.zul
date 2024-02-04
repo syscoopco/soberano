@@ -16,11 +16,11 @@
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.opening}" sort="auto(opening)">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.input}" sort="auto(input)">
+				<column align="left" label="${labels.caption.columnHeader.input}" sort="auto(input_)">
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.available}" sort="auto(available)">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.output}" sort="auto(output)">
+				<column align="left" label="${labels.caption.columnHeader.output}" sort="auto(output_)">
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.ending}" sort="auto(ending)">
 				</column>

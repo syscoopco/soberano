@@ -11305,6 +11305,65 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryOperation_getSPICount\"(\n"
+						+ "	warehouseid integer,\n"
+						+ "	lang character,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "DECLARE\n"
+						+ "	count integer;\n"
+						+ "BEGIN\n"
+						+ "	SELECT COUNT(*) FROM soberano.\"fn_InventoryOperation_getSPI\"(warehouseId, lang, loginname) INTO count;\n"
+						+ "	RETURN count;\n"
+						+ "END;\n"
+						+ "$BODY$;\n"
+						+ "",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryOperation_getSPI\"(\n"
+						+ "	warehouseid integer,\n"
+						+ "	lang character,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"inventoryItemName\" text, unit character varying, opening numeric, input_ numeric, available numeric, output_ numeric, ending numeric) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 1000\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT * FROM (SELECT DISTINCT inventoryItem.\"This_has_Name\" || ' : ' || stock.\"InventoryItemHasInventoryItemCode\" itemName,\n"
+						+ "												unit.\"Acronym\",\n"
+						+ "												0.0,\n"
+						+ "												0.0,\n"
+						+ "												SUM(stock.\"Quantity\"),\n"
+						+ "												0.0,\n"
+						+ "												0.0\n"
+						+ "										FROM soberano.\"Stock\" stock\n"
+						+ "											INNER JOIN soberano.\"InventoryItem\" inventoryItem\n"
+						+ "												ON inventoryItem.\"InventoryItemHasInventoryItemCode\" = stock.\"InventoryItemHasInventoryItemCode\"\n"
+						+ "											INNER JOIN soberano.\"UnitHasAcronymInLanguage\" unit\n"
+						+ "												ON unit.\"UnitHasUnitId\" = inventoryItem.\"This_is_measured_in_Unit_with_UnitHasUnitId\"\n"
+						+ "													AND unit.\"Language\" = lang\n"
+						+ "										WHERE --user can make decisions on inventory operations \n"
+						+ "											(EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(21, 1, loginname))\n"
+						+ "												--or user can execute inventory operations\n"
+						+ "												OR 1 IN (SELECT * FROM metamodel.\"fn_User_canCreateInstance\"(1, '_E439FAF1-C89D-4C86-A1F7-0A970074FA02', loginname)))\n"
+						+ "											AND (stock.\"WarehouseHasWarehouseId\" = warehouseId OR warehouseId = 0)						  \n"
+						+ "									GROUP BY stock.\"InventoryItemHasInventoryItemCode\",\n"
+						+ "											inventoryItem.\"This_has_Name\",\n"
+						+ "											unit.\"Acronym\"\n"
+						+ "								   	ORDER BY itemName ASC) sq;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						////////////////////
 						// business facts //
 						////////////////////

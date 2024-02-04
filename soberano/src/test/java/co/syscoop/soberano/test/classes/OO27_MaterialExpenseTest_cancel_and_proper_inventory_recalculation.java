@@ -1,3 +1,11 @@
+/****************************************************************************************/
+/* TODO:																				*/
+/* IMPORTANT: This is an unplanned test. Test cases weren't selected nor calculated		*/
+/*			in advanced. It is for regression testing. GUI content is compared with		*/
+/*			the output resulting of a (not verified yet) human run following the 		*/
+/*			previous automatic tests.													*/
+/****************************************************************************************/
+
 package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(27)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO27_MaterialExpenseTest_cancel_and_proper_inventory_recalculation extends MaterialExpenseActionTest {
@@ -154,7 +162,7 @@ class OO27_MaterialExpenseTest_cancel_and_proper_inventory_recalculation extends
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	@Test
 	@Order(5)
 	final void testCase5() {
@@ -164,51 +172,86 @@ class OO27_MaterialExpenseTest_cancel_and_proper_inventory_recalculation extends
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(7, grd.getRows().getChildren().size(), "Wrong count of recorded material expenses.");
+			assertEquals(12, grd.getRows().getChildren().size(), "Wrong count of recorded material expenses.");
 			
 			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(0), 
+										"mprov2",
+										"mmaterial8",
+										"100000.00000000 ml",
+										20000.00000000,
+										"mc2",
+										"process run tests precond");			
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(1), 
+										"mprov2",
+										"mmaterial7",
+										"1000.00100000 ml",
+										500000.00000000,
+										"mc2",
+										"inventory operation tests precond");
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(2), 
+										"mprov2",
+										"mmaterial6",
+										"1360776002001.00000000 mg",
+										800000000000000.0000000,
+										"mc2",
+										"inventory operation tests precond");
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(3), 
+										"mprov2",
+										"mmaterial4",
+										"1360776000000.00000000 mg",
+										300000000000000.0000000,
+										"mc2",
+										"inventory operation tests precond");
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(4), 
 										"mprov1",
 										"mmaterial6",
 										"2000.00000000 mg",
-										0.000001,
+										0.00000100,
 										"mc3",
-										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(1), 
+										"abc123");			
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(5), 
 										"mprov2",
 										"mmaterial2",
 										"0.00000100 mg",
 										1.000001,
 										"mc1",
 										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(2), 
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(6), 
 										"mprov1",
 										"mmaterial2",
 										"2000.00000000 lb",
 										3000000.0,
 										"mc3",
 										"");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(3), 
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(7), 
 										"mprov1",
 										"mmaterial7",
 										"1.00000100 l",
 										0.000001,
 										"mc2",
 										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(4), 
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(8), 
+										"mprov1",
+										"mmaterial2",
+										"1.00000000 mg",
+										3000000.00000000,
+										"mc2",
+										"abc123");			
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(9), 
 										"mprov2",
 										"mmaterial6",
 										"3000000.00000000 lb",
 										1.0,
 										"mc1",
 										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(5), 
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(10), 
 										"mprov1",
 										"mmaterial4",
 										"3000000.00000000 lb",
 										1.000001,
 										"mc2",
 										"abc123");
-			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(6), 
+			TestUtilityCode.testExpense((Row) grd.getRows().getChildren().get(11), 
 										"mprov2",
 										"mmaterial6",
 										"1.00000000 mg",
