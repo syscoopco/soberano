@@ -227,7 +227,6 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 	
 	@Test
 	@Order(5)
-	@Disabled
 	final void testCase5() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -241,19 +240,19 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			//From LogicalQueriesForSoberanoInstance.java, the shift corresponding to the day before is closed
+			//From LogicalQueriesForSoberanoInstance.java, the shift corresponding to 5 days before is closed
 			/*
 			INSERT INTO soberano.\"ShiftClosure\"(\"This_is_identified_by_EntityTypeInstance_id\", \n"
 			+ "									\"This_is_of_Shift\", \n"
 			+ "									\"Report_is_of_This\")\n"
 			+ "	VALUES (13, \n"
-			+ "			now() - INTERVAL '1 day', \n"
+			+ "			now() - INTERVAL '10 day', \n"
 			+ "			'');",
 			*/
 			Date closedShift = new Date(); //in closedShift, current day
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -10);
+			cal.add(Calendar.DAY_OF_YEAR, -5);
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), cal.getTime());
 			
