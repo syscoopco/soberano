@@ -3,6 +3,7 @@ package co.syscoop.soberano.test.classes;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.jupiter.api.AfterAll;
@@ -84,7 +85,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), new Date());
+			Date closedShift = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(closedShift);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
+			
+			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
 			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
@@ -137,7 +143,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), new Date());
+			Date closedShift = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(closedShift);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
+			
+			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
 			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
@@ -190,7 +201,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), new Date());
+			Date closedShift = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(closedShift);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
+			
+			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
 			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
@@ -243,7 +259,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), new Date());
+			Date closedShift = new Date();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(closedShift);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
+			
+			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
 			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);

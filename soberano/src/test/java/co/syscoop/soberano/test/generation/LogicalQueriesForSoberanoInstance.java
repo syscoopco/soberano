@@ -1874,37 +1874,6 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"CREATE OR REPLACE FUNCTION soberano.\"fn_ShiftClosure_recordClosuresOnDeployment\"(\n"
-						+ "	lang character,\n"
-						+ "	loginname character varying)\n"
-						+ "    RETURNS void\n"
-						+ "    LANGUAGE 'plpgsql'\n"
-						+ "    COST 100\n"
-						+ "    VOLATILE PARALLEL UNSAFE\n"
-						+ "AS $BODY$\n"
-						+ "DECLARE\n"
-						+ "	closureId integer;\n"
-						+ "BEGIN\n"
-						+ "	closureId := 0;\n"
-						+ "	WHILE closureId >= 0 LOOP\n"
-						+ "		SELECT FROM soberano.\"fn_ShiftClosure_create\"(lang, loginname) INTO closureId;\n"
-						+ "	END LOOP;\n"
-						+ "	\n"
-						+ "	--close the day of yesterday\n"
-						+ "	SELECT FROM soberano.\"fn_ShiftClosure_create\"(lang, loginname) INTO closureId;\n"
-						+ "	\n"
-						+ "	--cancel current day closure\n"
-						+ "	PERFORM soberano.\"fn_ShiftClosure_cancel\"(\"ShiftClosureHasShiftClosureId\", loginname)\n"
-						+ "		FROM soberano.\"ShiftClosure\" ORDER BY \"ShiftClosureHasShiftClosureId\" DESC LIMIT 1;\n"
-						+ "END;\n"
-						+ "$BODY$;",
-						
-						
-						
-						"SELECT soberano.\"fn_ShiftClosure_recordClosuresOnDeployment\"('en', 'soberano.user.top');",
-						
-						
-						
 						//////////////////////
 						// business queries //
 						//////////////////////
@@ -11333,6 +11302,37 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		RETURN qryResult;\n"
 						+ "END;\n"
 						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_ShiftClosure_recordClosuresOnDeployment\"(\n"
+								+ "	lang character,\n"
+								+ "	loginname character varying)\n"
+								+ "    RETURNS void\n"
+								+ "    LANGUAGE 'plpgsql'\n"
+								+ "    COST 100\n"
+								+ "    VOLATILE PARALLEL UNSAFE\n"
+								+ "AS $BODY$\n"
+								+ "DECLARE\n"
+								+ "	closureId integer;\n"
+								+ "BEGIN\n"
+								+ "	closureId := 0;\n"
+								+ "	WHILE closureId >= 0 LOOP\n"
+								+ "		SELECT FROM soberano.\"fn_ShiftClosure_create\"(lang, loginname) INTO closureId;\n"
+								+ "	END LOOP;\n"
+								+ "	\n"
+								+ "	--close the day of yesterday\n"
+								+ "	SELECT FROM soberano.\"fn_ShiftClosure_create\"(lang, loginname) INTO closureId;\n"
+								+ "	\n"
+								+ "	--cancel current day closure\n"
+								+ "	PERFORM soberano.\"fn_ShiftClosure_cancel\"(\"ShiftClosureHasShiftClosureId\", loginname)\n"
+								+ "		FROM soberano.\"ShiftClosure\" ORDER BY \"ShiftClosureHasShiftClosureId\" DESC LIMIT 1;\n"
+								+ "END;\n"
+								+ "$BODY$;",
+								
+								
+								
+						"SELECT soberano.\"fn_ShiftClosure_recordClosuresOnDeployment\"('en', 'soberano.user.top');",
 						
 						
 						
