@@ -38,7 +38,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(11)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
@@ -90,7 +90,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -150,7 +150,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -205,7 +205,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -258,7 +258,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -317,7 +317,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -376,7 +376,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -435,7 +435,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -487,7 +487,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			//From LogicalQueriesForSoberanoInstance.java, the shift corresponding to 11 days before is closed
+			//From LogicalQueriesForSoberanoInstance.java, the shift corresponding to 10 days before is closed
 			/*
 			INSERT INTO soberano.\"ShiftClosure\"(\"This_is_identified_by_EntityTypeInstance_id\", \n"
 			+ "									\"This_is_of_Shift\", \n"
@@ -499,7 +499,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date(); //in closedShift, current day
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -11);
+			cal.add(Calendar.DAY_OF_YEAR, -10);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -619,7 +619,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -679,7 +679,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -739,7 +739,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -799,7 +799,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -859,7 +859,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -919,7 +919,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -9);
+			cal.add(Calendar.DAY_OF_YEAR, -8);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -977,7 +977,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -8);
+			cal.add(Calendar.DAY_OF_YEAR, -7);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1037,7 +1037,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -8);
+			cal.add(Calendar.DAY_OF_YEAR, -7);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1097,7 +1097,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -8);
+			cal.add(Calendar.DAY_OF_YEAR, -7);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1155,7 +1155,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -7);
+			cal.add(Calendar.DAY_OF_YEAR, -6);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1215,7 +1215,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -7);
+			cal.add(Calendar.DAY_OF_YEAR, -6);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1275,7 +1275,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -7);
+			cal.add(Calendar.DAY_OF_YEAR, -6);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1335,7 +1335,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -7);
+			cal.add(Calendar.DAY_OF_YEAR, -6);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1393,7 +1393,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -6);
+			cal.add(Calendar.DAY_OF_YEAR, -5);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1453,7 +1453,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -6);
+			cal.add(Calendar.DAY_OF_YEAR, -5);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1511,7 +1511,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -5);
+			cal.add(Calendar.DAY_OF_YEAR, -4);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1571,7 +1571,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -5);
+			cal.add(Calendar.DAY_OF_YEAR, -4);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1633,7 +1633,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -5);
+			cal.add(Calendar.DAY_OF_YEAR, -4);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1691,7 +1691,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -4);
+			cal.add(Calendar.DAY_OF_YEAR, -3);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1751,7 +1751,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -4);
+			cal.add(Calendar.DAY_OF_YEAR, -3);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1809,7 +1809,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1869,7 +1869,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1929,7 +1929,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -1989,7 +1989,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2049,7 +2049,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2109,7 +2109,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2169,7 +2169,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2229,7 +2229,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2289,7 +2289,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -3);
+			cal.add(Calendar.DAY_OF_YEAR, -2);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2347,7 +2347,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2407,7 +2407,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2467,7 +2467,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2527,7 +2527,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2587,7 +2587,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2647,7 +2647,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2707,7 +2707,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2767,7 +2767,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			
@@ -2827,7 +2827,7 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 			Date closedShift = new Date();
 			Calendar cal = Calendar.getInstance();
 			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -2);
+			cal.add(Calendar.DAY_OF_YEAR, -1);
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
 			

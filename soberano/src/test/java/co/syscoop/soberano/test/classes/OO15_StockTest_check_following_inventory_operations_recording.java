@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(15)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO15_StockTest_check_following_inventory_operations_recording extends StockActionTest {
@@ -111,7 +111,7 @@ class OO15_StockTest_check_following_inventory_operations_recording extends Stoc
 										"mmaterial7",
 										1000000.00000000,
 										"ml",
-										249.99975000);
+										0.5);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
