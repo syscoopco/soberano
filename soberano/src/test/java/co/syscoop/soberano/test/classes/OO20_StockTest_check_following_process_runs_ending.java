@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(20)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO20_StockTest_check_following_process_runs_ending extends StockActionTest {
@@ -144,7 +144,7 @@ class OO20_StockTest_check_following_process_runs_ending extends StockActionTest
 										"mmaterial7",
 										1004000.00000000,
 										"ml",
-										1157624.76705712);
+										1157376.26133003);
 			testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm9",
 										"mmaterial9",

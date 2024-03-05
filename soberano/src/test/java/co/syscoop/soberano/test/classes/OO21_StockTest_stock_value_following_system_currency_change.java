@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(21)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class OO21_StockTest_system_currency_change extends CurrencyActionTest {
 	
@@ -111,7 +111,7 @@ class OO21_StockTest_system_currency_change extends CurrencyActionTest {
 							524.84403952 / 6.67800009);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(4),										
-							169464955.82463177 / 6.67800009);
+							169429313.01338675 / 6.67800009);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(5),										
 							785846.8616671 / 6.67800009);

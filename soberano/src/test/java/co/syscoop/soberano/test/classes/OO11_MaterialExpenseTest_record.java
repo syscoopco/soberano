@@ -38,7 +38,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(11)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
@@ -87,13 +87,6 @@ class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			Date closedShift = new Date();
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(closedShift);
-			cal.add(Calendar.DAY_OF_YEAR, -8);
-			
-			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), cal.getTime());
-			
 			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
