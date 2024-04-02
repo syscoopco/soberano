@@ -1,11 +1,3 @@
-/****************************************************************************************/
-/* TODO:																				*/
-/* IMPORTANT: This is an unplanned test. Test cases weren't selected nor calculated		*/
-/*			in advanced. It is for regression testing. GUI content is compared with		*/
-/*			the output resulting of a (not verified yet) human run following the 		*/
-/*			previous automatic tests.													*/
-/****************************************************************************************/
-
 package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;

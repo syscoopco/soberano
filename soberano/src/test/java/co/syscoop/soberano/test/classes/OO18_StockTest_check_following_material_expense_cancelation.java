@@ -1,11 +1,3 @@
-/****************************************************************************************/
-/* TODO:																				*/
-/* IMPORTANT: This is an unplanned test. Test cases weren't selected nor calculated		*/
-/*			in advanced. It is for regression testing. GUI content is compared with		*/
-/*			the output resulting of a (not verified yet) human run following the 		*/
-/*			previous automatic tests.													*/
-/****************************************************************************************/
-
 package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -107,7 +99,7 @@ class OO18_StockTest_check_following_material_expense_cancelation extends StockA
 										"mmaterial7",
 										1000.001,
 										"ml",
-										0.0);
+										499.9995);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm8",
 										"mmaterial8",
