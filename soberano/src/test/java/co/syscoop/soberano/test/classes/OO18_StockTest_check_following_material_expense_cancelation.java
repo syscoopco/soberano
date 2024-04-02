@@ -34,13 +34,13 @@ import co.syscoop.soberano.test.helper.StockForm;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(28)
+@Order(18)
 
 //TODO: enable test
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO28_StockTest_check_following_material_expense_cancelation extends StockActionTest {
+class OO18_StockTest_check_following_material_expense_cancelation extends StockActionTest {
 	
 	protected StockForm stockForm = null;
 
@@ -76,62 +76,44 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 		try {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(9, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			assertEquals(6, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
 			
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										3816.368002,
+										1000.000001,
 										"kg",										
-										2506967.91065426);
+										3002.000997);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										2721552001000.0,
+										2721552000000.0,
 										"mg",
-										16.56379044);
+										110.23122101);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
-										-1.40924524,
+										0.0,
 										"lb",
 										0.0);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
 										"mm6",
 										"mmaterial6",
-										2721552096818.0,
+										1360776004002.0,
 										"mg",
-										78.59299677);
+										587.89984365);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 										"mm7",
 										"mmaterial7",
-										7000.002,
+										1000.001,
 										"ml",
-										25376602.80633985);
+										0.0);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm8",
 										"mmaterial8",
-										97400.0,
+										100000.0,
 										"ml",
-										117676.97680086);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(6), 
-										"mm9",
-										"mmaterial9",
-										7.0,
-										"pcs",
-										38998140.28080506);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(7), 
-										"mp1",
-										"mproduct1",
-										0.0,
-										"kg",
-										0.0);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(8), 
-										"mp7",
-										"mproduct7",
-										11.0,
-										"pcs",
-										0.0);
+										0.2);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -161,56 +143,44 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(8, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			assertEquals(6, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
 			
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										3812.370002,
+										1000.001001000000000,
 										"kg",										
-										973.92672368);
+										1640.31572181);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										2721553000000.0,
+										2721553000000.00000000,
 										"mg",
-										16.50661561);
+										110.231180506130000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
-										-26.43339924,
+										-22.02415400,
 										"lb",
 										0.0);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
 										"mm6",
 										"mmaterial6",
-										2721578992726.0,
+										1360804353502.00000000,
 										"mg",
-										44.01719921);
+										587.887595995132000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 										"mm7",
 										"mmaterial7",
-										3000.002,
+										1000.00100000,
 										"ml",
-										1197950.84576058);
+										0.000000000000000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
 										"mm8",
 										"mmaterial8",
-										97400.0,
+										100000.00000000,
 										"ml",
-										117676.97680086);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(6), 
-										"mm9",
-										"mmaterial9",
-										1.0,
-										"pcs",
-										11979513.24940921);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(7), 
-										"mp7",
-										"mproduct7",
-										0.0,
-										"pcs",
-										0.0);
+										0.200000000000000);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -240,50 +210,38 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 			
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(7, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			assertEquals(5, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
 			
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
 											"mm2",
 											"mmaterial2",
-											2011.998,
+											999.99900000,
 											"kg",										
-											52187.69751684);
+											0.00000000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
 											"mm4",
 											"mmaterial4",
-											6000.0,
+											0.00000000,
 											"mg",
-											155.58763247);
+											0.00000000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
 											"mm5",
 											"mmaterial5",
-											7817.4015322,
+											7817.40153220,
 											"lb",
-											0.0);
+											0.00000000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
 											"mm6",
 											"mmaterial6",
-											0.0,
+											0.00000000,
 											"mg",
-											0.0);
+											0.00000000);
 			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
 											"mm7",
 											"mmaterial7",
-											-999000.0,
+											-999000.00000000,
 											"ml",
-											0.0);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(5), 
-											"mp1",
-											"mproduct1",
-											6.0,
-											"kg",
-											0.0);
-			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(6), 
-											"mp7",
-											"mproduct7",
-											11.0,
-											"pcs",
-											0.0);
+											0.00000000);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -296,12 +254,116 @@ class OO28_StockTest_check_following_material_expense_cancelation extends StockA
 	@Test
 	final void testCase4() {
 
-		SpringUtility.setLoggedUserForTesting("user18@soberano.syscoop.co");
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw8");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1008));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
-			assertEquals(0, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			assertEquals(5, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
+											"mm2",
+											"mmaterial2",
+											-1454.59200000,
+											"kg",										
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
+											"mm4",
+											"mmaterial4",
+											-1001000000.00000000,
+											"mg",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
+											"mm5",
+											"mmaterial5",
+											-10000.00000000,
+											"lb",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
+											"mm6",
+											"mmaterial6",
+											-481941500.00000000,
+											"mg",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
+											"mm7",
+											"mmaterial7",
+											-1000.00000000,
+											"ml",
+											0.00000000);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase5() {
+
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw6");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1006));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			assertEquals(5, grd.getRows().getChildren().size(), "Wrong count of stock entries.");
+			
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(0), 
+											"mm2",
+											"mmaterial2",
+											454.59200000,
+											"kg",										
+											2995.39727103);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(1), 
+											"mm4",
+											"mmaterial4",
+											1000000000.00000000,
+											"mg",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(2), 
+											"mm5",
+											"mmaterial5",
+											2204.62262180,
+											"lb",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(3), 
+											"mm6",
+											"mmaterial6",
+											453592000.00000000,
+											"mg",
+											0.00000000);
+			TestUtilityCode.testStockRecord((Row) grd.getRows().getChildren().get(4), 
+											"mm7",
+											"mmaterial7",
+											1000000.00000000,
+											"ml",
+											0.50000000);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

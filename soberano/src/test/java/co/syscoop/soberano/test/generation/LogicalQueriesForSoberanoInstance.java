@@ -6894,7 +6894,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "													inventoryItemQuantityAtOrigin,\n"
 						+ "													inventoryItemValueAtOrigin,\n"
 						+ "													NULL,\n"
-						+ "													fromWarehouse,\n"
+						+ "													NULL, --fromWarehouse,\n"
 						+ "													true);\n"
 						+ "\n"
 						+ "						PERFORM soberano.\"fn_Stock_change\"(NULL,\n"

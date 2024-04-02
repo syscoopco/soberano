@@ -15,7 +15,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 @Order(22)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class OO22_AcquirableMaterialTest_check_stock_after_modifying_unit extends AcquirableMaterialActionTest{
 
