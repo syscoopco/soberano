@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.zkoss.lang.Library;
 import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
-import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
+import co.syscoop.soberano.test.helper.ActionTest;
 
-@Order(23)
+@Order(28)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
-class OO23_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
+class OO28_ReceivableTest_grid extends ActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,6 +45,6 @@ class OO23_OrderTest_check_activity_summary_tree_after_recording extends Acquira
 
 	@Test
 	final void testCase1() {
-		//TODO: By clicking 'A' shortcut bottom on the bottom bar, check counter and order nodes are shown correctly.
+		//TODO: receivables.zul. grid content. receivable dishonoring. filtering.
 	}
 }

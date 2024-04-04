@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 @Order(5)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 class O5_WarehouseTest_modify extends WarehouseActionTest {
 

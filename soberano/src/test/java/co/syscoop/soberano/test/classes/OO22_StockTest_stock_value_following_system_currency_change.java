@@ -26,10 +26,10 @@ import co.syscoop.soberano.test.helper.CurrencyForm;
 import co.syscoop.soberano.test.helper.StockForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(21)
+@Order(22)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
 class OO21_StockTest_system_currency_change extends CurrencyActionTest {
 	

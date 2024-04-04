@@ -15,7 +15,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 @Order(17)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 class OO17_CatalogTest extends ActionTest {
 

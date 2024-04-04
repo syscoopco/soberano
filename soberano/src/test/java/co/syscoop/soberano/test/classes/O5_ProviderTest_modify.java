@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.ProviderForm;
 @Order(5)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 class O5_ProviderTest_modify extends ProviderActionTest{
 

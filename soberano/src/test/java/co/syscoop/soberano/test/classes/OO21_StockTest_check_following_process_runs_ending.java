@@ -27,13 +27,13 @@ import co.syscoop.soberano.test.helper.StockActionTest;
 import co.syscoop.soberano.test.helper.StockForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(20)
+@Order(21)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO20_StockTest_check_following_process_runs_ending extends StockActionTest {
+class OO21_StockTest_check_following_process_runs_ending extends StockActionTest {
 	
 	protected StockForm stockForm = null;
 

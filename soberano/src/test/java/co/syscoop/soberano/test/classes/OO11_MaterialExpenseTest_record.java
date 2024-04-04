@@ -38,7 +38,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(11)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO11_MaterialExpenseTest_record extends MaterialExpenseActionTest {

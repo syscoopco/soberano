@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.zkoss.lang.Library;
 import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
-import co.syscoop.soberano.test.helper.ActionTest;
+import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
-@Order(26)
+@Order(24)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
-class OO26_ActivityTest extends ActionTest {
+class OO24_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,6 +45,6 @@ class OO26_ActivityTest extends ActionTest {
 
 	@Test
 	final void testCase1() {
-		//TODO: activity.zul tree content
+		//TODO: By clicking 'A' shortcut bottom on the bottom bar, check counter and order nodes are shown correctly.
 	}
 }

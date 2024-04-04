@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(10)
 
 //TODO: enable testCase
-//@Disabled
+////@Disabled
 
 class OO10_WarehouseTest_disable extends WarehouseActionTest{
 

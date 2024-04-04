@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.ProcessForm;
 @Order(5)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 class O5_ProcessTest_modify extends ProcessActionTest{
 

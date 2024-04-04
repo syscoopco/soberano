@@ -27,13 +27,13 @@ import co.syscoop.soberano.test.helper.NewOrderActionTest;
 import co.syscoop.soberano.test.helper.NewOrderForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(22)
+@Order(23)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO22_OrderTest_record extends NewOrderActionTest {
+class OO23_OrderTest_record extends NewOrderActionTest {
 	
 	protected NewOrderForm newOrderForm = null;
 

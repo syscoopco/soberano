@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(8)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTest {

@@ -12,12 +12,12 @@ import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.ActionTest;
 
-@Order(26)
+@Order(25)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
-class OO26_InventoryTest_proper_recalculation_following_past_material_expense_recording extends ActionTest {
+class OO25_ActivityTest extends ActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,6 +45,6 @@ class OO26_InventoryTest_proper_recalculation_following_past_material_expense_re
 
 	@Test
 	final void testCase1() {
-		//TODO:
+		//TODO: activity.zul tree content
 	}
 }

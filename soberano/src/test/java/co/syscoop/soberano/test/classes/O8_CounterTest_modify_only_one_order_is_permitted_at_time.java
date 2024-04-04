@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(8)
 
 //TODO: enable testCase
-//@Disabled
+////@Disabled
 
 class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterActionTest {
 	

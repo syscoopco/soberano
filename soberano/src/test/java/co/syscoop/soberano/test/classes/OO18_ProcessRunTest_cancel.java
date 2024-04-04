@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(18)
 
 //TODO: enable test
-//@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO18_ProcessRunTest_cancel extends ProcessRunActionTest {

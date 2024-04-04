@@ -30,13 +30,13 @@ import co.syscoop.soberano.test.helper.ProcessRunActionTest;
 import co.syscoop.soberano.test.helper.ProcessRunForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(19)
+@Order(20)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO19_ProcessRunTest_end extends ProcessRunActionTest {
+class OO20_ProcessRunTest_end extends ProcessRunActionTest {
 	
 	protected ProcessRunForm processRunForm = null;
 

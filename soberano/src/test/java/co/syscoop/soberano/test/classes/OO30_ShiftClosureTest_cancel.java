@@ -12,12 +12,12 @@ import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.ActionTest;
 
-@Order(26)
+@Order(30)
 
 //TODO: enable test
-@Disabled
+////@Disabled
 
-class OO26_ReceivableTest_grid extends ActionTest {
+class OO30_ShiftClosureTest_cancel extends ActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,6 +45,6 @@ class OO26_ReceivableTest_grid extends ActionTest {
 
 	@Test
 	final void testCase1() {
-		//TODO: receivables.zul. grid content. receivable dishonoring. filtering.
+		//TODO: 
 	}
 }
