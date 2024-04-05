@@ -36,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(25)
 
 //TODO: enable test
-////@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO25_OrderTest_add_items_and_order_discount extends OrderActionTest {
