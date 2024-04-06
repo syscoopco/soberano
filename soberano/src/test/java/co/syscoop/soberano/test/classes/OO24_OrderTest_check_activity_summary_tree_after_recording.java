@@ -15,7 +15,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 @Order(24)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class OO24_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
 

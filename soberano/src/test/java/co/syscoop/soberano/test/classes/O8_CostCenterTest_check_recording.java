@@ -21,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(8)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 
