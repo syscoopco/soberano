@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(22)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class OO21_StockTest_system_currency_change extends CurrencyActionTest {
 	
