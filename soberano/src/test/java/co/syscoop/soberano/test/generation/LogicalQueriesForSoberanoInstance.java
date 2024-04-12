@@ -371,6 +371,36 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"/********************************************************************************/\n"
+						+ "/*RULE_CONSTRAINT_16: At most one 'Printer' can be the default printer.			*/\n"
+						+ "/*RULE_CONSTRAINT_17: At most one 'Printer' can be the management printer.   	*/\n"
+						+ "/********************************************************************************/\n"
+						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_Printer_RULE_CONSTRAINTS_16_AND_17\"(\n"
+						+ "	isdefaultprinter boolean,\n"
+						+ "	ismanagementprinter boolean)\n"
+						+ "    RETURNS void\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		IF isdefaultprinter AND\n"
+						+ "			ismanagementprinter THEN\n"
+						+ "			UPDATE soberano.\"Printer\"\n"
+						+ "				SET \"Printer_is_default_printer\" = false,\n"
+						+ "					\"Printer_is_used_by_management\" = false;\n"
+						+ "		ELSIF isdefaultprinter THEN\n"
+						+ "			UPDATE soberano.\"Printer\" \n"
+						+ "				SET \"Printer_is_default_printer\" = false;\n"
+						+ "		ELSIF ismanagementprinter THEN\n"
+						+ "			UPDATE soberano.\"Printer\"\n"
+						+ "				SET \"Printer_is_used_by_management\" = false;\n"
+						+ "		END IF;\n"
+						+ "	END;\n"
+						+ "$BODY$;",
+						
+						
+						
 						///////////////////////////////
 						// foreign keys to metamodel //
 						///////////////////////////////
@@ -465,6 +495,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"ALTER TABLE soberano.\"Printer\"\n"
+						+ "						ADD CONSTRAINT \"Printer_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
 						"ALTER TABLE soberano.\"Process\" \n"
 						+ "			ADD CONSTRAINT \"Process_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
@@ -489,6 +526,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			ADD CONSTRAINT \"ProductCategory_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"ProductionLine\"\n"
+						+ "						ADD CONSTRAINT \"ProductionLine_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
@@ -557,12 +601,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(14, 'System admin'),\n"
 						+ "		(15, 'Technologist'),\n"
 						+ "		(16, 'Manager assistant'),\n"
-						+ "		(17, 'Staff');",
+						+ "		(17, 'Staff'),\n"
+						+ "		(18, 'Reopener');",
 						
 						
 												
 						"--assign top user to all responsibilities\n"
-						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
+						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
 						
 							
 												
@@ -600,7 +645,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			(24, 'Withdrawal', '_5C00E9C9-05FC-4B07-A1F4-A679E4A52D6D'),\n"
 						+ "			(25, 'Receivable', '_78C955BD-2EAA-4504-852D-E545AB7FFB5E'),\n"
 						+ "			(26, 'Balancing', '_394DD7F2-327F-4823-B9EC-5A231CB7053E'),\n"
-						+ "			(27, 'ProcessRun', '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA');",
+						+ "			(27, 'ProcessRun', '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA'),\n"
+						+ "			(28, 'Printer', '_4F6BC878-0E8B-46DB-9B2C-59A103C00C03'),\n"
+						+ "			(29, 'ProductionLine, '_D6394DC1-F701-4B68-96A3-8167D217F6E8');",
 						
 						
 						
@@ -633,7 +680,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	 (24, 1),\n"
 						+ "	 (25, 1),\n"
 						+ "	 (26, 1),\n"
-						+ "	 (27, 1);",
+						+ "	 (27, 1),\n"
+						+ "  (28, 1),\n"
+						+ "  (29, 1);",
 						
 						
 						
@@ -745,7 +794,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(3006, 'Check', 3, 3002, 3002, 'false'),\n"
 						+ "		(3007, 'Check', 3, 3003, 3003, 'false'),\n"
 						+ "		(3008, 'Check', 3, 3004, 3004, 'false'),\n"
-						+ "		(3009, 'Cancel order', 3, 3003, 3004, 'false');\n"
+						+ "		(3009, 'Cancel order', 3, 3003, 3004, 'false'),\n"
+						+ "		(3010, 'Reopen', 3, 3003, 3002, 'false');\n"
 						+ "			\n"
 						+ "--responsability filters\n"
 						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
@@ -772,7 +822,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(3, 'Manager', 3009),\n"
 						+ "				(3, 'Shift manager', 3006),\n"
 						+ "				(3, 'Shift manager', 3007),\n"
-						+ "				(3, 'Shift manager', 3008),\n"						
+						+ "				(3, 'Shift manager', 3008),\n"
+						+ "				(3, 'Reopener', 3010),\n"		
 						+ "				(3, 'Auditor', 3006),\n"	
 						+ "				(3, 'Auditor', 3007),\n"
 						+ "				(3, 'Auditor', 3008),\n"	
@@ -1661,6 +1712,78 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(20, 'Accounter', 20002),\n"
 						+ "				(20, 'Auditor', 20002),\n"
 						+ "				(20, 'Manager', 20002);",
+						
+						
+						
+						"/* printer */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (28001, 'soberano.stage.starting', 28),\n"
+						+ "		(28002, 'Enabled', 28),\n"
+						+ "		(28003, 'Disabled', 28);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (28001, 'Add', 28, 28001, 28002, 'false'),\n"
+						+ "		(28002, 'Apply', 28, 28002, 28002, 'false'),\n"
+						+ "		(28003, 'Disable', 28, 28002, 28003, 'false'),\n"
+						+ "		(28004, 'Check', 28, 28002, 28002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (28, 'System admin', 28001),\n"
+						+ "				(28, 'System admin', 28002),\n"
+						+ "				(28, 'System admin', 28003),\n"
+						+ "				(28, 'Auditor', 28004);",
+						
+						
+						
+						"/* production line */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (29001, 'soberano.stage.starting', 29),\n"
+						+ "		(29002, 'Enabled', 29),\n"
+						+ "		(29003, 'Disabled', 29);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (29001, 'Add', 29, 29001, 29002, 'false'),\n"
+						+ "		(29002, 'Apply', 29, 29002, 29002, 'false'),\n"
+						+ "		(29003, 'Disable', 29, 29002, 29003, 'false'),\n"
+						+ "		(29004, 'Check', 29, 29002, 29002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (29, 'Technologist', 29001),\n"
+						+ "				(29, 'Technologist', 29002),\n"
+						+ "				(29, 'Technologist', 29003),\n"
+						+ "				(29, 'Accounter', 29004),\n"
+						+ "				(29, 'Shift manager', 29004),\n"	
+						+ "				(29, 'Manager', 29004),\n"
+						+ "				(29, 'Workshop 1 worker', 29004),\n"
+						+ "				(29, 'Workshop 2 worker', 29004),\n"
+						+ "				(29, 'Manager assistant', 29004),\n"
+						+ "				(29, 'Auditor', 29004);",
 						
 						
 												
