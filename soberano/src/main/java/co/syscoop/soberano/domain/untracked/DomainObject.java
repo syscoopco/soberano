@@ -17,6 +17,9 @@ public class DomainObject implements IDomainObject {
 	private String stringId = "";
 	private String name = "";
 	private String qualifiedName = "";
+	private String entityTypeMeaningId = "";
+	private String entityTypeName = "";
+	private Integer entityTypeInstanceId = 0;
 	
 	//it is expected queries and parameters to be set by subclasses
 	protected String getAllQuery = "";
@@ -92,5 +95,29 @@ public class DomainObject implements IDomainObject {
 
 	public void setQualifiedName(String qualifiedName) {
 		this.qualifiedName = qualifiedName;
+	}
+
+	public String getEntityTypeName() {
+		return entityTypeName;
+	}
+
+	public void setEntityTypeName(String entityTypeName) {
+		this.entityTypeName = entityTypeName;
+	}
+
+	public Integer getEntityTypeInstanceId() {
+		return entityTypeInstanceId;
+	}
+
+	public void setEntityTypeInstanceId(Integer entityTypeInstanceId) {
+		this.entityTypeInstanceId = entityTypeInstanceId;
+	}
+
+	public String getEntityTypeMeaningId() {
+		return entityTypeMeaningId;
+	}
+
+	public void setEntityTypeMeaningId(String entityTypeMeaningId) {
+		this.entityTypeMeaningId = entityTypeMeaningId;
 	}
 }

@@ -1768,7 +1768,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	VALUES (29001, 'Add', 29, 29001, 29002, 'false'),\n"
 						+ "		(29002, 'Apply', 29, 29002, 29002, 'false'),\n"
 						+ "		(29003, 'Disable', 29, 29002, 29003, 'false'),\n"
-						+ "		(29004, 'Check', 29, 29002, 29002, 'false');\n"
+						+ "		(29004, 'Check', 29, 29002, 29002, 'false'),\n"
+						+ "		(29005, 'Manage allocation', 29, 29002, 29002, 'false');\n"
 						+ "			\n"
 						+ "--responsability filters\n"
 						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
@@ -1782,6 +1783,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(29, 'Manager', 29004),\n"
 						+ "				(29, 'Workshop 1 worker', 29004),\n"
 						+ "				(29, 'Workshop 2 worker', 29004),\n"
+						+ "				(29, 'Workshop 1 worker', 29005),\n"
+						+ "				(29, 'Workshop 2 worker', 29005),\n"
 						+ "				(29, 'Manager assistant', 29004),\n"
 						+ "				(29, 'Auditor', 29004);",
 						
