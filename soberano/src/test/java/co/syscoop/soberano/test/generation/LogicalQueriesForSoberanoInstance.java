@@ -371,11 +371,11 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"/********************************************************************************/\n"
-						+ "/*RULE_CONSTRAINT_16: At most one 'Printer' can be the default printer.			*/\n"
-						+ "/*RULE_CONSTRAINT_17: At most one 'Printer' can be the management printer.   	*/\n"
-						+ "/********************************************************************************/\n"
-						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_Printer_RULE_CONSTRAINTS_16_AND_17\"(\n"
+						"/*****************************************************************************************/\n"
+						+ "/*RULE_CONSTRAINT_16: At most one 'PrinterProfile' can be the default printer profile. */\n"
+						+ "/*RULE_CONSTRAINT_17: At most one 'PrinterProfile' can be the management printer profile.     */\n"
+						+ "/***************************************************************************************/\n"
+						+ "CREATE OR REPLACE FUNCTION soberano.\"fn_PrinterProfile_RULE_CONSTRAINTS_16_AND_17\"(\n"
 						+ "	isdefaultprinter boolean,\n"
 						+ "	ismanagementprinter boolean)\n"
 						+ "    RETURNS void\n"
@@ -386,15 +386,15 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	BEGIN\n"
 						+ "		IF isdefaultprinter AND\n"
 						+ "			ismanagementprinter THEN\n"
-						+ "			UPDATE soberano.\"Printer\"\n"
-						+ "				SET \"Printer_is_default_printer\" = false,\n"
-						+ "					\"Printer_is_used_by_management\" = false;\n"
+						+ "			UPDATE soberano.\"PrinterProfile\"\n"
+						+ "				SET \"PrinterProfile_is_default_printer_profile\" = false,\n"
+						+ "					\"PrinterProfile_is_used_by_management\" = false;\n"
 						+ "		ELSIF isdefaultprinter THEN\n"
-						+ "			UPDATE soberano.\"Printer\" \n"
-						+ "				SET \"Printer_is_default_printer\" = false;\n"
+						+ "			UPDATE soberano.\"PrinterProfile\" \n"
+						+ "				SET \"PrinterProfile_is_default_printer_profile\" = false;\n"
 						+ "		ELSIF ismanagementprinter THEN\n"
-						+ "			UPDATE soberano.\"Printer\"\n"
-						+ "				SET \"Printer_is_used_by_management\" = false;\n"
+						+ "			UPDATE soberano.\"PrinterProfile\"\n"
+						+ "				SET \"PrinterProfile_is_used_by_management\" = false;\n"
 						+ "		END IF;\n"
 						+ "	END;\n"
 						+ "$BODY$;",
@@ -495,8 +495,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"ALTER TABLE soberano.\"Printer\"\n"
-						+ "						ADD CONSTRAINT \"Printer_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						"ALTER TABLE soberano.\"PrinterProfile\"\n"
+						+ "						ADD CONSTRAINT \"PrinterProfile_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
 						
@@ -646,8 +646,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			(25, 'Receivable', '_78C955BD-2EAA-4504-852D-E545AB7FFB5E'),\n"
 						+ "			(26, 'Balancing', '_394DD7F2-327F-4823-B9EC-5A231CB7053E'),\n"
 						+ "			(27, 'ProcessRun', '_0FA8A5A6-6037-4B1F-AB01-CB0947E3C3AA'),\n"
-						+ "			(28, 'Printer', '_4F6BC878-0E8B-46DB-9B2C-59A103C00C03'),\n"
-						+ "			(29, 'ProductionLine, '_D6394DC1-F701-4B68-96A3-8167D217F6E8');",
+						+ "			(28, 'PrinterProfile', '_4F6BC878-0E8B-46DB-9B2C-59A103C00C03'),\n"
+						+ "			(29, 'ProductionLine', '_D6394DC1-F701-4B68-96A3-8167D217F6E8');",
 						
 						
 						
@@ -1715,7 +1715,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"/* printer */\n"
+						"/* printer profile */\n"
 						+ "\n"
 						+ "--stage filters\n"
 						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
@@ -7647,12 +7647,12 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	BEGIN\n"
 						+ "		RETURN QUERY SELECT crcurr.\"CashRegisterHasCashRegisterId\",\n"
 						+ "							\"This_is_identified_by_EntityTypeInstance_id\",\n"
-						+ "							\"This_uses_Printer_with_PrinterHasPrinterId\",\n"
+						+ "							\"This_uses_PrinterProfile_with_PrinterProfileHasPrinterProfileId\",\n"
 						+ "							\"This_has_Currency_code\",\n"
 						+ "							CASE WHEN \"Balance\" IS NULL THEN CAST(0 AS numeric) ELSE ROUND(\"Balance\", 8) END\n"
 						+ "							FROM (SELECT \"CashRegisterHasCashRegisterId\", \n"
 						+ "										cr.\"This_is_identified_by_EntityTypeInstance_id\",\n"
-						+ "										\"This_uses_Printer_with_PrinterHasPrinterId\",\n"
+						+ "										\"This_uses_PrinterProfile_with_PrinterProfileHasPrinterProfileId\",\n"
 						+ "										\"CurrencyHasCurrencyId\",\n"
 						+ "										\"This_has_Currency_code\"\n"
 						+ "									FROM soberano.\"CashRegister\" cr, soberano.\"Currency\"\n"
