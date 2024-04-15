@@ -1,6 +1,6 @@
 <?page title="" contentType="text/html;charset=UTF-8"?>
 <zk>
-	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.PrinterProfileFormComposer">
+	<vbox id="vboxForm" hflex="1" vflex="1" visible="true">
 		<label value="${labels.caption.field.name}" sclass="Caption"></label>			
 		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
 		<separator></separator>
@@ -32,7 +32,7 @@
 		<textbox id="txtFooter" rows="3" multiline="true" maxlength="1000" hflex="1"/>
 		<separator></separator>
 		<label id="lblUsedBy" value="${labels.caption.field.usedBy}" sclass="Caption"></label>		
-		<tree id="treePrintJobsSources" apply="co.syscoop.soberano.composers.PrintJobsSourcesUsingPrinterProfileFormComposer">
+		<tree id="treePrintJobsSources">
 			<treecols>
 				<treecol>
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.PrintJobsSourceSelectionViewModel')">
@@ -43,6 +43,9 @@
 							</template>
 						</combobox>		
 					</hbox>					
+				</treecol>
+				<treecol id="treecolAddSourceButton">
+					<button id="btnAddSource" label="+" apply="co.syscoop.soberano.composers.AddPrintJobsSourceButtonComposer"></button>
 				</treecol>
 			</treecols>
 			<treechildren id="tchdnPrintJobsSources"></treechildren>

@@ -26,8 +26,8 @@ public class PrinterProfile extends TrackedObject {
 	private Boolean isDefaultPrinter = true;
 	private Boolean isManagementPrinter = false;
 	private String printerPath = "POS58";
-	private ArrayList<Integer> objectUsingThisIds = new ArrayList<Integer>();
-	private ArrayList<String> objectUsingThisQualifiedNames = new ArrayList<String>();
+	private ArrayList<Integer> objectsUsingThisIds = new ArrayList<Integer>();
+	private ArrayList<String> objectsUsingThisQualifiedNames = new ArrayList<String>();
 		
 	public PrinterProfile(Integer id) {
 		super(id);
@@ -76,8 +76,8 @@ public class PrinterProfile extends TrackedObject {
 			Boolean isDefaultPrinter,
 			Boolean isManagementPrinter,
 			String printerPath,
-			ArrayList<Integer> objectUsingThisIds,
-			ArrayList<String> objectUsingThisQualifiedNames) {
+			ArrayList<Integer> objectsUsingThisIds,
+			ArrayList<String> objectsUsingThisQualifiedNames) {
 		this(id, 
 			entityTypeInstanceId, 
 			name,
@@ -91,8 +91,8 @@ public class PrinterProfile extends TrackedObject {
 			isDefaultPrinter,
 			isManagementPrinter,
 			printerPath);	
-		this.objectUsingThisIds = objectUsingThisIds;
-		this.objectUsingThisQualifiedNames = objectUsingThisQualifiedNames;
+		this.objectsUsingThisIds = objectsUsingThisIds;
+		this.objectsUsingThisQualifiedNames = objectsUsingThisQualifiedNames;
 	}
 	
 	public PrinterProfile() {
@@ -127,7 +127,7 @@ public class PrinterProfile extends TrackedObject {
 		recordParameters.addValue("compactFormat", this.getCompactFormat());
 		recordParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
 		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());		
-		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectUsingThisIds().toArray()));
+		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
 	}
@@ -161,7 +161,7 @@ public class PrinterProfile extends TrackedObject {
 		modifyParameters.addValue("compactFormat", this.getCompactFormat());
 		modifyParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
 		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());		
-		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectUsingThisIds().toArray()));
+		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
 	}
@@ -224,12 +224,18 @@ public class PrinterProfile extends TrackedObject {
 		super.get(new PrinterProfileMapper());
 	}
 	
-	public List<Object> getObjectsUsingThis(Integer printerProfileId) throws SQLException {
+	public List<Object> getObjectsUsingThis() throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_PrinterProfile_getObjectsUsingThis\"(:printerProfileId, :loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_PrinterProfile_getObjectsUsingThis\"(:loginname)";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("printerProfileId", printerProfileId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new DomainObjectQualifiedMapper());
+	}
+	
+	public List<Object> getPrintJobSources() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_PrinterProfile_getPrintJobSources\"()";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		return super.query(qryStr, parametersMap, new DomainObjectQualifiedMapper());
 	}
 
@@ -251,8 +257,8 @@ public class PrinterProfile extends TrackedObject {
 		setIsDefaultPrinter(sourcePrinterProfile.getIsDefaultPrinter());
 		setIsManagementPrinter(sourcePrinterProfile.getIsManagementPrinter());
 		setPrinterPath(sourcePrinterProfile.getPrinterPath());
-		setObjectUsingThisIds(sourcePrinterProfile.getObjectUsingThisIds());
-		setObjectUsingThisQualifiedNames(sourcePrinterProfile.getObjectUsingThisQualifiedNames());
+		setObjectsUsingThisIds(sourcePrinterProfile.getObjectsUsingThisIds());
+		setObjectsUsingThisQualifiedNames(sourcePrinterProfile.getObjectsUsingThisQualifiedNames());
 	}
 	
 	@Override
@@ -352,19 +358,19 @@ public class PrinterProfile extends TrackedObject {
 		this.printerPath = printerPath;
 	}
 
-	public ArrayList<Integer> getObjectUsingThisIds() {
-		return objectUsingThisIds;
+	public ArrayList<Integer> getObjectsUsingThisIds() {
+		return objectsUsingThisIds;
 	}
 
-	public void setObjectUsingThisIds(ArrayList<Integer> objectUsingThisIds) {
-		this.objectUsingThisIds = objectUsingThisIds;
+	public void setObjectsUsingThisIds(ArrayList<Integer> objectsUsingThisIds) {
+		this.objectsUsingThisIds = objectsUsingThisIds;
 	}
 
-	public ArrayList<String> getObjectUsingThisQualifiedNames() {
-		return objectUsingThisQualifiedNames;
+	public ArrayList<String> getObjectsUsingThisQualifiedNames() {
+		return objectsUsingThisQualifiedNames;
 	}
 
-	public void setObjectUsingThisQualifiedNames(ArrayList<String> objectUsingThisQualifiedNames) {
-		this.objectUsingThisQualifiedNames = objectUsingThisQualifiedNames;
+	public void setObjectsUsingThisQualifiedNames(ArrayList<String> objectsUsingThisQualifiedNames) {
+		this.objectsUsingThisQualifiedNames = objectsUsingThisQualifiedNames;
 	}
 }

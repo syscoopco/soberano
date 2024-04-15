@@ -129,11 +129,10 @@ public class ProductionLine extends TrackedObject {
 		super.get(new ProductionLineMapper());
 	}
 	
-	public List<Object> getObjectsUsingThis(Integer productionLineId) throws SQLException {
+	public List<Object> getObjectsUsingThis() throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_ProductionLine_getObjectsUsingThis\"(:productionLineId, :loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_ProductionLine_getObjectsUsingThis\"(:loginname)";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("productionLineId", productionLineId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new DomainObjectQualifiedMapper());
 	}
