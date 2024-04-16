@@ -87,7 +87,7 @@ public class Counter extends TrackedObject {
 		modifyParameters.addValue("onlyOneOrderIsPermitted", this.onlyOneOrderIsPermitted);
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -100,7 +100,7 @@ public class Counter extends TrackedObject {
 		disableParameters.addValue("counterId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

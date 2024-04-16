@@ -16,7 +16,7 @@ public class PrinterProfileSelectionViewModel extends IntellisenseViewModel {
 	public ListModel getModel() throws SQLException {
 		
 		if (_model == null) {
-			List l = new PrinterProfile().getPrintJobSources();
+			List l = new PrinterProfile().getAll(false);
 			_model = new ListModelList(l);
 		}
 		return ListModels.toListSubModel(new ListModelList(_model), new AutocompletionComparator(), 15);

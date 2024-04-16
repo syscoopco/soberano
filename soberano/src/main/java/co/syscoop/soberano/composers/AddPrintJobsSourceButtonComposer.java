@@ -17,7 +17,7 @@ import co.syscoop.soberano.ui.helper.PrinterProfileFormHelper;
 public class AddPrintJobsSourceButtonComposer extends SelectorComposer {
 	
 	@Wire
-	private Treechildren treePrintJobsSources;
+	private Treechildren tchdnPrintJobsSources;
 	
 	@Wire
 	private Combobox cmbPrintJobsSource;
@@ -33,14 +33,14 @@ public class AddPrintJobsSourceButtonComposer extends SelectorComposer {
 		
 		try{
 			//if the tree has no items,
-			if (treePrintJobsSources.getChildren().size() == 0) {
+			if (tchdnPrintJobsSources.getChildren().size() == 0) {
 				PrinterProfileFormHelper.addPrintJobsSource(cmbPrintJobsSource.getSelectedItem().getLabel(), 
 															((DomainObject) cmbPrintJobsSource.getSelectedItem().getValue()).getEntityTypeInstanceId(),
-															treePrintJobsSources);
+															tchdnPrintJobsSources);
 			}
 			else {
 				int i = 0;
-				for (Component item : treePrintJobsSources.getChildren()) {
+				for (Component item : tchdnPrintJobsSources.getChildren()) {
 					
 					//if that item was already added,
 					if ((((Treeitem) item).getValue()).equals(((DomainObject) cmbPrintJobsSource.getSelectedItem().getValue()).getEntityTypeInstanceId())) {
@@ -50,10 +50,10 @@ public class AddPrintJobsSourceButtonComposer extends SelectorComposer {
 				}
 				
 				//if that item wasn't already added,
-				if (i == treePrintJobsSources.getChildren().size()) {
+				if (i == tchdnPrintJobsSources.getChildren().size()) {
 					PrinterProfileFormHelper.addPrintJobsSource(cmbPrintJobsSource.getSelectedItem().getLabel(),
 																((DomainObject) cmbPrintJobsSource.getSelectedItem().getValue()).getEntityTypeInstanceId(),
-																treePrintJobsSources);
+																tchdnPrintJobsSources);
 				}
 			}
 		}

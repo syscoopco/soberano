@@ -73,7 +73,7 @@ public class ProductCategory extends TrackedObject {
 		modifyParameters.addValue("isEnabled", this.isEnabled);
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -86,7 +86,7 @@ public class ProductCategory extends TrackedObject {
 		disableParameters.addValue("categoryId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

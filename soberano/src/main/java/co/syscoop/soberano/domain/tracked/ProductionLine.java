@@ -32,6 +32,7 @@ public class ProductionLine extends TrackedObject {
 			Integer entityTypeInstanceId, 
 			String name) {
 		super(id, entityTypeInstanceId, name);
+		this.setQualifiedName(name);
 	}
 	
 	public ProductionLine(Integer id, 
@@ -77,8 +78,8 @@ public class ProductionLine extends TrackedObject {
 		modifyParameters.addValue("productionLineId", this.getId());
 		modifyParameters.addValue("productionLineName", this.getName());
 		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectUsingThisIds().toArray()));
-		Integer qryResult = super.record();
-		return qryResult > 0 ? qryResult : -1;
+		Integer qryResult = super.modify();
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -91,7 +92,7 @@ public class ProductionLine extends TrackedObject {
 		disableParameters.addValue("productionLineId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -131,8 +132,9 @@ public class ProductionLine extends TrackedObject {
 	
 	public List<Object> getObjectsUsingThis() throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_ProductionLine_getObjectsUsingThis\"(:loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_ProductionLine_getObjectsUsingThis\"(:productionLineId, :loginname)";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("productionLineId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new DomainObjectQualifiedMapper());
 	}
@@ -145,6 +147,7 @@ public class ProductionLine extends TrackedObject {
 		setStringId(sourceProductionLine.getStringId());
 		setEntityTypeInstanceId(sourceProductionLine.getEntityTypeInstanceId());
 		setName(sourceProductionLine.getName());
+		setQualifiedName(sourceProductionLine.getQualifiedName());
 		setObjectUsingThisIds(sourceProductionLine.getObjectUsingThisIds());
 		setObjectUsingThisQualifiedNames(sourceProductionLine.getObjectUsingThisQualifiedNames());
 	}

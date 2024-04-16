@@ -117,7 +117,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		disableParameters.addValue("inventoryOperationId", this.getId());
 
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

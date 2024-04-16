@@ -140,7 +140,7 @@ public class Customer extends TrackedObject {
 		modifyParameters.addValue("discount", this.getDiscount());
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -153,7 +153,7 @@ public class Customer extends TrackedObject {
 		disableParameters.addValue("customerId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 
 	@Override

@@ -87,7 +87,7 @@ public class AcquirableMaterial extends InventoryItem {
 		if (qryResult == -2) {
 			throw new ProcessRunningException();
 		}
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -100,7 +100,7 @@ public class AcquirableMaterial extends InventoryItem {
 		disableParameters.addValue("itemId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

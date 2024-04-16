@@ -158,7 +158,7 @@ public class Product extends InventoryItem {
 		if (qryResult == -2) {
 			throw new ProcessRunningException();
 		}
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -171,7 +171,7 @@ public class Product extends InventoryItem {
 		disableParameters.addValue("productId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	public BigDecimal setItemPrice(BigDecimal itemPrice) throws SQLException, Exception {

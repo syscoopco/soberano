@@ -35,7 +35,7 @@ public class AddCostCenterToProductionLineButtonComposer extends SelectorCompose
 			//if the tree has no items,
 			if (tchdnCostCenters.getChildren().size() == 0) {
 				ProductionLineFormHelper.addCostCenter(cmbCostCenter.getSelectedItem().getLabel(), 
-															((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getEntityTypeInstanceId(),
+															((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getId(),
 															tchdnCostCenters);
 			}
 			else {
@@ -43,7 +43,7 @@ public class AddCostCenterToProductionLineButtonComposer extends SelectorCompose
 				for (Component item : tchdnCostCenters.getChildren()) {
 					
 					//if that item was already added,
-					if ((((Treeitem) item).getValue()).equals(((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getEntityTypeInstanceId())) {
+					if ((((Treeitem) item).getValue()).equals(((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getId())) {
 						break;
 					}
 					else i++;
@@ -52,7 +52,7 @@ public class AddCostCenterToProductionLineButtonComposer extends SelectorCompose
 				//if that item wasn't already added,
 				if (i == tchdnCostCenters.getChildren().size()) {
 					ProductionLineFormHelper.addCostCenter(cmbCostCenter.getSelectedItem().getLabel(),
-															((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getEntityTypeInstanceId(),
+															((DomainObject) cmbCostCenter.getSelectedItem().getValue()).getId(),
 															tchdnCostCenters);
 				}
 			}

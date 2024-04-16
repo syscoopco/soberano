@@ -106,7 +106,7 @@ public class Warehouse extends TrackedObject {
 		modifyParameters.addValue("entryProcesses", createArrayOfSQLType("integer", entryProcessIds.toArray()));
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -119,7 +119,7 @@ public class Warehouse extends TrackedObject {
 		disableParameters.addValue("warehouseId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

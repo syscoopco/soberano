@@ -175,7 +175,7 @@ public class Process extends TrackedObject {
 		if (qryResult == -2) {
 			throw new ProcessRunningException();
 		}
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -188,7 +188,7 @@ public class Process extends TrackedObject {
 		disableParameters.addValue("processId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

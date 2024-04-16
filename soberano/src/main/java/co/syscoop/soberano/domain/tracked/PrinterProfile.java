@@ -51,6 +51,7 @@ public class PrinterProfile extends TrackedObject {
 			Boolean isManagementPrinter,
 			String printerPath) {
 		super(id, entityTypeInstanceId, name);
+		this.setQualifiedName(name + " : " + printerPath);		
 		this.setFontSize(fontSize);
 		this.setPageWidth(pageWidth);
 		this.setPageHeight(pageHeight);
@@ -114,6 +115,7 @@ public class PrinterProfile extends TrackedObject {
 				+ "											:compactFormat, "
 				+ "											:isDefaultPrinter, "
 				+ "											:isManagementPrinter, "
+				+ "											:printerPath, "
 				+ "											:objectUsingThisIds, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
@@ -126,7 +128,8 @@ public class PrinterProfile extends TrackedObject {
 		recordParameters.addValue("footer", this.getFooter());
 		recordParameters.addValue("compactFormat", this.getCompactFormat());
 		recordParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
-		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());		
+		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
+		recordParameters.addValue("printerPath", this.getPrinterPath());		
 		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -147,6 +150,7 @@ public class PrinterProfile extends TrackedObject {
 				+ "													:compactFormat,"
 				+ "													:isDefaultPrinter,"
 				+ "													:isManagementPrinter,"
+				+ "													:printerPath, "
 				+ "													:objectUsingThisIds,"	
 				+ "													:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
@@ -160,10 +164,11 @@ public class PrinterProfile extends TrackedObject {
 		modifyParameters.addValue("footer", this.getFooter());
 		modifyParameters.addValue("compactFormat", this.getCompactFormat());
 		modifyParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
-		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());		
+		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
+		modifyParameters.addValue("printerPath", this.getPrinterPath());	
 		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
-		Integer qryResult = super.record();
-		return qryResult > 0 ? qryResult : -1;
+		Integer qryResult = super.modify();
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -176,7 +181,7 @@ public class PrinterProfile extends TrackedObject {
 		disableParameters.addValue("printerProfileId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -226,8 +231,9 @@ public class PrinterProfile extends TrackedObject {
 	
 	public List<Object> getObjectsUsingThis() throws SQLException {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_PrinterProfile_getObjectsUsingThis\"(:loginname)";
+		String qryStr = "SELECT * FROM soberano.\"fn_PrinterProfile_getObjectsUsingThis\"(:printerProfileId, :loginname)";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("printerProfileId", this.getId());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new DomainObjectQualifiedMapper());
 	}
@@ -247,6 +253,7 @@ public class PrinterProfile extends TrackedObject {
 		setStringId(sourcePrinterProfile.getStringId());
 		setEntityTypeInstanceId(sourcePrinterProfile.getEntityTypeInstanceId());
 		setName(sourcePrinterProfile.getName());	
+		setQualifiedName(sourcePrinterProfile.getQualifiedName());
 		setFontSize(sourcePrinterProfile.getFontSize());
 		setPageWidth(sourcePrinterProfile.getPageWidth());
 		setPageHeight(sourcePrinterProfile.getPageHeight());

@@ -126,7 +126,7 @@ public class Currency extends TrackedObject {
 		else if (qryResult == -3) {
 			throw new ExchangeRateEqualsToZeroException();
 		}
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -142,7 +142,7 @@ public class Currency extends TrackedObject {
 		if (qryResult == -2) {
 			throw new CurrencyHasBalanceException();
 		}
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

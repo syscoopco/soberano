@@ -29,7 +29,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 	
 	public static void addPrintJobsSource(String objectQualifiedName,
 										Integer entityTypeInstanceId,
-										Treechildren treePrintJobsSources) {
+										Treechildren tchdnPrintJobsSources) {
 		
 			Treeitem treeItem = new Treeitem(objectQualifiedName, entityTypeInstanceId);
 			Treecell treeCell = new Treecell();
@@ -40,16 +40,16 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + entityTypeInstanceId, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
-			treePrintJobsSources.appendChild(treeItem);
+			tchdnPrintJobsSources.appendChild(treeItem);
 	}
 		
 	static private void fillArrays(Include incDetails,
 								ArrayList<Integer> objectUsingThisIds,
 								ArrayList<String> objectUsingThisNames) {
-		Treechildren treePrintJobsSources = (Treechildren) incDetails.query("#treePrintJobsSources");
+		Treechildren tchdnPrintJobsSources = (Treechildren) incDetails.query("#tchdnPrintJobsSources");
 		objectUsingThisIds.clear();
 		objectUsingThisNames.clear();
-		for (Component item : treePrintJobsSources.getChildren()) {
+		for (Component item : tchdnPrintJobsSources.getChildren()) {
 			objectUsingThisIds.add(((Treeitem) item).getValue());
 			objectUsingThisNames.add(((Treeitem) item).getLabel());
 		}
@@ -70,7 +70,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		((Checkbox) incDetails.query("#chkCompactFormat")).setChecked(false);
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), "");
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), "");
-		((Treechildren) incDetails.query("#treePrintJobsSources")).getChildren().clear();
+		((Treechildren) incDetails.query("#tchdnPrintJobsSources")).getChildren().clear();
 	}
 	
 	public void fillForm(Include incDetails, Integer id) throws SQLException {
@@ -86,7 +86,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getQualifiedName());
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getName());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterPath"), printerProfile.getPrinterPath());
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(printerProfile.getIsDefaultPrinter());
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(printerProfile.getIsManagementPrinter());
@@ -98,12 +98,12 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), printerProfile.getHeader());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), printerProfile.getFooter());
 			
-		Treechildren treePrintJobsSources = (Treechildren) incDetails.query("#treePrintJobsSources");
-		treePrintJobsSources.getChildren().clear();
+		Treechildren tchdnPrintJobsSources = (Treechildren) incDetails.query("#tchdnPrintJobsSources");
+		tchdnPrintJobsSources.getChildren().clear();
 		for (Object printJobsSource : printerProfile.getObjectsUsingThis()) {
 			addPrintJobsSource(((DomainObject) printJobsSource).getQualifiedName(),
 									((DomainObject) printJobsSource).getEntityTypeInstanceId(),
-									treePrintJobsSources);
+									tchdnPrintJobsSources);
 		}
 	}
 	
@@ -128,9 +128,9 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 									((Doublebox) incDetails.query("#dblPageMargin")).getValue(),
 									((Textbox) incDetails.query("#txtHeader")).getValue(),
 									((Textbox) incDetails.query("#txtFooter")).getValue(),
-									((Checkbox) incDetails.query("#chkCompactFormat")).getValue(),
-									((Checkbox) incDetails.query("#chkIsDefaultPrinter")).getValue(),
-									((Checkbox) incDetails.query("#chkIsManagementPrinter")).getValue(),
+									((Checkbox) incDetails.query("#chkCompactFormat")).isChecked(),
+									((Checkbox) incDetails.query("#chkIsDefaultPrinter")).isChecked(),
+									((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 									((Textbox) incDetails.query("#txtPrinterPath")).getValue(),
 									objectUsingThisIds,
 									objectUsingThisNames)).record();
@@ -142,7 +142,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		fillArrays(incDetails,
 				objectUsingThisIds,
 				objectUsingThisNames);
-		super.setTrackedObject(new PrinterProfile(0,
+		super.setTrackedObject(new PrinterProfile(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
 												((Textbox) incDetails.query("#txtName")).getValue(),
 												((Doublebox) incDetails.query("#dblFontSize")).getValue(),
@@ -151,9 +151,9 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 												((Doublebox) incDetails.query("#dblPageMargin")).getValue(),
 												((Textbox) incDetails.query("#txtHeader")).getValue(),
 												((Textbox) incDetails.query("#txtFooter")).getValue(),
-												((Checkbox) incDetails.query("#chkCompactFormat")).getValue(),
-												((Checkbox) incDetails.query("#chkIsDefaultPrinter")).getValue(),
-												((Checkbox) incDetails.query("#chkIsManagementPrinter")).getValue(),
+												((Checkbox) incDetails.query("#chkCompactFormat")).isChecked(),
+												((Checkbox) incDetails.query("#chkIsDefaultPrinter")).isChecked(),
+												((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 												((Textbox) incDetails.query("#txtPrinterPath")).getValue(),
 												objectUsingThisIds,
 												objectUsingThisNames));

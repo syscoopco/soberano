@@ -26,28 +26,28 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 	private ArrayList<String> objectUsingThisNames = new ArrayList<String>();
 	
 	public static void addCostCenter(String objectQualifiedName,
-										Integer entityTypeInstanceId,
-										Treechildren treeCostCenters) {
+										Integer id,
+										Treechildren tchdnCostCenters) {
 		
-			Treeitem treeItem = new Treeitem(objectQualifiedName, entityTypeInstanceId);
+			Treeitem treeItem = new Treeitem(objectQualifiedName, id);
 			Treecell treeCell = new Treecell();
 			
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + entityTypeInstanceId, hbox);
+			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + id, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
-			treeCostCenters.appendChild(treeItem);
+			tchdnCostCenters.appendChild(treeItem);
 	}
 		
 	static private void fillArrays(Include incDetails,
 								ArrayList<Integer> objectUsingThisIds,
 								ArrayList<String> objectUsingThisNames) {
-		Treechildren treeCostCenters = (Treechildren) incDetails.query("#treeCostCenters");
+		Treechildren tchdnCostCenters = (Treechildren) incDetails.query("#tchdnCostCenters");
 		objectUsingThisIds.clear();
 		objectUsingThisNames.clear();
-		for (Component item : treeCostCenters.getChildren()) {
+		for (Component item : tchdnCostCenters.getChildren()) {
 			objectUsingThisIds.add(((Treeitem) item).getValue());
 			objectUsingThisNames.add(((Treeitem) item).getLabel());
 		}
@@ -58,7 +58,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		((Treechildren) incDetails.query("#treeCostCenters")).getChildren().clear();
+		((Treechildren) incDetails.query("#tchdnCostCenters")).getChildren().clear();
 	}
 	
 	public void fillForm(Include incDetails, Integer id) throws SQLException {
@@ -76,12 +76,12 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), productionLine.getQualifiedName());
 					
-		Treechildren treeCostCenters = (Treechildren) incDetails.query("#treeCostCenters");
-		treeCostCenters.getChildren().clear();
+		Treechildren tchdnCostCenters = (Treechildren) incDetails.query("#tchdnCostCenters");
+		tchdnCostCenters.getChildren().clear();
 		for (Object printJobsSource : productionLine.getObjectsUsingThis()) {
-			addCostCenter(((DomainObject) printJobsSource).getQualifiedName(),
-									((DomainObject) printJobsSource).getEntityTypeInstanceId(),
-									treeCostCenters);
+			addCostCenter(((DomainObject) printJobsSource).getName(),
+									((DomainObject) printJobsSource).getId(),
+									tchdnCostCenters);
 		}
 	}
 	
@@ -110,7 +110,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		fillArrays(incDetails,
 				objectUsingThisIds,
 				objectUsingThisNames);
-		super.setTrackedObject(new ProductionLine(0,
+		super.setTrackedObject(new ProductionLine(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
 												((Textbox) incDetails.query("#txtName")).getValue(),
 												objectUsingThisIds,

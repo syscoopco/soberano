@@ -64,7 +64,7 @@ public class Service extends TrackedObject {
 		modifyParameters.addValue("itemName", this.getName());
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -77,7 +77,7 @@ public class Service extends TrackedObject {
 		disableParameters.addValue("itemId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

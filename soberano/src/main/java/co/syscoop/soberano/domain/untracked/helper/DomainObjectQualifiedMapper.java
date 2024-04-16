@@ -21,6 +21,8 @@ public final class DomainObjectQualifiedMapper implements RowMapper<Object> {
 				domainObject.setEntityTypeMeaningId(rs.getString("entityTypeMeaningId"));
 				domainObject.setEntityTypeName(Labels.getLabel(rs.getString("entityTypeName")));
 				domainObject.setEntityTypeInstanceId(rs.getInt("entityTypeInstanceId"));
+				
+				domainObject.setQualifiedName(domainObject.getEntityTypeName() + " : " + domainObject.getName());
 			}
 			return domainObject;
 		}

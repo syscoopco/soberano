@@ -68,7 +68,7 @@ public class CostCenter extends TrackedObject {
 		modifyParameters.addValue("outputWarehouse", this.getOutputWarehouse());
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class CostCenter extends TrackedObject {
 		disableParameters.addValue("costCenterId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override

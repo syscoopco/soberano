@@ -54,7 +54,7 @@ public class Provider extends TrackedObject {
 		modifyParameters.addValue("providerName", this.getName());
 		
 		Integer qryResult = super.modify();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
@@ -67,7 +67,7 @@ public class Provider extends TrackedObject {
 		disableParameters.addValue("providerId", this.getId());
 		
 		Integer qryResult = super.disable();
-		return qryResult >= 0 ? qryResult : -1;
+		return qryResult == 0 ? qryResult : -1;
 	}
 	
 	@Override
