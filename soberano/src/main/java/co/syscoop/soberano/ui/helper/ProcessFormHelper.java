@@ -322,8 +322,6 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	
 	public void initForm(Include incDetails, Integer processId) throws Exception {
 		
-		Process process = new Process(processId);
-		process.get();		
-		fillForm(incDetails, process.getId(), false, 1);
+		fillForm(incDetails, processId, false, 1);
 	}
 }

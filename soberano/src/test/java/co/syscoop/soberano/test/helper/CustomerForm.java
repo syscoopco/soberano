@@ -16,7 +16,7 @@ public class CustomerForm extends ConstrainedForm {
 	private Textbox txtPhoneNumber;
 	private Textbox txtEmailAddress;
 	private Textbox txtAddress;
-	private Textbox txtPostalCode;
+	private Combobox cmbPostalCode;
 	private Textbox txtTown;
 	private Textbox txtCity;
 	private Combobox cmbCountry;
@@ -32,7 +32,7 @@ public class CustomerForm extends ConstrainedForm {
 					Textbox txtPhoneNumber,
 					Textbox txtEmailAddress,
 					Textbox txtAddress,
-					Textbox txtPostalCode,
+					Combobox cmbPostalCode,
 					Textbox txtTown,
 					Textbox txtCity,
 					Combobox cmbCountry,
@@ -74,7 +74,7 @@ public class CustomerForm extends ConstrainedForm {
 		
 		this.setTxtAddress(txtAddress);
 		
-		this.setTxtPostalCode(txtPostalCode);
+		this.setCmbPostalCode(cmbPostalCode);
 		
 		this.setTxtTown(txtTown);
 		
@@ -145,12 +145,12 @@ public class CustomerForm extends ConstrainedForm {
 		this.txtAddress = txtAddress;
 	}
 
-	public Textbox getTxtPostalCode() {
-		return txtPostalCode;
+	public Textbox getCmbPostalCode() {
+		return cmbPostalCode;
 	}
 
-	public void setTxtPostalCode(Textbox txtPostalCode) {
-		this.txtPostalCode = txtPostalCode;
+	public void setCmbPostalCode(Combobox cmbPostalCode) {
+		this.cmbPostalCode = cmbPostalCode;
 	}
 
 	public Textbox getTxtTown() {

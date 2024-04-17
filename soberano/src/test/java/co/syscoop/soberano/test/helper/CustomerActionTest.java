@@ -20,7 +20,7 @@ public class CustomerActionTest extends ActionTest {
 	protected static Textbox txtPhoneNumber = null;
 	protected static Textbox txtEmailAddress = null;
 	protected static Textbox txtAddress = null;
-	protected static Textbox txtPostalCode = null;
+	protected static Combobox cmbPostalCode = null;
 	protected static Textbox txtTown = null;
 	protected static Textbox txtCity = null;
 	protected static Combobox cmbCountry = null;
@@ -42,7 +42,7 @@ public class CustomerActionTest extends ActionTest {
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtPhoneNumber").as(Textbox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtEmailAddress").as(Textbox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtAddress").as(Textbox.class), 
-												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtPostalCode").as(Textbox.class), 
+												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#cmbPostalCode").as(Combobox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtTown").as(Textbox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtCity").as(Textbox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#cmbCountry").as(Combobox.class), 
@@ -81,7 +81,7 @@ public class CustomerActionTest extends ActionTest {
 		assertEquals(province, cmbProvince.getText(), "Wrong province shown for user " +  qualifiedName);
 		assertEquals(municipality, cmbMunicipality.getText(), "Wrong municipality shown for user " +  qualifiedName);
 		assertEquals(address, txtAddress.getText(), "Wrong address shown for user " +  qualifiedName);
-		assertEquals(postalCode, txtPostalCode.getText(), "Wrong postalCode shown for user " +  qualifiedName);
+		assertEquals(postalCode, cmbPostalCode.getText(), "Wrong postalCode shown for user " +  qualifiedName);
 		assertEquals(town, txtTown.getText(), "Wrong town shown for user " +  qualifiedName);
 		assertEquals(city, txtCity.getText(), "Wrong city shown for user " +  qualifiedName);
 		assertEquals(latitude, dblLatitude.getValue(), "Wrong latitude shown for user " +  qualifiedName);

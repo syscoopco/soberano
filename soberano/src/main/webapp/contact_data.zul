@@ -13,7 +13,14 @@
 			<textbox id="txtAddress" hflex="1" maxlength="1000"/>
 			<separator></separator>
 			<label value="${labels.caption.field.postalCode}" sclass="Caption"></label>			
-			<textbox id="txtPostalCode" hflex="1" maxlength="20"/>
+			<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.PostalCodeSelectionViewModel')">
+				<combobox id="cmbPostalCode" maxlength="100" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.postalcode}" constraint="no empty">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>
+			</hbox>
 			<separator></separator>		
 			<label value="${labels.caption.field.town}" sclass="Caption"></label>			
 			<textbox id="txtTown" hflex="1" maxlength="255"/>

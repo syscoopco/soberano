@@ -56,7 +56,7 @@
 						<menuitem label="${labels.menuItem.Counters}" href="counters.zul"/>
 						<menuitem label="${labels.menuItem.Workers}" href="workers.zul"/>
 						<menuitem label="${labels.menuItem.ThirdPartyServices}" href="thirdparty_services.zul"/>
-						<menuitem label="${labels.menuItem.ShippingServices}" href="shipping_thirdparty_services.zul"/>					
+						<menuitem label="${labels.menuItem.DeliveryProviders}" href="delivery_providers.zul"/>					
 						<menuitem label="${labels.menuItem.PrinterProfiles}" href="printer_profiles.zul"/>
 						<menuitem label="${labels.menuItem.Other}" href="other.zul"/>
 					</menupopup>					

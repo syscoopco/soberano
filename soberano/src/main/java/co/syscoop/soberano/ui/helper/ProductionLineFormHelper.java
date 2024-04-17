@@ -120,8 +120,6 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 	
 	public void initForm(Include incDetails, Integer productionLineId) throws Exception {
 		
-		ProductionLine productionLine = new ProductionLine(productionLineId);
-		productionLine.get();		
-		fillForm(incDetails, productionLine.getId());
+		fillForm(incDetails, productionLineId);
 	}
 }

@@ -16,8 +16,6 @@ import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zats.mimic.operation.InputAgent;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zul.Combobox;
-import org.zkoss.zul.Tree;
 import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.test.helper.WorkerActionTest;
@@ -26,7 +24,7 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 @Order(6)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		
@@ -99,7 +97,7 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 		workerForm.setComponentValue(workerForm.getTxtLastName(), "ln");
 		workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "66666666");
 		workerForm.setComponentValue(workerForm.getTxtAddress(), "address");
-		workerForm.setComponentValue(workerForm.getTxtPostalCode(), "Postal code");
+		workerForm.setComponentValue(workerForm.getCmbPostalCode(), "Postal code");
 		workerForm.setComponentValue(workerForm.getTxtTown(), "Town M");
 		workerForm.setComponentValue(workerForm.getTxtCity(), "City M");
 		
@@ -461,7 +459,7 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 		assertEquals(province, workerForm.getCmbProvince().getText(), "Wrong province shown for user " +  qualifiedName);
 		assertEquals(municipality, workerForm.getCmbMunicipality().getText(), "Wrong municipality shown for user " +  qualifiedName);
 		assertEquals(address, workerForm.getTxtAddress().getText(), "Wrong address shown for user " +  qualifiedName);
-		assertEquals(postalCode, workerForm.getTxtPostalCode().getText(), "Wrong postalCode shown for user " +  qualifiedName);
+		assertEquals(postalCode, workerForm.getCmbPostalCode().getText(), "Wrong postalCode shown for user " +  qualifiedName);
 		assertEquals(town, workerForm.getTxtTown().getText(), "Wrong town shown for user " +  qualifiedName);
 		assertEquals(city, workerForm.getTxtCity().getText(), "Wrong city shown for user " +  qualifiedName);
 		assertEquals(latitude, workerForm.getDblLatitude().getValue(), "Wrong latitude shown for user " +  qualifiedName);

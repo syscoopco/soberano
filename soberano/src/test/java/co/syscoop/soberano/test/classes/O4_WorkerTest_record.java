@@ -32,7 +32,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O4_WorkerTest_record extends WorkerActionTest {
 	
@@ -72,7 +72,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -112,7 +112,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -139,7 +139,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -194,7 +194,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -221,7 +221,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -276,7 +276,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -303,7 +303,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -358,7 +358,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -385,7 +385,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -440,7 +440,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -467,7 +467,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -522,7 +522,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -549,7 +549,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -604,7 +604,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -631,7 +631,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");		
 			clickOnRecordButton(desktop);
@@ -665,7 +665,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -692,7 +692,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -733,7 +733,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -760,7 +760,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -808,7 +808,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -835,7 +835,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -890,7 +890,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -917,7 +917,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -972,7 +972,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -999,7 +999,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -1054,7 +1054,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -1081,7 +1081,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "");
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
 			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), "54321");
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
 			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
 			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
 						
@@ -1139,7 +1139,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 									cmbCountryAgent.as(Combobox.class), 
@@ -1160,7 +1160,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), newWorkerData.getContactData().getMobilePhoneNumber());
 			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), newWorkerData.getContactData().getEmailAddress());
 			workerForm.setComponentValue(workerForm.getTxtAddress(), newWorkerData.getContactData().getAddress());
-			workerForm.setComponentValue(workerForm.getTxtPostalCode(), newWorkerData.getContactData().getPostalCode());
+			workerForm.setComponentValue(workerForm.getCmbPostalCode(), newWorkerData.getContactData().getPostalCode());
 			workerForm.setComponentValue(workerForm.getTxtTown(), newWorkerData.getContactData().getTown());
 			workerForm.setComponentValue(workerForm.getTxtCity(), newWorkerData.getContactData().getCity());
 						

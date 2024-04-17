@@ -162,8 +162,6 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 	
 	public void initForm(Include incDetails, Integer printerProfileId) throws Exception {
 		
-		PrinterProfile printerProfile = new PrinterProfile(printerProfileId);
-		printerProfile.get();		
-		fillForm(incDetails, printerProfile.getId());
+		fillForm(incDetails, printerProfileId);
 	}
 }

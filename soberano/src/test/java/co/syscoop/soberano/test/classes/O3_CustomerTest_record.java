@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(3)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O3_CustomerTest_record extends CustomerActionTest {
 	
@@ -64,7 +64,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -101,7 +101,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -117,7 +117,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 1");
 						
@@ -169,7 +169,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -185,7 +185,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 1");
 						
@@ -247,7 +247,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -263,7 +263,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 1");
 						
@@ -315,7 +315,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -331,7 +331,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 1");
 						
@@ -381,7 +381,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -397,7 +397,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c2@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 2");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 2");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 2");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 2");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 2");
 						
@@ -447,7 +447,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -463,7 +463,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555557");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c3@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 3");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 3");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 3");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 3");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 3");
 						
@@ -513,7 +513,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -529,7 +529,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555558");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c4@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 4");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 4");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 4");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 4");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 4");
 						
@@ -579,7 +579,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -595,7 +595,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555559");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c5@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 5");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 5");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 5");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 5");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 5");
 						
@@ -645,7 +645,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -661,7 +661,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555560");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c6@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 6");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 6");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 6");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 6");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 6");
 						
@@ -711,7 +711,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -727,7 +727,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555561");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c7@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 7");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 7");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 7");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 7");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 7");
 						
@@ -777,7 +777,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -793,7 +793,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555562");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c8@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 8");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 8");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 8");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 8");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 8");
 						
@@ -843,7 +843,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-										(desktop.query("textbox").query("#incContactData").query("#txtPostalCode")).as(Textbox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
 										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
@@ -859,7 +859,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "55555563");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c9@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Address 9");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pc 9");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pc 9");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Town 9");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "City 9");
 						

@@ -43,7 +43,7 @@ class O6_CustomerTest_check_modifying extends CustomerActionTest {
 		txtPhoneNumber = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtPhoneNumber").as(Textbox.class);
 		txtEmailAddress = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtEmailAddress").as(Textbox.class);
 		txtAddress = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtAddress").as(Textbox.class);
-		txtPostalCode = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtPostalCode").as(Textbox.class);
+		cmbPostalCode = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#cmbPostalCode").as(Combobox.class);
 		txtTown = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtTown").as(Textbox.class);
 		txtCity = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#txtCity").as(Textbox.class);
 		cmbCountry = cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#cmbCountry").as(Combobox.class);

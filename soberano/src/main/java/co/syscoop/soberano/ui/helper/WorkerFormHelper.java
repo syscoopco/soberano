@@ -116,13 +116,14 @@ public class WorkerFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), worker.getContactData().getMobilePhoneNumber());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), worker.getContactData().getEmailAddress());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), worker.getContactData().getAddress());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPostalCode"), worker.getContactData().getPostalCode());
+		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), worker.getContactData().getPostalCode());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), worker.getContactData().getTown());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), worker.getContactData().getCity());
 		Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
 		ZKUtilitity.setValueWOValidation(cmbCountry, worker.getContactData().getCountryCode());
 		Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
-		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
+		Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
+		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
 		ZKUtilitity.setValueWOValidation(cmbProvince, worker.getContactData().getProvinceId().toString());
 		Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
 		ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
@@ -152,7 +153,7 @@ public class WorkerFormHelper extends TrackedObjectFormHelper {
 							((Textbox) incContactData.query("#txtPhoneNumber")).getValue(),
 							((DomainObject) (((Combobox) incContactData.query("#cmbCountry")).getSelectedItem().getValue())).getStringId(),
 							((Textbox) incContactData.query("#txtAddress")).getValue(),
-							((Textbox) incContactData.query("#txtPostalCode")).getValue(),
+							((Textbox) incContactData.query("#cmbPostalCode")).getValue(),
 							((Textbox) incContactData.query("#txtTown")).getValue(),
 							((Combobox) incContactData.query("#cmbMunicipality")).getSelectedItem().getValue(),
 							((Textbox) incContactData.query("#txtCity")).getValue(),
@@ -179,7 +180,7 @@ public class WorkerFormHelper extends TrackedObjectFormHelper {
 											((Textbox) incContactData.query("#txtPhoneNumber")).getValue(),
 											((DomainObject) (((Combobox) incContactData.query("#cmbCountry")).getSelectedItem().getValue())).getStringId(),
 											((Textbox) incContactData.query("#txtAddress")).getValue(),
-											((Textbox) incContactData.query("#txtPostalCode")).getValue(),
+											((Textbox) incContactData.query("#cmbPostalCode")).getValue(),
 											((Textbox) incContactData.query("#txtTown")).getValue(),
 											((Combobox) incContactData.query("#cmbMunicipality")).getSelectedItem().getValue(),
 											((Textbox) incContactData.query("#txtCity")).getValue(),

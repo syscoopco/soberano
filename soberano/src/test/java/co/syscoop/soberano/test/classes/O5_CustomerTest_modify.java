@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.CustomerForm;
 @Order(5)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O5_CustomerTest_modify extends CustomerActionTest {
 		
@@ -60,7 +60,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 1");
 			
@@ -109,7 +109,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c1mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 1");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 1");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 1");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 1");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 1");
 			
@@ -156,7 +156,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555556");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c2mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 2");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 2");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 2");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 2");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 2");
 			
@@ -203,7 +203,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555557");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c3mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 3");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 3");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 3");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 3");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 3");
 			
@@ -250,7 +250,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555558");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c4mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 4");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 4");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 4");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 4");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 4");
 			
@@ -297,7 +297,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555559");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c5mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 5");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 5");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 5");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 5");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 5");
 			
@@ -344,7 +344,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555560");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c6mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 6");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 6");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 6");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 6");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 6");
 			
@@ -391,7 +391,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555561");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c7mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 7");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 7");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 7");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 7");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 7");
 			
@@ -438,7 +438,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555562");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c8mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 8");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 8");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 8");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 8");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 8");
 			
@@ -485,7 +485,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 			customerForm.setComponentValue(customerForm.getTxtPhoneNumber(), "5355555563");
 			customerForm.setComponentValue(customerForm.getTxtEmailAddress(), "c9mod@soberano.syscoop.co");
 			customerForm.setComponentValue(customerForm.getTxtAddress(), "Addressmod 9");
-			customerForm.setComponentValue(customerForm.getTxtPostalCode(), "Pcmod 9");
+			customerForm.setComponentValue(customerForm.getCmbPostalCode(), "Pcmod 9");
 			customerForm.setComponentValue(customerForm.getTxtTown(), "Townmod 9");
 			customerForm.setComponentValue(customerForm.getTxtCity(), "Citymod 9");
 			
