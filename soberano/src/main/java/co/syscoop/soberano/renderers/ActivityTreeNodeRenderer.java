@@ -10,7 +10,7 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.OrderRowData;
+import co.syscoop.soberano.util.rowdata.OrderRowData;
 
 public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {
 

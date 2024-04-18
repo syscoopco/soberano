@@ -25,8 +25,8 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ProcessIORowData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.rowdata.ProcessIORowData;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class ProcessFormHelper extends TrackedObjectFormHelper {

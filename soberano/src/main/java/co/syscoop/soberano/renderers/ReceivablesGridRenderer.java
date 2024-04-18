@@ -14,10 +14,10 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.domain.tracked.Receivable;
-import co.syscoop.soberano.util.ExceptionTreatment;
-import co.syscoop.soberano.util.ReceivableRowData;
+import co.syscoop.soberano.util.rowdata.ReceivableRowData;
 
 @SuppressWarnings("rawtypes")
 public class ReceivablesGridRenderer extends DomainObjectRowRenderer {

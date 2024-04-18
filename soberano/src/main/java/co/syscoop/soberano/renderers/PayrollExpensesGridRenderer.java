@@ -13,9 +13,9 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.PayrollExpense;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
-import co.syscoop.soberano.util.ExceptionTreatment;
-import co.syscoop.soberano.util.ExpenseRowData;
+import co.syscoop.soberano.util.rowdata.ExpenseRowData;
 
 public class PayrollExpensesGridRenderer extends DomainObjectRowRenderer {
 

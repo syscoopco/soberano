@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.ShiftClosureRowData;
+import co.syscoop.soberano.util.rowdata.ShiftClosureRowData;
 
 public class ShiftClosureExtractor implements ResultSetExtractor<List<Object>> {
 	

@@ -41,7 +41,7 @@ import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.UndeterminedErrorException;
 import co.syscoop.soberano.renderers.ActionRequested;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHelper {

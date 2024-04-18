@@ -10,7 +10,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.util.InventoryOperationRowData;
+import co.syscoop.soberano.util.rowdata.InventoryOperationRowData;
 
 public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 

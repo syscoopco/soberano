@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import co.syscoop.soberano.util.ProcessIORowData;
+import co.syscoop.soberano.util.rowdata.ProcessIORowData;
 
 public class ProcessIOMapper implements RowMapper<Object> {
 

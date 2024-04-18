@@ -12,8 +12,8 @@ import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial", "rawtypes" })

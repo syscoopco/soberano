@@ -12,7 +12,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Provider;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class ProviderFormHelper extends TrackedObjectFormHelper {
 	

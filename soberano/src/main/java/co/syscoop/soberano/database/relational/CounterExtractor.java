@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.CounterRowData;
+import co.syscoop.soberano.util.rowdata.CounterRowData;
 
 public final class CounterExtractor implements ResultSetExtractor<List<Object>> {
 	

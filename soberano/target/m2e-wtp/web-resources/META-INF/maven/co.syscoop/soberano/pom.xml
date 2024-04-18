@@ -9,14 +9,20 @@
 		<commons-dbcp2>2.9.0</commons-dbcp2>
 		<commons-io>2.6</commons-io>
 		<commons-lang3>3.12.0</commons-lang3>
+		<cups4j>0.7.9</cups4j>
+		<escpos-coffee>4.1.0</escpos-coffee>
+		<gson>2.10.1</gson>
 		<jasypt>1.9.3</jasypt>
 		<javaluator>3.0.3</javaluator>
 		<javax.servlet-api>4.0.1</javax.servlet-api>
 		<javax-ws-rs>2.1.1</javax-ws-rs>
+		<java-websocket>1.5.6</java-websocket>
 		<jersey>2.36</jersey>
 		<junit>5.9.0</junit>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
+		<pdfbox>2.0.13</pdfbox>
+		<pdfbox-tools>2.0.13</pdfbox-tools>
 		<postgresql>42.4.2</postgresql>
 		<slf4j.version>2.0.0</slf4j.version>
 		<spring-dao>2.0.8</spring-dao>
@@ -68,12 +74,43 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>${pdfbox}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox-tools</artifactId>
+		    <version>${pdfbox-tools}</version>
+		</dependency>
 		
 		<!-- CGLIB dependencies -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
 			<version>${cglib}</version>
+		</dependency>
+		
+		<!-- CUPS4J -->
+		<dependency>
+		    <groupId>org.cups4j</groupId>
+		    <artifactId>cups4j</artifactId>
+		    <version>${cups4j}</version>
+		</dependency>
+		
+		<!-- EscPos Coffee -->
+		<dependency>
+		    <groupId>com.github.anastaciocintra</groupId>
+		    <artifactId>escpos-coffee</artifactId>
+		    <version>${escpos-coffee}</version>
+		</dependency>
+		
+		<!-- Gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>${gson}</version>
 		</dependency>
 		
 		<!-- Jasypt dependencies -->		
@@ -86,7 +123,7 @@
 		    <groupId>org.jasypt</groupId>
 		    <artifactId>jasypt-spring4</artifactId>
 		    <version>${jasypt}</version>
-		</dependency>
+		</dependency>				
 		
 		<!-- javaluator -->
 		<dependency>
@@ -106,7 +143,14 @@
 		    <artifactId>javax.servlet-api</artifactId>
 		    <version>${javax.servlet-api}</version>
 		    <scope>provided</scope>
-		</dependency>				
+		</dependency>
+		
+		<!-- Java-WebSocket -->
+		<dependency>
+		    <groupId>org.java-websocket</groupId>
+		    <artifactId>Java-WebSocket</artifactId>
+		    <version>${java-websocket}</version>
+		</dependency>	
 		
 		<!-- Jersey dependencies -->
 		<dependency>

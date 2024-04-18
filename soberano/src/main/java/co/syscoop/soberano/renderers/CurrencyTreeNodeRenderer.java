@@ -9,9 +9,9 @@ import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.ui.helper.CurrencyFormHelper;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class CurrencyTreeNodeRenderer extends DomainObjectTreeNodeRenderer {

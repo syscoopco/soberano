@@ -11,7 +11,7 @@ import org.zkoss.zul.Grid;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.SPIGridModel;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class SPIInitiator implements Initiator, InitiatorExt {
 	

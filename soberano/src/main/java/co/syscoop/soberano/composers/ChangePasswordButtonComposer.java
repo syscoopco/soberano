@@ -9,11 +9,11 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
 import co.syscoop.soberano.ldap.dao.LdapUserDao;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 

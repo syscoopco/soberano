@@ -12,7 +12,7 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.Unit;
 import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;

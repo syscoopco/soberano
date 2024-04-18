@@ -10,6 +10,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Messagebox;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
@@ -22,7 +23,6 @@ import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.ui.helper.TrackedObjectFormHelper;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial", "rawtypes" })

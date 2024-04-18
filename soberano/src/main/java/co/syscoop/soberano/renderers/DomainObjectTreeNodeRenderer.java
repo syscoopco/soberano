@@ -17,9 +17,9 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {

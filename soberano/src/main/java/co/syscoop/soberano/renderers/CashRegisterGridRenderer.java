@@ -10,7 +10,7 @@ import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.util.CashRegisterOperationRowData;
+import co.syscoop.soberano.util.rowdata.CashRegisterOperationRowData;
 
 public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 

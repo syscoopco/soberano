@@ -9,7 +9,7 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public abstract class TrackedObjectFormHelper {
 	

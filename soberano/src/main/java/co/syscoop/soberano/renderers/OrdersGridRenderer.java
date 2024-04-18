@@ -14,7 +14,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.util.OrderRowData;
+import co.syscoop.soberano.util.rowdata.OrderRowData;
 
 public class OrdersGridRenderer extends DomainObjectRowRenderer {
 

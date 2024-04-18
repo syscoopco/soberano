@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.ReceivableRowData;
+import co.syscoop.soberano.util.rowdata.ReceivableRowData;
 
 public class ReceivableExtractor implements ResultSetExtractor<List<Object>> {
 	

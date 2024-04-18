@@ -8,7 +8,6 @@ import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.DefaultTreeNode;
-import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
@@ -20,7 +19,7 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 	
@@ -60,13 +59,14 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterPath"), "");
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), "");
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), "");
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(false);
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(false);
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblFontSize"), 0.0);
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageWitdth"), 0.0);
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageHeight"), 0.0);
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageMargin"), 0.0);
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), 0);
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), 0);
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), 0);
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), 0);
 		((Checkbox) incDetails.query("#chkCompactFormat")).setChecked(false);
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), "");
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), "");
@@ -87,13 +87,14 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getName());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterPath"), printerProfile.getPrinterPath());
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), printerProfile.getPrintServer());
+		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), printerProfile.getPrinterName());
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(printerProfile.getIsDefaultPrinter());
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(printerProfile.getIsManagementPrinter());
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblFontSize"), printerProfile.getFontSize());
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageWitdth"), printerProfile.getPageWidth());
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageHeight"), printerProfile.getPageHeight());
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblPageMargin"), printerProfile.getMargin());
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), printerProfile.getFontSize());
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), printerProfile.getPageWidth());
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), printerProfile.getPageHeight());
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), printerProfile.getMargin());
 		((Checkbox) incDetails.query("#chkCompactFormat")).setChecked(printerProfile.getCompactFormat());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), printerProfile.getHeader());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), printerProfile.getFooter());
@@ -122,16 +123,17 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		return (new PrinterProfile(0,
 									0,
 									((Textbox) incDetails.query("#txtName")).getValue(),
-									((Doublebox) incDetails.query("#dblFontSize")).getValue(),
-									((Doublebox) incDetails.query("#dblPageWitdth")).getValue(),
-									((Doublebox) incDetails.query("#dblPageHeight")).getValue(),
-									((Doublebox) incDetails.query("#dblPageMargin")).getValue(),
+									((Intbox) incDetails.query("#intFontSize")).getValue(),
+									((Intbox) incDetails.query("#intPageWitdth")).getValue(),
+									((Intbox) incDetails.query("#intPageHeight")).getValue(),
+									((Intbox) incDetails.query("#intPageMargin")).getValue(),
 									((Textbox) incDetails.query("#txtHeader")).getValue(),
 									((Textbox) incDetails.query("#txtFooter")).getValue(),
 									((Checkbox) incDetails.query("#chkCompactFormat")).isChecked(),
 									((Checkbox) incDetails.query("#chkIsDefaultPrinter")).isChecked(),
 									((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
-									((Textbox) incDetails.query("#txtPrinterPath")).getValue(),
+									((Textbox) incDetails.query("#txtPrintServer")).getValue(),
+									((Textbox) incDetails.query("#txtPrinterName")).getValue(),
 									objectUsingThisIds,
 									objectUsingThisNames)).record();
 	}
@@ -145,16 +147,17 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		super.setTrackedObject(new PrinterProfile(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
 												((Textbox) incDetails.query("#txtName")).getValue(),
-												((Doublebox) incDetails.query("#dblFontSize")).getValue(),
-												((Doublebox) incDetails.query("#dblPageWitdth")).getValue(),
-												((Doublebox) incDetails.query("#dblPageHeight")).getValue(),
-												((Doublebox) incDetails.query("#dblPageMargin")).getValue(),
+												((Intbox) incDetails.query("#intFontSize")).getValue(),
+												((Intbox) incDetails.query("#intPageWitdth")).getValue(),
+												((Intbox) incDetails.query("#intPageHeight")).getValue(),
+												((Intbox) incDetails.query("#intPageMargin")).getValue(),
 												((Textbox) incDetails.query("#txtHeader")).getValue(),
 												((Textbox) incDetails.query("#txtFooter")).getValue(),
 												((Checkbox) incDetails.query("#chkCompactFormat")).isChecked(),
 												((Checkbox) incDetails.query("#chkIsDefaultPrinter")).isChecked(),
 												((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
-												((Textbox) incDetails.query("#txtPrinterPath")).getValue(),
+												((Textbox) incDetails.query("#txtPrintServer")).getValue(),
+												((Textbox) incDetails.query("#txtPrinterName")).getValue(),
 												objectUsingThisIds,
 												objectUsingThisNames));
 		return super.getTrackedObject().modify();

@@ -7,7 +7,8 @@ import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Combobox;
-import co.syscoop.soberano.util.ZKUtilitity;
+
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 	

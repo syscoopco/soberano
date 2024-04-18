@@ -15,9 +15,9 @@ import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.ui.helper.ProcessFormHelper;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 

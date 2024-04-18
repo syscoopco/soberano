@@ -3,7 +3,8 @@ package co.syscoop.soberano.database.relational;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import org.springframework.jdbc.core.RowMapper;
-import co.syscoop.soberano.util.CatalogEntryRowData;
+
+import co.syscoop.soberano.util.rowdata.CatalogEntryRowData;
 
 public class CatalogEntryMapper implements RowMapper<Object> {
 

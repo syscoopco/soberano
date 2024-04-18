@@ -12,6 +12,7 @@ import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
@@ -23,7 +24,6 @@ import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.exception.WrongProcessSpecificationException;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 

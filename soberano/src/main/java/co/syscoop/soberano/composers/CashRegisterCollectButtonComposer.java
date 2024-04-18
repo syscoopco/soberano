@@ -13,13 +13,13 @@ import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
 import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings("serial")

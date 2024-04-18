@@ -26,7 +26,7 @@ import co.syscoop.soberano.domain.untracked.Responsibility;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class WorkerFormHelper extends TrackedObjectFormHelper {
 	

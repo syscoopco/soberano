@@ -16,10 +16,10 @@ import org.zkoss.zul.TreeitemRenderer;
 import org.zkoss.zul.Treerow;
 
 import co.syscoop.soberano.domain.tracked.Product;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.CatalogEntryRowData;
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.util.rowdata.CatalogEntryRowData;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {

@@ -11,10 +11,10 @@ import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.TreeNode;
 
-import co.syscoop.soberano.util.ExceptionTreatment;
-import co.syscoop.soberano.util.CatalogEntryRowData;
+import co.syscoop.soberano.util.rowdata.CatalogEntryRowData;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.domain.tracked.CatalogEntry;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.renderers.CatalogTreeNodeRenderer;
 

@@ -29,10 +29,10 @@ import org.zkoss.zul.Window;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {

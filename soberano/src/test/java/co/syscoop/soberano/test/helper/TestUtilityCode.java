@@ -29,7 +29,7 @@ import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class TestUtilityCode {
 

@@ -4,7 +4,8 @@ import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
-import co.syscoop.soberano.util.SPIRowData;
+
+import co.syscoop.soberano.util.rowdata.SPIRowData;
 
 public class SPIGridRenderer extends DomainObjectRowRenderer {
 

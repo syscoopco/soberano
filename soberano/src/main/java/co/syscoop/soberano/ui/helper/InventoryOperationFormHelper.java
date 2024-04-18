@@ -29,7 +29,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.models.InventoryOperationsGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectFormHelper {

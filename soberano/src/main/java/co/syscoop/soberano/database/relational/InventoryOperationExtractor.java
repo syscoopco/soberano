@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.InventoryOperationRowData;
+import co.syscoop.soberano.util.rowdata.InventoryOperationRowData;
 
 public final class InventoryOperationExtractor implements ResultSetExtractor<List<Object>> {
 	

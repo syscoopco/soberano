@@ -19,9 +19,9 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 import co.syscoop.soberano.exception.SoberanoException;
-import co.syscoop.soberano.util.ExceptionTreatment;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 

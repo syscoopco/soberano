@@ -23,7 +23,7 @@ import co.syscoop.soberano.domain.tracked.DeliveryProvider;
 import co.syscoop.soberano.domain.untracked.DeliveryFee;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 	

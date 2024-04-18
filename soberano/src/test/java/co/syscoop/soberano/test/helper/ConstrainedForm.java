@@ -22,7 +22,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 
 public class ConstrainedForm {
 

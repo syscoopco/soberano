@@ -10,7 +10,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ViewModelComposer extends SelectorComposer {

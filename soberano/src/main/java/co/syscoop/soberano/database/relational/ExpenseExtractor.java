@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.ExpenseRowData;
+import co.syscoop.soberano.util.rowdata.ExpenseRowData;
 
 public final class ExpenseExtractor implements ResultSetExtractor<List<Object>> {
 	

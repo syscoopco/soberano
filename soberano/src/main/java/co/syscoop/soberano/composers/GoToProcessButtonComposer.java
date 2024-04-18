@@ -10,7 +10,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings({ "serial", "rawtypes" })

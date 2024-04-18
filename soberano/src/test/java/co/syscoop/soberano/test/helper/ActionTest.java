@@ -11,7 +11,7 @@ import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 
 public class ActionTest {
 	

@@ -14,7 +14,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.util.ProcessRunRowData;
+import co.syscoop.soberano.util.rowdata.ProcessRunRowData;
 
 public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 

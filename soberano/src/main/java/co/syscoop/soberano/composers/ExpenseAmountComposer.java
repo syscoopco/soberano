@@ -9,7 +9,7 @@ import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
 

@@ -4,7 +4,8 @@ import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Row;
-import co.syscoop.soberano.util.CounterRowData;
+
+import co.syscoop.soberano.util.rowdata.CounterRowData;
 
 public class CountersGridRenderer extends DomainObjectRowRenderer {
 

@@ -9,7 +9,7 @@ import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
-import co.syscoop.soberano.util.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class OrderInitiator implements Initiator, InitiatorExt {
 	

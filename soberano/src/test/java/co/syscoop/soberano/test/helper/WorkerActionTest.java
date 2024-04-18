@@ -14,7 +14,7 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treechildren;
 import org.zkoss.zul.Treeitem;
 
-import co.syscoop.soberano.util.ExceptionTreatment;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class WorkerActionTest extends ActionTest {

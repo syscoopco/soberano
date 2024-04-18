@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import co.syscoop.soberano.util.OrderRowData;
+import co.syscoop.soberano.util.rowdata.OrderRowData;
 
 public class OrderExtractor implements ResultSetExtractor<List<Object>> {
 	

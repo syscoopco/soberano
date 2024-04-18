@@ -4,24 +4,27 @@
 		<label value="${labels.caption.field.name}" sclass="Caption"></label>			
 		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>
 		<separator></separator>
-		<label value="${labels.caption.field.printerPath}" sclass="Caption"></label>			
-		<textbox id="txtPrinterPath" readonly="false" maxlength="512" hflex="1" placeholder="${labels.caption.field.printerPathPlaceholder}" constraint="no empty"/>
+		<label value="${labels.caption.field.printServer}" sclass="Caption"></label>			
+		<textbox id="txtPrintServer" readonly="false" maxlength="512" hflex="1" placeholder="${labels.caption.field.printServerPlaceholder}" constraint="no empty"/>
+		<separator></separator>
+		<label value="${labels.caption.field.printerName}" sclass="Caption"></label>			
+		<textbox id="txtPrinterName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.printerNamePlaceholder}" constraint="no empty"/>
 		<separator></separator>
 		<checkbox id="chkIsDefaultPrinter" checked="false" label="${labels.caption.field.defaultPrinter}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkIsManagementPrinter" checked="false" label="${labels.caption.field.managementPrinter}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<label value="${labels.caption.field.fontSize}" sclass="Caption"></label>
-		<doublebox id="dblFontSize" hflex="1" placeholder="${labels.caption.field.fontSizePlaceholder}" constraint="no empty"/>
+		<intbox id="intFontSize" hflex="1" placeholder="${labels.caption.field.fontSizePlaceholder}" constraint="no negative, no empty"/>
 		<separator></separator>
 		<label value="${labels.caption.field.pageWitdth}" sclass="Caption"></label>
-		<doublebox id="dblPageWitdth" hflex="1" placeholder="${labels.caption.field.pageWitdthPlaceholder}" constraint="no empty"/>
+		<intbox id="intPageWitdth" hflex="1" placeholder="${labels.caption.field.pageWitdthPlaceholder}" constraint="no negative, no empty"/>
 		<separator></separator>
 		<label value="${labels.caption.field.pageHeight}" sclass="Caption"></label>
-		<doublebox id="dblPageHeight" hflex="1" placeholder="${labels.caption.field.pageHeightPlaceholder}" constraint="no empty"/>
+		<intbox id="intPageHeight" hflex="1" placeholder="${labels.caption.field.pageHeightPlaceholder}" constraint="no negative, no empty"/>
 		<separator></separator>
 		<label value="${labels.caption.field.pageMargin}" sclass="Caption"></label>
-		<doublebox id="dblPageMargin" hflex="1" placeholder="${labels.caption.field.pageMarginPlaceholder}" constraint="no empty"/>
+		<intbox id="intPageMargin" hflex="1" placeholder="${labels.caption.field.pageMarginPlaceholder}" constraint="no negative, no empty"/>
 		<separator></separator>
 		<checkbox id="chkCompactFormat" checked="false" label="${labels.caption.field.compactFormat}" sclass="Caption"></checkbox>
 		<separator></separator>		

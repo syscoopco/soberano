@@ -29,7 +29,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.exception.WrongProcessSpecificationException;
 import co.syscoop.soberano.renderers.ActionRequested;
-import co.syscoop.soberano.util.ProcessIORowData;
+import co.syscoop.soberano.util.rowdata.ProcessIORowData;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelper {

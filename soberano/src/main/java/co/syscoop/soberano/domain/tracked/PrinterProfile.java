@@ -16,16 +16,17 @@ import co.syscoop.soberano.domain.untracked.helper.DomainObjectQualifiedMapper;
 
 public class PrinterProfile extends TrackedObject {
 
-	private Double fontSize = 9.0;
-	private Double pageWidth = 164.0;
-	private Double pageHeight = 595.0;
-	private Double margin = 1.0;
+	private Integer fontSize;
+	private Integer pageWidth;
+	private Integer pageHeight;
+	private Integer margin;
 	private String header = "";
 	private String footer = "";
 	private Boolean compactFormat = true;
 	private Boolean isDefaultPrinter = true;
 	private Boolean isManagementPrinter = false;
-	private String printerPath = "POS58";
+	private String printServer = "";
+	private String printerName = "";
 	private ArrayList<Integer> objectsUsingThisIds = new ArrayList<Integer>();
 	private ArrayList<String> objectsUsingThisQualifiedNames = new ArrayList<String>();
 		
@@ -40,18 +41,19 @@ public class PrinterProfile extends TrackedObject {
 	public PrinterProfile(Integer id, 
 			Integer entityTypeInstanceId, 
 			String name,
-			Double fontSize,
-			Double pageWidth,
-			Double pageHeight,
-			Double margin,
+			Integer fontSize,
+			Integer pageWidth,
+			Integer pageHeight,
+			Integer margin,
 			String header,
 			String footer,
 			Boolean compactFormat,
 			Boolean isDefaultPrinter,
 			Boolean isManagementPrinter,
-			String printerPath) {
+			String printServer,
+			String printerName) {
 		super(id, entityTypeInstanceId, name);
-		this.setQualifiedName(name + " : " + printerPath);		
+		this.setQualifiedName(name + " : " + printServer);		
 		this.setFontSize(fontSize);
 		this.setPageWidth(pageWidth);
 		this.setPageHeight(pageHeight);
@@ -61,22 +63,24 @@ public class PrinterProfile extends TrackedObject {
 		this.setCompactFormat(compactFormat);
 		this.setIsDefaultPrinter(isDefaultPrinter);
 		this.setIsManagementPrinter(isManagementPrinter);
-		this.setPrinterPath(printerPath);
+		this.setPrintServer(printServer);
+		this.setPrinterName(printerName);
 	}
 	
 	public PrinterProfile(Integer id, 
 			Integer entityTypeInstanceId, 
 			String name,
-			Double fontSize,
-			Double pageWidth,
-			Double pageHeight,
-			Double margin,
+			Integer fontSize,
+			Integer pageWidth,
+			Integer pageHeight,
+			Integer margin,
 			String header,
 			String footer,
 			Boolean compactFormat,
 			Boolean isDefaultPrinter,
 			Boolean isManagementPrinter,
-			String printerPath,
+			String printServer,
+			String printerName,
 			ArrayList<Integer> objectsUsingThisIds,
 			ArrayList<String> objectsUsingThisQualifiedNames) {
 		this(id, 
@@ -91,7 +95,8 @@ public class PrinterProfile extends TrackedObject {
 			compactFormat,
 			isDefaultPrinter,
 			isManagementPrinter,
-			printerPath);	
+			printServer,
+			printerName);	
 		this.objectsUsingThisIds = objectsUsingThisIds;
 		this.objectsUsingThisQualifiedNames = objectsUsingThisQualifiedNames;
 	}
@@ -115,7 +120,8 @@ public class PrinterProfile extends TrackedObject {
 				+ "											:compactFormat, "
 				+ "											:isDefaultPrinter, "
 				+ "											:isManagementPrinter, "
-				+ "											:printerPath, "
+				+ "											:printServer, "
+				+ "											:printerName, "
 				+ "											:objectUsingThisIds, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
@@ -129,7 +135,8 @@ public class PrinterProfile extends TrackedObject {
 		recordParameters.addValue("compactFormat", this.getCompactFormat());
 		recordParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
 		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
-		recordParameters.addValue("printerPath", this.getPrinterPath());		
+		recordParameters.addValue("printServer", this.getPrintServer());
+		recordParameters.addValue("printerName", this.getPrinterName());
 		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -150,7 +157,8 @@ public class PrinterProfile extends TrackedObject {
 				+ "													:compactFormat,"
 				+ "													:isDefaultPrinter,"
 				+ "													:isManagementPrinter,"
-				+ "													:printerPath, "
+				+ "													:printServer, "
+				+ "													:printerName, "
 				+ "													:objectUsingThisIds,"	
 				+ "													:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
@@ -165,7 +173,8 @@ public class PrinterProfile extends TrackedObject {
 		modifyParameters.addValue("compactFormat", this.getCompactFormat());
 		modifyParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
 		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
-		modifyParameters.addValue("printerPath", this.getPrinterPath());	
+		modifyParameters.addValue("printServer", this.getPrintServer());
+		modifyParameters.addValue("printerName", this.getPrinterName());	
 		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
@@ -200,16 +209,17 @@ public class PrinterProfile extends TrackedObject {
 					printerProfile = new PrinterProfile(id,
 														rs.getInt("entityTypeInstanceId"), 
 														rs.getString("profileName"),
-														rs.getDouble("fontSize"),
-														rs.getDouble("pageWidth"),
-														rs.getDouble("pageHeight"),
-														rs.getDouble("margin"),
+														rs.getInt("fontSize"),
+														rs.getInt("pageWidth"),
+														rs.getInt("pageHeight"),
+														rs.getInt("margin"),
 														rs.getString("header"),
 														rs.getString("footer"),
 														rs.getBoolean("compactFormat"),
 														rs.getBoolean("isDefaultPrinter"),
 														rs.getBoolean("isManagementPrinter"),
-														rs.getString("printerPath"));
+														rs.getString("printServer"),
+														rs.getString("printerName"));
 				}
 				return printerProfile;
 			}
@@ -263,7 +273,8 @@ public class PrinterProfile extends TrackedObject {
 		setCompactFormat(sourcePrinterProfile.getCompactFormat());
 		setIsDefaultPrinter(sourcePrinterProfile.getIsDefaultPrinter());
 		setIsManagementPrinter(sourcePrinterProfile.getIsManagementPrinter());
-		setPrinterPath(sourcePrinterProfile.getPrinterPath());
+		setPrintServer(sourcePrinterProfile.getPrintServer());
+		setPrinterName(sourcePrinterProfile.getPrinterName());
 		setObjectsUsingThisIds(sourcePrinterProfile.getObjectsUsingThisIds());
 		setObjectsUsingThisQualifiedNames(sourcePrinterProfile.getObjectsUsingThisQualifiedNames());
 	}
@@ -285,35 +296,35 @@ public class PrinterProfile extends TrackedObject {
 		return 0;
 	}
 
-	public Double getFontSize() {
+	public Integer getFontSize() {
 		return fontSize;
 	}
 
-	public void setFontSize(Double fontSize) {
+	public void setFontSize(Integer fontSize) {
 		this.fontSize = fontSize;
 	}
 
-	public Double getPageWidth() {
+	public Integer getPageWidth() {
 		return pageWidth;
 	}
 
-	public void setPageWidth(Double pageWidth) {
+	public void setPageWidth(Integer pageWidth) {
 		this.pageWidth = pageWidth;
 	}
 
-	public Double getPageHeight() {
+	public Integer getPageHeight() {
 		return pageHeight;
 	}
 
-	public void setPageHeight(Double pageHeight) {
+	public void setPageHeight(Integer pageHeight) {
 		this.pageHeight = pageHeight;
 	}
 
-	public Double getMargin() {
+	public Integer getMargin() {
 		return margin;
 	}
 
-	public void setMargin(Double margin) {
+	public void setMargin(Integer margin) {
 		this.margin = margin;
 	}
 
@@ -357,12 +368,12 @@ public class PrinterProfile extends TrackedObject {
 		this.isManagementPrinter = isManagementPrinter;
 	}
 
-	public String getPrinterPath() {
-		return printerPath;
+	public String getPrintServer() {
+		return printServer;
 	}
 
-	public void setPrinterPath(String printerPath) {
-		this.printerPath = printerPath;
+	public void setPrintServer(String printServer) {
+		this.printServer = printServer;
 	}
 
 	public ArrayList<Integer> getObjectsUsingThisIds() {
@@ -379,5 +390,13 @@ public class PrinterProfile extends TrackedObject {
 
 	public void setObjectsUsingThisQualifiedNames(ArrayList<String> objectsUsingThisQualifiedNames) {
 		this.objectsUsingThisQualifiedNames = objectsUsingThisQualifiedNames;
+	}
+
+	public String getPrinterName() {
+		return printerName;
+	}
+
+	public void setPrinterName(String printerName) {
+		this.printerName = printerName;
 	}
 }
