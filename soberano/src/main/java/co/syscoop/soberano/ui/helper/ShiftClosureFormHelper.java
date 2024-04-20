@@ -13,6 +13,7 @@ import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.models.ShiftClosuresGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.vocabulary.Labels;
+import co.syscoop.soberano.vocabulary.Translator;
 
 public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
@@ -45,7 +46,7 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 		else {
 			requestedAction = ActionRequested.RECORD;
 			((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.confirm"));
-			((Textbox) boxDetails.query("#txtReport")).setText((new ShiftClosure()).getReport());
+			((Textbox) boxDetails.query("#txtReport")).setText(Translator.translate((new ShiftClosure()).getReport()));
 			throw new ConfirmationRequiredException();
 		}
 	}

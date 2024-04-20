@@ -11,6 +11,7 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
@@ -255,144 +256,14 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void renderOrderItemsForBilling(Order order, Div divOrderItems) {
-
-		for (String cat : order.getCategories()) {
-			Tree treeCat = new Tree();
-			divOrderItems.appendChild(treeCat);
-			Treecols treeCols = new Treecols();
-			treeCat.appendChild(treeCols);
-			Treecol treeCol = new Treecol();
-			treeCols.appendChild(treeCol);
-			Treechildren chdnCat = new Treechildren();
-			treeCat.appendChild(chdnCat);
-			Treeitem titemCat = new Treeitem();
-			chdnCat.appendChild(titemCat);
-			Treerow rowCat = new Treerow();
-			titemCat.appendChild(rowCat);
-			Treecell cellCat = new Treecell(cat);
-			rowCat.appendChild(cellCat);
-			Treechildren chdnDesc = new Treechildren();
-			titemCat.appendChild(chdnDesc);
-			titemCat.setOpen(true);
-			for (String desc : order.getDescriptions().get(cat)) {
-				Treeitem titemDesc = new Treeitem();
-				chdnDesc.appendChild(titemDesc);
-				Treerow rowDesc = new Treerow();
-				titemDesc.appendChild(rowDesc);
-				Treecell cellDesc = new Treecell(desc);
-				cellDesc.setId("cell" + cat + "_desc");
-				rowDesc.appendChild(cellDesc);
-				Treechildren chdnOic = new Treechildren();
-				titemDesc.appendChild(chdnOic);
-				titemDesc.setOpen(true);
-				for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
-					
-					//only items with cancellations
-					if (oi.getCanceledRuns().compareTo(new BigDecimal(0)) > 0) {
-						
-						ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
-						chdnOic.appendChild(oiItem);
-						Treerow rowOi = new Treerow();
-						rowOi.setId(oi.getProcessRunId().toString());
-						oiItem.appendChild(rowOi);
-						Treecell cellOi = new Treecell();
-						Hbox boxOi = new Hbox();
-						boxOi.setAlign("center");
-						
-						Label lblInventoryItemCode = new Label(oi.getInventoryItemCode());
-						lblInventoryItemCode.setId("lblInventoryItemCode" + oi.getProcessRunId().toString());
-						lblInventoryItemCode.setVisible(false);
-						boxOi.appendChild(lblInventoryItemCode);
-																	
-						Decimalbox decCanceledButEndedItems = new Decimalbox(new BigDecimal(0));
-						decCanceledButEndedItems.setFormat("####.########");
-						decCanceledButEndedItems.setConstraint("no negative,no empty");
-						decCanceledButEndedItems.setId("decCanceledButEndedItems" + oi.getProcessRunId().toString());
-						boxOi.appendChild(decCanceledButEndedItems);
-						decCanceledButEndedItems.addEventListener("onChange", new EventListener() {
-
-							@Override
-							public void onEvent(Event event) throws Exception {
-								
-								try {
-									updateCanceledButEndedItems(event);
-								}
-								catch(NotEnoughRightsException ex) {
-									ExceptionTreatment.logAndShow(ex, 
-											Labels.getLabel("message.permissions.NotEnoughRights"), 
-											Labels.getLabel("messageBoxTitle.Warning"),
-											Messagebox.EXCLAMATION);
-								}
-								catch(Exception ex)	{
-									ExceptionTreatment.logAndShow(ex, 
-											ex.getMessage(), 
-											Labels.getLabel("messageBoxTitle.Error"),
-											Messagebox.ERROR);
-								}
-							}
-						});
-																		
-						boxOi.appendChild(new Label("/"));					
-						
-						Label lblCanceledItems = new Label((oi.getCanceledRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
-						lblCanceledItems.setId("lblCanceledItems" + oi.getProcessRunId().toString());
-						boxOi.appendChild(lblCanceledItems);
-						
-						boxOi.appendChild((new Separator("horizontal")));
-						
-						Label lblProductUnit = new Label(oi.getProductUnit());
-						lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
-						boxOi.appendChild(lblProductUnit);	
-						
-						boxOi.appendChild(new Separator("horizontal"));
-						
-						Label lblProductName = new Label(oi.getProductName());
-						lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
-						boxOi.appendChild(lblProductName);
-						
-						boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
-						cellOi.appendChild(boxOi);
-						rowOi.appendChild(cellOi);
-					}
-				}
-			}
-		}
-	}
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void renderOrderItemsForManagement(Order order, Div divOrderItems) {
+	private void renderItems(Order order, String cat, String desc, Treechildren chdnOic, Boolean itsForManagement) {
 		
-		for (String cat : order.getCategories()) {
-			Tree treeCat = new Tree();
-			divOrderItems.appendChild(treeCat);
-			Treecols treeCols = new Treecols();
-			treeCat.appendChild(treeCols);
-			Treecol treeCol = new Treecol();
-			treeCols.appendChild(treeCol);
-			Treechildren chdnCat = new Treechildren();
-			treeCat.appendChild(chdnCat);
-			Treeitem titemCat = new Treeitem();
-			chdnCat.appendChild(titemCat);
-			Treerow rowCat = new Treerow();
-			titemCat.appendChild(rowCat);
-			Treecell cellCat = new Treecell(cat);
-			rowCat.appendChild(cellCat);
-			Treechildren chdnDesc = new Treechildren();
-			titemCat.appendChild(chdnDesc);
-			titemCat.setOpen(true);
-			for (String desc : order.getDescriptions().get(cat)) {
-				Treeitem titemDesc = new Treeitem();
-				chdnDesc.appendChild(titemDesc);
-				Treerow rowDesc = new Treerow();
-				titemDesc.appendChild(rowDesc);
-				Treecell cellDesc = new Treecell(desc);
-				cellDesc.setId("cell" + cat + "_desc");
-				rowDesc.appendChild(cellDesc);
-				Treechildren chdnOic = new Treechildren();
-				titemDesc.appendChild(chdnOic);
-				titemDesc.setOpen(true);
-				for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
+		if (!itsForManagement) {
+			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
+				
+				//only items with cancellations
+				if (oi.getCanceledRuns().compareTo(new BigDecimal(0)) > 0) {
+					
 					ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
 					chdnOic.appendChild(oiItem);
 					Treerow rowOi = new Treerow();
@@ -402,64 +273,23 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Hbox boxOi = new Hbox();
 					boxOi.setAlign("center");
 					
-					Decimalbox decOneRunQuantity = new Decimalbox(oi.getOneRunQuantity());
-					decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
-					decOneRunQuantity.setVisible(false);
-					boxOi.appendChild(decOneRunQuantity);
-					
 					Label lblInventoryItemCode = new Label(oi.getInventoryItemCode());
 					lblInventoryItemCode.setId("lblInventoryItemCode" + oi.getProcessRunId().toString());
 					lblInventoryItemCode.setVisible(false);
 					boxOi.appendChild(lblInventoryItemCode);
-					
-					Button btnIncServedItems = new Button("+");
-					btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
-					if ((oi.getCanceledRuns()).compareTo(new BigDecimal(0)) > 0) {
-						btnIncServedItems.setDisabled(false);
-					}
-					else {
-						btnIncServedItems.setDisabled(true);
-					}
-					boxOi.appendChild(btnIncServedItems);
-					btnIncServedItems.addEventListener("onClick", new EventListener() {
+																
+					Decimalbox decCanceledButEndedItems = new Decimalbox(new BigDecimal(0));
+					decCanceledButEndedItems.setFormat("####.########");
+					decCanceledButEndedItems.setConstraint("no negative,no empty");
+					decCanceledButEndedItems.setId("decCanceledButEndedItems" + oi.getProcessRunId().toString());
+					boxOi.appendChild(decCanceledButEndedItems);
+					decCanceledButEndedItems.addEventListener("onChange", new EventListener() {
 
 						@Override
 						public void onEvent(Event event) throws Exception {
 							
 							try {
-								updateServedItems(ItemOperation.REORDER, event);
-							}
-							catch(NotEnoughRightsException ex) {
-								ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-							}
-							catch(Exception ex)	{
-								ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Error"),
-										Messagebox.ERROR);
-							}
-						}
-					});	
-					
-					Button btnDecServedItems = new Button("-");
-					btnDecServedItems.setId("btnDecServedItems" + oi.getProcessRunId().toString());
-					if (oi.getCanceledRuns().compareTo(oi.getOrderedRuns()) < 0) {
-						btnDecServedItems.setDisabled(false);
-					}
-					else {
-						btnDecServedItems.setDisabled(true);
-					}
-					boxOi.appendChild(btnDecServedItems);
-					btnDecServedItems.addEventListener("onClick", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-							
-							try {
-								updateServedItems(ItemOperation.CANCEL, event);
+								updateCanceledButEndedItems(event);
 							}
 							catch(NotEnoughRightsException ex) {
 								ExceptionTreatment.logAndShow(ex, 
@@ -475,91 +305,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 							}
 						}
 					});
-					
-					Button btnCancelAllItems = new Button();
-					btnCancelAllItems.setImage("./images/delete.png");
-					btnCancelAllItems.setId("btnCancelAllItems" + oi.getProcessRunId().toString());
-					boxOi.appendChild(btnCancelAllItems);
-					btnCancelAllItems.addEventListener("onClick", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-							
-							try {
-								updateServedItems(ItemOperation.CANCELALL, event);
-							}
-							catch(NotEnoughRightsException ex) {
-								ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-							}
-							catch(Exception ex)	{
-								ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Error"),
-										Messagebox.ERROR);
-							}
-						}
-					});
-					
-					BigDecimal servedItems = oi.getOrderedRuns().subtract(oi.getCanceledRuns());
-					servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
-					Decimalbox decServedItems = new Decimalbox(servedItems);
-					decServedItems.setFormat("####.########");
-					decServedItems.setId("decServedItems" + oi.getProcessRunId().toString());
-					boxOi.appendChild(decServedItems);
-					decServedItems.addEventListener("onChange", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-							
-							try {
-								updateServedItems(ItemOperation.SETQTY, event);
-							}
-							catch(NotEnoughRightsException ex) {
-								ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-							}
-							catch(Exception ex)	{
-								ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Error"),
-										Messagebox.ERROR);
-							}
-						}
-					});
-					
-					decServedItems.addEventListener("onClick", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-							
-							try {
-								if (SpringUtility.underTesting()) updateServedItems(ItemOperation.SETQTY, event);
-							}
-							catch(NotEnoughRightsException ex) {
-								ExceptionTreatment.logAndShow(ex, 
-										Labels.getLabel("message.permissions.NotEnoughRights"), 
-										Labels.getLabel("messageBoxTitle.Warning"),
-										Messagebox.EXCLAMATION);
-							}
-							catch(Exception ex)	{
-								ExceptionTreatment.logAndShow(ex, 
-										ex.getMessage(), 
-										Labels.getLabel("messageBoxTitle.Error"),
-										Messagebox.ERROR);
-							}
-						}
-					});
-					
+																	
 					boxOi.appendChild(new Label("/"));					
 					
-					Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
-					lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
-					boxOi.appendChild(lblOrderedItems);
+					Label lblCanceledItems = new Label((oi.getCanceledRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
+					lblCanceledItems.setId("lblCanceledItems" + oi.getProcessRunId().toString());
+					boxOi.appendChild(lblCanceledItems);
 					
 					boxOi.appendChild((new Separator("horizontal")));
 					
@@ -573,42 +324,229 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
 					boxOi.appendChild(lblProductName);
 					
-					boxOi.appendChild((new Separator("horizontal")));
-					boxOi.appendChild((new Separator("horizontal")));
-					
-					boxOi.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
-					Decimalbox decDiscount = new Decimalbox();
-					decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
-					decDiscount.setConstraint("no empty, no negative");
-					decDiscount.setValue(oi.getDiscountedRuns());
-					decDiscount.setFormat("####.########");
-					decDiscount.addEventListener("onChange", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-
-							discountBoxHandler(event);
-						}
-					});
-					decDiscount.addEventListener("onClick", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-
-							if (SpringUtility.underTesting()) discountBoxHandler(event);
-						}
-					});					
-					boxOi.appendChild(decDiscount);
-					boxOi.appendChild((new Separator("horizontal")));
-					
-					Label lblProductUnit1 = new Label(oi.getProductUnit());
-					lblProductUnit1.setId("lblProductUnit1" + oi.getProcessRunId().toString());					
-					boxOi.appendChild(lblProductUnit1);					
-					
 					boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 					cellOi.appendChild(boxOi);
 					rowOi.appendChild(cellOi);
 				}
+			}
+		}
+		else {
+			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
+				ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
+				chdnOic.appendChild(oiItem);
+				Treerow rowOi = new Treerow();
+				rowOi.setId(oi.getProcessRunId().toString());
+				oiItem.appendChild(rowOi);
+				Treecell cellOi = new Treecell();
+				Hbox boxOi = new Hbox();
+				boxOi.setAlign("center");
+				
+				Decimalbox decOneRunQuantity = new Decimalbox(oi.getOneRunQuantity());
+				decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
+				decOneRunQuantity.setVisible(false);
+				boxOi.appendChild(decOneRunQuantity);
+				
+				Label lblInventoryItemCode = new Label(oi.getInventoryItemCode());
+				lblInventoryItemCode.setId("lblInventoryItemCode" + oi.getProcessRunId().toString());
+				lblInventoryItemCode.setVisible(false);
+				boxOi.appendChild(lblInventoryItemCode);
+				
+				Button btnIncServedItems = new Button("+");
+				btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
+				if ((oi.getCanceledRuns()).compareTo(new BigDecimal(0)) > 0) {
+					btnIncServedItems.setDisabled(false);
+				}
+				else {
+					btnIncServedItems.setDisabled(true);
+				}
+				boxOi.appendChild(btnIncServedItems);
+				btnIncServedItems.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						try {
+							updateServedItems(ItemOperation.REORDER, event);
+						}
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex)	{
+							ExceptionTreatment.logAndShow(ex, 
+									ex.getMessage(), 
+									Labels.getLabel("messageBoxTitle.Error"),
+									Messagebox.ERROR);
+						}
+					}
+				});	
+				
+				Button btnDecServedItems = new Button("-");
+				btnDecServedItems.setId("btnDecServedItems" + oi.getProcessRunId().toString());
+				if (oi.getCanceledRuns().compareTo(oi.getOrderedRuns()) < 0) {
+					btnDecServedItems.setDisabled(false);
+				}
+				else {
+					btnDecServedItems.setDisabled(true);
+				}
+				boxOi.appendChild(btnDecServedItems);
+				btnDecServedItems.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						try {
+							updateServedItems(ItemOperation.CANCEL, event);
+						}
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex)	{
+							ExceptionTreatment.logAndShow(ex, 
+									ex.getMessage(), 
+									Labels.getLabel("messageBoxTitle.Error"),
+									Messagebox.ERROR);
+						}
+					}
+				});
+				
+				Button btnCancelAllItems = new Button();
+				btnCancelAllItems.setImage("./images/delete.png");
+				btnCancelAllItems.setId("btnCancelAllItems" + oi.getProcessRunId().toString());
+				boxOi.appendChild(btnCancelAllItems);
+				btnCancelAllItems.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						try {
+							updateServedItems(ItemOperation.CANCELALL, event);
+						}
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex)	{
+							ExceptionTreatment.logAndShow(ex, 
+									ex.getMessage(), 
+									Labels.getLabel("messageBoxTitle.Error"),
+									Messagebox.ERROR);
+						}
+					}
+				});
+				
+				BigDecimal servedItems = oi.getOrderedRuns().subtract(oi.getCanceledRuns());
+				servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
+				Decimalbox decServedItems = new Decimalbox(servedItems);
+				decServedItems.setFormat("####.########");
+				decServedItems.setId("decServedItems" + oi.getProcessRunId().toString());
+				boxOi.appendChild(decServedItems);
+				decServedItems.addEventListener("onChange", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						try {
+							updateServedItems(ItemOperation.SETQTY, event);
+						}
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex)	{
+							ExceptionTreatment.logAndShow(ex, 
+									ex.getMessage(), 
+									Labels.getLabel("messageBoxTitle.Error"),
+									Messagebox.ERROR);
+						}
+					}
+				});
+				
+				decServedItems.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						try {
+							if (SpringUtility.underTesting()) updateServedItems(ItemOperation.SETQTY, event);
+						}
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex)	{
+							ExceptionTreatment.logAndShow(ex, 
+									ex.getMessage(), 
+									Labels.getLabel("messageBoxTitle.Error"),
+									Messagebox.ERROR);
+						}
+					}
+				});
+				
+				boxOi.appendChild(new Label("/"));					
+				
+				Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
+				lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
+				boxOi.appendChild(lblOrderedItems);
+				
+				boxOi.appendChild((new Separator("horizontal")));
+				
+				Label lblProductUnit = new Label(oi.getProductUnit());
+				lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
+				boxOi.appendChild(lblProductUnit);	
+				
+				boxOi.appendChild(new Separator("horizontal"));
+				
+				Label lblProductName = new Label(oi.getProductName());
+				lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
+				boxOi.appendChild(lblProductName);
+				
+				boxOi.appendChild((new Separator("horizontal")));
+				boxOi.appendChild((new Separator("horizontal")));
+				
+				boxOi.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
+				Decimalbox decDiscount = new Decimalbox();
+				decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
+				decDiscount.setConstraint("no empty, no negative");
+				decDiscount.setValue(oi.getDiscountedRuns());
+				decDiscount.setFormat("####.########");
+				decDiscount.addEventListener("onChange", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+
+						discountBoxHandler(event);
+					}
+				});
+				decDiscount.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+
+						if (SpringUtility.underTesting()) discountBoxHandler(event);
+					}
+				});					
+				boxOi.appendChild(decDiscount);
+				boxOi.appendChild((new Separator("horizontal")));
+				
+				Label lblProductUnit1 = new Label(oi.getProductUnit());
+				lblProductUnit1.setId("lblProductUnit1" + oi.getProcessRunId().toString());					
+				boxOi.appendChild(lblProductUnit1);					
+				
+				boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
+				cellOi.appendChild(boxOi);
+				rowOi.appendChild(cellOi);
 			}
 		}
 	}
@@ -643,16 +581,83 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		return order;
 	}
 	
+	private void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement) {
+		
+		for (String cat : order.getCategories()) {
+			Tree treeCat = new Tree();
+			vboxOrderItems.appendChild(treeCat);
+			Treecols treeCols = new Treecols();
+			treeCat.appendChild(treeCols);
+			Treecol treeCol = new Treecol();
+			treeCols.appendChild(treeCol);
+			Treechildren chdnCat = new Treechildren();
+			treeCat.appendChild(chdnCat);
+			Treeitem titemCat = new Treeitem();
+			chdnCat.appendChild(titemCat);
+			Treerow rowCat = new Treerow();
+			titemCat.appendChild(rowCat);
+			Treecell cellCat = new Treecell(cat);
+			rowCat.appendChild(cellCat);
+			Treechildren chdnDesc = new Treechildren();
+			titemCat.appendChild(chdnDesc);
+			titemCat.setOpen(true);
+			for (String desc : order.getDescriptions().get(cat)) {
+				Treeitem titemDesc = new Treeitem();
+				chdnDesc.appendChild(titemDesc);
+				Treerow rowDesc = new Treerow();
+				titemDesc.appendChild(rowDesc);
+				Treecell cellDesc = new Treecell(desc);
+				//cellDesc.setId("cell" + cat + "_desc");
+				rowDesc.appendChild(cellDesc);
+				Treechildren chdnOic = new Treechildren();
+				titemDesc.appendChild(chdnOic);
+				titemDesc.setOpen(true);
+				renderItems(order, cat, desc, chdnOic, itsForManagement);
+			}
+		}
+	}
+	
+	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement) throws Exception {
+		
+		Order order = initForm(wndContentPanel, orderId);
+		
+		Hbox hbox = new Hbox();
+		hbox.setId("hboxOrderDetails");
+		hbox.setHflex("1");
+		hbox.setVflex("1");			
+		
+		Include incActivityWnd = new Include("/activity_wnd.zul");
+		incActivityWnd.setHflex("1");
+		incActivityWnd.setVflex("1");
+		hbox.appendChild(incActivityWnd);			
+		
+		Vbox vbox = new Vbox();
+		vbox.setHflex("1");
+		vbox.setVflex("1");
+		
+		Div divOrderItems = (Div) wndContentPanel.query("#divOrderItems");
+		
+		renderOrderItems(order, vbox, itsForManagement);
+		
+		hbox.appendChild(vbox);
+		
+		Include incPrintTicketWnd = new Include("/activity_wnd.zul");
+		incPrintTicketWnd.setId("incTicket");
+		incPrintTicketWnd.setHflex("1");
+		incPrintTicketWnd.setVflex("1");
+		hbox.appendChild(incPrintTicketWnd);
+					
+		divOrderItems.appendChild(hbox);
+	}
+	
 	public void initFormForManagement(Window wndContentPanel, Integer orderId) throws Exception {
 		
-		Order order = initForm(wndContentPanel, orderId);		
-		renderOrderItemsForManagement(order, (Div) wndContentPanel.query("#divOrderItems"));
+		initForm(wndContentPanel, orderId, true);
 	}
 	
 	public void initFormForBilling(Window wndContentPanel, Integer orderId) throws Exception {
 		
-		Order order = initForm(wndContentPanel, orderId);
-		renderOrderItemsForBilling(order, (Div) wndContentPanel.query("#divOrderItems"));
+		initForm(wndContentPanel, orderId, false);
 	}
 
 	@Override

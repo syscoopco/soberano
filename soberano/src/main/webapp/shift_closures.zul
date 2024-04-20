@@ -6,8 +6,8 @@
 	<label self="@define(pageTitle)" value="${labels.pageShiftClosures.WindowTitle}" sclass="PageTitle"/>
 	
 	<window self="@define(inputForm)" contentStyle="overflow:auto">
-		<vbox id="boxDetails" height="100px" width="100%">
-			<textbox id="txtReport" multiline="true" height="80px" hflex="1" readonly="true" placeholder="${labels.placeholder.report}"/>
+		<vbox id="boxDetails" height="300px" width="100%">
+			<textbox id="txtReport" multiline="true" height="300px" hflex="1" readonly="true" placeholder="${labels.placeholder.report}"/>
 			<button id="btnRecord" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
 		</vbox>
 	</window>
