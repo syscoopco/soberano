@@ -1,5 +1,5 @@
 <zk>
-	<window width="100%" vflex="1" apply="co.syscoop.soberano.composers.ActivityTreeComposer" contentStyle="overflow:auto">
+	<window hflex="1" apply="co.syscoop.soberano.composers.ActivityTreeComposer" contentStyle="overflow:auto">
 		<tree id="treeActivity" xmlns:ca="client/attribute" ca:data-scrollable="false">
 			<treecols>
 				<treecol>

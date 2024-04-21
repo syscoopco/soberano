@@ -620,34 +620,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement) throws Exception {
 		
 		Order order = initForm(wndContentPanel, orderId);
-		
-		Hbox hbox = new Hbox();
-		hbox.setId("hboxOrderDetails");
-		hbox.setHflex("1");
-		hbox.setVflex("1");			
-		
-		Include incActivityWnd = new Include("/activity_wnd.zul");
-		incActivityWnd.setHflex("1");
-		incActivityWnd.setVflex("1");
-		hbox.appendChild(incActivityWnd);			
-		
 		Vbox vbox = new Vbox();
 		vbox.setHflex("1");
-		vbox.setVflex("1");
-		
-		Div divOrderItems = (Div) wndContentPanel.query("#divOrderItems");
-		
 		renderOrderItems(order, vbox, itsForManagement);
-		
-		hbox.appendChild(vbox);
-		
-		Include incPrintTicketWnd = new Include("/activity_wnd.zul");
-		incPrintTicketWnd.setId("incTicket");
-		incPrintTicketWnd.setHflex("1");
-		incPrintTicketWnd.setVflex("1");
-		hbox.appendChild(incPrintTicketWnd);
-					
-		divOrderItems.appendChild(hbox);
+		Div divOrderItems = (Div) wndContentPanel.query("window").query("#wndOrderItems").query("#divOrderItems");
+		divOrderItems.appendChild(vbox);
 	}
 	
 	public void initFormForManagement(Window wndContentPanel, Integer orderId) throws Exception {

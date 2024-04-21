@@ -23,6 +23,19 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 		item.appendChild(tr);
 		tr.appendChild(new Treecell(nodeData.getLabel()));
 		if (nodeData.getValue() != null) {
+			
+			//highlight the node related to the order specified in the URL
+			String orderToHighlight = "";
+			try{
+				String queryString = Executions.getCurrent().getDesktop().getQueryString();
+				orderToHighlight = (queryString.substring(queryString.indexOf("id=") + 3, queryString.length())).replace("%20", " ");
+			}
+			catch(StringIndexOutOfBoundsException ex) {}
+			catch(NullPointerException ex) {}
+			if (nodeData.getLabel().trim().contains(orderToHighlight.trim())) {
+				item.setSelected(true);
+			}
+			
 			item.addEventListener("onClick", new EventListener() {
 
 				@Override

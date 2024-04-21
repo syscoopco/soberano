@@ -70,8 +70,26 @@
 					<separator></separator>
 				</hbox>	
 			</hbox>
-			<separator></separator>		
-			<div id="divOrderItems"/>
+			<separator></separator>
+			<window id="wndOrderItems" hflex="1" vflex="1">
+				<hlayout hflex="1" vflex="1">
+					<borderlayout width="200px" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<include src="activity_wnd.zul"/>
+						</center>	
+					</borderlayout>
+					<borderlayout hflex="1" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<div id="divOrderItems"/>
+						</center>	
+					</borderlayout>
+					<borderlayout width="300px" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<include src="activity_wnd.zul"/>
+						</center>	
+					</borderlayout>
+				</hlayout>
+			</window>		
 			<separator></separator>
 			<hbox width="100%" align="center">
 				<hbox hflex="1" align="center" pack="start">

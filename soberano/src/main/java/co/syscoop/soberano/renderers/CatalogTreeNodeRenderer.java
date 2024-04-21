@@ -45,6 +45,7 @@ public class CatalogTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode
 			tc.appendChild(chkItemEnabled);
 			
 			//item price
+			tc.appendChild(new Separator("vertical"));
 			Decimalbox decPrice = new Decimalbox(catalogEntryRowData.getItemPrice());
 			decPrice.setId("decPrice" + catalogEntryRowData.getItemId().toString());
 			decPrice.setConstraint("no negative, no empty");
