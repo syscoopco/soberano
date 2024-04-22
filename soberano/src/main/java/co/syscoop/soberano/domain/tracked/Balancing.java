@@ -28,10 +28,12 @@ public class Balancing extends BusinessActivityTrackedObject {
 	
 	public Balancing(Integer cashRegister,
 					ArrayList<Integer> currencyIds,
-					ArrayList<BigDecimal> amounts) {
+					ArrayList<BigDecimal> amounts,
+					String notes) {
 		this.setCashRegister(cashRegister);
 		this.setCurrencyIds(currencyIds);
 		this.setAmounts(amounts);
+		this.setNotes(notes);
 	}
 
 	@Override
@@ -55,12 +57,14 @@ public class Balancing extends BusinessActivityTrackedObject {
 				+ "											:excludeCash, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
+				+ "											:notes, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("cashRegister", this.getCashRegister());
 		recordParameters.addValue("excludeCash", false);
 		recordParameters.addValue("currencyIds", createArrayOfSQLType("integer", this.currencyIds.toArray()));
 		recordParameters.addValue("amounts", createArrayOfSQLType("numeric", this.amounts.toArray()));
+		recordParameters.addValue("notes", this.getNotes());
 		
 		return super.record();
 	}

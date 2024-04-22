@@ -54,6 +54,9 @@
 			</cell>
 		</hbox>
 		<separator></separator>
+		<label value="${labels.caption.field.Notes}" sclass="Caption"></label>			
+		<textbox id="txtNotes" maxlength="1000" multiline="true" hflex="1" sclass="NotesTextbox"/>
+		<separator></separator>
 		<separator></separator>
 		<separator></separator>
 		<separator></separator>

@@ -32,13 +32,14 @@ public class Deposit extends BusinessActivityTrackedObject {
 					Integer order,
 					Integer receivable,
 					ArrayList<Integer> currencyIds,
-					ArrayList<BigDecimal> amounts) {
+					ArrayList<BigDecimal> amounts,
+					String notes) {
 		this.setCashRegister(cashRegister);
 		this.setOrder(order);
 		this.setReceivable(receivable);
 		this.setCurrencyIds(currencyIds);
 		this.setAmounts(amounts);
-	}
+		this.setNotes(notes);}
 
 	@Override
 	public void get() throws SQLException {
@@ -63,6 +64,7 @@ public class Deposit extends BusinessActivityTrackedObject {
 				+ "											:receivable, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
+				+ "											:notes, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("cashRegister", this.getCashRegister());
@@ -71,6 +73,7 @@ public class Deposit extends BusinessActivityTrackedObject {
 		recordParameters.addValue("receivable", this.getReceivable());
 		recordParameters.addValue("currencyIds", createArrayOfSQLType("integer", this.currencyIds.toArray()));
 		recordParameters.addValue("amounts", createArrayOfSQLType("numeric", this.amounts.toArray()));
+		recordParameters.addValue("notes", this.getNotes());
 		
 		return super.record();
 	}

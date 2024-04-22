@@ -10,6 +10,7 @@ public class BusinessActivityTrackedObject extends TrackedObject {
 	
 	private Date occurrenceTime = null;
 	private String reference = null;
+	private String notes = "";
 	
 	public BusinessActivityTrackedObject() {};
 	
@@ -59,5 +60,13 @@ public class BusinessActivityTrackedObject extends TrackedObject {
 	@Override
 	public String getReport() throws SQLException {
 		return super.getReport();
+	}
+
+	public String getNotes() {
+		return notes;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
 	}
 }

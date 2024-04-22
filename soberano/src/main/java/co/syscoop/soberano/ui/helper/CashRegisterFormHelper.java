@@ -48,6 +48,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 	
 	private ArrayList<Integer> currencyIds = new ArrayList<Integer>();
 	private ArrayList<BigDecimal> amounts = new ArrayList<BigDecimal>();
+	private String notes = "";
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void showOrderCollectingComponents(Window wndContentPanel, CashRegister cashRegister, Integer orderId) throws SQLException {
@@ -214,6 +215,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			String currCode = ((Currency) item).getStringId();
 			amounts.add(((Decimalbox) boxDetails.query("#decEnteredAmount" + currCode)).getValue());
 		}
+		notes = ((Textbox) boxDetails.query("#txtNotes")).getValue();
 	}
 	
 	public Integer deposit(Box boxDetails, Boolean excludeCash) throws Exception {
@@ -225,7 +227,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 									null, 
 									null,
 									currencyIds, 
-									amounts)).record();
+									amounts,
+									notes)).record();
 			if (qryResult == -1) {
 				throw new NotEnoughRightsException();						
 			}
@@ -254,7 +257,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 									null, 
 									null,
 									currencyIds, 
-									amounts)).record();
+									amounts,
+									notes)).record();
 			if (qryResult == -1) {
 				throw new NotEnoughRightsException();						
 			}
@@ -281,7 +285,8 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			fillAmounts(boxDetails, excludeCash);			
 			qryResult = (new Balancing(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(), 
 									currencyIds, 
-									amounts)).record();
+									amounts,
+									notes)).record();
 			if (qryResult == -1) {
 				throw new NotEnoughRightsException();						
 			}

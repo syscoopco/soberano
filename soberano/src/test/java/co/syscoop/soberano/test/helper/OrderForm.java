@@ -14,7 +14,7 @@ public class OrderForm extends ConstrainedForm {
 	
 	private Textbox txtLabel;
 	private Textbox txtCounters;
-	private Textbox txtCustomer;
+	private Combobox cmbCustomer;
 	private Combobox cmbItemToOrder;
 	private Textbox txtSpecialInstructions;
 	private Decimalbox decQuantity;
@@ -30,7 +30,7 @@ public class OrderForm extends ConstrainedForm {
 	public OrderForm(DesktopAgent desktop,
 					Textbox txtLabel,
 					Textbox txtCounters,
-					Textbox txtCustomer,
+					Combobox cmbCustomer,
 					Combobox cmbItemToOrder,
 					Textbox txtSpecialInstructions,
 					Decimalbox decQuantity,
@@ -49,7 +49,7 @@ public class OrderForm extends ConstrainedForm {
 		
 		this.setTxtLabel(txtLabel);
 		this.setTxtCounters(txtCounters);
-		this.setTxtCustomer(txtCustomer);
+		this.setCmbCustomer(cmbCustomer);
 		this.setCmbItemToOrder(cmbItemToOrder);
 		this.setTxtSpecialInstructions(txtSpecialInstructions);
 		this.setDecQuantity(decQuantity);
@@ -93,12 +93,12 @@ public class OrderForm extends ConstrainedForm {
 		this.txtCounters = txtCounters;
 	}
 
-	public Textbox getTxtCustomer() {
-		return txtCustomer;
+	public Combobox getCmbCustomer() {
+		return cmbCustomer;
 	}
 
-	public void setTxtCustomer(Textbox txtCustomer) {
-		this.txtCustomer = txtCustomer;
+	public void setCmbCustomer(Combobox cmbCustomer) {
+		this.cmbCustomer = cmbCustomer;
 	}
 
 	public Combobox getCmbItemToOrder() {

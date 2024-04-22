@@ -11,7 +11,6 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Hbox;
-import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
@@ -35,6 +34,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
@@ -161,8 +161,16 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				((Decimalbox) event.getTarget().query("#decAmountTop")).setValue(amount);
-				((Decimalbox) event.getTarget().query("#decAmountBottom")).setValue(amount);
+				((Decimalbox) event.getTarget().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().query("#wndContentPanel").
+								query("#decAmountTop")).setValue(amount);
+				((Decimalbox) event.getTarget().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().getParent().
+								getParent().getParent().getParent().getParent().query("#wndContentPanel").
+								query("#decAmountBottom")).setValue(amount);
 			}
 		}
 		else {
@@ -312,15 +320,18 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					lblCanceledItems.setId("lblCanceledItems" + oi.getProcessRunId().toString());
 					boxOi.appendChild(lblCanceledItems);
 					
-					boxOi.appendChild((new Separator("horizontal")));
+					boxOi.appendChild(new Separator("horizontal"));
 					
 					Label lblProductUnit = new Label(oi.getProductUnit());
 					lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
 					boxOi.appendChild(lblProductUnit);	
 					
+					boxOi.appendChild(new Separator("horizontal"));				
+					boxOi.appendChild(new Separator("horizontal"));
 					boxOi.appendChild(new Separator("horizontal"));
 					
 					Label lblProductName = new Label(oi.getProductName());
+					lblProductName.setClass("Caption");
 					lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
 					boxOi.appendChild(lblProductName);
 					
@@ -338,8 +349,16 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				rowOi.setId(oi.getProcessRunId().toString());
 				oiItem.appendChild(rowOi);
 				Treecell cellOi = new Treecell();
+				Vbox vboxOi = new Vbox();
+				
+				Label lblProductName = new Label(oi.getProductName());
+				lblProductName.setSclass("Caption");
+				lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
+				vboxOi.appendChild(lblProductName);				
+				
 				Hbox boxOi = new Hbox();
 				boxOi.setAlign("center");
+				vboxOi.appendChild(boxOi);				
 				
 				Decimalbox decOneRunQuantity = new Decimalbox(oi.getOneRunQuantity());
 				decOneRunQuantity.setId("decOneRunQuantity" + oi.getProcessRunId().toString());
@@ -500,20 +519,15 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 				boxOi.appendChild(lblOrderedItems);
 				
-				boxOi.appendChild((new Separator("horizontal")));
+				boxOi.appendChild(new Separator("horizontal"));
 				
 				Label lblProductUnit = new Label(oi.getProductUnit());
 				lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
 				boxOi.appendChild(lblProductUnit);	
 				
+				boxOi.appendChild(new Separator("horizontal"));				
 				boxOi.appendChild(new Separator("horizontal"));
-				
-				Label lblProductName = new Label(oi.getProductName());
-				lblProductName.setId("lblProductName" + oi.getProcessRunId().toString());					
-				boxOi.appendChild(lblProductName);
-				
-				boxOi.appendChild((new Separator("horizontal")));
-				boxOi.appendChild((new Separator("horizontal")));
+				boxOi.appendChild(new Separator("horizontal"));
 				
 				boxOi.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
 				Decimalbox decDiscount = new Decimalbox();
@@ -538,14 +552,14 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					}
 				});					
 				boxOi.appendChild(decDiscount);
-				boxOi.appendChild((new Separator("horizontal")));
+				boxOi.appendChild(new Separator("horizontal"));
 				
 				Label lblProductUnit1 = new Label(oi.getProductUnit());
 				lblProductUnit1.setId("lblProductUnit1" + oi.getProcessRunId().toString());					
 				boxOi.appendChild(lblProductUnit1);					
 				
 				boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
-				cellOi.appendChild(boxOi);
+				cellOi.appendChild(vboxOi);
 				rowOi.appendChild(cellOi);
 			}
 		}
@@ -562,7 +576,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
 		((Textbox) wndContentPanel.query("#txtLabel")).setValue(order.getLabel());
 		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
-		((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
+		if (wndContentPanel.query("#cmbCustomer") != null) {
+			ZKUtilitity.setValueWOValidation((Combobox) wndContentPanel.query("#cmbCustomer"), order.getCustomer());
+		}
+		else {
+			((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
+		}		
 		
 		//it's a delivery
 		if (order.getDeliverTo() != null) {
@@ -623,7 +642,13 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		Vbox vbox = new Vbox();
 		vbox.setHflex("1");
 		renderOrderItems(order, vbox, itsForManagement);
-		Div divOrderItems = (Div) wndContentPanel.query("window").query("#wndOrderItems").query("#divOrderItems");
+		Div divOrderItems;
+		if (itsForManagement) {
+			divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
+		}
+		else {
+			divOrderItems = (Div) wndContentPanel.query("#divOrderItems");
+		}
 		divOrderItems.appendChild(vbox);
 	}
 	

@@ -26,7 +26,7 @@ public class OrderActionTest extends ActionTest {
 	
 	protected static Textbox txtLabel;
 	protected static Textbox txtCounters;
-	protected static Textbox txtCustomer;
+	protected static Combobox cmbCustomer;
 	protected static Combobox cmbItemToOrder;
 	protected static Textbox txtSpecialInstructions;
 	protected static Decimalbox decQuantity;
@@ -48,7 +48,7 @@ public class OrderActionTest extends ActionTest {
 		OrderForm orderForm = new OrderForm(desktop,
 											boxDetailsAgent.query("#txtLabel").as(Textbox.class),
 											boxDetailsAgent.query("#txtCounters").as(Textbox.class),
-											boxDetailsAgent.query("#txtCustomer").as(Textbox.class),
+											boxDetailsAgent.query("#cmbCustomer").as(Combobox.class),
 											boxDetailsAgent.query("#cmbItemToOrder").as(Combobox.class),
 											boxDetailsAgent.query("#txtSpecialInstructions").as(Textbox.class),
 											boxDetailsAgent.query("#decQuantity").as(Decimalbox.class),																					
@@ -110,8 +110,8 @@ public class OrderActionTest extends ActionTest {
 		}
 		
 		//customer
-		if (!(orderForm.getTxtCustomer().getValue()).equals(customer)) {
-			fail("Wrong customer for order with id " + orderId + ". Expected: " + customer + ". It was: " + orderForm.getTxtCustomer().getValue());
+		if (!(orderForm.getCmbCustomer().getText()).equals(customer)) {
+			fail("Wrong customer for order with id " + orderId + ". Expected: " + customer + ". It was: " + orderForm.getCmbCustomer().getText());
 		}		
 		
 		Integer shownOrderItems = 0;
