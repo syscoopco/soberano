@@ -17,6 +17,7 @@ import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Constraint;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
@@ -158,5 +159,14 @@ public class ZKUtilitity {
 			}
 		});		
 		parentComponent.appendChild(btnDelete);
+	}
+	
+	public static void selectComboitemByLabel(Combobox comboBox, String label) {
+		for(Component ci : comboBox.getChildren()) {
+			if(((Comboitem) ci).getLabel().equals(label)) {
+				comboBox.setSelectedItem((Comboitem) ci);
+				break;
+			}
+		}
 	}
 }

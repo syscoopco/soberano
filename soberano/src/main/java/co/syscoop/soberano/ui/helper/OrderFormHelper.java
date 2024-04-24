@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
@@ -63,7 +64,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		String buttonId = event.getTarget().getId();
 		Integer processRunId = Integer.parseInt(buttonId.substring(buttonId.indexOf("s") + 1, buttonId.length()));
 		String inventoryItemCode =  ((Label) event.getTarget().query("#lblInventoryItemCode" + processRunId.toString())).getValue();
-		ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent();
+		ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) event.getTarget().getParent().getParent().getParent().getParent().getParent();
 		Decimalbox decOneRunQuantity = (Decimalbox) event.getTarget().query("#decOneRunQuantity" + processRunId.toString());
 		Decimalbox decServedItems = (Decimalbox) event.getTarget().query("#decServedItems" + processRunId.toString());
 		Decimalbox decDiscount = (Decimalbox) event.getTarget().query("#decDiscount" + processRunId.toString());
@@ -161,16 +162,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				((Decimalbox) event.getTarget().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().query("#wndContentPanel").
-								query("#decAmountTop")).setValue(amount);
-				((Decimalbox) event.getTarget().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().getParent().
-								getParent().getParent().getParent().getParent().query("#wndContentPanel").
-								query("#decAmountBottom")).setValue(amount);
+				Decimalbox decAmountTop = (Decimalbox) event.getTarget().getParent().getParent().getParent().getParent().getParent().
+														getParent().getParent().getParent().getParent().getParent().getParent().
+														getParent().getParent().getParent().getParent().getParent().getParent().
+														getParent().query("#wndContentPanel").query("#decAmountTop");
+				decAmountTop.setValue(amount);				
+				((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
 			}
 		}
 		else {
@@ -184,7 +181,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			Decimalbox decDiscount = (Decimalbox) event.getTarget();
 			String targetId = decDiscount.getId();
 			Integer processRunId = Integer.parseInt(targetId.substring(targetId.indexOf("t") + 1, targetId.length()));
-			ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) decDiscount.getParent().getParent().getParent().getParent();
+			ConfirmationOrderTreeitem confTreeitem = (ConfirmationOrderTreeitem) decDiscount.getParent().getParent().getParent().getParent().getParent();
 			String inventoryItemCode =  ((Label) decDiscount.query("#lblInventoryItemCode" + processRunId.toString())).getValue();
 			Decimalbox decServedItems = (Decimalbox) decDiscount.query("#decServedItems" + processRunId.toString());
 			BigDecimal discountableRuns = decServedItems.getValue();
@@ -207,8 +204,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					((Decimalbox) decDiscount.query("#decAmountTop")).setValue(amount);
-					((Decimalbox) decDiscount.query("#decAmountBottom")).setValue(amount);
+					Decimalbox decAmountTop = ((Decimalbox) event.getTarget().getParent().getParent().getParent().getParent().
+															getParent().getParent().getParent().getParent().getParent().getParent().
+															getParent().getParent().getParent().getParent().getParent().getParent().
+															getParent().getParent().query("#wndContentPanel").query("#decAmountTop"));
+					decAmountTop.setValue(amount);
+					((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
 				}
 			}
 		}
@@ -313,7 +314,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 							}
 						}
 					});
-																	
+					
 					boxOi.appendChild(new Label("/"));					
 					
 					Label lblCanceledItems = new Label((oi.getCanceledRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
@@ -338,6 +339,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 					cellOi.appendChild(boxOi);
 					rowOi.appendChild(cellOi);
+					
+					//trigger onchange event for making canceled but ended items equal to zero in database, upon rendering.
+					Events.sendEvent(Events.ON_CHANGE, decCanceledButEndedItems, null);
 				}
 			}
 		}
@@ -576,12 +580,24 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
 		((Textbox) wndContentPanel.query("#txtLabel")).setValue(order.getLabel());
 		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
-		if (wndContentPanel.query("#cmbCustomer") != null) {
-			ZKUtilitity.setValueWOValidation((Combobox) wndContentPanel.query("#cmbCustomer"), order.getCustomer());
+		
+		Combobox cmbCustomer = (Combobox) wndContentPanel.query("#cmbCustomer");
+		if (cmbCustomer != null) {
+			cmbCustomer.setText(order.getCustomerStr());
+			ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
 		}
+		//order billing form doesn't have customer combo. it has textbox instead.
 		else {
 			((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
-		}		
+		}
+		
+		Combobox cmbDeliveryProvider = (Combobox) wndContentPanel.query("#cmbDeliveryProvider");
+		
+		//order billing form doesn't have delivery provider combo.
+		if (cmbDeliveryProvider != null) {
+			cmbDeliveryProvider.setText(order.getDeliveryBy());
+			ZKUtilitity.selectComboitemByLabel(cmbDeliveryProvider, order.getDeliveryBy());
+		}
 		
 		//it's a delivery
 		if (order.getDeliverTo() != null) {

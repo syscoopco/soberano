@@ -16,7 +16,7 @@ import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class SwitchCustomerComboboxComposer extends SelectorComposer {
+public class ChangeCustomerComboboxComposer extends SelectorComposer {
 	
 	@Wire
 	private Combobox cmbCustomer;
@@ -27,7 +27,7 @@ public class SwitchCustomerComboboxComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	private void switchCustomer() throws Exception {
+	private void changeCustomer() throws Exception {
 		
 		try {
 			Integer orderId = ((Intbox) cmbCustomer.query("#intObjectId")).getValue();
@@ -36,7 +36,7 @@ public class SwitchCustomerComboboxComposer extends SelectorComposer {
 				newCustomerId = (Integer) ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId();
 			}
 			Order order = new Order();
-			int result = order.switchCustomer(orderId, newCustomerId);				
+			int result = order.changeCustomer(orderId, newCustomerId);				
 			if (result == -1) {
 				throw new NotEnoughRightsException();
 			}
@@ -60,11 +60,11 @@ public class SwitchCustomerComboboxComposer extends SelectorComposer {
 	
 	@Listen("onSelect = combobox#cmbCustomer")
     public void cmbCustomer_onSelect() throws Exception {
-		switchCustomer();		
+		changeCustomer();		
     }
     	
 	@Listen("onChange = combobox#cmbCustomer")
     public void cmbCustomer_onChange() throws Exception {
-		switchCustomer();		
+		changeCustomer();		
 	}
 }

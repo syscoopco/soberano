@@ -330,6 +330,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 										((Intbox) boxDetails.query("#intSelectedOrder")).getValue(),
 										currencyIds, 
 										amounts,
+										notes,
 										cmbCustomer.getSelectedItem() == null ? null : ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId()));
 			if (qrwr.getResult() == -1) {
 				throw new NotEnoughRightsException();						

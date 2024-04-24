@@ -115,7 +115,7 @@ public class OrderActionTest extends ActionTest {
 		}		
 		
 		Integer shownOrderItems = 0;
-		for (Component treeCat : orderForm.getDivOrderItems().getChildren()) {			
+		for (Component treeCat : orderForm.getDivOrderItems().query("vbox").getChildren()) {			
 			for (Component chdnCat : treeCat.query("treechildren").getChildren()) {			
 				for (Component chdnDesc : ((Treeitem) chdnCat).getTreechildren().getChildren()) {
 					for (Component chdnOic : ((Treeitem) chdnDesc).getTreechildren().getChildren()) {

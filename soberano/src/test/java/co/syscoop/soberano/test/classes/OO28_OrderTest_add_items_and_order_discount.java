@@ -36,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(28)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
@@ -66,7 +66,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 	@AfterEach
 	void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	@Order(0)
 	final void testCase0() {
@@ -741,7 +741,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	@Test
 	@Order(21)
 	final void testCase21() {
@@ -764,7 +764,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1009");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -803,7 +803,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1010");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -846,7 +846,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1011");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -892,7 +892,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 						
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1013");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -934,7 +934,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1014");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -980,7 +980,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1015");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1022,7 +1022,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1016");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1068,7 +1068,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1017");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1110,7 +1110,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1018");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1156,7 +1156,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1020");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1202,7 +1202,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1021");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1221,7 +1221,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	@Test
 	@Order(32)
 	final void testCase32() {
@@ -1299,7 +1299,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			fail(ex.getMessage());
 		}
 	}
-	
+
 	@Test
 	@Order(33)
 	final void testCase33() {

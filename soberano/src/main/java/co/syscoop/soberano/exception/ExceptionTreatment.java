@@ -34,6 +34,8 @@ public class ExceptionTreatment {
 				throw new AtLeastOneInventoryItemMustBeMovedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.CurrencyHasBalanceException"))
 				throw new CurrencyHasBalanceException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.CustomerRequiredException"))
+				throw new CustomerRequiredException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DebtorRequiredException"))
 				throw new DebtorRequiredException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.DisabledCurrencyException"))
@@ -72,6 +74,8 @@ public class ExceptionTreatment {
 				throw new WrongProcessSpecificationException(ex);		
 			else if (ex.getClass().getName().equals("org.zkoss.zk.ui.WrongValueException"))
 				throw new WrongValueException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ZoneNotCoveredByDeliveryProviderException"))
+				throw new ZoneNotCoveredByDeliveryProviderException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

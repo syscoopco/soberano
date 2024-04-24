@@ -31,6 +31,7 @@ public class Order extends BusinessActivityTrackedObject {
 	private Integer customer = 0;
 	private String customerStr = "";
 	private String deliverTo = "";
+	private String deliveryBy = "";
 	private Integer discount = 0;
 	private BigDecimal amount = new BigDecimal(0); //in order currency
 	private BigDecimal collectedAmount = new BigDecimal(0); //in order currency
@@ -55,6 +56,7 @@ public class Order extends BusinessActivityTrackedObject {
 				String customer,
 				Integer customerId,
 				String deliverTo,
+				String deliveryBy,
 				Integer orderDiscount,
 				BigDecimal orderAmount,
 				BigDecimal collectedAmount,
@@ -67,6 +69,7 @@ public class Order extends BusinessActivityTrackedObject {
 		this.customerStr = customer;
 		this.customer = customerId;
 		this.deliverTo = deliverTo;
+		this.deliveryBy = deliveryBy;
 		this.discount = orderDiscount;
 		this.amount = orderAmount;
 		this.collectedAmount = collectedAmount;
@@ -127,6 +130,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        							rs.getString("customer"),
 	        							rs.getInt("customerId"),
 	        							rs.getString("deliverTo"),
+	        							rs.getString("deliveryBy"),
 	        							rs.getInt("orderDiscount"),
 	        							rs.getBigDecimal("orderAmount"),
 	        							rs.getBigDecimal("collectedAmount"),
@@ -198,6 +202,7 @@ public class Order extends BusinessActivityTrackedObject {
 		setCustomer((sourceOrder).getCustomer());
 		setCustomerStr((sourceOrder).getCustomerStr());
 		setDeliverTo((sourceOrder).getDeliverTo());
+		setDeliveryBy((sourceOrder).getDeliveryBy());
 		setDiscount((sourceOrder).getDiscount());
 		setAmount((sourceOrder).getAmount());
 		setCollectedAmount((sourceOrder).getCollectedAmount());
@@ -345,6 +350,7 @@ public class Order extends BusinessActivityTrackedObject {
 							Integer orderId,
 							ArrayList<Integer> currencyIds, 
 							ArrayList<BigDecimal> amounts,
+							String notes,
 							Integer customer) throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -353,6 +359,7 @@ public class Order extends BusinessActivityTrackedObject {
 				+ "											:lang, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
+				+ "											:notes, "
 				+ "											:customer, "
 				+ "											:loginname) AS queryresult";
 		
@@ -362,6 +369,7 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());	
 		parametersMap.put("currencyIds", createArrayOfSQLType("integer", currencyIds.toArray()));
 		parametersMap.put("amounts", createArrayOfSQLType("numeric", amounts.toArray()));
+		parametersMap.put("notes", notes);
 		parametersMap.put("customer", customer);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (QueryResultWithReport) super.query(qryStr, parametersMap, new QueryResultWithReportMapper()).get(0);
@@ -379,15 +387,66 @@ public class Order extends BusinessActivityTrackedObject {
 		return (QueryResultWithReport) super.query(qryStr, parametersMap, new QueryResultWithReportMapper()).get(0);
 	}
 	
-	public Integer switchCustomer(Integer orderId, Integer customerId) throws Exception {
+	public Integer changeCustomer(Integer orderId, Integer customerId) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String qryStr = "SELECT soberano.\"fn_Order_switchCustomer\"(:orderId, "
+		String qryStr = "SELECT soberano.\"fn_Order_changeCustomer\"(:orderId, "
 							+ "										:customerId, "
 							+ "										:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("orderId", orderId);
 		parametersMap.put("customerId", customerId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer changeDeliveryProvider(Integer orderId, Integer providerId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_changeDeliveryProvider\"(:orderId, "
+									+ "										:providerId, "
+									+ "										:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", orderId);
+		parametersMap.put("providerId", providerId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer changeDeliveryAddress(Integer orderId,
+										String emailAddress,
+										String mobilePhoneNumber,
+										String address,
+										String postalCode,
+										String town,
+										Integer municipalityId,
+										String city,
+										Double latitude,
+										Double longitude) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_changeDeliveryAddress\"(:orderId, "
+								+ "											:emailAddress, "
+								+ "											:mobilePhoneNumber, "
+								+ "											:address, "
+								+ "											:postalCode, "
+								+ "											:town, "
+								+ "											:municipalityId, "
+								+ "											:city, "
+								+ "											:latitude, "
+								+ "											:longitude, "
+								+ "											:loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", orderId);
+		parametersMap.put("emailAddress", emailAddress);
+		parametersMap.put("mobilePhoneNumber", mobilePhoneNumber);
+		parametersMap.put("address", address);
+		parametersMap.put("postalCode", postalCode);
+		parametersMap.put("town", town);
+		parametersMap.put("municipalityId", municipalityId);
+		parametersMap.put("city", city);
+		parametersMap.put("latitude", latitude);
+		parametersMap.put("longitude", longitude);		
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
@@ -518,5 +577,13 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setStageId(Stage stageId) {
 		this.stageId = stageId;
+	}
+
+	public String getDeliveryBy() {
+		return deliveryBy;
+	}
+
+	public void setDeliveryBy(String deliveryBy) {
+		this.deliveryBy = deliveryBy;
 	}
 }
