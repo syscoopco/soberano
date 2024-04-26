@@ -326,8 +326,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
 			fillAmounts(boxDetails, false);			
-			qrwr = (new Order().collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
-										((Intbox) boxDetails.query("#intSelectedOrder")).getValue(),
+			qrwr = (new Order(((Intbox) boxDetails.query("#intSelectedOrder")).getValue()).collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
 										currencyIds, 
 										amounts,
 										notes,
@@ -365,7 +364,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		QueryResultWithReport qrwr;
 		
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			qrwr = (new Order().cancel(((Intbox) boxDetails.query("#intSelectedOrder")).getValue()));
+			qrwr = (new Order(((Intbox) boxDetails.query("#intSelectedOrder")).getValue())).cancel();
 			if (qrwr.getResult() == -1) {
 				throw new NotEnoughRightsException();						
 			}

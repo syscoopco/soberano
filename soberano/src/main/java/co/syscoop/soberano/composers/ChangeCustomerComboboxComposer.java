@@ -35,8 +35,8 @@ public class ChangeCustomerComboboxComposer extends SelectorComposer {
 			if (cmbCustomer.getSelectedItem() != null) {
 				newCustomerId = (Integer) ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId();
 			}
-			Order order = new Order();
-			int result = order.changeCustomer(orderId, newCustomerId);				
+			Order order = new Order(orderId);
+			int result = order.changeCustomer(newCustomerId);				
 			if (result == -1) {
 				throw new NotEnoughRightsException();
 			}

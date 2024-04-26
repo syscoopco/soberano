@@ -27,7 +27,7 @@ public class ContactData {
 						 Integer provinceId,
 						 Double latitude,
 						 Double longitude) {
-		this.emailAddress = emailAddress.toLowerCase();;
+		this.emailAddress = emailAddress == null ? null : emailAddress.toLowerCase();;
 		this.mobilePhoneNumber = mobilePhoneNumber;
 		this.Name = Name;
 		this.countryCode = countryCode;
@@ -57,11 +57,11 @@ public class ContactData {
 	}
 	
 	public String getEmailAddress() {
-		return emailAddress.toLowerCase();
+		return emailAddress == null ? null : emailAddress.toLowerCase();
 	}
 	
 	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress.toLowerCase();;
+		this.emailAddress = emailAddress == null ? null : emailAddress.toLowerCase();
 	}
 
 	public String getMobilePhoneNumber() {

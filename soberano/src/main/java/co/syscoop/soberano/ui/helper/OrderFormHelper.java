@@ -11,7 +11,9 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Div;
+import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Hbox;
+import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Tree;
@@ -156,18 +158,23 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				btnIncServedItems.setDisabled(false);
 			}
 			
-			//update amount fields
-			BigDecimal amount = confTreeitem.getOrder().retrieveAmount();											
+			//update amount fields and ticket
+			Order order = confTreeitem.getOrder();
+			BigDecimal amount = order.retrieveAmount();											
 			if (amount.compareTo(new BigDecimal(0)) < 0) {
 				throw new NotEnoughRightsException();
 			}
 			else {
-				Decimalbox decAmountTop = (Decimalbox) event.getTarget().getParent().getParent().getParent().getParent().getParent().
+				Window wndContentPanel = (Window) event.getTarget().getParent().getParent().getParent().getParent().getParent().
 														getParent().getParent().getParent().getParent().getParent().getParent().
 														getParent().getParent().getParent().getParent().getParent().getParent().
-														getParent().query("#wndContentPanel").query("#decAmountTop");
+														getParent().query("#wndContentPanel");				
+				Decimalbox decAmountTop = (Decimalbox) wndContentPanel.query("#decAmountTop");
 				decAmountTop.setValue(amount);				
 				((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
+				
+				//update ticket
+				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
 			}
 		}
 		else {
@@ -194,22 +201,27 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				runsToDiscount = discountableRuns;
 				decDiscount.setValue(discountableRuns);
 			}
-			if (confTreeitem.getOrder().applyItemDiscount(processRunId, inventoryItemCode, runsToDiscount) == -1) {
+			Order order = confTreeitem.getOrder();
+			if (order.applyItemDiscount(processRunId, inventoryItemCode, runsToDiscount) == -1) {
 				throw new NotEnoughRightsException();
 			}
 			else {						
-				//update amount fields
+				//update amount fields and ticket
 				BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
 				if (amount.compareTo(new BigDecimal(0)) < 0) {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					Decimalbox decAmountTop = ((Decimalbox) event.getTarget().getParent().getParent().getParent().getParent().
+					Window wndContentPanel = (Window) event.getTarget().getParent().getParent().getParent().getParent().
 															getParent().getParent().getParent().getParent().getParent().getParent().
 															getParent().getParent().getParent().getParent().getParent().getParent().
-															getParent().getParent().query("#wndContentPanel").query("#decAmountTop"));
+															getParent().getParent().query("#wndContentPanel");
+					Decimalbox decAmountTop = ((Decimalbox) wndContentPanel.query("#decAmountTop"));
 					decAmountTop.setValue(amount);
 					((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
+					
+					//update ticket
+					((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
 				}
 			}
 		}
@@ -582,9 +594,21 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
 		
 		Combobox cmbCustomer = (Combobox) wndContentPanel.query("#cmbCustomer");
+		
+		//initializing for order management
 		if (cmbCustomer != null) {
 			cmbCustomer.setText(order.getCustomerStr());
 			ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
+			
+			try {
+				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
+			}
+			catch(Exception ex) {
+				ExceptionTreatment.logAndShow(ex, 
+						ex.getMessage(), 
+						Labels.getLabel("messageBoxTitle.Error"),
+						Messagebox.ERROR);
+			}			
 		}
 		//order billing form doesn't have customer combo. it has textbox instead.
 		else {
@@ -604,6 +628,26 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			((Textbox) wndContentPanel.query("#txtDeliverTo")).setValue(order.getDeliverTo());
 			((Label) wndContentPanel.query("#lblDeliverTo")).setVisible(true);
 			((Textbox) wndContentPanel.query("#txtDeliverTo")).setVisible(true);
+			
+			//fill out the delivery address form
+			Include incContactData = (Include) wndContentPanel.query("popup").query("include").query("#incContactData");
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), order.getDeliveryContactData().getMobilePhoneNumber());
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), order.getDeliveryContactData().getEmailAddress());
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), order.getDeliveryContactData().getAddress());
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), order.getDeliveryContactData().getPostalCode());
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), order.getDeliveryContactData().getTown());
+			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), order.getDeliveryContactData().getCity());
+			Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
+			ZKUtilitity.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
+			Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
+			Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
+			CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
+			ZKUtilitity.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
+			Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
+			ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
+			ZKUtilitity.setValueWOValidation(cmbMunicipality, order.getDeliveryContactData().getMunicipalityId().toString());
+			ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), order.getDeliveryContactData().getLatitude());
+			ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), order.getDeliveryContactData().getLongitude());
 		}
 		((Intbox) wndContentPanel.query("#intDiscountTop")).setValue(order.getDiscount());
 		((Decimalbox) wndContentPanel.query("#decAmountTop")).setValue(order.getAmount());

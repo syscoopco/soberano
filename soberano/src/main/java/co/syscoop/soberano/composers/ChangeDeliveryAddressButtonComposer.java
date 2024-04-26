@@ -48,9 +48,8 @@ public class ChangeDeliveryAddressButtonComposer extends SelectorComposer {
 			Integer orderId = ((Intbox) btnApply.getParent().getParent().getParent().query("#wndContentPanel").query("#intObjectId")).getValue();
 			Popup pp = (Popup) btnCancel.getParent().getParent().getParent().query("#wndContentPanel").query("#pp");
 			
-			Order order = new Order();
-			int result = order.changeDeliveryAddress(orderId,
-													((Textbox) pp.query("include").query("#txtEmailAddress")).getText(),
+			Order order = new Order(orderId);
+			int result = order.changeDeliveryAddress(((Textbox) pp.query("include").query("#txtEmailAddress")).getText(),
 													((Textbox) pp.query("include").query("#txtPhoneNumber")).getText(),
 													((Textbox) pp.query("include").query("#txtAddress")).getText(),
 													((Combobox) pp.query("include").query("#cmbPostalCode")).getText(),

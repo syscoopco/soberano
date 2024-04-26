@@ -1,12 +1,16 @@
 package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
+import java.sql.SQLException;
+
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Textbox;
+
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
@@ -32,7 +36,7 @@ public class OrderComposer extends SelectorComposer {
 	@Wire
 	protected Decimalbox decAmountBottom;
 	
-	protected void updateAmounts(BigDecimal amount) throws NotEnoughRightsException {
+	protected void updateAmounts(BigDecimal amount) throws NotEnoughRightsException, Exception, SQLException {
 													
 		if (amount.compareTo(new BigDecimal(0)) < 0) {
 			throw new NotEnoughRightsException();
@@ -40,6 +44,9 @@ public class OrderComposer extends SelectorComposer {
 		else {
 			decAmountTop.setValue(amount);
 			decAmountBottom.setValue(amount);
+			
+			//update order ticket
+			((Textbox) decAmountTop.query("#wndContentPanel").query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(new Order(intObjectId.getValue()).retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
 		}
 	}
 	

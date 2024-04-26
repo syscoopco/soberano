@@ -31,13 +31,13 @@
 						</combobox>
 						<button id="btnNewCustomer" label="+" href="/new_customer.zul"></button>
 						<popup id="pp" width="80%">	
-							<window height="100%" contentStyle="overflow:auto">
+							<window height="100%" contentStyle="overflow:auto" apply="co.syscoop.soberano.composers.ChangeDeliveryAddressButtonComposer">
 								<include id="incContactData" src="/contact_data.zul"></include>
 								<separator></separator>
 								<separator></separator>
 								<hbox width="100%" pack="end">
 									<button id="btnApply" label="${labels.caption.action.apply}" sclass="DecisionButton"></button>
-									<button id="btnCancel" label="${labels.caption.action.cancel}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ChangeDeliveryAddressButtonComposer"></button>
+									<button id="btnCancel" label="${labels.caption.action.cancel}" sclass="DecisionButton"></button>
 								</hbox>
 							</window>
 						</popup>
@@ -118,7 +118,9 @@
 					</borderlayout>
 					<borderlayout width="300px" vflex="1">
 						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
-							<include src="activity_wnd.zul"/>
+							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto">
+								<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
+							</window>
 						</center>	
 					</borderlayout>
 				</hlayout>
