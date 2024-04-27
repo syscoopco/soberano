@@ -174,7 +174,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
 				
 				//update ticket
-				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
+				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
+					setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
 			}
 		}
 		else {
@@ -221,7 +222,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
 					
 					//update ticket
-					((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
+					((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
+						setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
 				}
 			}
 		}
@@ -601,7 +603,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
 			
 			try {
-				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
+				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
+					setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
 			}
 			catch(Exception ex) {
 				ExceptionTreatment.logAndShow(ex, 

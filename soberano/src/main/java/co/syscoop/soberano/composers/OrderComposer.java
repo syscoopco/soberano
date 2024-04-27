@@ -46,7 +46,10 @@ public class OrderComposer extends SelectorComposer {
 			decAmountBottom.setValue(amount);
 			
 			//update order ticket
-			((Textbox) decAmountTop.query("#wndContentPanel").query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).setValue(new Order(intObjectId.getValue()).retrieveTicket(new BigDecimal(0), new BigDecimal(0)));
+			((Textbox) decAmountTop.query("#wndContentPanel").query("#wndOrderItems").
+									query("#wndTicket").query("#txtTicket")).
+										setValue((new Order(intObjectId.getValue()).
+												retrieveTicket(new BigDecimal(0), new BigDecimal(0))).getTextToPrint());
 		}
 	}
 	

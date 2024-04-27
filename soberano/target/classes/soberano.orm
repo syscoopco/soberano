@@ -13583,7 +13583,7 @@
 					<orm:UniquenessConstraint ref="_787F82C4-830A-41C4-A281-FCBE3305D290" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_5A664DB9-41ED-4D70-8676-393F8BCE5567" _Name="PrinterProfileHasPrinterprintServer">
+			<orm:Fact id="_5A664DB9-41ED-4D70-8676-393F8BCE5567" _Name="PrinterProfileHasPrintServer">
 				<orm:FactRoles>
 					<orm:Role id="_695BADB4-046D-4D57-95D2-FDEC9AF89118" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_4F6BC878-0E8B-46DB-9B2C-59A103C00C03" />
@@ -13596,9 +13596,9 @@
 					<orm:ReadingOrder id="_FC0BFF06-F5C5-4D32-8E1D-27A2612E399F">
 						<orm:Readings>
 							<orm:Reading id="_1ACBFE26-9D56-465C-B65B-DCC827647C33">
-								<orm:Data>{0} has Printer{1}</orm:Data>
+								<orm:Data>{0} has {1}</orm:Data>
 								<orm:ExpandedData>
-									<orm:RoleText RoleIndex="0" FollowingText=" has Printer" />
+									<orm:RoleText RoleIndex="0" FollowingText=" has " />
 								</orm:ExpandedData>
 							</orm:Reading>
 						</orm:Readings>
@@ -21460,7 +21460,7 @@ On the other hand, for a material expense, the item's value is derived from the 
 			</ormDiagram:ObjectTypeShape>
 			<ormDiagram:FactTypeShape id="_C2802C8B-BDAF-4DE7-9387-08CC07B2962C" IsExpanded="true" AbsoluteBounds="4.0437500000000011, 1.2195833134651186, 0.38388888899236917, 0.24388888899236916">
 				<ormDiagram:RelativeShapes>
-					<ormDiagram:ReadingShape id="_903C0E5D-413F-4CFC-8814-2721DD3DCD99" IsExpanded="true" AbsoluteBounds="4.0437500000000011, 1.528223715759814, 0.50902414321899414, 0.12950302660465241">
+					<ormDiagram:ReadingShape id="_903C0E5D-413F-4CFC-8814-2721DD3DCD99" IsExpanded="true" AbsoluteBounds="4.0437500000000011, 1.528223715759814, 0.18545643985271454, 0.12950302660465241">
 						<ormDiagram:Subject ref="_FC0BFF06-F5C5-4D32-8E1D-27A2612E399F" />
 					</ormDiagram:ReadingShape>
 				</ormDiagram:RelativeShapes>

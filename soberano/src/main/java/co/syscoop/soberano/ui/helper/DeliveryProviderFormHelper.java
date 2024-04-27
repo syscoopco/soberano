@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -114,36 +116,50 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public Integer recordFromForm(Include incDetails) throws Exception {
 		
-		fillArrays(incDetails,
-				feeCountries,
-				feePostalCodes,
-				fees);
-		return (new DeliveryProvider(0,
-									0,
-									((Textbox) incDetails.query("#txtName")).getValue(),
-									((Doublebox) incDetails.query("#dblRate")).getValue(),
-									((Checkbox) incDetails.query("#chkIsReseller")).isChecked(),
-									feeCountries,
-									feePostalCodes,
-									fees)).record();
+		Doublebox dblRate = ((Doublebox) incDetails.query("#dblRate"));
+		Double rate = dblRate.getValue();
+		if (rate < 0 || rate > 100) {
+			throw new WrongValueException(dblRate, Labels.getLabel("message.validation.aRateMustBeBetween0And100"));
+		}
+		else {
+			fillArrays(incDetails,
+					feeCountries,
+					feePostalCodes,
+					fees);
+			return (new DeliveryProvider(0,
+										0,
+										((Textbox) incDetails.query("#txtName")).getValue(),
+										rate,
+										((Checkbox) incDetails.query("#chkIsReseller")).isChecked(),
+										feeCountries,
+										feePostalCodes,
+										fees)).record();
+		}
 	}
 	
 	@Override
 	public Integer modifyFromForm(Include incDetails) throws Exception {
 		
-		fillArrays(incDetails,
-				feeCountries,
-				feePostalCodes,
-				fees);
-		super.setTrackedObject(new DeliveryProvider(((Intbox) incDetails.getParent().query("#intId")).getValue(),
-												0,
-												((Textbox) incDetails.query("#txtName")).getValue(),
-												((Doublebox) incDetails.query("#dblRate")).getValue(),
-												((Checkbox) incDetails.query("#chkIsReseller")).isChecked(),
-												feeCountries,
-												feePostalCodes,
-												fees));
-		return super.getTrackedObject().modify();
+		Doublebox dblRate = ((Doublebox) incDetails.query("#dblRate"));
+		Double rate = dblRate.getValue();
+		if (rate < 0 || rate > 100) {
+			throw new WrongValueException(dblRate, Labels.getLabel("message.validation.aRateMustBeBetween0And100"));
+		}
+		else {
+			fillArrays(incDetails,
+					feeCountries,
+					feePostalCodes,
+					fees);
+			super.setTrackedObject(new DeliveryProvider(((Intbox) incDetails.getParent().query("#intId")).getValue(),
+													0,
+													((Textbox) incDetails.query("#txtName")).getValue(),
+													rate,
+													((Checkbox) incDetails.query("#chkIsReseller")).isChecked(),
+													feeCountries,
+													feePostalCodes,
+													fees));
+			return super.getTrackedObject().modify();
+		}
 	}
 	
 	public void initForm(Include incDetails, Integer deliveryProviderId) throws Exception {
