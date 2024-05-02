@@ -590,69 +590,71 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		order.get();
 		
 		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
-		
 		Vbox boxDetails = (Vbox) wndContentPanel.query("#boxDetails");
-		((Intbox) wndContentPanel.query("#intObjectId")).setValue(orderId);
 		((Textbox) wndContentPanel.query("#txtLabel")).setValue(order.getLabel());
 		((Textbox) wndContentPanel.query("#txtCounters")).setValue(order.getCountersStr());
 		
 		Combobox cmbCustomer = (Combobox) wndContentPanel.query("#cmbCustomer");
 		
 		//initializing for order management
-		if (cmbCustomer != null) {
-			cmbCustomer.setText(order.getCustomerStr());
-			ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
+		if (cmbCustomer != null) {			
 			
 			try {
+				cmbCustomer.setText(order.getCustomerStr());
+				ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
+				
 				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
 					setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
+				
+				//it's a delivery
+				if (order.getDeliverTo() != null) {
+					
+					Combobox cmbDeliveryProvider = (Combobox) wndContentPanel.query("#cmbDeliveryProvider");					
+					cmbDeliveryProvider.setText(order.getDeliveryBy());
+					ZKUtilitity.selectComboitemByLabel(cmbDeliveryProvider, order.getDeliveryBy());
+					
+					//fill out the delivery address form
+					Include incContactData = (Include) wndContentPanel.query("popup").query("include").query("#incContactData");
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), order.getDeliveryContactData().getMobilePhoneNumber());
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), order.getDeliveryContactData().getEmailAddress());
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), order.getDeliveryContactData().getAddress());
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), order.getDeliveryContactData().getPostalCode());
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), order.getDeliveryContactData().getTown());
+					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), order.getDeliveryContactData().getCity());
+					Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
+					ZKUtilitity.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
+					Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
+					Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
+					CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
+					ZKUtilitity.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
+					Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
+					ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
+					ZKUtilitity.setValueWOValidation(cmbMunicipality, order.getDeliveryContactData().getMunicipalityId().toString());
+					ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), order.getDeliveryContactData().getLatitude());
+					ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), order.getDeliveryContactData().getLongitude());
+				}
 			}
 			catch(Exception ex) {
 				ExceptionTreatment.logAndShow(ex, 
 						ex.getMessage(), 
 						Labels.getLabel("messageBoxTitle.Error"),
 						Messagebox.ERROR);
-			}			
+			}		
 		}
 		//order billing form doesn't have customer combo. it has textbox instead.
 		else {
 			((Textbox) wndContentPanel.query("#txtCustomer")).setValue(order.getCustomerStr());
 		}
 		
-		Combobox cmbDeliveryProvider = (Combobox) wndContentPanel.query("#cmbDeliveryProvider");
-		
-		//order billing form doesn't have delivery provider combo.
-		if (cmbDeliveryProvider != null) {
-			cmbDeliveryProvider.setText(order.getDeliveryBy());
-			ZKUtilitity.selectComboitemByLabel(cmbDeliveryProvider, order.getDeliveryBy());
-		}
-		
 		//it's a delivery
+		/* commented since this info is shown in the ticket textbox
 		if (order.getDeliverTo() != null) {
 			((Textbox) wndContentPanel.query("#txtDeliverTo")).setValue(order.getDeliverTo());
 			((Label) wndContentPanel.query("#lblDeliverTo")).setVisible(true);
 			((Textbox) wndContentPanel.query("#txtDeliverTo")).setVisible(true);
-			
-			//fill out the delivery address form
-			Include incContactData = (Include) wndContentPanel.query("popup").query("include").query("#incContactData");
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), order.getDeliveryContactData().getMobilePhoneNumber());
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), order.getDeliveryContactData().getEmailAddress());
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), order.getDeliveryContactData().getAddress());
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), order.getDeliveryContactData().getPostalCode());
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), order.getDeliveryContactData().getTown());
-			ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), order.getDeliveryContactData().getCity());
-			Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
-			ZKUtilitity.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
-			Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
-			Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
-			CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
-			ZKUtilitity.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
-			Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
-			ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
-			ZKUtilitity.setValueWOValidation(cmbMunicipality, order.getDeliveryContactData().getMunicipalityId().toString());
-			ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), order.getDeliveryContactData().getLatitude());
-			ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), order.getDeliveryContactData().getLongitude());
 		}
+		*/
+		
 		((Intbox) wndContentPanel.query("#intDiscountTop")).setValue(order.getDiscount());
 		((Decimalbox) wndContentPanel.query("#decAmountTop")).setValue(order.getAmount());
 		((Label) wndContentPanel.query("#lblCurrencyTop")).setValue(order.getCurrencyCode());
@@ -660,7 +662,6 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
 		((Label) wndContentPanel.query("#lblCurrencyBottom")).setValue(order.getCurrencyCode());
 		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
-		
 		return order;
 	}
 	

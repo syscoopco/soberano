@@ -17,6 +17,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
+import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class OrderComposer extends SelectorComposer {
@@ -48,8 +49,8 @@ public class OrderComposer extends SelectorComposer {
 			//update order ticket
 			((Textbox) decAmountTop.query("#wndContentPanel").query("#wndOrderItems").
 									query("#wndTicket").query("#txtTicket")).
-										setValue((new Order(intObjectId.getValue()).
-												retrieveTicket(new BigDecimal(0), new BigDecimal(0))).getTextToPrint());
+										setValue(Translator.translate((new Order(intObjectId.getValue()).
+												retrieveTicket(new BigDecimal(0), new BigDecimal(0))).getTextToPrint()));
 		}
 	}
 	
