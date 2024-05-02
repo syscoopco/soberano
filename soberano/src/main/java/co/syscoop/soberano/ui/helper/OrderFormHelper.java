@@ -38,6 +38,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.vocabulary.Translator;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
@@ -175,7 +176,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				
 				//update ticket
 				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
-					setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
+					setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
 			}
 		}
 		else {
@@ -223,7 +224,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					//update ticket
 					((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
-						setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
+						setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
 				}
 			}
 		}
@@ -604,7 +605,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			
 			try {
 				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
-					setValue(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
+					setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
 			}
 			catch(Exception ex) {
 				ExceptionTreatment.logAndShow(ex, 
