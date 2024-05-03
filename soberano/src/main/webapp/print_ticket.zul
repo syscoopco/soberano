@@ -1,0 +1,20 @@
+<?page title="${labels.pagePrintTicket.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pagePrintTicket.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<vbox vflex="1" id="boxDetails" hflex="1" apply="co.syscoop.soberano.composers.ClearTicketBoxComposer">
+			<label value="${labels.caption.field.orderNumber}" sclass="Caption"></label>
+			<hbox vflex="1" hflex="1">
+				<intbox hflex="1" id="intOrderNumber" placeholder="${labels.caption.field.orderNumberPlaceholder}"/>
+				<button id="btnRetrieve" label="${labels.caption.action.retrieve}" apply="co.syscoop.soberano.composers.RetrieveTicketButtonComposer"></button>
+			</hbox>
+			<textbox id="txtReport" rows="50" multiline="true" width="100%" readonly="true" style="font-family: courier;"/>
+		</vbox>		
+	</window>
+	<button id="btnReopen" self="@define(decisionButton)" label="${labels.caption.action.reopen}" sclass="DecisionButton"></button>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
+</zk>
