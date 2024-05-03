@@ -1,0 +1,72 @@
+package co.syscoop.soberano.composers;
+
+import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
+import org.zkoss.zk.ui.select.SelectorComposer;
+import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Messagebox;
+
+import co.syscoop.soberano.domain.tracked.Order;
+import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
+
+@SuppressWarnings({ "serial", "rawtypes" })
+public class ReopenTicketButtonComposer extends SelectorComposer {
+	
+	@Wire
+	private Button btnReopen;
+	
+	@SuppressWarnings("unchecked")
+	public void doAfterCompose(Component comp) throws Exception {
+    	
+          super.doAfterCompose(comp);
+    }
+	
+	@Listen("onClick = button#btnReopen")
+    public void btnReopen_onClick() throws Exception {
+		try {
+			Integer orderId = ((Intbox) btnReopen.getParent().getParent().getParent().query("#wndContentPanel").query("#intOrderNumber")).getValue();
+			if (orderId != null) {			
+				int result = new Order(orderId).reopen();
+				if (result == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else if (result == -2) {
+					throw new ShiftHasBeenClosedException();
+				}
+				else {
+					Executions.sendRedirect("/order.zul?id=" + orderId);
+				}
+			}
+			else {
+				Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
+								Labels.getLabel("messageBoxTitle.Warning"), 
+								0, 
+								Messagebox.EXCLAMATION);
+			}				
+		}
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(ShiftHasBeenClosedException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.shiftHasBeenClosed"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+		}	
+	}
+}

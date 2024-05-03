@@ -15,6 +15,6 @@
 			<textbox id="txtReport" rows="50" multiline="true" width="100%" readonly="true" style="font-family: courier;"/>
 		</vbox>		
 	</window>
-	<button id="btnReopen" self="@define(decisionButton)" label="${labels.caption.action.reopen}" sclass="DecisionButton"></button>
+	<button id="btnReopen" self="@define(decisionButton)" label="${labels.caption.action.reopen}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ReopenTicketButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
 </zk>

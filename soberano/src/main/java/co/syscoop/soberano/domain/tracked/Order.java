@@ -506,6 +506,17 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer reopen() throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_reopen\"(:orderId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public ArrayList<String> getCounters() {
 		return counters;
 	}

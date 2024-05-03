@@ -39,9 +39,6 @@ public class RetrieveTicketButtonComposer extends SelectorComposer {
     public void btnRetrieve_onClick() throws SoberanoException {
 		
 		try{
-			Button btnPrint = (Button) btnRetrieve.getParent().getParent().getParent().getParent().query("#btnPrint");
-			Button btnReopen = (Button) btnRetrieve.getParent().getParent().getParent().getParent().query("#btnReopen");
-			
 			if (intOrderNumber.getValue() == null) {
 				Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
 						Labels.getLabel("messageBoxTitle.Warning"), 
