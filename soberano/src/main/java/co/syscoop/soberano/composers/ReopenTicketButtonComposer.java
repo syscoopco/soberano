@@ -9,14 +9,17 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
-
 import co.syscoop.soberano.domain.tracked.Order;
+import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
+import co.syscoop.soberano.renderers.ActionRequested;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ReopenTicketButtonComposer extends SelectorComposer {
+	
+	protected ActionRequested requestedAction = ActionRequested.NONE;
 	
 	@Wire
 	private Button btnReopen;
@@ -30,25 +33,35 @@ public class ReopenTicketButtonComposer extends SelectorComposer {
 	@Listen("onClick = button#btnReopen")
     public void btnReopen_onClick() throws Exception {
 		try {
-			Integer orderId = ((Intbox) btnReopen.getParent().getParent().getParent().query("#wndContentPanel").query("#intOrderNumber")).getValue();
-			if (orderId != null) {			
-				int result = new Order(orderId).reopen();
-				if (result == -1) {
-					throw new NotEnoughRightsException();
-				}
-				else if (result == -2) {
-					throw new ShiftHasBeenClosedException();
+			if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
+				Integer orderId = ((Intbox) btnReopen.getParent().getParent().getParent().query("#wndContentPanel").query("#intOrderNumber")).getValue();
+				if (orderId != null) {			
+					int result = new Order(orderId).reopen();
+					if (result == -1) {
+						throw new NotEnoughRightsException();
+					}
+					else if (result == -2) {
+						throw new ShiftHasBeenClosedException();
+					}
+					else {
+						Executions.sendRedirect("/order.zul?id=" + orderId);
+					}
 				}
 				else {
-					Executions.sendRedirect("/order.zul?id=" + orderId);
+					Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
+									Labels.getLabel("messageBoxTitle.Warning"), 
+									0, 
+									Messagebox.EXCLAMATION);
 				}
 			}
 			else {
-				Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
-								Labels.getLabel("messageBoxTitle.Warning"), 
-								0, 
-								Messagebox.EXCLAMATION);
-			}				
+				requestedAction = ActionRequested.RECORD;
+				btnReopen.setLabel(Labels.getLabel("caption.action.confirm"));
+				throw new ConfirmationRequiredException();
+			}			
+		}
+		catch(ConfirmationRequiredException ex) {
+			return;
 		}
 		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 
