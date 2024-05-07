@@ -667,8 +667,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
 	private void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement) {
 		
+		Integer catIx = 0;
 		for (String cat : order.getCategories()) {
+			catIx++;
 			Tree treeCat = new Tree();
+			treeCat.setId("treeCat_" + catIx.toString() + "_" + cat.replace(" ", ""));
 			vboxOrderItems.appendChild(treeCat);
 			Treecols treeCols = new Treecols();
 			treeCat.appendChild(treeCols);
@@ -704,17 +707,18 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement) throws Exception {
 		
 		Order order = initForm(wndContentPanel, orderId);
-		Vbox vbox = new Vbox();
-		vbox.setHflex("1");
-		renderOrderItems(order, vbox, itsForManagement);
-		Div divOrderItems;
 		if (itsForManagement) {
-			divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
+			Vbox vbox = new Vbox();
+			vbox.setId("vboxOrderItems");
+			vbox.setHflex("1");
+			renderOrderItems(order, vbox, itsForManagement);
+			Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
+			divOrderItems.appendChild(vbox);
 		}
 		else {
-			divOrderItems = (Div) wndContentPanel.query("#divOrderItems");
+			Vbox vobxdivOrderItems = (Vbox) wndContentPanel.query("#wndOrderItems").query("#divOrderItems").query("#vboxOrderItems");
+			renderOrderItems(order, vobxdivOrderItems, itsForManagement);
 		}
-		divOrderItems.appendChild(vbox);
 	}
 	
 	public void initFormForManagement(Window wndContentPanel, Integer orderId) throws Exception {

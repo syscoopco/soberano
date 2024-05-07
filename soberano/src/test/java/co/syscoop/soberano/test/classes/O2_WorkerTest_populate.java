@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(2)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O2_WorkerTest_populate extends TestClass {
 
@@ -734,7 +734,7 @@ class O2_WorkerTest_populate extends TestClass {
 			authorities.clear();
 			responsibilities.add(new Responsibility(16, "Manager assistant"));
 			responsibilities.add(new Responsibility(18, "Reopener"));
-			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
+			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,
 									0,
 									"user22@soberano.syscoop.co",

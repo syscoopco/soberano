@@ -45,8 +45,12 @@
 					<separator></separator>
 				</hbox>	
 			</hbox>
-			<separator></separator>		
-			<div id="divOrderItems"/>
+			<separator></separator>
+			<window id="wndOrderItems" hflex="1" vflex="1">
+				<div id="divOrderItems">
+					<vbox id="vboxOrderItems"></vbox>
+				</div>
+			</window>
 			<separator></separator>
 			<hbox width="100%" align="center">
 				<hbox hflex="1" align="center" pack="start">
