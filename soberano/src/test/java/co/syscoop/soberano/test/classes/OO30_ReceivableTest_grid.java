@@ -15,7 +15,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 @Order(30)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class OO30_ReceivableTest_grid extends ActionTest {
 

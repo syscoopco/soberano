@@ -12,12 +12,12 @@ import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.ActionTest;
 
-@Order(40)
+@Order(42)
 
 //TODO: enable test
 //@Disabled
 
-class OO40_ShiftClosureTest_create extends ActionTest {
+class OO42_ShiftClosureTest_cancel extends ActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {

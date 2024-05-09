@@ -29,13 +29,13 @@ import co.syscoop.soberano.test.helper.CashRegisterOperationActionTest;
 import co.syscoop.soberano.test.helper.CashRegisterOperationForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(35)
+@Order(36)
 
 //TODO: enable test
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO35_OrderTest_recollect_after_reopen_cash_balances_not_tested extends CashRegisterOperationActionTest {
+class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends CashRegisterOperationActionTest {
 	
 	protected CashRegisterOperationForm cashRegisterOperationForm = null;
 

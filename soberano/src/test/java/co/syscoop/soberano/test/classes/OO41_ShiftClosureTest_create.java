@@ -10,14 +10,14 @@ import org.junit.jupiter.api.Test;
 import org.zkoss.lang.Library;
 import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
-import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
+import co.syscoop.soberano.test.helper.ActionTest;
 
-@Order(42)
+@Order(41)
 
 //TODO: enable test
 //@Disabled
 
-class OO42_AcquirableMaterialTest_check_stock_after_modifying_unit extends AcquirableMaterialActionTest{
+class OO41_ShiftClosureTest_create extends ActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -45,7 +45,6 @@ class OO42_AcquirableMaterialTest_check_stock_after_modifying_unit extends Acqui
 
 	@Test
 	final void testCase1() {
-		//TODO: Inventory item unit change is disabled for the time being.
-		//Current unit is kept after applying changes.
+		//TODO: 
 	}
 }

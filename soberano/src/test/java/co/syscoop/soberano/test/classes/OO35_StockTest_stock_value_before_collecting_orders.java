@@ -26,12 +26,12 @@ import co.syscoop.soberano.test.helper.CurrencyForm;
 import co.syscoop.soberano.test.helper.StockForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(25)
+@Order(35)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
-class OO25_StockTest_system_currency_change extends CurrencyActionTest {
+class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 	
 	protected StockForm stockForm = null;
 
@@ -57,23 +57,6 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 
 	@AfterEach
 	void tearDown() throws Exception {
-	}
-
-	@Test
-	final void testCase1() {
-		
-		try {
-			CurrencyForm currencyForm = setFormComponents("user3@soberano.syscoop.co", "currencies.zul");			
-			loadObjectDetails("mcurrency5 : mc5");								
-			currencyForm.getDesktop().query("checkbox").query("#chkIsSystemCurrency").as(CheckAgent.class).check(true);	
-			clickOnApplyButton(currencyForm.getDesktop());
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			throw(ex);
-		}
 	}
 	
 	private void testStockRecord(Row row, 

@@ -23,6 +23,6 @@
 		</vbox>
 	</window>
 	<button id="btnReport" self="@define(decisionButton)" label="${labels.caption.action.report}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.PrintStockReportButtonComposer" -->
-	<button id="btnTakeSnapshot" self="@define(decisionButton)" label="${labels.caption.action.takeSnapshot}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.TakeStockSnapshotButtonComposer" -->
+	<button id="btnTakeSnapshot" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.takeSnapshot}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.TakeStockSnapshotButtonComposer" -->
 	<button id="btnPrintBuyList" self="@define(decisionButton)" label="${labels.caption.action.printBuyList}" sclass="DecisionButton" ></button> <!-- apply="co.syscoop.soberano.composers.PrintBuyListButtonComposer" -->
 </zk>

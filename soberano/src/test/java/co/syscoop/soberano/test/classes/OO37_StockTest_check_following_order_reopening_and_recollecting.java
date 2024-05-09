@@ -32,13 +32,13 @@ import co.syscoop.soberano.test.helper.StockActionTest;
 import co.syscoop.soberano.test.helper.StockForm;
 import co.syscoop.soberano.util.SpringUtility;
 
-@Order(36)
+@Order(37)
 
 //TODO: enable test
 //@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
-class OO36_StockTest_check_following_order_reopening_and_recollecting extends StockActionTest {
+class OO37_StockTest_check_following_order_reopening_and_recollecting extends StockActionTest {
 	
 	protected StockForm stockForm = null;
 
