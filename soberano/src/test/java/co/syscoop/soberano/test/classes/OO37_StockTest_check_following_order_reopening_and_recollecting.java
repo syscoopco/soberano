@@ -123,19 +123,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										450.592,
+										456.592,
 										"kg",										
-										10495967.08797286);
+										10359585.03383019);
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										999995000.0,
+										1000001000.0,
 										"mg",
-										155.58763247);
+										155.58669895);
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
-										2207.62262180,
+										2207.6226218,
 										"lb",
 										140955.12386064);
 			testStockRecord((Row) grd.getRows().getChildren().get(3), 
@@ -159,7 +159,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
 										"mp1",
 										"mproduct1",
-										-6.0,
+										0.0,
 										"kg",
 										0.0);
 		}
@@ -201,13 +201,13 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										2721553000000.0,
+										2721547556896.0,
 										"mg",
 										16.50661561);
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
-										-26.43339924,
+										-38.43339924,
 										"lb",
 										0.0);
 			testStockRecord((Row) grd.getRows().getChildren().get(3), 
@@ -335,13 +335,13 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 										"mmaterial2",
 										1005.999,
 										"kg",										
-										62600.26354682);
+										61899.61905042);
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
 										6000.0,
 										"mg",
-										155.58763247);
+										155.58682861);
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
@@ -365,7 +365,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 										"mproduct1",
 										6.0,
 										"kg",
-										0.0);
+										64889662.81378389);
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
 										"mp7",
 										"mproduct7",

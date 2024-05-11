@@ -14371,7 +14371,7 @@
 					<orm:Role id="_17167D5E-FAB7-47AA-9419-62C7297F0BAA" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_BD3DEF99-C7B5-4A31-BD72-FCC02EDB6355" />
 					</orm:Role>
-					<orm:Role id="_0AC7AA2A-B2A2-4408-942E-AF9F857F9F3D" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+					<orm:Role id="_0AC7AA2A-B2A2-4408-942E-AF9F857F9F3D" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_E439FAF1-C89D-4C86-A1F7-0A970074FA02" />
 					</orm:Role>
 				</orm:FactRoles>
@@ -14393,7 +14393,6 @@
 				</orm:ReadingOrders>
 				<orm:InternalConstraints>
 					<orm:UniquenessConstraint ref="_FD3D048B-BDEB-41AC-B330-67BC720D9A4F" />
-					<orm:UniquenessConstraint ref="_5CC7E50C-A036-4E3C-AA0D-C477E54A5D05" />
 				</orm:InternalConstraints>
 			</orm:Fact>
 			<orm:Fact id="_C93B8E5C-13D3-445D-9A32-EC83DE3C528B" _Name="StockChangeIsOfInventoryOperation">
@@ -14401,7 +14400,7 @@
 					<orm:Role id="_B06E5FDE-BD54-471C-86EE-092ADFD88D81" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
 						<orm:RolePlayer ref="_E439FAF1-C89D-4C86-A1F7-0A970074FA02" />
 					</orm:Role>
-					<orm:Role id="_13E3BC24-BD0F-439A-AA33-7C02D27A2F3F" _IsMandatory="false" _Multiplicity="ZeroToOne" Name="">
+					<orm:Role id="_13E3BC24-BD0F-439A-AA33-7C02D27A2F3F" _IsMandatory="false" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_4B4E4D82-E6A6-4612-AAA6-2F9F692F9DEA" />
 					</orm:Role>
 				</orm:FactRoles>
@@ -14422,7 +14421,6 @@
 					</orm:ReadingOrder>
 				</orm:ReadingOrders>
 				<orm:InternalConstraints>
-					<orm:UniquenessConstraint ref="_31C8381E-1CEA-474C-8A22-CA6EA5A67C8F" />
 					<orm:UniquenessConstraint ref="_39139831-9D60-49AB-BA57-F4318B3F5DFA" />
 				</orm:InternalConstraints>
 			</orm:Fact>
@@ -19147,16 +19145,6 @@
 			<orm:UniquenessConstraint id="_FD3D048B-BDEB-41AC-B330-67BC720D9A4F" Name="InternalUniquenessConstraint456" IsInternal="true">
 				<orm:RoleSequence>
 					<orm:Role id="_D97E9FEF-AE3B-4D22-9ADA-A6F942A68740" ref="_0AC7AA2A-B2A2-4408-942E-AF9F857F9F3D" />
-				</orm:RoleSequence>
-			</orm:UniquenessConstraint>
-			<orm:UniquenessConstraint id="_5CC7E50C-A036-4E3C-AA0D-C477E54A5D05" Name="InternalUniquenessConstraint457" IsInternal="true">
-				<orm:RoleSequence>
-					<orm:Role id="_F5E10327-C9E2-400C-81D8-EA50B14D7F76" ref="_17167D5E-FAB7-47AA-9419-62C7297F0BAA" />
-				</orm:RoleSequence>
-			</orm:UniquenessConstraint>
-			<orm:UniquenessConstraint id="_31C8381E-1CEA-474C-8A22-CA6EA5A67C8F" Name="InternalUniquenessConstraint458" IsInternal="true">
-				<orm:RoleSequence>
-					<orm:Role id="_DDA5547D-DE9D-4E9E-B456-C4D98E7DC43D" ref="_B06E5FDE-BD54-471C-86EE-092ADFD88D81" />
 				</orm:RoleSequence>
 			</orm:UniquenessConstraint>
 			<orm:UniquenessConstraint id="_39139831-9D60-49AB-BA57-F4318B3F5DFA" Name="InternalUniquenessConstraint459" IsInternal="true">
