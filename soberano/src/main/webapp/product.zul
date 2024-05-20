@@ -28,22 +28,22 @@
 		</hbox>
 		<separator></separator>
 		<label value="${labels.caption.field.minimumInventoryLevel}" sclass="Caption"></label>
-		<decimalbox id="decMinimumInventoryLevel" format="####.########" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
+		<decimalbox id="decMinimumInventoryLevel" format="####.########" scale="8" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
 		<separator></separator>
 		<label value="${labels.caption.field.price}" sclass="Caption"></label>
 		<hbox width="100%" align="center">
 			<label id="lblSystemCurrency"></label>
-			<decimalbox id="decPrice" format="####.########" hflex="1" placeholder="${labels.caption.field.pricePlaceholder}" constraint="no empty, no negative"/>
+			<decimalbox id="decPrice" format="####.########" scale="8" hflex="1" placeholder="${labels.caption.field.pricePlaceholder}" constraint="no empty, no negative"/>
 		</hbox>
 		<separator></separator>
 		<label value="${labels.caption.field.referencePrice}" sclass="Caption"></label>
 		<hbox width="100%" align="center">
 			<label id="lblReferenceCurrency"></label>
 			<decimalbox id="decReferencePriceExchangeRate" visible="false"/>
-			<decimalbox id="decReferencePrice" format="####.########" hflex="1" placeholder="${labels.caption.field.referencePricePlaceholder}" constraint="no empty, no negative"/>
+			<decimalbox id="decReferencePrice" format="####.########" scale="8" hflex="1" placeholder="${labels.caption.field.referencePricePlaceholder}" constraint="no empty, no negative"/>
 			
 			<!-- for testing purpose, since decReferencePrice throws an IllegalStateException when it is accessed under testing from class ProductActionTest -->
-			<decimalbox id="decReferencePriceForTesting" format="####.########" visible="false"/>
+			<decimalbox id="decReferencePriceForTesting" format="####.########" scale="8" visible="false"/>
 		</hbox>
 		<separator></separator>
 		<label value="${labels.caption.field.costCenter}" sclass="Caption"></label>

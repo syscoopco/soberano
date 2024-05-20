@@ -37,7 +37,7 @@
 		</vbox>
 	</window>	
 	<label id="lblEstimatedCost" self="@define(decisionButton)" value="${labels.caption.field.estimatedCost}" sclass="Caption"></label>
-	<decimalbox id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" readonly="true"/>
+	<decimalbox id="decEstimatedCost" self="@define(decisionButton)" value="0" format="####.########" scale="8" readonly="true"/>
 	<separator self="@define(decisionButton)"></separator>
 	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCostSheetButtonComposer"></button>
 	<separator self="@define(decisionButton)"></separator>

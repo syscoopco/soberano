@@ -40,7 +40,7 @@
 				<hbox hflex="1" align="center" pack="end">
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
-					<decimalbox id="decAmountTop" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<decimalbox id="decAmountTop" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
 					<label id="lblCurrencyTop" value=""></label>
 					<separator></separator>
 				</hbox>	
@@ -62,7 +62,7 @@
 				<hbox hflex="1" align="center" pack="end">
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
-					<decimalbox id="decAmountBottom" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<decimalbox id="decAmountBottom" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
 					<label id="lblCurrencyBottom" value=""></label>
 					<separator></separator>
 				</hbox>	

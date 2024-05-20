@@ -30,7 +30,7 @@
 					<textbox id="txtPostalCode" maxlength="100" hflex="1" placeholder="${labels.placeholder.postalCode}" constraint="no empty"/>
 				</treecol>
 				<treecol>
-					<decimalbox id="decFee" format="####.########" hflex="1" placeholder="${labels.placeholder.deliveryFee}" value="0" constraint="no negative, no empty"/>
+					<decimalbox id="decFee" format="####.########" scale="8" hflex="1" placeholder="${labels.placeholder.deliveryFee}" value="0" constraint="no negative, no empty"/>
 				</treecol>
 				<treecol id="treecolAddDeliveryFeeButton">
 					<button id="btnAddFee" label="+" apply="co.syscoop.soberano.composers.AddDeliveryFeeButtonComposer"></button>

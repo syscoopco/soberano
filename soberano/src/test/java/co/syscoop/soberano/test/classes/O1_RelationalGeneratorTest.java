@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 @Order(1)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class O1_RelationalGeneratorTest extends TestClass {
 	

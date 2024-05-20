@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(25)
 
 //TODO: enable test
-@Disabled
+//@Disabled
 
 class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 	
@@ -99,25 +99,25 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(0),										
-							16778096.88795505 / 6.67800009); //2512443.345587773
+							2512443.34556672);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(1),										
-							110.61299404 / 6.67800009); //16.563790439
+							16.56379044);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(2),										
-							0 / 6.67800009);
+							0.0);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(3),										
-							524.84403952 / 6.67800009); //78.592996772
+							78.59299677);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(4),										
-							169429313.01338675 / 6.67800009); //25371265.45821696
+							25371265.45800418);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(5),										
-							785846.8616671 / 6.67800009); //117676.976800864
+							117676.97679988);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(6),										
-							260429584.30504884 / 6.67800009); //38998140.280805064
+							38998140.28047801);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

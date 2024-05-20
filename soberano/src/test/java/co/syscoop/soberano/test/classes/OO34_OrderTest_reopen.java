@@ -147,7 +147,7 @@ class OO34_OrderTest_reopen extends PrintTicketActionTest {
 	
 	@Test
 	@Order(4)
-	final void testCase4() {
+	final void testCase5() {
 
 		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co"); //user 22 is a reopener
 		DesktopAgent desktop = Zats.newClient().connect("/print_ticket.zul");
@@ -157,7 +157,7 @@ class OO34_OrderTest_reopen extends PrintTicketActionTest {
 																desktop.query("#wndContentPanel").query("#txtReport").as(Textbox.class),
 																desktop.query("#incSouth").query("#btnReopen").as(Button.class));	
 		try {
-			printTicketForm.setComponentValue(printTicketForm.getIntOrderNumber(), 1002);
+			printTicketForm.setComponentValue(printTicketForm.getIntOrderNumber(), 1006);
 			
 			ComponentAgent btnRetrieve = desktop.query("#wndContentPanel").query("#btnRetrieve");
 			btnRetrieve.click();			
@@ -176,7 +176,7 @@ class OO34_OrderTest_reopen extends PrintTicketActionTest {
 	
 	@Test
 	@Order(5)
-	final void testCase5() {
+	final void testCase4() {
 
 		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co"); //user 22 is a reopener
 		DesktopAgent desktop = Zats.newClient().connect("/print_ticket.zul");
@@ -186,7 +186,7 @@ class OO34_OrderTest_reopen extends PrintTicketActionTest {
 																desktop.query("#wndContentPanel").query("#txtReport").as(Textbox.class),
 																desktop.query("#incSouth").query("#btnReopen").as(Button.class));	
 		try {
-			printTicketForm.setComponentValue(printTicketForm.getIntOrderNumber(), 1006);
+			printTicketForm.setComponentValue(printTicketForm.getIntOrderNumber(), 1002);
 			
 			ComponentAgent btnRetrieve = desktop.query("#wndContentPanel").query("#btnRetrieve");
 			btnRetrieve.click();			

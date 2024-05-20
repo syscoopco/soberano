@@ -18,6 +18,6 @@
 		</hbox>
 		<separator></separator>
 		<label value="${labels.caption.field.minimumInventoryLevel}" sclass="Caption"></label>
-		<decimalbox id="decMinimumInventoryLevel" format="####.########" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
+		<decimalbox id="decMinimumInventoryLevel" format="####.########" scale="8" hflex="1" placeholder="${labels.caption.field.leaveBlankIfNotRequiredPlaceholder}" constraint="no negative"/>
 	</vbox>	
 </zk>

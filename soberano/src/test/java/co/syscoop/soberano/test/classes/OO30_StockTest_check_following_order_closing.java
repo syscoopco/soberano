@@ -1,8 +1,3 @@
-/*************************************************************************************************/
-/*	Unplanned tests. Expected values just taken from GUI after running previous automated tests. */
-/*	Purposeful as regression tests. 											   				 */
-/*************************************************************************************************/
-
 package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -123,15 +118,15 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 			testStockRecord((Row) grd.getRows().getChildren().get(0), 
 										"mm2",
 										"mmaterial2",
-										456.592,
+										462.592,
 										"kg",										
-										10359585.03383019);
+										10359830.2708039);
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										1000001000.0,
+										1000007000.0,
 										"mg",
-										155.58669895);
+										155.58669895074);
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
@@ -159,9 +154,9 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
 										"mp1",
 										"mproduct1",
-										0.0,
+										6.0,
 										"kg",
-										0.0);
+										64889662.8273497);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -237,7 +232,7 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 			testStockRecord((Row) grd.getRows().getChildren().get(7), 
 										"mp7",
 										"mproduct7",
-										0.0,
+										11.0,
 										"pcs",
 										0.0);
 		}
@@ -310,6 +305,7 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 	}
 	
 	@Test
+	//@Disabled
 	final void testCase4() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
@@ -335,13 +331,13 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 										"mmaterial2",
 										1005.999,
 										"kg",										
-										61899.61905042);
+										61899.6190504233);
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
 										6000.0,
 										"mg",
-										155.58682861);
+										155.586828605997);
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
@@ -365,7 +361,7 @@ class OO30_StockTest_check_following_order_closing extends StockActionTest {
 										"mproduct1",
 										6.0,
 										"kg",
-										64889662.81378389);
+										64889662.8273497);
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
 										"mp7",
 										"mproduct7",

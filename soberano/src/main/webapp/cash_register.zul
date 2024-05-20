@@ -14,7 +14,7 @@
 		<hbox id="boxDetails" width="100%">
 			<cell hflex="1" align="center">
 				<textbox id="txtInputExpression" placeholder="${labels.placeholder.amountInSelectedCurrency}" sclass="CollectingTextbox"/>
-				<decimalbox visible="false" format="####.########" id="decInput"/>
+				<decimalbox visible="false" format="####.########" scale="8" id="decInput"/>
 			</cell>
 			<cell width="20%" align="center">
 				<button id="btnCalc" label="$" sclass="CollectingButtonLargeFont"></button>
@@ -26,7 +26,7 @@
 				<label value="${labels.caption.field.Counted}" sclass="CollectingLabel"></label>
 			</cell>
 			<cell hflex="1" align="center">
-				<decimalbox id="decCounted" format="####.########" readonly="true" sclass="CollectingTextbox" value="0.00"/>
+				<decimalbox id="decCounted" format="####.########" scale="8" readonly="true" sclass="CollectingTextbox" value="0.00"/>
 			</cell>
 			<separator></separator>
 			<label visible="false" id="lblSystemCurrency" sclass="CollectingCurrency"></label>
@@ -41,7 +41,7 @@
 				<label value="${labels.caption.field.ToCollect}" sclass="CollectingLabel"></label>
 			</cell>
 			<cell hflex="1" align="center">
-				<decimalbox id="decToCollect" format="####.########" readonly="true" sclass="CollectingTextbox" value="0.00"/>
+				<decimalbox id="decToCollect" format="####.########" scale="8" readonly="true" sclass="CollectingTextbox" value="0.00"/>
 			</cell>
 		</hbox>
 		<separator></separator>
@@ -50,7 +50,7 @@
 				<label value="${labels.caption.field.Change}" sclass="CollectingLabel"></label>
 			</cell>
 			<cell hflex="1" align="center">
-				<decimalbox id="decChange" format="####.########" readonly="true" sclass="CollectingTextbox" value="0.00"/>
+				<decimalbox id="decChange" format="####.########" scale="8" readonly="true" sclass="CollectingTextbox" value="0.00"/>
 			</cell>
 		</hbox>
 		<separator></separator>

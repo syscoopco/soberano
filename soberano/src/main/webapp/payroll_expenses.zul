@@ -17,7 +17,7 @@
 				</combobox>		
 			</hbox>
 			<textbox id="txtAmountExpression" hflex="1" placeholder="${labels.placeholder.amount}"/>
-			<decimalbox visible="false" format="####.########" id="decAmount" hflex="1" placeholder="${labels.placeholder.amount}"/>
+			<decimalbox visible="false" format="####.########" scale="8" id="decAmount" hflex="1" placeholder="${labels.placeholder.amount}"/>
 			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CurrencySelectionViewModel')">
 				<combobox id="cmbCurrency" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.currency}">
 					<template name="model">

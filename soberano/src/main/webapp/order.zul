@@ -76,10 +76,10 @@
 					<hbox hflex="1" align="center">
 						<button id="btnInc" label="+"></button>
 						<button disabled="true" id="btnDec" label="-"></button>
-						<decimalbox id="decOneRunQuantity" format="####.########" value="0" visible="false"></decimalbox>
+						<decimalbox id="decOneRunQuantity" format="####.########" scale="8" value="0" visible="false"></decimalbox>
 						
 						<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
-						<decimalbox visible="false" format="####.########" id="decQuantity" hflex="1"/>
+						<decimalbox visible="false" format="####.########" scale="8" id="decQuantity" hflex="1"/>
 						<combobox readonly="true" disabled="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
 											
 						<button disabled="true" id="btnMake" label="${labels.caption.action.make}" hflex="1"></button>
@@ -98,7 +98,7 @@
 				<hbox hflex="1" align="center" pack="end">
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
-					<decimalbox id="decAmountTop" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<decimalbox id="decAmountTop" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
 					<label id="lblCurrencyTop" value=""></label>
 					<separator></separator>
 				</hbox>	
@@ -136,7 +136,7 @@
 				<hbox hflex="1" align="center" pack="end">
 					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
 					<separator></separator>
-					<decimalbox id="decAmountBottom" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					<decimalbox id="decAmountBottom" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
 					<label id="lblCurrencyBottom" value=""></label>
 					<separator></separator>
 				</hbox>	

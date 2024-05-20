@@ -564,53 +564,6 @@ class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends Cas
 		}
 	}
 	
-//	@Test
-//	@Order(9)
-//	final void testCase9() {
-//
-//		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
-//		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
-//																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
-//																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
-//																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decToCollect").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decChange").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#cmbCustomer").as(Combobox.class),
-//																							desktop.query("#incSouth").query("#btnCollect").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnCancel").as(Button.class),
-//																							desktop.query("grid").query("#grd").as(Grid.class));	
-//		try {
-//			//check mc3 final balance
-//			assertEquals(new BigDecimal(10016.901).subtract(cashRegisterOperationForm.getDecBalancemc3().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc3 final balance.");
-//			
-//			//check mc5 final balance
-//			assertEquals(new BigDecimal(23464.0810032582).subtract(cashRegisterOperationForm.getDecBalancemc5().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc5 final balance.");
-//			
-//			//check mc8 final balance
-//			assertEquals(new BigDecimal(54340.2345).subtract(cashRegisterOperationForm.getDecBalancemc8().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc8 final balance.");
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
 	@Test
 	@Order(10)
 	final void testCase10() {
@@ -768,53 +721,6 @@ class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends Cas
 		}
 	}
 	
-//	@Test
-//	@Order(13)
-//	final void testCase13() {
-//
-//		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
-//		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
-//																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
-//																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
-//																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decToCollect").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decChange").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#cmbCustomer").as(Combobox.class),
-//																							desktop.query("#incSouth").query("#btnCollect").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnCancel").as(Button.class),
-//																							desktop.query("grid").query("#grd").as(Grid.class));	
-//		try {
-//			//check mc3 final balance
-//			assertEquals(new BigDecimal(10018.901).subtract(cashRegisterOperationForm.getDecBalancemc3().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc3 final balance.");
-//			
-//			//check mc5 final balance
-//			assertEquals(new BigDecimal(23467.0810032582).subtract(cashRegisterOperationForm.getDecBalancemc5().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc5 final balance.");
-//			
-//			//check mc8 final balance
-//			assertEquals(new BigDecimal(54344.2345).subtract(cashRegisterOperationForm.getDecBalancemc8().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc8 final balance.");
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
 	@Test
 	@Order(14)
 	final void testCase14() {
@@ -927,54 +833,7 @@ class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends Cas
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(16)
-//	final void testCase16() {
-//
-//		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
-//		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
-//																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
-//																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
-//																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decToCollect").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decChange").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#cmbCustomer").as(Combobox.class),
-//																							desktop.query("#incSouth").query("#btnCollect").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnCancel").as(Button.class),
-//																							desktop.query("grid").query("#grd").as(Grid.class));	
-//		try {
-//			//check mc3 final balance
-//			assertEquals(new BigDecimal(10028.901).subtract(cashRegisterOperationForm.getDecBalancemc3().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc3 final balance.");
-//			
-//			//check mc5 final balance
-//			assertEquals(new BigDecimal(23444.405972692).subtract(cashRegisterOperationForm.getDecBalancemc5().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc5 final balance.");
-//			
-//			//check mc8 final balance
-//			assertEquals(new BigDecimal(54364.2345).subtract(cashRegisterOperationForm.getDecBalancemc8().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc8 final balance.");
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
+		
 	@Test
 	@Order(17)
 	final void testCase17() {
@@ -1046,54 +905,7 @@ class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends Cas
 			fail(ex.getMessage());
 		}
 	}
-	
-//	@Test
-//	@Order(18)
-//	final void testCase18() {
-//
-//		SpringUtility.setLoggedUserForTesting("user20@soberano.syscoop.co");
-//		DesktopAgent desktop = Zats.newClient().connect("/cash_register.zul");
-//		CashRegisterOperationForm cashRegisterOperationForm = new CashRegisterOperationForm(desktop,
-//																							desktop.query("#wndContentPanel").query("#btnmc3").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc5").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#btnmc8").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decBalancemc8").as(Decimalbox.class),																					
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc3").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc5").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decEnteredAmountmc8").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#txtInputExpression").as(Textbox.class),
-//																							desktop.query("#wndContentPanel").query("#decInput").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#btnCalc").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decCounted").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#btnDeposit").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnWithdraw").as(Button.class),																					
-//																							desktop.query("#incSouth").query("#btnCount").as(Button.class),
-//																							desktop.query("#wndContentPanel").query("#decToCollect").as(Decimalbox.class),
-//																							desktop.query("#wndContentPanel").query("#decChange").as(Decimalbox.class),
-//																							desktop.query("#incSouth").query("#cmbCustomer").as(Combobox.class),
-//																							desktop.query("#incSouth").query("#btnCollect").as(Button.class),
-//																							desktop.query("#incSouth").query("#btnCancel").as(Button.class),
-//																							desktop.query("grid").query("#grd").as(Grid.class));	
-//		try {
-//			//check mc3 final balance
-//			assertEquals(new BigDecimal(10031.901).subtract(cashRegisterOperationForm.getDecBalancemc3().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc3 final balance.");
-//			
-//			//check mc5 final balance
-//			assertEquals(new BigDecimal(23448.405972692).subtract(cashRegisterOperationForm.getDecBalancemc5().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc5 final balance.");
-//			
-//			//check mc8 final balance
-//			assertEquals(new BigDecimal(54369.2345).subtract(cashRegisterOperationForm.getDecBalancemc8().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong mc8 final balance.");
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			fail(ex.getMessage());
-//		}
-//	}
-	
+		
 	@Test
 	@Order(19)
 	final void testCase19() {
