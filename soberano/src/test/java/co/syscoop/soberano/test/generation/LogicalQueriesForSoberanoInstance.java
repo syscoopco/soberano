@@ -605,12 +605,15 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(15, 'Technologist'),\n"
 						+ "		(16, 'Manager assistant'),\n"
 						+ "		(17, 'Staff'),\n"
-						+ "		(18, 'Reopener');",
+						+ "		(18, 'Reopener'),\n"
+						+ "		(19, 'Workshop 3 worker'),\n"
+						+ "		(20, 'Workshop 4 worker'),\n"
+						+ "		(21, 'Workshop 5 worker');",
 						
 						
 												
 						"--assign top user to all responsibilities\n"
-						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
+						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, 19, 20, 21], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
 						
 							
 												
@@ -988,6 +991,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(14, 'Community manager', 14004),\n"
 						+ "				(14, 'Procurement worker', 14004),\n"
 						+ "				(14, 'Manager assistant', 14004),\n"
+						+ "				(14, 'Workshop 3 worker', 14004),\n"
+						+ "				(14, 'Workshop 4 worker', 14004),\n"
+						+ "				(14, 'Workshop 5 worker', 14004),\n"
 						+ "				(14, 'Auditor', 14004);",
 						
 						
@@ -1070,6 +1076,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(13, 'Procurement worker', 13004),\n"
 						+ "				(13, 'Technologist', 13004),\n"
 						+ "				(13, 'Manager assistant', 13004),\n"
+						+ "				(13, 'Workshop 3 worker', 13004),\n"
+						+ "				(13, 'Workshop 4 worker', 13004),\n"
+						+ "				(13, 'Workshop 5 worker', 13004),\n"
 						+ "				(13, 'Auditor', 13004);",
 						
 						
@@ -1145,8 +1154,11 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(8, 'Technologist', 8004),\n"
 						+ "				(8, 'Auditor', 8004),\n"
 						+ "				(8, 'Manager assistant', 8004),\n"
+						+ "				(8, 'Workshop 1 worker', 8004),\n"
 						+ "				(8, 'Workshop 2 worker', 8004),\n"
-						+ "				(8, 'Workshop 1 worker', 8004);\n;",
+						+ "				(8, 'Workshop 3 worker', 8004),\n"
+						+ "				(8, 'Workshop 4 worker', 8004),\n"
+						+ "				(8, 'Workshop 5 worker', 8004);\n;",
 						
 						
 						
@@ -1184,6 +1196,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(12, 'Manager', 12004),\n"
 						+ "				(12, 'Workshop 1 worker', 12004),\n"
 						+ "				(12, 'Workshop 2 worker', 12004),\n"
+						+ "				(12, 'Workshop 3 worker', 12004),\n"
+						+ "				(12, 'Workshop 4 worker', 12004),\n"
+						+ "				(12, 'Workshop 5 worker', 12004),\n"						
 						+ "				(12, 'Storekeeper', 12004),\n"
 						+ "				(12, 'Auditor', 12004);",
 						
@@ -1223,6 +1238,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(7, 'Manager', 7004),\n"
 						+ "				(7, 'Workshop 1 worker', 7004),\n"
 						+ "				(7, 'Workshop 2 worker', 7004),\n"
+						+ "				(7, 'Workshop 3 worker', 7004),\n"
+						+ "				(7, 'Workshop 4 worker', 7004),\n"
+						+ "				(7, 'Workshop 5 worker', 7004),\n"						
 						+ "				(7, 'Storekeeper', 7004),\n"
 						+ "				(7, 'Auditor', 7004);",
 						
@@ -1650,7 +1668,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(27005, 'Cancel', 27, 27002, 27003, 'false'),\n"
 						+ "		(27006, 'Check', 27, 27002, 27002, 'false'),\n"
 						+ "		(27007, 'Check', 27, 27003, 27003, 'false'),\n"
-						+ "		(27008, 'Check', 27, 27004, 27004, 'false');\n"
+						+ "		(27008, 'Check', 27, 27004, 27004, 'false'),\n"
+						+ "		(27009, 'Add WS3', 27, 27001, 27002, 'false'),\n"
+						+ "		(27010, 'Add WS4', 27, 27001, 27002, 'false'),\n"
+						+ "		(27011, 'Close WS3', 27, 27002, 27004, 'false'),\n"
+						+ "		(27012, 'Close WS4', 27, 27002, 27004, 'false'),\n"
+						+ "		(27013, 'Add WS5', 27, 27001, 27002, 'false'),\n"
+						+ "		(27014, 'Close WS5', 27, 27002, 27004, 'false');\n"						
 						+ "			\n"
 						+ "--responsability filters\n"
 						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
@@ -1678,8 +1702,19 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(27, 'Manager', 27008),\n"
 						+ "				(27, 'Shift manager', 27008),\n"
 						+ "				(27, 'Workshop 1 worker', 27008),\n"
-						+ "				(27, 'Workshop 2 worker', 27008);",
-						
+						+ "				(27, 'Workshop 2 worker', 27008),\n"						
+						+ " 			(27, 'Workshop 3 worker', 27009),\n"
+						+ "				(27, 'Workshop 4 worker', 27010),\n"
+						+ "				(27, 'Workshop 3 worker', 27011),\n"
+						+ "				(27, 'Workshop 4 worker', 27012),\n"
+						+ "				(27, 'Workshop 3 worker', 27007),\n"
+						+ "				(27, 'Workshop 4 worker', 27007),\n"
+						+ "				(27, 'Workshop 3 worker', 27008),\n"
+						+ "				(27, 'Workshop 4 worker', 27008),\n"
+						+ " 			(27, 'Workshop 5 worker', 27013),\n"
+						+ "				(27, 'Workshop 5 worker', 27014),\n"
+						+ "				(27, 'Workshop 5 worker', 27007),\n"
+						+ "				(27, 'Workshop 5 worker', 27008);",
 						
 						
 						"/* shift closure lifecycle */\n"
@@ -1790,7 +1825,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(29, 'Workshop 2 worker', 29004),\n"
 						+ "				(29, 'Workshop 1 worker', 29005),\n"
 						+ "				(29, 'Workshop 2 worker', 29005),\n"
-						+ "				(29, 'Manager assistant', 29004),\n"
+						+ "				(29, 'Manager assistant', 29004),\n"						
+						+ "				(29, 'Workshop 3 worker', 29004),\n"
+						+ "				(29, 'Workshop 4 worker', 29004),\n"
+						+ "				(29, 'Workshop 3 worker', 29005),\n"
+						+ "				(29, 'Workshop 4 worker', 29005),\n"
+						+ "				(29, 'Workshop 5 worker', 29004),\n"
+						+ "				(29, 'Workshop 5 worker', 29005),\n"						
 						+ "				(29, 'Auditor', 29004);",
 						
 						
@@ -7839,7 +7880,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		RETURN QUERY SELECT *\n"
 						+ "						FROM (SELECT DISTINCT \"EntityTypeInstanceHasEntityTypeInstanceId\",\n"
 						+ "							  					deposit.\"DepositHasDepositId\",\n"
-						+ "							  					'#TO_TRANSLATE(DEPOSIT)#',\n"
+						+ "							  					'tt_DEPOSIT_tt',\n"
 						+ "							  					\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || worker.\"This_has_LoginName\",\n"
 						+ "							  					STRING_AGG(curr.\"This_has_Currency_code\" || ' ' || ROUND(\"Amount\", 8) || ' ' || chr(8644) || ROUND(\"This_uses_ExchangeRate\", 8),\n"
 						+ "							  								chr(13)\n"
@@ -7869,7 +7910,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							 \n"
 						+ "							 SELECT DISTINCT \"EntityTypeInstanceHasEntityTypeInstanceId\",\n"
 						+ "							  					withdrawal.\"WithdrawalHasWithdrawalId\",\n"
-						+ "							  					'#TO_TRANSLATE(WITHDRAWAL)#',\n"
+						+ "							  					'tt_WITHDRAWAL_tt',\n"
 						+ "							  					\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || worker.\"This_has_LoginName\",\n"
 						+ "							  					STRING_AGG(curr.\"This_has_Currency_code\" || ' ' || ROUND(\"Amount\", 8) || ' ' || chr(8644) || ROUND(\"This_uses_ExchangeRate\", 8),\n"
 						+ "							  								chr(13)\n"
@@ -7899,11 +7940,11 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							 \n"
 						+ "							 SELECT DISTINCT \"EntityTypeInstanceHasEntityTypeInstanceId\",\n"
 						+ "							  					balancing.\"BalancingHasBalancingId\",\n"
-						+ "							  					'#TO_TRANSLATE(BALANCING)#',\n"
+						+ "							  					'tt_BALANCING_tt',\n"
 						+ "							  					\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || worker.\"This_has_LoginName\",\n"
 						+ "							  					STRING_AGG(curr.\"This_has_Currency_code\" || chr(13) ||\n"
-						+ "														   '#TO_TRANSLATE(EXPECTED)#' || ': ' || ROUND(eb.\"Balance\", 8) || chr(13) ||\n"
-						+ "														   '#TO_TRANSLATE(COUNTED)#' || ': ' || ROUND(cb.\"Balance\", 8) || chr(13),\n"
+						+ "														   'tt_EXPECTED_tt' || ': ' || ROUND(eb.\"Balance\", 8) || chr(13) ||\n"
+						+ "														   'tt_COUNTED_tt' || ': ' || ROUND(cb.\"Balance\", 8) || chr(13),\n"
 						+ "														   chr(13)\n"
 						+ "							  							   ORDER BY curr.\"This_has_Currency_code\") || chr(13) || \"This_has_Note\",\n"
 						+ "							  					\"This_is_created_at_Timestamp\" rd\n"
@@ -8344,9 +8385,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	BEGIN\n"
 						+ "		SELECT \"This_has_Code\",\n"
 						+ "				STRING_AGG(ii.\"This_has_Name\" || ' ' \n"
-						+ "						  	|| pri.\"Quantity\" || ' ' \n"
+						+ "						  	|| round(pri.\"Quantity\", 8) || ' ' \n"
 						+ "						  	|| iu.\"Acronym\",\n"
-						+ "						  '\\n' ORDER BY ii.\"This_has_Name\")\n"
+						+ "						  chr(13) ORDER BY ii.\"This_has_Name\")\n"
 						+ "			FROM soberano.\"ProcessRunInput\" pri\n"
 						+ "				INNER JOIN soberano.\"ProcessRun\" pr\n"
 						+ "					ON pri.\"ProcessRunHasProcessRunId\" = pr.\"ProcessRunHasProcessRunId\"\n"
@@ -8360,7 +8401,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			INTO prCode, inputspec;\n"
 						+ "			\n"
 						+ "		SELECT STRING_AGG(oi.\"This_has_Name\" || ' ' \n"
-						+ "						  	|| pro.\"Quantity\" || ' ' \n"
+						+ "						  	|| round(pro.\"Quantity\", 8) || ' ' \n"
 						+ "						  	|| ou.\"Acronym\",\n"
 						+ "						  chr(13) ORDER BY oi.\"This_has_Name\")\n"
 						+ "			FROM soberano.\"ProcessRunOutput\" pro\n"
@@ -10493,7 +10534,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							PERFORM metamodel.\"fn_Vote_vote\"('soberano.user.top',\n"
 						+ "													receivableEntityTypeInstanceId, \n"
 						+ "													decisionIdToDishonorReceivable,\n"
-						+ "													'#TO_TRANSLATE(RECEIVABLE)# ' || CAST(currentReceivableId AS text) || ' #TO_TRANSLATE(DISHONORED_BY)# ' || currentDebtorQualifiedName);\n"
+						+ "													'tt_RECEIVABLE_tt ' || CAST(currentReceivableId AS text) || ' tt_DISHONORED_BY_tt ' || currentDebtorQualifiedName);\n"
 						+ "							\n"
 						+ "							--update the active receivable\n"
 						+ "							currentReceivableId := newReceivableId;\n"
@@ -10509,7 +10550,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
 						+ "														orderEntityTypeInstanceId, \n"
 						+ "														decisionIdToCollectOrder, \n"
-						+ "														'#TO_TRANSLATE(ORDER)# ' || CAST(orderid AS text) || ' #TO_TRANSLATE(CLOSED_BY)# ' || loginname);\n"
+						+ "														'tt_ORDER_tt ' || CAST(orderid AS text) || ' tt_CLOSED_BY_tt ' || loginname);\n"
 						+ "\n"
 						+ "						PERFORM soberano.\"fn_Order_closeProcessRuns\"(orderid, loginname);\n"
 						+ "					ELSE\n"
@@ -10517,7 +10558,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
 						+ "														receivableEntityTypeInstanceId, \n"
 						+ "														decisionIdToCollectReceivable, \n"
-						+ "														'#TO_TRANSLATE(RECEIVABLE)# ' || CAST(currentReceivableId AS text) || ' #TO_TRANSLATE(COLLECTED_BY)# ' || loginname);\n"
+						+ "														'tt_RECEIVABLE_tt ' || CAST(currentReceivableId AS text) || ' tt_COLLECTED_BY_tt ' || loginname);\n"
 						+ "					END IF;\n"
 						+ "					\n"
 						+ "					PERFORM soberano.\"fn_Deposit_create\"(1,\n"
@@ -11577,7 +11618,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
 						+ "											entityTypeInstanceId, \n"
 						+ "											decisionId,\n"
-						+ "											'tt_CUSTOMER_CHANGED_FOR ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' #TO_TRANSLATE(BY)# ' || loginname);\n"
+						+ "											'tt_CUSTOMER_CHANGED_FOR ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' tt_BY_tt ' || loginname);\n"
 						+ "			qryResult := 0;\n"
 						+ "\n"
 						+ "		END IF;\n"
@@ -11719,7 +11760,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
 						+ "														entityTypeInstanceId, \n"
 						+ "														decisionId,\n"
-						+ "														'tt_DELIVERY_PROVIDER_CHANGED_FOR_ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' #TO_TRANSLATE(BY)# ' || loginname);\n"
+						+ "														'tt_DELIVERY_PROVIDER_CHANGED_FOR_ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' tt_BY_tt ' || loginname);\n"
 						+ "						qryResult := 0;\n"
 						+ "					ELSE\n"
 						+ "						--the provider does not deliver to that postal code\n"
@@ -11868,7 +11909,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						PERFORM metamodel.\"fn_Vote_vote\"(loginname,\n"
 						+ "														entityTypeInstanceId, \n"
 						+ "														decisionId,\n"
-						+ "														'tt_DELIVERY_ADDRESS_CHANGED_FOR_ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' #TO_TRANSLATE(BY)# ' || loginname);\n"
+						+ "														'tt_DELIVERY_ADDRESS_CHANGED_FOR_ORDER)_tt ' || CAST(orderid AS text) || ' : ' || objectCode || ' tt_BY_tt ' || loginname);\n"
 						+ "						qryResult := 0;\n"
 						+ "					ELSE\n"
 						+ "						--the provider does not deliver to that postal code\n"

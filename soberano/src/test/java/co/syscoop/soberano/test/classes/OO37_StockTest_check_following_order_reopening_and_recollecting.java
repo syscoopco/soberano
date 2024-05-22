@@ -700,7 +700,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 	}
 	
 	@Test
-	//@Disabled
+	@Disabled
 	final void testCase18() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");

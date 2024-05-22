@@ -21,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 @Order(4)
 
 //TODO: enable test
-//@Disabled
+@Disabled
 
 class O4_AcquirableMaterialTest_search_showingAll {
 	

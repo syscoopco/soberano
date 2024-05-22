@@ -11,6 +11,7 @@ import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.util.rowdata.CashRegisterOperationRowData;
+import co.syscoop.soberano.vocabulary.Translator;
 
 public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 
@@ -19,13 +20,13 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 		CashRegisterOperationRowData cashRegisterOperation = (CashRegisterOperationRowData) data;
 		
 		//operation
-		row.appendChild(new Label(cashRegisterOperation.getOperation()));
+		row.appendChild(new Label(Translator.translate(cashRegisterOperation.getOperation())));
 		
 		//worker
 		row.appendChild(new Label(cashRegisterOperation.getWorker()));
 		
 		//description
-		row.appendChild(new Label(cashRegisterOperation.getDescription()));
+		row.appendChild(new Label(Translator.translate(cashRegisterOperation.getDescription())));
 		
 		//recording date
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
