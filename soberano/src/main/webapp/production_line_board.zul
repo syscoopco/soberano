@@ -1,0 +1,35 @@
+<?page title="${labels.pageProductionLineBoard.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.ProductionLineBoardInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageProductionLineBoard.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<timer id="timerRefreshPage" delay="60000" repeats="true" apply="co.syscoop.soberano.composers.ProductionLineBoardTimerComposer"></timer>
+		<vbox hflex="1">
+			<grid id="grd" height="100%" model="${model}" rowRenderer="${renderer}" xmlns:ca="client/attribute" ca:data-scrollable="false">
+				<columns sizable="true">
+					<column align="left" label="${labels.pageProductionLineBoard.grid.Id}" sort="auto(allocationId)">
+					</column>
+					<column align="left" label="${labels.pageProductionLineBoard.grid.Quantity}" sort="auto(allocationQty)">
+					</column>
+					<column align="left" label="${labels.pageProductionLineBoard.grid.Item}" sort="auto(allocationItem)">
+					</column>
+					<column align="left" label="${labels.pageProductionLineBoard.grid.Instructions}" sort="auto(allocationInstructions)">
+					</column>
+					<column align="right" label="${labels.pageProductionLineBoard.grid.Counter}" sort="auto(allocationCounter)">
+					</column>
+					<column align="right" label="${labels.pageProductionLineBoard.grid.Order}" sort="auto(allocationOrder)">
+					</column>
+					<column align="center" label="${labels.pageProductionLineBoard.grid.Action}">
+					</column>
+				</columns>
+			</grid>
+		</vbox>
+	</window>
+	<button id="btnKeepSorted" self="@define(decisionButton)" label="${labels.pageProductionLineBoard.keepSorted}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProductionLineBoardKeepSortingModeButtonComposer"></button>
+	<script src="./audio/jquery.min.js"></script>
+	<script src="./audio/music.js"></script>
+</zk>

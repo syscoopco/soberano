@@ -15,7 +15,6 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.util.rowdata.ProcessRunRowData;
-import co.syscoop.soberano.vocabulary.Translator;
 
 public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 
@@ -37,16 +36,14 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(Labels.getLabel("translation.stage." + processRunRowData.getStage())));
 		
 		//description
-		String desc = processRunRowData.getDescription();
-		Textbox txtDescription = new Textbox(desc != null ? Translator.translate(desc) : "");
+		Textbox txtDescription = new Textbox(processRunRowData.getDescription());
 		txtDescription.setMultiline(true);
 		txtDescription.setRows(15);
 		txtDescription.setReadonly(true);		
 		row.appendChild(txtDescription);
 		
 		//history
-		String hist = processRunRowData.getHistory();
-		Textbox txtHistory = new Textbox(hist != null ? Translator.translate(hist) : "");
+		Textbox txtHistory = new Textbox(processRunRowData.getHistory());
 		txtHistory.setMultiline(true);
 		txtHistory.setRows(15);
 		txtHistory.setReadonly(true);		

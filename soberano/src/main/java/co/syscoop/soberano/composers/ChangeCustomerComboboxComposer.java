@@ -33,7 +33,7 @@ public class ChangeCustomerComboboxComposer extends SelectorComposer {
 			Integer orderId = ((Intbox) cmbCustomer.query("#intObjectId")).getValue();
 			Integer newCustomerId = null;
 			if (cmbCustomer.getSelectedItem() != null) {
-				newCustomerId = (Integer) ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId();
+				newCustomerId = ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId();
 			}
 			Order order = new Order(orderId);
 			int result = order.changeCustomer(newCustomerId);				

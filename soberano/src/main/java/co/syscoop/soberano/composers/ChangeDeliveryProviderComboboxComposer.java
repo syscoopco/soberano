@@ -35,7 +35,7 @@ public class ChangeDeliveryProviderComboboxComposer extends SelectorComposer {
 			Integer orderId = ((Intbox) cmbDeliveryProvider.query("#intObjectId")).getValue();
 			Integer newDeliveryProviderId = null;
 			if (cmbDeliveryProvider.getSelectedItem() != null) {
-				newDeliveryProviderId = (Integer) ((DomainObject) cmbDeliveryProvider.getSelectedItem().getValue()).getId();
+				newDeliveryProviderId = ((DomainObject) cmbDeliveryProvider.getSelectedItem().getValue()).getId();
 			}
 			Order order = new Order(orderId);
 			int result = order.changeDeliveryProvider(newDeliveryProviderId);				
