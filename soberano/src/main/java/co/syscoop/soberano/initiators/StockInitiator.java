@@ -10,6 +10,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.StockGridModel;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
@@ -62,6 +63,7 @@ public class StockInitiator implements Initiator, InitiatorExt {
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

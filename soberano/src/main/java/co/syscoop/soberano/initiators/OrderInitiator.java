@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Window;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
@@ -48,6 +49,7 @@ public class OrderInitiator implements Initiator, InitiatorExt {
 		}
 		catch(Exception ex) {
 			orderId = 0; 
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

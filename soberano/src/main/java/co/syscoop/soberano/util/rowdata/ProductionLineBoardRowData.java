@@ -1,5 +1,9 @@
 package co.syscoop.soberano.util.rowdata;
 
+import org.zkoss.zul.Row;
+
+import co.syscoop.soberano.renderers.ActionRequested;
+
 public class ProductionLineBoardRowData {
 	private Integer allocationId = 0;
 	private String allocationQty = "";
@@ -8,6 +12,8 @@ public class ProductionLineBoardRowData {
 	private String allocationCounter = "";
 	private Integer allocationCounterId = 0;
 	private String allocationOrder = "";
+	private ActionRequested actionRequested = ActionRequested.NONE;
+	private boolean confirmationRequested = false;
 	
 	public Integer getAllocationId() {
 		return allocationId;
@@ -63,5 +69,33 @@ public class ProductionLineBoardRowData {
 
 	public void setAllocationQty(String allocationQty) {
 		this.allocationQty = allocationQty;
+	}
+
+	public ActionRequested getActionRequested() {
+		return actionRequested;
+	}
+
+	public void setActionRequested(ActionRequested actionRequested) {
+		this.actionRequested = actionRequested;
+	}
+
+	public boolean isConfirmationRequested() {
+		return confirmationRequested;
+	}
+
+	public void setConfirmationRequested(boolean confirmationRequested) {
+		this.confirmationRequested = confirmationRequested;
+	}
+	
+	public void requestConfirmation(Row row, ActionRequested actionRequested) {
+		this.actionRequested = actionRequested;
+		confirmationRequested = true;
+		row.setStyle("background-color:yellow;");
+	}
+	
+	public void restoreRowDefaultStyle(Row row) {
+		actionRequested = ActionRequested.NONE;
+		confirmationRequested = false;
+		row.setStyle("background-color:transparent;");
 	}
 }

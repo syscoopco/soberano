@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import co.syscoop.soberano.database.relational.ProcessRunOutputAllocationExtractor;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
-import co.syscoop.soberano.domain.tracked.ProductionLine;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 
 @SuppressWarnings("serial")
 public class ProductionLineBoardGridModel extends SoberanoAbstractListModel<Object>
@@ -27,6 +27,7 @@ public class ProductionLineBoardGridModel extends SoberanoAbstractListModel<Obje
 		} 
 		catch (SQLException e) 
 		{
+			ExceptionTreatment.log(e);
 			return 0;
 		}
 	}
@@ -37,7 +38,7 @@ public class ProductionLineBoardGridModel extends SoberanoAbstractListModel<Obje
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = new ProductionLine(productionLineId).getAll(_orderBy == null?"allocationId":_orderBy,
+				_cache = new ProcessRunOutputAllocation(productionLineId).getAll(_orderBy == null?"allocationId":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 
@@ -45,6 +46,7 @@ public class ProductionLineBoardGridModel extends SoberanoAbstractListModel<Obje
 			}
 			catch (SQLException e) 
 			{
+				ExceptionTreatment.log(e);
 				return null;
 			}
 		}

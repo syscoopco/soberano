@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Combobox;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class InventoryOperationInitiator implements Initiator, InitiatorExt {
@@ -47,6 +48,7 @@ public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

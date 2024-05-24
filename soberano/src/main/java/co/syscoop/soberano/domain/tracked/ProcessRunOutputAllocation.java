@@ -18,6 +18,7 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 	public ProcessRunOutputAllocation() {}
 	
 	public ProcessRunOutputAllocation(Integer produtionLineId) {
+		this.productionLineId = produtionLineId;
 		getAllQuery = "SELECT * FROM soberano.\"" 
 							+ "fn_ProcessRunOutputAllocation_getAll\"" 
 							+ "(:productionLineId, :lang, :loginname)";

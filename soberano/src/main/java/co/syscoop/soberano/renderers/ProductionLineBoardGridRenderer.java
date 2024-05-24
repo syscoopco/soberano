@@ -14,7 +14,6 @@ import org.zkoss.zul.RowRenderer;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
-import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.util.rowdata.ProductionLineBoardRowData;
@@ -22,8 +21,6 @@ import co.syscoop.soberano.util.rowdata.ProductionLineBoardRowData;
 @SuppressWarnings("rawtypes")
 public class ProductionLineBoardGridRenderer implements RowRenderer{
 	
-	private ActionRequested requestedAction = ActionRequested.NONE;
-
 	@SuppressWarnings("unchecked")
 	public void prepareRow(Row row, Object data) {
 		
@@ -31,6 +28,9 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		
 		//id column
 		row.appendChild(new Label(new Integer(plbRowData.getAllocationId()).toString()));
+		
+		//quantity column
+		row.appendChild(new Label(plbRowData.getAllocationQty()));
 		
 		//item column
 		row.appendChild(new Label(plbRowData.getAllocationItem()));
@@ -67,23 +67,23 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 			public void onEvent(Event event) throws Exception {
 				
 				try {
-					if (requestedAction != null && requestedAction.equals(ActionRequested.DONE)) {
-						Integer result = (new ProcessRunOutputAllocation()).markAllocationAsProduced(plbRowData.getAllocationId());
-						if (result == -1) {
-							throw new NotEnoughRightsException();
-						}
-						else {
-							row.detach();
-						}
+					if (!plbRowData.isConfirmationRequested()) {
+						plbRowData.requestConfirmation((Row) btnRemove.getParent().getParent(), ActionRequested.DONE);
 					}
 					else {
-						requestedAction = ActionRequested.DONE;
-						row.setStyle("background-color:yellow;");
-						throw new ConfirmationRequiredException();
+						if (plbRowData.getActionRequested() == ActionRequested.DONE) {
+							Integer result = (new ProcessRunOutputAllocation()).markAllocationAsProduced(plbRowData.getAllocationId());
+							if (result == -1) {
+								throw new NotEnoughRightsException();
+							}
+							else {
+								btnDone.getParent().getParent().detach();
+							}
+						}
+						else {
+							plbRowData.restoreRowDefaultStyle((Row) btnRemove.getParent().getParent());
+						}
 					}
-				}
-				catch(ConfirmationRequiredException ex) {
-					return;
 				}
 				catch(NotEnoughRightsException ex) {
 					ExceptionTreatment.logAndShow(ex, 
@@ -106,23 +106,23 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 			public void onEvent(Event event) throws Exception {
 
 				try {
-					if (requestedAction != null && requestedAction.equals(ActionRequested.CANCEL)) {
-						Integer result = (new ProcessRunOutputAllocation()).markAllocationAsOmitted(plbRowData.getAllocationId());
-						if (result == -1) {
-							throw new NotEnoughRightsException();
-						}
-						else {
-							row.detach();
-						}
+					if (!plbRowData.isConfirmationRequested()) {
+						plbRowData.requestConfirmation((Row) btnRemove.getParent().getParent(), ActionRequested.CANCEL);
 					}
 					else {
-						requestedAction = ActionRequested.DONE;
-						row.setStyle("background-color:yellow;");
-						throw new ConfirmationRequiredException();
+						if (plbRowData.getActionRequested() == ActionRequested.CANCEL) {
+							Integer result = (new ProcessRunOutputAllocation()).markAllocationAsOmitted(plbRowData.getAllocationId());
+							if (result == -1) {
+								throw new NotEnoughRightsException();
+							}
+							else {
+								btnDone.getParent().getParent().detach();
+							}
+						}
+						else {
+							plbRowData.restoreRowDefaultStyle((Row) btnRemove.getParent().getParent());
+						}
 					}
-				}
-				catch(ConfirmationRequiredException ex) {
-					return;
 				}
 				catch(NotEnoughRightsException ex) {
 					ExceptionTreatment.logAndShow(ex, 
@@ -135,7 +135,7 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 							ex.getMessage(), 
 							Labels.getLabel("messageBoxTitle.Error"),
 							Messagebox.ERROR);
-				}			
+				}		
 			}
 		});
 		

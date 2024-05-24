@@ -12,7 +12,9 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.ProductionLineBoardGridModel;
+import co.syscoop.soberano.renderers.ProductionLineBoardGridRenderer;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
@@ -22,7 +24,7 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
-			Combobox cmbProductionLine = (Combobox) comps[0].getPreviousSibling().query("#north").query("combobox").query("#cmbProductionLine");					
+			Combobox cmbProductionLine = (Combobox) comps[1].query("#cmbProductionLine");					
 			ZKUtilitity.setValueWOValidation(cmbProductionLine, productionLineId);
 			
 			ProductionLineBoardGridModel productionLineBoardGridModel = null;
@@ -35,15 +37,18 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 				productionLineBoardGridModel = new ProductionLineBoardGridModel(((DomainObject) cmbProductionLine.getSelectedItem().getValue()).getId(),
 																				orderColumn,
 																				sortDirection);
-				((Grid) comps[0].getPreviousSibling().query("#center").query("grid").query("#grd")).setModel(productionLineBoardGridModel);
+				((Grid) comps[0].getPreviousSibling().query("#wndContentPanel").query("#grd")).setModel(productionLineBoardGridModel);
+				Grid grd = (Grid) comps[0].getPreviousSibling().query("#wndContentPanel").query("#grd");
+				grd.setModel(productionLineBoardGridModel);
+				ProductionLineBoardGridRenderer productionLineBoardGridRenderer = new ProductionLineBoardGridRenderer();
+				grd.setRowRenderer(productionLineBoardGridRenderer);
 				if (productionLineBoardGridModel.getSize() > 0) {
-		  			Clients.evalJavaScript("example3('sawtooth', 0.2)");
+					Clients.evalJavaScript("example3('square', 0.2)");
 		  		}			
 			}
 		}
 		catch(Exception ex) {
-			ex.printStackTrace();
-			ex.fillInStackTrace();
+			ExceptionTreatment.log(ex);
 		}		
 	}
 	
@@ -67,7 +72,8 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 			}
 		}
 		catch(Exception ex) {
-			productionLineId = 0; 
+			productionLineId = 0;
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

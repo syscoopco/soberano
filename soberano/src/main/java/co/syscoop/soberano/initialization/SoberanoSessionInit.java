@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.SessionInit;
 
 import co.syscoop.soberano.domain.tracked.Counter;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 
 public class SoberanoSessionInit implements SessionInit {
 
@@ -55,6 +56,7 @@ public class SoberanoSessionInit implements SessionInit {
 			}			
 		}
 		catch(Exception ex) {
+			ExceptionTreatment.log(ex);
 		}
 		
 		sess.setAttribute("production_line_board_grid_order_column", "allocationId");

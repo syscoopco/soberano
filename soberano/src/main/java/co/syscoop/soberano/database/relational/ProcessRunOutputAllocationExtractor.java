@@ -24,6 +24,7 @@ public final class ProcessRunOutputAllocationExtractor implements ResultSetExtra
         	productionLineBoardRowData.setAllocationItem(rs.getString("allocationItem"));
         	productionLineBoardRowData.setAllocationInstructions(rs.getString("allocationInstructions"));
         	productionLineBoardRowData.setAllocationCounter(rs.getString("allocationCounter"));
+        	productionLineBoardRowData.setAllocationCounterId(rs.getInt("allocationCounterId"));
         	productionLineBoardRowData.setAllocationOrder(rs.getString("allocationOrder"));
         	allocationTableData.add(productionLineBoardRowData);
         }

@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Window;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.ProcessRunFormHelper;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
@@ -48,6 +49,7 @@ public class ProcessRunInitiator implements Initiator, InitiatorExt {
 		}
 		catch(Exception ex) {
 			processRunId = 0; 
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

@@ -8,6 +8,7 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Window;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
@@ -51,6 +52,7 @@ public class CashRegisterInitiator implements Initiator, InitiatorExt {
 		catch(Exception ex) {
 			cashRegisterId = 1; 
 			orderId = null; 
+			ExceptionTreatment.log(ex);
 		}
 	}
 }

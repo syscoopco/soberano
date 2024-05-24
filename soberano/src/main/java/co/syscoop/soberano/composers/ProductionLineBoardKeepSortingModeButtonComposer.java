@@ -8,6 +8,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.ListModel;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.ProductionLineBoardGridModel;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
@@ -20,7 +21,7 @@ public class ProductionLineBoardKeepSortingModeButtonComposer extends SelectorCo
 	@Listen("onClick = button#btnKeepSorted")
     public void btnKeepSorted_onClick() {
 		
-		Grid grd = (Grid) btnKeepSorted.getParent().getParent().getParent().query("center").query("window").query("#grd");
+		Grid grd = (Grid) btnKeepSorted.getParent().getParent().getParent().query("#wndContentPanel").query("#grd");
 		ListModel<Object> model = grd.getModel();
 		Executions.getCurrent().getSession().setAttribute("production_line_board_grid_order_column", ((ProductionLineBoardGridModel) model).get_orderBy());
 		if (((ProductionLineBoardGridModel) model).is_ascending()) {
@@ -39,7 +40,8 @@ public class ProductionLineBoardKeepSortingModeButtonComposer extends SelectorCo
 			}
 		}
 		catch(Exception ex) {
-			productionLineId = 0; 
+			productionLineId = 0;
+			ExceptionTreatment.log(ex);
 		}
 		Executions.sendRedirect("/production_line_board.zul?id=" + productionLineId);
     }

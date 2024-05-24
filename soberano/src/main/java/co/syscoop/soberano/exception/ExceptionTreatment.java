@@ -12,6 +12,11 @@ import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.zk.ui.WrongValueException;
 
 public class ExceptionTreatment {
+	
+	public static void log(Exception ex) {
+		ex.printStackTrace();
+		ex.fillInStackTrace();
+	}
 
 	public static void logAndShow(Exception ex, String messageBody, String messageTitle, String messageIcon) throws SoberanoException {
 		

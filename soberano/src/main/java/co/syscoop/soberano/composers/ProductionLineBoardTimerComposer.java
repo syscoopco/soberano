@@ -5,6 +5,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 @SuppressWarnings({ "rawtypes", "serial" })
@@ -24,7 +25,8 @@ public class ProductionLineBoardTimerComposer extends SelectorComposer {
 			}
 		}
 		catch(Exception ex) {
-			productionLineId = 0; 
+			productionLineId = 0;
+			ExceptionTreatment.log(ex);
 		}
 	}
 	
