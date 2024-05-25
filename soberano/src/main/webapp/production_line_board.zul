@@ -7,7 +7,7 @@
 	<label self="@define(pageTitle)" value="${labels.pageProductionLineBoard.WindowTitle}" sclass="PageTitle"/>
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
-		<timer id="timerRefreshPage" delay="60000" repeats="true" apply="co.syscoop.soberano.composers.ProductionLineBoardTimerComposer"></timer>
+		<timer id="timerRefreshPage" delay="300000" repeats="true" apply="co.syscoop.soberano.composers.ProductionLineBoardTimerComposer"></timer>
 		<vbox hflex="1">
 			<grid id="grd" height="100%" model="${model}" rowRenderer="${renderer}" xmlns:ca="client/attribute" ca:data-scrollable="false">
 				<columns sizable="true">

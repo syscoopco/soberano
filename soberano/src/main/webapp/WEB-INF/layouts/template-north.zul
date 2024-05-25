@@ -12,8 +12,7 @@
 			<separator></separator>
 			<barbuttonpopup tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposer"></barbuttonpopup>
 			<separator></separator>			
-			<!-- TODO: apply composer to splitting popup-->
-			<barbuttonpopup shortcutCaption="${labels.layout.template.shortcut.Split}"></barbuttonpopup>
+			<barbuttonpopup tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Split}" composer="co.syscoop.soberano.composers.OrderSplittingTreeComposer"></barbuttonpopup>
 			<separator></separator>
 			<barbuttonpopup tree="treeInventory" shortcutCaption="${labels.layout.template.shortcut.Inventory}" composer="co.syscoop.soberano.composers.InventoryTreeComposer"></barbuttonpopup>
 			<separator></separator>
