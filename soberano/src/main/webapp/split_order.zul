@@ -1,0 +1,48 @@
+<?page title="${labels.pageSplitOrder.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.SplitOrderPageInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label id="lblPageTitle" self="@define(pageTitle)" sclass="PageTitleNoPadding"/>
+	<borderlayout self="@define(contentPanel)">
+		<north height="50%">
+			<window id="wndTop" width="100%" height="100%" contentStyle="overflow:auto">
+				<hbox width="100%" align="center">
+					<combobox id="cmbFromOrder" hflex="1" readonly="true"></combobox>
+					<hbox hflex="1" align="center" pack="end">
+						<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
+						<separator></separator>
+						<decimalbox id="decAmountTop" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					</hbox>	
+				</hbox>
+				
+				<separator></separator>
+				
+				<div height="100%" width="100%">
+					<tree id="treeOrderedItemsFrom" vflex="1" xmlns:ca="client/attribute" ca:data-scrollable="false">
+					</tree>
+				</div>
+			</window>
+		</north>
+		<south  height="50%">
+			<window id="wndBottom" width="100%" height="100%" contentStyle="overflow:auto">
+				<hbox width="100%" align="center">
+					<combobox id="cmbToOrder" hflex="1" readonly="true"></combobox>
+					<hbox hflex="1" align="center" pack="end">
+						<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
+						<separator></separator>
+						<decimalbox id="decAmountBottom" format="####.########" hflex="1" readonly="true" placeholder="0"/>
+					</hbox>	
+				</hbox>
+				
+				<separator></separator>
+				
+				<div height="100%" width="100%">
+					<tree id="treeOrderedItemsTo" vflex="1" xmlns:ca="client/attribute" ca:data-scrollable="false">
+					</tree>
+				</div>
+			</window>
+		</south>
+	</borderlayout>
+</zk>

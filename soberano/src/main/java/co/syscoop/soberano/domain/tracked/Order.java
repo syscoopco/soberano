@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.ActivityMapper;
+import co.syscoop.soberano.database.relational.CounterOrderMapper;
+import co.syscoop.soberano.database.relational.OrderedItemMapper;
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
@@ -513,6 +515,70 @@ public class Order extends BusinessActivityTrackedObject {
 							+ "								:loginname) AS queryresult";		
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("orderId", this.getId());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public List<Object> getCurrentOrdersOnCounter() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getCurrentOrdersOnCounter\"()";	
+		return query(qryStr, new HashMap<String, Object>(), new CounterOrderMapper());
+	}
+	
+	public int getCurrentOrdersOnCounterCount() throws Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getCurrentOrdersOnCounterCount\"() AS queryresult";		
+		return (Integer) super.query(qryStr, new HashMap<String, Object>(), new QueryObjectResultMapper()).get(0);
+	}
+	
+	public List<Object> getOrderedItems() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getOrderedItems\"(:orderid, :lang)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderid", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());		
+		return query(qryStr, parametersMap, new OrderedItemMapper());
+	}
+	
+	public Integer moveOrderedItemToOrder(Integer fromOrderId, Integer toOrderId, Integer processRunId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_moveOrderedItemToOrder\"(:fromOrderId, "
+							+ "								:toOrderId, "
+							+ "								:processRunId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("fromOrderId", fromOrderId);
+		parametersMap.put("toOrderId", toOrderId);
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer moveAllOrderedItemsToOrder(Integer fromOrderId, Integer toOrderId, Integer processRunId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_moveAllOrderedItemsToOrder\"(:fromOrderId, "
+							+ "								:toOrderId, "
+							+ "								:processRunId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("fromOrderId", fromOrderId);
+		parametersMap.put("toOrderId", toOrderId);
+		parametersMap.put("processRunId", processRunId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer moveOrderToCounter(Integer fromOrderId, String counterCode) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_moveToCounter\"(:fromOrderId, "
+							+ "								:counterCode, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("fromOrderId", fromOrderId);
+		parametersMap.put("counterCode", counterCode);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}

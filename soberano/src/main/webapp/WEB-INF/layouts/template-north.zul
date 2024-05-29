@@ -5,7 +5,7 @@
 
 <zk>
 	<hlayout hflex="1">
-		<hbox hflex="1" sclass="ButtonBar" align="center">
+		<hbox id="hboxButtonBar" hflex="1" sclass="ButtonBar" align="center">
 			<include src="./././menubar.zul"></include>
 			
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
@@ -38,11 +38,11 @@
 				<label id="lblSystemTime" sclass="SystemTimeBox"></label>
 			</hbox>
 		</hbox>
-		<hbox self="@insert(pageTitle)" hflex="0" vflex="1" pack="end" align="center">
+		<hbox id="hboxTitle" self="@insert(pageTitle)" hflex="0" vflex="1" pack="end" align="center">
 		</hbox>
-		<hbox self="@insert(pageSubtitle)" hflex="0" vflex="1" pack="start" align="center">
+		<hbox id="hboxSubTitle" self="@insert(pageSubtitle)" hflex="0" vflex="1" pack="start" align="center">
 		</hbox>
-		<hbox self="@insert(actionButton)" hflex="0" vflex="1" pack="end" align="center" sclass="ButtonBar">
+		<hbox id="hboxAction" self="@insert(actionButton)" hflex="0" vflex="1" pack="end" align="center" sclass="ButtonBar">
 		</hbox>
 	</hlayout>
 </zk>
