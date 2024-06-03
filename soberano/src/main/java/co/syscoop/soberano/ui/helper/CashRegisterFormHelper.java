@@ -73,12 +73,11 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 					@Override
 					public void onEvent(Event event) throws Exception {
 
-						Button btnNoCashCurrencyButton = (Button) event.getTarget();
-						Integer noCashcurrencyId = (Integer) btnNoCashCurrencyButton.getAttribute("currencyId");					
-						
-						//use currency id to instantiate the proper payment processor bean
-						
-						//use the bean to generate and show the payment link
+						PaymentProcessorWindow wndPaymentProcessorWindow = new PaymentProcessorWindow((Currency) item, 
+																										wndContentPanel,
+																										orderId);
+						wndPaymentProcessorWindow.setPage(wndContentPanel.getPage());
+						wndPaymentProcessorWindow.doModal();
 					}
 				});
 				hboxDecisionButtons.insertBefore(btnNoCashCurrencyButton, hboxCustomer);
@@ -130,6 +129,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			
 			Currency curr = (Currency) item;
 			Button button = new Button(curr.getStringId());
+			if (!curr.getIsCash()) {button.setDisabled(true);}
 			button.setId("btn" + curr.getStringId());
 			if (curr.getIsSystemCurrency()) {
 				((Textbox) wndContentPanel.query("#txtSelectedCurrencyCode")).setValue(button.getLabel());

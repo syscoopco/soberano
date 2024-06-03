@@ -22,7 +22,8 @@ public final class CurrencyMapper implements RowMapper<Object> {
 										rs.getBoolean("isCash"),
 										rs.getBigDecimal("exchangeRate"),
 										rs.getInt("itemPosition"),
-										rs.getInt("paymentProcessor"));
+										rs.getInt("paymentProcessor"),
+										rs.getString("paymentProcessorName"));
 			}
 			return currency;
 		}

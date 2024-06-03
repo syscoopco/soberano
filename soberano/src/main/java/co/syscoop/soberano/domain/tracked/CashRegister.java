@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.CurrencyMapper;
+import co.syscoop.soberano.database.relational.ParameterMapper;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class CashRegister extends TrackedObject {
@@ -112,5 +113,14 @@ public class CashRegister extends TrackedObject {
 		parametersMap.put("excludecash", excludeCash);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new CurrencyMapper());
+	}
+	
+	public List<Object> getPaymentProcessorParameters(Integer paymentProcessorId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_PaymentProcessor_getParameters\"(:paymentProcessorId, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("paymentProcessorId", paymentProcessorId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ParameterMapper());
 	}
 }

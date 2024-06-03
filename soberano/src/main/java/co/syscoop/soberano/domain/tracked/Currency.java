@@ -26,6 +26,7 @@ public class Currency extends TrackedObject {
 	private BigDecimal exchangeRate = new BigDecimal(0.0);	
 	private Integer position = 0;
 	private Integer paymentProcessor = 1;
+	private String paymentProcessorName = "";
 	
 	public Currency(Integer id) {
 		super(id);
@@ -41,6 +42,25 @@ public class Currency extends TrackedObject {
 	}
 	
 	public Currency(Integer id, 
+			Integer entityTypeInstanceId, 
+			String code,
+			String name,
+			Boolean isSystemCurrency, 
+			Boolean isPriceReferenceCurrency,
+			Boolean isCash,
+			BigDecimal exchangeRate,
+			Integer position,
+			Integer paymentProcessor) {
+		this(id, entityTypeInstanceId, code, name);
+		this.setIsSystemCurrency(isSystemCurrency);
+		this.setIsPriceReferenceCurrency(isPriceReferenceCurrency);
+		this.setIsCash(isCash);
+		this.setExchangeRate(exchangeRate);
+		this.setPosition(position);
+		this.setPaymentProcessor(paymentProcessor);
+	}
+	
+	public Currency(Integer id, 
 					Integer entityTypeInstanceId, 
 					String code,
 					String name,
@@ -49,14 +69,19 @@ public class Currency extends TrackedObject {
 					Boolean isCash,
 					BigDecimal exchangeRate,
 					Integer position,
-					Integer paymentProcessor) {
-		this(id, entityTypeInstanceId, code, name);
-		this.setIsSystemCurrency(isSystemCurrency);
-		this.setIsPriceReferenceCurrency(isPriceReferenceCurrency);
-		this.setIsCash(isCash);
-		this.setExchangeRate(exchangeRate);
-		this.setPosition(position);
-		this.setPaymentProcessor(paymentProcessor);
+					Integer paymentProcessor,
+					String paymentProcessorName) {
+		this(id, 
+			entityTypeInstanceId, 
+			code,
+			name,
+			isSystemCurrency, 
+			isPriceReferenceCurrency,
+			isCash,
+			exchangeRate,
+			position,
+			paymentProcessor);
+		this.setPaymentProcessorName(paymentProcessorName);
 	}
 	
 	public Currency() {
@@ -271,5 +296,13 @@ public class Currency extends TrackedObject {
 	@Override
 	public Integer getCount() throws SQLException {
 		return 0;
+	}
+
+	public String getPaymentProcessorName() {
+		return paymentProcessorName;
+	}
+
+	public void setPaymentProcessorName(String paymentProcessorName) {
+		this.paymentProcessorName = paymentProcessorName;
 	}
 }

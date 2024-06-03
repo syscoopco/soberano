@@ -260,4 +260,10 @@
  	<bean id="soberanoDatasource" class="co.syscoop.soberano.beans.SoberanoDatasource" scope="singleton">
  		<constructor-arg ref="dataSource"/>
  	</bean>
+ 	
+ 	<!-- payment processor beans -->
+ 	<bean name="tropipay" class="co.syscoop.soberano.beans.Tropipay">
+ 	</bean>
+ 	<bean name="opennode" class="co.syscoop.soberano.beans.Opennode">
+ 	</bean>
 </beans>
