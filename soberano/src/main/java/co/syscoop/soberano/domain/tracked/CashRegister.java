@@ -13,6 +13,7 @@ import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.CurrencyMapper;
 import co.syscoop.soberano.database.relational.ParameterMapper;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class CashRegister extends TrackedObject {
@@ -34,17 +35,17 @@ public class CashRegister extends TrackedObject {
 	
 	public CashRegister(Integer id, 
 			Integer entityTypeInstanceId, 
-			Integer printer) {
+			Integer printerProfile) {
 		super(id, entityTypeInstanceId);
-		this.setPrinter(printer);
+		this.setPrinterProfile(printerProfile);
 	}
 	
 	public CashRegister(Integer id, 
 					Integer entityTypeInstanceId, 
-					Integer printer,
+					Integer printerProfile,
 					HashMap<String, BigDecimal> balances) {
 		super(id, entityTypeInstanceId);
-		this.setPrinter(printer);
+		this.setPrinterProfile(printerProfile);
 		this.setBalances(balances);
 	}
 		
@@ -90,7 +91,7 @@ public class CashRegister extends TrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 
@@ -101,7 +102,7 @@ public class CashRegister extends TrackedObject {
 		setId(sourceCashRegister.getId());
 		setStringId(sourceCashRegister.getStringId());
 		setEntityTypeInstanceId(sourceCashRegister.getEntityTypeInstanceId());
-		setPrinter(sourceCashRegister.getPrinter());
+		setPrinterProfile(sourceCashRegister.getPrinterProfile());
 		setBalances(sourceCashRegister.getBalances());
 	}
 	

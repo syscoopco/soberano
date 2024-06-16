@@ -37,7 +37,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -77,21 +76,21 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -118,9 +117,9 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
@@ -129,7 +128,7 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -156,21 +155,21 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -197,16 +196,16 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
@@ -233,9 +232,9 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
@@ -256,14 +255,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), cal.getTime());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -290,9 +289,9 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
@@ -304,14 +303,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), cal.getTime());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -338,23 +337,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -381,23 +380,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -424,23 +423,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -467,23 +466,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -508,23 +507,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user@1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -549,23 +548,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -590,23 +589,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -633,23 +632,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -676,23 +675,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -719,23 +718,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -760,23 +759,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -803,23 +802,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -846,23 +845,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -889,23 +888,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -932,23 +931,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -975,23 +974,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -1016,23 +1015,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -1057,23 +1056,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -1100,23 +1099,23 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/payroll_expenses.zul");
 		PayrollExpenseForm payrollExpenseForm = new PayrollExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbWorker")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbWorker")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));

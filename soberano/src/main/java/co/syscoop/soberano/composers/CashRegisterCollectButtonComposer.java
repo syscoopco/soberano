@@ -18,9 +18,13 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OrderAlreadyCollectedException;
 import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
+import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
+import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
+import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings("serial")
 public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObjectRecordButtonComposer {
@@ -46,7 +50,20 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 			QueryResultWithReport qrwr = ((CashRegisterFormHelper) trackedObjectFormHelper).collect(boxDetails);
 			
 			if (!qrwr.getReport().isEmpty()) {
-				//TODO: print ticket
+				
+				Integer orderId = ZKUtilitity.getObjectIdFromURLQuery("oid");
+				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/tickets/" + 
+												"TICKET_" + orderId + ".pdf";
+				try {
+					Printer.print(Translator.translate(qrwr.getReport()), qrwr.getPrinterProfileId(), fileToPrintFullPath, "TICKET_" + orderId, false);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+				}				
 			}				
 			
 			Executions.sendRedirect("/cash_register.zul?id=" + 

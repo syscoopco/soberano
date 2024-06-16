@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class Unit extends TrackedObject {
 
@@ -52,18 +53,15 @@ public class Unit extends TrackedObject {
 
 	@Override
 	public void get() throws SQLException {
-		// TODO Auto-generated method stub		
 	}
 
 	@Override
-	public Integer print() throws SQLException {
-		// TODO Auto-generated method stub
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 
 	@Override
 	protected void copyFrom(Object object) {
-		// TODO Auto-generated method stub		
 	}
 
 	@Override

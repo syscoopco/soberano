@@ -37,7 +37,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -77,20 +76,20 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -99,7 +98,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -126,17 +125,17 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -145,7 +144,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -172,24 +171,24 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -216,29 +215,29 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -265,22 +264,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -311,10 +310,10 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
@@ -335,12 +334,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), cal.getTime());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -349,7 +348,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -376,10 +375,10 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
@@ -391,12 +390,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), cal.getTime());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -405,7 +404,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -432,22 +431,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -456,7 +455,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -483,22 +482,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -507,7 +506,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -534,22 +533,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -558,7 +557,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -585,22 +584,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -609,7 +608,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -636,22 +635,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -660,7 +659,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -685,22 +684,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -709,7 +708,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -734,22 +733,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -758,7 +757,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -785,22 +784,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -809,7 +808,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -836,22 +835,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -860,7 +859,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -887,22 +886,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -911,7 +910,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -938,22 +937,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -962,7 +961,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -989,22 +988,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -1013,7 +1012,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -1038,22 +1037,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -1062,7 +1061,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -1089,22 +1088,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -1113,7 +1112,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -1140,22 +1139,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
@@ -1164,7 +1163,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
@@ -1191,22 +1190,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -1215,7 +1214,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
@@ -1240,22 +1239,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
@@ -1264,7 +1263,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -1289,22 +1288,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -1313,7 +1312,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
@@ -1340,22 +1339,22 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/service_expenses.zul");
 		ServiceExpenseForm serviceExpenseForm = new ServiceExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbService")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbService")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbServiceAgent = desktop.query("combobox").query("#cmbService");
+			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
@@ -1364,7 +1363,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(1));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));

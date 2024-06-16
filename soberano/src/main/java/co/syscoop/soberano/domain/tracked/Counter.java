@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.database.relational.DaoBase;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class Counter extends TrackedObject {
@@ -156,9 +157,9 @@ public class Counter extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 

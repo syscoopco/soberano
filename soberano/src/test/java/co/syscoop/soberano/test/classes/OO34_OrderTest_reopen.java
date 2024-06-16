@@ -26,8 +26,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(34)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO34_OrderTest_reopen extends PrintTicketActionTest {

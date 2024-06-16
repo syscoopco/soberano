@@ -21,7 +21,6 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 
 @Order(8)
 
-//TODO: enable test
 @Disabled
 
 class O8_WarehouseTest_with_entry_processes_modify extends WarehouseActionTest {

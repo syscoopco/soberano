@@ -27,7 +27,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -67,18 +66,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse21");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w21");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -103,18 +102,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse22");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w22");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");
@@ -143,18 +142,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse23");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w23");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr4");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr4");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr5");
@@ -187,18 +186,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w24");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr7");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr8");
@@ -237,18 +236,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w24");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr7");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr8");
@@ -287,18 +286,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse24");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w24");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr7");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr8");
@@ -335,18 +334,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse25");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w25");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -371,18 +370,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse26");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w26");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");
@@ -413,18 +412,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse26");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w26");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");
@@ -453,18 +452,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse27");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w27");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr4");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr4");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr5");
@@ -497,18 +496,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse28");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w28");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr7");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr7");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr8");
@@ -545,18 +544,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse29");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w29");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			clickOnRecordButton(desktop);
@@ -581,18 +580,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w30");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");
@@ -623,18 +622,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w30");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");
@@ -665,18 +664,18 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
 				(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(Checkbox.class),
 				(desktop.query("checkbox").query("#chkSalesWarehouse")).as(Checkbox.class),
-				(desktop.query("combobox").query("#cmbEntryProcesses")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbEntryProcesses")).as(Combobox.class));
 		try {
 			warehouseForm.setComponentValue(warehouseForm.getTxtName(), "warehouse30");
 			warehouseForm.setComponentValue(warehouseForm.getTxtCode(), "w30");
 			(desktop.query("checkbox").query("#chkProcurementWarehouse")).as(CheckAgent.class).check(false);		
 			(desktop.query("checkbox").query("#chkSalesWarehouse")).as(CheckAgent.class).check(false);		
 			
-			ComponentAgent cmbEntryProcessesAgent = desktop.query("combobox").query("#cmbEntryProcesses");
+			ComponentAgent cmbEntryProcessesAgent = desktop.query("textbox").query("#cmbEntryProcesses");
 			InputAgent cmbEntryProcessesInputAgent = cmbEntryProcessesAgent.as(InputAgent.class);
 			cmbEntryProcessesInputAgent.typing("mpr2");
 			warehouseForm.selectComboitemByLabel(warehouseForm.getCmbEntryProcesses(), "mpr2");
-			ComponentAgent btnAddEntryProcess = desktop.query("combobox").query("#cmbEntryProcesses").getNextSibling();
+			ComponentAgent btnAddEntryProcess = desktop.query("textbox").query("#cmbEntryProcesses").getNextSibling();
 			btnAddEntryProcess.click();
 			
 			cmbEntryProcessesInputAgent.typing("mpr3");

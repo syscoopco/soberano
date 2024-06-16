@@ -30,7 +30,6 @@ import org.springframework.ldap.support.LdapUtils;
 
 @Order(3)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)

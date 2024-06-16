@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import co.syscoop.soberano.exception.SoberanoException;
+
 public class InventoryItem extends TrackedObject {
 	
 	private BigDecimal minimumInventoryLevel = new BigDecimal(0.0);
@@ -49,7 +51,7 @@ public class InventoryItem extends TrackedObject {
 	public void get() throws SQLException {}
 
 	@Override
-	public Integer print() throws SQLException {return null;}
+	public Integer print() throws SoberanoException {return null;}
 
 	@Override
 	protected void copyFrom(Object object) {}

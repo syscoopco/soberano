@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.database.relational.DeliveryFeeMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class DeliveryProvider extends TrackedObject {
 
@@ -187,9 +188,9 @@ public class DeliveryProvider extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 

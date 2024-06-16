@@ -9,6 +9,7 @@ import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
@@ -33,7 +34,7 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

@@ -9,6 +9,7 @@ import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class ShiftClosure extends BusinessActivityTrackedObject {
 	
@@ -34,7 +35,7 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

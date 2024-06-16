@@ -64,12 +64,7 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			if (ZKUtilitity.splitQuery().get("id") == null) {
-				productionLineId = 0; 
-			}
-			else {
-				productionLineId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
-			}
+			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

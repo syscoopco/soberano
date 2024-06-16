@@ -19,7 +19,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_ServiceTest_check_recording extends ServiceActionTest {
@@ -31,7 +30,7 @@ class O4_ServiceTest_check_recording extends ServiceActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/thirdparty_services.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);

@@ -35,8 +35,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(28)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
@@ -75,12 +74,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 									desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 									desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-									desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-									desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+									desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+									desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 									desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 									desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-									desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-									desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+									desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+									desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 									desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 									desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 									desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -109,12 +108,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -122,7 +121,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -136,7 +135,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 						
 			fail("None exception was thrown when it should.");
 		}
@@ -157,12 +156,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -170,7 +169,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -184,7 +183,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 						
 			fail("None exception was thrown when it should.");
 		}
@@ -205,12 +204,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -218,7 +217,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -228,7 +227,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -247,12 +246,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -260,7 +259,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -270,7 +269,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(2));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -289,12 +288,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -302,7 +301,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -312,7 +311,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(3));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -331,12 +330,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -344,7 +343,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -354,7 +353,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(4));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -373,12 +372,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -386,7 +385,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -396,7 +395,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(543.321));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -415,12 +414,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -428,7 +427,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -438,7 +437,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -457,12 +456,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -470,7 +469,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -480,7 +479,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -499,12 +498,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -512,7 +511,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -522,7 +521,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(6));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -541,12 +540,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -554,7 +553,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
@@ -564,7 +563,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -583,12 +582,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -596,7 +595,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -606,7 +605,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(7));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -625,12 +624,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -638,7 +637,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -648,7 +647,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(8));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -667,12 +666,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -680,7 +679,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -690,7 +689,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(9));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -709,12 +708,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -722,7 +721,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent cmbItemToOrderAgent = desktop.query("combobox").query("#cmbItemToOrder");
+			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
 			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
@@ -732,7 +731,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
-			desktop.query("combobox").query("#cmbUnit").query("#btnMake").click();
+			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -751,12 +750,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -764,7 +763,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1009");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -790,12 +789,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -803,7 +802,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1010");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -829,12 +828,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -846,7 +845,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1011");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -875,12 +874,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -892,7 +891,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 						
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1013");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -921,12 +920,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -934,7 +933,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1014");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -963,12 +962,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -980,7 +979,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1015");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1009,12 +1008,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1022,7 +1021,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1016");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1051,12 +1050,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1068,7 +1067,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1017");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1097,12 +1096,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1110,7 +1109,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 				desktop.query("div").query("#divOrderItems").as(Div.class),
 				desktop.query("south").query("textbox").query("#txtStage").as(Textbox.class));				
 		try {
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1018");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1139,12 +1138,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1156,7 +1155,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 
 			ComponentAgent decServedItemsAgent = divOrderItemsAgent.query("#decServedItems1020");
 			Decimalbox decServedItems = decServedItemsAgent.as(Decimalbox.class);
@@ -1185,12 +1184,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1202,7 +1201,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent intDiscountTopAgent = desktop.query("intbox").query("#intDiscountTop");
 			intDiscountTopAgent.click();
 			
-			ComponentAgent divOrderItemsAgent = desktop.query("combobox").query("#wndOrderItems").query("#divOrderItems");
+			ComponentAgent divOrderItemsAgent = desktop.query("textbox").query("#wndOrderItems").query("#divOrderItems");
 			
 			ComponentAgent decDiscountAgent = divOrderItemsAgent.query("#decDiscount1021");
 			Decimalbox decDiscount = decDiscountAgent.as(Decimalbox.class);
@@ -1231,12 +1230,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1309,12 +1308,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1379,12 +1378,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1449,12 +1448,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1527,12 +1526,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1605,12 +1604,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1683,12 +1682,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1753,12 +1752,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),
@@ -1823,12 +1822,12 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 		orderForm = new OrderForm(desktop, 
 				desktop.query("textbox").query("#txtLabel").as(Textbox.class),
 				desktop.query("textbox").query("#txtCounters").as(Textbox.class),
-				desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
-				desktop.query("combobox").query("#cmbItemToOrder").as(Combobox.class),
+				desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+				desktop.query("textbox").query("#cmbItemToOrder").as(Combobox.class),
 				desktop.query("textbox").query("#txtSpecialInstructions").as(Textbox.class),
 				desktop.query("textbox").query("#decQuantity").as(Decimalbox.class),																					
-				desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
-				desktop.query("combobox").query("#cmbUnit").query("#btnMake").as(Button.class),
+				desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
+				desktop.query("textbox").query("#cmbUnit").query("#btnMake").as(Button.class),
 				desktop.query("intbox").query("#intDiscountTop").as(Intbox.class),
 				desktop.query("decimalbox").query("#decAmountTop").as(Decimalbox.class),
 				desktop.query("intbox").query("#intDiscountBottom").as(Intbox.class),

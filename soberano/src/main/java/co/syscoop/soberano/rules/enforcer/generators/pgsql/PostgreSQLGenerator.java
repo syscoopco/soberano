@@ -113,7 +113,7 @@ public class PostgreSQLGenerator extends RelationalGenerator implements IRelatio
 			query = "ALTER TABLE \"" + relationName + "\" ADD COLUMN \"" + columnName + "\" integer;";
 			break;
 		case "co.syscoop.soberano.rules.enforcer.metamodel.DecimalNumericDataType":
-			//TODO: FIX THE PROBLEM WITH columnScale
+			//FIX THE PROBLEM WITH columnScale
 			//query = "ALTER TABLE \"" + relationName + "\" ADD COLUMN \"" + columnName + "\" numeric(" + columnLength + ", " + columnScale + ");";
 			
 			query = "ALTER TABLE \"" + relationName + "\" ADD COLUMN \"" + columnName + "\" numeric;";

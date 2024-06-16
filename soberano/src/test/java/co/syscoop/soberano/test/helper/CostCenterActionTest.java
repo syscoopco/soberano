@@ -19,7 +19,7 @@ public class CostCenterActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		CostCenterForm costCenterForm = new CostCenterForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class), 

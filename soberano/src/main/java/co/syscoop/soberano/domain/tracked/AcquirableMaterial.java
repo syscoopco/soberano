@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class AcquirableMaterial extends InventoryItem { 
 
@@ -157,9 +158,7 @@ public class AcquirableMaterial extends InventoryItem {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
-		
-		// TODO print a report on the object
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 }

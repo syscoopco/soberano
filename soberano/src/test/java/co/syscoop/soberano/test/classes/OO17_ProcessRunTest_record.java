@@ -28,7 +28,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(17)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -66,8 +65,8 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		processRunForm = new ProcessRunForm(desktop,
-											desktop.query("combobox").query("#cmbProcess").as(Combobox.class),
-											desktop.query("combobox").query("#cmbCostCenter").as(Combobox.class),
+											desktop.query("textbox").query("#cmbProcess").as(Combobox.class),
+											desktop.query("textbox").query("#cmbCostCenter").as(Combobox.class),
 											desktop.query("intbox").query("#intRuns").as(Intbox.class),																					
 											desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 											desktop.query("grid").query("#grd").as(Grid.class));
@@ -91,21 +90,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr7");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr7");
 			cmbProcessAgent.click();			
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -129,21 +128,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr4");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr4");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -169,21 +168,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user8@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr5");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr5");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -209,21 +208,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr7");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr7");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc6");
@@ -249,21 +248,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user9@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);		
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr4");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr4");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc6");
@@ -289,21 +288,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr5");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr5");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -327,21 +326,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);		
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr5");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr5");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc6");
@@ -367,21 +366,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);			
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr2");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr2");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -407,21 +406,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user19@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);		
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr7");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr7");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -447,21 +446,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr2");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr2");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -487,21 +486,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr4");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr4");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -527,21 +526,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr2");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr2");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc6");
@@ -567,21 +566,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr2");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr2");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -605,21 +604,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr4");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr4");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -643,21 +642,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr7");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr7");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc5");
@@ -681,21 +680,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);			
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr2");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr2");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -719,21 +718,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr4");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr4");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");
@@ -757,21 +756,21 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/process_runs.zul");
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
-															(desktop.query("combobox").query("#cmbProcess")).as(Combobox.class),
-															(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
+															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
 															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
 			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
 			
-			ComponentAgent cmbProcessAgent = desktop.query("combobox").query("#cmbProcess");
+			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
 			cmbProcessInputAgent.typing("mpr5");
 			selectComboitemByLabel(processRunForm.getCmbProcess(), "mpr5");
 			cmbProcessAgent.click();
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			selectComboitemByLabel(processRunForm.getCmbCostCenter(), "mcc4");

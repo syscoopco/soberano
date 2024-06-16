@@ -1180,9 +1180,9 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 		super.generateLogicalModel();
 		TransactionStatus transactionStatus = null ;
 		try {
-			// TODO backup current database
+			// TO DO backup current database
 			
-			// TODO save current fact model
+			// TO DO save current fact model
 			
 			//get the conceptual model name, that determines the name of the target relational database
 			databaseName = parsingResults.getName();
@@ -1216,7 +1216,7 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 			
 			transactionManager.commit(transactionStatus);
 			
-			// TODO restore fact model under the new conceptual scheme
+			// TO DO restore fact model under the new conceptual scheme
 			
 			//transactionally apply restrictions
 			transactionStatus = transactionManager.getTransaction(transactionDefinition);
@@ -1291,7 +1291,7 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 	}
 	
 	private void implementExternalUniquenessConstraint(UniquenessConstraint uc) {
-		// TODO External uniqueness constraints.
+		// TO DO External uniqueness constraints.
 	}
 	
 	private void implementUniquenessConstraints() throws SoberanoSQLException, SoberanoException, SQLException {
@@ -1333,7 +1333,7 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 	
 	private void implementMandatoryConstraint() {
 		
-		// TODO Mandatory constraints.
+		// TO DO Mandatory constraints.
 	}
 	
 	//Implements Object-Role Modeling constraints, that means to generate queries that enforce them in
@@ -1344,7 +1344,7 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 		
 		implementMandatoryConstraint();
 		
-		//TODO
+		//TO DO
 		
 		//value comparison
 		
@@ -1364,7 +1364,7 @@ public abstract class RelationalGenerator extends LogicalModelGenerator implemen
 		
 		//cardinality
 		
-		// TODO Other constraints.
+		//Other constraints.
 	}
 	
 	private void populateDomain() throws SQLException {

@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import co.syscoop.soberano.exception.SoberanoException;
+
 public class BusinessActivityTrackedObject extends TrackedObject {
 	
 	private Date occurrenceTime = null;
@@ -39,7 +41,7 @@ public class BusinessActivityTrackedObject extends TrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

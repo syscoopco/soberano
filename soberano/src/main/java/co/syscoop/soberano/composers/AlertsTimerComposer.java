@@ -17,7 +17,5 @@ public class AlertsTimerComposer extends SelectorComposer {
 	
 	@Listen("onTimer = timer#timerAlerts")
     public void timerAlerts_onTimer() {
-		
-		//TODO
     }
 }

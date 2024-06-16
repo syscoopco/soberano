@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class InventoryOperation extends BusinessActivityTrackedObject {
 	
@@ -72,7 +73,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

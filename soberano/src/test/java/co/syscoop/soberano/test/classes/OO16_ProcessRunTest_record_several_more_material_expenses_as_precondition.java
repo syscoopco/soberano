@@ -34,7 +34,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(16)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -74,24 +73,24 @@ class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition 
 		DesktopAgent desktop = Zats.newClient().connect("/material_expenses.zul");
 		MaterialExpenseForm materialExpenseForm = new MaterialExpenseForm(desktop, 
 													(desktop.query("datebox").query("#dateExpenseDate")).as(Datebox.class), 
-													(desktop.query("combobox").query("#cmbProvider")).as(Combobox.class),
-													(desktop.query("combobox").query("#cmbMaterial")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbProvider")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbMaterial")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decQuantity")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 													(desktop.query("decimalbox").query("#decAmount")).as(Decimalbox.class),
-													(desktop.query("combobox").query("#cmbCurrency")).as(Combobox.class),
+													(desktop.query("textbox").query("#cmbCurrency")).as(Combobox.class),
 													(desktop.query("textbox").query("#txtReference")).as(Textbox.class),
 													(desktop.query("datebox").query("#boxDetails").query("#btnRecord")).as(Button.class),
 													(desktop.query("grid").query("#grd")).as(Grid.class));		
 		try {
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDateExpenseDate(), new Date());
 			
-			ComponentAgent cmbProviderAgent = desktop.query("combobox").query("#cmbProvider");
+			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
 			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm8");
 			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1008));
@@ -102,7 +101,7 @@ class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition 
 			materialExpenseForm.selectComboitemByValueForcingLabel(materialExpenseForm.getCmbUnit(), "8", "ml : milliliter");
 			materialExpenseForm.setComponentValue(materialExpenseForm.getDecAmount(), new BigDecimal(20000));
 			
-			ComponentAgent cmbCurrencyAgent = desktop.query("combobox").query("#cmbCurrency");
+			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
 			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));

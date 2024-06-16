@@ -14,7 +14,6 @@ import co.syscoop.soberano.test.helper.ActionTest;
 
 @Order(17)
 
-//TODO: enable test
 @Disabled
 
 class OO17_CatalogTest extends ActionTest {
@@ -45,6 +44,6 @@ class OO17_CatalogTest extends ActionTest {
 
 	@Test
 	final void testCase1() {
-		//TODO: catalog.zul. tree content. product disabling / enabling. price in system currency change. price in reference currency change.
+		//catalog.zul. tree content. product disabling / enabling. price in system currency change. price in reference currency change.
 	}
 }

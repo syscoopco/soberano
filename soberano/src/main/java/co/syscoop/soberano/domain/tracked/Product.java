@@ -17,6 +17,7 @@ import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class Product extends InventoryItem { 
@@ -309,8 +310,7 @@ public class Product extends InventoryItem {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
-		// TODO Auto-generated method stub
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 	

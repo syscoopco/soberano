@@ -18,6 +18,7 @@ import co.syscoop.soberano.database.relational.ObjectMapper;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class Process extends TrackedObject {
 
@@ -278,9 +279,9 @@ public class Process extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 

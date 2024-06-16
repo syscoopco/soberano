@@ -17,6 +17,7 @@ import co.syscoop.soberano.database.relational.ProcessIOMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class ProcessRun extends BusinessActivityTrackedObject {
@@ -209,7 +210,7 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 
@@ -220,7 +221,7 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		setId(sourceProcessRun.getId());
 		setStringId(sourceProcessRun.getStringId());
 		setEntityTypeInstanceId(sourceProcessRun.getEntityTypeInstanceId());
-		setPrinter(sourceProcessRun.getPrinter());
+		setPrinterProfile(sourceProcessRun.getPrinterProfile());
 		setProcess(sourceProcessRun.getProcess());
 		setCostCenter(sourceProcessRun.getCostCenter());
 		setCurrentStageName(sourceProcessRun.getCurrentStageName());

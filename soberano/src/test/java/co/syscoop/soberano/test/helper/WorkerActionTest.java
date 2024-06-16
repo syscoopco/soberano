@@ -46,7 +46,7 @@ public class WorkerActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		ComponentAgent cmbResponsibilities = cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities");
 		WorkerForm workerForm = new WorkerForm(desktop, 

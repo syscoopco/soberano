@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
+import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.database.relational.ActivityMapper;
 import co.syscoop.soberano.database.relational.CounterOrderMapper;
@@ -25,6 +26,10 @@ import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
 import co.syscoop.soberano.enums.Stage;
+import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -80,7 +85,8 @@ public class Order extends BusinessActivityTrackedObject {
 				String city,
 				Integer province,
 				Double latitude,
-				Double longitude) {
+				Double longitude,
+				Integer printerProfile) {
 		super(id);
 		this.label = label;
 		this.countersStr = counters;
@@ -106,6 +112,7 @@ public class Order extends BusinessActivityTrackedObject {
 											 province,
 											 latitude,
 											 longitude));
+		this.setPrinterProfile(printerProfile);
 	}
 	
 	public Order() {
@@ -177,7 +184,8 @@ public class Order extends BusinessActivityTrackedObject {
 										rs.getString("city"),
 										rs.getInt("provinceId"),
 										rs.getDouble("latitude"),
-										rs.getDouble("longitude"));
+										rs.getDouble("longitude"),
+										rs.getInt("printerProfile"));
 	        	}
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
@@ -227,8 +235,31 @@ public class Order extends BusinessActivityTrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
-		// TODO Auto-generated method stub
+	public Integer print() throws SoberanoException {
+		
+		String printJobName = "ORDER_" + this.getId();
+		try {
+			PrinterProfile printerProfile = new PrinterProfile(this.getPrinterProfile());
+			printerProfile.get();
+			Printer printer = new Printer(printerProfile);			
+			String textToPrint = this.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint();
+			String fileFullPath = "./records/orders/" + "ORDER_" + this.getId().toString();
+			printer.createPDFFile(textToPrint, fileFullPath);
+			printer.printPDFFile(textToPrint, fileFullPath, printJobName);
+		} 
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+}
+		
+		catch (Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+						Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + printJobName + ". DETAILS: " + ex.getMessage(), 
+						Labels.getLabel("messageBoxTitle.Error"),
+						Messagebox.ERROR);
+		}
 		return null;
 	}
 	
@@ -255,6 +286,7 @@ public class Order extends BusinessActivityTrackedObject {
 		setDescriptions((sourceOrder).getDescriptions());
 		setOrderItems((sourceOrder).getOrderItems());
 		deliveryContactData = new ContactData(sourceOrder.getDeliveryContactData());
+		setPrinterProfile((sourceOrder).getPrinterProfile());
 	}
 	
 	public Integer make(Integer itemId, String description, BigDecimal runs) throws Exception {
@@ -369,6 +401,11 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+	
+	@Override
+	public String getReport() throws SQLException {
+		return retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint();
 	}
 	
 	public BigDecimal getCanceledRunsCount() throws Exception {
@@ -561,7 +598,7 @@ public class Order extends BusinessActivityTrackedObject {
 		String qryStr = "SELECT soberano.\"fn_Order_moveAllOrderedItemsToOrder\"(:fromOrderId, "
 							+ "								:toOrderId, "
 							+ "								:processRunId, "
-							+ "								:loginname) AS queryresult";		
+							+ "								:loginname) AS queryresult";	
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("fromOrderId", fromOrderId);
 		parametersMap.put("toOrderId", toOrderId);

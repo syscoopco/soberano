@@ -13,7 +13,6 @@ import co.syscoop.soberano.test.helper.CounterActionTest;
 
 @Order(8)
 
-//TODO: enable testCase
 @Disabled
 
 class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterActionTest {
@@ -39,8 +38,7 @@ class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterA
 	void tearDown() throws Exception {
 	}
 
-	@Test
-	final void testCase1() {
-		//TODO:
-	}
+//	@Test
+//	final void testCase1() {
+//	}
 }

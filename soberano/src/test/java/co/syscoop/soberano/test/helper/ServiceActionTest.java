@@ -18,7 +18,7 @@ public class ServiceActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		ServiceForm serviceForm = new ServiceForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class), 

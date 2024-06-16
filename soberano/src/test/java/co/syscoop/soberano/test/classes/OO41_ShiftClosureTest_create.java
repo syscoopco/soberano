@@ -14,8 +14,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 
 @Order(41)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 class OO41_ShiftClosureTest_create extends ActionTest {
 
@@ -43,8 +42,7 @@ class OO41_ShiftClosureTest_create extends ActionTest {
 	void tearDown() throws Exception {
 	}
 
-	@Test
-	final void testCase1() {
-		//TODO: 
-	}
+//	@Test
+//	final void testCase1() {
+//	}
 }

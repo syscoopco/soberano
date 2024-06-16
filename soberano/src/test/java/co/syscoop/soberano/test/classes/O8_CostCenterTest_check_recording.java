@@ -20,7 +20,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//TODO: enable test
 @Disabled
 
 class O8_CostCenterTest_check_recording extends CostCenterActionTest {
@@ -32,7 +31,7 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/cost_centers.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		cmbInputWarehouse = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse").as(Combobox.class);

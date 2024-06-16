@@ -14,8 +14,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
 @Order(43)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 class OO43_AcquirableMaterialTest_check_stock_after_modifying_unit extends AcquirableMaterialActionTest{
 
@@ -45,7 +44,7 @@ class OO43_AcquirableMaterialTest_check_stock_after_modifying_unit extends Acqui
 
 	@Test
 	final void testCase1() {
-		//TODO: Inventory item unit change is disabled for the time being.
+		//Inventory item unit change is disabled for the time being.
 		//Current unit is kept after applying changes.
 	}
 }

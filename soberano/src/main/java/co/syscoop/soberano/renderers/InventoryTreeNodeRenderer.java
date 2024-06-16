@@ -40,6 +40,9 @@ public class InventoryTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNo
 			a.setLabel(Labels.getLabel("caption.action.operation"));
 			a.setHref("/inventory_operations.zul?id=" + nodeData.getValue());
 			box.appendChild(a);
+			wareHouseSubnodeTreeCell.appendChild(new Separator("horizontal"));
+			wareHouseSubnodeTreeCell.appendChild(new Separator("horizontal"));
+			wareHouseSubnodeTreeCell.appendChild(new Separator("horizontal"));
 		}
 		else {
 			tr.appendChild(new Treecell(nodeData.getLabel()));	

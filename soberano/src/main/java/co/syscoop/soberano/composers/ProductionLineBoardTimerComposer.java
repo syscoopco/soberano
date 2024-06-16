@@ -17,12 +17,7 @@ public class ProductionLineBoardTimerComposer extends SelectorComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);		
 		try {
-			if (ZKUtilitity.splitQuery().get("id") == null) {
-				productionLineId = 0; 
-			}
-			else {
-				productionLineId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
-			}
+			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

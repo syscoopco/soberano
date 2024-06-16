@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class ProductCategory extends TrackedObject {
 
@@ -138,9 +139,7 @@ public class ProductCategory extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
-		
-		// TODO print a report on the object
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

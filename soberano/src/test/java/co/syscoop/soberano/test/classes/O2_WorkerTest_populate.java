@@ -27,10 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 * Notice, a worker is defined by its assignments.
 */
 @Order(2)
-
-//TODO: enable test
 @Disabled
-
 class O2_WorkerTest_populate extends TestClass {
 
 	@BeforeAll
@@ -775,6 +772,6 @@ class O2_WorkerTest_populate extends TestClass {
 
 	@Test
 	final void test() {
-		//fail("Not yet implemented"); // TODO
+		//fail("Not yet implemented");
 	}
 }

@@ -122,6 +122,15 @@ public class ZKUtilitity {
 		 return query_pairs;
 	}
 	
+	public static Integer getObjectIdFromURLQuery(String idParamName) throws NumberFormatException, UnsupportedEncodingException {
+		if (splitQuery().get(idParamName) == null) {
+			return 0; 
+		}
+		else {
+			return Integer.parseInt(ZKUtilitity.splitQuery().get(idParamName).get(0));
+		}
+	}
+	
 	public static void processItemSelection(Combobox cmbIntelliSearch) {
 		Tree treeObjects = (Tree) cmbIntelliSearch.query("#wndShowingAll").query("#treeObjects");
 		for (Component comp : treeObjects.getTreechildren().getChildren()) {

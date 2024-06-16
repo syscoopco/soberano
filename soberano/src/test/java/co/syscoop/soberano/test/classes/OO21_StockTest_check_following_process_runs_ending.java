@@ -29,7 +29,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(21)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -89,7 +88,7 @@ class OO21_StockTest_check_following_process_runs_ending extends StockActionTest
 		}
 		
 		//unit value
-		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.003 /*TODO: precision reduced to pass the test. Depending on the currency, it could be a problem.*/) {
+		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.003 /*precision reduced to pass the test. Depending on the currency, it could be a problem.*/) {
 			fail("Wrong unit value for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnitValue + ". It was: " + ((Decimalbox) row.getChildren().get(4)).getValue().doubleValue());
 		}
 	}
@@ -100,12 +99,12 @@ class OO21_StockTest_check_following_process_runs_ending extends StockActionTest
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw6");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1006));
@@ -166,12 +165,12 @@ class OO21_StockTest_check_following_process_runs_ending extends StockActionTest
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw10");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1010));

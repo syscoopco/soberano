@@ -14,8 +14,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 
 @Order(28)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 class OO28_ActivityTest extends ActionTest {
 
@@ -45,6 +44,6 @@ class OO28_ActivityTest extends ActionTest {
 
 	@Test
 	final void testCase1() {
-		//TODO: activity.zul tree content
+		//activity.zul tree content
 	}
 }

@@ -25,7 +25,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//TODO: enable test
 @Disabled
 
 class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialActionTest {
@@ -41,7 +40,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/acquirable_materials.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);

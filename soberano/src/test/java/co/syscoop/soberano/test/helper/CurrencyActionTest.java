@@ -30,7 +30,7 @@ public class CurrencyActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		CurrencyForm currencyForm = new CurrencyForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class), 

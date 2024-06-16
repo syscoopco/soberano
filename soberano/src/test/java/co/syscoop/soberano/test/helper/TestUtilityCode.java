@@ -70,7 +70,7 @@ public class TestUtilityCode {
 	public static void testSearchCombobox(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
-		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
+		ComponentAgent cmbIntelliSearch = desktop.query("center").query("combobox");
 		assertEquals(expectedAccessibleObjectCount, 
 					cmbIntelliSearch.as(Combobox.class).getModel().getSize(), 
 					"User" 
@@ -98,7 +98,7 @@ public class TestUtilityCode {
 	public static void testShowingAllTree(String pageURIStr, Integer expectedAccessibleObjectCount, Integer userIdSuffix, Integer objectBaseId, String qualifiedNamePattern) {
 		
 		DesktopAgent desktop = Zats.newClient().connect(pageURIStr);
-		ComponentAgent cmbIntelliSearch = desktop.query("combobox");		
+		ComponentAgent cmbIntelliSearch = desktop.query("center").query("combobox");		
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(expectedAccessibleObjectCount, 
 					treeObjects.getTreechildren().getItemCount(), 
@@ -129,7 +129,7 @@ public class TestUtilityCode {
 		
 		SpringUtility.setLoggedUserForTesting(userToLogin);
 		DesktopAgent desktop = Zats.newClient().connect(formURL);
-		ComponentAgent cmbIntelliSearchAgent = desktop.query("combobox");
+		ComponentAgent cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		ComponentAgent treeChildrenAgent = cmbIntelliSearchAgent.query("#wndShowingAll").query("#treeObjects").query("Treechildren");
 		Tree treeObjects = (Tree) cmbIntelliSearchAgent.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		Treechildren treeChildren = (Treechildren) treeObjects.query("Treechildren");		
@@ -150,7 +150,7 @@ public class TestUtilityCode {
 		
 		//reload the form and check the object was actually disabled
 		desktop = Zats.newClient().connect(formURL);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		treeChildrenAgent = cmbIntelliSearchAgent.query("#wndShowingAll").query("#treeObjects").query("Treechildren");
 		treeObjects = (Tree) cmbIntelliSearchAgent.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		treeChildren = (Treechildren) treeObjects.query("Treechildren");		

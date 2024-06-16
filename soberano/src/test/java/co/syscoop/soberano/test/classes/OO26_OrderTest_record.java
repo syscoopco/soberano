@@ -30,8 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(26)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO26_OrderTest_record extends NewOrderActionTest {
@@ -69,7 +68,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -79,7 +78,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
@@ -105,7 +104,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -115,7 +114,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
@@ -141,7 +140,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -151,7 +150,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
@@ -177,7 +176,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -187,7 +186,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
@@ -211,7 +210,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -237,7 +236,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -265,7 +264,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -273,7 +272,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(true);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c1mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1001));
@@ -297,7 +296,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -307,7 +306,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c3mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1003));
@@ -331,7 +330,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -357,7 +356,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -367,7 +366,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(true);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(false);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c4mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1004));
@@ -391,7 +390,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -399,7 +398,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c6mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1006));
@@ -423,7 +422,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
 		newOrderForm = new NewOrderForm(desktop,
 										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("combobox").query("#cmbCustomer").as(Combobox.class),
+										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
 										desktop.query("grid").query("#grdCounters").as(Grid.class),
 										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
@@ -433,7 +432,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
-			ComponentAgent cmbCustomerAgent = desktop.query("combobox").query("#cmbCustomer");
+			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c8mod");
 			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1008));

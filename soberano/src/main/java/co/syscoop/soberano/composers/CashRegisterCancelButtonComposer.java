@@ -43,7 +43,6 @@ public class CashRegisterCancelButtonComposer extends CashRegisterTrackedObjectR
 			QueryResultWithReport qrwr = ((CashRegisterFormHelper) trackedObjectFormHelper).cancel(boxDetails);
 			
 			if (!qrwr.getReport().isEmpty()) {
-				//TODO: print ticket
 			}				
 			
 			Executions.sendRedirect("/cash_register.zul?id=" + 

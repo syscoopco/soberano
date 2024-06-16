@@ -14,6 +14,7 @@ import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectQualifiedMapper;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class ProductionLine extends TrackedObject {
 
@@ -153,9 +154,9 @@ public class ProductionLine extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 

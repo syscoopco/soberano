@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.ContactData;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class Customer extends TrackedObject {
 	
@@ -169,8 +170,7 @@ public class Customer extends TrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
-		// TODO print customer
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 	

@@ -31,7 +31,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_WorkerTest_record extends WorkerActionTest {
@@ -68,16 +67,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-									(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-									(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-									(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+									(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -99,16 +98,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -130,7 +129,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -181,16 +180,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -212,7 +211,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -263,16 +262,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -294,7 +293,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -345,16 +344,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -376,7 +375,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -427,16 +426,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -458,7 +457,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -509,16 +508,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -540,7 +539,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -591,16 +590,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -622,7 +621,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -652,16 +651,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -683,7 +682,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -720,16 +719,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -751,7 +750,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -795,16 +794,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -826,7 +825,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -877,16 +876,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -908,7 +907,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					//ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					//ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					//btnAssignResponsibility.click();
 					break;
 				}
@@ -959,16 +958,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -990,7 +989,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -1041,16 +1040,16 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbResponsibilities")).as(Combobox.class), 
+									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
 									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
@@ -1072,7 +1071,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			//responsibilities combobox
 			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
 				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("combobox").query("#cmbResponsibilities").getNextSibling();
+					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
 					btnAssignResponsibility.click();
 					break;
 				}
@@ -1125,10 +1124,10 @@ class O4_WorkerTest_record extends WorkerActionTest {
 							String municipalityName, 
 							DesktopAgent desktop) {
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
-		ComponentAgent cmbResponsibilities = desktop.query("combobox").query("#cmbResponsibilities");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbResponsibilities = desktop.query("textbox").query("#cmbResponsibilities");
 		workerForm = new WorkerForm(desktop,
 									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
 									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 

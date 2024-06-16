@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public interface ITrackedObject {
 
@@ -17,7 +18,7 @@ public interface ITrackedObject {
 	abstract public Integer modify() throws SQLException, Exception;	
 	abstract public Integer makeDecision(String decision) throws SQLException; //it's passed the name of the decision
 	abstract public Integer disable() throws SQLException, Exception;
-	abstract public Integer print() throws SQLException;
+	abstract public Integer print() throws SoberanoException;
 	abstract public String getReport() throws SQLException;
 	abstract public List<Object> query(String queryStr, Map<String, Object> queryParameters, RowMapper<Object> mapper) throws SQLException;
 	

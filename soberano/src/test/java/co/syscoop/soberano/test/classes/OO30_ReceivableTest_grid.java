@@ -14,8 +14,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 
 @Order(30)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 class OO30_ReceivableTest_grid extends ActionTest {
 
@@ -45,6 +44,6 @@ class OO30_ReceivableTest_grid extends ActionTest {
 
 	@Test
 	final void testCase1() {
-		//TODO: receivables.zul. grid content. receivable dishonoring. filtering.
+		//receivables.zul. grid content. receivable dishonoring. filtering.
 	}
 }

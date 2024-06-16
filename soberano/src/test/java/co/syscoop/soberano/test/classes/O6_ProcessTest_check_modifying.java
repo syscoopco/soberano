@@ -24,7 +24,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//TODO: enable test
 @Disabled
 
 class O6_ProcessTest_check_modifying extends ProcessActionTest {
@@ -36,7 +35,7 @@ class O6_ProcessTest_check_modifying extends ProcessActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/processes.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		decFixedCost = cmbIntelliSearchAgent.query("#incDetails").query("#decFixedCost").as(Decimalbox.class);

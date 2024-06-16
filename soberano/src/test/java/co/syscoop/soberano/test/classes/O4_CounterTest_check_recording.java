@@ -22,7 +22,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_CounterTest_check_recording extends CounterActionTest {
@@ -34,7 +33,7 @@ class O4_CounterTest_check_recording extends CounterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/counters.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);
 		intNumberOfReceivers = cmbIntelliSearchAgent.query("#incDetails").query("#intNumberOfReceivers").as(Intbox.class);

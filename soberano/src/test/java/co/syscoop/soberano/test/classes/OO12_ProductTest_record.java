@@ -30,7 +30,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(12)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -70,13 +69,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			//this is needed to execute only in the first test. it has to do with testing configuration.
 			productForm.testEachConstrainedObjectIsDeclared();
@@ -99,30 +98,30 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "");			
 			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -148,29 +147,29 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product1");		
 			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("");
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -196,29 +195,29 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product1");			
 			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("");
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -244,30 +243,30 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product1");			
 			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("");		
 			
@@ -292,29 +291,29 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product1");			
 			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -340,13 +339,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product1");			
@@ -357,17 +356,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("1.001");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -391,13 +390,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p2");
 			productForm.setComponentValue(productForm.getTxtName(), "product2");			
@@ -408,17 +407,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("2.00000002");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(2.00000002));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(2));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -442,13 +441,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p3");
 			productForm.setComponentValue(productForm.getTxtName(), "product3");			
@@ -459,17 +458,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("3.0123");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(3.0123));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(5));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat3");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1003));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1006));			
@@ -495,13 +494,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p3");
 			productForm.setComponentValue(productForm.getTxtName(), "product3");			
@@ -512,17 +511,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("3.0123");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(3.0123));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(5));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat3");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1003));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1006));			
@@ -546,13 +545,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p4");
 			productForm.setComponentValue(productForm.getTxtName(), "product4");			
@@ -563,17 +562,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("987.654");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(987.654));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(8));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat4");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1004));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc7");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1007));			
@@ -599,13 +598,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p4");
 			productForm.setComponentValue(productForm.getTxtName(), "product4");			
@@ -616,17 +615,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("987.654");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(987.654));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(8));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat4");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1004));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc7");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1007));	
@@ -650,13 +649,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p5");
 			productForm.setComponentValue(productForm.getTxtName(), "product5");			
@@ -667,17 +666,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("876.123");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(876.123));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("liter");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(7));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat5");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1005));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc8");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1008));			
@@ -701,13 +700,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p6");
 			productForm.setComponentValue(productForm.getTxtName(), "product6");			
@@ -718,17 +717,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("3.45");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(3.45));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat6");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1006));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc9");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1009));			
@@ -752,13 +751,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p7");
 			productForm.setComponentValue(productForm.getTxtName(), "product7");			
@@ -769,17 +768,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("8.00998877");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(8.00998877));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat7");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1007));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc10");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1010));			
@@ -805,13 +804,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p7");
 			productForm.setComponentValue(productForm.getTxtName(), "product7");			
@@ -822,17 +821,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("8.00998877");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(8.00998877));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat7");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1007));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc10");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1010));			
@@ -856,13 +855,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p8");
 			productForm.setComponentValue(productForm.getTxtName(), "product8");			
@@ -873,17 +872,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("0.0005");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(0.0005));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("gram");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(3));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
@@ -907,13 +906,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p9");
 			productForm.setComponentValue(productForm.getTxtName(), "product9");			
@@ -924,17 +923,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("1.09878901");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.09878901));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -960,13 +959,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p9");
 			productForm.setComponentValue(productForm.getTxtName(), "product9");			
@@ -977,17 +976,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("1.09878901");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.09878901));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -1013,13 +1012,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p9");
 			productForm.setComponentValue(productForm.getTxtName(), "product9");			
@@ -1030,17 +1029,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decPriceInputAgent.type("1.09878901");
 			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.09878901));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -1064,13 +1063,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p10");
 			productForm.setComponentValue(productForm.getTxtName(), "product10");			
@@ -1081,17 +1080,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("1234");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(1234));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -1117,13 +1116,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p1");
 			productForm.setComponentValue(productForm.getTxtName(), "product10");			
@@ -1134,17 +1133,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("1234");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(1234));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
@@ -1170,13 +1169,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 		productForm = new ProductForm(desktop, 
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCategory")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
 				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("combobox").query("#cmbCostCenter")).as(Combobox.class));
+				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
 		try {
 			productForm.setComponentValue(productForm.getTxtCode(), "p10");
 			productForm.setComponentValue(productForm.getTxtName(), "product9");			
@@ -1187,17 +1186,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			decReferencePriceInputAgent.type("1234");
 			productForm.setComponentValue(productForm.getDecReferencePrice(), new BigDecimal(1234));
 						
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
 			
-			ComponentAgent cmbCategoryAgent = desktop.query("combobox").query("#cmbCategory");
+			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
 			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
 			
-			ComponentAgent cmbCostCenterAgent = desktop.query("combobox").query("#cmbCostCenter");
+			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
 			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			

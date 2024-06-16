@@ -20,7 +20,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_ProviderTest_check_recording extends ProviderActionTest {
@@ -32,7 +31,7 @@ class O4_ProviderTest_check_recording extends ProviderActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/providers.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 	}

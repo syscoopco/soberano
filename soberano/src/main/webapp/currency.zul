@@ -17,6 +17,8 @@
 		<combobox disabled="true" id="cmbPaymentProcessor" selectedIndex="-1">
 			<comboitem label="Opennode" value="1"/>
 			<comboitem label="Tropipay" value="2"/>
+			<comboitem label="EnZona" value="3"/>
+			<comboitem label="Transfermovil" value="4"/>
 		</combobox>
 		<separator></separator>
 		<label value="${labels.caption.field.exchangeRate}" sclass="Caption"></label>

@@ -29,7 +29,7 @@ public class ProductActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		ProductForm productForm = new ProductForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class), 
@@ -66,7 +66,7 @@ public class ProductActionTest extends ActionTest {
 		assertEquals(price.subtract(decPrice.getValue()).abs().doubleValue() < 0.00000001, true, "Wrong price shown for product " + qualifiedName);
 		assertEquals(refExchangeRate.subtract(decReferencePriceExchangeRate.getValue()).abs().doubleValue() < 0.00000001, true, "Wrong reference price exchange rage shown for product " + qualifiedName);
 		
-		//TODO: this assert fails with java.lang.IllegalStateException 
+		//this assert fails with java.lang.IllegalStateException 
 		//assertEquals(refPrice.subtract(decReferencePrice.getValue()).abs().doubleValue() < 0.00000001, true, "Wrong reference price shown for product " + qualifiedName);
 		//so, an invisible component is used for checking a proper reference price value is stored in database
 		Decimalbox decReferencePriceForTesting = (Decimalbox) decReferencePrice.query("#decReferencePriceForTesting");

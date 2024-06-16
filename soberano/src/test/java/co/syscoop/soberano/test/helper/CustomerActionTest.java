@@ -33,7 +33,7 @@ public class CustomerActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		CustomerForm customerForm = new CustomerForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtFirstName").as(Textbox.class), 

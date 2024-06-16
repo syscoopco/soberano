@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class CostCenter extends TrackedObject {
 
@@ -134,9 +135,9 @@ public class CostCenter extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 

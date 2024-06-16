@@ -32,12 +32,7 @@ public class ProductionLineBoardKeepSortingModeButtonComposer extends SelectorCo
 		}
 		Integer productionLineId = 0;
 		try {
-			if (ZKUtilitity.splitQuery().get("id") == null) {
-				productionLineId = 0; 
-			}
-			else {
-				productionLineId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
-			}
+			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

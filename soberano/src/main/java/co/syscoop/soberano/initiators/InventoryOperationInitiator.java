@@ -39,12 +39,7 @@ public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			if (ZKUtilitity.splitQuery().get("id") == null) {
-				warehouseId = 0; 
-			}
-			else {
-				warehouseId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
-			}
+			warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 

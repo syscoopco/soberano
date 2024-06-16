@@ -15,6 +15,7 @@ import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.Responsibility;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
 
 public class Worker extends TrackedObject {
@@ -394,9 +395,7 @@ public class Worker extends TrackedObject {
 	}
 
 	@Override
-	public Integer print() throws SQLException {
-		
-		// TODO print a report on worker
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 

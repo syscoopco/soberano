@@ -19,7 +19,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_CustomerTest_search_showingAll {
@@ -68,7 +67,7 @@ class O4_CustomerTest_search_showingAll {
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
 		DesktopAgent desktop = Zats.newClient().connect("/customers.zul");
-		ComponentAgent cmbIntelliSearch = desktop.query("combobox");
+		ComponentAgent cmbIntelliSearch = desktop.query("center").query("combobox");
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(0,
 					cmbIntelliSearch.as(Combobox.class).getModel().getSize() + treeObjects.getTreechildren().getItemCount(), 

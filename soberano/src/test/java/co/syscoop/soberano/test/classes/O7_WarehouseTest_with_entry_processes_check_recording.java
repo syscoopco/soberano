@@ -22,7 +22,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
 
-//TODO: enable test
 @Disabled
 
 class O7_WarehouseTest_with_entry_processes_check_recording extends WarehouseActionTest {
@@ -34,7 +33,7 @@ class O7_WarehouseTest_with_entry_processes_check_recording extends WarehouseAct
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/warehouses.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);

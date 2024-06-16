@@ -18,7 +18,6 @@ import co.syscoop.soberano.test.helper.CustomerActionTest;
 
 @Order(7)
 
-//TODO: enable testCase
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)

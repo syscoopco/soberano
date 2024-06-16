@@ -24,6 +24,9 @@ public class RetrieveTicketButtonComposer extends SelectorComposer {
 	private Button btnRetrieve;
 	
 	@Wire
+	private Button btnPrint;
+	
+	@Wire
 	private Textbox txtReport;
 	
 	@Wire

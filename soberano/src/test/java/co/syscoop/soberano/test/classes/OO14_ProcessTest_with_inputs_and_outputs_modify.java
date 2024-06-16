@@ -30,7 +30,6 @@ import co.syscoop.soberano.test.helper.ProcessForm;
 
 @Order(14)
 
-//TODO: enable test
 @Disabled
 
 class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{

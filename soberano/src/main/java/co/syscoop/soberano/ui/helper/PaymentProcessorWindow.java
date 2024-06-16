@@ -16,6 +16,7 @@ import co.syscoop.soberano.domain.tracked.Currency;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.Parameter;
 import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.util.PaymentLink;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Translator;
 
@@ -108,9 +109,21 @@ public class PaymentProcessorWindow extends Window {
 									((Parameter) paramObject).getParamValue());
 					}
 					pp.setParameters(ppParams);
-					String pLnkUrl = pp.createPaymentLink(orderId, ticket, decToCollect.getValue());
+					PaymentLink paymentLink = pp.createPaymentLink(orderId, ticket, decToCollect.getValue());
 					calcReceivedBalances(event, wndContentPanel, decToCollect);
-					Executions.getCurrent().sendRedirect(pLnkUrl, "_blank");
+					if (!paymentLink.getPaymentLinkURL().isEmpty()) {
+						if (!pp.openPaymentLinkInNewWindow()) {
+							PaymentLinkWindow wndPaymentLinkWindow = new PaymentLinkWindow(currency.getPaymentProcessorName(),
+									paymentLink.getPaymentLinkURL(),
+									paymentLink.getPaymentLinkQRImage());
+							wndPaymentLinkWindow.setPage(wndContentPanel.getPage());
+							wndPaymentLinkWindow.doModal();
+						}
+						else {
+							Executions.getCurrent().sendRedirect(paymentLink.getPaymentLinkURL(), "_blank");
+						}
+					}
+					
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 

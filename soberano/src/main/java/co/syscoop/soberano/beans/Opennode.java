@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import org.zkoss.json.JSONObject;
 import org.zkoss.json.parser.JSONParser;
+
+import co.syscoop.soberano.util.PaymentLink;
 import co.syscoop.soberano.ws.RESTClient;
 
 public class Opennode implements IPaymentProcessor {
 	
 	private String authorization = "";
-	
-	private final String checkout_url = "https://app.dev.opennode.com";
+	private final String apiUrl = "https://dev-api.opennode.com/v1";
 	
 	@Override
 	public void setParameters(HashMap<String, String> parameters) {
@@ -22,7 +23,7 @@ public class Opennode implements IPaymentProcessor {
 	}
 
 	@Override
-	public String createPaymentLink(Integer orderId, String invoiceContent, BigDecimal amount) throws MalformedURLException, ProtocolException, IOException, Exception {
+	public PaymentLink createPaymentLink(Integer orderId, String invoiceContent, BigDecimal amount) throws MalformedURLException, ProtocolException, IOException, Exception {
 		
 		ArrayList<Object> headerFields = new ArrayList<Object>();
 		ArrayList<Object> headerValues = new ArrayList<Object>();
@@ -49,21 +50,25 @@ public class Opennode implements IPaymentProcessor {
 		requestFields.add("currency");
 		requestValues.add("USD");
 		
+		/*
 		requestFields.add("customer_email");
-		requestValues.add("");
+		requestValues.add("customer@example.com");
 		
 		requestFields.add("notif_email");
-		requestValues.add("");
+		requestValues.add("customer@example.com");
 		
 		requestFields.add("customer_name");
-		requestValues.add("");						
+		requestValues.add("customer name");						
+		*/
 		
 		requestFields.add("order_id");
 		requestValues.add(orderId);
 		
+		/*
 		requestFields.add("success_url");
-		requestValues.add("https://");						
-		
+		requestValues.add("https://example.com");
+		*/					
+				
 		requestFields.add("auto_settle");
 		requestValues.add(false);
 		
@@ -71,17 +76,19 @@ public class Opennode implements IPaymentProcessor {
 		requestValues.add(1440);
 		
 		//send http request
-		String response = (new RESTClient().call(checkout_url,
+		String response = (new RESTClient().call(apiUrl,
 										"/charges",
 										"POST",
 										headerFields.toArray(),
 										headerValues.toArray(),
 										requestFields.toArray(),
 										requestValues.toArray()));
-		JSONObject data = (JSONObject) ((JSONObject) new JSONParser().parse(response)).get("data");
 		
-		String checkoutURL = checkout_url + "/" + (String) data.get("id");
-	    
-		return checkoutURL;
+		return new PaymentLink((String) ((JSONObject) ((JSONObject) new JSONParser().parse(response)).get("data")).get("hosted_checkout_url"), "");
+	}
+
+	@Override
+	public Boolean openPaymentLinkInNewWindow() {
+		return true;
 	}
 }

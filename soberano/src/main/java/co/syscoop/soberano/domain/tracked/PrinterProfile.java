@@ -13,9 +13,11 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectQualifiedMapper;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class PrinterProfile extends TrackedObject {
 
+	private Integer font; 
 	private Integer fontSize;
 	private Integer pageWidth;
 	private Integer pageHeight;
@@ -280,9 +282,7 @@ public class PrinterProfile extends TrackedObject {
 	}
 	
 	@Override
-	public Integer print() throws SQLException {
-		
-		// TODO print a report on the object
+	public Integer print() throws SoberanoException {
 		return null;
 	}
 
@@ -398,5 +398,13 @@ public class PrinterProfile extends TrackedObject {
 
 	public void setPrinterName(String printerName) {
 		this.printerName = printerName;
+	}
+
+	public Integer getFont() {
+		return font;
+	}
+
+	public void setFont(Integer font) {
+		this.font = font;
 	}
 }

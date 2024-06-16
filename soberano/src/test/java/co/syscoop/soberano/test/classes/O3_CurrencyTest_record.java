@@ -31,7 +31,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -73,7 +72,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -102,7 +101,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -116,7 +115,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -145,7 +144,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -160,7 +159,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -189,7 +188,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -201,7 +200,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -230,7 +229,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -244,7 +243,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -273,7 +272,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -287,7 +286,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -316,7 +315,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -330,7 +329,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -357,7 +356,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -371,7 +370,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -400,7 +399,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -414,7 +413,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -441,7 +440,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -455,7 +454,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -482,7 +481,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -496,7 +495,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -525,7 +524,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -539,7 +538,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -566,7 +565,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -580,7 +579,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -609,7 +608,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -623,7 +622,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(true);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -650,7 +649,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -664,7 +663,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -693,7 +692,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -707,7 +706,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -734,7 +733,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -748,7 +747,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -775,7 +774,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -789,7 +788,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -818,7 +817,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -832,7 +831,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -859,7 +858,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -873,7 +872,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(true);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Opennode");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 1);		
@@ -900,7 +899,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -914,7 +913,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -943,7 +942,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -957,7 +956,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		
@@ -986,7 +985,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 										desktop.query("checkbox").query("#chkIsSystemCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsPriceReferenceCurrency").as(Checkbox.class),
 										desktop.query("checkbox").query("#chkIsCash").as(Checkbox.class),
-										desktop.query("combobox").query("#cmbPaymentProcessor").as(Combobox.class),
+										desktop.query("textbox").query("#cmbPaymentProcessor").as(Combobox.class),
 										desktop.query("textbox").query("#txtExchangeRateExpression").as(Textbox.class),
 										desktop.query("decimalbox").query("#decExchangeRate").as(Decimalbox.class),
 										desktop.query("intbox").query("#intPosition").as(Intbox.class));
@@ -1000,7 +999,7 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 			(desktop.query("checkbox").query("#chkIsSystemCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsPriceReferenceCurrency")).as(CheckAgent.class).check(false);	
 			(desktop.query("checkbox").query("#chkIsCash")).as(CheckAgent.class).check(false);
-			ComponentAgent cmbPaymentProcessorAgent = desktop.query("combobox").query("#cmbPaymentProcessor");
+			ComponentAgent cmbPaymentProcessorAgent = desktop.query("textbox").query("#cmbPaymentProcessor");
 			InputAgent cmbPaymentProcessorInputAgent = cmbPaymentProcessorAgent.as(InputAgent.class);
 			cmbPaymentProcessorInputAgent.typing("Tropipay");
 			currencyForm.setComponentValue(currencyForm.getCmbPaymentProcessor(), 2);		

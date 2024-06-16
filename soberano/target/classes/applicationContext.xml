@@ -266,4 +266,8 @@
  	</bean>
  	<bean name="opennode" class="co.syscoop.soberano.beans.Opennode">
  	</bean>
+ 	<bean name="enzona" class="co.syscoop.soberano.beans.EnZona">
+ 	</bean>
+ 	<bean name="transfermovil" class="co.syscoop.soberano.beans.Transfermovil">
+ 	</bean>
 </beans>

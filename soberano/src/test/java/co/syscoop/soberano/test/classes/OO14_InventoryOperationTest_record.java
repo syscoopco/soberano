@@ -30,7 +30,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(14)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -69,26 +68,26 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -127,26 +126,26 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -185,26 +184,26 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -243,26 +242,26 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
@@ -287,31 +286,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user17@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -350,31 +349,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -411,31 +410,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse8 : mw8");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1008));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1003));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -472,31 +471,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -541,31 +540,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1003));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial5 : mm5");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial5 : mm5");
@@ -594,31 +593,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial5 : mm5");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial5 : mm5");
@@ -647,31 +646,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse8 : mw8");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1008));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1003));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -716,31 +715,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse8 : mw8");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1008));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -785,31 +784,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1003));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -846,31 +845,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse10 : mw10");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1010));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial2 : mm2");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial2 : mm2");
@@ -915,31 +914,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse6 : mw6");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1006));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1003));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial5 : mm5");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial5 : mm5");
@@ -968,31 +967,31 @@ class OO14_InventoryOperationTest_record extends InventoryOperationActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/inventory_operations.zul");
 		InventoryOperationForm inventoryOperationForm = new InventoryOperationForm(desktop,
-																					desktop.query("combobox").query("#cmbFromWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbToWarehouse").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbWorker").as(Combobox.class),
-																					desktop.query("combobox").query("#cmbMaterial").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbFromWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbToWarehouse").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbWorker").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbMaterial").as(Combobox.class),
 																					desktop.query("decimalbox").query("#decQuantity").as(Decimalbox.class),
-																					desktop.query("combobox").query("#cmbUnit").as(Combobox.class),
+																					desktop.query("textbox").query("#cmbUnit").as(Combobox.class),
 																					desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 																					desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			ComponentAgent cmbFromWarehouseAgent = desktop.query("combobox").query("#cmbFromWarehouse");
+			ComponentAgent cmbFromWarehouseAgent = desktop.query("textbox").query("#cmbFromWarehouse");
 			InputAgent cmbFromWarehouseInputAgent = cmbFromWarehouseAgent.as(InputAgent.class);
 			cmbFromWarehouseInputAgent.typing("mwarehouse8 : mw8");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbFromWarehouse(), new Integer(1008));
 			
-			ComponentAgent cmbToWarehouseAgent = desktop.query("combobox").query("#cmbToWarehouse");
+			ComponentAgent cmbToWarehouseAgent = desktop.query("textbox").query("#cmbToWarehouse");
 			InputAgent cmbToWarehouseInputAgent = cmbToWarehouseAgent.as(InputAgent.class);
 			cmbToWarehouseInputAgent.typing("mwarehouse9 : mw9");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbToWarehouse(), new Integer(1009));
 			
-			ComponentAgent cmbWorkerAgent = desktop.query("combobox").query("#cmbWorker");
+			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
 			inventoryOperationForm.setComponentValue(inventoryOperationForm.getCmbWorker(), new Integer(1002));
 			
-			ComponentAgent cmbMaterialAgent = desktop.query("combobox").query("#cmbMaterial");
+			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mmaterial5 : mm5");
 			inventoryOperationForm.selectComboitemByLabel(inventoryOperationForm.getCmbMaterial(), "mmaterial5 : mm5");

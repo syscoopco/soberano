@@ -34,6 +34,7 @@ import com.github.anastaciocintra.output.PrinterOutputStream;
 import co.syscoop.soberano.util.WSocketClient;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
+import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.printjobs.rawbt.AttributesString;
 import co.syscoop.soberano.printjobs.rawbt.Constant;
@@ -49,7 +50,7 @@ public class Printer {
 	
 	private CupsPrinter selectedPrinter;
 	
-	public void print(String textToprint, String printJobName) throws Exception {
+	private void printCUPS(String textToPrint, String printJobName) throws Exception {
 		PrintRequestResult printRequestResult;
 		try { 
 	        CupsClient client = new CupsClient(printerProfile.getPrintServer(), 631);
@@ -66,17 +67,17 @@ public class Printer {
 		                selectedPrinter = cupsPrinter;
 		            }
 		        }
-	        	Builder builder = new PrintJob.Builder(textToprint.getBytes());
+	        	Builder builder = new PrintJob.Builder(textToPrint.getBytes());
 	        	builder.jobName(printJobName);
 	        	HashMap<String, String> map = new HashMap<>();
 	        	
 	        	map.put("document-format", "application/vnd.cups-raw");
 	        	map.put("document-name", printJobName);       	
 	        	
-	        	PrintJob printJob = new PrintJob.Builder(textToprint.getBytes()).attributes(map).build();
+	        	PrintJob printJob = new PrintJob.Builder(textToPrint.getBytes()).attributes(map).build();
 	        	printRequestResult = selectedPrinter.print(printJob);
 	        	if (!printRequestResult.isSuccessfulResult()) {
-	        		Messagebox.show(Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + printJobName + ". DETAILS: " + printRequestResult.getResultDescription(), 
+	        		Messagebox.show(Labels.getLabel("error.print.ErrorWhilePrintingDocument") + printJobName + ". DETAILS: " + printRequestResult.getResultDescription(), 
 	      					Labels.getLabel("messageBoxTitle.Error"), 
 	    					0, 
 	    					Messagebox.ERROR);
@@ -89,47 +90,6 @@ public class Printer {
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 	    }
-	}
-	
-	private void createPDFFile(String fileFullPath, String fileContent, int fontSize) throws UnsupportedEncodingException, IOException {
-		
-		InputStream in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
-		Reader reader = new InputStreamReader(in, "ISO-8859-1");
-		TextToPDF textToPDF = new TextToPDF();
-		textToPDF.setFont(PDType1Font.COURIER_BOLD);
-		textToPDF.setFontSize(fontSize);
-		textToPDF.setLandscape(false);
-		
-		PDRectangle mediaBox = new PDRectangle(printerProfile.getPageWidth(), printerProfile.getPageHeight());
-		PDDocument document = textToPDF.createPDFFromText(reader, mediaBox, printerProfile.getMargin());
-		
-		Integer numberOfPages = document.getNumberOfPages(); 
-		if (numberOfPages > 1) {
-			in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
-			reader = new InputStreamReader(in, "ISO-8859-1");
-			mediaBox = new PDRectangle(printerProfile.getPageWidth(), printerProfile.getPageHeight() * numberOfPages);
-			document = textToPDF.createPDFFromText(reader, mediaBox, printerProfile.getMargin());
-		}
-		
-		PDPage page = new PDPage();
-		
-		PDPageContentStream contentStream = new PDPageContentStream(document, page);
-		contentStream.close();
-		
-		document.save(fileFullPath);
-		document.close();
-	}
-	
-	public void createPDFFile(String fileFullPath, String fileContent) throws UnsupportedEncodingException, IOException {
-		createPDFFile(fileFullPath, fileContent, printerProfile.getFontSize());
-	}
-	
-	public void createPDFFile3LF(String fileFullPath, String fileContent) throws UnsupportedEncodingException, IOException {
-		createPDFFile(fileFullPath, fileContent + "--\n--\n--\n", printerProfile.getFontSize());
-	}
-	
-	public void printPDFFile(String fileFullPath, String jobName, String textToPrint) throws UnsupportedEncodingException, IOException, Exception {
-		printPDFFile(printerProfile.getPrinterName(), fileFullPath, jobName, textToPrint);
 	}
 	
 	private void printThroughSocket(String textToPrint, String printerWS) throws URISyntaxException, Exception {
@@ -176,7 +136,7 @@ public class Printer {
 		}		
 	}
 	
-	private void printPDFFile(String printerNameParam, String fileFullPath, String jobName, String textToPrint) throws UnsupportedEncodingException, IOException, Exception {
+	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
 		String printJobName = "";
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
@@ -185,15 +145,12 @@ public class Printer {
 			else {
 				PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
 				if (printServices.length == 0) {
-					Messagebox.show(Labels.getLabel("message.print.TheresNoPrinterConfigured"), 
-														  					Labels.getLabel("messageBoxTitle.Information"), 
-																			0, 
-																			Messagebox.EXCLAMATION);
+					printCUPS(textToPrint, printJobName);
 				}
 				else {
 					for (PrintService printService : printServices) {					
 						if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
-							PDDocument document = PDDocument.load(new File(fileFullPath));
+							PDDocument document = PDDocument.load(new File(fileToPrintFullPath));
 					        PrinterJob job = PrinterJob.getPrinterJob();
 					        job.setJobName(jobName);
 					        job.setPageable(new PDFPageable(document));
@@ -217,6 +174,82 @@ public class Printer {
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 	    }
+	}
+	
+	private void createPDFFile(String fileContent, String fileToPrintFullPath, int fontSize) throws UnsupportedEncodingException, IOException {
+		
+		InputStream in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
+		Reader reader = new InputStreamReader(in, "ISO-8859-1");
+		TextToPDF textToPDF = new TextToPDF();
+		textToPDF.setFont(PDType1Font.COURIER_BOLD);
+		textToPDF.setFontSize(fontSize);
+		textToPDF.setLandscape(false);
+		
+		PDRectangle mediaBox = new PDRectangle(printerProfile.getPageWidth(), printerProfile.getPageHeight());
+		PDDocument document = textToPDF.createPDFFromText(reader, mediaBox, printerProfile.getMargin());
+		
+		Integer numberOfPages = document.getNumberOfPages(); 
+		if (numberOfPages > 1) {
+			in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
+			reader = new InputStreamReader(in, "ISO-8859-1");
+			mediaBox = new PDRectangle(printerProfile.getPageWidth(), printerProfile.getPageHeight() * numberOfPages);
+			document = textToPDF.createPDFFromText(reader, mediaBox, printerProfile.getMargin());
+		}
+		
+		PDPage page = new PDPage();
+		
+		PDPageContentStream contentStream = new PDPageContentStream(document, page);
+		contentStream.close();
+		
+		document.save(fileToPrintFullPath);
+		document.close();
+	}
+	
+	public void createPDFFile(String fileContent, String fileFullPath) throws UnsupportedEncodingException, IOException {
+		createPDFFile(fileContent, fileFullPath, printerProfile.getFontSize());
+	}
+	
+	public void createPDFFile3LF(String fileContent, String fileFullPath) throws UnsupportedEncodingException, IOException {
+		createPDFFile(fileContent + "--\n--\n--\n", fileFullPath, printerProfile.getFontSize());
+	}
+	
+	public void printPDFFile(String textToPrint, String fileFullPath, String jobName) throws UnsupportedEncodingException, IOException, Exception {
+		print(textToPrint, fileFullPath, printerProfile.getPrinterName(), jobName);
+	}
+	
+	public static void print(String textToPrint,
+							TrackedObject trackedObject,
+							String fileToPrintFullPath,
+							Boolean _3LF) throws Exception {
+		Integer objectId = trackedObject.getId();
+		String printJobName = trackedObject.getClass().getSimpleName() + "_" + objectId;
+		PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
+		printerProfile.get();
+		Printer printer = new Printer(printerProfile);
+		if (_3LF) {
+			printer.createPDFFile3LF(textToPrint, fileToPrintFullPath);
+		}
+		else {
+			printer.createPDFFile(textToPrint, fileToPrintFullPath);
+		}		
+		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+	}
+	
+	public static void print(String textToPrint,
+							Integer printerProfileId,
+							String fileToPrintFullPath,
+							String printJobName,
+							Boolean _3LF) throws Exception {
+		PrinterProfile printerProfile = new PrinterProfile(printerProfileId);
+		printerProfile.get();
+		Printer printer = new Printer(printerProfile);
+		if (_3LF) {
+			printer.createPDFFile3LF(textToPrint, fileToPrintFullPath);
+		}
+		else {
+			printer.createPDFFile(textToPrint, fileToPrintFullPath);
+		}		
+		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
 	}
 
 	public PrinterProfile getPrinterProfile() {

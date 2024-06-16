@@ -22,7 +22,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//TODO: enable test
 @Disabled
 
 class O4_ProcessTest_check_recording extends ProcessActionTest {
@@ -34,7 +33,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/processes.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);
 		decFixedCost = cmbIntelliSearchAgent.query("#incDetails").query("#decFixedCost").as(Decimalbox.class);
@@ -60,7 +59,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr1",
-						new BigDecimal(1));
+						new BigDecimal(1.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -75,7 +74,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr2",
-						new BigDecimal(2));
+						new BigDecimal(2.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -90,7 +89,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr3",
-						new BigDecimal(3));
+						new BigDecimal(3.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -105,7 +104,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr4",
-						new BigDecimal(4));
+						new BigDecimal(4.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -120,7 +119,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr5",
-						new BigDecimal(5));
+						new BigDecimal(5.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -135,7 +134,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr6",
-						new BigDecimal(6));
+						new BigDecimal(6.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -150,7 +149,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr7",
-						new BigDecimal(7));
+						new BigDecimal(7.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -165,7 +164,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr8",
-						new BigDecimal(8));
+						new BigDecimal(8.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -180,7 +179,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr9",
-						new BigDecimal(9));
+						new BigDecimal(9.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -195,7 +194,7 @@ class O4_ProcessTest_check_recording extends ProcessActionTest {
 		
 		try {
 			checkProcess("pr10",
-						new BigDecimal(91));
+						new BigDecimal(91.00000000));
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

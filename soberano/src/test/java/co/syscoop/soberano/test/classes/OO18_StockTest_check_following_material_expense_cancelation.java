@@ -28,7 +28,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(18)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -121,12 +120,12 @@ class OO18_StockTest_check_following_material_expense_cancelation extends StockA
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw10");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1010));
@@ -188,12 +187,12 @@ class OO18_StockTest_check_following_material_expense_cancelation extends StockA
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw9");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1009));
@@ -249,12 +248,12 @@ class OO18_StockTest_check_following_material_expense_cancelation extends StockA
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw8");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1008));
@@ -310,12 +309,12 @@ class OO18_StockTest_check_following_material_expense_cancelation extends StockA
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
-			ComponentAgent cmbWarehouseAgent = desktop.query("combobox").query("#cmbWarehouse");
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
 			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
 			cmbWarehouseInputAgent.typing("mw6");
 			
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1006));

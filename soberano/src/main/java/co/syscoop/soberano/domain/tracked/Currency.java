@@ -17,6 +17,7 @@ import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
 import co.syscoop.soberano.exception.NotCurrenciesConfiguredException;
 import co.syscoop.soberano.exception.OrdersOngoingException;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class Currency extends TrackedObject {
 
@@ -203,9 +204,9 @@ public class Currency extends TrackedObject {
 	}
 		
 	@Override
-	public Integer print() throws SQLException {
+	public Integer print() throws SoberanoException {
 		
-		// TODO print a report on the object
+		
 		return null;
 	}
 	

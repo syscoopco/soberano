@@ -29,10 +29,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
-
-//TODO: enable test
 @Disabled
-
 @TestMethodOrder(OrderAnnotation.class)
 class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 	
@@ -69,7 +66,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			//this is needed to execute only in the first test. it has to do with testing configuration.
@@ -94,13 +91,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m1");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1.0));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), 1);		
@@ -127,13 +124,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m1");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material1");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1.0));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("");		
 			
@@ -159,13 +156,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m1");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material1");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1.0));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
@@ -190,13 +187,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m2");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material2");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1.5));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));		
@@ -223,13 +220,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m2");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material2");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1.5));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));		
@@ -254,13 +251,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m3");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material3");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
@@ -287,13 +284,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m3");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material3");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
@@ -318,13 +315,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m4");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material4");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2.5));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
@@ -351,13 +348,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m4");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material4");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2.5));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
@@ -382,13 +379,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m5");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material5");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(3));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
@@ -415,13 +412,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m5");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material5");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(3));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
@@ -446,13 +443,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m6");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material6");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(4));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));		
@@ -479,13 +476,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m6");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material6");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(4));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));		
@@ -510,13 +507,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m7");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material7");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
@@ -543,13 +540,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m7");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material7");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
@@ -574,13 +571,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m8");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material8");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100.00001));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
@@ -607,13 +604,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m8");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material8");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100.00001));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
@@ -638,13 +635,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m9");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material9");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(400.00004));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
@@ -671,13 +668,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m9");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material9");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(400.00004));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
@@ -702,13 +699,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m1");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material93");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(12800.00128));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
@@ -735,13 +732,13 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 		acquirableMaterialForm = new AcquirableMaterialForm(desktop,
 				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 				(desktop.query("textbox").query("#txtCode")).as(Textbox.class), 
-				(desktop.query("combobox").query("#cmbUnit")).as(Combobox.class),
+				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
 				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class));
 		try {
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtCode(), "m93");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getTxtName(), "material1");			
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(12800.00128));
-			ComponentAgent cmbUnitAgent = desktop.query("combobox").query("#cmbUnit");
+			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		

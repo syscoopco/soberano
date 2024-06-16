@@ -40,12 +40,7 @@ public class OrderInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			if (ZKUtilitity.splitQuery().get("id") == null) {
-				orderId = 0; 
-			}
-			else {
-				orderId = Integer.parseInt(ZKUtilitity.splitQuery().get("id").get(0));
-			}
+			orderId = ZKUtilitity.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			orderId = 0; 

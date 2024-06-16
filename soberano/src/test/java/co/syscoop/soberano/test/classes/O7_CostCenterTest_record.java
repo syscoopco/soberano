@@ -25,7 +25,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
 
-//TODO: enable test
 @Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -60,8 +59,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		costCenterForm = new CostCenterForm(desktop,
 									(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
-									(desktop.query("combobox").query("#cmbInputWarehouse")).as(Combobox.class),
-									(desktop.query("combobox").query("#cmbOutputWarehouse")).as(Combobox.class));
+									(desktop.query("textbox").query("#cmbInputWarehouse")).as(Combobox.class),
+									(desktop.query("textbox").query("#cmbOutputWarehouse")).as(Combobox.class));
 		try {
 			//this is needed to execute only in the first test. it has to do with testing configuration.
 			costCenterForm.testEachConstrainedObjectIsDeclared();
@@ -82,8 +81,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -118,8 +117,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -150,8 +149,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -182,8 +181,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -216,8 +215,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -250,8 +249,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user3@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -284,8 +283,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user4@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -320,8 +319,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user5@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -356,8 +355,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -390,8 +389,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user7@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -424,8 +423,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user8@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -460,8 +459,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user9@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -494,8 +493,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user10@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -528,8 +527,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user11@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -562,8 +561,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user12@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -596,8 +595,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user13@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -632,8 +631,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user14@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -668,8 +667,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user15@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -702,8 +701,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),
@@ -738,8 +737,8 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_cost_center.zul");
 		
-		ComponentAgent cmbInputWarehouseAgent = desktop.query("combobox").query("#cmbInputWarehouse");
-		ComponentAgent cmbOutputWarehouseAgent = desktop.query("combobox").query("#cmbOutputWarehouse");
+		ComponentAgent cmbInputWarehouseAgent = desktop.query("textbox").query("#cmbInputWarehouse");
+		ComponentAgent cmbOutputWarehouseAgent = desktop.query("textbox").query("#cmbOutputWarehouse");
 		costCenterForm = new CostCenterForm(desktop,
 										(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
 										cmbInputWarehouseAgent.as(Combobox.class),

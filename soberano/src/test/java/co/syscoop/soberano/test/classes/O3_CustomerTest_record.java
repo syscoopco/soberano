@@ -26,7 +26,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//TODO: enable test
 @Disabled
 
 class O3_CustomerTest_record extends CustomerActionTest {
@@ -67,9 +66,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));		
 		try {
@@ -91,9 +90,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -104,9 +103,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -159,9 +158,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -172,9 +171,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -223,12 +222,12 @@ class O3_CustomerTest_record extends CustomerActionTest {
 	
 	@Test
 	final void testCase3() {
-		//TODO: reserved
+		//reserved
 	}
 	
 	@Test
 	final void testCase4() {
-		//TODO: reserved
+		//reserved
 	}
 	
 	@Test
@@ -237,9 +236,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user2@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -250,9 +249,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -305,9 +304,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -318,9 +317,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -371,9 +370,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -384,9 +383,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -437,9 +436,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -450,9 +449,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -503,9 +502,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -516,9 +515,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -569,9 +568,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -582,9 +581,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -635,9 +634,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -648,9 +647,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -701,9 +700,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -714,9 +713,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -767,9 +766,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -780,9 +779,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {
@@ -833,9 +832,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/new_customer.zul");
 		
-		ComponentAgent cmbCountryAgent = desktop.query("combobox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("combobox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("combobox").query("#incContactData").query("#cmbMunicipality");
+		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
 		customerForm = new CustomerForm(desktop, 
 										(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
 										(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
@@ -846,9 +845,9 @@ class O3_CustomerTest_record extends CustomerActionTest {
 										(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
 										(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
-										(desktop.query("combobox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbCountry")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbProvince")).as(Combobox.class), 
+										(desktop.query("textbox").query("#incContactData").query("#cmbMunicipality")).as(Combobox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
 										(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
 		try {

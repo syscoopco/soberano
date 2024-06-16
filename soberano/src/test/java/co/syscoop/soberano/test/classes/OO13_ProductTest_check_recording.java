@@ -25,7 +25,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(13)
 
-//TODO: enable test
 @Disabled
 
 class OO13_ProductTest_check_recording extends ProductActionTest {
@@ -41,7 +40,7 @@ class OO13_ProductTest_check_recording extends ProductActionTest {
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/products.zul");
 		
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		txtCode = cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class);
 		txtName = cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class);

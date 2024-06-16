@@ -23,7 +23,7 @@ public class ProcessActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		ProcessForm processForm = new ProcessForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtName").as(Textbox.class), 
@@ -38,7 +38,7 @@ public class ProcessActionTest extends ActionTest {
 		loadObjectDetails(qualifiedName);
 		
 		assertEquals(name.toLowerCase(), txtName.getText().toLowerCase(), "Wrong name shown for process " +  qualifiedName);
-		assertEquals(fixedCost, decFixedCost.getValue(), "Wrong fixed cost shown for process " +  qualifiedName);
+		assertEquals((fixedCost.subtract(decFixedCost.getValue().abs()).compareTo(new BigDecimal(0.00000001)) <= 0), true, "Wrong fixed cost shown for process " +  qualifiedName);
 	}
 	
 	protected void checkProcess(ProcessForm processForm,

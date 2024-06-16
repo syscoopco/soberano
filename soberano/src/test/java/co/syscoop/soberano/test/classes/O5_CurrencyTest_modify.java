@@ -22,7 +22,6 @@ import co.syscoop.soberano.test.helper.CurrencyForm;
 
 @Order(5)
 
-//TODO: enable test
 @Disabled
 
 class O5_CurrencyTest_modify extends CurrencyActionTest{

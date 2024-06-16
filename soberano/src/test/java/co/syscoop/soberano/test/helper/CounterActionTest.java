@@ -21,7 +21,7 @@ public class CounterActionTest extends ActionTest {
 		
 		SpringUtility.setLoggedUserForTesting(user);
 		DesktopAgent desktop = Zats.newClient().connect("/" + formZulFilename);
-		cmbIntelliSearchAgent = desktop.query("combobox");
+		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);
 		CounterForm counterForm = new CounterForm(desktop, 
 												cmbIntelliSearchAgent.query("#incDetails").query("#txtCode").as(Textbox.class), 

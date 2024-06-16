@@ -18,7 +18,6 @@ import co.syscoop.soberano.test.helper.ProductCategoryForm;
 
 @Order(5)
 
-//TODO: enable test
 @Disabled
 
 class O5_ProductCategoryTest_modify extends ProductCategoryActionTest{

@@ -14,8 +14,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
 @Order(27)
 
-//TODO: enable test
-//@Disabled
+@Disabled
 
 class OO27_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
 
@@ -45,6 +44,6 @@ class OO27_OrderTest_check_activity_summary_tree_after_recording extends Acquira
 
 	@Test
 	final void testCase1() {
-		//TODO: By clicking 'A' shortcut bottom on the bottom bar, check counter and order nodes are shown correctly.
+		//By clicking 'A' shortcut bottom on the bottom bar, check counter and order nodes are shown correctly.
 	}
 }

@@ -28,7 +28,6 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(25)
 
-//TODO: enable test
 @Disabled
 
 class OO25_StockTest_system_currency_change extends CurrencyActionTest {
@@ -80,7 +79,7 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 								Double expectedUnitValue) {
 
 		//unit value
-		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.00000001 /*TODO: precision reduced to pass the test. Depending on the currency, it could be a problem.*/) {
+		if (Math.abs(((Decimalbox) row.getChildren().get(4)).getValue().doubleValue() - expectedUnitValue) > 0.00000001 /*precision reduced to pass the test. Depending on the currency, it could be a problem.*/) {
 			fail("Wrong unit value for stock record with row index " + row.getIndex() + ". Expected: " + expectedUnitValue + ". It was: " + ((Decimalbox) row.getChildren().get(4)).getValue().doubleValue());
 		}
 	}
@@ -92,7 +91,7 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
 		try {
 			stockForm = new StockForm(desktop,
-									(desktop.query("combobox").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
 			ComponentAgent expensesGridAgent = desktop.query("grid");

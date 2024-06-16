@@ -15,12 +15,14 @@ import org.zkoss.json.JSONObject;
 import org.zkoss.json.parser.JSONParser;
 import org.zkoss.zk.ui.Executions;
 
+import co.syscoop.soberano.util.PaymentLink;
 import co.syscoop.soberano.ws.RESTClient;
 
 public class Tropipay implements IPaymentProcessor {
 	
 	private String clientId = "";
 	private String clientSecret = "";
+	private final String apiUrl = "https://tropipay-dev.herokuapp.com/api/v2";
 	
 	@Override
 	public void setParameters(HashMap<String, String> parameters) {
@@ -29,7 +31,7 @@ public class Tropipay implements IPaymentProcessor {
 	}
 
 	@Override
-	public String createPaymentLink(Integer orderId, String invoiceContent, BigDecimal amount) throws MalformedURLException, ProtocolException, IOException, Exception {
+	public PaymentLink createPaymentLink(Integer orderId, String invoiceContent, BigDecimal amount) throws MalformedURLException, ProtocolException, IOException, Exception {
 		
 		ArrayList<Object> headerFields = new ArrayList<Object>();
 		ArrayList<Object> headerValues = new ArrayList<Object>();
@@ -54,7 +56,7 @@ public class Tropipay implements IPaymentProcessor {
 		
 		String response;
 		
-		response = (new RESTClient().call("https://tropipay-dev.herokuapp.com/api/v2",
+		response = (new RESTClient().call(apiUrl,
 										"/access/token",
 										"POST",
 										headerFields.toArray(),
@@ -108,6 +110,7 @@ public class Tropipay implements IPaymentProcessor {
 		requestFields.add("lang");
 		requestValues.add("en");
 		
+		/*
 		requestFields.add("urlSuccess");
 		requestValues.add("https://syscoop.co");
 		
@@ -116,6 +119,7 @@ public class Tropipay implements IPaymentProcessor {
 		
 		requestFields.add("urlNotification");
 		requestValues.add("https://syscoop.co");
+		*/
 		
 		requestFields.add("directPayment");
 		requestValues.add(true);
@@ -127,7 +131,7 @@ public class Tropipay implements IPaymentProcessor {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		requestValues.add(dateFormat.format(c.getTime()).toString());
 		
-		response = (new RESTClient().call("https://tropipay-dev.herokuapp.com/api/v2",
+		response = (new RESTClient().call(apiUrl,
 											"/paymentcards",
 											"POST",
 											headerFields.toArray(),
@@ -135,8 +139,16 @@ public class Tropipay implements IPaymentProcessor {
 											requestFields.toArray(),
 											requestValues.toArray()));
 		
-		String checkoutURL =((JSONObject) new JSONParser().parse(response)).get("shortUrl").toString();
-		
-		return checkoutURL;
+		return new PaymentLink(((JSONObject) new JSONParser().parse(response)).get("shortUrl").toString(),
+								((JSONObject) new JSONParser().parse(response)).get("qrImage").toString());
+	}
+
+	public String getApiUrl() {
+		return apiUrl;
+	}
+
+	@Override
+	public Boolean openPaymentLinkInNewWindow() {
+		return false;
 	}
 }
