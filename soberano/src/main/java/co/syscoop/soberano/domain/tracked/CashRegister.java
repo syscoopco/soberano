@@ -61,7 +61,7 @@ public class CashRegister extends TrackedObject {
 	        		cashRegisterCurrentlyBeingExtractedId = rs.getInt("cashRegisterId");
 	        		cashRegister = new CashRegister(rs.getInt("cashRegisterId"),
 					        						rs.getInt("entityTypeInstanceId"),
-					        						rs.getInt("printer"));
+					        						rs.getInt("printerProfile"));
 	        	}
 	        	String currencyCode = rs.getString("currencyCode");
 	        	BigDecimal balance = rs.getBigDecimal("balance");
