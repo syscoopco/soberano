@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 
 public class BusinessActivityTrackedObject extends TrackedObject {
@@ -70,5 +71,15 @@ public class BusinessActivityTrackedObject extends TrackedObject {
 
 	public void setNotes(String notes) {
 		this.notes = notes;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

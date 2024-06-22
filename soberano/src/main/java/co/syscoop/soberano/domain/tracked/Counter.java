@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.database.relational.DaoBase;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -226,5 +227,15 @@ public class Counter extends TrackedObject {
 
 	public void setOnlyOneOrderIsPermitted(Boolean onlyOneOrderIsPermitted) {
 		this.onlyOneOrderIsPermitted = onlyOneOrderIsPermitted;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

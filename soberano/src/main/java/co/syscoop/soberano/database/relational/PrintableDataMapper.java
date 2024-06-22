@@ -13,7 +13,7 @@ public class PrintableDataMapper implements RowMapper<Object> {
 		
 		try {
 			PrintableData printableData = new PrintableData();
-			String textToPrint = rs.getString("textToPrint");
+			String textToPrint = rs.getString("ttp");
 			if (!rs.wasNull()) {
 				printableData.setTextToPrint(textToPrint);
 				printableData.setPrinterProfile(rs.getInt("printerProfile"));

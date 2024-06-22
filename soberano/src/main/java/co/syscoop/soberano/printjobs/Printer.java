@@ -11,6 +11,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -31,11 +32,16 @@ import org.cups4j.PrintRequestResult;
 import org.zkoss.zul.Messagebox;
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.output.PrinterOutputStream;
+
 import co.syscoop.soberano.util.WSocketClient;
 import co.syscoop.soberano.vocabulary.Labels;
+import co.syscoop.soberano.vocabulary.Translator;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.printjobs.rawbt.AttributesString;
 import co.syscoop.soberano.printjobs.rawbt.Constant;
 import co.syscoop.soberano.printjobs.rawbt.RawbtPrintJob;
@@ -250,6 +256,38 @@ public class Printer {
 			printer.createPDFFile(textToPrint, fileToPrintFullPath);
 		}		
 		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+	}
+	
+	public static void printReport(TrackedObject trackedObject, 
+									String pdfFileToPrintFullPath, 
+									String printJobPrefix, 
+									Boolean _3LF,
+									Boolean translate,
+									Boolean minimal) throws SoberanoException, SQLException {
+		
+		PrintableData pd = null;
+		if (!minimal) {
+			pd = trackedObject.getReportFull();
+		}
+		else {
+			pd = trackedObject.getReportMinimal();
+		}
+		if (!pd.getTextToPrint().isEmpty()) {				
+			try {
+				Printer.print(translate ? Translator.translate(pd.getTextToPrint()) : pd.getTextToPrint(), 
+							pd.getPrinterProfile(), pdfFileToPrintFullPath, 
+							"printJobPrefix" + trackedObject.getId(), _3LF);
+			}
+			catch(Exception ex) {
+				ExceptionTreatment.logAndShow(ex, 
+						Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+						Labels.getLabel("messageBoxTitle.Error"),
+						Messagebox.ERROR);
+			}				
+		}
+		else {
+			throw new NotEnoughRightsException();
+		}
 	}
 
 	public PrinterProfile getPrinterProfile() {

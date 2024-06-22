@@ -15,12 +15,15 @@ import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.Unit;
+import co.syscoop.soberano.domain.tracked.ProcessRun;
+import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
+import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
@@ -179,11 +182,41 @@ public class OrderManagementComposer extends OrderComposer {
 			if (decQuantity.getValue().compareTo(new BigDecimal(0)) > 0) {	
 				Vbox boxDetails = (Vbox) btnMake.query("#boxDetails");
 				OrderFormHelper orderFormHelper = new OrderFormHelper();
-				if (orderFormHelper.makeFromForm(boxDetails) == -1) {
+				int result = orderFormHelper.makeFromForm(boxDetails);
+				if (result == -1) {
 					btnMake.setDisabled(false);
 					throw new NotEnoughRightsException();						
 				}
 				else {
+					//print order's process run allocations
+					try {
+						for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(intObjectId.getValue())) {
+							try{
+								Integer allocationId = ((ProcessRunOutputAllocation) object).getId();				
+								Printer.printReport((ProcessRunOutputAllocation) object, 
+														SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+														"records/production_lines/" + 
+														"ALLOCATION_" + allocationId + ".pdf",
+														"ALLOCATION_",
+														true,
+														true,
+														true);
+							}
+							catch(Exception ex) {
+								throw ex;
+							}
+						}
+					}
+					catch(NotEnoughRightsException ex) {
+						ExceptionTreatment.logAndShow(ex, 
+								Labels.getLabel("message.permissions.NotEnoughRights"), 
+								Labels.getLabel("messageBoxTitle.Warning"),
+								Messagebox.EXCLAMATION);
+					}
+					catch(Exception ex) {
+						throw ex;
+					}					
+					
 					Executions.sendRedirect("/order.zul?id=" + intObjectId.getValue());
 				}
 			}

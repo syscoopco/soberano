@@ -13,10 +13,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
+import co.syscoop.soberano.database.relational.ProcessRunOutputAllocationMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -189,26 +192,6 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		super.get(new ProcessRunMapper());
 	}
 	
-	public List<Object> getProcessRunInputs(Integer processRunId) throws SQLException {
-		
-		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getInputs\"(:processId, :lang, :loginname)";
-		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("processRunId", processRunId);
-		parametersMap.put("lang", Locales.getCurrent().getLanguage());
-		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return super.query(qryStr, parametersMap, new ProcessIOMapper());
-	}
-	
-	public List<Object> getProcessRunOutputs(Integer processRunId) throws SQLException {
-		
-		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getOutputs\"(:processId, :lang, :loginname)";
-		Map<String,	Object> parametersMap = new HashMap<String, Object>();
-		parametersMap.put("processRunId", processRunId);
-		parametersMap.put("lang", Locales.getCurrent().getLanguage());
-		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return super.query(qryStr, parametersMap, new ProcessIOMapper());
-	}
-
 	@Override
 	public Integer print() throws SoberanoException {
 		return null;
@@ -313,6 +296,30 @@ public class ProcessRun extends BusinessActivityTrackedObject {
 		parametersMap.put("costCenterId", costCenterId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
+	}
+	
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getReport\"(:prId, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("prId", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+	
+	public List<Object> getOrderProcessRunAllocations(Integer orderId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRun_getOrderAllocations\"(:orderId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", orderId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessRunOutputAllocationMapper());
 	}
 	
 	@Override

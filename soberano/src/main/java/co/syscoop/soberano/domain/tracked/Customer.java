@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.domain.untracked.ContactData;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 
 public class Customer extends TrackedObject {
@@ -249,5 +250,15 @@ public class Customer extends TrackedObject {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

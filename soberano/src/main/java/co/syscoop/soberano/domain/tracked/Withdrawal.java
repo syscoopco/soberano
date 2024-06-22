@@ -5,12 +5,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Withdrawal extends BusinessActivityTrackedObject {
 	
@@ -78,6 +82,20 @@ public class Withdrawal extends BusinessActivityTrackedObject {
 		recordParameters.addValue("notes", this.getNotes());
 		
 		return super.record();
+	}
+	
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_Withdrawal_getReport\"(:opid, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("opid", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
 	
 	@Override

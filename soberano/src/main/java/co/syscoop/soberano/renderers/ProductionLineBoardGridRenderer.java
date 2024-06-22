@@ -16,6 +16,8 @@ import org.zkoss.zul.Vbox;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.printjobs.Printer;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.rowdata.ProductionLineBoardRowData;
 
 @SuppressWarnings("rawtypes")
@@ -60,6 +62,41 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		Button btnRemove = new Button();
 		btnRemove.setWidth("90%");
 		btnRemove.setImage("./images/delete.png");
+		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setWidth("90%");
+		
+		btnPrint.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				try{
+					Integer opId = plbRowData.getAllocationId();
+					ProcessRunOutputAllocation proa = new ProcessRunOutputAllocation();
+					proa.setId(opId);
+					Printer.printReport(proa, 
+											SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+											"records/production_lines/" + 
+											"ALLOCATION_" + opId + ".pdf",
+											"ALLOCATION_",
+											false,
+											true,
+											false);
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+								ex.getMessage(), 
+								Labels.getLabel("messageBoxTitle.Error"),
+								Messagebox.ERROR);
+				}				
+			}
+		});	
 				
 		btnDone.addEventListener("onClick", new EventListener() {
 
@@ -141,6 +178,7 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		
 		actionCell.appendChild(btnDone);
 		actionCell.appendChild(btnRemove);
+		actionCell.appendChild(btnPrint);
 		row.appendChild(actionCell);
 	}
 	

@@ -54,7 +54,7 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
 		btnCancel.setWidth("90%");
 		
-		//add listener to cancel the expenditure
+		//add listener to cancel the closure
 		btnCancel.addEventListener("onClick", new EventListener() {
 
 			@Override

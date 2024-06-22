@@ -15,6 +15,8 @@ import org.zkoss.zul.Vbox;
 import co.syscoop.soberano.domain.tracked.PayrollExpense;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.printjobs.Printer;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.rowdata.ExpenseRowData;
 
 public class PayrollExpensesGridRenderer extends DomainObjectRowRenderer {
@@ -58,21 +60,48 @@ public class PayrollExpensesGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setPack("center");
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
 		btnPrint.setWidth("90%");
-		btnPrint.setDisabled(true);
-		btnPrint.setId(btnPrint.getUuid());
+		
+		btnPrint.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				try{
+					Integer expenseId = expense.getExpenseId();					
+					Printer.printReport(new PayrollExpense(expenseId), 
+											SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+											"records/expenses/" + 
+											"PAYROLLEXP_" + expenseId + ".pdf",
+											"PAYROLLEXP_",
+											false,
+											true,
+											false);
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+								ex.getMessage(), 
+								Labels.getLabel("messageBoxTitle.Error"),
+								Messagebox.ERROR);
+				}	
+			}
+		});	
+		
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
 		btnUpload.setWidth("90%");
 		btnUpload.setDisabled(true);
-		btnUpload.setId(btnUpload.getUuid());
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
-		btnDocument.setId(btnDocument.getUuid());
 		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
 		btnCancel.setWidth("90%");
-		btnCancel.setId(btnCancel.getUuid());
 		
-		//add listener to cancel the expenditure
+		//add listener to cancel the expense
 		btnCancel.addEventListener("onClick", new EventListener() {
 
 			@Override

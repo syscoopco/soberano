@@ -17,6 +17,7 @@ import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.database.relational.ObjectMapper;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ProcessRunningException;
 import co.syscoop.soberano.exception.SoberanoException;
 
@@ -389,5 +390,15 @@ public class Process extends TrackedObject {
 
 	public void setWeights(ArrayList<Integer> weights) {
 		this.weights = weights;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 
 public class InventoryItem extends TrackedObject {
@@ -80,5 +81,15 @@ public class InventoryItem extends TrackedObject {
 	@Override
 	public Integer getCount() throws SQLException {
 		return 0;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

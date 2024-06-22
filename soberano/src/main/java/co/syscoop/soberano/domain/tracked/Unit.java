@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 
 public class Unit extends TrackedObject {
@@ -88,5 +89,15 @@ public class Unit extends TrackedObject {
 		qryNamedParameters.put("inventoryItemCode", inventoryItemCode);
 		qryNamedParameters.put("lang",  Locales.getCurrent().getLanguage());
 		return trackedObjectDao.getAll(qryStr, qryNamedParameters, false);
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

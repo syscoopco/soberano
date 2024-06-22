@@ -14,6 +14,7 @@ import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.Authority;
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.Responsibility;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SoberanoLDAPException;
@@ -407,5 +408,15 @@ public class Worker extends TrackedObject {
 	@Override
 	public Integer getCount() throws SQLException {
 		return 0;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

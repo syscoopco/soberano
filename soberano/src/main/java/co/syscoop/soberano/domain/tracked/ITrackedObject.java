@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 
 public interface ITrackedObject {
@@ -20,6 +21,8 @@ public interface ITrackedObject {
 	abstract public Integer disable() throws SQLException, Exception;
 	abstract public Integer print() throws SoberanoException;
 	abstract public String getReport() throws SQLException;
+	abstract public PrintableData getReportFull() throws SQLException;
+	abstract public PrintableData getReportMinimal() throws SQLException;
 	abstract public List<Object> query(String queryStr, Map<String, Object> queryParameters, RowMapper<Object> mapper) throws SQLException;
 	
 	//limit and offset are useful for windowed lists, as in paged lists / grids / scrollable trees / etc.

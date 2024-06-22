@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import co.syscoop.soberano.database.relational.CurrencyMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.helper.SystemCurrencies;
 import co.syscoop.soberano.exception.CurrencyHasBalanceException;
 import co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException;
@@ -305,5 +306,15 @@ public class Currency extends TrackedObject {
 
 	public void setPaymentProcessorName(String paymentProcessorName) {
 		this.paymentProcessorName = paymentProcessorName;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectQualifiedMapper;
 import co.syscoop.soberano.exception.SoberanoException;
 
@@ -406,5 +407,15 @@ public class PrinterProfile extends TrackedObject {
 
 	public void setFont(Integer font) {
 		this.font = font;
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

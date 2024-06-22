@@ -13,6 +13,7 @@ import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.CurrencyMapper;
 import co.syscoop.soberano.database.relational.ParameterMapper;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -123,5 +124,15 @@ public class CashRegister extends TrackedObject {
 		parametersMap.put("paymentProcessorId", paymentProcessorId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new ParameterMapper());
+	}
+
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		return null;
+	}
+
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		return null;
 	}
 }

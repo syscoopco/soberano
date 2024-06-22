@@ -7,8 +7,10 @@ import java.util.Map;
 
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -78,5 +80,33 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 		parametersMap.put("allocationId", allocationId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	@Override
+	public PrintableData getReportFull() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRunOutputAllocation_getReport\"(:opId, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("opId", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+	
+	@Override
+	public PrintableData getReportMinimal() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRunOutputAllocation_getReportMinimal\"(:opId, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("opId", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
 }
