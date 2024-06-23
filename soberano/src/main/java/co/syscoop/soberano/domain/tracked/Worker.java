@@ -5,10 +5,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
 import co.syscoop.soberano.ldap.dao.LdapUserDao;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.domain.untracked.Authority;
@@ -389,6 +392,22 @@ public class Worker extends TrackedObject {
 		contactData = new ContactData(sourceWorker.getContactData());
 		setResponsibilities(sourceWorker.getResponsibilities());
 		setAuthorities(sourceWorker.getAuthorities());
+	}
+	
+	private static final class ResponsibilityMapper implements RowMapper<Object> {
+
+		public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+			 return rs.getString("fn_User_getResponsibilities");
+	    }
+	}
+	
+	public List<Object> getCurrentUserResponsibilities() throws SQLException {
+		
+		String qryStr = "SELECT * FROM " +
+						"\"metamodel\".\"fn_User_getResponsibilities\"(:loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return query(qryStr, parametersMap, new ResponsibilityMapper());
 	}
 
 	public ArrayList<Integer> getResponsibilityIds() {

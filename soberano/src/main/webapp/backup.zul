@@ -1,0 +1,11 @@
+<?page title="${labels.pageBackup.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.BackupUserCheckInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageBackup.WindowTitle}" sclass="PageTitle"/>
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+	</window>
+	<button id="btnBackup" self="@define(decisionButton)" label="${labels.caption.action.backup}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BackupButtonComposer"></button>
+</zk>

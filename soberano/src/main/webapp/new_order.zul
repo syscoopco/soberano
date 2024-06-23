@@ -2,7 +2,7 @@
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
 
 <zk>
-<include src="/style.zul"/>
+	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageNewOrder.WindowTitle}" sclass="PageTitle"/>
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">		
 		<vbox vflex="1" id="boxDetails" width="100%">
