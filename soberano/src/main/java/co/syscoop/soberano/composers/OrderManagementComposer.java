@@ -2,6 +2,7 @@ package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.HashMap;
 
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -174,6 +175,7 @@ public class OrderManagementComposer extends OrderComposer {
 		}
     }
 	
+	@SuppressWarnings("unchecked")
 	@Listen("onClick = button#btnMake")
     public void btnMake_onClick() throws SoberanoException {
 		
@@ -188,34 +190,59 @@ public class OrderManagementComposer extends OrderComposer {
 					throw new NotEnoughRightsException();						
 				}
 				else {
-					//print order's process run allocations
-					try {
-						for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(intObjectId.getValue())) {
-							try{
-								Integer allocationId = ((ProcessRunOutputAllocation) object).getId();				
-								Printer.printReport((ProcessRunOutputAllocation) object, 
-														SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
-														"records/production_lines/" + 
-														"ALLOCATION_" + allocationId + ".pdf",
-														"ALLOCATION_",
-														true,
-														true,
-														true);
-							}
-							catch(Exception ex) {
-								throw ex;
+					//there's not ZK web application context under testing
+					if (!SpringUtility.underTesting()) {
+						
+						//print order's process run allocations
+						try {
+							Integer orderId = intObjectId.getValue();
+							for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(orderId)) {
+								try{
+									Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
+									
+									//print allocation only in case it wasn't printed yet
+									HashMap<Integer, Boolean> thisOrderPrintedAllocations = 
+											((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+																								getCurrent().
+																								getDesktop().
+																								getWebApp().
+																								getAttribute("printed_allocations")).
+																									get(orderId);
+									
+									//order hasn't been collected. it's still open.
+									if (thisOrderPrintedAllocations != null) {
+										Boolean allocationWasPrinted = 
+												thisOrderPrintedAllocations.get(allocationId) == null ? false : thisOrderPrintedAllocations.get(allocationId);
+										
+										//allocation was not printed yet
+										if (!allocationWasPrinted) {
+											Printer.printReport((ProcessRunOutputAllocation) object, 
+													SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+													"records/production_lines/" + 
+													"ALLOCATION_" + allocationId + ".pdf",
+													"ALLOCATION_",
+													true,
+													true,
+													true);
+											thisOrderPrintedAllocations.put(allocationId, true);
+										}
+									}
+								}
+								catch(Exception ex) {
+									throw ex;
+								}
 							}
 						}
-					}
-					catch(NotEnoughRightsException ex) {
-						ExceptionTreatment.logAndShow(ex, 
-								Labels.getLabel("message.permissions.NotEnoughRights"), 
-								Labels.getLabel("messageBoxTitle.Warning"),
-								Messagebox.EXCLAMATION);
-					}
-					catch(Exception ex) {
-						throw ex;
-					}					
+						catch(NotEnoughRightsException ex) {
+							ExceptionTreatment.logAndShow(ex, 
+									Labels.getLabel("message.permissions.NotEnoughRights"), 
+									Labels.getLabel("messageBoxTitle.Warning"),
+									Messagebox.EXCLAMATION);
+						}
+						catch(Exception ex) {
+							throw ex;
+						}
+					}		
 					
 					Executions.sendRedirect("/order.zul?id=" + intObjectId.getValue());
 				}

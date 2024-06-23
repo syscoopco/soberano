@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(29)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
@@ -336,7 +336,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 																							desktop.query("grid").query("#grd").as(Grid.class));	
 		try {
 			//check cancel button is visible
-			assertEquals(cashRegisterOperationForm.getBtnCancel().isVisible(), true, "Order already totally collected. Cancel button isn't visible when it should.");
+			//cancel order is disabled. assertEquals(cashRegisterOperationForm.getBtnCancel().isVisible(), true, "Order already totally collected. Cancel button isn't visible when it should.");
 			
 			//check collect button is hidden
 			assertEquals(cashRegisterOperationForm.getBtnCollect().isVisible(), false, "Order already totally collected. Collect button is visible when it shouldn't.");
@@ -641,7 +641,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 																							desktop.query("grid").query("#grd").as(Grid.class));	
 		try {
 			//check cancel button is visible
-			assertEquals(cashRegisterOperationForm.getBtnCancel().isVisible(), true, "Order partially collected. Cancel button isn't visible when it should.");
+			//cancel order is disabled. assertEquals(cashRegisterOperationForm.getBtnCancel().isVisible(), true, "Order partially collected. Cancel button isn't visible when it should.");
 			
 			//check collect button is visible
 			assertEquals(cashRegisterOperationForm.getBtnCollect().isVisible(), true, "Order partially collected. Collect button isn't visible when it should.");

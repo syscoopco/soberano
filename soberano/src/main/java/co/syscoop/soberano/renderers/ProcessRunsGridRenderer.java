@@ -21,6 +21,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.rowdata.ProcessRunRowData;
+import co.syscoop.soberano.vocabulary.Translator;
 
 public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 
@@ -42,14 +43,14 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(Labels.getLabel("translation.stage." + processRunRowData.getStage())));
 		
 		//description
-		Textbox txtDescription = new Textbox(processRunRowData.getDescription());
+		Textbox txtDescription = new Textbox(Translator.translate(processRunRowData.getDescription()) );
 		txtDescription.setMultiline(true);
 		txtDescription.setRows(15);
 		txtDescription.setReadonly(true);		
 		row.appendChild(txtDescription);
 		
 		//history
-		Textbox txtHistory = new Textbox(processRunRowData.getHistory());
+		Textbox txtHistory = new Textbox(Translator.translate(processRunRowData.getHistory()));
 		txtHistory.setMultiline(true);
 		txtHistory.setRows(15);
 		txtHistory.setReadonly(true);		
@@ -67,6 +68,7 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setPack("center");
 		
 		Button btnManage = new Button(Labels.getLabel("caption.action.manage"));
+		btnManage.setId(btnManage.getUuid());
 		btnManage.setWidth("90%");
 		btnManage.addEventListener("onClick", new EventListener() {
 
@@ -78,6 +80,7 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		});		
 		
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setId(btnPrint.getUuid());
 		btnPrint.setWidth("90%");
 		
 		btnPrint.addEventListener("onClick", new EventListener() {
@@ -112,10 +115,12 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 		});	
 		
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
+		btnUpload.setId(btnUpload.getUuid());
 		btnUpload.setWidth("90%");
 		btnUpload.setDisabled(true);
 		
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
+		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 		

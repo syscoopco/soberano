@@ -46,12 +46,15 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setId(btnPrint.getUuid());
 		btnPrint.setWidth("90%");
 		btnPrint.setDisabled(true);
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
+		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
+		btnCancel.setId(btnCancel.getUuid());
 		btnCancel.setWidth("90%");
 		
 		//add listener to cancel the closure

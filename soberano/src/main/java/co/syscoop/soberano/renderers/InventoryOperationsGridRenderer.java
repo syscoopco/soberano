@@ -57,6 +57,7 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setId(btnPrint.getUuid());
 		btnPrint.setWidth("90%");
 		
 		btnPrint.addEventListener("onClick", new EventListener() {
@@ -91,9 +92,11 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 		});	
 		
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
+		btnUpload.setId(btnUpload.getUuid());
 		btnUpload.setWidth("90%");
 		btnUpload.setDisabled(true);
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
+		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 				

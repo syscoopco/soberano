@@ -3,6 +3,7 @@ package co.syscoop.soberano.ui.helper;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.zkoss.zk.ui.Component;
@@ -41,6 +42,7 @@ import co.syscoop.soberano.exception.OrderCanceledException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.UndeterminedErrorException;
 import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -92,14 +94,18 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 				wndContentPanel.query("#hboxToCollect").setVisible(true);
 				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(true);
 				if (order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
-					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
+					
+					//cancel order disabled, untested
+					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(false);
 				}
 			}
 			else {
 				wndContentPanel.query("#hboxToCollect").setVisible(false); 
 				((Button) hboxDecisionButtons.query("#btnCollect")).setVisible(false);
 				if (order.getStageId() == Stage.CLOSED) {
-					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(true);
+					
+					//cancel order disabled, untested
+					((Button) hboxDecisionButtons.query("#btnCancel")).setVisible(false);
 				}
 			}
 		}
@@ -307,6 +313,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public QueryResultWithReport collect(Box boxDetails) throws Exception {
 		
 		Combobox cmbCustomer = ((Combobox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#cmbCustomer"));
@@ -325,8 +332,9 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			}
 		}
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			fillAmounts(boxDetails, false);			
-			qrwr = (new Order(((Intbox) boxDetails.query("#intSelectedOrder")).getValue()).collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
+			fillAmounts(boxDetails, false);
+			Integer orderId = ((Intbox) boxDetails.query("#intSelectedOrder")).getValue();
+			qrwr = (new Order(orderId).collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
 										currencyIds, 
 										amounts,
 										notes,
@@ -349,6 +357,18 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (qrwr.getResult() == null) {
 				throw new UndeterminedErrorException();
 			}
+			
+			//there's not ZK web application context under testing
+			if (!SpringUtility.underTesting()) {
+				
+				//deallocate order's printed allocations store
+				((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+						getCurrent().
+						getDesktop().
+						getWebApp().
+						getAttribute("printed_allocations")).remove(orderId);
+			}
+			
 			requestedAction = ActionRequested.NONE;
 		}
 		else {

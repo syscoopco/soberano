@@ -47,7 +47,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 								Treechildren tchdnInputs,
 								Boolean runMode,
 								Integer runs) throws SomeFieldsContainWrongValuesException {
-		if (quantity.compareTo(new BigDecimal(0)) <= 0) {
+		if (quantity.compareTo(new BigDecimal(0)) < 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
 					0, 
@@ -95,7 +95,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 								Treechildren tchdnOutputs,
 								Boolean runMode,
 								Integer runs) throws SomeFieldsContainWrongValuesException {
-		if (quantity.compareTo(new BigDecimal(0)) <= 0 || weight < 0) {
+		if (quantity.compareTo(new BigDecimal(0)) < 0 || weight < 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
 					0, 

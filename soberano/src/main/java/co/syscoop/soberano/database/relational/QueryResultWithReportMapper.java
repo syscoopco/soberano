@@ -12,7 +12,7 @@ public class QueryResultWithReportMapper implements RowMapper<Object> {
 		try {
 			Integer result = rs.getInt("res");
 			if (!rs.wasNull()) {
-				return new QueryResultWithReport(result, rs.getString("textToPrint"), rs.getInt("printerProfile"));
+				return new QueryResultWithReport(result, rs.getString("ttp"), rs.getInt("printerProfile"));
 			}
 			else {
 				return new QueryResultWithReport(null, null, null);

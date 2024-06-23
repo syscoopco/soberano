@@ -1,6 +1,7 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -19,6 +20,7 @@ import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -38,6 +40,7 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Integer recordFromForm(Box boxDetails) throws Exception {
 		
@@ -60,6 +63,18 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 				}
 				requestedAction = ActionRequested.NONE;
 				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
+				
+				//there's not ZK web application context under testing
+				if (!SpringUtility.underTesting()) {
+					
+					//initialize new order's printed allocations store
+					((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+							getCurrent().
+							getDesktop().
+							getWebApp().
+							getAttribute("printed_allocations")).put(newOrderId, new HashMap<Integer, Boolean>());
+				}
+				
 				return newOrderId;
 			}
 		}

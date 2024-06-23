@@ -53,7 +53,7 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(txtDescription);
 		
 		//history
-		Textbox txtHistory = new Textbox(orderRowData.getHistory());
+		Textbox txtHistory = new Textbox(Translator.translate(orderRowData.getHistory()));
 		txtHistory.setMultiline(true);
 		txtHistory.setRows(15);
 		txtHistory.setReadonly(true);		
@@ -71,6 +71,7 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setPack("center");
 		
 		Button btnManage = new Button(Labels.getLabel("caption.action.manage"));
+		btnManage.setId(btnManage.getUuid());
 		btnManage.setWidth("90%");
 		btnManage.addEventListener("onClick", new EventListener() {
 
@@ -82,6 +83,7 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 		});		
 		
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setId(btnPrint.getUuid());
 		btnPrint.setWidth("90%");
 		btnPrint.addEventListener("onClick", new EventListener() {
 
@@ -115,10 +117,12 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 		});	
 		
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
+		btnUpload.setId(btnUpload.getUuid());
 		btnUpload.setWidth("90%");
 		btnUpload.setDisabled(true);
 		
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
+		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
 		btnDocument.setDisabled(true);
 		

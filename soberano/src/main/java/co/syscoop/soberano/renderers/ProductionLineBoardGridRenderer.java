@@ -58,11 +58,14 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
 		Button btnDone = new Button(Labels.getLabel("pageProductionLineBoard.grid.Done"));
+		btnDone.setId(btnDone.getUuid());
 		btnDone.setWidth("90%");
 		Button btnRemove = new Button();
+		btnRemove.setId(btnRemove.getUuid());
 		btnRemove.setWidth("90%");
 		btnRemove.setImage("./images/delete.png");
 		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
+		btnPrint.setId(btnPrint.getUuid());
 		btnPrint.setWidth("90%");
 		
 		btnPrint.addEventListener("onClick", new EventListener() {
