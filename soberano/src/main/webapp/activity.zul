@@ -15,5 +15,5 @@
 	<label id="lblShiftSales" self="@define(decisionButton)" value="${labels.pageActivity.ShiftSales}" sclass="Caption"></label>
 	
 	<!-- TODO: apply composer timer for updating shift sales -->	
-	<textbox readonly="true" id="txtShiftSales" self="@define(decisionButton)" value=""/>
+	<decimalbox format="####.########" readonly="true" id="decShiftSales" self="@define(decisionButton)" apply="co.syscoop.soberano.composers.ShiftSalesBoxComposer"/>
 </zk>

@@ -45,10 +45,9 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		actionCell.setVflex("1");
 		actionCell.setAlign("center");
 		actionCell.setPack("center");
-		Button btnPrint = new Button(Labels.getLabel("caption.action.print"));
-		btnPrint.setId(btnPrint.getUuid());
-		btnPrint.setWidth("90%");
-		btnPrint.setDisabled(true);
+		Button btnGo = new Button(Labels.getLabel("caption.action.go"));
+		btnGo.setId(btnGo.getUuid());
+		btnGo.setWidth("90%");
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
 		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
@@ -86,7 +85,7 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 			}
 		});
 				
-		actionCell.appendChild(btnPrint);
+		actionCell.appendChild(btnGo);
 		actionCell.appendChild(btnCancel);
 		row.appendChild(actionCell);
 	}

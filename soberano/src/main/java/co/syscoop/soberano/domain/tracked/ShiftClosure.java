@@ -1,15 +1,20 @@
 package co.syscoop.soberano.domain.tracked;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class ShiftClosure extends BusinessActivityTrackedObject {
 	
@@ -83,5 +88,13 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
 		getReportParameters.put("closureId", this.getId());
 		return super.getReport();
+	}
+	
+	public BigDecimal getShiftSales() throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ShiftClosure_getSales\"(:loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}
 }

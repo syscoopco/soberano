@@ -24,7 +24,7 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 		((Textbox) boxDetails.query("#txtReport")).setText("");
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new ShiftClosuresGridModel());
 		requestedAction = ActionRequested.NONE;
-		((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
+		((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
 	}
 	
 	@Override
