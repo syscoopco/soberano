@@ -1,3 +1,3 @@
-user: accounter,auditor,checker,manager,shift manager
+user: accountant,auditor,checker,manager,shift manager
 operation: deposit,withdrawal,balancing
 amount: 100.123_0_0,-50.3451000_1000.678_0,10000.901_23456.09876_54321.2345

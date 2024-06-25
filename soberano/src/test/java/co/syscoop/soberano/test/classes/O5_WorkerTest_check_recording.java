@@ -71,12 +71,12 @@ class O5_WorkerTest_check_recording extends WorkerActionTest {
 	final void testCase33() {
 		
 		try {
-			checkUser("accounter@soberano.syscoop.co",
-						"accounter",
-						"accounter",
-						new String[] {"Accounter"},
+			checkUser("accountant@soberano.syscoop.co",
+						"accountant",
+						"accountant",
+						new String[] {"Accountant"},
 						"50155555",
-						"accounter@soberano.syscoop.co",
+						"accountant@soberano.syscoop.co",
 						"Cuba",
 						"La Habana",
 						"Plaza de la Revolución",

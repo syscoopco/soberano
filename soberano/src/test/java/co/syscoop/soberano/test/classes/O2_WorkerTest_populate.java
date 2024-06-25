@@ -46,7 +46,7 @@ class O2_WorkerTest_populate extends TestClass {
 			}
 			
 			//clean other LDAP test users
-			workerToDelete = new Worker("accounter@soberano.syscoop.co");
+			workerToDelete = new Worker("accountant@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
 			workerToDelete = new Worker("auditor@soberano.syscoop.co");
 			try{workerToDelete.deleteUserFromLDAP();}catch(Exception ex){ex.printStackTrace();}
@@ -81,7 +81,7 @@ class O2_WorkerTest_populate extends TestClass {
 			
 			//user1
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(6, "Checker"));
@@ -151,7 +151,7 @@ class O2_WorkerTest_populate extends TestClass {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
@@ -184,7 +184,7 @@ class O2_WorkerTest_populate extends TestClass {
 			//user4
 			responsibilities.clear();
 			authorities.clear();
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(8, "Workshop 1 worker"));
 			responsibilities.add(new Responsibility(9, "Workshop 2 worker"));
 			responsibilities.add(new Responsibility(10, "Storekeeper"));
@@ -250,7 +250,7 @@ class O2_WorkerTest_populate extends TestClass {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(6, "Checker"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
@@ -317,7 +317,7 @@ class O2_WorkerTest_populate extends TestClass {
 			//user8
 			responsibilities.clear();
 			authorities.clear();
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(6, "Checker"));
@@ -377,7 +377,7 @@ class O2_WorkerTest_populate extends TestClass {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(6, "Checker"));
@@ -410,7 +410,7 @@ class O2_WorkerTest_populate extends TestClass {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(5, "Shift manager"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
@@ -475,7 +475,7 @@ class O2_WorkerTest_populate extends TestClass {
 			//user13
 			responsibilities.clear();
 			authorities.clear();
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(6, "Checker"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
@@ -507,7 +507,7 @@ class O2_WorkerTest_populate extends TestClass {
 			//user14
 			responsibilities.clear();
 			authorities.clear();
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(4, "Salesclerk"));
 			responsibilities.add(new Responsibility(6, "Checker"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
@@ -539,7 +539,7 @@ class O2_WorkerTest_populate extends TestClass {
 			responsibilities.clear();
 			authorities.clear();
 			responsibilities.add(new Responsibility(2, "Manager"));
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(6, "Checker"));
 			responsibilities.add(new Responsibility(7, "Auditor"));
 			responsibilities.add(new Responsibility(8, "Workshop 1 worker"));
@@ -602,7 +602,7 @@ class O2_WorkerTest_populate extends TestClass {
 			//user17
 			responsibilities.clear();
 			authorities.clear();
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			responsibilities.add(new Responsibility(15, "Technologist"));
 			for (int i = 1; i <= 2; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			newWorker = new Worker(0,

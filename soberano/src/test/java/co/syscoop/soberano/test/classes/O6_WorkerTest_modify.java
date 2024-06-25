@@ -125,7 +125,7 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 		WorkerForm workerForm = null;
 		try {
 			workerForm = setFormComponents("user3@soberano.syscoop.co", "workers.zul");			
-			loadObjectDetails("accounter accounter : accounter@soberano.syscoop.co");
+			loadObjectDetails("accountant accountant : accountant@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
 								new Integer(7), 
@@ -473,14 +473,14 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			ArrayList<String> rl = new ArrayList<String>();
 			rl.add("Auditor");
 			rl.add("Catalog maintainer");
-			rl.add("Accounter");
+			rl.add("Accountant");
 			checkUser(	workerForm,
-						"accounter@soberano.syscoop.co",
+						"accountant@soberano.syscoop.co",
 						"fn",
 						"ln",
 						rl,
 						"66666666",
-						"accounter@soberano.syscoop.co",
+						"accountant@soberano.syscoop.co",
 						"Cuba",
 						"Camagüey",
 						"Camagüey",

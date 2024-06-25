@@ -1223,14 +1223,14 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		try {
 			ArrayList<Responsibility> responsibilities = new ArrayList<Responsibility>();
 			ArrayList<Authority> authorities = new ArrayList<Authority>();			
-			responsibilities.add(new Responsibility(3, "Accounter"));
+			responsibilities.add(new Responsibility(3, "Accountant"));
 			for (int i = 1; i <= 1; i++) authorities.add(new Authority(1, "soberano.authority.top"));
 			Worker newWorkerData = new Worker(0,
 										0,
-										"accounter@soberano.syscoop.co",
-										"accounter",
-										"accounter",
-										"accounter",
+										"accountant@soberano.syscoop.co",
+										"accountant",
+										"accountant",
+										"accountant",
 										"50155555",
 										"CU",
 										"Address 1",
@@ -1246,7 +1246,7 @@ class O4_WorkerTest_record extends WorkerActionTest {
 			testForAllowedUser("user1@soberano.syscoop.co",
 								newWorkerData, 
 								3,
-								"Accounter",
+								"Accountant",
 								"Cuba",
 								"La Habana",
 								"Plaza de la Revolución");

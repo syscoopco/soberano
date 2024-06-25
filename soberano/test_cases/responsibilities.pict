@@ -1,6 +1,6 @@
-User: none,manager,accounter,salesclerk,shiftManager,checker,auditor,workshop1Worker,workshop2Worker,storeKeeper,catalogMaintainer,communityManager,procurementWorker,systemAdmin,user
+User: none,manager,Accountant,salesclerk,shiftManager,checker,auditor,workshop1Worker,workshop2Worker,storeKeeper,catalogMaintainer,communityManager,procurementWorker,systemAdmin,user
 2_Manager: assigned,not assigned
-3_Accounter: assigned,not assigned
+3_Accountant: assigned,not assigned
 4_Salesclerk: assigned,not assigned
 5_ShiftManager: assigned,not assigned
 6_Checker: assigned,not assigned
@@ -14,7 +14,7 @@ User: none,manager,accounter,salesclerk,shiftManager,checker,auditor,workshop1Wo
 14_SystemAdmin: assigned,not assigned
 
 IF [User] = "none" THEN [2_Manager] = "not assigned";
-IF [User] = "none" THEN [3_Accounter] = "not assigned";
+IF [User] = "none" THEN [3_Accountant] = "not assigned";
 IF [User] = "none" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "none" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "none" THEN [6_Checker] = "not assigned";
@@ -28,7 +28,7 @@ IF [User] = "none" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "none" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "manager" THEN [2_Manager] = "assigned";
-IF [User] = "manager" THEN [3_Accounter] = "not assigned";
+IF [User] = "manager" THEN [3_Accountant] = "not assigned";
 IF [User] = "manager" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "manager" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "manager" THEN [6_Checker] = "not assigned";
@@ -41,22 +41,22 @@ IF [User] = "manager" THEN [12_CommunityManager] = "not assigned";
 IF [User] = "manager" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "manager" THEN [14_SystemAdmin] = "not assigned";
 
-IF [User] = "accounter" THEN [2_Manager] = "not assigned";
-IF [User] = "accounter" THEN [3_Accounter] = "assigned";
-IF [User] = "accounter" THEN [4_Salesclerk] = "not assigned";
-IF [User] = "accounter" THEN [5_ShiftManager] = "not assigned";
-IF [User] = "accounter" THEN [6_Checker] = "not assigned";
-IF [User] = "accounter" THEN [7_Auditor] = "not assigned";
-IF [User] = "accounter" THEN [8_Workshop1Worker] = "not assigned";
-IF [User] = "accounter" THEN [9_Workshop2Worker] = "not assigned";
-IF [User] = "accounter" THEN [10_Storekeeper] = "not assigned";
-IF [User] = "accounter" THEN [11_CatalogMaintainer] = "not assigned";
-IF [User] = "accounter" THEN [12_CommunityManager] = "not assigned";
-IF [User] = "accounter" THEN [13_ProcurementWorker] = "not assigned";
-IF [User] = "accounter" THEN [14_SystemAdmin] = "not assigned";
+IF [User] = "Accountant" THEN [2_Manager] = "not assigned";
+IF [User] = "Accountant" THEN [3_Accountant] = "assigned";
+IF [User] = "Accountant" THEN [4_Salesclerk] = "not assigned";
+IF [User] = "Accountant" THEN [5_ShiftManager] = "not assigned";
+IF [User] = "Accountant" THEN [6_Checker] = "not assigned";
+IF [User] = "Accountant" THEN [7_Auditor] = "not assigned";
+IF [User] = "Accountant" THEN [8_Workshop1Worker] = "not assigned";
+IF [User] = "Accountant" THEN [9_Workshop2Worker] = "not assigned";
+IF [User] = "Accountant" THEN [10_Storekeeper] = "not assigned";
+IF [User] = "Accountant" THEN [11_CatalogMaintainer] = "not assigned";
+IF [User] = "Accountant" THEN [12_CommunityManager] = "not assigned";
+IF [User] = "Accountant" THEN [13_ProcurementWorker] = "not assigned";
+IF [User] = "Accountant" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "salesclerk" THEN [2_Manager] = "not assigned";
-IF [User] = "salesclerk" THEN [3_Accounter] = "not assigned";
+IF [User] = "salesclerk" THEN [3_Accountant] = "not assigned";
 IF [User] = "salesclerk" THEN [4_Salesclerk] = "assigned";
 IF [User] = "salesclerk" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "salesclerk" THEN [6_Checker] = "not assigned";
@@ -70,7 +70,7 @@ IF [User] = "salesclerk" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "salesclerk" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "shiftManager" THEN [2_Manager] = "not assigned";
-IF [User] = "shiftManager" THEN [3_Accounter] = "not assigned";
+IF [User] = "shiftManager" THEN [3_Accountant] = "not assigned";
 IF [User] = "shiftManager" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "shiftManager" THEN [5_ShiftManager] = "assigned";
 IF [User] = "shiftManager" THEN [6_Checker] = "not assigned";
@@ -84,7 +84,7 @@ IF [User] = "shiftManager" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "shiftManager" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "checker" THEN [2_Manager] = "not assigned";
-IF [User] = "checker" THEN [3_Accounter] = "not assigned";
+IF [User] = "checker" THEN [3_Accountant] = "not assigned";
 IF [User] = "checker" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "checker" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "checker" THEN [6_Checker] = "assigned";
@@ -98,7 +98,7 @@ IF [User] = "checker" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "checker" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "auditor" THEN [2_Manager] = "not assigned";
-IF [User] = "auditor" THEN [3_Accounter] = "not assigned";
+IF [User] = "auditor" THEN [3_Accountant] = "not assigned";
 IF [User] = "auditor" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "auditor" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "auditor" THEN [6_Checker] = "not assigned";
@@ -112,7 +112,7 @@ IF [User] = "auditor" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "auditor" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "workshop1Worker" THEN [2_Manager] = "not assigned";
-IF [User] = "workshop1Worker" THEN [3_Accounter] = "not assigned";
+IF [User] = "workshop1Worker" THEN [3_Accountant] = "not assigned";
 IF [User] = "workshop1Worker" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "workshop1Worker" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "workshop1Worker" THEN [6_Checker] = "not assigned";
@@ -126,7 +126,7 @@ IF [User] = "workshop1Worker" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "workshop1Worker" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "workshop2Worker" THEN [2_Manager] = "not assigned";
-IF [User] = "workshop2Worker" THEN [3_Accounter] = "not assigned";
+IF [User] = "workshop2Worker" THEN [3_Accountant] = "not assigned";
 IF [User] = "workshop2Worker" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "workshop2Worker" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "workshop2Worker" THEN [6_Checker] = "not assigned";
@@ -140,7 +140,7 @@ IF [User] = "workshop2Worker" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "workshop2Worker" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "storeKeeper" THEN [2_Manager] = "not assigned";
-IF [User] = "storeKeeper" THEN [3_Accounter] = "not assigned";
+IF [User] = "storeKeeper" THEN [3_Accountant] = "not assigned";
 IF [User] = "storeKeeper" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "storeKeeper" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "storeKeeper" THEN [6_Checker] = "not assigned";
@@ -154,7 +154,7 @@ IF [User] = "storeKeeper" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "storeKeeper" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "catalogMaintainer" THEN [2_Manager] = "not assigned";
-IF [User] = "catalogMaintainer" THEN [3_Accounter] = "not assigned";
+IF [User] = "catalogMaintainer" THEN [3_Accountant] = "not assigned";
 IF [User] = "catalogMaintainer" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "catalogMaintainer" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "catalogMaintainer" THEN [6_Checker] = "not assigned";
@@ -168,7 +168,7 @@ IF [User] = "catalogMaintainer" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "catalogMaintainer" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "communityManager" THEN [2_Manager] = "not assigned";
-IF [User] = "communityManager" THEN [3_Accounter] = "not assigned";
+IF [User] = "communityManager" THEN [3_Accountant] = "not assigned";
 IF [User] = "communityManager" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "communityManager" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "communityManager" THEN [6_Checker] = "not assigned";
@@ -182,7 +182,7 @@ IF [User] = "communityManager" THEN [13_ProcurementWorker] = "not assigned";
 IF [User] = "communityManager" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "procurementWorker" THEN [2_Manager] = "not assigned";
-IF [User] = "procurementWorker" THEN [3_Accounter] = "not assigned";
+IF [User] = "procurementWorker" THEN [3_Accountant] = "not assigned";
 IF [User] = "procurementWorker" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "procurementWorker" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "procurementWorker" THEN [6_Checker] = "not assigned";
@@ -196,7 +196,7 @@ IF [User] = "procurementWorker" THEN [13_ProcurementWorker] = "assigned";
 IF [User] = "procurementWorker" THEN [14_SystemAdmin] = "not assigned";
 
 IF [User] = "systemAdmin" THEN [2_Manager] = "not assigned";
-IF [User] = "systemAdmin" THEN [3_Accounter] = "not assigned";
+IF [User] = "systemAdmin" THEN [3_Accountant] = "not assigned";
 IF [User] = "systemAdmin" THEN [4_Salesclerk] = "not assigned";
 IF [User] = "systemAdmin" THEN [5_ShiftManager] = "not assigned";
 IF [User] = "systemAdmin" THEN [6_Checker] = "not assigned";

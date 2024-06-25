@@ -592,7 +592,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "INSERT INTO \"metamodel\".\"Responsibility\" (\"ResponsibilityHasResponsibilityId\",\n"
 						+ "						\"This_has_Name\")	\n"
 						+ "	VALUES (2, 'Manager'),\n"
-						+ "		(3, 'Accounter'),\n"
+						+ "		(3, 'Accountant'),\n"
 						+ "		(4, 'Salesclerk'),\n"
 						+ "		(5, 'Shift manager'),\n"
 						+ "		(6, 'Checker'),\n"
@@ -837,9 +837,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(3, 'Auditor', 3006),\n"	
 						+ "				(3, 'Auditor', 3007),\n"
 						+ "				(3, 'Auditor', 3008),\n"	
-						+ "				(3, 'Accounter', 3006),\n"	
-						+ "				(3, 'Accounter', 3007),\n"	
-						+ "				(3, 'Accounter', 3008);",
+						+ "				(3, 'Accountant', 3006),\n"	
+						+ "				(3, 'Accountant', 3007),\n"	
+						+ "				(3, 'Accountant', 3008);",
 						
 						
 						
@@ -896,7 +896,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_FilterExpression\",\n"
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (5, 'Manager', 5001),\n"
-						+ "				(5, 'Accounter', 5001),\n"
+						+ "				(5, 'Accountant', 5001),\n"
 						+ "				(5, 'Salesclerk', 5001),\n"
 						+ "				(5, 'Shift manager', 5001),\n"
 						+ "				(5, 'Checker', 5001),\n"
@@ -911,7 +911,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(5, 'Catalog maintainer', 5002),\n"
 						+ "				(5, 'Manager', 5003),\n"
 						+ "				(5, 'Shift manager', 5003),\n"
-						+ "				(5, 'Accounter', 5003),\n"
+						+ "				(5, 'Accountant', 5003),\n"
 						+ "				(5, 'Catalog maintainer', 5003),\n"
 						+ "				(5, 'Auditor', 5003);",
 						
@@ -948,7 +948,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(6, 'System admin', 6003),\n"						
 						+ "				(6, 'Shift manager', 6004),\n"	
 						+ "				(6, 'Manager', 6004),\n"
-						+ "				(6, 'Accounter', 6004),\n"
+						+ "				(6, 'Accountant', 6004),\n"
 						+ "				(6, 'Auditor', 6004);",
 						
 						
@@ -983,7 +983,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(14, 'Catalog maintainer', 14002),\n"
 						+ "				(14, 'Catalog maintainer', 14003),\n"
 						+ "				(14, 'Manager', 14004),\n"
-						+ "				(14, 'Accounter', 14004),\n"						
+						+ "				(14, 'Accountant', 14004),\n"						
 						+ "				(14, 'Salesclerk', 14004),\n"
 						+ "				(14, 'Shift manager', 14004),\n"
 						+ "				(14, 'Checker', 14004),\n"
@@ -1031,7 +1031,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(15, 'Procurement worker', 15003),\n"
 						+ "				(15, 'Manager', 15004),\n"
 						+ "				(15, 'Shift manager', 15004),\n"
-						+ "				(15, 'Accounter', 15004),\n"
+						+ "				(15, 'Accountant', 15004),\n"
 						+ "				(15, 'Storekeeper', 15004),\n"
 						+ "				(15, 'Auditor', 15004);",
 						
@@ -1067,7 +1067,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(13, 'Catalog maintainer', 13002),\n"
 						+ "				(13, 'Catalog maintainer', 13003),\n"
 						+ "				(13, 'Manager', 13004),\n"
-						+ "				(13, 'Accounter', 13004),\n"						
+						+ "				(13, 'Accountant', 13004),\n"						
 						+ "				(13, 'Salesclerk', 13004),\n"
 						+ "				(13, 'Shift manager', 13004),\n"
 						+ "				(13, 'Checker', 13004),\n"
@@ -1114,7 +1114,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (17, 'Manager', 17001),\n"
 						+ "				(17, 'Manager', 17002),\n"
 						+ "				(17, 'Manager', 17003),\n"
-						+ "				(17, 'Accounter', 17004),\n"
+						+ "				(17, 'Accountant', 17004),\n"
 						+ "				(17, 'Shift manager', 17004),\n"						
 						+ "				(17, 'Storekeeper', 17004),\n"
 						+ "				(17, 'Technologist', 17004),\n"
@@ -1151,7 +1151,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (8, 'Manager', 8001),\n"
 						+ "				(8, 'Manager', 8002),\n"
 						+ "				(8, 'Manager', 8003),\n"
-						+ "				(8, 'Accounter', 8004),\n"
+						+ "				(8, 'Accountant', 8004),\n"
 						+ "				(8, 'Shift manager', 8004),\n"	
 						+ "				(8, 'Technologist', 8004),\n"
 						+ "				(8, 'Auditor', 8004),\n"
@@ -1193,7 +1193,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (12, 'Technologist', 12001),\n"
 						+ "				(12, 'Technologist', 12002),\n"
 						+ "				(12, 'Technologist', 12003),\n"
-						+ "				(12, 'Accounter', 12004),\n"
+						+ "				(12, 'Accountant', 12004),\n"
 						+ "				(12, 'Shift manager', 12004),\n"	
 						+ "				(12, 'Manager', 12004),\n"
 						+ "				(12, 'Workshop 1 worker', 12004),\n"
@@ -1235,7 +1235,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (7, 'Technologist', 7001),\n"
 						+ "				(7, 'Technologist', 7002),\n"
 						+ "				(7, 'Technologist', 7003),\n"
-						+ "				(7, 'Accounter', 7004),\n"
+						+ "				(7, 'Accountant', 7004),\n"
 						+ "				(7, 'Shift manager', 7004),\n"	
 						+ "				(7, 'Manager', 7004),\n"
 						+ "				(7, 'Workshop 1 worker', 7004),\n"
@@ -1274,9 +1274,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
 						+ "							\"This_filters_by_FilterExpression\",\n"
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
-						+ "			VALUES (9, 'Accounter', 9001),\n"
-						+ "				(9, 'Accounter', 9002),\n"
-						+ "				(9, 'Accounter', 9003),\n"
+						+ "			VALUES (9, 'Accountant', 9001),\n"
+						+ "				(9, 'Accountant', 9002),\n"
+						+ "				(9, 'Accountant', 9003),\n"
 						+ "				(9, 'Manager', 9004),\n"
 						+ "				(9, 'Shift manager', 9004),\n"	
 						+ "				(9, 'Salesclerk', 9004),\n"
@@ -1314,7 +1314,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (19, 'Manager', 19001),\n"
 						+ "				(19, 'Manager', 19002),\n"
 						+ "				(19, 'Manager', 19003),\n"
-						+ "				(19, 'Accounter', 19004),\n"
+						+ "				(19, 'Accountant', 19004),\n"
 						+ "				(19, 'Shift manager', 19004),\n"
 						+ "				(19, 'Auditor', 19004);",
 						
@@ -1350,7 +1350,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(10, 'Manager', 10001),\n"
 						+ "				(10, 'Shift manager', 10003),\n"	
 						+ "				(10, 'Manager', 10003),\n"
-						+ "				(10, 'Accounter', 10004),\n"
+						+ "				(10, 'Accountant', 10004),\n"
 						+ "				(10, 'Storekeeper', 10004),\n"
 						+ "				(10, 'Auditor', 10004);",
 						
@@ -1386,7 +1386,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(18, 'Manager', 18001),\n"
 						+ "				(18, 'Shift manager', 18003),\n"	
 						+ "				(18, 'Manager', 18003),\n"
-						+ "				(18, 'Accounter', 18004),\n"
+						+ "				(18, 'Accountant', 18004),\n"
 						+ "				(18, 'Auditor', 18004);",
 						
 						
@@ -1420,7 +1420,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(11, 'Manager', 11001),\n"
 						+ "				(11, 'Shift manager', 11003),\n"	
 						+ "				(11, 'Manager', 11003),\n"
-						+ "				(11, 'Accounter', 11004),\n"
+						+ "				(11, 'Accountant', 11004),\n"
 						+ "				(11, 'Auditor', 11004);",
 						
 						
@@ -1452,7 +1452,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(21, 'Storekeeper', 21004),\n"	
 						+ "				(21, 'Shift manager', 21004),\n"
 						+ "				(21, 'Manager', 21004),\n"
-						+ "				(21, 'Accounter', 21004),\n"
+						+ "				(21, 'Accountant', 21004),\n"
 						+ "				(21, 'Auditor', 21004);",
 						
 						
@@ -1520,7 +1520,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (23, 'Checker', 23001),\n"
 						+ "				(23, 'Manager assistant', 23001),\n"
-						+ "				(23, 'Accounter', 23004),\n"
+						+ "				(23, 'Accountant', 23004),\n"
 						+ "				(23, 'Shift manager', 23004),\n"	
 						+ "				(23, 'Manager', 23004),\n"
 						+ "				(23, 'Auditor', 23004);",
@@ -1552,7 +1552,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (24, 'Checker', 24001),\n"
 						+ "				(24, 'Manager assistant', 24001),\n"
-						+ "				(24, 'Accounter', 24004),\n"
+						+ "				(24, 'Accountant', 24004),\n"
 						+ "				(24, 'Shift manager', 24004),\n"	
 						+ "				(24, 'Manager', 24004),\n"
 						+ "				(24, 'Auditor', 24004);",
@@ -1606,9 +1606,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(25, 'Auditor', 25005),\n"
 						+ "				(25, 'Auditor', 25006),\n"
 						+ "				(25, 'Auditor', 25007),\n"
-						+ "				(25, 'Accounter', 25005),\n"
-						+ "				(25, 'Accounter', 25006),\n"
-						+ "				(25, 'Accounter', 25007);",
+						+ "				(25, 'Accountant', 25005),\n"
+						+ "				(25, 'Accountant', 25006),\n"
+						+ "				(25, 'Accountant', 25007);",
 						
 						
 						
@@ -1637,10 +1637,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (26, 'Shift manager', 26001),\n"
 						+ "				(26, 'Manager', 26001),\n"
-						+ "				(26, 'Accounter', 26001),\n"
+						+ "				(26, 'Accountant', 26001),\n"
 						+ "				(26, 'Shift manager', 26004),\n"	
 						+ "				(26, 'Manager', 26004),\n"
-						+ "				(26, 'Accounter', 26004),\n"
+						+ "				(26, 'Accountant', 26004),\n"
 						+ "				(26, 'Auditor', 26004);",
 						
 						
@@ -1688,17 +1688,17 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(27, 'Workshop 2 worker', 27004),\n"
 						+ "				(27, 'Manager', 27005),\n"
 						+ "				(27, 'Shift manager', 27005),\n"
-						+ "				(27, 'Accounter', 27006),\n"
+						+ "				(27, 'Accountant', 27006),\n"
 						+ "				(27, 'Auditor', 27006),\n"
 						+ "				(27, 'Technologist', 27006),\n"
-						+ "				(27, 'Accounter', 27007),\n"
+						+ "				(27, 'Accountant', 27007),\n"
 						+ "				(27, 'Auditor', 27007),\n"
 						+ "				(27, 'Technologist', 27007),\n"
 						+ "				(27, 'Manager', 27007),\n"
 						+ "				(27, 'Shift manager', 27007),\n"
 						+ "				(27, 'Workshop 1 worker', 27007),\n"
 						+ "				(27, 'Workshop 2 worker', 27007),\n"
-						+ "				(27, 'Accounter', 27008),\n"
+						+ "				(27, 'Accountant', 27008),\n"
 						+ "				(27, 'Auditor', 27008),\n"
 						+ "				(27, 'Technologist', 27008),\n"
 						+ "				(27, 'Manager', 27008),\n"
@@ -1746,12 +1746,12 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
 						+ "			VALUES (20, 'Shift manager', 20001),\n"
 						+ "				(20, 'Manager assistant', 20001),\n"
-						+ "				(20, 'Accounter', 20001),\n"
+						+ "				(20, 'Accountant', 20001),\n"
 						+ "				(20, 'Auditor', 20001),\n"
 						+ "				(20, 'Manager', 20001),\n"
 						+ "				(20, 'Shift manager', 20002),\n"
 						+ "				(20, 'Manager assistant', 20002),\n"
-						+ "				(20, 'Accounter', 20002),\n"
+						+ "				(20, 'Accountant', 20002),\n"
 						+ "				(20, 'Auditor', 20002),\n"
 						+ "				(20, 'Manager', 20002);",
 						
@@ -1825,7 +1825,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (29, 'Technologist', 29001),\n"
 						+ "				(29, 'Technologist', 29002),\n"
 						+ "				(29, 'Technologist', 29003),\n"
-						+ "				(29, 'Accounter', 29004),\n"
+						+ "				(29, 'Accountant', 29004),\n"
 						+ "				(29, 'Shift manager', 29004),\n"	
 						+ "				(29, 'Manager', 29004),\n"
 						+ "				(29, 'Workshop 1 worker', 29004),\n"
@@ -1875,7 +1875,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(30, 'Shift manager', 30001),\n"
 						+ "				(30, 'Shift manager', 30002),\n"
 						+ "				(30, 'Shift manager', 30003),\n"
-						+ "				(30, 'Accounter', 30004),\n"
+						+ "				(30, 'Accountant', 30004),\n"
 						+ "				(30, 'Salesclerk', 30004),\n"
 						+ "				(30, 'Community manager', 30004),\n"
 						+ "				(30, 'Auditor', 30004);",
@@ -7463,7 +7463,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			report := report || '=== ' || 'tt_EXPENSE_DETAILS_END_tt' || ' ===' || chr(13) || chr(13);\n"
 						+ "			\n"
 						+ "			report := report || '=== ' || 'tt_CATALOG_SECTION_DETAILS_tt' || ' ===' || chr(13) || chr(13);\n"
-						+ "			report := report || 'tt_MENU_SECTION_tt' || chr(13) || 'tt_ITEM_COUNT_tt' || chr(13) || 'tt_ITEM_AMOUNT_tt' || chr(13);\n"
+						+ "			report := report || 'tt_MENU_SECTION_tt' || chr(13) || 'tt_ITEM_QTY_tt' || chr(13) || 'tt_ITEM_AMOUNT_tt' || chr(13);\n"
 						+ "			report := report || '----- ' || chr(13);	\n"
 						+ "			report := report || '=== ' || 'tt_MENU_SECTION_DETAILS_END_tt' || ' ===' || chr(13) || chr(13);\n"
 						+ "	\n"

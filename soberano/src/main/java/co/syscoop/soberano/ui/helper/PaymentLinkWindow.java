@@ -8,7 +8,7 @@ public class PaymentLinkWindow extends Window {
 	
 	public PaymentLinkWindow(String paymentProcessorName, String paymentLinkURL, String paymentLinkQRImage) {
 		
-		this.setTitle(Labels.getLabel("PaymentLinkGeneratedBy") + " " + paymentProcessorName);
+		this.setTitle(Labels.getLabel("other.PaymentLinkGeneratedBy") + " " + paymentProcessorName);
 		this.setBorder("normal");
 		this.setSizable(true);
 		this.setClosable(true);
@@ -21,7 +21,7 @@ public class PaymentLinkWindow extends Window {
 		vbox.setHflex("1");
 		vbox.setParent(this);
 		
-		Label lblUrl = new Label(Labels.getLabel("Link") + ": " + paymentLinkURL);
+		Label lblUrl = new Label(Labels.getLabel("other.Link") + ": " + paymentLinkURL);
 		lblUrl.setHflex("1");
 		lblUrl.setParent(vbox);
 		

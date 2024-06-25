@@ -20,7 +20,7 @@
 				<treecol>
 					<combobox id="cmbResponsibilities" selectedIndex="-1">
 						<comboitem label="${labels.responsibilities.Manager}" value="2"/>
-						<comboitem label="${labels.responsibilities.Accounter}" value="3"/>
+						<comboitem label="${labels.responsibilities.Accountant}" value="3"/>
 						<comboitem label="${labels.responsibilities.Salesclerk}" value="4"/>
 						<comboitem label="${labels.responsibilities.ShiftManager}" value="5"/>
 						<comboitem label="${labels.responsibilities.Checker}" value="6"/>

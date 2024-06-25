@@ -47,7 +47,7 @@ class O7_WorkerTest_disable extends WorkerActionTest {
 	@Test
 	@Order(1)
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/workers.zul", "user1@soberano.syscoop.co", "accounter@soberano.syscoop.co", 34);
+		TestUtilityCode.testDisablingObject("/workers.zul", "user1@soberano.syscoop.co", "accountant@soberano.syscoop.co", 34);
 	}
 	
 	@Test

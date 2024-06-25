@@ -53,7 +53,7 @@ public class PaymentProcessorWindow extends Window {
 			toCollect = new BigDecimal(0);
 		}
 		
-		this.setTitle(Labels.getLabel("CollectionByMeansOfPaymentProcessor") + " " + currency.getName());
+		this.setTitle(Labels.getLabel("other.CollectionByMeansOfPaymentProcessor") + " " + currency.getName());
 		this.setBorder("normal");
 		this.setSizable(true);
 		this.setClosable(true);
