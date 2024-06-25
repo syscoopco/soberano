@@ -7462,7 +7462,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			\n"
 						+ "			report := report || '=== ' || 'tt_EXPENSE_DETAILS_END_tt' || ' ===' || chr(13) || chr(13);\n"
 						+ "			\n"
-						+ "			report := report || '=== ' || 'tt_MENU_SECTION_DETAILS_tt' || ' ===' || chr(13) || chr(13);\n"
+						+ "			report := report || '=== ' || 'tt_CATALOG_SECTION_DETAILS_tt' || ' ===' || chr(13) || chr(13);\n"
 						+ "			report := report || 'tt_MENU_SECTION_tt' || chr(13) || 'tt_ITEM_COUNT_tt' || chr(13) || 'tt_ITEM_AMOUNT_tt' || chr(13);\n"
 						+ "			report := report || '----- ' || chr(13);	\n"
 						+ "			report := report || '=== ' || 'tt_MENU_SECTION_DETAILS_END_tt' || ' ===' || chr(13) || chr(13);\n"
