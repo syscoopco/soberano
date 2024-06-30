@@ -20,7 +20,7 @@ public class ShiftSalesBoxComposer extends SelectorComposer {
     	
           super.doAfterCompose(comp);
           try {
-        	  decShiftSales.setValue(new ShiftClosure().getShiftSales());
+        	  decShiftSales.setValue(new ShiftClosure().getShiftSales(0));
           }
           catch(Exception ex) {
         	  Messagebox.show(ex.getMessage(), 

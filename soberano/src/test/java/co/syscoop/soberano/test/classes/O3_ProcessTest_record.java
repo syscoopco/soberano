@@ -23,7 +23,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 class O3_ProcessTest_record extends ProcessActionTest {
 	

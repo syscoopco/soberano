@@ -90,10 +90,11 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		return super.getReport();
 	}
 	
-	public BigDecimal getShiftSales() throws SQLException, Exception {
+	public BigDecimal getShiftSales(Integer closureid) throws SQLException, Exception {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_ShiftClosure_getSales\"(:loginname) AS queryresult";
+		String qryStr = "SELECT * FROM soberano.\"fn_ShiftClosure_getSales\"(:closureid, :loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("closureid", closureid);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
 	}

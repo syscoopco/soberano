@@ -4256,7 +4256,7 @@
 					<orm:MandatoryConstraint ref="_E848F6C6-0C30-45AE-8B1C-31E1D2D74720" />
 				</orm:InternalConstraints>
 			</orm:Fact>
-			<orm:Fact id="_7B2F6C8D-E233-4B40-9E44-5EE74D39D279" _Name="VoteFavoursDecision">
+			<orm:Fact id="_7B2F6C8D-E233-4B40-9E44-5EE74D39D279" _Name="VotefavorsDecision">
 				<orm:FactRoles>
 					<orm:Role id="_7C151AA9-1C4F-429B-BD14-16F8FAA859DF" _IsMandatory="true" _Multiplicity="ZeroToMany" Name="">
 						<orm:RolePlayer ref="_48B28FBB-0499-4AF2-B552-60AB4FE19D0F" />
@@ -4269,9 +4269,9 @@
 					<orm:ReadingOrder id="_50F731E7-CCBC-4314-9A10-E16E501F3AAF">
 						<orm:Readings>
 							<orm:Reading id="_D80BB42F-F180-448F-AFD5-22E77865D36F">
-								<orm:Data>{0} favours {1}</orm:Data>
+								<orm:Data>{0} favors {1}</orm:Data>
 								<orm:ExpandedData>
-									<orm:RoleText RoleIndex="0" FollowingText=" favours " />
+									<orm:RoleText RoleIndex="0" FollowingText=" favors " />
 								</orm:ExpandedData>
 							</orm:Reading>
 						</orm:Readings>
