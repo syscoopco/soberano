@@ -30,7 +30,7 @@ import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class BusinessActivityTrackedObjectButtonComposer extends SelectorComposer {
 
-	protected BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;;
+	protected BusinessActivityTrackedObjectFormHelper trackedObjectFormHelper = null;
 	
 	protected Box boxDetails = null;
 	
@@ -64,11 +64,13 @@ public class BusinessActivityTrackedObjectButtonComposer extends SelectorCompose
     public void btnRecord_onClick() throws Throwable {
 		
 		try{
-			if (trackedObjectFormHelper.recordFromForm(boxDetails) == -1) {
+			Integer newObjectid = trackedObjectFormHelper.recordFromForm(boxDetails);
+			if (newObjectid == -1) {
 				throw new NotEnoughRightsException();						
 			}
 			else {
 				//clean form
+				trackedObjectFormHelper.setNewObjectId(newObjectid);
 				trackedObjectFormHelper.cleanForm(boxDetails);
 			}
 		}

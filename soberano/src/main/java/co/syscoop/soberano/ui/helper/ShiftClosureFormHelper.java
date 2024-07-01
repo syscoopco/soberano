@@ -1,16 +1,14 @@
 package co.syscoop.soberano.ui.helper;
 
-import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Grid;
 import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
-import co.syscoop.soberano.models.ShiftClosuresGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
@@ -20,11 +18,16 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 	@Override
 	public void cleanForm(Box boxDetails) {
 		
-		Clients.scrollIntoView(boxDetails);
-		((Textbox) boxDetails.query("#txtReport")).setText("");
-		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new ShiftClosuresGridModel());
+		/*
+		Textbox txtReport = (Textbox) boxDetails.query("#txtReport");
+		txtReport.setText("");
+		((Grid) boxDetails.query("#wndContentPanel").getParent().query("center").query("grid")).setModel(new ShiftClosuresGridModel());
 		requestedAction = ActionRequested.NONE;
-		((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
+		((Button) boxDetails.query("#wndContentPanel").getParent().query("#incSouth").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
+		Clients.scrollIntoView(txtReport);
+		*/
+		
+		Executions.sendRedirect("/shift_closures.zul?id=" + this.getNewObjectId());
 	}
 	
 	@Override
@@ -40,12 +43,12 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 				throw new ShiftHasBeenClosedException();
 			}
 			requestedAction = ActionRequested.NONE;
-			((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
+			((Button) boxDetails.query("#wndContentPanel").getParent().query("#incSouth").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.close"));
 			return qryResult;	
 		}
 		else {
 			requestedAction = ActionRequested.RECORD;
-			((Button) boxDetails.query("#btnRecord")).setLabel(Labels.getLabel("caption.action.confirm"));
+			((Button) boxDetails.query("#wndContentPanel").getParent().query("#incSouth").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.confirm"));
 			((Textbox) boxDetails.query("#txtReport")).setText(Translator.translate((new ShiftClosure()).getReport()));
 			throw new ConfirmationRequiredException();
 		}

@@ -6,6 +6,8 @@ import co.syscoop.soberano.renderers.ActionRequested;
 
 public abstract class BusinessActivityTrackedObjectFormHelper {
 	
+	private Integer newObjectId = 0;
+	
 	protected ActionRequested requestedAction = ActionRequested.NONE;
 	
 	private BusinessActivityTrackedObject trackedObject = null;
@@ -28,5 +30,13 @@ public abstract class BusinessActivityTrackedObjectFormHelper {
 
 	public void setTrackedObject(BusinessActivityTrackedObject trackedObject) {
 		this.trackedObject = trackedObject;
+	}
+
+	public Integer getNewObjectId() {
+		return newObjectId;
+	}
+
+	public void setNewObjectId(Integer newObjectId) {
+		this.newObjectId = newObjectId;
 	}
 }

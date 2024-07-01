@@ -10,8 +10,10 @@ import java.util.Map;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
+import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
@@ -89,6 +91,59 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		getReportParameters.put("closureId", this.getId());
 		return super.getReport();
 	}
+	
+	public String getHouseBillReport() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getHouseBillReport\"(:lang, :closureId, :loginname) AS report";
+		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
+		return super.getReport();
+	}
+	
+	public String getCashRegisterReport() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getCashRegisterReport\"(:lang, :closureId, :loginname) AS report";
+		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
+		return super.getReport();
+	}
+	
+	public PrintableData getReportWithPrinterProfile() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
+	
+	public PrintableData getHouseBillReportWithPrinterProfile() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getHouseBillReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
+
+	public PrintableData getCashRegisterReportWithPrinterProfile() throws SQLException {
+	
+	//it must be passed loginname. output alias must be queryresult. both in lower case.
+	String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getCashRegisterReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
+	Map<String, Object> qryParameters = new HashMap<String,	Object>();
+	qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+	qryParameters.put("closureId", this.getId());
+	qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+	return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+}
 	
 	public BigDecimal getShiftSales(Integer closureid) throws SQLException, Exception {
 		

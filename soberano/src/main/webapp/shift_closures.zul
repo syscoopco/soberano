@@ -1,15 +1,25 @@
 <?page title="${labels.pageShiftClosures.WindowTitle}" contentType="text/html;charset=UTF-8"?>
-<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-grid.zul"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.ShiftClosuresInitiator"?>
 
 <zk>
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageShiftClosures.WindowTitle}" sclass="PageTitle"/>
 	
-	<window self="@define(inputForm)" contentStyle="overflow:auto">
+	<window id="wndContentPanel" self="@define(contentPanel)" contentStyle="overflow:auto">
 		<vbox id="boxDetails" height="300px" width="100%">
+			<textbox id="txtShownReport" value="general" visible="false"/>
 			<textbox id="txtReport" multiline="true" height="300px" hflex="1" readonly="true" placeholder="${labels.placeholder.report}"/>
-			<button id="btnRecord" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
-		</vbox>
+			<separator></separator>
+			<hbox width="100%">
+				<button id="btnGeneral" label="${labels.caption.action.general}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralReportLoadingButtonComposer"></button>
+				<button id="btnHouseBill" label="${labels.caption.action.houseBill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureHouseBillReportLoadingButtonComposer"></button>
+				<button id="btnCashRegister" label="${labels.caption.action.cashRegister}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCashRegisterReportLoadingButtonComposer"></button>
+			</hbox>
+			<separator></separator>		
+			<include id="incGrid" src="/shift_closures_history.zul"></include>
+		</vbox>	
 	</window>
-	<include id="incGrid" self="@define(grid)" src="/shift_closures_history.zul"></include>
+	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintShiftClosureReportButtonComposer"></button>
 </zk>

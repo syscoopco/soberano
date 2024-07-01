@@ -3,6 +3,7 @@ package co.syscoop.soberano.renderers;
 import java.text.SimpleDateFormat;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
@@ -48,6 +49,17 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		Button btnGo = new Button(Labels.getLabel("caption.action.go"));
 		btnGo.setId(btnGo.getUuid());
 		btnGo.setWidth("90%");
+		
+		//add listener to go to closure
+		btnGo.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				Executions.sendRedirect("/shift_closures.zul?id=" + shift.getShiftClosureId());
+			}
+		});
+		
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
 		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
