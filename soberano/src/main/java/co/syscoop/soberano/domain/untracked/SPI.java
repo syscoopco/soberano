@@ -10,18 +10,20 @@ import co.syscoop.soberano.domain.tracked.BusinessActivityTrackedObject;
 public class SPI extends BusinessActivityTrackedObject {
 	
 	private Integer warehouseId = 0;
+	private Integer closureId = 0;
 	private String iventoryItemCode = "";
 	private BigDecimal quantity = new BigDecimal(0.0);
 	private BigDecimal unitValue = new BigDecimal(0.0);
 	
-	public SPI(Integer warehouseId) {
+	public SPI(Integer closureId, Integer warehouseId) {
 		this.setWarehouseId(warehouseId);
 		getAllQuery = "SELECT * FROM soberano.\"" 
 				+ "fn_InventoryOperation_getSPI\"" 
-				+ "(:warehouseId, :lang, :loginname)";
-		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:warehouseId, :lang, :loginname) AS count";
+				+ "(:closureId, :warehouseId, :lang, :loginname)";
+		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, :warehouseId, :lang, :loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
-		getAllQueryNamedParameters.put("warehouseId", warehouseId);	
+		getAllQueryNamedParameters.put("closureId", closureId);	
+		getAllQueryNamedParameters.put("warehouseId", warehouseId);		
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 
@@ -31,6 +33,14 @@ public class SPI extends BusinessActivityTrackedObject {
 
 	public void setWarehouseId(Integer warehouseId) {
 		this.warehouseId = warehouseId;
+	}
+	
+	public Integer getClosureId() {
+		return closureId;
+	}
+
+	public void setClosureId(Integer closureId) {
+		this.closureId = closureId;
 	}
 
 	public String getIventoryItemCode() {

@@ -28,7 +28,7 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			if (cmbWarehouse.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected warehouse spi
-				spiGridModel = new SPIGridModel(((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
+				spiGridModel = new SPIGridModel(0, ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
 			}
 			else {
 				//re-render the grid with the whole spi

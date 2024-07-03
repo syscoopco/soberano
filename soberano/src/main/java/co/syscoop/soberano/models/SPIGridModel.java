@@ -9,6 +9,7 @@ import co.syscoop.soberano.domain.untracked.SPI;
 public class SPIGridModel extends SoberanoAbstractListModel<Object>
 {
 	private Integer warehouseId = 0;
+	private Integer closureId = 0;
 	
 	public SPIGridModel() {
 		
@@ -16,12 +17,13 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		super("inventoryItemName", true, false);
 	}
 	
-	public SPIGridModel(Integer warehouseId) {
+	public SPIGridModel(Integer closureId, Integer warehouseId) {
 		
 		//the set is sorted by inventoryItemName alphabetically (ascending).
 		super("inventoryItemName", true, false);
 		
 		this.warehouseId = warehouseId;
+		this.closureId = closureId;
 	}
 	
 	@Override
@@ -29,7 +31,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 
 		try {
 			if (_size < 0)
-				_size = new SPI(warehouseId).getCount();
+				_size = new SPI(closureId, warehouseId).getCount();
 			return _size;
 		} 
 		catch (SQLException e) 
@@ -44,7 +46,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = (new SPI(warehouseId)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
+				_cache = (new SPI(closureId, warehouseId)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 
@@ -56,5 +58,13 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 			}
 		}
 		return _cache.get(index - _beginOffset);
+	}
+
+	public Integer getClosureId() {
+		return closureId;
+	}
+
+	public void setClosureId(Integer closureId) {
+		this.closureId = closureId;
 	}
 }
