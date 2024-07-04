@@ -33,13 +33,6 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 		decInput.setWidth("100%");
 		row.appendChild(decInput);
 		
-		//available
-		Decimalbox decAvailable = new Decimalbox(spiRowData.getAvailable());
-		decAvailable.setFormat("####.########");
-		decAvailable.setReadonly(true);
-		decAvailable.setWidth("100%");
-		row.appendChild(decAvailable);
-		
 		//output
 		Decimalbox decOutput = new Decimalbox(spiRowData.getOutput());
 		decOutput.setFormat("####.########");

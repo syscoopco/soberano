@@ -18,8 +18,6 @@
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.input}" sort="auto(input_)">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.available}" sort="auto(available)">
-				</column>
 				<column align="left" label="${labels.caption.columnHeader.output}" sort="auto(output_)">
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.ending}" sort="auto(ending)">
