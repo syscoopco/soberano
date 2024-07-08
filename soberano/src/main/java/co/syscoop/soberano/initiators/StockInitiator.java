@@ -16,7 +16,7 @@ import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class StockInitiator implements Initiator, InitiatorExt {
 	
-	Integer warehouseId = 1;
+	private Integer warehouseId = 1;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {

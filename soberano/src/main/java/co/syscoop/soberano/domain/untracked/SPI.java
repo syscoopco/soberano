@@ -16,6 +16,7 @@ public class SPI extends BusinessActivityTrackedObject {
 	private BigDecimal unitValue = new BigDecimal(0.0);
 	
 	public SPI(Integer closureId, Integer warehouseId) {
+		this.setClosureId(closureId);
 		this.setWarehouseId(warehouseId);
 		getAllQuery = "SELECT * FROM soberano.\"" 
 				+ "fn_InventoryOperation_getSPI\"" 

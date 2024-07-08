@@ -19,7 +19,7 @@ import co.syscoop.soberano.vocabulary.Translator;
 
 public class ShiftClosuresInitiator implements Initiator, InitiatorExt {
 	
-	Integer shiftClosureId = 0;
+	private Integer shiftClosureId = 0;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {

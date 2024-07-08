@@ -60,6 +60,20 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 			}
 		});
 		
+		Button btnSPI = new Button(Labels.getLabel("caption.action.spi"));
+		btnSPI.setId(btnSPI.getUuid());
+		btnSPI.setWidth("90%");
+		
+		//add listener to spi loading button
+		btnSPI.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				Executions.getCurrent().sendRedirect("/spi.zul?scid=" + shift.getShiftClosureId(), "_blank");
+			}
+		});
+		
 		Button btnDocument = new Button(Labels.getLabel("caption.action.document"));
 		btnDocument.setId(btnDocument.getUuid());
 		btnDocument.setWidth("90%");
@@ -98,6 +112,7 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		});
 				
 		actionCell.appendChild(btnGo);
+		actionCell.appendChild(btnSPI);
 		actionCell.appendChild(btnCancel);
 		row.appendChild(actionCell);
 	}

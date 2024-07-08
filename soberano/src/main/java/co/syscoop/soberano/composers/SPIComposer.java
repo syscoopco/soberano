@@ -11,6 +11,7 @@ import org.zkoss.zul.Grid;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.SPIGridModel;
 import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class SPIComposer extends SelectorComposer {
@@ -24,14 +25,18 @@ public class SPIComposer extends SelectorComposer {
 	private void processWarehouseSelection() throws SQLException {
 		
 		SPIGridModel spiGridModel = null;
+		
+		Integer closureId = 0;
+		try {closureId = ZKUtilitity.getObjectIdFromURLQuery("scid");} catch(Exception ex) {};		
+		
 		if (cmbWarehouse.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected warehouse spi
-			spiGridModel = new SPIGridModel(0, ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
+			spiGridModel = new SPIGridModel(closureId, ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
 		}
 		else {
 			//re-render the grid with the whole spi
-			spiGridModel = new SPIGridModel();	
+			spiGridModel = new SPIGridModel(closureId, 0);	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(spiGridModel);
 	}

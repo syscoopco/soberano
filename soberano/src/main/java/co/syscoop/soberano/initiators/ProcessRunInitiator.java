@@ -14,7 +14,7 @@ import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class ProcessRunInitiator implements Initiator, InitiatorExt {
 	
-	Integer processRunId = 1;
+	private Integer processRunId = 1;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {

@@ -19,7 +19,7 @@ import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	
-	Integer productionLineId = 0;
+	private Integer productionLineId = 0;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
