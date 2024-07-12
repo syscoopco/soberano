@@ -3,6 +3,7 @@ package co.syscoop.soberano.renderers;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
@@ -34,6 +35,7 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 			catch(NullPointerException ex) {}
 			if (nodeData.getLabel().trim().contains(orderToHighlight.trim())) {
 				item.setSelected(true);
+				Clients.scrollIntoView(item);
 			}
 			
 			item.addEventListener("onClick", new EventListener() {

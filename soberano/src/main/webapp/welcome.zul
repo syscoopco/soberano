@@ -27,7 +27,7 @@
 			            </hbox>
 		      		</row>
 		      		<row align="center">
-		      			<a label="${labels.pageWelcome.note2}" href="https://github.com/syscoopco/soberano"></a>
+		      			<a label="${labels.pageWelcome.note2}" href="https://github.com/syscoopco/soberano/issues/"></a>
 		      		</row>
 				</rows>
 			</grid>
