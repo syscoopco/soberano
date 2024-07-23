@@ -25,7 +25,7 @@
 				]]>
 			</zscript>
 			<separator></separator>
-			<grid id="grdCounters" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+			<grid id="grdCounters" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}" pageSize="50">
 				<columns sizable="false">
 					<column align="right">
 					</column>
