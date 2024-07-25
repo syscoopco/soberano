@@ -15,6 +15,7 @@
 				<button id="btnGeneral" label="${labels.caption.action.general}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralReportLoadingButtonComposer"></button>
 				<button id="btnHouseBill" label="${labels.caption.action.houseBill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureHouseBillReportLoadingButtonComposer"></button>
 				<button id="btnCashRegister" label="${labels.caption.action.cashRegister}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCashRegisterReportLoadingButtonComposer"></button>
+				<button id="btnReceivables" label="${labels.caption.action.receivables}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureReceivablesReportLoadingButtonComposer"></button>
 			</hbox>
 			<separator></separator>		
 			<include id="incGrid" src="/shift_closures_history.zul"></include>

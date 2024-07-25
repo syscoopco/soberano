@@ -112,6 +112,16 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		return super.getReport();
 	}
 	
+	public String getReceivablesReport() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getReceivablesReport\"(:lang, :closureId, :loginname) AS report";
+		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
+		return super.getReport();
+	}
+	
 	public PrintableData getReportWithPrinterProfile() throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -136,14 +146,25 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 
 	public PrintableData getCashRegisterReportWithPrinterProfile() throws SQLException {
 	
-	//it must be passed loginname. output alias must be queryresult. both in lower case.
-	String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getCashRegisterReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
-	Map<String, Object> qryParameters = new HashMap<String,	Object>();
-	qryParameters.put("lang", Locales.getCurrent().getLanguage());	
-	qryParameters.put("closureId", this.getId());
-	qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
-	return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
-}
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getCashRegisterReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
+	
+	public PrintableData getReceivablesReportWithPrinterProfile() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getReceivablesReportWithPrinterProfile\"(:lang, :closureId, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
 	
 	public BigDecimal getShiftSales(Integer closureid) throws SQLException, Exception {
 		

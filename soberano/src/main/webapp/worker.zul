@@ -27,6 +27,9 @@
 						<comboitem label="${labels.responsibilities.Auditor}" value="7"/>	
 						<comboitem label="${labels.responsibilities.Workshop1Worker}" value="8"/>
 						<comboitem label="${labels.responsibilities.Workshop2Worker}" value="9"/>
+						<comboitem label="${labels.responsibilities.Workshop3Worker}" value="19"/>
+						<comboitem label="${labels.responsibilities.Workshop4Worker}" value="20"/>
+						<comboitem label="${labels.responsibilities.Workshop5Worker}" value="21"/>
 						<comboitem label="${labels.responsibilities.Storekeeper}" value="10"/>
 						<comboitem label="${labels.responsibilities.CatalogMaintaner}" value="11"/>
 						<comboitem label="${labels.responsibilities.CommunityManager}" value="12"/>

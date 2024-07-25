@@ -42,7 +42,30 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 			catch(Exception ex) {}
 			
 			Textbox txtShownReport = (Textbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#txtShownReport");
-			if (txtShownReport.getText().equals("cashregister")) {
+			if (txtShownReport.getText().equals("receivables")) {
+				PrintableData pd = new ShiftClosure(scId).getReceivablesReportWithPrinterProfile();
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_RECEIVABLES_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_RECEIVABLES_" + scId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
+			else if (txtShownReport.getText().equals("cashregister")) {
 				PrintableData pd = new ShiftClosure(scId).getCashRegisterReportWithPrinterProfile();
 				if (!pd.getTextToPrint().isEmpty()) {				
 					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 

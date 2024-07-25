@@ -41,7 +41,10 @@ public class ShiftClosureReportLoadingButtonComposer extends SelectorComposer {
 			catch(Exception ex) {}
 			
 			String scReport = "";
-			if (reportType.equals("cashregister")) {					
+			if (reportType.equals("receivables")) {					
+				scReport = Translator.translate(new ShiftClosure(scId).getReceivablesReport());
+			}
+			else if (reportType.equals("cashregister")) {					
 				scReport = Translator.translate(new ShiftClosure(scId).getCashRegisterReport());
 			}
 			else if (reportType.equals("housebill")) {
