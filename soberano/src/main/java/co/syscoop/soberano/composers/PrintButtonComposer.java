@@ -7,10 +7,12 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 
+import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
 
@@ -33,10 +35,23 @@ public class PrintButtonComposer extends SelectorComposer {
     public void btnPrint_onClick() throws Throwable {
 		
 		try {
-			Printer.print(Translator.translate(trackedObject.getReport()),
-							trackedObject, 
-							fileToPrintFullPath,
-							false);
+			String report = ZKUtilitity.getReportFromURLQuery();
+			if (report.isEmpty()) {
+				report = trackedObject.getReport();
+				Printer.print(Translator.translate(report),
+								trackedObject, 
+								fileToPrintFullPath,
+								false);
+			}
+			else {
+				//file to print path is passed in report param
+				PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
+				printerProfile.get();
+				Printer.print(null, 
+							report, 
+							printerProfile.getPrinterName(), 
+							trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
+			}
 		}
 		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 

@@ -131,6 +131,24 @@ public class ZKUtilitity {
 		}
 	}
 	
+	public static String getObjectStrIdFromURLQuery(String idParamName) throws UnsupportedEncodingException {
+		if (splitQuery().get(idParamName) == null) {
+			return ""; 
+		}
+		else {
+			return ZKUtilitity.splitQuery().get(idParamName).get(0);
+		}
+	}
+	
+	public static String getReportFromURLQuery() throws NumberFormatException, UnsupportedEncodingException {
+		if (splitQuery().get("report") == null) {
+			return ""; 
+		}
+		else {
+			return ZKUtilitity.splitQuery().get("report").get(0);
+		}
+	}
+	
 	public static void processItemSelection(Combobox cmbIntelliSearch) {
 		Tree treeObjects = (Tree) cmbIntelliSearch.query("#wndShowingAll").query("#treeObjects");
 		for (Component comp : treeObjects.getTreechildren().getChildren()) {

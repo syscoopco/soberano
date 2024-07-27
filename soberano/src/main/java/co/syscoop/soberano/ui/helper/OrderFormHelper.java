@@ -32,6 +32,7 @@ import org.zkoss.zul.Window;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
+import co.syscoop.soberano.enums.Stage;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
@@ -662,6 +663,13 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		((Decimalbox) wndContentPanel.query("#decAmountBottom")).setValue(order.getAmount());
 		((Label) wndContentPanel.query("#lblCurrencyBottom")).setValue(order.getCurrencyCode());
 		((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
+		
+		if (order.getStageId() == Stage.CLOSED) {
+			
+			//always, allow print ticket when order is closed
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnPrint")).setDisabled(false);
+		}
+		
 		return order;
 	}
 	

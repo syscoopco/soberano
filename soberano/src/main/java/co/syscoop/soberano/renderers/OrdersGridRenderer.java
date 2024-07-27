@@ -98,7 +98,7 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 											"ORDER_" + orderId + ".pdf",
 											"ORDER_",
 											false,
-											false,
+											true,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

@@ -96,7 +96,7 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 											"PROCESSRUN_" + processRunId + ".pdf",
 											"PROCESSRUN_",
 											false,
-											false,
+											true,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

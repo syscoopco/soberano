@@ -20,30 +20,54 @@ public class SPIComposer extends SelectorComposer {
 	private Combobox cmbWarehouse;
 	
 	@Wire
+	private Combobox cmbMaterial;
+	
+	@Wire
 	private Box boxDetails;
 	
-	private void processWarehouseSelection() throws SQLException {
+	private void processParamSelection() throws SQLException {
 		
 		SPIGridModel spiGridModel = null;
 		
 		Integer closureId = 0;
 		try {closureId = ZKUtilitity.getObjectIdFromURLQuery("scid");} catch(Exception ex) {};		
 		
-		if (cmbWarehouse.getSelectedItem() != null) {
+		if (cmbWarehouse.getSelectedItem() != null && cmbMaterial.getSelectedItem() != null) {
 			
-			//re-render the grid with the selected warehouse spi
-			spiGridModel = new SPIGridModel(closureId, ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
+			//re-render the grid with the selected warehouse and item
+			spiGridModel = new SPIGridModel(closureId, 
+										((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());			
+		}
+		else if (cmbWarehouse.getSelectedItem() != null) {
+			
+			//re-render the grid with the selected warehouse
+			spiGridModel = new SPIGridModel(closureId, 
+										((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+										0);
+		}
+		else if (cmbMaterial.getSelectedItem() != null) {
+			
+			//re-render the grid with the selected material
+			spiGridModel = new SPIGridModel(closureId, 
+										0,
+										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());
 		}
 		else {
 			//re-render the grid with the whole spi
-			spiGridModel = new SPIGridModel(closureId, 0);	
+			spiGridModel = new SPIGridModel(closureId, 0, 0);	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(spiGridModel);
 	}
 	
 	@Listen("onChange = combobox#cmbWarehouse")
     public void cmbWarehouse_onChange() throws SQLException {
-		processWarehouseSelection();
+		processParamSelection();
+	}
+	
+	@Listen("onChange = combobox#cmbMaterial")
+    public void cmbMaterial_onChange() throws SQLException {
+		processParamSelection();
 	}
 	
 	/*
@@ -52,6 +76,15 @@ public class SPIComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbWarehouse")
     public void cmbWarehouse_onClick() throws SQLException {
-		if (SpringUtility.underTesting()) processWarehouseSelection();
+		if (SpringUtility.underTesting()) processParamSelection();
+	}
+	
+	/*
+	 * Needed for testing. 
+	 * combo_onChange event isn't triggered under testing.
+	 */
+	@Listen("onClick = combobox#cmbMaterial")
+    public void cmbMaterial_onClick() throws SQLException {
+		if (SpringUtility.underTesting()) processParamSelection();
 	}
 }

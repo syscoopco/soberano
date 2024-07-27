@@ -11,20 +11,22 @@ public class SPI extends BusinessActivityTrackedObject {
 	
 	private Integer warehouseId = 0;
 	private Integer closureId = 0;
-	private String iventoryItemCode = "";
+	private Integer acquirableMaterialId = 0;
 	private BigDecimal quantity = new BigDecimal(0.0);
 	private BigDecimal unitValue = new BigDecimal(0.0);
 	
-	public SPI(Integer closureId, Integer warehouseId) {
+	public SPI(Integer closureId, Integer warehouseId, Integer acquirableMaterialId) {
 		this.setClosureId(closureId);
 		this.setWarehouseId(warehouseId);
+		this.setAcquirableMaterialId(acquirableMaterialId);
 		getAllQuery = "SELECT * FROM soberano.\"" 
 				+ "fn_InventoryOperation_getSPI\"" 
-				+ "(:closureId, :warehouseId, :lang, :loginname)";
-		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, :warehouseId, :lang, :loginname) AS count";
+				+ "(:closureId, :warehouseId, :acquirableMaterialId, :lang, :loginname)";
+		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, :warehouseId, :acquirableMaterialId, :lang, :loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 		getAllQueryNamedParameters.put("closureId", closureId);	
-		getAllQueryNamedParameters.put("warehouseId", warehouseId);		
+		getAllQueryNamedParameters.put("warehouseId", warehouseId);	
+		getAllQueryNamedParameters.put("acquirableMaterialId", acquirableMaterialId);	
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 
@@ -44,14 +46,6 @@ public class SPI extends BusinessActivityTrackedObject {
 		this.closureId = closureId;
 	}
 
-	public String getIventoryItemCode() {
-		return iventoryItemCode;
-	}
-
-	public void setIventoryItemCode(String iventoryItemCode) {
-		this.iventoryItemCode = iventoryItemCode;
-	}
-
 	public BigDecimal getQuantity() {
 		return quantity;
 	}
@@ -66,5 +60,13 @@ public class SPI extends BusinessActivityTrackedObject {
 
 	public void setUnitValue(BigDecimal unitValue) {
 		this.unitValue = unitValue;
+	}
+
+	public Integer getAcquirableMaterialId() {
+		return acquirableMaterialId;
+	}
+
+	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
+		this.acquirableMaterialId = acquirableMaterialId;
 	}
 }

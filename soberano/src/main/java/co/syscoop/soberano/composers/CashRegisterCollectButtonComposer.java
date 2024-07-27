@@ -6,10 +6,10 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
+import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
@@ -56,7 +56,22 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 												"records/tickets/" + 
 												"TICKET_" + orderId + ".pdf";
 				try {
-					Printer.print(Translator.translate(qrwr.getReport()), qrwr.getPrinterProfileId(), fileToPrintFullPath, "TICKET_" + orderId, false);
+					//20240726: Barbosa requested not to print ticket on collecting. Better to add a global setting 
+					//enabling / disabling this. This line was commented for just creating the file to print and 
+					//navigating to the (just closed) order's management form.
+					//Printer.print(Translator.translate(qrwr.getReport()), qrwr.getPrinterProfileId(), fileToPrintFullPath, "TICKET_" + orderId, false);
+					
+					/*20240727: replace this block to print from here (cash register form after order collecting)*/
+					PrinterProfile printerProfile = new PrinterProfile(qrwr.getPrinterProfileId());
+					printerProfile.get();
+					Printer printer = new Printer(printerProfile);
+					Printer.createFile(printer,
+										Translator.translate(qrwr.getReport()),
+										qrwr.getPrinterProfileId(),
+										fileToPrintFullPath,
+										false);
+					Executions.sendRedirect("/order.zul?id=" + orderId + "&report=" + fileToPrintFullPath);
+					/*****/
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 
@@ -65,10 +80,11 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 							Messagebox.ERROR);
 				}				
 			}				
-			
+			/*20240726: Uncomment to stay in cash register form after order collecting. 
 			Executions.sendRedirect("/cash_register.zul?id=" + 
 					((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue().toString() + "&oid=" +
 					((Intbox) boxDetails.query("#intSelectedOrder")).getValue().toString());
+			*/
 		}
 		catch(ConfirmationRequiredException ex) {
 			return;

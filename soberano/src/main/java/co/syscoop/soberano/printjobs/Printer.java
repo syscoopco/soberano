@@ -142,8 +142,42 @@ public class Printer {
 		}		
 	}
 	
+	public static void print(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
+		try {
+			PrintService[] printServices = null;
+			if (pss == null) {
+				printServices = PrintServiceLookup.lookupPrintServices(null, null);
+			}
+			else {
+				printServices = pss;
+			}			
+			for (PrintService printService : printServices) {					
+				if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
+					PDDocument document = PDDocument.load(new File(fileToPrintFullPath));
+			        PrinterJob job = PrinterJob.getPrinterJob();
+			        job.setJobName(jobName);
+			        job.setPageable(new PDFPageable(document));
+			        job.setPrintService(printService);
+			        job.print();
+			        document.close();
+			        
+			        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+			        EscPos escPos = new EscPos(printerOutputStream);
+			        escPos.feed(1).cut(EscPos.CutMode.FULL);
+			        escPos.close();
+	            	break;
+	            }
+			}
+		}
+		catch (Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + jobName + ". DETAILS: " + ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+	    }
+	}
+	
 	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
-		String printJobName = "";
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
 				printThroughSocket(textToPrint, printerNameParam);
@@ -151,32 +185,16 @@ public class Printer {
 			else {
 				PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
 				if (printServices.length == 0) {
-					printCUPS(textToPrint, printJobName);
+					printCUPS(textToPrint, jobName);
 				}
 				else {
-					for (PrintService printService : printServices) {					
-						if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
-							PDDocument document = PDDocument.load(new File(fileToPrintFullPath));
-					        PrinterJob job = PrinterJob.getPrinterJob();
-					        job.setJobName(jobName);
-					        job.setPageable(new PDFPageable(document));
-					        job.setPrintService(printService);
-					        job.print();
-					        document.close();
-					        
-					        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
-					        EscPos escPos = new EscPos(printerOutputStream);
-					        escPos.feed(1).cut(EscPos.CutMode.FULL);
-					        escPos.close();
-			            	break;
-			            }
-					}		        
+					print(printServices, fileToPrintFullPath, printerNameParam, jobName);    
 				}
 			}
 		}
 		catch (Exception ex) {
 			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + printJobName + ". DETAILS: " + ex.getMessage(), 
+					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + jobName + ". DETAILS: " + ex.getMessage(), 
 					Labels.getLabel("messageBoxTitle.Error"),
 					Messagebox.ERROR);
 	    }
@@ -241,6 +259,19 @@ public class Printer {
 		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
 	}
 	
+	public static void createFile(Printer printer,
+								String textToPrint,
+								Integer printerProfileId,
+								String fileToPrintFullPath,
+								Boolean _3LF) throws Exception {
+		if (_3LF) {
+			printer.createPDFFile3LF(textToPrint, fileToPrintFullPath);
+		}
+		else {
+			printer.createPDFFile(textToPrint, fileToPrintFullPath);
+		}	
+	}
+	
 	public static void print(String textToPrint,
 							Integer printerProfileId,
 							String fileToPrintFullPath,
@@ -249,12 +280,7 @@ public class Printer {
 		PrinterProfile printerProfile = new PrinterProfile(printerProfileId);
 		printerProfile.get();
 		Printer printer = new Printer(printerProfile);
-		if (_3LF) {
-			printer.createPDFFile3LF(textToPrint, fileToPrintFullPath);
-		}
-		else {
-			printer.createPDFFile(textToPrint, fileToPrintFullPath);
-		}		
+		createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
 		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
 	}
 	
