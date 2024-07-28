@@ -406,13 +406,6 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						///////////////////////////////
 						// foreign keys to metamodel //
 						///////////////////////////////
-						"ALTER TABLE soberano.\"AcquirableMaterial\" \n"
-						+ "			ADD CONSTRAINT \"AcquirableMaterial_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
 						"ALTER TABLE soberano.\"Activity\"\n"
 						+ "  ADD CONSTRAINT \"Activity_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
@@ -420,76 +413,69 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"ALTER TABLE soberano.\"CashRegister\"\n"
-						+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+						"ALTER TABLE soberano.\"Counter\"\n"
+								+ "  ADD CONSTRAINT \"Counter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Order\"\n"
+								+ "  ADD CONSTRAINT \"Order_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 						
-						
-						
-						"ALTER TABLE soberano.\"Catalog\"\n"
-						+ "  ADD CONSTRAINT \"Catalog_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
+								
+								
 						"ALTER TABLE soberano.\"Configuration\"\n"
-						+ "  ADD CONSTRAINT \"Configuration_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "  ADD CONSTRAINT \"Configuration_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Catalog\"\n"
+								+ "  ADD CONSTRAINT \"Catalog_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Worker\"\n"
+								+ "  ADD CONSTRAINT \"Worker_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"AcquirableMaterial\" \n"
+						+ "			ADD CONSTRAINT \"AcquirableMaterial_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
 						"ALTER TABLE soberano.\"CostCenter\" \n"
-						+ "			ADD CONSTRAINT \"CostCenter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "			ADD CONSTRAINT \"CostCenter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
 						
-						
-						
-						"ALTER TABLE soberano.\"Counter\"\n"
-						+ "  ADD CONSTRAINT \"Counter_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",						
-						
-						
-						
+								
+								
 						"ALTER TABLE soberano.\"Currency\" \n"
-						+ "			ADD CONSTRAINT \"Currency_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"Customer\" \n"
-						+ "			ADD CONSTRAINT \"Customer_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-				
-						
-						
-						"ALTER TABLE soberano.\"InventoryOperation\" \n"
-						+ "			ADD CONSTRAINT \"InventoryOperation_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "			ADD CONSTRAINT \"Currency_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
 						"ALTER TABLE soberano.\"MaterialExpense\" \n"
-						+ "			ADD CONSTRAINT \"MaterialExpense_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"Order\"\n"
-						+ "  ADD CONSTRAINT \"Order_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
+								+ "			ADD CONSTRAINT \"MaterialExpense_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
 						"ALTER TABLE soberano.\"PayrollExpense\" \n"
 						+ "			ADD CONSTRAINT \"PayrollExpense_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
@@ -497,87 +483,144 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
-						"ALTER TABLE soberano.\"PrinterProfile\"\n"
-						+ "						ADD CONSTRAINT \"PrinterProfile_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
 						"ALTER TABLE soberano.\"Process\" \n"
-						+ "			ADD CONSTRAINT \"Process_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"ProcessRun\" \n"
-						+ "			ADD CONSTRAINT \"ProcessRun_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
+								+ "			ADD CONSTRAINT \"Process_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
 						"ALTER TABLE soberano.\"Product\" \n"
-						+ "			ADD CONSTRAINT \"Product_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "			ADD CONSTRAINT \"Product_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
 						
-						
+								
+								
 						"ALTER TABLE soberano.\"ProductCategory\" \n"
-						+ "			ADD CONSTRAINT \"ProductCategory_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"ProductionLine\"\n"
-						+ "						ADD CONSTRAINT \"ProductionLine_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"Service\" \n"
-						+ "			ADD CONSTRAINT \"Service_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"ServiceExpense\" \n"
-						+ "			ADD CONSTRAINT \"ServiceExpense_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
-						"ALTER TABLE soberano.\"ShiftClosure\" \n"
-						+ "			ADD CONSTRAINT \"ShiftClosure_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
+								+ "			ADD CONSTRAINT \"ProductCategory_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Provider\" \n"
+								+ "			ADD CONSTRAINT \"Provider_This_is_identified_by_EntityTypeInstance_id_fke\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
 						"ALTER TABLE soberano.\"Unit\" \n"
-						+ "			ADD CONSTRAINT \"Unit_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-						
-						
-						
+								+ "			ADD CONSTRAINT \"Unit_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
 						"ALTER TABLE soberano.\"Warehouse\" \n"
-						+ "			ADD CONSTRAINT \"Warehouse_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
-									
-									
-									
-						"ALTER TABLE soberano.\"Worker\"\n"
-						+ "  ADD CONSTRAINT \"Worker_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "			ADD CONSTRAINT \"Warehouse_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"ServiceExpense\" \n"
+								+ "			ADD CONSTRAINT \"ServiceExpense_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Service\" \n"
+								+ "			ADD CONSTRAINT \"Service_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"ShiftClosure\" \n"
+								+ "			ADD CONSTRAINT \"ShiftClosure_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"InventoryOperation\" \n"
+								+ "			ADD CONSTRAINT \"InventoryOperation_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Customer\" \n"
+								+ "			ADD CONSTRAINT \"Customer_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Deposit\" \n"
+								+ "			ADD CONSTRAINT \"Deposit_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Withdrawal\" \n"
+								+ "			ADD CONSTRAINT \"Withdrawal_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Receivable\" \n"
+								+ "			ADD CONSTRAINT \"Receivable_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Balancing\" \n"
+								+ "			ADD CONSTRAINT \"Balancing_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"ProcessRun\" \n"
+								+ "			ADD CONSTRAINT \"ProcessRun_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "				REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "				ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"PrinterProfile\"\n"
+								+ "						ADD CONSTRAINT \"PrinterProfile_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"ProductionLine\"\n"
+								+ "						ADD CONSTRAINT \"ProductionLine_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"DeliveryProvider\"\n"
+								+ "						ADD CONSTRAINT \"DeliveryProvider_This_is_identified_by_EntityTypeInstance_id_\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "						REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "						ON UPDATE CASCADE ON DELETE CASCADE;",
+						
+						
+						
+						"ALTER TABLE soberano.\"CashRegister\"\n"
+						+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
 						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
-						
+									
 						
 						
 						/////////////////////////////////////
@@ -740,6 +783,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Activity\"\n"
+						+ "    ON soberano.\"Activity\" USING btree\n"
+						+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+						+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* counter lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -775,6 +825,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(2, 'Salesclerk', 2004),\n"
 						+ "				(2, 'Manager assistant', 2004),\n"
 						+ "				(2, 'Auditor', 2004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Counter\"\n"
+								+ "    ON soberano.\"Counter\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -843,6 +900,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Order\"\n"
+								+ "    ON soberano.\"Order\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* configuration lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -869,6 +933,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(4, 'System admin', 4001),\n"
 						+ "				(4, 'Manager', 4002),\n"
 						+ "				(4, 'System admin', 4002);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Configuration\"\n"
+								+ "    ON soberano.\"Configuration\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -917,6 +988,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Catalog\"\n"
+								+ "    ON soberano.\"Catalog\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* worker lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -950,6 +1028,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(6, 'Manager', 6004),\n"
 						+ "				(6, 'Accountant', 6004),\n"
 						+ "				(6, 'Auditor', 6004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Worker\"\n"
+								+ "    ON soberano.\"Worker\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1000,6 +1085,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_ProductCategory\"\n"
+								+ "    ON soberano.\"ProductCategory\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* provider lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1034,6 +1126,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(15, 'Accountant', 15004),\n"
 						+ "				(15, 'Storekeeper', 15004),\n"
 						+ "				(15, 'Auditor', 15004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Provider\"\n"
+								+ "    ON soberano.\"Provider\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1085,6 +1184,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Product\"\n"
+								+ "    ON soberano.\"Product\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* warehouse lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1119,6 +1225,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(17, 'Storekeeper', 17004),\n"
 						+ "				(17, 'Technologist', 17004),\n"
 						+ "				(17, 'Auditor', 17004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Warehouse\"\n"
+								+ "    ON soberano.\"Warehouse\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1164,6 +1277,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_CostCenter\"\n"
+								+ "    ON soberano.\"CostCenter\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* process lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1203,6 +1323,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(12, 'Workshop 5 worker', 12004),\n"						
 						+ "				(12, 'Storekeeper', 12004),\n"
 						+ "				(12, 'Auditor', 12004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Process\"\n"
+								+ "    ON soberano.\"Process\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1248,6 +1375,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_AcquirableMaterial\"\n"
+								+ "    ON soberano.\"AcquirableMaterial\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* currency lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1285,6 +1419,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Currency\"\n"
+								+ "    ON soberano.\"Currency\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* service lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1317,6 +1458,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(19, 'Accountant', 19004),\n"
 						+ "				(19, 'Shift manager', 19004),\n"
 						+ "				(19, 'Auditor', 19004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Service\"\n"
+								+ "    ON soberano.\"Service\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1356,6 +1504,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_MaterialExpense\"\n"
+								+ "    ON soberano.\"MaterialExpense\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* service expense lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1388,6 +1543,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(18, 'Manager', 18003),\n"
 						+ "				(18, 'Accountant', 18004),\n"
 						+ "				(18, 'Auditor', 18004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_ServiceExpense\"\n"
+								+ "    ON soberano.\"ServiceExpense\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1425,6 +1587,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_PayrollExpense\"\n"
+								+ "    ON soberano.\"PayrollExpense\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* inventory operation lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1454,6 +1623,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(21, 'Manager', 21004),\n"
 						+ "				(21, 'Accountant', 21004),\n"
 						+ "				(21, 'Auditor', 21004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_InventoryOperation\"\n"
+								+ "    ON soberano.\"InventoryOperation\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1495,6 +1671,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Customer\"\n"
+								+ "    ON soberano.\"Customer\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* deposit lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1527,6 +1710,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Deposit\"\n"
+								+ "    ON soberano.\"Deposit\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* withdrawal lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1556,6 +1746,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(24, 'Shift manager', 24004),\n"	
 						+ "				(24, 'Manager', 24004),\n"
 						+ "				(24, 'Auditor', 24004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Withdrawal\"\n"
+								+ "    ON soberano.\"Withdrawal\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1612,6 +1809,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Receivable\"\n"
+								+ "    ON soberano.\"Receivable\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* balancing lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1642,6 +1846,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(26, 'Manager', 26004),\n"
 						+ "				(26, 'Accountant', 26004),\n"
 						+ "				(26, 'Auditor', 26004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Balancing\"\n"
+								+ "    ON soberano.\"Balancing\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1719,6 +1930,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(27, 'Workshop 5 worker', 27008);",
 						
 						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_ProcessRun\"\n"
+								+ "    ON soberano.\"ProcessRun\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
 						"/* shift closure lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1757,6 +1975,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_ShiftClosure\"\n"
+								+ "    ON soberano.\"ShiftClosure\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* printer profile lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1788,6 +2013,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(28, 'System admin', 28003),\n"
 						+ "				(28, 'Salesclerk', 28004),\n"
 						+ "				(28, 'Auditor', 28004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_PrinterProfile\"\n"
+								+ "    ON soberano.\"PrinterProfile\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 						
@@ -1843,6 +2075,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_ProductionLine\"\n"
+								+ "    ON soberano.\"ProductionLine\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+						
+						
+						
 						"/* delivery provider */\n"
 						+ "\n"
 						+ "--stage filters\n"
@@ -1879,6 +2118,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(30, 'Salesclerk', 30004),\n"
 						+ "				(30, 'Community manager', 30004),\n"
 						+ "				(30, 'Auditor', 30004);",
+						
+						
+						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_DeliveryProvider\"\n"
+								+ "    ON soberano.\"DeliveryProvider\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
 						
 						
 												
