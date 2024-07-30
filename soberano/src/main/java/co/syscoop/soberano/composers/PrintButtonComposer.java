@@ -1,5 +1,7 @@
 package co.syscoop.soberano.composers;
 
+import java.util.Base64;
+
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -48,7 +50,7 @@ public class PrintButtonComposer extends SelectorComposer {
 				PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
 				printerProfile.get();
 				Printer.print(null, 
-							report, 
+							new String(Base64.getDecoder().decode(report)), 
 							printerProfile.getPrinterName(), 
 							trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
 			}

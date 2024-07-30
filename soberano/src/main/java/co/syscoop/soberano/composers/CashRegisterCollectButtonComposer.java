@@ -1,5 +1,7 @@
 package co.syscoop.soberano.composers;
 
+import java.util.Base64;
+
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -70,7 +72,8 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 										qrwr.getPrinterProfileId(),
 										fileToPrintFullPath,
 										false);
-					Executions.sendRedirect("/order.zul?id=" + orderId + "&report=" + fileToPrintFullPath);
+					Executions.sendRedirect("/order.zul?id=" + orderId + 
+														"&report=" + Base64.getEncoder().encodeToString(fileToPrintFullPath.getBytes()));
 					/*****/
 				}
 				catch(Exception ex) {
