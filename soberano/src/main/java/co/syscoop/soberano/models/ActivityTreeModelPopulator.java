@@ -1,9 +1,11 @@
 package co.syscoop.soberano.models;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.BeansException;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.DefaultTreeModel;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Messagebox;
@@ -11,6 +13,7 @@ import org.zkoss.zul.Tree;
 import org.zkoss.zul.TreeModel;
 import org.zkoss.zul.TreeNode;
 
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.rowdata.OrderRowData;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.domain.tracked.Order;
@@ -31,7 +34,33 @@ public class ActivityTreeModelPopulator {
 		
 		for (Object orderObject : orderObjects) {
 			
-			OrderRowData order = (OrderRowData) orderObject;			
+			OrderRowData order = (OrderRowData) orderObject;	
+			
+			//there's not ZK web application context under testing
+			if (!SpringUtility.underTesting()) {
+				
+				//in case ongoing object is an order,
+				if (order.getObjectType() == 0) {					
+					HashMap<Integer, HashMap<Integer, Boolean>> printedAllocationsStore = 
+							((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.getCurrent().
+																					getDesktop().
+																					getWebApp().
+																					getAttribute("printed_allocations"));
+					
+					//in case printed allocations store doesn't include an entry for the order,					
+					if (printedAllocationsStore.get(order.getOrderId()) == null) {
+						
+						//initialize order's printed allocations store
+						((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+								getCurrent().
+								getDesktop().
+								getWebApp().
+								getAttribute("printed_allocations")).put(order.getOrderId(), 
+																		new HashMap<Integer, Boolean>());
+					}
+				}
+			}	
+					
 			String orderId = order.getOrderId().toString(); 
 			String orderLabel = order.getLabel() == null || order.getLabel().isEmpty() ? orderId : orderId + " (" + order.getLabel() + ")";
 			TreeNode orderNode = new DefaultTreeNode(new NodeData(orderLabel, order));

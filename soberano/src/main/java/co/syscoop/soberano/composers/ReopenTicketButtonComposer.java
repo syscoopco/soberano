@@ -1,5 +1,7 @@
 package co.syscoop.soberano.composers;
 
+import java.util.HashMap;
+
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -15,6 +17,7 @@ import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.renderers.ActionRequested;
+import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ReopenTicketButtonComposer extends SelectorComposer {
@@ -30,6 +33,7 @@ public class ReopenTicketButtonComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
+	@SuppressWarnings("unchecked")
 	@Listen("onClick = button#btnReopen")
     public void btnReopen_onClick() throws Exception {
 		try {
@@ -44,6 +48,17 @@ public class ReopenTicketButtonComposer extends SelectorComposer {
 						throw new ShiftHasBeenClosedException();
 					}
 					else {
+						//there's not ZK web application context under testing
+						if (!SpringUtility.underTesting()) {
+							
+							//re-initialize order's printed allocations store
+							((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+									getCurrent().
+									getDesktop().
+									getWebApp().
+									getAttribute("printed_allocations")).put(orderId, new HashMap<Integer, Boolean>());
+						}
+						
 						Executions.sendRedirect("/order.zul?id=" + orderId);
 					}
 				}
