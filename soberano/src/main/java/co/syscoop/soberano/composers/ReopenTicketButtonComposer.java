@@ -52,11 +52,12 @@ public class ReopenTicketButtonComposer extends SelectorComposer {
 						if (!SpringUtility.underTesting()) {
 							
 							//re-initialize order's printed allocations store
-							((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+							((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
 									getCurrent().
 									getDesktop().
 									getWebApp().
-									getAttribute("printed_allocations")).put(orderId, new HashMap<Integer, Boolean>());
+									getAttribute("printed_allocations")).put(orderId, new HashMap<Integer, 
+																								HashMap<Integer, Boolean>>());
 						}
 						
 						Executions.sendRedirect("/order.zul?id=" + orderId);

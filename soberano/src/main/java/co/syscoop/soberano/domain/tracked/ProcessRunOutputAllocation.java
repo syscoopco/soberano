@@ -17,7 +17,17 @@ import co.syscoop.soberano.util.SpringUtility;
 public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 	
 	private Integer productionLineId = 0;
+	private String description = "";
+	private String itemName = "";
 	
+	public Integer getProductionLineId() {
+		return productionLineId;
+	}
+
+	public void setProductionLineId(Integer productionLineId) {
+		this.productionLineId = productionLineId;
+	}
+
 	public ProcessRunOutputAllocation() {}
 	
 	public ProcessRunOutputAllocation(Integer produtionLineId) {
@@ -108,5 +118,21 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
 }

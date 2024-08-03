@@ -16,6 +16,9 @@ public class ProcessRunOutputAllocationMapper implements RowMapper<Object> {
 			Integer allocationId = rs.getInt("allocationId");
 			if (!rs.wasNull()) {
 				processRunOutputAllocation.setId(allocationId);
+				processRunOutputAllocation.setProductionLineId(rs.getInt("productionLineId"));
+				processRunOutputAllocation.setDescription(rs.getString("description"));	
+				processRunOutputAllocation.setItemName(rs.getString("itemName"));	
 			}
 			return processRunOutputAllocation;
 		}

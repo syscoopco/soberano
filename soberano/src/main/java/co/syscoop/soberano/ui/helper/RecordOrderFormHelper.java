@@ -68,11 +68,12 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 				if (!SpringUtility.underTesting()) {
 					
 					//initialize new order's printed allocations store
-					((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+					((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
 							getCurrent().
 							getDesktop().
 							getWebApp().
-							getAttribute("printed_allocations")).put(newOrderId, new HashMap<Integer, Boolean>());
+							getAttribute("printed_allocations")).put(newOrderId, 
+																	new HashMap<Integer, HashMap<Integer, Boolean>>());
 				}
 				
 				return newOrderId;

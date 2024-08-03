@@ -41,22 +41,22 @@ public class ActivityTreeModelPopulator {
 				
 				//in case ongoing object is an order,
 				if (order.getObjectType() == 0) {					
-					HashMap<Integer, HashMap<Integer, Boolean>> printedAllocationsStore = 
-							((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.getCurrent().
-																					getDesktop().
-																					getWebApp().
-																					getAttribute("printed_allocations"));
+					HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>> printedAllocationsStore = 
+							((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.getCurrent().
+																										getDesktop().
+																										getWebApp().
+																										getAttribute("printed_allocations"));
 					
 					//in case printed allocations store doesn't include an entry for the order,					
 					if (printedAllocationsStore.get(order.getOrderId()) == null) {
 						
 						//initialize order's printed allocations store
-						((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+						((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
 								getCurrent().
 								getDesktop().
 								getWebApp().
 								getAttribute("printed_allocations")).put(order.getOrderId(), 
-																		new HashMap<Integer, Boolean>());
+																		new HashMap<Integer, HashMap<Integer, Boolean>>());
 					}
 				}
 			}	

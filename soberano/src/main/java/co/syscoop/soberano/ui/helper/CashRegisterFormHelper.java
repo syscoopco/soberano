@@ -362,11 +362,10 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			if (!SpringUtility.underTesting()) {
 				
 				//deallocate order's printed allocations store
-				((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
-						getCurrent().
-						getDesktop().
-						getWebApp().
-						getAttribute("printed_allocations")).remove(orderId);
+				((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.getCurrent().
+																							getDesktop().
+																							getWebApp().
+																							getAttribute("printed_allocations")).remove(orderId);
 			}
 			
 			requestedAction = ActionRequested.NONE;

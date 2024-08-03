@@ -24,7 +24,6 @@ import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
-import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
@@ -199,10 +198,11 @@ public class OrderManagementComposer extends OrderComposer {
 							for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(orderId)) {
 								try{
 									Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
+									Integer productionLineId = ((ProcessRunOutputAllocation) object).getProductionLineId();
 									
 									//print allocation only in case it wasn't printed yet
-									HashMap<Integer, Boolean> thisOrderPrintedAllocations = 
-											((HashMap<Integer, HashMap<Integer, Boolean>>) Executions.
+									HashMap<Integer, HashMap<Integer, Boolean>> thisOrderPrintedAllocations = 
+											((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
 																								getCurrent().
 																								getDesktop().
 																								getWebApp().
@@ -210,12 +210,20 @@ public class OrderManagementComposer extends OrderComposer {
 																									get(orderId);
 									
 									//order hasn't been collected. it's still open.
-									if (thisOrderPrintedAllocations != null) {
+									if (thisOrderPrintedAllocations != null) {										
+										HashMap<Integer, Boolean> productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
+										
+										if (productionLineAllocations == null) {
+											thisOrderPrintedAllocations.put(productionLineId, new HashMap<Integer, Boolean>());
+											productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
+										}
+										
 										Boolean allocationWasPrinted = 
-												thisOrderPrintedAllocations.get(allocationId) == null ? false : thisOrderPrintedAllocations.get(allocationId);
+												productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
 										
 										//allocation was not printed yet
 										if (!allocationWasPrinted) {
+											/* TODO: global setting to enable this code to print allocations: one by one on making request. 
 											Printer.printReport((ProcessRunOutputAllocation) object, 
 													SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 													"records/production_lines/" + 
@@ -224,8 +232,9 @@ public class OrderManagementComposer extends OrderComposer {
 													true,
 													true,
 													true);
-											thisOrderPrintedAllocations.put(allocationId, true);
-										}
+											productionLineAllocations.put(allocationId, true);
+											*/											
+										}																			
 									}
 								}
 								catch(Exception ex) {
@@ -233,17 +242,11 @@ public class OrderManagementComposer extends OrderComposer {
 								}
 							}
 						}
-						catch(NotEnoughRightsException ex) {
-							ExceptionTreatment.logAndShow(ex, 
-									Labels.getLabel("message.permissions.NotEnoughRights"), 
-									Labels.getLabel("messageBoxTitle.Warning"),
-									Messagebox.EXCLAMATION);
-						}
 						catch(Exception ex) {
 							throw ex;
 						}
 					}		
-					
+				
 					Executions.sendRedirect("/order.zul?id=" + intObjectId.getValue());
 				}
 			}

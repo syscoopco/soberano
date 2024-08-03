@@ -13,8 +13,11 @@ import co.syscoop.soberano.util.SpringUtility;
 
 public class SoberanoInit implements WebAppInit {
 	
-	private HashMap<Integer /*order id*/, HashMap<Integer /*allocation id*/, Boolean /*true if allocation was already printed*/>> printedAllocations=
-				new HashMap<Integer, HashMap<Integer, Boolean>>();
+	private HashMap<Integer /*order id*/, 
+					HashMap<Integer /*production line id*/, 
+						HashMap<Integer /*allocation id*/, 
+								Boolean /*true if allocation was already printed*/>>> printedAllocations =
+				new HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>();
 	
 	@Override
 	public void init(WebApp wapp) throws Exception {
