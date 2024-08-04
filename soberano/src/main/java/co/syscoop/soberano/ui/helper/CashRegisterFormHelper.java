@@ -135,7 +135,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			
 			Currency curr = (Currency) item;
 			Button button = new Button(curr.getStringId());
-			if (!curr.getIsCash()) {button.setDisabled(true);}
+			if (!curr.getIsCash() && orderId != null) {button.setDisabled(true);}
 			button.setId("btn" + curr.getStringId());
 			if (curr.getIsSystemCurrency()) {
 				((Textbox) wndContentPanel.query("#txtSelectedCurrencyCode")).setValue(button.getLabel());
