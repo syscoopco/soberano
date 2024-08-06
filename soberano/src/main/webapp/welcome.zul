@@ -6,7 +6,11 @@
 			<grid>
 				<rows>
 					<row align="center">
-						<label value="${labels.pageWelcome.note1}"/>
+					
+					<!-- 
+					<label value="${labels.pageWelcome.note1}"/>
+					 -->
+						
 					</row>
 					<row>
 						${labels.caption.field.emailAddress}

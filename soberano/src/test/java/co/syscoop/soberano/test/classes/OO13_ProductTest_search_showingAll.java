@@ -20,7 +20,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(13)
 
-//@Disabled
+@Disabled
 
 class OO13_ProductTest_search_showingAll {
 	

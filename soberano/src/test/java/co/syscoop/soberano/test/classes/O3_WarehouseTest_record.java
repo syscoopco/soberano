@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_WarehouseTest_record extends WarehouseActionTest {

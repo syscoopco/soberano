@@ -48,6 +48,14 @@ public class AcquirableMaterial extends InventoryItem {
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 	}
 	
+	public AcquirableMaterial(Boolean onlyUsedOnes) {
+		getAllQuery = "SELECT * FROM soberano.\"fn_AcquirableMaterial_getAll\"(:onlyUsedOnes, :loginname)";
+		getAllQueryNamedParameters = new HashMap<String, Object>();
+		
+		//filterable params 
+		getAllQueryNamedParameters.put("onlyUsedOnes", onlyUsedOnes);
+	}
+	
 	@Override
 	public Integer record() throws Exception {
 					

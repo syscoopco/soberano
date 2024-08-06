@@ -11,7 +11,10 @@
 				</comboitem>
 			</template>
 		</combobox>
-		<button id="btnNew" label="+" href="/new_acquirable_material.zul" sclass="BarButton NewButton"></button>		
+		<button id="btnNew" label="+" href="/new_acquirable_material.zul" sclass="BarButton NewButton"></button>
+		<hbox pack="center" align="center" hflex="1">
+			<checkbox id="chkShowOnlyUsedOnes" checked="false" label="${labels.caption.field.showOnlyUsedOnes}" sclass="Caption" apply="co.syscoop.soberano.composers.ShowOnlyUsedAcquirableMaterialsComposer"></checkbox>
+		</hbox>	
 	</hbox>
 	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
 		<tree id="treeObjects" apply="co.syscoop.soberano.composers.AcquirableMaterialsTreeComposer">
