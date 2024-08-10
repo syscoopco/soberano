@@ -17,7 +17,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(11)
 
-@Disabled
+//@Disabled
 
 class OO11_CostCenterTest_disable  extends CostCenterActionTest {
 

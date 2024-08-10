@@ -23,7 +23,7 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 
 @Order(6)
 
-@Disabled
+//@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		

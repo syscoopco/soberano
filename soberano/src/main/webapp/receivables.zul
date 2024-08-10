@@ -52,7 +52,7 @@
 				</column>
 				<column align="right" label="${labels.caption.columnHeader.amountDue}" sort="auto(amountDue)">
 				</column>
-				<column align="right" label="${labels.caption.columnHeader.history}">
+				<column align="right" label="${labels.caption.columnHeader.history}" visible="false">
 				</column>
 				<column align="center" label="${labels.caption.columnHeader.action}">
 				</column>

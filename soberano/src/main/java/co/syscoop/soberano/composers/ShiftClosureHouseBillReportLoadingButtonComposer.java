@@ -5,7 +5,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import co.syscoop.soberano.exception.SoberanoException;
 
 @SuppressWarnings({ "serial" })
-public class ShiftClosureHouseBillReportLoadingButtonComposer extends ShiftClosureReportLoadingButtonComposer {
+public class ShiftClosureHouseBillReportLoadingButtonComposer extends ShiftClosureReportLoadingComposer {
 	
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -15,6 +15,6 @@ public class ShiftClosureHouseBillReportLoadingButtonComposer extends ShiftClosu
 	@Listen("onClick = button#btnHouseBill")
     public void btnRetrieve_onClick() throws SoberanoException {
 		
-		loadReport("housebill");
+		loadReport("housebill", null);
     }
 }

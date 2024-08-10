@@ -27,6 +27,7 @@ import co.syscoop.soberano.exception.PasswordsMustMatchException;
 import co.syscoop.soberano.exception.WorkerMustBeAssignedToAResponsibilityException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.view.viewmodel.CountrySelectionViewModel;
 
 public class WorkerFormHelper extends TrackedObjectFormHelper {
 	
@@ -120,6 +121,10 @@ public class WorkerFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), worker.getContactData().getTown());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), worker.getContactData().getCity());
 		Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
+		
+		CountrySelectionViewModel cSelectionViewModel = new CountrySelectionViewModel();
+		cmbCountry.setModel(cSelectionViewModel.getModel());
+		
 		ZKUtilitity.setValueWOValidation(cmbCountry, worker.getContactData().getCountryCode());
 		Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
 		Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");

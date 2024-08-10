@@ -122,6 +122,17 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		return super.getReport();
 	}
 	
+	public String getCostCenterReport(String costCenterName) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getCostCenterReport\"(:lang, :closureId, :costCenterName, :loginname) AS report";
+		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
+		getReportParameters.put("costCenterName", costCenterName);
+		return super.getReport();
+	}
+	
 	public PrintableData getReportWithPrinterProfile() throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -162,6 +173,18 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		Map<String, Object> qryParameters = new HashMap<String,	Object>();
 		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
 		qryParameters.put("closureId", this.getId());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
+	
+	public PrintableData getCostCenterReportWithPrinterProfile(String costCenterName) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getCostCenterReportWithPrinterProfile\"(:lang, :closureId, :costCenterName, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("costCenterName", costCenterName);
 		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
 	}

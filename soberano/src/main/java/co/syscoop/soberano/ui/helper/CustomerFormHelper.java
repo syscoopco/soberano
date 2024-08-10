@@ -15,6 +15,7 @@ import co.syscoop.soberano.domain.tracked.Customer;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.view.viewmodel.CountrySelectionViewModel;
 
 public class CustomerFormHelper extends TrackedObjectFormHelper {
 	
@@ -44,6 +45,10 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), customer.getContactData().getTown());
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), customer.getContactData().getCity());
 		Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
+		
+		CountrySelectionViewModel cSelectionViewModel = new CountrySelectionViewModel();
+		cmbCountry.setModel(cSelectionViewModel.getModel());
+		
 		ZKUtilitity.setValueWOValidation(cmbCountry, customer.getContactData().getCountryCode());
 		Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
 		Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");

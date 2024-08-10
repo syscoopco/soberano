@@ -16,7 +16,6 @@ import org.zkoss.zul.Checkbox;
 
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
-import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
@@ -43,47 +42,83 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 	@SuppressWarnings("unchecked")
 	@Override
 	public Integer recordFromForm(Box boxDetails) throws Exception {
-		
-		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
-			Comboitem cmbiCustomer = ((Combobox) boxDetails.query("#cmbCustomer")).getSelectedItem();
-			fillCounters(boxDetails);
-			if (counters.size() == 0) {
-				throw new SomeFieldsContainWrongValuesException();
-			}
-			else {
-				String orderLabel = ((Textbox) boxDetails.query("#txtLabel")).getValue();
-				newOrderId = (new Order(orderLabel,
-										counters, 
-										cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null).record());
-				if (newOrderId == -4) {
-					throw new SomeFieldsContainWrongValuesException();
-				}
-				else if (newOrderId == -2) {
-					throw new OnlyOneOrderPerCounterIsPermittedException();
-				}
-				requestedAction = ActionRequested.NONE;
-				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
 				
-				//there's not ZK web application context under testing
-				if (!SpringUtility.underTesting()) {
-					
-					//initialize new order's printed allocations store
-					((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
-							getCurrent().
-							getDesktop().
-							getWebApp().
-							getAttribute("printed_allocations")).put(newOrderId, 
-																	new HashMap<Integer, HashMap<Integer, Boolean>>());
-				}
-				
-				return newOrderId;
-			}
+		Comboitem cmbiCustomer = ((Combobox) boxDetails.query("#cmbCustomer")).getSelectedItem();
+		fillCounters(boxDetails);
+		if (counters.size() == 0) {
+			throw new SomeFieldsContainWrongValuesException();
 		}
 		else {
-			requestedAction = ActionRequested.RECORD;
-			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.confirm"));
-			throw new ConfirmationRequiredException();
+			String orderLabel = ((Textbox) boxDetails.query("#txtLabel")).getValue();
+			newOrderId = (new Order(orderLabel,
+									counters, 
+									cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null).record());
+			if (newOrderId == -4) {
+				throw new SomeFieldsContainWrongValuesException();
+			}
+			else if (newOrderId == -2) {
+				throw new OnlyOneOrderPerCounterIsPermittedException();
+			}
+			requestedAction = ActionRequested.NONE;
+			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
+			
+			//there's not ZK web application context under testing
+			if (!SpringUtility.underTesting()) {
+				
+				//initialize new order's printed allocations store
+				((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
+						getCurrent().
+						getDesktop().
+						getWebApp().
+						getAttribute("printed_allocations")).put(newOrderId, 
+																new HashMap<Integer, HashMap<Integer, Boolean>>());
+			}
+			
+			return newOrderId;
 		}
+
+//		if required confirmation for order recording, replace the above code block with the following commented one
+//
+//		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
+//			Comboitem cmbiCustomer = ((Combobox) boxDetails.query("#cmbCustomer")).getSelectedItem();
+//			fillCounters(boxDetails);
+//			if (counters.size() == 0) {
+//				throw new SomeFieldsContainWrongValuesException();
+//			}
+//			else {
+//				String orderLabel = ((Textbox) boxDetails.query("#txtLabel")).getValue();
+//				newOrderId = (new Order(orderLabel,
+//										counters, 
+//										cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null).record());
+//				if (newOrderId == -4) {
+//					throw new SomeFieldsContainWrongValuesException();
+//				}
+//				else if (newOrderId == -2) {
+//					throw new OnlyOneOrderPerCounterIsPermittedException();
+//				}
+//				requestedAction = ActionRequested.NONE;
+//				((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
+//				
+//				//there's not ZK web application context under testing
+//				if (!SpringUtility.underTesting()) {
+//					
+//					//initialize new order's printed allocations store
+//					((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
+//							getCurrent().
+//							getDesktop().
+//							getWebApp().
+//							getAttribute("printed_allocations")).put(newOrderId, 
+//																	new HashMap<Integer, HashMap<Integer, Boolean>>());
+//				}
+//				
+//				return newOrderId;
+//			}
+//		}
+//		else {
+//			requestedAction = ActionRequested.RECORD;
+//			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.confirm"));
+//			throw new ConfirmationRequiredException();
+//		}
 	}
 
 	@Override

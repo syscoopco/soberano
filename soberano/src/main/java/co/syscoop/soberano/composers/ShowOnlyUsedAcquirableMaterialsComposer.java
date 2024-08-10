@@ -6,7 +6,6 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
-import org.zkoss.zul.ListModel;
 import org.zkoss.zul.Tree;
 import co.syscoop.soberano.domain.tracked.AcquirableMaterial;
 import co.syscoop.soberano.models.AcquirableMaterialTreeModelPopulator;

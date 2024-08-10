@@ -166,7 +166,7 @@ public class SplitOrderPageInitiator implements Initiator, InitiatorExt {
 						Executions.sendRedirect("/split_order.zul?from=" + cmbFromOrder.getSelectedItem().getValue() + "&to=" + cmbToOrder.getSelectedItem().getValue());
 					}
 					else {
-						if ((Integer) cmbToOrder.getSelectedItem().getValue() != 0) {
+						if (Integer.parseInt(cmbToOrder.getSelectedItem().getValue()) != 0) {
 							Executions.sendRedirect("/split_order.zul?from=" + cmbToOrder.getSelectedItem().getValue());
 						}
 						else {

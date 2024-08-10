@@ -111,7 +111,8 @@ public class OrderedItemTreeNodeRenderer implements TreeitemRenderer<DefaultTree
 		Separator sep4 = new Separator("vertical");
 		tc.appendChild(sep4);
 		Button btnDec = new Button("- 1");
-		btnDec.setDisabled(true);
+		//btnDec.setDisabled(true);
+		btnDec.setVisible(false);
 		btnDec.setClass("ContextualButton");
 		tc.appendChild(btnDec);
 		Separator sep5 = new Separator("vertical");

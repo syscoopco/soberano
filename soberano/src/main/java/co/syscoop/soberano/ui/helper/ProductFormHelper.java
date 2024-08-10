@@ -20,6 +20,8 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel;
+import co.syscoop.soberano.view.viewmodel.ProductCategorySelectionViewModel;
 
 public class ProductFormHelper extends TrackedObjectFormHelper {
 
@@ -38,10 +40,14 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		((Button) incDetails.getParent().query("#incSouth").query("#btnProcess")).setDisabled(false);
 		
+		Combobox cmbCategory = (Combobox) incDetails.query("#cmbCategory");
+		ProductCategorySelectionViewModel pcSelectionViewModel = new ProductCategorySelectionViewModel();
+		cmbCategory.setModel(pcSelectionViewModel.getModel());
+		
 		if (product.getProductCategoryIds().length > 0)
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCategory"), product.getProductCategoryIds()[0]);
+			ZKUtilitity.setValueWOValidation(cmbCategory, product.getProductCategoryIds()[0]);
 		else
-			((Combobox) incDetails.query("#cmbCategory")).setSelectedItem(null);
+			(cmbCategory).setSelectedItem(null);
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), product.getStringId());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), product.getName());
@@ -57,11 +63,15 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		
 		//testing purpose. this control isn't visible
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePriceForTesting"), product.getReferencePrice());
-				
+		
+		Combobox cmbCostCenter = (Combobox) incDetails.query("#cmbCostCenter");
+		CostCenterSelectionViewModel ccSelectionViewModel = new CostCenterSelectionViewModel();
+		cmbCostCenter.setModel(ccSelectionViewModel.getModel());
+		
 		if (product.getCostCenter() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbCostCenter"), product.getCostCenter());
+			ZKUtilitity.setValueWOValidation(cmbCostCenter, product.getCostCenter());
 		else
-			((Combobox) incDetails.query("#cmbCostCenter")).setSelectedItem(null);
+			cmbCostCenter.setSelectedItem(null);
 		
 		((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
 	}

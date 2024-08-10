@@ -15,7 +15,7 @@ import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class ShiftClosureReportLoadingButtonComposer extends SelectorComposer {
+public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 	
 	@Wire
 	protected Textbox txtShownReport; 
@@ -29,7 +29,7 @@ public class ShiftClosureReportLoadingButtonComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	protected void loadReport(String reportType) throws SoberanoException {
+	protected void loadReport(String reportType, String param) throws SoberanoException {
 		
 		try{
 			txtShownReport.setValue(reportType);
@@ -49,6 +49,9 @@ public class ShiftClosureReportLoadingButtonComposer extends SelectorComposer {
 			}
 			else if (reportType.equals("housebill")) {
 				scReport = Translator.translate(new ShiftClosure(scId).getHouseBillReport());
+			}
+			else if (reportType.equals("costcenter")) {
+				scReport = Translator.translate(new ShiftClosure(scId).getCostCenterReport(param));
 			}
 			else {
 				scReport = Translator.translate(new ShiftClosure(scId).getReport());

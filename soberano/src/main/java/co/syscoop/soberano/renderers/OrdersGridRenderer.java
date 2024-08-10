@@ -46,18 +46,22 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(Labels.getLabel("translation.stage." + orderRowData.getStage())));
 		
 		//description
-		Textbox txtDescription = new Textbox(Translator.translate(orderRowData.getDescription()));
-		txtDescription.setMultiline(true);
+		Textbox txtDescription = new
+		Textbox(Translator.translate(orderRowData.getDescription()));
+		txtDescription.setMultiline(true); 
 		txtDescription.setRows(15);
-		txtDescription.setReadonly(true);		
+		txtDescription.setReadonly(true); 
 		row.appendChild(txtDescription);
+		 
 		
 		//history
-		Textbox txtHistory = new Textbox(Translator.translate(orderRowData.getHistory()));
-		txtHistory.setMultiline(true);
+		Textbox txtHistory = new
+		Textbox(Translator.translate(orderRowData.getHistory()));
+		txtHistory.setMultiline(true); 
 		txtHistory.setRows(15);
-		txtHistory.setReadonly(true);		
+		txtHistory.setReadonly(true); 
 		row.appendChild(txtHistory);
+		 
 		
 		//recording date
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

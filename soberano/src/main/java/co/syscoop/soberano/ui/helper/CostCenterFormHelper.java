@@ -14,6 +14,7 @@ import co.syscoop.soberano.domain.tracked.CostCenter;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel;
 
 public class CostCenterFormHelper extends TrackedObjectFormHelper {
 	
@@ -33,15 +34,23 @@ public class CostCenterFormHelper extends TrackedObjectFormHelper {
 		
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), costCenter.getName());
 		
+		Combobox cmbInputWarehouse = (Combobox) incDetails.query("#cmbInputWarehouse");
+		WarehouseSelectionViewModel wSelectionViewModel = new WarehouseSelectionViewModel();
+		cmbInputWarehouse.setModel(wSelectionViewModel.getModel());
+		
 		if (costCenter.getInputWarehouse() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbInputWarehouse"), costCenter.getInputWarehouse());
+			ZKUtilitity.setValueWOValidation(cmbInputWarehouse, costCenter.getInputWarehouse());
 		else
-			((Combobox) incDetails.query("#cmbInputWarehouse")).setSelectedItem(null);
+			(cmbInputWarehouse).setSelectedItem(null);
+		
+		Combobox cmbOutputWarehouse = (Combobox) incDetails.query("#cmbOutputWarehouse");
+		WarehouseSelectionViewModel owSelectionViewModel = new WarehouseSelectionViewModel();
+		cmbOutputWarehouse.setModel(owSelectionViewModel.getModel());
 			
 		if (costCenter.getOutputWarehouse() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbOutputWarehouse"), costCenter.getOutputWarehouse());
+			ZKUtilitity.setValueWOValidation(cmbOutputWarehouse, costCenter.getOutputWarehouse());
 		else
-			((Combobox) incDetails.query("#cmbOutputWarehouse")).setSelectedItem(null);
+			(cmbOutputWarehouse).setSelectedItem(null);
 	}
 
 	@Override

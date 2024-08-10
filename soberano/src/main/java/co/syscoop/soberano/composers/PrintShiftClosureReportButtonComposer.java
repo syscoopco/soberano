@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -99,6 +100,34 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
 									"CLOSURE_HOUSEBILL_" + scId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
+			else if (txtShownReport.getText().equals("costcenter")) {
+				Combobox cmbCostCenter = (Combobox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#cmbCostCenter");
+				String costCenterName = "";
+				if (cmbCostCenter.getSelectedItem() != null) {
+					costCenterName = cmbCostCenter.getText();
+				}
+				PrintableData pd = new ShiftClosure(scId).getCostCenterReportWithPrinterProfile(costCenterName);
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_COSTCENTER_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_COSTCENTER_" + scId, false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 

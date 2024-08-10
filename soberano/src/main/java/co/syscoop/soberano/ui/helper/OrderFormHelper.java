@@ -715,18 +715,12 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement) throws Exception {
 		
 		Order order = initForm(wndContentPanel, orderId);
-		if (itsForManagement) {
-			Vbox vbox = new Vbox();
-			vbox.setId("vboxOrderItems");
-			vbox.setHflex("1");
-			renderOrderItems(order, vbox, itsForManagement);
-			Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
-			divOrderItems.appendChild(vbox);
-		}
-		else {
-			Vbox vobxdivOrderItems = (Vbox) wndContentPanel.query("#wndOrderItems").query("#divOrderItems").query("#vboxOrderItems");
-			renderOrderItems(order, vobxdivOrderItems, itsForManagement);
-		}
+		Vbox vbox = new Vbox();
+		vbox.setId("vboxOrderItems");
+		vbox.setHflex("1");
+		renderOrderItems(order, vbox, itsForManagement);
+		Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
+		divOrderItems.appendChild(vbox);
 	}
 	
 	public void initFormForManagement(Window wndContentPanel, Integer orderId) throws Exception {

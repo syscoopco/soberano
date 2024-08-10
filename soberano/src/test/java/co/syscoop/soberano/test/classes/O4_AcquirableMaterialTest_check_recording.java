@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-@Disabled
+//@Disabled
 
 class O4_AcquirableMaterialTest_check_recording extends AcquirableMaterialActionTest {
 	

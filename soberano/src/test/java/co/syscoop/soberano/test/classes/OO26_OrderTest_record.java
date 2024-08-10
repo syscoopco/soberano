@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(26)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO26_OrderTest_record extends NewOrderActionTest {
@@ -85,7 +85,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
 		}
@@ -121,7 +121,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
 		}
@@ -157,7 +157,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 			
 			fail("None exception was thrown when it should.");
 		}
@@ -193,7 +193,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -219,7 +219,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(false);	
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -247,7 +247,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -279,7 +279,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -313,7 +313,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -339,7 +339,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(false);
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -373,7 +373,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -405,7 +405,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -439,7 +439,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
-			clickOnRecordButton(desktop);
+			//uncomment if confirmation is required clickOnRecordButton(desktop);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

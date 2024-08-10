@@ -47,9 +47,13 @@
 			</hbox>
 			<separator></separator>
 			<window id="wndOrderItems" hflex="1" vflex="1">
-				<div id="divOrderItems">
-					<vbox id="vboxOrderItems"></vbox>
-				</div>
+				<hlayout hflex="1" vflex="1">
+					<borderlayout hflex="1" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<div id="divOrderItems"/>
+						</center>	
+					</borderlayout>
+				</hlayout>
 			</window>
 			<separator></separator>
 			<hbox width="100%" align="center">

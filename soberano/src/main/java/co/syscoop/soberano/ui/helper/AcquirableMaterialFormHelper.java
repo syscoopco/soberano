@@ -17,6 +17,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.view.viewmodel.UnitSelectionViewModel;
 
 public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 
@@ -37,10 +38,14 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), acquirableMaterial.getStringId());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), acquirableMaterial.getName());
 		
+		Combobox cmbUnit = (Combobox) incDetails.query("#cmbUnit");
+		UnitSelectionViewModel uSelectionViewModel = new UnitSelectionViewModel();
+		cmbUnit.setModel(uSelectionViewModel.getModel());
+		
 		if (acquirableMaterial.getUnit() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbUnit"), acquirableMaterial.getUnit());
+			ZKUtilitity.setValueWOValidation(cmbUnit, acquirableMaterial.getUnit());
 		else
-			((Combobox) incDetails.query("#cmbUnit")).setSelectedItem(null);
+			(cmbUnit).setSelectedItem(null);
 			
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), acquirableMaterial.getMinimumInventoryLevel());
 	}

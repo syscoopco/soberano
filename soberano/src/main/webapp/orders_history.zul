@@ -20,9 +20,9 @@
 				</column>
 				<column align="left" label="${labels.caption.columnHeader.stage}" sortDirection="descending">
 				</column>
-				<column align="left" label="${labels.caption.columnHeader.description}">
+				<column align="left" label="${labels.caption.columnHeader.description}" visible="false">
 				</column>
-				<column align="right" label="${labels.caption.columnHeader.history}">
+				<column align="right" label="${labels.caption.columnHeader.history}" visible="false">
 				</column>
 				<column align="right" label="${labels.caption.columnHeader.recordingDate}" sort="auto(recordingDate)">
 				</column>
