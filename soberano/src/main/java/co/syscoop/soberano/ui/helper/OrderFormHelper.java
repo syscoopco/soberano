@@ -63,7 +63,23 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	    ItemOperation(int actionCode) {this.actionCode = actionCode;}
 	}
 	
-	private void updateServedItems(ItemOperation itemOperation, Event event) throws Exception {
+	public static void updateAmountAndTicket(Order order, Window wndContentPanel) throws Exception {
+		BigDecimal amount = order.retrieveAmount();											
+		if (amount.compareTo(new BigDecimal(0)) < 0) {
+			throw new NotEnoughRightsException();
+		}
+		else {
+			Decimalbox decAmountTop = (Decimalbox) wndContentPanel.query("#decAmountTop");
+			decAmountTop.setValue(amount);				
+			((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
+			
+			//update ticket
+			((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
+				setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
+		}
+	}
+	
+	private static void updateServedItems(ItemOperation itemOperation, Event event) throws Exception {
 		
 		String buttonId = event.getTarget().getId();
 		Integer processRunId = Integer.parseInt(buttonId.substring(buttonId.indexOf("s") + 1, buttonId.length()));
@@ -161,31 +177,18 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			}
 			
 			//update amount fields and ticket
-			Order order = confTreeitem.getOrder();
-			BigDecimal amount = order.retrieveAmount();											
-			if (amount.compareTo(new BigDecimal(0)) < 0) {
-				throw new NotEnoughRightsException();
-			}
-			else {
-				Window wndContentPanel = (Window) event.getTarget().getParent().getParent().getParent().getParent().getParent().
-														getParent().getParent().getParent().getParent().getParent().getParent().
-														getParent().getParent().getParent().getParent().getParent().getParent().
-														getParent().query("#wndContentPanel");				
-				Decimalbox decAmountTop = (Decimalbox) wndContentPanel.query("#decAmountTop");
-				decAmountTop.setValue(amount);				
-				((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
-				
-				//update ticket
-				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
-					setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
-			}
+			updateAmountAndTicket(confTreeitem.getOrder(), 
+								(Window) event.getTarget().getParent().getParent().getParent().getParent().getParent().
+												getParent().getParent().getParent().getParent().getParent().getParent().
+												getParent().getParent().getParent().getParent().getParent().getParent().
+												getParent().query("#wndContentPanel"));
 		}
 		else {
 			confTreeitem.requestAction();
 		}
 	}
 	
-	private void discountBoxHandler(Event event) throws Exception {
+	private static void discountBoxHandler(Event event) throws Exception {
 		
 		try {
 			Decimalbox decDiscount = (Decimalbox) event.getTarget();
@@ -210,23 +213,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			}
 			else {						
 				//update amount fields and ticket
-				BigDecimal amount = confTreeitem.getOrder().retrieveAmount();												
-				if (amount.compareTo(new BigDecimal(0)) < 0) {
-					throw new NotEnoughRightsException();
-				}
-				else {
-					Window wndContentPanel = (Window) event.getTarget().getParent().getParent().getParent().getParent().
-															getParent().getParent().getParent().getParent().getParent().getParent().
-															getParent().getParent().getParent().getParent().getParent().getParent().
-															getParent().getParent().query("#wndContentPanel");
-					Decimalbox decAmountTop = ((Decimalbox) wndContentPanel.query("#decAmountTop"));
-					decAmountTop.setValue(amount);
-					((Decimalbox) decAmountTop.query("#decAmountBottom")).setValue(amount);
-					
-					//update ticket
-					((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
-						setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
-				}
+				updateAmountAndTicket(confTreeitem.getOrder(), 
+									(Window) event.getTarget().getParent().getParent().getParent().getParent().
+												getParent().getParent().getParent().getParent().getParent().getParent().
+												getParent().getParent().getParent().getParent().getParent().getParent().
+												getParent().getParent().query("#wndContentPanel"));
 			}
 		}
 		catch(NotEnoughRightsException ex) {
@@ -243,7 +234,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 	}
 	
-	private void updateCanceledButEndedItems(Event event) throws Exception {
+	private static void updateCanceledButEndedItems(Event event) throws Exception {
 		
 		try {
 			Decimalbox decCanceledButEndedItems = (Decimalbox) event.getTarget();
@@ -281,7 +272,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void renderItems(Order order, String cat, String desc, Treechildren chdnOic, Boolean itsForManagement) {
+	private static void renderItems(Order order, String cat, String desc, Treechildren chdnOic, Boolean itsForManagement) {
 		
 		if (!itsForManagement) {
 			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
@@ -673,7 +664,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		return order;
 	}
 	
-	private void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement) {
+	public static void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement) {
 		
 		Integer catIx = 0;
 		for (String cat : order.getCategories()) {

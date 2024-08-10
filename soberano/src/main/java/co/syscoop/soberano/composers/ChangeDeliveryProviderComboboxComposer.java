@@ -2,13 +2,13 @@ package co.syscoop.soberano.composers;
 
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -16,6 +16,7 @@ import co.syscoop.soberano.exception.CustomerRequiredException;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.ZoneNotCoveredByDeliveryProviderException;
+import co.syscoop.soberano.ui.helper.OrderFormHelper;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ChangeDeliveryProviderComboboxComposer extends SelectorComposer {
@@ -49,7 +50,8 @@ public class ChangeDeliveryProviderComboboxComposer extends SelectorComposer {
 				throw new ZoneNotCoveredByDeliveryProviderException();
 			}
 			else {
-				Executions.sendRedirect("/order.zul?id=" + orderId);
+				Window wndContentPanel = (Window) cmbDeliveryProvider.query("#wndContentPanel");
+				OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
 			}
 		}
 		catch(NotEnoughRightsException ex) {

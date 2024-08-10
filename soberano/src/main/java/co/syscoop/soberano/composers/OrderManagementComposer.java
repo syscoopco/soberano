@@ -11,11 +11,14 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
+import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Unit;
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.tracked.Product;
@@ -245,9 +248,26 @@ public class OrderManagementComposer extends OrderComposer {
 						catch(Exception ex) {
 							throw ex;
 						}
-					}		
-				
-					Executions.sendRedirect("/order.zul?id=" + intObjectId.getValue());
+					}				
+					Order order = new Order(intObjectId.getValue());
+					order.get();
+					Window wndContentPanel = (Window) boxDetails.query("#wndContentPanel");
+					OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
+					Vbox vboxOrderItems = (Vbox) boxDetails.query("#wndOrderItems").query("#divOrderItems").query("#vboxOrderItems");
+					if (vboxOrderItems == null) {
+						vboxOrderItems = new Vbox();
+						vboxOrderItems.setId("vboxOrderItems");
+						vboxOrderItems.setHflex("1");
+						Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
+						divOrderItems.appendChild(vboxOrderItems);
+					}
+					vboxOrderItems.getChildren().clear();
+					OrderFormHelper.renderOrderItems(order, 
+													vboxOrderItems, 
+													true);
+					btnDec.setDisabled(true);
+					cmbItemToOrder.setSelectedItem(null);
+					txtQuantityExpression.setValue("0");
 				}
 			}
 		}
