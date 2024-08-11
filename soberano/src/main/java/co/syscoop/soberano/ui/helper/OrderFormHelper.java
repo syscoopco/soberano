@@ -668,37 +668,39 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		
 		Integer catIx = 0;
 		for (String cat : order.getCategories()) {
-			catIx++;
-			Tree treeCat = new Tree();
-			treeCat.setId("treeCat_" + catIx.toString() + "_" + cat.replace(" ", ""));
-			vboxOrderItems.appendChild(treeCat);
-			Treecols treeCols = new Treecols();
-			treeCat.appendChild(treeCols);
-			Treecol treeCol = new Treecol();
-			treeCols.appendChild(treeCol);
-			Treechildren chdnCat = new Treechildren();
-			treeCat.appendChild(chdnCat);
-			Treeitem titemCat = new Treeitem();
-			chdnCat.appendChild(titemCat);
-			Treerow rowCat = new Treerow();
-			titemCat.appendChild(rowCat);
-			Treecell cellCat = new Treecell(cat);
-			rowCat.appendChild(cellCat);
-			Treechildren chdnDesc = new Treechildren();
-			titemCat.appendChild(chdnDesc);
-			titemCat.setOpen(true);
-			for (String desc : order.getDescriptions().get(cat)) {
-				Treeitem titemDesc = new Treeitem();
-				chdnDesc.appendChild(titemDesc);
-				Treerow rowDesc = new Treerow();
-				titemDesc.appendChild(rowDesc);
-				Treecell cellDesc = new Treecell(desc);
-				//cellDesc.setId("cell" + cat + "_desc");
-				rowDesc.appendChild(cellDesc);
-				Treechildren chdnOic = new Treechildren();
-				titemDesc.appendChild(chdnOic);
-				titemDesc.setOpen(true);
-				renderItems(order, cat, desc, chdnOic, itsForManagement);
+			if (cat != null) {
+				catIx++;
+				Tree treeCat = new Tree();
+				treeCat.setId("treeCat_" + catIx.toString() + "_" + cat.replace(" ", ""));
+				vboxOrderItems.appendChild(treeCat);
+				Treecols treeCols = new Treecols();
+				treeCat.appendChild(treeCols);
+				Treecol treeCol = new Treecol();
+				treeCols.appendChild(treeCol);
+				Treechildren chdnCat = new Treechildren();
+				treeCat.appendChild(chdnCat);
+				Treeitem titemCat = new Treeitem();
+				chdnCat.appendChild(titemCat);
+				Treerow rowCat = new Treerow();
+				titemCat.appendChild(rowCat);
+				Treecell cellCat = new Treecell(cat);
+				rowCat.appendChild(cellCat);
+				Treechildren chdnDesc = new Treechildren();
+				titemCat.appendChild(chdnDesc);
+				titemCat.setOpen(true);
+				for (String desc : order.getDescriptions().get(cat)) {
+					Treeitem titemDesc = new Treeitem();
+					chdnDesc.appendChild(titemDesc);
+					Treerow rowDesc = new Treerow();
+					titemDesc.appendChild(rowDesc);
+					Treecell cellDesc = new Treecell(desc);
+					//cellDesc.setId("cell" + cat + "_desc");
+					rowDesc.appendChild(cellDesc);
+					Treechildren chdnOic = new Treechildren();
+					titemDesc.appendChild(chdnOic);
+					titemDesc.setOpen(true);
+					renderItems(order, cat, desc, chdnOic, itsForManagement);
+				}
 			}
 		}
 	}

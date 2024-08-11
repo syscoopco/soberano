@@ -268,6 +268,7 @@ public class OrderManagementComposer extends OrderComposer {
 					btnDec.setDisabled(true);
 					cmbItemToOrder.setSelectedItem(null);
 					txtQuantityExpression.setValue("0");
+					decQuantity.setValue(new BigDecimal(0));
 				}
 			}
 		}
