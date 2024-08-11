@@ -67,6 +67,9 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 							((Intbox) boxDetails.query("#intDiscountBottom")).setValue(order.getDiscount());
 							((Combobox) boxDetails.query("#cmbCustomer")).setText(order.getCustomerStr());
 							((Combobox) boxDetails.query("#cmbDeliveryProvider")).setText(order.getDeliveryBy());
+							
+							((Textbox) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#txtStage")).setValue(order.getStage());
+							
 							Vbox vboxOrderItems = (Vbox) boxDetails.query("#wndOrderItems").query("#divOrderItems").query("#vboxOrderItems");
 							if (vboxOrderItems != null) {
 								vboxOrderItems.getChildren().clear();

@@ -7,7 +7,11 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
+import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.ProcessRun;
@@ -24,6 +28,9 @@ public class ProduceButtonComposer extends SelectorComposer {
 	
 	private String fileToPrintFullPath = "";
 	private Integer orderId = 0;
+	
+	@Wire
+	protected Button btnProduce;
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
@@ -56,8 +63,13 @@ public class ProduceButtonComposer extends SelectorComposer {
     public void btnProduce_onClick() throws Throwable {
 		
 		try {
+			Vbox boxDetails = (Vbox) btnProduce.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
+			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
 			Order order = new Order(orderId);
-			order.get();
+			order.get();		
+			setFileToPrintFullPath(SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+					"records/production_lines/" + 
+					"ORDER_" + orderId + "_ALLOCATIONS" + ".pdf");
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			String textToprint = orderId + " | " + order.getCountersStr() + " | " + dateFormat.format(new Date()) + "\n\n";

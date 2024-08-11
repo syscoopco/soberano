@@ -76,6 +76,6 @@
 	<label id="lblStage" value="${labels.caption.field.stage}" self="@define(decisionButton)" sclass="Caption"/>
 	<textbox id="txtStage" self="@define(decisionButton)" readonly="true" value=""/>
 	<separator self="@define(decisionButton)"></separator>
-	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintOrderButtonComposer"></button>
 	<button id="btnCollect" self="@define(decisionButton)" label="${labels.caption.action.collect}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CollectButtonComposer"></button>
 </zk>

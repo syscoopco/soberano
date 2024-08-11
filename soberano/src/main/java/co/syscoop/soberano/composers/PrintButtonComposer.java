@@ -7,13 +7,16 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
@@ -37,15 +40,18 @@ public class PrintButtonComposer extends SelectorComposer {
     public void btnPrint_onClick() throws Throwable {
 		
 		try {
+			Vbox boxDetails = (Vbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
+			Integer orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
+			trackedObject.setId(orderId);
+			trackedObject.get();			
+			fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+					"records/orders/" + 
+					"ORDER_" + (trackedObject.getId() == 0 ? trackedObject.getStringId() : trackedObject.getId() + ".pdf");
+			
 			String report = ZKUtilitity.getReportFromURLQuery();
-			if (report.isEmpty()) {
-				report = trackedObject.getReport();
-				Printer.print(Translator.translate(report),
-								trackedObject, 
-								fileToPrintFullPath,
-								false);
-			}
-			else {
+			Integer orderIdFromURL = ZKUtilitity.getObjectIdFromURLQuery("id");
+			if (!report.isEmpty() && orderIdFromURL.equals(trackedObject.getId())) {
+				
 				//file to print path is passed in report param
 				PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
 				printerProfile.get();
@@ -53,6 +59,13 @@ public class PrintButtonComposer extends SelectorComposer {
 							new String(Base64.getDecoder().decode(report)), 
 							printerProfile.getPrinterName(), 
 							trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
+			}
+			else {
+				report = trackedObject.getReport();
+				Printer.print(Translator.translate(report),
+								trackedObject, 
+								fileToPrintFullPath,
+								false);
 			}
 		}
 		catch(NotEnoughRightsException ex) {
