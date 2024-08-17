@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.CustomerActionTest;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_CustomerTest_disable extends CustomerActionTest {

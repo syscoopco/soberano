@@ -53,6 +53,9 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			else if (reportType.equals("costcenter")) {
 				scReport = Translator.translate(new ShiftClosure(scId).getCostCenterReport(param));
 			}
+			else if (reportType.equals("generalfull")) {
+				scReport = Translator.translate(new ShiftClosure(scId).getGeneralFullReport());
+			}
 			else {
 				scReport = Translator.translate(new ShiftClosure(scId).getReport());
 			}

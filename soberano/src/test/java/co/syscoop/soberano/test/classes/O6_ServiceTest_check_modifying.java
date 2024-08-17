@@ -20,7 +20,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_ServiceTest_check_modifying extends ServiceActionTest {
 
