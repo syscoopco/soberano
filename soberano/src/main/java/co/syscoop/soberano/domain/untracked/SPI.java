@@ -15,18 +15,42 @@ public class SPI extends BusinessActivityTrackedObject {
 	private BigDecimal quantity = new BigDecimal(0.0);
 	private BigDecimal unitValue = new BigDecimal(0.0);
 	
-	public SPI(Integer closureId, Integer warehouseId, Integer acquirableMaterialId) {
+	public SPI(Integer closureId, 
+				Integer warehouseId, 
+				Integer acquirableMaterialId,
+				Boolean wOpeningStock,
+				Boolean wStockOnClosure,
+				Boolean wChanges,
+				Boolean wSurplus) {
 		this.setClosureId(closureId);
 		this.setWarehouseId(warehouseId);
 		this.setAcquirableMaterialId(acquirableMaterialId);
-		getAllQuery = "SELECT * FROM soberano.\"" 
-				+ "fn_InventoryOperation_getSPI\"" 
-				+ "(:closureId, :warehouseId, :acquirableMaterialId, :lang, :loginname)";
-		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, :warehouseId, :acquirableMaterialId, :lang, :loginname) AS count";
+		getAllQuery = "SELECT * FROM soberano.\"fn_InventoryOperation_getSPI\"(:closureId, "
+																			+ ":warehouseId, "
+																			+ ":acquirableMaterialId, "
+																			+ ":wOpeningStock, "
+																			+ ":wStockOnClosure, "
+																			+ ":wChanges, "
+																			+ ":wSurplus, "
+																			+ ":lang, "
+																			+ ":loginname)";
+		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, "
+																			+ ":warehouseId, "
+																			+ ":acquirableMaterialId, "
+																			+ ":wOpeningStock, "
+																			+ ":wStockOnClosure, "
+																			+ ":wChanges, "
+																			+ ":wSurplus, "
+																			+ ":lang, "
+																			+ ":loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
 		getAllQueryNamedParameters.put("closureId", closureId);	
 		getAllQueryNamedParameters.put("warehouseId", warehouseId);	
-		getAllQueryNamedParameters.put("acquirableMaterialId", acquirableMaterialId);	
+		getAllQueryNamedParameters.put("acquirableMaterialId", acquirableMaterialId);
+		getAllQueryNamedParameters.put("wOpeningStock", wOpeningStock);
+		getAllQueryNamedParameters.put("wStockOnClosure", wStockOnClosure);
+		getAllQueryNamedParameters.put("wChanges", wChanges);
+		getAllQueryNamedParameters.put("wSurplus", wSurplus);
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 

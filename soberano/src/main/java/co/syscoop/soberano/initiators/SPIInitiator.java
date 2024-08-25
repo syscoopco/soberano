@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 
@@ -25,6 +26,10 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 		try {
 			Combobox cmbWarehouse = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbWarehouse");					
 			Combobox cmbMaterial = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbMaterial");
+			Checkbox chkWithOpeningStock = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkWithOpeningStock");
+			Checkbox chkWithStockOnClosure = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkWithStockOnClosure");
+			Checkbox chkWithChanges = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkWithChanges");
+			Checkbox chkSurplus = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkSurplus");
 			
 			try {
 				ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);
@@ -37,25 +42,43 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 				//re-render the grid with the selected warehouse and inventory item
 				spiGridModel = new SPIGridModel(closureId, 
 												((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
-												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());			
+												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
+												chkWithOpeningStock.isChecked(),
+												chkWithStockOnClosure.isChecked(),
+												chkWithChanges.isChecked(),
+												chkSurplus.isChecked());			
 			}
 			else if (cmbWarehouse.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected warehouse
 				spiGridModel = new SPIGridModel(closureId, 
 												((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
-												0);	
+												0, 
+												chkWithOpeningStock.isChecked(),
+												chkWithStockOnClosure.isChecked(),
+												chkWithChanges.isChecked(),
+												chkSurplus.isChecked());	
 			}
 			else if (cmbMaterial.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected inventory item
 				spiGridModel = new SPIGridModel(closureId, 
 												0,
-												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());	
+												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(), 
+												chkWithOpeningStock.isChecked(),
+												chkWithStockOnClosure.isChecked(),
+												chkWithChanges.isChecked(),
+												chkSurplus.isChecked());	
 			}
 			else {
 				//re-render the grid with the whole spi
-				spiGridModel = new SPIGridModel(closureId, 0, 0);	
+				spiGridModel = new SPIGridModel(closureId, 
+												0, 
+												0, 
+												chkWithOpeningStock.isChecked(),
+												chkWithStockOnClosure.isChecked(),
+												chkWithChanges.isChecked(),
+												chkSurplus.isChecked());
 			}
 			((Grid) cmbWarehouse.query("#incGrid").query("#grd")).setModel(spiGridModel);
 		}

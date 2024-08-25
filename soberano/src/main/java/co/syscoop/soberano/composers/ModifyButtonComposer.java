@@ -28,8 +28,8 @@ import co.syscoop.soberano.vocabulary.Labels;
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ModifyButtonComposer extends SelectorComposer {
 	
-	private TrackedObjectFormHelper trackedObjectFormHelper = null;;
-	private Include incDetails = null;
+	protected TrackedObjectFormHelper trackedObjectFormHelper = null;;
+	protected Include incDetails = null;
 	
 	@Wire
 	private Button btnApply;

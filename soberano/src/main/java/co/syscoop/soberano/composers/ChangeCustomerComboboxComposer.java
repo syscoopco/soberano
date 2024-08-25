@@ -32,7 +32,6 @@ public class ChangeCustomerComboboxComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	@SuppressWarnings("null")
 	private void changeCustomer() throws Exception {
 		
 		try {

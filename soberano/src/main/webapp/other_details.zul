@@ -1,0 +1,22 @@
+<?page title="${labels.pageOther.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+
+<zk>
+	<include src="/style.zul"/>	
+	<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.OtherConfigurationComposer">
+		<label value="${labels.caption.field.surcharge}" sclass="Caption"></label>
+		<hbox hflex="1" align="center" pack="start">
+			<decimalbox id="decSurcharge" hflex="1" value="0" constraint="no negative"/>
+			<label value=" % "></label>
+		</hbox>
+		<separator></separator>
+		<label value="${labels.caption.field.shiftOpeningHour}" sclass="Caption"></label>
+		<hbox hflex="1" align="center" pack="start">
+			<intbox id="intHour" hflex="1" value="0" constraint="no negative" placeholder="HH"/>
+		</hbox>
+		<separator></separator>
+		<label value="${labels.caption.field.shiftOpeningMinutes}" sclass="Caption"></label>
+		<hbox hflex="1" align="center" pack="start">
+			<intbox id="intMinutes" hflex="1" value="0" constraint="no negative" placeholder="mm"/>
+		</hbox>
+	</vbox>
+</zk>

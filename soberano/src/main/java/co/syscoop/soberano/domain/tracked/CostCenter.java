@@ -96,16 +96,16 @@ public class CostCenter extends TrackedObject {
 		public CostCenter mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
 			try {
-				CostCenter CostCenter = null;
+				CostCenter costCenter = null;
 				int id = rs.getInt("costCenterId");
 				if (!rs.wasNull()) {
-					CostCenter = new CostCenter(id,
+					costCenter = new CostCenter(id,
 											rs.getInt("entityTypeInstanceId"),
 											rs.getString("costCenterName"),
 											rs.getInt("inputWarehouse"),
 											rs.getInt("outputWarehouse"));
 				}
-				return CostCenter;
+				return costCenter;
 			}
 			catch(Exception ex)
 			{

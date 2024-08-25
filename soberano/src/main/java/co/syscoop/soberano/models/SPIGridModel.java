@@ -11,6 +11,10 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 	private Integer warehouseId = 0;
 	private Integer closureId = 0;
 	private Integer acquirableMaterialId = 0;
+	private Boolean wOpeningStock = false;
+	private Boolean wStockOnClosure = false;
+	private Boolean wChanges = false;
+	private Boolean wSurplus = false;
 	
 	public SPIGridModel() {
 		
@@ -18,7 +22,13 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		super("inventoryItemName", true, false);
 	}
 	
-	public SPIGridModel(Integer closureId, Integer warehouseId, Integer acquirableMaterialId) {
+	public SPIGridModel(Integer closureId, 
+						Integer warehouseId, 
+						Integer acquirableMaterialId,
+						Boolean wOpeningStock,
+						Boolean wStockOnClosure,
+						Boolean wChanges,
+						Boolean wSurplus) {
 		
 		//the set is sorted by inventoryItemName alphabetically (ascending).
 		super("inventoryItemName", true, false);
@@ -26,6 +36,10 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		this.warehouseId = warehouseId;
 		this.closureId = closureId;
 		this.setAcquirableMaterialId(acquirableMaterialId);
+		this.setwOpeningStock(wOpeningStock);
+		this.setwStockOnClosure(wStockOnClosure);
+		this.setwChanges(wChanges);
+		this.setwSurplus(wSurplus);
 	}
 	
 	@Override
@@ -33,7 +47,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 
 		try {
 			if (_size < 0)
-				_size = new SPI(closureId, warehouseId, acquirableMaterialId).getCount();
+				_size = new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus).getCount();
 			return _size;
 		} 
 		catch (SQLException e) 
@@ -48,7 +62,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = (new SPI(closureId, warehouseId, acquirableMaterialId)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
+				_cache = (new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 
@@ -76,5 +90,37 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 
 	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
 		this.acquirableMaterialId = acquirableMaterialId;
+	}
+
+	public Boolean getwOpeningStock() {
+		return wOpeningStock;
+	}
+
+	public void setwOpeningStock(Boolean wOpeningStock) {
+		this.wOpeningStock = wOpeningStock;
+	}
+
+	public Boolean getwStockOnClosure() {
+		return wStockOnClosure;
+	}
+
+	public void setwStockOnClosure(Boolean wStockOnClosure) {
+		this.wStockOnClosure = wStockOnClosure;
+	}
+
+	public Boolean getwChanges() {
+		return wChanges;
+	}
+
+	public void setwChanges(Boolean wChanges) {
+		this.wChanges = wChanges;
+	}
+
+	public Boolean getwSurplus() {
+		return wSurplus;
+	}
+
+	public void setwSurplus(Boolean wSurplus) {
+		this.wSurplus = wSurplus;
 	}
 }

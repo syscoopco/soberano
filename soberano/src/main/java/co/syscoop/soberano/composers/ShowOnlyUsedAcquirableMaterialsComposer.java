@@ -27,7 +27,7 @@ public class ShowOnlyUsedAcquirableMaterialsComposer extends SelectorComposer {
     }
 	
 	@Listen("onCheck = checkbox#chkShowOnlyUsedOnes")
-    public void chkDishonored_onCheck() throws Throwable {
+    public void chkShowOnlyUsedOnes_onCheck() throws Throwable {
 		AcquirableMaterial am = new AcquirableMaterial(chkShowOnlyUsedOnes.isChecked());
 		Tree treeObjects = (Tree) chkShowOnlyUsedOnes.getParent().
 														getParent().

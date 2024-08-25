@@ -6,6 +6,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -25,6 +26,18 @@ public class SPIComposer extends SelectorComposer {
 	@Wire
 	private Box boxDetails;
 	
+	@Wire
+	private Checkbox chkWithOpeningStock;
+	
+	@Wire
+	private Checkbox chkWithStockOnClosure;
+	
+	@Wire
+	private Checkbox chkWithChanges;
+	
+	@Wire
+	private Checkbox chkSurplus;
+	
 	private void processParamSelection() throws SQLException {
 		
 		SPIGridModel spiGridModel = null;
@@ -37,25 +50,43 @@ public class SPIComposer extends SelectorComposer {
 			//re-render the grid with the selected warehouse and item
 			spiGridModel = new SPIGridModel(closureId, 
 										((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
-										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());			
+										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
+										chkWithOpeningStock.isChecked(),
+										chkWithStockOnClosure.isChecked(),
+										chkWithChanges.isChecked(),
+										chkSurplus.isChecked());			
 		}
 		else if (cmbWarehouse.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected warehouse
 			spiGridModel = new SPIGridModel(closureId, 
-										((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
-										0);
+											((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+											0,
+											chkWithOpeningStock.isChecked(),
+											chkWithStockOnClosure.isChecked(),
+											chkWithChanges.isChecked(),
+											chkSurplus.isChecked());
 		}
 		else if (cmbMaterial.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected material
 			spiGridModel = new SPIGridModel(closureId, 
-										0,
-										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId());
+											0,
+											((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
+											chkWithOpeningStock.isChecked(),
+											chkWithStockOnClosure.isChecked(),
+											chkWithChanges.isChecked(),
+											chkSurplus.isChecked());
 		}
 		else {
 			//re-render the grid with the whole spi
-			spiGridModel = new SPIGridModel(closureId, 0, 0);	
+			spiGridModel = new SPIGridModel(closureId, 
+											0, 
+											0,
+											chkWithOpeningStock.isChecked(),
+											chkWithStockOnClosure.isChecked(),
+											chkWithChanges.isChecked(),
+											chkSurplus.isChecked());	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(spiGridModel);
 	}
@@ -86,5 +117,25 @@ public class SPIComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbMaterial")
     public void cmbMaterial_onClick() throws SQLException {
 		if (SpringUtility.underTesting()) processParamSelection();
+	}
+	
+	@Listen("onCheck = checkbox#chkWithOpeningStock")
+    public void chkWithOpeningStock_onCheck() throws Throwable {
+		processParamSelection();
+	}
+	
+	@Listen("onCheck = checkbox#chkWithStockOnClosure")
+    public void chkWithStockOnClosure_onCheck() throws Throwable {
+		processParamSelection();
+	}
+	
+	@Listen("onCheck = checkbox#chkWithChanges")
+    public void chkWithChanges_onCheck() throws Throwable {
+		processParamSelection();
+	}
+	
+	@Listen("onCheck = checkbox#chkSurplus")
+    public void chkSurplus_onCheck() throws Throwable {
+		processParamSelection();
 	}
 }

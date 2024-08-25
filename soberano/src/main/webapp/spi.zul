@@ -26,6 +26,16 @@
 						</template>
 					</combobox>		
 				</hbox>
+				<separator></separator>
+				<hbox hflex="1" align="start">
+					<checkbox id="chkWithOpeningStock" checked="false" label="${labels.caption.field.WithOpeningStock}" sclass="Caption"></checkbox>
+					<separator></separator>
+					<checkbox id="chkWithStockOnClosure" checked="false" label="${labels.caption.field.WithStockOnClosure}" sclass="Caption"></checkbox>
+					<separator></separator>
+					<checkbox id="chkWithChanges" checked="false" label="${labels.caption.field.WithChanges}" sclass="Caption"></checkbox>
+					<separator></separator>
+					<checkbox id="chkSurplus" checked="false" label="${labels.caption.field.Surplus}" sclass="Caption"></checkbox>
+				</hbox>
 			</vbox>
 			<separator></separator>			
 			<include id="incGrid" src="/spi_rows.zul"></include>	
