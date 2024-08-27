@@ -8,6 +8,8 @@ import org.zkoss.zk.ui.Page;
 import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Box;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -27,9 +29,13 @@ public class ShiftClosuresInitiator implements Initiator, InitiatorExt {
 			String scReport = new ShiftClosure(shiftClosureId).getReport();
 			if (!scReport.isEmpty()) {
 				
-				//set report
-				Box boxDetails = (Box) comps[0].getPreviousSibling().query("#wndContentPanel").query("#boxDetails");	
+				Box boxDetails = (Box) comps[0].getPreviousSibling().query("#wndShowingAll").query("#boxDetails");
+				((Button) boxDetails.getParent().getParent().getParent().getParent().getParent().query("south").query("#incSouth").query("#btnGeneral")).setClass("ReportButtonPushed");
+				
+				//set report					
 				((Textbox) boxDetails.query("#txtReport")).setValue(Translator.translate(scReport));
+				((Intbox) boxDetails.query("#intObjectId")).setValue(shiftClosureId);
+				((Textbox) boxDetails.query("#txtShownReport")).setValue("general");
 			}
 			else {
 				throw new NotEnoughRightsException();

@@ -31,6 +31,13 @@
 			            </hbox>
 		      		</row>
 		      		<row align="center">
+		      			<vbox style="padding: 5%" height="100%" width="100%" align="center" pack="center">
+							<vbox height="100%" width="100%" align="center" pack="center">
+								<image src="/images/logo.png" sclass="WelcomeLogo"></image>
+							</vbox>
+						</vbox>
+		      		</row>
+		      		<row align="center">
 		      			<a label="${labels.pageWelcome.note2}" href="https://github.com/syscoopco/soberano/issues/"></a>
 		      		</row>
 				</rows>

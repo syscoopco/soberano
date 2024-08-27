@@ -9,6 +9,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Intbox;
 
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.domain.untracked.PrintableData;
@@ -16,7 +17,6 @@ import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings({ "serial", "rawtypes" })
@@ -36,13 +36,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
     public void btnPrint_onClick() throws Exception {
 		
 		try{
-			Integer scId = 0;
-			try {
-				scId = ZKUtilitity.getObjectIdFromURLQuery("id");
-			}
-			catch(Exception ex) {}
-			
-			Textbox txtShownReport = (Textbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#txtShownReport");
+			Textbox txtShownReport = (Textbox) btnPrint.getParent().getParent().getParent().query("#wndShowingAll").query("#txtShownReport");
+			Integer scId = ((Intbox) txtShownReport.query("#intObjectId")).getValue();
 			if (txtShownReport.getText().equals("receivables")) {
 				PrintableData pd = new ShiftClosure(scId).getReceivablesReportWithPrinterProfile();
 				if (!pd.getTextToPrint().isEmpty()) {				
@@ -113,7 +108,7 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 				}
 			}
 			else if (txtShownReport.getText().equals("costcenter")) {
-				Combobox cmbCostCenter = (Combobox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#cmbCostCenter");
+				Combobox cmbCostCenter = (Combobox) btnPrint.query("#cmbCostCenter");
 				String costCenterName = "";
 				if (cmbCostCenter.getSelectedItem() != null) {
 					costCenterName = cmbCostCenter.getText();

@@ -1,27 +1,42 @@
 package co.syscoop.soberano.composers;
 
-import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 
-import co.syscoop.soberano.domain.tracked.ShiftClosure;
-import co.syscoop.soberano.exception.ExceptionTreatment;
-import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
-import co.syscoop.soberano.vocabulary.Translator;
+import co.syscoop.soberano.ui.helper.ShiftClosureFormHelper;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 	
 	@Wire
-	protected Textbox txtShownReport; 
+	protected Intbox intObjectId;
 	
 	@Wire
 	protected Textbox txtReport;
+	
+	@Wire
+	protected Button btnGeneral;
+	
+	@Wire
+	protected Button btnGeneralFull; 
+	
+	@Wire
+	protected Button btnHouseBill;
+	
+	@Wire
+	protected Button btnCashRegister; 
+	
+	@Wire
+	protected Button btnReceivables; 
+	
+	@Wire
+	protected Combobox cmbCostCenter;
 	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
@@ -29,57 +44,67 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	protected void loadReport(String reportType, String param) throws SoberanoException {
+	protected void loadReport(Textbox txtShownReport, String reportType, String param) throws SoberanoException {
 		
-		try{
-			txtShownReport.setValue(reportType);
-			
-			Integer scId = 0;
-			try {
-				scId = ZKUtilitity.getObjectIdFromURLQuery("id");
-			}
-			catch(Exception ex) {}
-			
-			String scReport = "";
-			if (reportType.equals("receivables")) {					
-				scReport = Translator.translate(new ShiftClosure(scId).getReceivablesReport());
-			}
-			else if (reportType.equals("cashregister")) {					
-				scReport = Translator.translate(new ShiftClosure(scId).getCashRegisterReport());
-			}
-			else if (reportType.equals("housebill")) {
-				scReport = Translator.translate(new ShiftClosure(scId).getHouseBillReport());
-			}
-			else if (reportType.equals("costcenter")) {
-				scReport = Translator.translate(new ShiftClosure(scId).getCostCenterReport(param));
-			}
-			else if (reportType.equals("generalfull")) {
-				scReport = Translator.translate(new ShiftClosure(scId).getGeneralFullReport());
-			}
-			else {
-				scReport = Translator.translate(new ShiftClosure(scId).getReport());
-			}
-			
-			if (!scReport.isEmpty()) {
-				
-				//set report
-				txtReport.setValue(scReport);
-			}
-			else {
-				throw new NotEnoughRightsException();
-			}
-		}		
-		catch(NotEnoughRightsException ex) {
-			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("message.permissions.NotEnoughRights"), 
-					Labels.getLabel("messageBoxTitle.Warning"),
-					Messagebox.EXCLAMATION);
-		}
-		catch(Exception ex) {
-			ExceptionTreatment.logAndShow(ex, 
-					ex.getMessage(), 
-					Labels.getLabel("messageBoxTitle.Error"),
-					Messagebox.ERROR);
-		}
+		ShiftClosureFormHelper.loadReport(txtShownReport, (Textbox) txtShownReport.query("#txtReport"), reportType, param, ((Intbox) txtShownReport.query("#intObjectId")).getValue());
     }
+	
+	protected void updateComponentStyles(String clickedButtonId) {
+		
+		switch(clickedButtonId) {
+		case "btnGeneral":
+			btnGeneral.setClass("ReportButtonPushed");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("DecisionButton");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbCostCenter.setSelectedItem(null);
+			break;
+		case "btnGeneralFull":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("ReportButtonPushed");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("DecisionButton");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbCostCenter.setSelectedItem(null);
+			break;
+		case "btnHouseBill":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("ReportButtonPushed");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("DecisionButton");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbCostCenter.setSelectedItem(null);
+			break;
+		case "btnCashRegister":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("ReportButtonPushed");
+			btnReceivables.setClass("DecisionButton");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbCostCenter.setSelectedItem(null);
+			break;	
+		case "btnReceivables":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("ReportButtonPushed");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbCostCenter.setSelectedItem(null);
+			break;
+		case "cmbCostCenter":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("DecisionButton");
+			cmbCostCenter.setClass("ReportButtonPushed");
+			break;	
+		}
+	}
 }

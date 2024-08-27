@@ -7,15 +7,19 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
+import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.ui.helper.ShiftClosureFormHelper;
 import co.syscoop.soberano.util.rowdata.ShiftClosureRowData;
 
 public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
@@ -29,8 +33,9 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(shift.getShiftClosureId().toString()));
 		
 		//shift
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-		row.appendChild(new Label(dateFormat.format(shift.getShift())));	
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String shiftStr = dateFormat.format(shift.getShift());
+		row.appendChild(new Label(shiftStr));	
 		
 		//closure time		
 		dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -55,8 +60,33 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
-
-				Executions.sendRedirect("/shift_closures.zul?id=" + shift.getShiftClosureId());
+				
+				try {
+					Window wndShowingAll = (Window) event.getTarget().
+														getParent().
+														getParent().
+														getParent().
+														getParent().
+														getParent().
+														getParent().
+														getParent().
+														getParent().query("#wndShowingAll");
+					Textbox txtShownReport = (Textbox) wndShowingAll.query("#txtShownReport");
+					Combobox cmbCostCenter = (Combobox) wndShowingAll.query("#boxDetails").getParent().getParent().query("#incSouth").query("#cmbCostCenter");
+					String costCenterName = "";
+					try {
+						costCenterName = cmbCostCenter.getSelectedItem() != null ? cmbCostCenter.getText() : "";
+					}
+					catch(Exception e) {}
+					ShiftClosureFormHelper.loadReport(txtShownReport,
+														(Textbox) wndShowingAll.query("#txtReport"),
+														txtShownReport.getText(), 
+														costCenterName,
+														shift.getShiftClosureId());
+				}
+				catch(Exception ex) {
+					Executions.getCurrent().sendRedirect("/shift_closures.zul?id=" + shift.getShiftClosureId(), "_blank");
+				}
 			}
 		});
 		
@@ -70,7 +100,7 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 
-				Executions.getCurrent().sendRedirect("/spi.zul?scid=" + shift.getShiftClosureId(), "_blank");
+				Executions.getCurrent().sendRedirect("/spi.zul?scid=" + shift.getShiftClosureId() + "&sh=" + shiftStr, "_blank");
 			}
 		});
 		

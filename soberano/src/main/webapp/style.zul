@@ -103,6 +103,12 @@
 			font-weight: bolder;
 			padding-right: 10px;
 		}
+		.ReportButtonPushed{
+			font-weight: bolder;
+			font-size: 10pt;
+			background: green;
+			color: white;
+		}
 		.SystemTimeBox{
 			font-weight: bolder;
 			font-size: 20pt;			

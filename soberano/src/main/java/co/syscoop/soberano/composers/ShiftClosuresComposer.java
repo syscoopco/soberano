@@ -3,24 +3,20 @@ package co.syscoop.soberano.composers;
 import java.sql.SQLException;
 
 import org.zkoss.zk.ui.select.annotation.Listen;
-import org.zkoss.zk.ui.select.annotation.Wire;
-import org.zkoss.zul.Box;
-import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Textbox;
+
 import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial" })
 public class ShiftClosuresComposer extends ShiftClosureReportLoadingComposer {
 	
-	@Wire
-	private Combobox cmbCostCenter;
-	
-	@Wire
-	private Box boxDetails;
-	
 	private void processCostCenterSelection() throws SQLException, Exception {
 		
 		if (cmbCostCenter.getSelectedItem() != null) {			
-			loadReport("costcenter", cmbCostCenter.getText());
+			loadReport((Textbox) cmbCostCenter.getParent().getParent().getParent().getParent().getParent().query("#wndShowingAll").query("#boxDetails").query("#txtShownReport"),
+					"costcenter", 
+					cmbCostCenter.getText());
+			updateComponentStyles("cmbCostCenter");
 		}
 	}
 	

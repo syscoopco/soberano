@@ -17,6 +17,6 @@ public class RecordShiftClosureButtonComposer extends BusinessActivityTrackedObj
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-          boxDetails = (Box) btnRecord.getPreviousSibling().query("#boxDetails");
+          boxDetails = (Box) btnRecord.query("#wndShowingAll").query("#boxDetails");
     }
 }

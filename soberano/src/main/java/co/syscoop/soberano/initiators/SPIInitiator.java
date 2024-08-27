@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
+import org.zkoss.zul.Textbox;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
@@ -20,10 +21,12 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 	private Integer warehouseId = 0;
 	private Integer acquirableMaterialId = 0;
 	private Integer closureId = 0;
+	private String shift = "";
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
+			Textbox txtShift = (Textbox) comps[0].getPreviousSibling().query("#center").query("textbox").query("#txtShift");
 			Combobox cmbWarehouse = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbWarehouse");					
 			Combobox cmbMaterial = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbMaterial");
 			Checkbox chkWithOpeningStock = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkWithOpeningStock");
@@ -32,6 +35,7 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			Checkbox chkSurplus = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkSurplus");
 			
 			try {
+				txtShift.setText(shift);
 				ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);
 			}
 			catch(Exception ex) {}			
@@ -103,11 +107,14 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");
 			closureId = ZKUtilitity.getObjectIdFromURLQuery("scid");
 			setAcquirableMaterialId(ZKUtilitity.getObjectIdFromURLQuery("item"));
+			setAcquirableMaterialId(ZKUtilitity.getObjectIdFromURLQuery("item"));
+			setShift(ZKUtilitity.getObjectStrIdFromURLQuery("sh"));
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 
 			closureId = 0;
 			setAcquirableMaterialId(0);
+			setShift(""); 
 			ExceptionTreatment.log(ex);
 		}
 	}
@@ -118,5 +125,13 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 
 	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
 		this.acquirableMaterialId = acquirableMaterialId;
+	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
 	}
 }
