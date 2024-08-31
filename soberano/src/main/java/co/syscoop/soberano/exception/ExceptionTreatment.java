@@ -81,6 +81,8 @@ public class ExceptionTreatment {
 				throw new WrongValueException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ZoneNotCoveredByDeliveryProviderException"))
 				throw new ZoneNotCoveredByDeliveryProviderException(ex);
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException"))
+				throw new FirstOrderRequiresCashOperationException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

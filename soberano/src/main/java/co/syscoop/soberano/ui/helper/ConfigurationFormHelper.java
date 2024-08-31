@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Window;
 
@@ -21,6 +22,7 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 		((Decimalbox) wndContentPanel.query("include").query("#decSurcharge")).setValue(configuration.getSurcharge());
 		((Intbox) wndContentPanel.query("include").query("#intHour")).setValue(configuration.getShiftOpeningHour());
 		((Intbox) wndContentPanel.query("include").query("#intMinutes")).setValue(configuration.getShiftOpeningMinutes());
+		((Checkbox) wndContentPanel.query("include").query("#chkFirstOrderRequiresCashOperation")).setChecked(configuration.getFirstOrderRequiresCashOperation());
 	}
 	
 	@Override
@@ -40,7 +42,8 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 	public Integer modifyFromForm(Include incDetails) throws Exception {
 		super.setTrackedObject(new Configuration(((Decimalbox) incDetails.query("#decSurcharge")).getValue(),
 												((Intbox) incDetails.query("#intHour")).getValue(),
-												((Intbox) incDetails.query("#intMinutes")).getValue()));
+												((Intbox) incDetails.query("#intMinutes")).getValue(),
+												((Checkbox) incDetails.query("#chkFirstOrderRequiresCashOperation")).isChecked()));
 		return super.getTrackedObject().modify();
 	}
 }

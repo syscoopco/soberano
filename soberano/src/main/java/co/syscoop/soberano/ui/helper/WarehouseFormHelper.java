@@ -56,6 +56,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 		
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(warehouse.getIsProcurementWarehouse());
 		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(warehouse.getIsSalesWarehouse());
+		((Checkbox) incDetails.query("#chkLossesWarehouse")).setChecked(warehouse.getIsLossesWarehouse());
 		
 		Treechildren tchdnEntryProcesses = (Treechildren) incDetails.query("#tchdnEntryProcesses");
 		tchdnEntryProcesses.getChildren().clear();
@@ -72,6 +73,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(false);
 		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(false);
+		((Checkbox) incDetails.query("#chkLossesWarehouse")).setChecked(false);
 	}
 
 	@Override
@@ -84,6 +86,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 					((Textbox) incDetails.query("#txtCode")).getValue(),
 					((Checkbox) incDetails.query("#chkProcurementWarehouse")).isChecked(),
 					((Checkbox) incDetails.query("#chkSalesWarehouse")).isChecked(),
+					((Checkbox) incDetails.query("#chkLossesWarehouse")).isChecked(),
 					entryProcesses)
 			.record();
 	}
@@ -98,6 +101,7 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 											((Textbox) incDetails.query("#txtCode")).getValue(),
 											((Checkbox) incDetails.query("#chkProcurementWarehouse")).isChecked(),
 											((Checkbox) incDetails.query("#chkSalesWarehouse")).isChecked(),
+											((Checkbox) incDetails.query("#chkLossesWarehouse")).isChecked(),
 											entryProcesses));
 		return super.getTrackedObject().modify();
 	}

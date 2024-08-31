@@ -18,5 +18,7 @@
 		<hbox hflex="1" align="center" pack="start">
 			<intbox id="intMinutes" hflex="1" value="0" constraint="no negative" placeholder="mm"/>
 		</hbox>
+		<separator></separator>
+		<checkbox id="chkFirstOrderRequiresCashOperation" checked="false" label="${labels.caption.field.firstOrderRequiresCashOperation}" sclass="Caption"></checkbox>
 	</vbox>
 </zk>

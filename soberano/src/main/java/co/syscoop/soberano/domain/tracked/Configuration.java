@@ -13,13 +13,15 @@ public class Configuration extends BusinessActivityTrackedObject {
 	private BigDecimal surcharge = new BigDecimal(0);
 	private Integer shiftOpeningHour = 0;
 	private Integer shiftOpeningMinutes = 0;
+	private Boolean firstOrderRequiresCashOperation = false;
 	
 	public Configuration() {}
 	
-	public Configuration(BigDecimal surcharge, Integer shiftOpeningHour, Integer shiftOpeningMinutes) {
+	public Configuration(BigDecimal surcharge, Integer shiftOpeningHour, Integer shiftOpeningMinutes, Boolean firstOrderRequiresCashOperation) {
 		setSurcharge(surcharge);
 		setShiftOpeningHour(shiftOpeningHour);
 		setShiftOpeningMinutes(shiftOpeningMinutes);
+		setFirstOrderRequiresCashOperation(firstOrderRequiresCashOperation);
 	}
 	
 	public final class ConfigurationMapper implements RowMapper<Object> {
@@ -32,7 +34,8 @@ public class Configuration extends BusinessActivityTrackedObject {
 				if (!rs.wasNull()) {
 					configuration = new Configuration(surcharge,
 													rs.getInt("shiftOpeningHour"),
-													rs.getInt("shiftOpeningMinutes"));
+													rs.getInt("shiftOpeningMinutes"),
+													rs.getBoolean("firstOrderRequiresCashOperation"));
 				}
 				return configuration;
 			}
@@ -58,11 +61,13 @@ public class Configuration extends BusinessActivityTrackedObject {
 		modifyQuery = "SELECT soberano.\"fn_Configuration_modify\"(:surcharge, "
 								+ " 								:shiftopeninghour, "
 								+ " 								:shiftopeningminutes, "
+								+ "									:firstorderrequirescashoperation, "
 								+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("surcharge", this.getSurcharge());
 		modifyParameters.addValue("shiftopeninghour", this.getShiftOpeningHour());
 		modifyParameters.addValue("shiftopeningminutes", this.getShiftOpeningMinutes());
+		modifyParameters.addValue("firstorderrequirescashoperation", this.getFirstOrderRequiresCashOperation());
 		
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
@@ -76,6 +81,7 @@ public class Configuration extends BusinessActivityTrackedObject {
 		setEntityTypeInstanceId(sourceConf.getEntityTypeInstanceId());
 		setShiftOpeningHour(sourceConf.getShiftOpeningHour());
 		setShiftOpeningMinutes(sourceConf.getShiftOpeningMinutes());
+		setFirstOrderRequiresCashOperation(sourceConf.getFirstOrderRequiresCashOperation());
 	}
 
 	public BigDecimal getSurcharge() {
@@ -100,5 +106,13 @@ public class Configuration extends BusinessActivityTrackedObject {
 
 	public void setShiftOpeningMinutes(Integer shiftMinutes) {
 		this.shiftOpeningMinutes = shiftMinutes;
+	}
+
+	public Boolean getFirstOrderRequiresCashOperation() {
+		return firstOrderRequiresCashOperation;
+	}
+
+	public void setFirstOrderRequiresCashOperation(Boolean firstOrderRequiresCashOperation) {
+		this.firstOrderRequiresCashOperation = firstOrderRequiresCashOperation;
 	}
 }

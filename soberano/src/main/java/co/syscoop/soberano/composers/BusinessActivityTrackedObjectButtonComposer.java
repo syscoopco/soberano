@@ -13,6 +13,7 @@ import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.PasswordsMustMatchException;
@@ -100,7 +101,13 @@ public class BusinessActivityTrackedObjectButtonComposer extends SelectorCompose
 					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Validation"),
 					Messagebox.EXCLAMATION);
-		}
+		}		
+		catch(FirstOrderRequiresCashOperationException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.firstOrderRequiresCashOperationException"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+		}		
 		catch(OnlyOneOrderPerCounterIsPermittedException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										Labels.getLabel("message.validation.onlyOneOrderPerCounterIsPermitted"), 

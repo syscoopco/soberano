@@ -11,6 +11,8 @@
 		<separator></separator>
 		<checkbox id="chkSalesWarehouse" checked="false" label="${labels.caption.field.salesWarehouse}" sclass="Caption"></checkbox>
 		<separator></separator>
+		<checkbox id="chkLossesWarehouse" checked="false" label="${labels.caption.field.lossesWarehouse}" sclass="Caption"></checkbox>
+		<separator></separator>
 		<label value="${labels.form.warehouse.entryProcesses}" sclass="Caption"></label>		
 		<tree id="treeEntryProcesses" visible="false">
 			<treecols>

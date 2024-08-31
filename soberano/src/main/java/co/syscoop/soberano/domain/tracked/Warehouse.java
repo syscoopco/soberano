@@ -19,6 +19,7 @@ public class Warehouse extends TrackedObject {
 
 	private Boolean isProcurementWarehouse = false;
 	private Boolean isSalesWarehouse = false;
+	private Boolean isLossesWarehouse = false;
 	private ArrayList<Process> entryProcesses = new ArrayList<Process>();
 	private ArrayList<Integer> entryProcessIds = null;
 	
@@ -38,12 +39,14 @@ public class Warehouse extends TrackedObject {
 					String name, 
 					String code,
 					Boolean isProcurementWarehouse, 
-					Boolean isSalesWarehouse) {
+					Boolean isSalesWarehouse,
+					Boolean isLossesWarehouse) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(code);
 		this.setQualifiedName(name + " : " + code);		
 		this.setIsProcurementWarehouse(isProcurementWarehouse);
 		this.setIsSalesWarehouse(isSalesWarehouse);
+		this.setIsLossesWarehouse(isLossesWarehouse);
 	}
 	
 	public Warehouse(Integer id, 
@@ -52,12 +55,14 @@ public class Warehouse extends TrackedObject {
 			String code,
 			Boolean isProcurementWarehouse, 
 			Boolean isSalesWarehouse,
+			Boolean isLossesWarehouse,
 			ArrayList<Process> entryProcesses) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(code);
 		this.setQualifiedName(name + " : " + code);		
 		this.setIsProcurementWarehouse(isProcurementWarehouse);
 		this.setIsSalesWarehouse(isSalesWarehouse);
+		this.setIsLossesWarehouse(isLossesWarehouse);
 		this.entryProcesses = entryProcesses;
 		fillEntryProcessIds();
 	}
@@ -75,6 +80,7 @@ public class Warehouse extends TrackedObject {
 				+ "											:warehouseCode, "
 				+ "											:isProcurementWarehouse, "
 				+ "											:isSalesWarehouse, "
+				+ "											:isLossesWarehouse, "
 				+ "											:entryProcesses, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
@@ -82,6 +88,7 @@ public class Warehouse extends TrackedObject {
 		recordParameters.addValue("warehouseCode", this.getStringId());
 		recordParameters.addValue("isProcurementWarehouse", this.isProcurementWarehouse);
 		recordParameters.addValue("isSalesWarehouse", this.isSalesWarehouse);
+		recordParameters.addValue("isLossesWarehouse", this.isLossesWarehouse);
 		recordParameters.addValue("entryProcesses", createArrayOfSQLType("integer", entryProcessIds.toArray()));
 		
 		Integer qryResult = super.record();
@@ -97,6 +104,7 @@ public class Warehouse extends TrackedObject {
 						+ "									:warehouseCode, "
 						+ "									:isProcurementWarehouse, "
 						+ "									:isSalesWarehouse, "
+						+ "									:isLossesWarehouse, "
 						+ "									:entryProcesses, "
 						+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
@@ -105,6 +113,7 @@ public class Warehouse extends TrackedObject {
 		modifyParameters.addValue("warehouseCode", this.getStringId());
 		modifyParameters.addValue("isProcurementWarehouse", this.isProcurementWarehouse);
 		modifyParameters.addValue("isSalesWarehouse", this.isSalesWarehouse);
+		modifyParameters.addValue("isLossesWarehouse", this.isLossesWarehouse);
 		modifyParameters.addValue("entryProcesses", createArrayOfSQLType("integer", entryProcessIds.toArray()));
 		
 		Integer qryResult = super.modify();
@@ -142,7 +151,8 @@ public class Warehouse extends TrackedObject {
 											rs.getString("warehouseName"),
 											rs.getString("warehouseCode"),
 											rs.getBoolean("isProcurementWarehouse"),
-											rs.getBoolean("isSalesWarehouse"));
+											rs.getBoolean("isSalesWarehouse"),
+											rs.getBoolean("isLossesWarehouse"));
 				}
 				return warehouse;
 			}
@@ -168,7 +178,8 @@ public class Warehouse extends TrackedObject {
 											rs.getString("warehouseName"),
 											rs.getString("warehouseCode"),
 											rs.getBoolean("isProcurementWarehouse"),
-											rs.getBoolean("isSalesWarehouse"));
+											rs.getBoolean("isSalesWarehouse"),
+											rs.getBoolean("isLossesWarehouse"));
 	        	}
 	        	Integer entryProcessId = rs.getInt("processId");
 	        	String entryProcessName = rs.getString("processName");
@@ -200,6 +211,7 @@ public class Warehouse extends TrackedObject {
 		setStringId(sourceWarehouse.getStringId());
 		setIsProcurementWarehouse(sourceWarehouse.getIsProcurementWarehouse());
 		setIsSalesWarehouse(sourceWarehouse.getIsSalesWarehouse());
+		setIsLossesWarehouse(sourceWarehouse.getIsLossesWarehouse());
 		setEntryProcesses(sourceWarehouse.getEntryProcesses());
 	}
 	
@@ -253,5 +265,13 @@ public class Warehouse extends TrackedObject {
 	@Override
 	public PrintableData getReportMinimal() throws SQLException {
 		return null;
+	}
+
+	public Boolean getIsLossesWarehouse() {
+		return isLossesWarehouse;
+	}
+
+	public void setIsLossesWarehouse(Boolean isLossesWarehouse) {
+		this.isLossesWarehouse = isLossesWarehouse;
 	}
 }

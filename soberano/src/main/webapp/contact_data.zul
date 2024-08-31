@@ -4,10 +4,10 @@
 		<caption label="${labels.caption.general.contactData}"/>
 		<vbox width="100%" sclass="DefaultBackground DefaultInput">
 			<label value="${labels.caption.field.phoneNumber}" sclass="Caption"></label>		
-			<textbox id="txtPhoneNumber" hflex="1" maxlength="50" constraint="/[0-9]+/: ${labels.validation.constraint.InvalidPhoneNumber}"/>
+			<textbox id="txtPhoneNumber" value="00008656696" hflex="1" maxlength="50" constraint="/[0-9]+/: ${labels.validation.constraint.InvalidPhoneNumber}"/>
 			<separator></separator>		
 			<label value="${labels.caption.field.emailAddress}" sclass="Caption"></label>		
-			<textbox id="txtEmailAddress" hflex="1" maxlength="100" placeholder="${labels.validation.constraint.InvalidEmailAddress}" constraint="/\w+[\w.-]*@[\w.-]+\.\w+/: ${labels.validation.constraint.InvalidEmailAddress}"/>
+			<textbox id="txtEmailAddress" value="unknown@tcptool.xyz" hflex="1" maxlength="100" placeholder="${labels.validation.constraint.InvalidEmailAddress}" constraint="/\w+[\w.-]*@[\w.-]+\.\w+/: ${labels.validation.constraint.InvalidEmailAddress}"/>
 			<separator></separator>
 			<label value="${labels.caption.field.address}" sclass="Caption"></label>			
 			<textbox id="txtAddress" hflex="1" maxlength="1000"/>

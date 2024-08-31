@@ -16,6 +16,7 @@ import org.zkoss.zul.Checkbox;
 
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException;
 import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
@@ -55,6 +56,9 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 									cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null).record());
 			if (newOrderId == -4) {
 				throw new SomeFieldsContainWrongValuesException();
+			}
+			else if (newOrderId == -3) {
+				throw new FirstOrderRequiresCashOperationException();
 			}
 			else if (newOrderId == -2) {
 				throw new OnlyOneOrderPerCounterIsPermittedException();
