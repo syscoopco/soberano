@@ -54,7 +54,8 @@ public class SPIComposer extends SelectorComposer {
 										chkWithOpeningStock.isChecked(),
 										chkWithStockOnClosure.isChecked(),
 										chkWithChanges.isChecked(),
-										chkSurplus.isChecked());			
+										chkSurplus.isChecked(),
+										"");			
 		}
 		else if (cmbWarehouse.getSelectedItem() != null) {
 			
@@ -65,7 +66,8 @@ public class SPIComposer extends SelectorComposer {
 											chkWithOpeningStock.isChecked(),
 											chkWithStockOnClosure.isChecked(),
 											chkWithChanges.isChecked(),
-											chkSurplus.isChecked());
+											chkSurplus.isChecked(),
+											cmbMaterial.getText());
 		}
 		else if (cmbMaterial.getSelectedItem() != null) {
 			
@@ -76,17 +78,19 @@ public class SPIComposer extends SelectorComposer {
 											chkWithOpeningStock.isChecked(),
 											chkWithStockOnClosure.isChecked(),
 											chkWithChanges.isChecked(),
-											chkSurplus.isChecked());
+											chkSurplus.isChecked(),
+											"");
 		}
 		else {
-			//re-render the grid with the whole spi
+			//re-render the grid with the whole spi, filtered by material name
 			spiGridModel = new SPIGridModel(closureId, 
 											0, 
 											0,
 											chkWithOpeningStock.isChecked(),
 											chkWithStockOnClosure.isChecked(),
 											chkWithChanges.isChecked(),
-											chkSurplus.isChecked());	
+											chkSurplus.isChecked(),
+											cmbMaterial.getText());	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(spiGridModel);
 	}

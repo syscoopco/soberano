@@ -21,7 +21,8 @@ public class SPI extends BusinessActivityTrackedObject {
 				Boolean wOpeningStock,
 				Boolean wStockOnClosure,
 				Boolean wChanges,
-				Boolean wSurplus) {
+				Boolean wSurplus,
+				String amNameFilterStr) {
 		this.setClosureId(closureId);
 		this.setWarehouseId(warehouseId);
 		this.setAcquirableMaterialId(acquirableMaterialId);
@@ -32,6 +33,7 @@ public class SPI extends BusinessActivityTrackedObject {
 																			+ ":wStockOnClosure, "
 																			+ ":wChanges, "
 																			+ ":wSurplus, "
+																			+ ":amNameFilterStr, "
 																			+ ":lang, "
 																			+ ":loginname)";
 		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, "
@@ -41,6 +43,7 @@ public class SPI extends BusinessActivityTrackedObject {
 																			+ ":wStockOnClosure, "
 																			+ ":wChanges, "
 																			+ ":wSurplus, "
+																			+ ":amNameFilterStr, "
 																			+ ":lang, "
 																			+ ":loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
@@ -51,6 +54,7 @@ public class SPI extends BusinessActivityTrackedObject {
 		getAllQueryNamedParameters.put("wStockOnClosure", wStockOnClosure);
 		getAllQueryNamedParameters.put("wChanges", wChanges);
 		getAllQueryNamedParameters.put("wSurplus", wSurplus);
+		getAllQueryNamedParameters.put("amNameFilterStr", amNameFilterStr);
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 

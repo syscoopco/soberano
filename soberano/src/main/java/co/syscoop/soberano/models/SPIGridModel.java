@@ -15,6 +15,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 	private Boolean wStockOnClosure = false;
 	private Boolean wChanges = false;
 	private Boolean wSurplus = false;
+	private String amNameFilterStr = "";
 	
 	public SPIGridModel() {
 		
@@ -28,7 +29,8 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 						Boolean wOpeningStock,
 						Boolean wStockOnClosure,
 						Boolean wChanges,
-						Boolean wSurplus) {
+						Boolean wSurplus,
+						String amNameFilterStr) {
 		
 		//the set is sorted by inventoryItemName alphabetically (ascending).
 		super("inventoryItemName", true, false);
@@ -40,6 +42,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		this.setwStockOnClosure(wStockOnClosure);
 		this.setwChanges(wChanges);
 		this.setwSurplus(wSurplus);
+		this.setAmNameFilterStr(amNameFilterStr);
 	}
 	
 	@Override
@@ -47,7 +50,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 
 		try {
 			if (_size < 0)
-				_size = new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus).getCount();
+				_size = new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus, amNameFilterStr).getCount();
 			return _size;
 		} 
 		catch (SQLException e) 
@@ -62,7 +65,7 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = (new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
+				_cache = (new SPI(closureId, warehouseId, acquirableMaterialId, wOpeningStock, wStockOnClosure, wChanges, wSurplus, amNameFilterStr)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 
@@ -122,5 +125,13 @@ public class SPIGridModel extends SoberanoAbstractListModel<Object>
 
 	public void setwSurplus(Boolean wSurplus) {
 		this.wSurplus = wSurplus;
+	}
+	
+	public String getAmNameFilterStr() {
+		return amNameFilterStr;
+	}
+
+	public void setAmNameFilterStr(String amNameFilterStr) {
+		this.amNameFilterStr = amNameFilterStr;
 	}
 }

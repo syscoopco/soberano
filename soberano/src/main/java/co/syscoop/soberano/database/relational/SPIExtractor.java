@@ -20,11 +20,16 @@ public final class SPIExtractor implements ResultSetExtractor<List<Object>> {
         while (rs.next()) {
         	spiRowData = new SPIRowData();
         	spiRowData.setInventoryItemName(rs.getString("inventoryItemName"));
+        	spiRowData.setInventoryItemCode(rs.getString("inventoryItemCode"));
         	spiRowData.setUnit(rs.getString("unit"));
+        	spiRowData.setUnitId(rs.getInt("unitId"));
         	spiRowData.setOpening(rs.getBigDecimal("opening"));
         	spiRowData.setInput(rs.getBigDecimal("input_"));
         	spiRowData.setOutput(rs.getBigDecimal("output_"));
         	spiRowData.setEnding(rs.getBigDecimal("ending"));
+        	spiRowData.setLosses(rs.getBigDecimal("losses"));
+        	spiRowData.setMovement(rs.getBigDecimal("movement"));
+        	spiRowData.setAvailable(rs.getBigDecimal("available"));
         	spiTableData.add(spiRowData);
         }
         return spiTableData;

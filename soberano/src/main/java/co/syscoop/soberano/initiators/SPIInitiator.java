@@ -50,7 +50,8 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
-												chkSurplus.isChecked());			
+												chkSurplus.isChecked(),
+												"");			
 			}
 			else if (cmbWarehouse.getSelectedItem() != null) {
 				
@@ -61,7 +62,8 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
-												chkSurplus.isChecked());	
+												chkSurplus.isChecked(),
+												cmbMaterial.getText());	
 			}
 			else if (cmbMaterial.getSelectedItem() != null) {
 				
@@ -72,7 +74,8 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
-												chkSurplus.isChecked());	
+												chkSurplus.isChecked(),
+												"");	
 			}
 			else {
 				//re-render the grid with the whole spi
@@ -82,7 +85,8 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
-												chkSurplus.isChecked());
+												chkSurplus.isChecked(),
+												cmbMaterial.getText());
 			}
 			((Grid) cmbWarehouse.query("#incGrid").query("#grd")).setModel(spiGridModel);
 		}

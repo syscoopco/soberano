@@ -139,6 +139,27 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
 	
+	public Integer request() throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_InventoryOperation_request\"(:from, "
+							+ "											:to, "
+							+ "											:worker, "
+							+ "											:inventoryItems, "
+							+ "											:units, "
+							+ "											:quantities, "
+							+ "											:loginname) AS queryresult";	
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("from", this.from.getId());
+		parametersMap.put("to", this.to.getId());
+		parametersMap.put("worker", this.worker.getId());
+		parametersMap.put("inventoryItems", createArrayOfSQLType("varchar", this.inventoryItemCodes.toArray()));
+		parametersMap.put("units", createArrayOfSQLType("integer", this.unitIds.toArray()));
+		parametersMap.put("quantities", createArrayOfSQLType("numeric", this.quantities.toArray()));
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+	
 	@Override
 	public List<DomainObject> getAll(Boolean stringId) throws SQLException {	
 		return super.getAll(false);
