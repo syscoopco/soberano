@@ -45,6 +45,9 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 	@Wire
 	private Decimalbox decLossesQuantity;
 	
+	@Wire
+	private Decimalbox decLossesCurrentQuantity;
+	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -61,20 +64,26 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 			
 			inventoryItems.add(new InventoryItem(lblLossesItemId.getValue(), ""));
 			units.add(new Unit(intLossesUnitId.getValue()));
-			quantities.add(decLossesQuantity.getValue());			
+			quantities.add(decLossesQuantity.getValue().compareTo(decLossesCurrentQuantity.getValue()) > 0 
+							? decLossesQuantity.getValue().subtract(decLossesCurrentQuantity.getValue())
+							: new BigDecimal(0));		
 			
 			if (cmbLossesToWarehouse.getSelectedItem() == null || cmbLossesWorker.getSelectedItem() == null) {
 				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
-				Integer qryResult = (new InventoryOperation(((DomainObject) cmbLossesToWarehouse.getSelectedItem().getValue()).getId(),
-															intLossesFromWarehouse.getValue(),
+				Integer qryResult = (new InventoryOperation(intLossesFromWarehouse.getValue(),
+															((DomainObject) cmbLossesToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbLossesWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
 															quantities)).request();
-				if (qryResult == -2) {
+				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				if (qryResult == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else if (qryResult == -2) {
 					throw new WrongDateTimeException();
 				}
 				else if (qryResult == -3) {
@@ -83,6 +92,10 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+//				((Button) cmbLossesToWarehouse.getParent().getParent().getParent().getParent()
+//						.getParent().getParent().getParent().getParent()
+//						.getParent().getParent()
+//						.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
 			}
 		}
 		catch(NotEnoughRightsException ex) {

@@ -45,6 +45,9 @@ public class RequestInputInventoryOperationButtonComposer extends SelectorCompos
 	@Wire
 	private Decimalbox decInputQuantity;
 	
+	@Wire
+	private Decimalbox decInputCurrentQuantity;
+	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -61,7 +64,9 @@ public class RequestInputInventoryOperationButtonComposer extends SelectorCompos
 			
 			inventoryItems.add(new InventoryItem(lblInputItemId.getValue(), ""));
 			units.add(new Unit(intInputUnitId.getValue()));
-			quantities.add(decInputQuantity.getValue());			
+			quantities.add(decInputQuantity.getValue().compareTo(decInputCurrentQuantity.getValue()) > 0 
+							? decInputQuantity.getValue().subtract(decInputCurrentQuantity.getValue())
+							: new BigDecimal(0));		
 			
 			if (cmbInputFromWarehouse.getSelectedItem() == null || cmbInputWorker.getSelectedItem() == null) {
 				((Popup) cmbInputFromWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
@@ -74,7 +79,11 @@ public class RequestInputInventoryOperationButtonComposer extends SelectorCompos
 															inventoryItems,
 															units,
 															quantities)).request();
-				if (qryResult == -2) {
+				((Popup) cmbInputFromWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				if (qryResult == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else if (qryResult == -2) {
 					throw new WrongDateTimeException();
 				}
 				else if (qryResult == -3) {
@@ -83,6 +92,10 @@ public class RequestInputInventoryOperationButtonComposer extends SelectorCompos
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+//				((Button) cmbInputFromWarehouse.getParent().getParent().getParent().getParent()
+//												.getParent().getParent().getParent().getParent()
+//												.getParent().getParent()
+//												.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
 			}
 		}
 		catch(NotEnoughRightsException ex) {

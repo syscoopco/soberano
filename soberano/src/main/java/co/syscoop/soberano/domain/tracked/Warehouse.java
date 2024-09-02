@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -14,6 +15,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Warehouse extends TrackedObject {
 
@@ -137,6 +139,25 @@ public class Warehouse extends TrackedObject {
 	public List<DomainObject> getAll(Boolean stringId) throws SQLException {	
 		return super.getAll(false);
 	}
+	
+	public final class WarehouseDomainObjectMapper implements RowMapper<Object> {
+
+		public DomainObject mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				DomainObject doo = null;
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					doo = new DomainObject(id, rs.getString("domainObjectName"));
+				}
+				return doo;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
 		
 	public final class WarehouseMapper implements RowMapper<Object> {
 
@@ -250,6 +271,15 @@ public class Warehouse extends TrackedObject {
 	@Override
 	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
 		return null;
+	}
+	
+	public List<Object> getLossesWarehouses() throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Warehouse_getLossesWarehouses\"(:loginname)", 
+					qryParams, 
+					new WarehouseDomainObjectMapper());
 	}
 	
 	@Override

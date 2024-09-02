@@ -30,6 +30,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									Label lblUnitAcronym,
 									Intbox intUnitId,
 									Decimalbox decPopupQty,
+									Decimalbox decPopupCurrentQty,
+									BigDecimal currentQty,
 									Intbox intCounterWarehouseId) throws SoberanoException {
 		
 		try{
@@ -40,6 +42,7 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			lblUnitAcronym.setValue(spiRowData.getUnit());
 			intUnitId.setValue(spiRowData.getUnitId());
 			decPopupQty.setValue(new BigDecimal(0));
+			decPopupCurrentQty.setValue(currentQty);
 			
 			try {
 				Combobox cmbWarehouse = (Combobox) popup.getParent().getParent().getParent().query("#cmbWarehouse");					
@@ -106,6 +109,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Label) popup.query("window").query("#lblInputUnit"),
 									(Intbox) popup.query("window").query("#intInputUnitId"),
 									(Decimalbox) popup.query("window").query("#decInputQuantity"),
+									(Decimalbox) popup.query("window").query("#decInputCurrentQuantity"),
+									spiRowData.getInput(),
 									(Intbox) popup.query("window").query("#intInputToWarehouse"));			
 			}
 		});
@@ -131,6 +136,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Label) popup.query("window").query("#lblLossesUnit"),
 									(Intbox) popup.query("window").query("#intLossesUnitId"),
 									(Decimalbox) popup.query("window").query("#decLossesQuantity"),
+									(Decimalbox) popup.query("window").query("#decLossesCurrentQuantity"),
+									spiRowData.getLosses(),
 									(Intbox) popup.query("window").query("#intLossesFromWarehouse"));
 			}
 		});		
@@ -156,6 +163,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Label) popup.query("window").query("#lblMovementUnit"),
 									(Intbox) popup.query("window").query("#intMovementUnitId"),
 									(Decimalbox) popup.query("window").query("#decMovementQuantity"),
+									(Decimalbox) popup.query("window").query("#decMovementCurrentQuantity"),
+									spiRowData.getMovement(),
 									(Intbox) popup.query("window").query("#intMovementFromWarehouse"));	
 			}
 		});	

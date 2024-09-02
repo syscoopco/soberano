@@ -45,6 +45,9 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 	@Wire
 	private Decimalbox decMovementQuantity;
 	
+	@Wire
+	private Decimalbox decMovementCurrentQuantity;
+	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -61,20 +64,26 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 			
 			inventoryItems.add(new InventoryItem(lblMovementItemId.getValue(), ""));
 			units.add(new Unit(intMovementUnitId.getValue()));
-			quantities.add(decMovementQuantity.getValue());			
+			quantities.add(decMovementQuantity.getValue().compareTo(decMovementCurrentQuantity.getValue()) > 0 
+							? decMovementQuantity.getValue().subtract(decMovementCurrentQuantity.getValue())
+							: new BigDecimal(0));
 			
 			if (cmbMovementToWarehouse.getSelectedItem() == null || cmbMovementWorker.getSelectedItem() == null) {
 				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
-				Integer qryResult = (new InventoryOperation(((DomainObject) cmbMovementToWarehouse.getSelectedItem().getValue()).getId(),
-															intMovementFromWarehouse.getValue(),
+				Integer qryResult = (new InventoryOperation(intMovementFromWarehouse.getValue(),
+															((DomainObject) cmbMovementToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbMovementWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
 															quantities)).request();
-				if (qryResult == -2) {
+				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				if (qryResult == -1) {
+					throw new NotEnoughRightsException();
+				}
+				else if (qryResult == -2) {
 					throw new WrongDateTimeException();
 				}
 				else if (qryResult == -3) {
@@ -83,6 +92,10 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+//				((Button) cmbMovementToWarehouse.getParent().getParent().getParent().getParent()
+//						.getParent().getParent().getParent().getParent()
+//						.getParent().getParent()
+//						.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
 			}
 		}
 		catch(NotEnoughRightsException ex) {

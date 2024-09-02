@@ -28,6 +28,7 @@
 						</combobox>
 					</hbox>
 					<decimalbox format="####.########" scale="8" id="decInputQuantity" hflex="1" placeholder="${labels.placeholder.quantity}" constraint="no negative"/>
+					<decimalbox visible="false" id="decInputCurrentQuantity"/>
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModel')">
 						<combobox id="cmbInputWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
 							<template name="model">
@@ -53,7 +54,7 @@
 						<label id="lblLossesUnit"/>
 					</hbox>
 					<intbox id="intLossesFromWarehouse" visible="false"/>			
-					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
+					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.LossesWarehouseSelectionViewModel')">
 						<combobox id="cmbLossesToWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.to}">
 							<template name="model">
 								<comboitem label="@load(each.name)" value="@load(each)">
@@ -62,6 +63,7 @@
 						</combobox>
 					</hbox>
 					<decimalbox format="####.########" scale="8" id="decLossesQuantity" hflex="1" placeholder="${labels.placeholder.quantity}" constraint="no negative"/>
+					<decimalbox visible="false" id="decLossesCurrentQuantity"/>
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModel')">
 						<combobox id="cmbLossesWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
 							<template name="model">
@@ -96,6 +98,7 @@
 						</combobox>
 					</hbox>
 					<decimalbox format="####.########" scale="8" id="decMovementQuantity" hflex="1" placeholder="${labels.placeholder.quantity}" constraint="no negative"/>
+					<decimalbox visible="false" id="decMovementCurrentQuantity"/>
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModel')">
 						<combobox id="cmbMovementWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
 							<template name="model">

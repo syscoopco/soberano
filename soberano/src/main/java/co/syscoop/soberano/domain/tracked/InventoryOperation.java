@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
@@ -157,7 +158,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		parametersMap.put("units", createArrayOfSQLType("integer", this.unitIds.toArray()));
 		parametersMap.put("quantities", createArrayOfSQLType("numeric", this.quantities.toArray()));
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return (Integer) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
 	@Override
