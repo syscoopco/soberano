@@ -152,7 +152,7 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 		
 		Clients.scrollIntoView(boxDetails.query("#grid"));
 		((Treechildren) boxDetails.query("#tchdnMove")).getChildren().clear();
-		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new InventoryOperationsGridModel());
+		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(new InventoryOperationsGridModel(false));
 		requestedAction = ActionRequested.NONE;
 		((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnRecord")).setLabel(Labels.getLabel("caption.action.record"));
 	}

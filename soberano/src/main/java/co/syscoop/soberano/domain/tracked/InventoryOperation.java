@@ -28,6 +28,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 	private ArrayList<Unit> units = new ArrayList<Unit>();
 	private ArrayList<Integer> unitIds = null;
 	private ArrayList<BigDecimal> quantities = new ArrayList<BigDecimal>();
+	private Boolean onlyPendingOperations = false;
 	
 	private void fillInventoryItemIds() {
 		inventoryItemCodes = new ArrayList<String>();
@@ -43,12 +44,17 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		}
 	}
 	
-	public InventoryOperation() {
+	public InventoryOperation() {}
+	
+	public InventoryOperation(Boolean onlyPendingOperations) {
+		
+		this.onlyPendingOperations = onlyPendingOperations;
 		getAllQuery = "SELECT * FROM soberano.\"" 
 							+ "fn_InventoryOperation_getAll\"" 
-							+ "(:lang, :loginname)";
-		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getCount\"(:lang, :loginname) AS count";
+							+ "(:onlyPendingOperations, :lang, :loginname)";
+		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getCount\"(:onlyPendingOperations, :lang, :loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
+		getAllQueryNamedParameters.put("onlyPendingOperations", onlyPendingOperations);	
 		getAllQueryNamedParameters.put("lang", Locales.getCurrent().getLanguage());		
 	}
 	
@@ -161,6 +167,24 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer confirm(Integer inventoryOperationId) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_confirm\"(:inventoryOperationId, :loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("inventoryOperationId", inventoryOperationId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer cancel(Integer inventoryOperationId) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_cancel\"(:inventoryOperationId, :loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("inventoryOperationId", inventoryOperationId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	@Override
 	public List<DomainObject> getAll(Boolean stringId) throws SQLException {	
 		return super.getAll(false);
@@ -196,5 +220,13 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 
 	public void setUnits(ArrayList<Unit> units) {
 		this.units = units;
+	}
+
+	public Boolean getOnlyPendingOperations() {
+		return onlyPendingOperations;
+	}
+
+	public void setOnlyPendingOperations(Boolean onlyPendingOperations) {
+		this.onlyPendingOperations = onlyPendingOperations;
 	}
 }

@@ -3,8 +3,8 @@
 	<include src="/style.zul"/>
 	<zscript>
 		<![CDATA[
-	  		co.syscoop.soberano.models.InventoryOperationsGridModel model = new co.syscoop.soberano.models.InventoryOperationsGridModel(false);
-	  		co.syscoop.soberano.renderers.InventoryOperationsGridRenderer renderer = new co.syscoop.soberano.renderers.InventoryOperationsGridRenderer();
+	  		co.syscoop.soberano.models.InventoryOperationsGridModel model = new co.syscoop.soberano.models.InventoryOperationsGridModel(true);
+	  		co.syscoop.soberano.renderers.InventoryOperationsRequestedGridRenderer renderer = new co.syscoop.soberano.renderers.InventoryOperationsRequestedGridRenderer();
 		]]>
 	</zscript>
 	<vbox hflex="1">

@@ -2,6 +2,10 @@ package co.syscoop.soberano.util.rowdata;
 
 import java.util.Date;
 
+import org.zkoss.zul.Row;
+
+import co.syscoop.soberano.renderers.ActionRequested;
+
 public class InventoryOperationRowData {
 	private Integer inventoryOperationId = 0;
 	private String fromWarehouse = "";
@@ -10,6 +14,8 @@ public class InventoryOperationRowData {
 	private String description = "";
 	private Date operationDate = null;
 	private Date recordingDate = null;
+	private ActionRequested actionRequested = ActionRequested.NONE;
+	private boolean confirmationRequested = false;
 	
 	public InventoryOperationRowData(Integer inventoryOperationId) {
 		this.setInventoryOperationId(inventoryOperationId);
@@ -69,5 +75,33 @@ public class InventoryOperationRowData {
 
 	public void setWorker(String worker) {
 		this.worker = worker;
+	}
+
+	public ActionRequested getActionRequested() {
+		return actionRequested;
+	}
+
+	public void setActionRequested(ActionRequested actionRequested) {
+		this.actionRequested = actionRequested;
+	}
+
+	public boolean isConfirmationRequested() {
+		return confirmationRequested;
+	}
+
+	public void setConfirmationRequested(boolean confirmationRequested) {
+		this.confirmationRequested = confirmationRequested;
+	}
+	
+	public void requestConfirmation(Row row, ActionRequested actionRequested) {
+		this.actionRequested = actionRequested;
+		confirmationRequested = true;
+		row.setStyle("background-color:yellow;");
+	}
+	
+	public void restoreRowDefaultStyle(Row row) {
+		actionRequested = ActionRequested.NONE;
+		confirmationRequested = false;
+		row.setStyle("background-color:transparent;");
 	}
 }

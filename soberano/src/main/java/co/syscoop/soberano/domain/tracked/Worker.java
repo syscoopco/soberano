@@ -336,6 +336,33 @@ public class Worker extends TrackedObject {
 		return super.getAll(false);
 	}
 	
+	public final class WorkerDomainObjectMapper implements RowMapper<Object> {
+
+		public DomainObject mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				DomainObject doo = null;
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					doo = new DomainObject(id, rs.getString("domainObjectName"));
+				}
+				return doo;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAllForSPI() throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		return query("SELECT * FROM soberano.\"fn_Worker_getAllForSPI\"()", 
+					qryParams, 
+					new WorkerDomainObjectMapper());
+	}
+	
 	public final class WorkerExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
