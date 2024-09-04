@@ -1,5 +1,6 @@
 package co.syscoop.soberano.composers;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
@@ -143,6 +144,12 @@ public class ModifyButtonComposer extends SelectorComposer {
 		catch(WrongValueException ex) {
 			ExceptionTreatment.logAndShow(ex, 
 										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(DataIntegrityViolationException ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 										Labels.getLabel("messageBoxTitle.Validation"),
 										Messagebox.EXCLAMATION);
 		}

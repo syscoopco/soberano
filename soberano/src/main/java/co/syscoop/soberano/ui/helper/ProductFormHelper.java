@@ -17,6 +17,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
@@ -94,6 +95,11 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		ArrayList<ProductCategory> productCategories = new ArrayList<ProductCategory>();		
 		productCategories.add(productCategory);		
 		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
+		Integer iUnitId = 0;
+		if (iUnitItem != null) 
+			iUnitId = ((DomainObject) iUnitItem.getValue()).getId();
+		else
+			throw new SomeFieldsContainWrongValuesException(); 		
 		Comboitem iCostCenterItem = ((Combobox) incDetails.query("#cmbCostCenter")).getSelectedItem();		
 		return (new Product(0,
 							0,
@@ -102,7 +108,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 							((Decimalbox) incDetails.query("#decPrice")).getValue(),
 							((Decimalbox) incDetails.query("#decReferencePrice")).getValue(),							
 							((Decimalbox) incDetails.query("#decMinimumInventoryLevel")).getValue(),
-							iUnitItem == null ? null : ((DomainObject) iUnitItem.getValue()).getId(),
+							iUnitId,
 							iCostCenterItem == null ? null : ((DomainObject) iCostCenterItem.getValue()).getId(),
 							true,
 							0,
@@ -115,8 +121,10 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		
 		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
 		Integer iUnitId = 0;
-		if (iUnitItem != null) iUnitId = ((DomainObject) iUnitItem.getValue()).getId();	
-		
+		if (iUnitItem != null) 
+			iUnitId = ((DomainObject) iUnitItem.getValue()).getId();	
+		else
+			throw new SomeFieldsContainWrongValuesException(); 
 		Comboitem iCostCenterItem = ((Combobox) incDetails.query("#cmbCostCenter")).getSelectedItem();
 		Integer iCostCenterId = 0;
 		if (iCostCenterItem != null) iCostCenterId = ((DomainObject) iCostCenterItem.getValue()).getId();	

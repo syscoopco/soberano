@@ -9,7 +9,7 @@
 	</zscript>
 	<vbox hflex="1">
 		<popup hflex="1" vflex="1" id="ppInput">	
-			<window hflex="min" vflex="min">
+			<window hflex="min" vflex="min" contentStyle="overflow:auto">
 				<vbox hflex="1" vflex="min">
 					<hbox hflex="1" vflex="min">
 						<label id="lblInputItem"/>

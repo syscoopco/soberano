@@ -169,7 +169,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 	
 	public Integer confirm(Integer inventoryOperationId) throws SQLException, Exception {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_confirm\"(:inventoryOperationId, :loginname) AS queryresult";
+		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_confirmRequestedOperation\"(:inventoryOperationId, :loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("inventoryOperationId", inventoryOperationId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
@@ -178,7 +178,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 	
 	public Integer cancel(Integer inventoryOperationId) throws SQLException, Exception {
 		
-		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_cancel\"(:inventoryOperationId, :loginname) AS queryresult";
+		String qryStr = "SELECT * FROM soberano.\"fn_InventoryOperation_cancelRequestedOperation\"(:inventoryOperationId, :loginname) AS queryresult";
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("inventoryOperationId", inventoryOperationId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());

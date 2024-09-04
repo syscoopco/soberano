@@ -14,6 +14,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.AcquirableMaterial;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
@@ -64,12 +65,17 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 	public Integer recordFromForm(Include incDetails) throws Exception {
 		
 		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
+		Integer iUnitId = 0;
+		if (iUnitItem != null) 
+			iUnitId = ((DomainObject) iUnitItem.getValue()).getId();
+		else
+			throw new SomeFieldsContainWrongValuesException(); 
 		return (new AcquirableMaterial(0,
 										0,
 										((Textbox) incDetails.query("#txtCode")).getValue(),
 										((Textbox) incDetails.query("#txtName")).getValue(),
 										((Decimalbox) incDetails.query("#decMinimumInventoryLevel")).getValue(),
-										iUnitItem == null ? null : ((DomainObject) iUnitItem.getValue()).getId()))
+										iUnitId))
 									.record();
 	}
 
@@ -78,7 +84,10 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 		
 		Comboitem iUnitItem = ((Combobox) incDetails.query("#cmbUnit")).getSelectedItem();
 		Integer iUnitId = 0;
-		if (iUnitItem != null) iUnitId = ((DomainObject) iUnitItem.getValue()).getId();	
+		if (iUnitItem != null) 
+			iUnitId = ((DomainObject) iUnitItem.getValue()).getId();
+		else
+			throw new SomeFieldsContainWrongValuesException(); 
 		super.setTrackedObject(new AcquirableMaterial(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
 												((Textbox) incDetails.query("#txtCode")).getValue(),
