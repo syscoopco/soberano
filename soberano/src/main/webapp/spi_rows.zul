@@ -17,6 +17,7 @@
 						<separator></separator>
 						<intbox id="intInputUnitId" visible="false"/>
 						<label id="lblInputUnit"/>
+						<intbox id="intAcquirableMaterialId" visible="false"/>
 					</hbox>
 					<intbox id="intInputToWarehouse" visible="false"/>			
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
@@ -52,6 +53,7 @@
 						<separator></separator>
 						<intbox id="intLossesUnitId" visible="false"/>
 						<label id="lblLossesUnit"/>
+						<intbox id="intAcquirableMaterialId" visible="false"/>
 					</hbox>
 					<intbox id="intLossesFromWarehouse" visible="false"/>			
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.LossesWarehouseSelectionViewModel')">
@@ -87,6 +89,7 @@
 						<separator></separator>
 						<intbox id="intMovementUnitId" visible="false"/>
 						<label id="lblMovementUnit"/>
+						<intbox id="intAcquirableMaterialId" visible="false"/>
 					</hbox>
 					<intbox id="intMovementFromWarehouse" visible="false"/>			
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">

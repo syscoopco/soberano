@@ -20,5 +20,7 @@
 		</hbox>
 		<separator></separator>
 		<checkbox id="chkFirstOrderRequiresCashOperation" checked="false" label="${labels.caption.field.firstOrderRequiresCashOperation}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkSpiOperationRequiresConfirmation" checked="false" label="${labels.caption.field.spiOperationRequiresConfirmation}" sclass="Caption"></checkbox>
 	</vbox>
 </zk>

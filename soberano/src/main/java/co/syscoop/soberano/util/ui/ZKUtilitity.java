@@ -140,6 +140,15 @@ public class ZKUtilitity {
 		}
 	}
 	
+	public static Boolean getBooleanParamFromURLQuery(String idParamName) throws NumberFormatException, UnsupportedEncodingException {
+		if (splitQuery().get(idParamName) == null) {
+			return false; 
+		}
+		else {
+			return Boolean.parseBoolean(ZKUtilitity.splitQuery().get(idParamName).get(0));
+		}
+	}
+	
 	public static String getReportFromURLQuery() throws NumberFormatException, UnsupportedEncodingException {
 		if (splitQuery().get("report") == null) {
 			return ""; 

@@ -3,11 +3,10 @@ package co.syscoop.soberano.composers;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.zkoss.util.resource.Labels;
-import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
@@ -24,8 +23,8 @@ import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 
-@SuppressWarnings({ "serial", "rawtypes" })
-public class RequestMovementInventoryOperationButtonComposer extends SelectorComposer {
+@SuppressWarnings({ "serial" })
+public class RequestMovementInventoryOperationButtonComposer extends SPICellButtonComposer {
 	
 	@Wire
 	private Combobox cmbMovementToWarehouse;
@@ -48,11 +47,8 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 	@Wire
 	private Decimalbox decMovementCurrentQuantity;
 	
-	@SuppressWarnings("unchecked")
-	public void doAfterCompose(Component comp) throws Exception {
-    	
-          super.doAfterCompose(comp);
-    }
+	@Wire
+	private Intbox intAcquirableMaterialId;
 	
 	@Listen("onClick = button#btnMovementRequest")
     public void btnMovementRequest_onClick() throws Exception {
@@ -73,12 +69,16 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
+				Datebox dateShift = (Datebox) intAcquirableMaterialId.getParent().getParent().
+																	getParent().getParent().
+																	getParent().getParent().
+																	getParent().query("#dateShift");
 				Integer qryResult = (new InventoryOperation(intMovementFromWarehouse.getValue(),
 															((DomainObject) cmbMovementToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbMovementWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
-															quantities)).request();
+															quantities)).request(dateShift.getText());
 				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
 				if (qryResult == -1) {
 					throw new NotEnoughRightsException();
@@ -92,6 +92,8 @@ public class RequestMovementInventoryOperationButtonComposer extends SelectorCom
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+				updateSPIRow(intAcquirableMaterialId);
+				
 //				((Button) cmbMovementToWarehouse.getParent().getParent().getParent().getParent()
 //						.getParent().getParent().getParent().getParent()
 //						.getParent().getParent()

@@ -8,9 +8,8 @@ import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.Textbox;
-
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.SPIGridModel;
@@ -18,15 +17,18 @@ import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 public class SPIInitiator implements Initiator, InitiatorExt {
 	
+	private String shiftDateStr = "";
 	private Integer warehouseId = 0;
 	private Integer acquirableMaterialId = 0;
-	private Integer closureId = 0;
-	private String shift = "";
+	private Boolean withOpeningStock = false;
+	private Boolean withStockOnClosure = false;
+	private Boolean withChanges = false;
+	private Boolean withSurplus = false;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
-			Textbox txtShift = (Textbox) comps[0].getPreviousSibling().query("#center").query("textbox").query("#txtShift");
+			Datebox dateShift = (Datebox) comps[0].getPreviousSibling().query("#center").query("datebox").query("#dateShift");
 			Combobox cmbWarehouse = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbWarehouse");					
 			Combobox cmbMaterial = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbMaterial");
 			Checkbox chkWithOpeningStock = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkWithOpeningStock");
@@ -35,16 +37,22 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			Checkbox chkSurplus = (Checkbox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#chkSurplus");
 			
 			try {
-				txtShift.setText(shift);
-				ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);
+				try {dateShift.setText(shiftDateStr);} catch(Exception ex) {};
+				try {ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);} catch(Exception ex) {};
+				try {ZKUtilitity.setValueWOValidation(cmbWarehouse, acquirableMaterialId);} catch(Exception ex) {};
+				try {chkWithOpeningStock.setChecked(withOpeningStock);} catch(Exception ex) {};
+				try {chkWithStockOnClosure.setChecked(withStockOnClosure);} catch(Exception ex) {};
+				try {chkWithChanges.setChecked(withChanges);} catch(Exception ex) {};
+				try {chkSurplus.setChecked(withSurplus);} catch(Exception ex) {};
 			}
-			catch(Exception ex) {}			
+			catch(Exception ex) {
+			}
 			
 			SPIGridModel spiGridModel = null;
 			if (cmbWarehouse.getSelectedItem() != null && cmbMaterial.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected warehouse and inventory item
-				spiGridModel = new SPIGridModel(closureId, 
+				spiGridModel = new SPIGridModel(shiftDateStr, 
 												((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
 												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
 												chkWithOpeningStock.isChecked(),
@@ -56,19 +64,19 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			else if (cmbWarehouse.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected warehouse
-				spiGridModel = new SPIGridModel(closureId, 
+				spiGridModel = new SPIGridModel(shiftDateStr, 
 												((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
 												0, 
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
 												chkSurplus.isChecked(),
-												cmbMaterial.getText());	
+												"");	
 			}
 			else if (cmbMaterial.getSelectedItem() != null) {
 				
 				//re-render the grid with the selected inventory item
-				spiGridModel = new SPIGridModel(closureId, 
+				spiGridModel = new SPIGridModel(shiftDateStr, 
 												0,
 												((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(), 
 												chkWithOpeningStock.isChecked(),
@@ -79,14 +87,14 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			}
 			else {
 				//re-render the grid with the whole spi
-				spiGridModel = new SPIGridModel(closureId, 
+				spiGridModel = new SPIGridModel(shiftDateStr, 
 												0, 
 												0, 
 												chkWithOpeningStock.isChecked(),
 												chkWithStockOnClosure.isChecked(),
 												chkWithChanges.isChecked(),
 												chkSurplus.isChecked(),
-												cmbMaterial.getText());
+												"");
 			}
 			((Grid) cmbWarehouse.query("#incGrid").query("#grd")).setModel(spiGridModel);
 		}
@@ -108,17 +116,22 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");
-			closureId = ZKUtilitity.getObjectIdFromURLQuery("scid");
-			setAcquirableMaterialId(ZKUtilitity.getObjectIdFromURLQuery("item"));
-			setAcquirableMaterialId(ZKUtilitity.getObjectIdFromURLQuery("item"));
-			setShift(ZKUtilitity.getObjectStrIdFromURLQuery("sh"));
+			try {shiftDateStr = ZKUtilitity.getObjectStrIdFromURLQuery("sd");} catch(Exception ex) {shiftDateStr = "";};
+			try {warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");} catch(Exception ex) {warehouseId = 0;};			
+			try {acquirableMaterialId = ZKUtilitity.getObjectIdFromURLQuery("item");} catch(Exception ex) {setAcquirableMaterialId(0);};
+			try {withOpeningStock = ZKUtilitity.getBooleanParamFromURLQuery("wos");} catch(Exception ex) {withOpeningStock = false;};			
+			try {withStockOnClosure = ZKUtilitity.getBooleanParamFromURLQuery("wsoc");} catch(Exception ex) {withStockOnClosure = false;};
+			try {withChanges = ZKUtilitity.getBooleanParamFromURLQuery("wc");} catch(Exception ex) {withChanges = false;};
+			try {withSurplus = ZKUtilitity.getBooleanParamFromURLQuery("ws");} catch(Exception ex) {withSurplus = false;};
 		}
 		catch(Exception ex) {
-			warehouseId = 0; 
-			closureId = 0;
-			setAcquirableMaterialId(0);
-			setShift(""); 
+			shiftDateStr = "";
+			warehouseId = 0;
+			acquirableMaterialId = 0;
+			withOpeningStock = false;
+			withStockOnClosure = false;
+			withChanges = false;
+			withSurplus = false;
 			ExceptionTreatment.log(ex);
 		}
 	}
@@ -131,11 +144,43 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 		this.acquirableMaterialId = acquirableMaterialId;
 	}
 
-	public String getShift() {
-		return shift;
+	public Boolean getWithOpeningStock() {
+		return withOpeningStock;
 	}
 
-	public void setShift(String shift) {
-		this.shift = shift;
+	public void setWithOpeningStock(Boolean withOpeningStock) {
+		this.withOpeningStock = withOpeningStock;
+	}
+
+	public Boolean getWithStockOnClosure() {
+		return withStockOnClosure;
+	}
+
+	public void setWithStockOnClosure(Boolean withStockOnClosure) {
+		this.withStockOnClosure = withStockOnClosure;
+	}
+
+	public Boolean getWithChanges() {
+		return withChanges;
+	}
+
+	public void setWithChanges(Boolean withChanges) {
+		this.withChanges = withChanges;
+	}
+
+	public Boolean getWithSurplus() {
+		return withSurplus;
+	}
+
+	public void setWithSurplus(Boolean withSurplus) {
+		this.withSurplus = withSurplus;
+	}
+
+	public String getShiftDateStr() {
+		return shiftDateStr;
+	}
+
+	public void setShiftDateStr(String shiftDateStr) {
+		this.shiftDateStr = shiftDateStr;
 	}
 }

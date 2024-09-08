@@ -12,6 +12,7 @@ import org.zkoss.util.Locales;
 
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -217,5 +218,13 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		parametersMap.put("closureid", closureid);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (BigDecimal) super.query(qryStr, parametersMap, new QueryBigDecimalResultMapper()).get(0);
+	}
+	
+	public Integer getShiftClosureIdFromDate(String dateStr) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ShiftClosure_getIdFromDate\"(:dateStr) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("dateStr", dateStr);
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 }

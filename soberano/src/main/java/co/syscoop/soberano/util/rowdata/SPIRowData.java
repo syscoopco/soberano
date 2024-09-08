@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public class SPIRowData {
 	private String inventoryItemName = "";
 	private String inventoryItemCode = "";
+	private Integer acquirableMaterialId = 0;
 	private String unit = "";
 	private Integer unitId = 0;
 	private BigDecimal opening = new BigDecimal(0);
@@ -104,5 +105,13 @@ public class SPIRowData {
 
 	public void setInventoryItemCode(String inventoryItemCode) {
 		this.inventoryItemCode = inventoryItemCode;
+	}
+
+	public Integer getAcquirableMaterialId() {
+		return acquirableMaterialId;
+	}
+
+	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
+		this.acquirableMaterialId = acquirableMaterialId;
 	}
 }

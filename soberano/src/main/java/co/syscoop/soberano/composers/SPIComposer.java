@@ -1,18 +1,23 @@
 package co.syscoop.soberano.composers;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Grid;
+
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.SPIGridModel;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class SPIComposer extends SelectorComposer {
@@ -22,6 +27,9 @@ public class SPIComposer extends SelectorComposer {
 	
 	@Wire
 	private Combobox cmbMaterial;
+	
+	@Wire
+	private Datebox dateShift;
 	
 	@Wire
 	private Box boxDetails;
@@ -38,17 +46,29 @@ public class SPIComposer extends SelectorComposer {
 	@Wire
 	private Checkbox chkSurplus;
 	
+	@SuppressWarnings("unchecked")
+	public void doAfterCompose(Component comp) throws Exception {
+    	
+          super.doAfterCompose(comp);
+    }
+	
+	
 	private void processParamSelection() throws SQLException {
 		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		String shiftDateStr = "";
+		try {
+			shiftDateStr = dateFormat.format(dateShift.getValue());
+			if (shiftDateStr.equals(dateFormat.format(new Date()))) 
+				dateShift.setValue(null);
+		} 
+		catch(Exception ex) {};
+		
 		SPIGridModel spiGridModel = null;
-		
-		Integer closureId = 0;
-		try {closureId = ZKUtilitity.getObjectIdFromURLQuery("scid");} catch(Exception ex) {};		
-		
 		if (cmbWarehouse.getSelectedItem() != null && cmbMaterial.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected warehouse and item
-			spiGridModel = new SPIGridModel(closureId, 
+			spiGridModel = new SPIGridModel(shiftDateStr, 
 										((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
 										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
 										chkWithOpeningStock.isChecked(),
@@ -60,7 +80,7 @@ public class SPIComposer extends SelectorComposer {
 		else if (cmbWarehouse.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected warehouse
-			spiGridModel = new SPIGridModel(closureId, 
+			spiGridModel = new SPIGridModel(dateShift.getText(), 
 											((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
 											0,
 											chkWithOpeningStock.isChecked(),
@@ -72,7 +92,7 @@ public class SPIComposer extends SelectorComposer {
 		else if (cmbMaterial.getSelectedItem() != null) {
 			
 			//re-render the grid with the selected material
-			spiGridModel = new SPIGridModel(closureId, 
+			spiGridModel = new SPIGridModel(dateShift.getText(), 
 											0,
 											((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
 											chkWithOpeningStock.isChecked(),
@@ -83,7 +103,7 @@ public class SPIComposer extends SelectorComposer {
 		}
 		else {
 			//re-render the grid with the whole spi, filtered by material name
-			spiGridModel = new SPIGridModel(closureId, 
+			spiGridModel = new SPIGridModel(dateShift.getText(), 
 											0, 
 											0,
 											chkWithOpeningStock.isChecked(),
@@ -93,6 +113,11 @@ public class SPIComposer extends SelectorComposer {
 											cmbMaterial.getText());	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(spiGridModel);
+	}
+	
+	@Listen("onChange = datebox#dateShift")
+    public void dateShift_onChange() throws WrongValueException, Exception {
+		processParamSelection();
 	}
 	
 	@Listen("onChange = combobox#cmbWarehouse")

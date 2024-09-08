@@ -9,13 +9,13 @@ import co.syscoop.soberano.domain.tracked.BusinessActivityTrackedObject;
 
 public class SPI extends BusinessActivityTrackedObject {
 	
+	private String shiftDateStr = "";
 	private Integer warehouseId = 0;
-	private Integer closureId = 0;
 	private Integer acquirableMaterialId = 0;
 	private BigDecimal quantity = new BigDecimal(0.0);
 	private BigDecimal unitValue = new BigDecimal(0.0);
 	
-	public SPI(Integer closureId, 
+	public SPI(String shiftDateStr, 
 				Integer warehouseId, 
 				Integer acquirableMaterialId,
 				Boolean wOpeningStock,
@@ -23,10 +23,10 @@ public class SPI extends BusinessActivityTrackedObject {
 				Boolean wChanges,
 				Boolean wSurplus,
 				String amNameFilterStr) {
-		this.setClosureId(closureId);
+		this.setShiftDateStr(shiftDateStr);
 		this.setWarehouseId(warehouseId);
 		this.setAcquirableMaterialId(acquirableMaterialId);
-		getAllQuery = "SELECT * FROM soberano.\"fn_InventoryOperation_getSPI\"(:closureId, "
+		getAllQuery = "SELECT * FROM soberano.\"fn_InventoryOperation_getSPI\"(:shiftDateStr, "
 																			+ ":warehouseId, "
 																			+ ":acquirableMaterialId, "
 																			+ ":wOpeningStock, "
@@ -36,7 +36,7 @@ public class SPI extends BusinessActivityTrackedObject {
 																			+ ":amNameFilterStr, "
 																			+ ":lang, "
 																			+ ":loginname)";
-		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:closureId, "
+		getCountQuery = "SELECT soberano.\"fn_InventoryOperation_getSPICount\"(:shiftDateStr, "
 																			+ ":warehouseId, "
 																			+ ":acquirableMaterialId, "
 																			+ ":wOpeningStock, "
@@ -47,7 +47,7 @@ public class SPI extends BusinessActivityTrackedObject {
 																			+ ":lang, "
 																			+ ":loginname) AS count";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
-		getAllQueryNamedParameters.put("closureId", closureId);	
+		getAllQueryNamedParameters.put("shiftDateStr", shiftDateStr);	
 		getAllQueryNamedParameters.put("warehouseId", warehouseId);	
 		getAllQueryNamedParameters.put("acquirableMaterialId", acquirableMaterialId);
 		getAllQueryNamedParameters.put("wOpeningStock", wOpeningStock);
@@ -66,14 +66,6 @@ public class SPI extends BusinessActivityTrackedObject {
 		this.warehouseId = warehouseId;
 	}
 	
-	public Integer getClosureId() {
-		return closureId;
-	}
-
-	public void setClosureId(Integer closureId) {
-		this.closureId = closureId;
-	}
-
 	public BigDecimal getQuantity() {
 		return quantity;
 	}
@@ -96,5 +88,13 @@ public class SPI extends BusinessActivityTrackedObject {
 
 	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
 		this.acquirableMaterialId = acquirableMaterialId;
+	}
+
+	public String getShiftDateStr() {
+		return shiftDateStr;
+	}
+
+	public void setShiftDateStr(String shiftDateStr) {
+		this.shiftDateStr = shiftDateStr;
 	}
 }

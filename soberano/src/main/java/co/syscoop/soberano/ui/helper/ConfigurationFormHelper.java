@@ -23,6 +23,7 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 		((Intbox) wndContentPanel.query("include").query("#intHour")).setValue(configuration.getShiftOpeningHour());
 		((Intbox) wndContentPanel.query("include").query("#intMinutes")).setValue(configuration.getShiftOpeningMinutes());
 		((Checkbox) wndContentPanel.query("include").query("#chkFirstOrderRequiresCashOperation")).setChecked(configuration.getFirstOrderRequiresCashOperation());
+		((Checkbox) wndContentPanel.query("include").query("#chkSpiOperationRequiresConfirmation")).setChecked(configuration.getSpiOperationRequiresConfirmation());
 	}
 	
 	@Override
@@ -43,7 +44,8 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 		super.setTrackedObject(new Configuration(((Decimalbox) incDetails.query("#decSurcharge")).getValue(),
 												((Intbox) incDetails.query("#intHour")).getValue(),
 												((Intbox) incDetails.query("#intMinutes")).getValue(),
-												((Checkbox) incDetails.query("#chkFirstOrderRequiresCashOperation")).isChecked()));
+												((Checkbox) incDetails.query("#chkFirstOrderRequiresCashOperation")).isChecked(),
+												((Checkbox) incDetails.query("#chkSpiOperationRequiresConfirmation")).isChecked()));
 		return super.getTrackedObject().modify();
 	}
 }

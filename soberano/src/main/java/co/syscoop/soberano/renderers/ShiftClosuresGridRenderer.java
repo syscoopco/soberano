@@ -100,7 +100,7 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 
-				Executions.getCurrent().sendRedirect("/spi.zul?scid=" + shift.getShiftClosureId() + "&sh=" + shiftStr, "_blank");
+				Executions.getCurrent().sendRedirect("/spi.zul?sd=" + shiftStr, "_blank");
 			}
 		});
 		

@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
-import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
@@ -24,8 +24,8 @@ import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 
-@SuppressWarnings({ "serial", "rawtypes" })
-public class RequestLossesInventoryOperationButtonComposer extends SelectorComposer {
+@SuppressWarnings({ "serial" })
+public class RequestLossesInventoryOperationButtonComposer extends SPICellButtonComposer {
 	
 	@Wire
 	private Combobox cmbLossesToWarehouse;
@@ -48,7 +48,9 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 	@Wire
 	private Decimalbox decLossesCurrentQuantity;
 	
-	@SuppressWarnings("unchecked")
+	@Wire
+	private Intbox intAcquirableMaterialId;
+	
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
@@ -73,12 +75,16 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
+				Datebox dateShift = (Datebox) intAcquirableMaterialId.getParent().getParent().
+																	getParent().getParent().
+																	getParent().getParent().
+																	getParent().query("#dateShift");
 				Integer qryResult = (new InventoryOperation(intLossesFromWarehouse.getValue(),
 															((DomainObject) cmbLossesToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbLossesWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
-															quantities)).request();
+															quantities)).request(dateShift.getText());
 				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
 				if (qryResult == -1) {
 					throw new NotEnoughRightsException();
@@ -92,6 +98,8 @@ public class RequestLossesInventoryOperationButtonComposer extends SelectorCompo
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
+				updateSPIRow(intAcquirableMaterialId);
+				
 //				((Button) cmbLossesToWarehouse.getParent().getParent().getParent().getParent()
 //						.getParent().getParent().getParent().getParent()
 //						.getParent().getParent()

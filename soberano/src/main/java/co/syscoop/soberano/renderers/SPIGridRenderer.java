@@ -22,7 +22,8 @@ import co.syscoop.soberano.util.rowdata.SPIRowData;
 
 public class SPIGridRenderer extends DomainObjectRowRenderer {
 	
-	private void requestClicHandler(SPIRowData spiRowData,
+	private void requestClicHandler(Row spiRow,
+									SPIRowData spiRowData,
 									Popup popup,
 									Decimalbox decRowQty,
 									Label lblItemName,
@@ -32,10 +33,12 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									Decimalbox decPopupQty,
 									Decimalbox decPopupCurrentQty,
 									BigDecimal currentQty,
-									Intbox intCounterWarehouseId) throws SoberanoException {
+									Intbox intCounterWarehouseId,
+									Intbox intAcquirableMaterialId) throws SoberanoException {
 		
 		try{
-			popup.open(decRowQty);
+			popup.open(decRowQty);			
+			popup.setAttribute("SPIRow", spiRow);
 			
 			lblItemName.setValue(spiRowData.getInventoryItemName());
 			lblItemId.setValue(spiRowData.getInventoryItemCode());
@@ -43,6 +46,7 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			intUnitId.setValue(spiRowData.getUnitId());
 			decPopupQty.setValue(new BigDecimal(0));
 			decPopupCurrentQty.setValue(currentQty);
+			intAcquirableMaterialId.setValue(spiRowData.getAcquirableMaterialId());
 			
 			try {
 				Combobox cmbWarehouse = (Combobox) popup.getParent().getParent().getParent().query("#cmbWarehouse");					
@@ -101,7 +105,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			public void onEvent(Event event) throws Exception {
 				
 				Popup popup = (Popup) decInput.query("#ppInput");
-				requestClicHandler(spiRowData,
+				requestClicHandler(row,
+									spiRowData,
 									popup,
 									decInput,
 									(Label) popup.query("window").query("#lblInputItem"),
@@ -111,7 +116,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Decimalbox) popup.query("window").query("#decInputQuantity"),
 									(Decimalbox) popup.query("window").query("#decInputCurrentQuantity"),
 									spiRowData.getInput(),
-									(Intbox) popup.query("window").query("#intInputToWarehouse"));			
+									(Intbox) popup.query("window").query("#intInputToWarehouse"),
+									(Intbox) popup.query("window").query("#intAcquirableMaterialId"));			
 			}
 		});
 		row.appendChild(decInput);
@@ -128,7 +134,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			public void onEvent(Event event) throws Exception {
 				
 				Popup popup = (Popup) decInput.query("#ppLosses");
-				requestClicHandler(spiRowData,
+				requestClicHandler(row,
+									spiRowData,
 									popup,
 									decLosses,
 									(Label) popup.query("window").query("#lblLossesItem"),
@@ -138,7 +145,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Decimalbox) popup.query("window").query("#decLossesQuantity"),
 									(Decimalbox) popup.query("window").query("#decLossesCurrentQuantity"),
 									spiRowData.getLosses(),
-									(Intbox) popup.query("window").query("#intLossesFromWarehouse"));
+									(Intbox) popup.query("window").query("#intLossesFromWarehouse"),
+									(Intbox) popup.query("window").query("#intAcquirableMaterialId"));
 			}
 		});		
 		row.appendChild(decLosses);
@@ -155,7 +163,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			public void onEvent(Event event) throws Exception {
 				
 				Popup popup = (Popup) decInput.query("#ppMovement");
-				requestClicHandler(spiRowData,
+				requestClicHandler(row,
+									spiRowData,
 									popup,
 									decMovement,
 									(Label) popup.query("window").query("#lblMovementItem"),
@@ -165,7 +174,8 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 									(Decimalbox) popup.query("window").query("#decMovementQuantity"),
 									(Decimalbox) popup.query("window").query("#decMovementCurrentQuantity"),
 									spiRowData.getMovement(),
-									(Intbox) popup.query("window").query("#intMovementFromWarehouse"));	
+									(Intbox) popup.query("window").query("#intMovementFromWarehouse"),
+									(Intbox) popup.query("window").query("#intAcquirableMaterialId"));	
 			}
 		});	
 		row.appendChild(decMovement);

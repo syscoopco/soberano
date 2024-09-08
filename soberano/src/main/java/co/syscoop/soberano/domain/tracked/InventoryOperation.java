@@ -146,7 +146,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
 	
-	public Integer request() throws Exception {
+	public Integer request(String shiftDateStr) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_InventoryOperation_request\"(:from, "
@@ -155,6 +155,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 							+ "											:inventoryItems, "
 							+ "											:units, "
 							+ "											:quantities, "
+							+ "											:shiftDateStr, "
 							+ "											:loginname) AS queryresult";	
 		Map<String,	Object> parametersMap = new HashMap<String, Object>();
 		parametersMap.put("from", this.from.getId());
@@ -163,6 +164,7 @@ public class InventoryOperation extends BusinessActivityTrackedObject {
 		parametersMap.put("inventoryItems", createArrayOfSQLType("varchar", this.inventoryItemCodes.toArray()));
 		parametersMap.put("units", createArrayOfSQLType("integer", this.unitIds.toArray()));
 		parametersMap.put("quantities", createArrayOfSQLType("numeric", this.quantities.toArray()));
+		parametersMap.put("shiftDateStr", shiftDateStr);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
