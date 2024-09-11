@@ -8,6 +8,10 @@
 		<debug-js>false</debug-js>
 	</client-config>
 	
+	<desktop-config>
+		<file-check-period>600</file-check-period>
+	</desktop-config>
+	
 	<device-config>
 		<device-type>ajax</device-type>		
 	</device-config>
@@ -40,5 +44,11 @@
     <library-property>
     	<name>org.zkoss.theme.preferred</name>
 	    <value>sapphire</value> <!-- or silvertail, atlantic, deepsea, gardensalad etc. -->
+	</library-property>
+	
+	<!-- render on demand -->
+	<library-property>
+		<name>org.zkoss.zul.grid.rod</name>
+		<value>true</value>
 	</library-property>
 </zk>

@@ -616,8 +616,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
 					ZKUtilitity.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
 					Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
-					Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
-					CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
+					CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
 					ZKUtilitity.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
 					Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
 					ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);

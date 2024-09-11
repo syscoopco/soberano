@@ -51,8 +51,7 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 		
 		ZKUtilitity.setValueWOValidation(cmbCountry, customer.getContactData().getCountryCode());
 		Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
-		Combobox cmbPostalCode = (Combobox) incContactData.query("#cmbPostalCode");
-		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);
+		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
 		ZKUtilitity.setValueWOValidation(cmbProvince, customer.getContactData().getProvinceId().toString());
 		Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
 		ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);

@@ -1,5 +1,6 @@
 package co.syscoop.soberano.util;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -7,6 +8,12 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.zkoss.zk.ui.Execution;
+import org.zkoss.zk.ui.Executions;
 
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
@@ -44,5 +51,17 @@ public class Utils {
 	    } catch (URISyntaxException | UnsupportedEncodingException | MalformedURLException ignored) {
 	        return null;
 	    }
+	}
+	
+	public void redirect(String urlStr) throws IOException {
+		
+		Execution exec = Executions.getCurrent();
+		HttpServletRequest request = (HttpServletRequest) exec.getNativeRequest();
+		HttpServletResponse response = (HttpServletResponse) exec.getNativeResponse();
+		String referrer = request.getHeader("Referer");
+		URL ref = new URL(referrer);
+	   	
+		response.sendRedirect(response.encodeRedirectURL(ref.getProtocol() + "://" + ref.getHost() + urlStr));
+		exec.setVoided(true);
 	}
 }

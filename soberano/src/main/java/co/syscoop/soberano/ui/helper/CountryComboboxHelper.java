@@ -10,7 +10,7 @@ import co.syscoop.soberano.domain.untracked.Province;
 
 public class CountryComboboxHelper {
 	
-	static public void processCountrySelection(Combobox cmbCountry, Combobox cmbProvince, Combobox cmbPostalCode) throws SQLException {
+	static public void processCountrySelection(Combobox cmbCountry, Combobox cmbProvince) throws SQLException {
 		
 		cmbProvince.getChildren().clear();
 		if (cmbCountry.getSelectedItem() != null) {

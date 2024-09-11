@@ -1,5 +1,6 @@
 <?page title="${labels.pageNewWorker.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+<?init class="co.syscoop.soberano.initiators.ContactDataInitiator"?>
 
 <zk>
 	<include src="/style.zul"/>

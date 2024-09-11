@@ -8,6 +8,16 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 
 public class ComboboxHelper {
 	
+	public static Comboitem getItemByText(Combobox box, String text) throws IllegalArgumentException {
+		
+		for (Comboitem item : box.getItems()){
+			if (item.getLabel().equals(text)) {
+				return item;
+			}
+		}
+		return null;
+	}
+	
 	public static Comboitem getItemByValue(Combobox box, String value) throws IllegalArgumentException {
 		
 		//non intellisense combobox

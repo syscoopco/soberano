@@ -403,6 +403,19 @@ public class Order extends BusinessActivityTrackedObject {
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
 	
+	public PrintableData retrieveTicket() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getTicket\"(:orderId, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
+	}
+	
 	@Override
 	public PrintableData getReportFull() throws SQLException {
 		

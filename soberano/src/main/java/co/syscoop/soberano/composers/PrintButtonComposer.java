@@ -11,8 +11,11 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Vbox;
 
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
+import co.syscoop.soberano.domain.untracked.PrintableData;
+import co.syscoop.soberano.enums.Stage;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
@@ -43,30 +46,53 @@ public class PrintButtonComposer extends SelectorComposer {
 			Vbox boxDetails = (Vbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
 			Integer orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
 			trackedObject.setId(orderId);
-			trackedObject.get();			
-			fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
-					"records/orders/" + 
-					"ORDER_" + (trackedObject.getId() == 0 ? trackedObject.getStringId() : trackedObject.getId() + ".pdf");
+			trackedObject.get();
 			
-			String report = ZKUtilitity.getReportFromURLQuery();
-			Integer orderIdFromURL = ZKUtilitity.getObjectIdFromURLQuery("id");
-			if (!report.isEmpty() && orderIdFromURL.equals(trackedObject.getId())) {
-				
-				//file to print path is passed in report param
-				PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
-				printerProfile.get();
-				Printer.print(null, 
-							new String(Base64.getDecoder().decode(report)), 
-							printerProfile.getPrinterName(), 
-							trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
+			if (((Order) trackedObject).getStageId() == Stage.ONGOING) {
+				PrintableData pd = new Order(orderId).retrieveTicket();
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+													"records/tickets/" + 
+													"TICKET_" + orderId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+								Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+								Labels.getLabel("messageBoxTitle.Error"),
+								Messagebox.ERROR);
+					}				
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
 			}
 			else {
-				report = trackedObject.getReport();
-				Printer.print(Translator.translate(report),
-								trackedObject, 
-								fileToPrintFullPath,
-								false);
-			}
+				fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+						"records/orders/" + 
+						"ORDER_" + (trackedObject.getId() == 0 ? trackedObject.getStringId() : trackedObject.getId() + ".pdf");
+				
+				String report = ZKUtilitity.getReportFromURLQuery();
+				Integer orderIdFromURL = ZKUtilitity.getObjectIdFromURLQuery("id");
+				if (!report.isEmpty() && orderIdFromURL.equals(trackedObject.getId())) {
+					
+					//file to print path is passed in report param
+					PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
+					printerProfile.get();
+					Printer.print(null, 
+								new String(Base64.getDecoder().decode(report)), 
+								printerProfile.getPrinterName(), 
+								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
+				}
+				else {
+					report = trackedObject.getReport();
+					Printer.print(Translator.translate(report),
+									trackedObject, 
+									fileToPrintFullPath,
+									false);
+				}
+			}			
 		}
 		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 

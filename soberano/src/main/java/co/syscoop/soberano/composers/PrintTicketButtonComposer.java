@@ -1,7 +1,5 @@
 package co.syscoop.soberano.composers;
 
-import java.math.BigDecimal;
-
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -35,7 +33,7 @@ public class PrintTicketButtonComposer extends SelectorComposer {
 		
 		try{
 			Integer orderId = ((Intbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#intOrderNumber")).getValue();
-			PrintableData pd = new Order(orderId).retrieveTicket(new BigDecimal(0), new BigDecimal(0));
+			PrintableData pd = new Order(orderId).retrieveTicket();
 			if (!pd.getTextToPrint().isEmpty()) {				
 				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 												"records/tickets/" + 

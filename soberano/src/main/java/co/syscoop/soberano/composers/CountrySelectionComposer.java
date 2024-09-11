@@ -33,7 +33,7 @@ public class CountrySelectionComposer extends SelectorComposer {
 	@Listen("onSelect = combobox#cmbCountry")
     public void cmbCountry_onSelect() throws SQLException {
 		
-		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);	
+		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);	
     }
     	
 	@Listen("onChange = combobox#cmbCountry")
@@ -59,6 +59,6 @@ public class CountrySelectionComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbCountry")
     public void cmbCountry_onClick() throws SQLException {
 		
-		if (SpringUtility.underTesting()) CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince, cmbPostalCode);	
+		if (SpringUtility.underTesting()) CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);	
     }
 }
