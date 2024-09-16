@@ -67,6 +67,11 @@
 		<!-- csrf -->
 		<security:csrf disabled="true"/>
 		
+		<!-- cors -->
+		<!-- 
+		<security:cors configuration-source-ref="corsSource"/>
+		 -->
+		
 	</security:http>
 	
  	<security:authentication-manager alias="authenticationManager">
@@ -78,6 +83,52 @@
 	beans
 	-->
 	
+	<!-- cors -->
+	<!-- 
+	<bean id="corsConfiguration" class="org.springframework.web.cors.CorsConfiguration">
+		<property name="allowedOrigins">
+			<list value-type="java.lang.String">
+				<value>http://127.0.0.1:8080</value>
+				<value>http://localhost:8080</value>
+			</list>
+		</property>
+		<property name="allowedMethods">
+			<list value-type="java.lang.String">
+				<value>GET</value>
+				<value>POST</value>
+				<value>HEAD</value>
+				<value>OPTIONS</value>
+				<value>PUT</value>
+			</list>
+		</property>
+		<property name="allowedHeaders">
+			<list value-type="java.lang.String">
+				<value>Content-Type</value>
+				<value>X-Requested-With</value>
+				<value>accept</value>
+				<value>Origin</value>
+				<value>Access-Control-Request-Method</value>
+				<value>Access-Control-Allow-Origin</value>
+				<value>Access-Control-Allow-Credentials</value>
+				<value>Access-Control-Request-Headers</value>
+			</list>
+		</property>
+		<property name="allowCredentials">
+			<value>false</value>
+		</property>
+		<property name="maxAge">
+			<value>86400</value>
+		</property>
+	</bean>	
+	<util:map id="corsConfigurationsMap" map-class="java.util.HashMap">
+	    <entry key="/**" value-ref="corsConfiguration"/>
+	</util:map>
+	<bean id="corsSource" class="org.springframework.web.cors.UrlBasedCorsConfigurationSource">
+		<property name="corsConfigurations" ref="corsConfigurationsMap">
+   		 </property>
+	</bean>
+	 -->
+		
 	<!-- spring ldap -->
  	<bean id="springLdapContextSource" class="org.springframework.ldap.core.support.LdapContextSource">
         <property name="url" value="${ldap.ldapAddress}"/>

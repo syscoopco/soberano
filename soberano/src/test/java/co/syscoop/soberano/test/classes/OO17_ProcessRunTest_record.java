@@ -2,6 +2,8 @@ package co.syscoop.soberano.test.classes;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -20,15 +22,15 @@ import org.zkoss.zats.mimic.Zats;
 import org.zkoss.zats.mimic.operation.InputAgent;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 import co.syscoop.soberano.test.helper.ProcessRunActionTest;
 import co.syscoop.soberano.test.helper.ProcessRunForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(17)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO17_ProcessRunTest_record extends ProcessRunActionTest {
@@ -67,7 +69,7 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		processRunForm = new ProcessRunForm(desktop,
 											desktop.query("textbox").query("#cmbProcess").as(Combobox.class),
 											desktop.query("textbox").query("#cmbCostCenter").as(Combobox.class),
-											desktop.query("intbox").query("#intRuns").as(Intbox.class),																					
+											desktop.query("decimalbox").query("#decRuns").as(Decimalbox.class),																					
 											desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 											desktop.query("grid").query("#grd").as(Grid.class));
 		try {
@@ -92,11 +94,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -130,11 +132,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -170,11 +172,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -210,11 +212,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -250,11 +252,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);		
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));		
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -290,11 +292,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -328,11 +330,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);		
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));		
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -368,11 +370,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);			
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));			
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -408,11 +410,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);		
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));		
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -448,11 +450,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -488,11 +490,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 3);
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(3.0));
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -528,11 +530,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -568,11 +570,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(2.0));
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -606,11 +608,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(2.0));
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -644,11 +646,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 2);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(2.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -682,11 +684,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);			
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));			
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -720,11 +722,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);
@@ -758,11 +760,11 @@ class OO17_ProcessRunTest_record extends ProcessRunActionTest {
 		ProcessRunForm processRunForm = new ProcessRunForm(desktop,
 															(desktop.query("textbox").query("#cmbProcess")).as(Combobox.class),
 															(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class),
-															(desktop.query("intbox").query("#intRuns")).as(Intbox.class),																					
+															(desktop.query("decimalbox").query("#decRuns")).as(Decimalbox.class),																					
 															desktop.query("south").query("button").query("#btnRecord").as(Button.class),
 															desktop.query("grid").query("#grd").as(Grid.class));		
 		try {
-			processRunForm.setComponentValue(processRunForm.getIntRuns(), 1);	
+			processRunForm.setComponentValue(processRunForm.getDecRuns(), new BigDecimal(1.0));	
 			
 			ComponentAgent cmbProcessAgent = desktop.query("textbox").query("#cmbProcess");
 			InputAgent cmbProcessInputAgent = cmbProcessAgent.as(InputAgent.class);

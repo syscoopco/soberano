@@ -46,7 +46,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 								Integer unitId,
 								Treechildren tchdnInputs,
 								Boolean runMode,
-								Integer runs) throws SomeFieldsContainWrongValuesException {
+								BigDecimal runs) throws SomeFieldsContainWrongValuesException {
 		if (quantity.compareTo(new BigDecimal(0)) < 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
@@ -60,7 +60,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			Decimalbox decQuantity = new Decimalbox(quantity.multiply(new BigDecimal(runs)));
+			Decimalbox decQuantity = new Decimalbox(quantity.multiply(runs));
 			decQuantity.setId("decInputQuantity" + inventoryItemId);
 			decQuantity.setReadonly(true);
 			decQuantity.setFormat("####.########");
@@ -94,7 +94,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 								Integer weight,
 								Treechildren tchdnOutputs,
 								Boolean runMode,
-								Integer runs) throws SomeFieldsContainWrongValuesException {
+								BigDecimal runs) throws SomeFieldsContainWrongValuesException {
 		if (quantity.compareTo(new BigDecimal(0)) < 0 || weight < 0) {
 			Messagebox.show(Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
 					Labels.getLabel("messageBoxTitle.Warning"), 
@@ -108,7 +108,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			Decimalbox decQuantity = new Decimalbox(quantity.multiply(new BigDecimal(runs)));
+			Decimalbox decQuantity = new Decimalbox(quantity.multiply(runs));
 			decQuantity.setReadonly(!runMode);
 			decQuantity.setId("decOutputQuantity" + inventoryItemId);
 			decQuantity.setFormat("####.########");
@@ -192,7 +192,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 		((Treechildren) incDetails.query("#incProcessIOs").query("#tchdnOutputs")).getChildren().clear();
 	}
 	
-	public void fillForm(Include incDetails, Integer id, Boolean runMode, Integer runs) throws SQLException {
+	public void fillForm(Include incDetails, Integer id, Boolean runMode, BigDecimal runs) throws SQLException {
 		
 		Process process = new Process(id);
 		process.get();
@@ -249,7 +249,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	@Override
 	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
 		
-		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId(), false, 1);
+		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId(), false, new BigDecimal(1.0));
 	}
 	
 	private Boolean weightsSum100() {
@@ -322,6 +322,6 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	
 	public void initForm(Include incDetails, Integer processId) throws Exception {
 		
-		fillForm(incDetails, processId, false, 1);
+		fillForm(incDetails, processId, false, new BigDecimal(1));
 	}
 }

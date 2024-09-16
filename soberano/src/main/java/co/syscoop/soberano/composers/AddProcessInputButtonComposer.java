@@ -1,5 +1,7 @@
 package co.syscoop.soberano.composers;
 
+import java.math.BigDecimal;
+
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -48,7 +50,7 @@ public class AddProcessInputButtonComposer extends SelectorComposer {
 											Integer.parseInt(cmbInputUnit.getSelectedItem().getValue()),
 											tchdnInputs,
 											false,
-											1);
+											new BigDecimal(1.0));
 			}
 			else {
 				int i = 0;
@@ -70,7 +72,7 @@ public class AddProcessInputButtonComposer extends SelectorComposer {
 												Integer.parseInt(cmbInputUnit.getSelectedItem().getValue()),
 												tchdnInputs,
 												false,
-												1);
+												new BigDecimal(1.0));
 				}
 			}
 		}

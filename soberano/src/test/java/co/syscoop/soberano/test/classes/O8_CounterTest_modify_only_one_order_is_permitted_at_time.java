@@ -13,7 +13,7 @@ import co.syscoop.soberano.test.helper.CounterActionTest;
 
 @Order(8)
 
-@Disabled
+//@Disabled
 
 class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterActionTest {
 	

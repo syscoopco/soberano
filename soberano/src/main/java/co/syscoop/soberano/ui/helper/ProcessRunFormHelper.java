@@ -176,7 +176,7 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 											((ProcessIORowData) input).getUnitId(),
 											tchdnInputs,
 											true,
-											1);
+											new BigDecimal(1.0));
 			} catch (SomeFieldsContainWrongValuesException e) {
 				e.printStackTrace();
 			}
@@ -195,7 +195,7 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 											((ProcessIORowData) output).getWeight(),
 											tchdnOutputs,
 											true,
-											1);
+											new BigDecimal(1.0));
 			} catch (SomeFieldsContainWrongValuesException e) {
 				e.printStackTrace();
 			}

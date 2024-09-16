@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(5)
 
-@Disabled
+//@Disabled
 
 class O5_WorkerTest_check_recording extends WorkerActionTest {
 	

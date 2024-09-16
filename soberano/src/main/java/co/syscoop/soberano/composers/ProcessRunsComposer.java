@@ -9,7 +9,6 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Include;
-import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 
@@ -31,7 +30,7 @@ public class ProcessRunsComposer extends SelectorComposer {
 	private Combobox cmbCostCenter;
 	
 	@Wire
-	private Intbox intRuns;
+	private Decimalbox decRuns;
 	
 	@Wire
 	private Textbox txtQuantityExpression;
@@ -55,7 +54,7 @@ public class ProcessRunsComposer extends SelectorComposer {
 	private void updateProcessSpec() throws SQLException {
 		
 		if (cmbProcess.getSelectedItem() != null) {
-			(new ProcessFormHelper()).fillForm(incProcessIOs, ((DomainObject) cmbProcess.getSelectedItem().getValue()).getId(), true, intRuns.getValue());
+			(new ProcessFormHelper()).fillForm(incProcessIOs, ((DomainObject) cmbProcess.getSelectedItem().getValue()).getId(), true, decRuns.getValue());
 		}
 	}
 	
@@ -64,7 +63,7 @@ public class ProcessRunsComposer extends SelectorComposer {
 		
 		try {
 			updateProcessSpec();
-			intRuns.setValue(1);
+			decRuns.setValue(new BigDecimal(1.0));
 			estimateCost();
 		} catch (SQLException e) {
 			ExceptionTreatment.logAndShow(e, 
@@ -85,7 +84,7 @@ public class ProcessRunsComposer extends SelectorComposer {
 		if (SpringUtility.underTesting()) {			
 			try {
 				updateProcessSpec();
-				intRuns.setValue(1);
+				decRuns.setValue(new BigDecimal(1.0));
 				estimateCost();
 			} catch (SQLException e) {
 				ExceptionTreatment.logAndShow(e, 
@@ -137,8 +136,8 @@ public class ProcessRunsComposer extends SelectorComposer {
 		}
 	}
 	
-	@Listen("onChange = intbox#intRuns")
-    public void intRuns_onChange() throws SoberanoException {
+	@Listen("onChange = decimalbox#decRuns")
+    public void decRuns_onChange() throws SoberanoException {
 		
 		try {
 			updateProcessSpec();

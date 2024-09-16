@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-@Disabled
+//@Disabled
 
 class O4_WorkerTest_record extends WorkerActionTest {
 	
@@ -584,209 +584,212 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		}
 	}
 	
-	@Test
-	final void testCase7() {
-
-		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
-		
-		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
-		workerForm = new WorkerForm(desktop,
-									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-									cmbCountryAgent.as(Combobox.class), 
-									cmbProvinceAgent.as(Combobox.class), 
-									cmbMunicipalityAgent.as(Combobox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
-		try {
-			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
-			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
-			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
-			
-			//responsibilities combobox
-			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
-					btnAssignResponsibility.click();
-					break;
-				}
-			}			
-			
-			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
-			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
-			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
-			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
-			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");		
-			clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			workerForm.testWrongValueException(ex);
-		}
-	}
+// country defaults to __
+//	@Test
+//	final void testCase7() {
+//
+//		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
+//		
+//		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+//		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+//		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
+//		workerForm = new WorkerForm(desktop,
+//									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
+//									cmbCountryAgent.as(Combobox.class), 
+//									cmbProvinceAgent.as(Combobox.class), 
+//									cmbMunicipalityAgent.as(Combobox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
+//		try {
+//			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
+//			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
+//			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
+//			
+//			//responsibilities combobox
+//			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
+//				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
+//					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
+//					btnAssignResponsibility.click();
+//					break;
+//				}
+//			}			
+//			
+//			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
+//			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
+//			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
+//			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
+//			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
+//			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");		
+//			clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			workerForm.testWrongValueException(ex);
+//		}
+//	}
 	
-	@Test
-	final void testCase8() {
-
-		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
-		
-		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
-		workerForm = new WorkerForm(desktop,
-									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-									cmbCountryAgent.as(Combobox.class), 
-									cmbProvinceAgent.as(Combobox.class), 
-									cmbMunicipalityAgent.as(Combobox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
-		try {
-			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
-			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
-			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
-			
-			//responsibilities combobox
-			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
-					btnAssignResponsibility.click();
-					break;
-				}
-			}			
-			
-			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
-			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
-			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
-			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
-			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
-						
-			//country combobox
-			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
-			cmbCountryInputAgent.typing("Cuba");
-			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
-			cmbCountryAgent.click(); 	//needed to force province combo population. 
-										//cmbCountry's onSelect event isn't triggered under testing		
-			clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			workerForm.testWrongValueException(ex);
-		}
-	}
+// province defaults to __
+//	@Test
+//	final void testCase8() {
+//
+//		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
+//		
+//		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+//		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+//		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
+//		workerForm = new WorkerForm(desktop,
+//									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
+//									cmbCountryAgent.as(Combobox.class), 
+//									cmbProvinceAgent.as(Combobox.class), 
+//									cmbMunicipalityAgent.as(Combobox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
+//		try {
+//			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
+//			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
+//			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
+//			
+//			//responsibilities combobox
+//			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
+//				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
+//					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
+//					btnAssignResponsibility.click();
+//					break;
+//				}
+//			}			
+//			
+//			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
+//			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
+//			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
+//			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
+//			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
+//			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
+//						
+//			//country combobox
+//			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
+//			cmbCountryInputAgent.typing("Cuba");
+//			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
+//			cmbCountryAgent.click(); 	//needed to force province combo population. 
+//										//cmbCountry's onSelect event isn't triggered under testing		
+//			clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			workerForm.testWrongValueException(ex);
+//		}
+//	}
 	
-	@Test
-	final void testCase9() {
-
-		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
-		
-		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
-		workerForm = new WorkerForm(desktop,
-									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-									cmbCountryAgent.as(Combobox.class), 
-									cmbProvinceAgent.as(Combobox.class), 
-									cmbMunicipalityAgent.as(Combobox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
-		try {
-			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
-			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
-			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
-			
-			//responsibilities combobox
-			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
-					btnAssignResponsibility.click();
-					break;
-				}
-			}			
-			
-			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
-			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
-			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
-			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
-			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
-						
-			//country combobox
-			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
-			cmbCountryInputAgent.typing("Cuba");
-			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
-			cmbCountryAgent.click(); 	//needed to force province combo population. 
-										//cmbCountry's onSelect event isn't triggered under testing
-			
-			//province combobox
-			InputAgent cmbProvinceInputAgent = cmbProvinceAgent.as(InputAgent.class);
-			cmbProvinceInputAgent.typing("La Habana");
-			workerForm.selectComboitemByLabel(workerForm.getCmbProvince(), "La Habana");
-			cmbProvinceAgent.click(); 	//needed to force municipality combo population. 
-										//cmbProvince's onSelect event isn't triggered under testing
-			clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			workerForm.testWrongValueException(ex);
-		}
-	}
+// municipality defaults to __
+//	@Test
+//	final void testCase9() {
+//
+//		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
+//		
+//		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+//		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+//		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
+//		workerForm = new WorkerForm(desktop,
+//									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
+//									cmbCountryAgent.as(Combobox.class), 
+//									cmbProvinceAgent.as(Combobox.class), 
+//									cmbMunicipalityAgent.as(Combobox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
+//		try {
+//			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
+//			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
+//			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
+//			
+//			//responsibilities combobox
+//			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
+//				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
+//					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
+//					btnAssignResponsibility.click();
+//					break;
+//				}
+//			}			
+//			
+//			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "55555555");
+//			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
+//			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
+//			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
+//			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
+//			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
+//						
+//			//country combobox
+//			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
+//			cmbCountryInputAgent.typing("Cuba");
+//			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
+//			cmbCountryAgent.click(); 	//needed to force province combo population. 
+//										//cmbCountry's onSelect event isn't triggered under testing
+//			
+//			//province combobox
+//			InputAgent cmbProvinceInputAgent = cmbProvinceAgent.as(InputAgent.class);
+//			cmbProvinceInputAgent.typing("La Habana");
+//			workerForm.selectComboitemByLabel(workerForm.getCmbProvince(), "La Habana");
+//			cmbProvinceAgent.click(); 	//needed to force municipality combo population. 
+//										//cmbProvince's onSelect event isn't triggered under testing
+//			clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			workerForm.testWrongValueException(ex);
+//		}
+//	}
 	
 	@Test
 	final void testCase10() {
@@ -1034,87 +1037,88 @@ class O4_WorkerTest_record extends WorkerActionTest {
 		}
 	}
 	
-	@Test
-	final void testCase13() {
-
-		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
-		
-		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
-		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
-		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
-		workerForm = new WorkerForm(desktop,
-									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
-									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
-									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
-									cmbCountryAgent.as(Combobox.class), 
-									cmbProvinceAgent.as(Combobox.class), 
-									cmbMunicipalityAgent.as(Combobox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
-									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
-		try {
-			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
-			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
-			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
-			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
-			
-			//responsibilities combobox
-			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
-				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
-					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
-					btnAssignResponsibility.click();
-					break;
-				}
-			}			
-			
-			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "");
-			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
-			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
-			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
-			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
-			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
-						
-			//country combobox
-			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
-			cmbCountryInputAgent.typing("Cuba");
-			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
-			cmbCountryAgent.click(); 	//needed to force province combo population. 
-										//cmbCountry's onSelect event isn't triggered under testing
-			
-			//province combobox
-			InputAgent cmbProvinceInputAgent = cmbProvinceAgent.as(InputAgent.class);
-			cmbProvinceInputAgent.typing("La Habana");
-			workerForm.selectComboitemByLabel(workerForm.getCmbProvince(), "La Habana");
-			cmbProvinceAgent.click(); 	//needed to force municipality combo population. 
-										//cmbProvince's onSelect event isn't triggered under testing
-			
-			//municipality combobox
-			InputAgent cmbMunicipalityInputAgent = cmbMunicipalityAgent.as(InputAgent.class);
-			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
-			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
-			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
-			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
-			clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			workerForm.testWrongValueException(ex);
-		}
-	}
+//  phone number defaults to 00008656696
+//	@Test
+//	final void testCase13() {
+//
+//		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_worker.zul");
+//		
+//		ComponentAgent cmbCountryAgent = desktop.query("textbox").query("#incContactData").query("#cmbCountry");
+//		ComponentAgent cmbProvinceAgent = desktop.query("textbox").query("#incContactData").query("#cmbProvince");
+//		ComponentAgent cmbMunicipalityAgent = desktop.query("textbox").query("#incContactData").query("#cmbMunicipality");
+//		workerForm = new WorkerForm(desktop,
+//									(desktop.query("textbox").query("#txtUserName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtConfirmPassword")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtFirstName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#txtLastName")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#cmbResponsibilities")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtPhoneNumber")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtEmailAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtAddress")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#cmbPostalCode")).as(Combobox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtTown")).as(Textbox.class), 
+//									(desktop.query("textbox").query("#incContactData").query("#txtCity")).as(Textbox.class), 
+//									cmbCountryAgent.as(Combobox.class), 
+//									cmbProvinceAgent.as(Combobox.class), 
+//									cmbMunicipalityAgent.as(Combobox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLatitude")).as(Doublebox.class), 
+//									(desktop.query("doublebox").query("#incContactData").query("#dblLongitude")).as(Doublebox.class));
+//		try {
+//			workerForm.setComponentValue(workerForm.getTxtUserName(), "manager@soberano.syscoop.co");
+//			workerForm.setComponentValue(workerForm.getTxtPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtConfirmPassword(), "12345");
+//			workerForm.setComponentValue(workerForm.getTxtFirstName(), "Manager");
+//			workerForm.setComponentValue(workerForm.getTxtLastName(), "Last Name");			
+//			
+//			//responsibilities combobox
+//			for (Component cmbItem : workerForm.getCmbResponsibilities().getChildren()) {
+//				if (Integer.parseInt(((Comboitem) cmbItem).getValue()) == 2 /*Manager*/) {
+//					ComponentAgent btnAssignResponsibility = desktop.query("textbox").query("#cmbResponsibilities").getNextSibling();
+//					btnAssignResponsibility.click();
+//					break;
+//				}
+//			}			
+//			
+//			workerForm.setComponentValue(workerForm.getTxtPhoneNumber(), "");
+//			workerForm.setComponentValue(workerForm.getTxtEmailAddress(), "");
+//			workerForm.setComponentValue(workerForm.getTxtAddress(), "Manager Address");
+//			workerForm.setComponentValue(workerForm.getCmbPostalCode(), "54321");
+//			workerForm.setComponentValue(workerForm.getTxtTown(), "Manager Town");
+//			workerForm.setComponentValue(workerForm.getTxtCity(), "Manager City");
+//						
+//			//country combobox
+//			InputAgent cmbCountryInputAgent = cmbCountryAgent.as(InputAgent.class);
+//			cmbCountryInputAgent.typing("Cuba");
+//			workerForm.setComponentValue(workerForm.getCmbCountry(), "CU");
+//			cmbCountryAgent.click(); 	//needed to force province combo population. 
+//										//cmbCountry's onSelect event isn't triggered under testing
+//			
+//			//province combobox
+//			InputAgent cmbProvinceInputAgent = cmbProvinceAgent.as(InputAgent.class);
+//			cmbProvinceInputAgent.typing("La Habana");
+//			workerForm.selectComboitemByLabel(workerForm.getCmbProvince(), "La Habana");
+//			cmbProvinceAgent.click(); 	//needed to force municipality combo population. 
+//										//cmbProvince's onSelect event isn't triggered under testing
+//			
+//			//municipality combobox
+//			InputAgent cmbMunicipalityInputAgent = cmbMunicipalityAgent.as(InputAgent.class);
+//			cmbMunicipalityInputAgent.typing("Plaza de la Revolución");
+//			workerForm.selectComboitemByLabel(workerForm.getCmbMunicipality(), "Plaza de la Revolución");
+//			workerForm.setComponentValue(workerForm.getDblLatitude(), 21.0);
+//			workerForm.setComponentValue(workerForm.getDblLongitude(), -81.0);
+//			clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			workerForm.testWrongValueException(ex);
+//		}
+//	}
 	
 	private void recordWorker(Worker newWorkerData, 
 							Integer responsibilityId,

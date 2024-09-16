@@ -61,7 +61,12 @@ public class Utils {
 		String referrer = request.getHeader("Referer");
 		URL ref = new URL(referrer);
 	   	
-		response.sendRedirect(response.encodeRedirectURL(ref.getProtocol() + "://" + ref.getHost() + urlStr));
-		exec.setVoided(true);
+		try {
+			response.sendRedirect(response.encodeRedirectURL(ref.getProtocol() + "://" + ref.getHost() + urlStr));
+			exec.setVoided(true);
+		}
+		catch(Throwable ex) {
+			return;
+		}		
 	}
 }

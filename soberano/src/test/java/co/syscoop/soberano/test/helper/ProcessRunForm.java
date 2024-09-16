@@ -5,33 +5,33 @@ import java.util.Arrays;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Grid;
-import org.zkoss.zul.Intbox;
 
 public class ProcessRunForm extends ConstrainedForm {
 	
 	private Combobox cmbProcess;
 	private Combobox cmbCostCenter;
-	private Intbox intRuns;
+	private Decimalbox decRuns;
 	private Button btnRecord;
 	private Grid grd;
 
 	public ProcessRunForm(DesktopAgent desktop,
 									Combobox cmbProcess,
 									Combobox cmbCostCenter,
-									Intbox intRuns,
+									Decimalbox decimalbox,
 									Button btnRecord,
 									Grid grd) {
 		
-		this.constrainedComponents = Arrays.asList("intRuns");
+		this.constrainedComponents = Arrays.asList("decRuns");
 		
 		this.setDesktop(desktop);
 		this.setCmbProcess(cmbProcess);
 		this.setCmbCostCenter(cmbCostCenter);
 		
-		this.setIntRuns(intRuns);
-		this.constrainableComponents.add(intRuns);
-		this.constrainableComponentById.put("intRuns", intRuns);
+		this.setDecRuns(decimalbox);
+		this.constrainableComponents.add(decimalbox);
+		this.constrainableComponentById.put("decRuns", decimalbox);
 		
 		this.btnRecord = btnRecord;
 		this.grd = grd;
@@ -69,11 +69,11 @@ public class ProcessRunForm extends ConstrainedForm {
 		this.cmbCostCenter = cmbCostCenter;
 	}
 
-	public Intbox getIntRuns() {
-		return intRuns;
+	public Decimalbox getDecRuns() {
+		return decRuns;
 	}
 
-	public void setIntRuns(Intbox intRuns) {
-		this.intRuns = intRuns;
+	public void setDecRuns(Decimalbox decRuns) {
+		this.decRuns = decRuns;
 	}
 }

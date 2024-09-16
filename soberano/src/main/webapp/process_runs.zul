@@ -28,7 +28,7 @@
 						</template>
 					</combobox>		
 				</hbox>
-				<intbox id="intRuns" hflex="1" placeholder="${labels.placeholder.runs}" constraint="no negative, no zero, no empty"/>
+				<decimalbox id="decRuns" hflex="1" placeholder="${labels.placeholder.runs}" constraint="no negative, no zero, no empty"/>
 			</hbox>
 			<separator></separator>
 			<include id="incProcessIOs" src="/process_ios.zul"></include>

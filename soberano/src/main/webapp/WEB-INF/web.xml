@@ -5,7 +5,7 @@
  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://www.oracle.com/webfolder/technetwork/jsc/xml/ns/javaee/web-app_4_0.xsd">
  
 	<description><![CDATA[The System for Self-Determined People!]]></description>
-	<display-name>Soberano</display-name>
+	<display-name>TCP TOOL</display-name>
 	
 	<!-- 
 	Spring configuration
@@ -252,7 +252,7 @@
 	<security-constraint>
 	  	<web-resource-collection>
 	  		<web-resource-name>
-	  			Soberano Web Aplication 
+	  			TCP TOOL Web Aplication 
 	  		</web-resource-name>
 	  		<url-pattern>/*</url-pattern>
 	  	</web-resource-collection>

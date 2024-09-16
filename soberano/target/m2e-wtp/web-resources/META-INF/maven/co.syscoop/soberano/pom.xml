@@ -48,6 +48,11 @@
 			<name>ZK CE Repository</name>
 			<url>https://mavensync.zkoss.org/maven2</url>
 		</repository>
+		<repository>
+	     	<id>ZK EVAL</id>
+	      	<name>ZK Evaluation Repository</name>
+	      	<url>https://mavensync.zkoss.org/eval</url>
+	    </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -277,11 +282,19 @@
 	      	<version>${zats-mimic}</version>
 	      	<scope>test</scope>
 	    </dependency>
+		
 		<dependency>
 		    <groupId>org.zkoss.zk</groupId>
 		    <artifactId>zk</artifactId>
 		    <version>${zk.version}</version>
 		</dependency>
+		
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.zkoss.zk</groupId> -->
+<!-- 		    <artifactId>zk</artifactId> -->
+<!-- 		    <version>9.6.0-Eval</version> -->
+<!-- 		</dependency> -->
+		
 		<dependency>
 		    <groupId>org.zkoss.common</groupId>
 		    <artifactId>zcommon</artifactId>

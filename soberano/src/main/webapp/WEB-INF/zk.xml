@@ -4,6 +4,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:schemaLocation="http://www.zkoss.org/2005/zk/config https://www.zkoss.org/2005/zk/config/zk.xsd">
 	
+	<!-- 5s for development -->
+	<desktop-config>
+		<file-check-period>3600</file-check-period>
+	</desktop-config>
+	<!-- ****** -->
+	
 	<client-config>
 		<debug-js>false</debug-js>
 	</client-config>
@@ -11,9 +17,11 @@
 	<device-config>
 		<device-type>ajax</device-type>		
 	</device-config>
+	
 	<session-config>
 		<timeout-uri>/timeout.zul</timeout-uri>
 	</session-config>
+	
 	<listener>
     	<listener-class>co.syscoop.soberano.locale.LocaleProvider</listener-class>
   	</listener>
@@ -23,6 +31,26 @@
   	<listener>
     	<listener-class>co.syscoop.soberano.initialization.SoberanoSessionInit</listener-class>
   	</listener>
+  	
+  	<!-- ZK EVAL -->
+<!--   	<listener> -->
+<!-- 		<listener-class>org.zkoss.zk.ui.util.DesktopRecycle</listener-class> -->
+<!-- 	</listener> -->
+<!-- 	<library-property> -->
+<!-- 		<name>org.zkoss.zul.grid.rod</name> -->
+<!-- 		<value>true</value> -->
+<!-- 	</library-property> -->
+<!-- 	<library-property> -->
+<!-- 		<name>org.zkoss.zul.listbox.rod</name> -->
+<!-- 		<value>true</value> -->
+<!-- 	</library-property> -->
+	<!-- END of ZK EVAL -->
+  	
+  	<!-- cache. true for production -->
+	<library-property>
+		<name>cache</name>
+		<value>true</value>
+	</library-property>
   	  	  	
   	<!-- encoding of the label properties files -->
   	<library-property>

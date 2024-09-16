@@ -6070,7 +6070,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "\n"
 						+ "				--if new unit does not measure the same magnitude as current unit, do not apply unit change\n"
 						+ "				IF conversionFactor IS NULL THEN\n"
-						+ "					newUnit := oldunit;\n"
+						+ "					--newUnit := oldunit;\n"
+						+ "					newUnit := itemUnit;\n"
 						+ "				ELSE\n"
 						+ "					newUnit := itemUnit;\n"
 						+ "				END IF;\n"
@@ -10473,7 +10474,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						LIMIT 1\n"
 						+ "						INTO stockChangeTime;\n"
 						+ "						\n"
-						+ "					IF stockChangeTim > now() THEN stockChangeTime := NULL; END IF;\n"
+						+ "					IF stockChangeTime > now() THEN stockChangeTime := NULL; END IF;\n"
 						+ "						\n"
 						+ "					UPDATE metamodel.\"EntityTypeInstance\" eti\n"
 						+ "						SET \"This_is_created_at_Timestamp\" = stockChangeTime\n"
@@ -14306,9 +14307,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			LEFT JOIN soberano.\"CashRegister\" cr\n"
 						+ "				ON cr.\"This_uses_PrinterProfile_with_PrinterProfileHasPrinterProfileId\" IS NOT NULL\n"
 						+ "			LEFT JOIN soberano.\"PrinterProfile\" mpp\n"
-						+ "				ON \"PrinterProfile_is_used_by_management\"\n"
+						+ "				ON mpp.\"PrinterProfile_is_used_by_management\"\n"
 						+ "			LEFT JOIN soberano.\"PrinterProfile\" dpp\n"
-						+ "				ON \"PrinterProfile_is_default_printer_profile\"\n"
+						+ "				ON dpp.\"PrinterProfile_is_default_printer_profile\"\n"
 						+ "		LIMIT 1\n"
 						+ "		INTO counterPP,\n"
 						+ "			cashRegisterPP,\n"
@@ -19755,8 +19756,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						//municipalities
 						
 						"INSERT INTO soberano.\"Municipality\"(\"This_has_Name\", \"This_belongs_to_Province_with_ProvinceHasProvinceId\")\n"
-						+ "			VALUES	('__', 0),\n"
-						+ "					('Mantua', 1),\n"
+						+ "			VALUES	('Mantua', 1),\n"
 						+ "					('Minas de Matahambre', 1),\n"
 						+ "					('Viñales', 1),\n"
 						+ "					('La Palma', 1),\n"
@@ -19924,7 +19924,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "					('Guines', 7),\n"
 						+ "					('Melena del Sur', 7),\n"
 						+ "					('Batabanó', 7),\n"
-						+ "					('Quivicán', 7);",
+						+ "					('Quivicán', 7),\n"
+						+ "					('__', 0);",
 						
 						////////////////////
 						// helper queries //

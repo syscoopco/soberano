@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(12)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO12_ProductTest_record extends ProductActionTest {
@@ -138,53 +138,55 @@ class OO12_ProductTest_record extends ProductActionTest {
 		}
 	}
 	
-	@Test
-	@Order(2)
-	final void testCase2() {
-
-		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_product.zul");
-		productForm = new ProductForm(desktop, 
-				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
-				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
-				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
-				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
-				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
-				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
-				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
-				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
-				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
-		try {
-			productForm.setComponentValue(productForm.getTxtCode(), "p1");
-			productForm.setComponentValue(productForm.getTxtName(), "product1");		
-			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
-			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
-						
-			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
-			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("");
-			
-			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
-			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
-			cmbCategoryInputAgent.typing("mcat1");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
-			
-			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
-			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
-			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
-			
-			clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			productForm.testWrongValueException(ex);
-		}
-	}
+// commented since product's unit defaults to U 
+//
+//	@Test
+//	@Order(2)
+//	final void testCase2() {
+//
+//		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_product.zul");
+//		productForm = new ProductForm(desktop, 
+//				(desktop.query("textbox").query("#txtName")).as(Textbox.class), 
+//				(desktop.query("textbox").query("#txtCode")).as(Textbox.class),
+//				(desktop.query("textbox").query("#cmbUnit")).as(Combobox.class),
+//				(desktop.query("decimalbox").query("#decMinimumInventoryLevel")).as(Decimalbox.class),
+//				(desktop.query("textbox").query("#cmbCategory")).as(Combobox.class),
+//				(desktop.query("decimalbox").query("#decPrice")).as(Decimalbox.class),
+//				(desktop.query("decimalbox").query("#decReferencePriceExchangeRate")).as(Decimalbox.class),
+//				(desktop.query("decimalbox").query("#decReferencePrice")).as(Decimalbox.class),
+//				(desktop.query("textbox").query("#cmbCostCenter")).as(Combobox.class));
+//		try {
+//			productForm.setComponentValue(productForm.getTxtCode(), "p1");
+//			productForm.setComponentValue(productForm.getTxtName(), "product1");		
+//			productForm.setComponentValue(productForm.getDecMinimumInventoryLevel(), new BigDecimal(1000.0));
+//			productForm.setComponentValue(productForm.getDecPrice(), new BigDecimal(1.001));
+//						
+//			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
+//			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
+//			cmbUnitInputAgent.typing("");
+//			
+//			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
+//			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
+//			cmbCategoryInputAgent.typing("mcat1");
+//			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+//			
+//			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
+//			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
+//			cmbCostCenterInputAgent.typing("mcc4");
+//			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+//			
+//			clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			productForm.testWrongValueException(ex);
+//		}
+//	}
 	
 	@Test
 	@Order(3)
