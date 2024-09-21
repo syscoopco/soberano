@@ -11,6 +11,7 @@ public class ActivityTreeComposer extends GenericForwardComposer<Window> {
 	
 	private Tree treeActivity;
 	
+	@SuppressWarnings({ })
 	@Override
 	public void doAfterCompose(Window div) throws Exception{
 		

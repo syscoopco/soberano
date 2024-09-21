@@ -23,6 +23,7 @@ import co.syscoop.soberano.util.StringIdCodeGenerator;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel;
 import co.syscoop.soberano.view.viewmodel.ProductCategorySelectionViewModel;
+import co.syscoop.soberano.view.viewmodel.UnitSelectionViewModel;
 
 public class ProductFormHelper extends TrackedObjectFormHelper {
 
@@ -53,10 +54,14 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), product.getStringId());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), product.getName());
 		
+		Combobox cmbUnit = (Combobox) incDetails.query("#cmbUnit");
+		UnitSelectionViewModel uSelectionViewModel = new UnitSelectionViewModel();
+		cmbUnit.setModel(uSelectionViewModel.getModel());
+		
 		if (product.getUnit() > 0) 
-			ZKUtilitity.setValueWOValidation((Combobox) incDetails.query("#cmbUnit"), product.getUnit());
+			ZKUtilitity.setValueWOValidation(cmbUnit, product.getUnit());
 		else
-			((Combobox) incDetails.query("#cmbUnit")).setSelectedItem(null);
+			(cmbUnit).setSelectedItem(null);
 		
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), product.getMinimumInventoryLevel());
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), product.getPrice());

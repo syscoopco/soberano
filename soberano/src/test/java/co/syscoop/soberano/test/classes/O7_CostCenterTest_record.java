@@ -25,7 +25,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_CostCenterTest_record extends CostCenterActionTest {

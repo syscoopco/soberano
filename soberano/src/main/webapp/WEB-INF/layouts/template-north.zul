@@ -1,5 +1,6 @@
 <?init class="co.syscoop.soberano.initiators.SystemTimeBoxInitiator"?>
 <?component name="barbuttonpopup" macroURI="../macros/barbuttonpopup.zul"?>
+<?component name="barbuttonwpopupcomposer" macroURI="../macros/barbuttonwpopupcomposer.zul"?>
 
 <!-- TODO: declare alerts initiator -->		
 
@@ -10,9 +11,9 @@
 			
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>
-			<barbuttonpopup tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposer"></barbuttonpopup>
+			<barbuttonwpopupcomposer tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposerForButtonBar"></barbuttonwpopupcomposer>
 			<separator></separator>			
-			<barbuttonpopup tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Split}" composer="co.syscoop.soberano.composers.OrderSplittingTreeComposer"></barbuttonpopup>
+			<barbuttonwpopupcomposer tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Split}" composer="co.syscoop.soberano.composers.OrderSplittingTreeComposer"></barbuttonwpopupcomposer>
 			<separator></separator>
 			<barbuttonpopup tree="treeInventory" shortcutCaption="${labels.layout.template.shortcut.Inventory}" composer="co.syscoop.soberano.composers.InventoryTreeComposer"></barbuttonpopup>
 			<separator></separator>
