@@ -60,9 +60,14 @@ public class RequestMovementInventoryOperationButtonComposer extends SPICellButt
 			
 			inventoryItems.add(new InventoryItem(lblMovementItemId.getValue(), ""));
 			units.add(new Unit(intMovementUnitId.getValue()));
-			quantities.add(decMovementQuantity.getValue().compareTo(decMovementCurrentQuantity.getValue()) > 0 
-							? decMovementQuantity.getValue().subtract(decMovementCurrentQuantity.getValue())
-							: new BigDecimal(0));
+			
+//			quantities.add(decMovementQuantity.getValue().compareTo(decMovementCurrentQuantity.getValue()) > 0 
+//							? decMovementQuantity.getValue().subtract(decMovementCurrentQuantity.getValue())
+//							: new BigDecimal(0));
+			
+			quantities.add(decMovementQuantity.getValue().compareTo(new BigDecimal(0)) > 0 
+					? decMovementQuantity.getValue() 
+					: new BigDecimal(0));
 			
 			if (cmbMovementToWarehouse.getSelectedItem() == null || cmbMovementWorker.getSelectedItem() == null) {
 				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();

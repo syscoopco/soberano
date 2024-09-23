@@ -66,9 +66,14 @@ public class RequestInputInventoryOperationButtonComposer extends SPICellButtonC
 			
 			inventoryItems.add(new InventoryItem(lblInputItemId.getValue(), ""));
 			units.add(new Unit(intInputUnitId.getValue()));
-			quantities.add(decInputQuantity.getValue().compareTo(decInputCurrentQuantity.getValue()) > 0 
-							? decInputQuantity.getValue().subtract(decInputCurrentQuantity.getValue())
-							: new BigDecimal(0));		
+			
+//			quantities.add(decInputQuantity.getValue().compareTo(decInputCurrentQuantity.getValue()) > 0 
+//							? decInputQuantity.getValue().subtract(decInputCurrentQuantity.getValue())
+//							: new BigDecimal(0));
+			
+			quantities.add(decInputQuantity.getValue().compareTo(new BigDecimal(0)) > 0 
+							? decInputQuantity.getValue() 
+							: new BigDecimal(0));
 			
 			if (cmbInputFromWarehouse.getSelectedItem() == null || cmbInputWorker.getSelectedItem() == null) {
 				((Popup) cmbInputFromWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();

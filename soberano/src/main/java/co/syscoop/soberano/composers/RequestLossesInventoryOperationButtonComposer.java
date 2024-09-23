@@ -66,9 +66,14 @@ public class RequestLossesInventoryOperationButtonComposer extends SPICellButton
 			
 			inventoryItems.add(new InventoryItem(lblLossesItemId.getValue(), ""));
 			units.add(new Unit(intLossesUnitId.getValue()));
-			quantities.add(decLossesQuantity.getValue().compareTo(decLossesCurrentQuantity.getValue()) > 0 
-							? decLossesQuantity.getValue().subtract(decLossesCurrentQuantity.getValue())
-							: new BigDecimal(0));		
+			
+//			quantities.add(decLossesQuantity.getValue().compareTo(decLossesCurrentQuantity.getValue()) > 0 
+//							? decLossesQuantity.getValue().subtract(decLossesCurrentQuantity.getValue())
+//							: new BigDecimal(0));
+			
+			quantities.add(decLossesQuantity.getValue().compareTo(new BigDecimal(0)) > 0 
+					? decLossesQuantity.getValue() 
+					: new BigDecimal(0));
 			
 			if (cmbLossesToWarehouse.getSelectedItem() == null || cmbLossesWorker.getSelectedItem() == null) {
 				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
