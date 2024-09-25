@@ -48,7 +48,9 @@ public class ExceptionTreatment {
 			else if (ex.getClass().getName().equals("org.springframework.dao.DuplicateKeyException"))
 				throw new DuplicateKeyException("");		
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ExchangeRateEqualsToZeroException"))
-				throw new ExchangeRateEqualsToZeroException(ex);
+				throw new ExchangeRateEqualsToZeroException(ex);		
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException"))
+				throw new FirstOrderRequiresCashOperationException(ex);		
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.NotEnoughRightsException"))
 				throw new NotEnoughRightsException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException"))
@@ -64,7 +66,9 @@ public class ExceptionTreatment {
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ProcessRunningException"))
 				throw new ProcessRunningException(ex);			
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.RunningOutOfInventoryException"))
-				throw new RunningOutOfInventoryException(ex);			
+				throw new RunningOutOfInventoryException(ex);		
+			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SameWarehouseException"))
+				throw new SameWarehouseException(ex);		
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ShiftHasBeenClosedException"))
 				throw new ShiftHasBeenClosedException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException"))
@@ -81,8 +85,6 @@ public class ExceptionTreatment {
 				throw new WrongValueException(ex);
 			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.ZoneNotCoveredByDeliveryProviderException"))
 				throw new ZoneNotCoveredByDeliveryProviderException(ex);
-			else if (ex.getClass().getName().equals("co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException"))
-				throw new FirstOrderRequiresCashOperationException(ex);
 	}
 	
 	public static Throwable getRootCause(Throwable throwable) {

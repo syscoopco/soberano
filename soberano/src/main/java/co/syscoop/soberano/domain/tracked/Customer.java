@@ -45,7 +45,8 @@ public class Customer extends TrackedObject {
 					Integer province,
 					Double latitude,
 					Double longitude,
-					BigDecimal discount) {
+					BigDecimal discount,
+					Integer printerProfile) {
 		super(id, entityTypeInstanceObject, firstName + " " + lastName);
 		this.setQualifiedName(firstName + " " + lastName + " : " + emailAddress);
 		this.firstName = firstName;
@@ -63,6 +64,7 @@ public class Customer extends TrackedObject {
 										 latitude,
 										 longitude));
 		this.discount = discount;
+		this.setPrinterProfile(printerProfile);
 	}
 
 	public ContactData getContactData() {
@@ -89,6 +91,7 @@ public class Customer extends TrackedObject {
 				+ "											:latitude, "
 				+ "											:longitude, "
 				+ "											:discount, "
+				+ "											:printerProfile, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("firstName", this.firstName);
@@ -103,6 +106,7 @@ public class Customer extends TrackedObject {
 		recordParameters.addValue("latitude", this.contactData.getLatitude());
 		recordParameters.addValue("longitude", this.contactData.getLongitude());
 		recordParameters.addValue("discount", this.getDiscount());
+		recordParameters.addValue("printerProfile", this.getPrinterProfile());
 		
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -125,6 +129,7 @@ public class Customer extends TrackedObject {
 				+ "											:latitude, "
 				+ "											:longitude, "
 				+ "											:discount, "
+				+ "											:printerProfile, "
 				+ "											:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("customerId", this.getId());
@@ -140,6 +145,7 @@ public class Customer extends TrackedObject {
 		modifyParameters.addValue("latitude", this.contactData.getLatitude());
 		modifyParameters.addValue("longitude", this.contactData.getLongitude());
 		modifyParameters.addValue("discount", this.getDiscount());
+		modifyParameters.addValue("printerProfile", this.getPrinterProfile());
 		
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
@@ -167,6 +173,7 @@ public class Customer extends TrackedObject {
 		setFirstName(sourceCustomer.getFirstName());
 		setLastName(sourceCustomer.getLastName());
 		setDiscount(sourceCustomer.getDiscount());
+		setPrinterProfile(sourceCustomer.getPrinterProfile());
 		contactData = new ContactData(sourceCustomer.getContactData());
 	}
 
@@ -198,7 +205,8 @@ public class Customer extends TrackedObject {
 											rs.getInt("provinceId"),
 											rs.getDouble("latitude"),
 											rs.getDouble("longitude"),
-											rs.getBigDecimal("discount"));
+											rs.getBigDecimal("discount"),
+											rs.getInt("printerProfile"));
 				}
 				return customer;
 			}

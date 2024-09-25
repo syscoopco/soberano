@@ -5,6 +5,7 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Doublebox;
@@ -16,6 +17,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ui.ZKUtilitity;
 import co.syscoop.soberano.view.viewmodel.CountrySelectionViewModel;
+import co.syscoop.soberano.view.viewmodel.PrinterProfileSelectionViewModel;
 
 public class CustomerFormHelper extends TrackedObjectFormHelper {
 	
@@ -36,6 +38,18 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFirstName"), customer.getFirstName());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtLastName"), customer.getLastName());
 		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decDiscount"), customer.getDiscount());
+		
+		Combobox cmbPrinterProfile = (Combobox) incDetails.query("#cmbPrinterProfile");
+		PrinterProfileSelectionViewModel pfSelectionViewModel = new PrinterProfileSelectionViewModel();
+		cmbPrinterProfile.setModel(pfSelectionViewModel.getModel());
+		
+		if (customer.getPrinterProfile() == null || customer.getPrinterProfile() == 0) {
+			cmbPrinterProfile.setSelectedItem(null);
+			cmbPrinterProfile.setText("");
+		}			
+		else
+			ZKUtilitity.setValueWOValidation(cmbPrinterProfile, customer.getPrinterProfile());
+			
 		
 		Include incContactData = (Include) incDetails.query("#incContactData");
 		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), customer.getContactData().getMobilePhoneNumber());
@@ -70,6 +84,10 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 	public Integer recordFromForm(Include incDetails) throws Exception {
 		
 		Include incContactData = (Include) incDetails.query("#incContactData");
+		
+		Comboitem iPrinterProfileItem = ((Combobox) incDetails.query("#cmbPrinterProfile")).getSelectedItem();
+		Integer iPrinterProfileId = iPrinterProfileItem != null ? ((DomainObject) iPrinterProfileItem.getValue()).getId() : 0;
+				
 		return (new Customer(0,
 							0,
 							((Textbox) incContactData.query("#txtEmailAddress")).getValue(),
@@ -85,12 +103,16 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 							((Combobox) incContactData.query("#cmbProvince")).getSelectedItem().getValue(),
 							((Doublebox) incContactData.query("#dblLatitude")).getValue(),
 							((Doublebox) incContactData.query("#dblLongitude")).getValue(),
-							((Decimalbox) incDetails.query("#decDiscount")).getValue()))
+							((Decimalbox) incDetails.query("#decDiscount")).getValue(),
+							iPrinterProfileId))
 					.record();
 	}
 
 	@Override
 	public Integer modifyFromForm(Include incDetails) throws Exception {
+		
+		Comboitem iPrinterProfileItem = ((Combobox) incDetails.query("#cmbPrinterProfile")).getSelectedItem();
+		Integer iPrinterProfileId = iPrinterProfileItem != null ? ((DomainObject) iPrinterProfileItem.getValue()).getId() : 0;
 		
 		Include incContactData = (Include) incDetails.query("#incContactData");
 		super.setTrackedObject(new Customer(((Intbox) incDetails.getParent().query("#intId")).getValue(),
@@ -108,7 +130,8 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 											((Combobox) incContactData.query("#cmbProvince")).getSelectedItem().getValue(),
 											((Doublebox) incContactData.query("#dblLatitude")).getValue(),
 											((Doublebox) incContactData.query("#dblLongitude")).getValue(),
-											((Decimalbox) incDetails.query("#decDiscount")).getValue()));
+											((Decimalbox) incDetails.query("#decDiscount")).getValue(),
+											iPrinterProfileId));
 		return super.getTrackedObject().modify();
 	}
 }

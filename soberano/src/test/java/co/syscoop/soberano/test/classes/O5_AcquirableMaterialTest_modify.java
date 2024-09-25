@@ -62,8 +62,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(12800.00128));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("kilogram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));
+			cmbUnitInputAgent.typing("piece");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -86,8 +86,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
+			cmbUnitInputAgent.typing("kilogram");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -112,8 +112,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(1));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
+			cmbUnitInputAgent.typing("kilogram");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -186,8 +186,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
+			cmbUnitInputAgent.typing("milligram");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -212,8 +212,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(2));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
+			cmbUnitInputAgent.typing("milligram");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -236,8 +236,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(4));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
+			cmbUnitInputAgent.typing("pound");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -262,8 +262,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(4));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
+			cmbUnitInputAgent.typing("pound");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -336,8 +336,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
+			cmbUnitInputAgent.typing("milliliter");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -362,8 +362,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
+			cmbUnitInputAgent.typing("milliliter");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -386,8 +386,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(3));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("ounce");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));
+			cmbUnitInputAgent.typing("milliliter");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -412,8 +412,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(3));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("ounce");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));
+			cmbUnitInputAgent.typing("milliliter");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}
@@ -436,8 +436,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100.00001));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
+			cmbUnitInputAgent.typing("piece");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 			
@@ -462,8 +462,8 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getDecMinimumInventoryLevel(), new BigDecimal(100.00001));
 			ComponentAgent cmbUnitAgent = acquirableMaterialForm.getDesktop().query("vbox").query("combobox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
-			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));
+			cmbUnitInputAgent.typing("piece");
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));
 			
 			clickOnApplyButton(acquirableMaterialForm.getDesktop());
 		}

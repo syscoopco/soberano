@@ -20,6 +20,7 @@ import co.syscoop.soberano.domain.tracked.Unit;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.SameWarehouseException;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
@@ -80,6 +81,10 @@ public class RequestInputInventoryOperationButtonComposer extends SPICellButtonC
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
+				if (intInputToWarehouse.getValue().equals(((DomainObject) cmbInputFromWarehouse.getSelectedItem().getValue()).getId())) {
+					throw new SameWarehouseException();
+				}
+				
 				Datebox dateShift = (Datebox) intAcquirableMaterialId.getParent().getParent().
 																	getParent().getParent().
 																	getParent().getParent().
@@ -110,6 +115,12 @@ public class RequestInputInventoryOperationButtonComposer extends SPICellButtonC
 //												.getParent().getParent()
 //												.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
 			}
+		}
+		catch(SameWarehouseException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.OriginAndDestinationMustNotBeTheSame"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
 		}
 		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 
