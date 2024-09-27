@@ -13,6 +13,7 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Vbox;
 
+import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
@@ -126,8 +127,11 @@ public class ProduceButtonComposer extends SelectorComposer {
 				}
 			}
 			
+			CashRegister cashRegister = new CashRegister(1);
+			cashRegister.get();
+			
 			Printer.print(Translator.translate(textToprint),
-												order, 
+												cashRegister, //order, 
 												fileToPrintFullPath,
 												true);
 		}
