@@ -128,8 +128,7 @@ public class ProduceButtonComposer extends SelectorComposer {
 			}
 			
 			CashRegister cashRegister = new CashRegister(1);
-			cashRegister.get();
-			
+			cashRegister.get();			
 			Printer.print(Translator.translate(textToprint),
 												cashRegister, //order, 
 												fileToPrintFullPath,
