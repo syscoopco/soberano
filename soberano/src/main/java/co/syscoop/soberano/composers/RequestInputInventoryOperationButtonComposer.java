@@ -2,6 +2,12 @@ package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+
+import org.springframework.dao.CannotAcquireLockException;
+import org.springframework.dao.ConcurrencyFailureException;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -115,6 +121,36 @@ public class RequestInputInventoryOperationButtonComposer extends SPICellButtonC
 //												.getParent().getParent()
 //												.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
 			}
+		}
+		catch(CannotAcquireLockException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.database.CannotAcquireLockException"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(ConcurrencyFailureException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.database.ConcurrencyFailureException"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(DuplicateKeyException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(DataIntegrityViolationException ex)	{
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(DataAccessException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.validation.DataAccessException"), 
+										Labels.getLabel("messageBoxTitle.Validation"),
+										Messagebox.EXCLAMATION);
 		}
 		catch(SameWarehouseException ex) {
 			ExceptionTreatment.logAndShow(ex, 

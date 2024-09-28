@@ -2,6 +2,11 @@ package co.syscoop.soberano.renderers;
 
 import java.text.SimpleDateFormat;
 
+import org.springframework.dao.CannotAcquireLockException;
+import org.springframework.dao.ConcurrencyFailureException;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -125,6 +130,36 @@ public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 					else {
 						requestDeletion(row);
 					}
+				}
+				catch(CannotAcquireLockException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.database.CannotAcquireLockException"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(ConcurrencyFailureException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.database.ConcurrencyFailureException"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(DuplicateKeyException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+												Labels.getLabel("message.validation.thereIsAlreadyAnObjectWithThatId"), 
+												Labels.getLabel("messageBoxTitle.Validation"),
+												Messagebox.EXCLAMATION);
+				}
+				catch(DataIntegrityViolationException ex)	{
+					ExceptionTreatment.logAndShow(ex, 
+												Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+												Labels.getLabel("messageBoxTitle.Validation"),
+												Messagebox.EXCLAMATION);
+				}
+				catch(DataAccessException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+												Labels.getLabel("message.validation.DataAccessException"), 
+												Labels.getLabel("messageBoxTitle.Validation"),
+												Messagebox.EXCLAMATION);
 				}
 				catch(NotEnoughRightsException ex) {
 					ExceptionTreatment.logAndShow(ex, 
