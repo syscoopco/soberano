@@ -1,7 +1,6 @@
 package co.syscoop.soberano.test.generation;
 
 import org.apache.commons.lang3.ArrayUtils;
-
 import co.syscoop.soberano.rules.enforcer.generator.LogicalQueriesBatch;
 
 public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
