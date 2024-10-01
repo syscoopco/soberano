@@ -19,7 +19,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-@Disabled
+//@Disabled
 
 class O4_ServiceTest_check_recording extends ServiceActionTest {
 	

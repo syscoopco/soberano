@@ -2176,8 +2176,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ " \"This_has_UpdateInventoryOnOrderClosing\", \n"
 						+ " \"This_has_FirstOrderOfTheShiftRequiresAPreviousCashRegisterOpera\", \n"
 						+ " \"This_has_SPIInventoryOperationRequiresConfirmation\", \n"
+						+ " \"This_has_CompensateDeliveryProviderRates\", \n"
+						+ " \"This_has_DoNotSellInCaseOfStockZero\", \n"
 						+ " \"This_has_SurchargeRate\") \n"
-						+ "	VALUES (1, 2, 8, 0, true, false, true, 10);",
+						+ "	VALUES (1, 2, 8, 0, true, false, true, false, false, 10);",
 						
 						
 						
@@ -2202,7 +2204,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	VALUES (1, 'Opennode'),\n"
 						+ "	 		(2, 'Tropipay'),\n"
 						+ "	 		(3, 'EnZona'),\n"
-						+ "			(4, 'Transfermovil');",
+						+ "			(4, 'Transfermovil'),\n"
+						+ "			(5, 'MLC');",
 						
 						
 						
@@ -5809,12 +5812,14 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "										   \"This_is_identified_by_EntityTypeInstance_id\", \n"
 						+ "										   \"This_has_Price_in_reference_currency\", \n"
 						+ "										   \"Product_is_enabled\", \n"
+						+ "										   \"This_is_shown_in_Position\", \n"
 						+ "										   \"This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe\")\n"
 						+ "						VALUES (itemCode,\n"
 						+ "							   itemprice,\n"
 						+ "							   entityTypeInstanceId,\n"
 						+ "							   finalreferenceprice,\n"
 						+ "							   isenabled,\n"
+						+ "							   0,\n"
 						+ "							   costcenter)\n"
 						+ "						RETURNING \"ProductHasProductId\" INTO itemId;\n"
 						+ "			\n"
@@ -6105,6 +6110,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						\"This_has_Price\" = itemprice, \n"
 						+ "						\"This_has_Price_in_reference_currency\" = finalreferenceprice, \n"
 						+ "						\"Product_is_enabled\" = isenabled, \n"
+						+ "						\"This_is_shown_in_Position\" = 0, \n"
 						+ "						\"This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe\" = costcenter\n"
 						+ "					WHERE \"ProductHasProductId\" = itemid;\n"
 						+ "\n"
@@ -10844,7 +10850,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		closureMinutes smallint;\n"
 						+ "		\n"
 						+ "	BEGIN\n"
-						+ "		SELECT soberano.\"fn_ShiftClosure_getIdFromDate\"(shiftdatestr) INTO closureid;\n"
+						+ "		IF shiftdatestr = '' THEN\n"
+						+ "			closureid := 0;			\n"
+						+ "			shiftDate := CAST(now() AS date);	\n"
+						+ "		ELSE\n"
+						+ "			SELECT soberano.\"fn_ShiftClosure_getIdFromDate\"(shiftdatestr) INTO closureid;			\n"
+						+ "			shiftDate := to_date(shiftDateStr, 'YYYY-MM-DD');		\n"
+						+ "		END IF;\n"
 						+ "	\n"
 						+ "		SELECT * \n"
 						+ "			FROM soberano.\"fn_ShiftClosure_getTimes\"(closureid) \n"
@@ -10858,8 +10870,6 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			--take default closure times		\n"
 						+ "			SELECT \"This_has_ShiftClosureHours\", \"This_has_ShiftClosureMinutes\"	FROM soberano.\"Configuration\"\n"
 						+ "				INTO closureHour, closureMinutes;\n"
-						+ "		\n"
-						+ "			shiftDate := to_date(shiftDateStr, 'YYYY-MM-DD');			\n"
 						+ "		\n"
 						+ "			previousClosureTime := make_timestamp(CAST(date_part('year', shiftDate) AS integer), \n"
 						+ "							CAST(date_part('month', shiftDate) AS integer), \n"
@@ -18559,10 +18569,12 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "\n"
 						+ "			INSERT INTO soberano.\"DeliveryProvider\"(\"This_has_Name\",\n"
 						+ "												  \"This_charges_Rate_on_order_amount\", \n"
+						+ "												  \"This_discounts_Rate_from_order_amount\", \n"
 						+ "												  \"DeliveryProvider_is_reseller\",\n"
 						+ "												  \"This_is_identified_by_EntityTypeInstance_id\")\n"
 						+ "				VALUES (deliveryProviderName,\n"
 						+ "					   rate,\n"
+						+ "					   0,\n"
 						+ "					   isreseller,\n"
 						+ "					   entityTypeInstanceId)\n"
 						+ "				RETURNING \"DeliveryProviderHasDeliveryProviderId\" \n"
@@ -18656,6 +18668,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		\n"
 						+ "			UPDATE soberano.\"DeliveryProvider\" SET \"This_has_Name\" = deliveryprovidername,\n"
 						+ "													\"This_charges_Rate_on_order_amount\" = rate, \n"
+						+ "													\"This_discounts_Rate_from_order_amount\" = 0, \n"
 						+ "												  	\"DeliveryProvider_is_reseller\" = isreseller\n"
 						+ "				WHERE \"DeliveryProviderHasDeliveryProviderId\" = itemid;\n"
 						+ "				\n"
@@ -19845,6 +19858,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "					\"This_has_ShiftClosureHours\" = \"shiftOpeningHour\",\n"
 						+ "					\"This_has_ShiftClosureMinutes\" = \"shiftOpeningMinutes\",\n"
 						+ "					\"This_has_FirstOrderOfTheShiftRequiresAPreviousCashRegisterOpera\" = \"firstOrderRequiresCashOperation\",\n"
+						+ "					\"This_has_CompensateDeliveryProviderRates\" = false,\n"
+						+ "					\"This_has_DoNotSellInCaseOfStockZero\" = false,\n"
 						+ "					\"This_has_SPIInventoryOperationRequiresConfirmation\" = \"spiOperationRequiresConfirmation\";\n"
 						+ "			\n"
 						+ "			--make the decision\n"

@@ -42,10 +42,10 @@
 						</menu>
 						<menuitem label="${labels.menuItem.Customers}" href="customers.zul"/>
 						<menuitem label="${labels.menuItem.Currencies}" href="currencies.zul"/>
+						<menuitem label="${labels.menuItem.Providers}" href="providers.zul"/>
 						<menu label="${labels.menuItem.Inventory}" sclass="BarMenu">
 							<menupopup>							
 								<menuitem label="${labels.menuItem.Units}" href="units.zul" disabled="true"/>
-								<menuitem label="${labels.menuItem.Providers}" href="providers.zul"/>
 								<menuitem label="${labels.menuItem.AcquirableMaterials}" href="acquirable_materials.zul"/>
 								<menuitem label="${labels.menuItem.Warehouses}" href="warehouses.zul"/>
 								<menuitem label="${labels.menuItem.CostCenters}" href="cost_centers.zul"/>
