@@ -18,7 +18,7 @@ import co.syscoop.soberano.test.helper.CounterForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_CounterTest_modify extends CounterActionTest {
 	

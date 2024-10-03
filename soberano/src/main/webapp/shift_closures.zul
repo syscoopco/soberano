@@ -56,6 +56,8 @@
 				</template>
 			</combobox>	
 		</hbox>
+		<button id="btnSalesByPrice" label="${labels.caption.action.salesByPrice}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureSalesByPriceReportLoadingButtonComposer"></button>
+		<button id="btnNotes" label="${labels.caption.action.notes}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureNotesReportLoadingButtonComposer"></button>
 	</hbox>
 	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintShiftClosureReportButtonComposer"></button>

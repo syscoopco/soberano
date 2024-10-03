@@ -158,6 +158,52 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 					throw new NotEnoughRightsException();
 				}
 			}
+			else if (txtShownReport.getText().equals("salesbyprice")) {
+				PrintableData pd = new ShiftClosure(scId).getSalesByPriceReportWithPrinterProfile();
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_SALES_BY_PRICE_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_SALES_BY_PRICE_" + scId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
+			else if (txtShownReport.getText().equals("notes")) {
+				PrintableData pd = new ShiftClosure(scId).getNotesReportWithPrinterProfile();
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_NOTES_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_NOTES_" + scId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
 			else {//print general report
 				PrintableData pd = new ShiftClosure(scId).getReportWithPrinterProfile();
 				if (!pd.getTextToPrint().isEmpty()) {				

@@ -157,11 +157,16 @@
 	</servlet-mapping>
 	-->
 	
-	<!-- [Optional] Session timeout in seconds -->
+	<!-- [Optional] Session timeout in minutes -->
 	<session-config>
-		<session-timeout>900</session-timeout>
-	</session-config>
-
+		<session-timeout>60</session-timeout>
+	</session-config>	
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location>/welcome.zul</location>
+	</error-page>
+	
 	<!-- 
 	[Optional] MIME mapping
 	-->

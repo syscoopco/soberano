@@ -14,7 +14,7 @@ public class SystemTimeTimerComposer extends SelectorComposer {
 	private Label lblSystemTime;
 	
 	@Listen("onTimer = timer#timerSystemTime")
-    public void timerSystemTime_onTimer() {		
+    public void timerSystemTime_onTimer() {
 		lblSystemTime.setValue(new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime()));
-    }
+	}
 }

@@ -100,6 +100,12 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 			else if (reportType.equals("generalfull")) {
 				scReport = Translator.translate(new ShiftClosure(scId).getGeneralFullReport());
 			}
+			else if (reportType.equals("salesbyprice")) {
+				scReport = Translator.translate(new ShiftClosure(scId).getSalesByPriceReport());
+			}
+			else if (reportType.equals("notes")) {
+				scReport = Translator.translate(new ShiftClosure(scId).getNotesReport());
+			}
 			else {
 				scReport = Translator.translate(new ShiftClosure(scId).getReport());
 			}

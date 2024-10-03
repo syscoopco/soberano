@@ -35,7 +35,7 @@
 			That is why this code line is disabled. -->
 	
 	<!-- access rules, sessions and login / logout --> 
-	<security:http auto-config="true" use-expressions="true">
+	<security:http auto-config="true" use-expressions="true" create-session="ifRequired">
 	
 		<!-- deny all -->
 		<security:intercept-url pattern="/zkau/web/**/*.zul" access="denyAll()"/>
