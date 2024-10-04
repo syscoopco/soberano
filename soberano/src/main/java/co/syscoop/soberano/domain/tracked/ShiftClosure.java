@@ -164,6 +164,17 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		return super.getReport();
 	}
 	
+	public String getSPIReport(String warehouseName) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		getReportQuery = "SELECT * FROM soberano.\"fn_ShiftClosure_getSPIReport\"(:lang, :closureId, :warehouseName, :loginname) AS report";
+		getReportParameters = new HashMap<String,	Object>();
+		getReportParameters.put("lang", Locales.getCurrent().getLanguage());	
+		getReportParameters.put("closureId", this.getId());
+		getReportParameters.put("warehouseName", warehouseName.substring(0, warehouseName.indexOf(" : ")));
+		return super.getReport();
+	}
+	
 	public PrintableData getReportWithPrinterProfile() throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -249,6 +260,18 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
 		qryParameters.put("closureId", this.getId());
 		qryParameters.put("costCenterName", costCenterName);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
+	}
+	
+	public PrintableData getSPIReportWithPrinterProfile(String warehouseName) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getSPIReportWithPrinterProfile\"(:lang, :closureId, :warehouseName, :loginname) AS report";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("closureId", this.getId());
+		qryParameters.put("warehouseName", warehouseName.substring(0, warehouseName.indexOf(" : ")));
 		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
 	}

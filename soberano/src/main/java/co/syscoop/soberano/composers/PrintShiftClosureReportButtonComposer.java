@@ -135,6 +135,34 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 					throw new NotEnoughRightsException();
 				}
 			}
+			else if (txtShownReport.getText().equals("spi")) {
+				Combobox cmbWarehouse = (Combobox) btnPrint.query("#cmbWarehouse");
+				String warehouseName = "";
+				if (cmbWarehouse.getSelectedItem() != null) {
+					warehouseName = cmbWarehouse.getText();
+				}
+				PrintableData pd = new ShiftClosure(scId).getSPIReportWithPrinterProfile(warehouseName);
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_SPI_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_SPI_" + scId, false);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
 			else if (txtShownReport.getText().equals("generalfull")) {
 				PrintableData pd = new ShiftClosure(scId).getGeneralFullReportWithPrinterProfile();
 				if (!pd.getTextToPrint().isEmpty()) {				

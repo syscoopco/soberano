@@ -44,6 +44,9 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 	@Wire
 	protected Combobox cmbCostCenter;
 	
+	@Wire
+	protected Combobox cmbWarehouse;
+	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -68,6 +71,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		case "btnGeneralFull":
 			btnGeneral.setClass("DecisionButton");
@@ -79,6 +84,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		case "btnHouseBill":
 			btnGeneral.setClass("DecisionButton");
@@ -90,6 +97,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		case "btnCashRegister":
 			btnGeneral.setClass("DecisionButton");
@@ -101,6 +110,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;	
 		case "btnReceivables":
 			btnGeneral.setClass("DecisionButton");
@@ -112,6 +123,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		case "cmbCostCenter":
 			btnGeneral.setClass("DecisionButton");
@@ -122,6 +135,19 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnSalesByPrice.setClass("DecisionButton");
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("ReportButtonPushed");
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
+			break;
+		case "cmbWarehouse":
+			btnGeneral.setClass("DecisionButton");
+			btnGeneralFull.setClass("DecisionButton");
+			btnHouseBill.setClass("DecisionButton");
+			btnCashRegister.setClass("DecisionButton");
+			btnReceivables.setClass("DecisionButton");
+			btnSalesByPrice.setClass("DecisionButton");
+			btnNotes.setClass("DecisionButton");
+			cmbCostCenter.setClass("DecisionButton");
+			cmbWarehouse.setClass("ReportButtonPushed");
 			break;
 		case "btnSalesByPrice":
 			btnGeneral.setClass("DecisionButton");
@@ -133,6 +159,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("DecisionButton");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		case "btnNotes":
 			btnGeneral.setClass("DecisionButton");
@@ -144,6 +172,8 @@ public class ShiftClosureReportLoadingComposer extends SelectorComposer {
 			btnNotes.setClass("ReportButtonPushed");
 			cmbCostCenter.setClass("DecisionButton");
 			cmbCostCenter.setSelectedItem(null);
+			cmbWarehouse.setClass("DecisionButton");
+			cmbWarehouse.setSelectedItem(null);
 			break;
 		}
 	}
