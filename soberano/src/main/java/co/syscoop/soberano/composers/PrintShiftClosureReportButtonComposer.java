@@ -48,7 +48,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_RECEIVABLES_" + scId, false);
+									"CLOSURE_RECEIVABLES_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -71,7 +73,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_CASH_REGISTER_" + scId, false);
+									"CLOSURE_CASH_REGISTER_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -94,7 +98,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_HOUSEBILL_" + scId, false);
+									"CLOSURE_HOUSEBILL_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -122,7 +128,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_COSTCENTER_" + scId, false);
+									"CLOSURE_COSTCENTER_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -150,7 +158,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_SPI_" + scId, false);
+									"CLOSURE_SPI_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -173,7 +183,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_GENERAL_FULL_" + scId, false);
+									"CLOSURE_GENERAL_FULL_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -196,7 +208,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_SALES_BY_PRICE_" + scId, false);
+									"CLOSURE_SALES_BY_PRICE_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -219,7 +233,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_NOTES_" + scId, false);
+									"CLOSURE_NOTES_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -242,7 +258,9 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 						Printer.print(Translator.translate(pd.getTextToPrint()), 
 									pd.getPrinterProfile(), 
 									fileToPrintFullPath, 
-									"CLOSURE_GENERAL_" + scId, false);
+									"CLOSURE_GENERAL_" + scId,
+									false,
+									null);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 

@@ -55,7 +55,7 @@ public class PrintButtonComposer extends SelectorComposer {
 													"records/tickets/" + 
 													"TICKET_" + orderId + ".pdf";
 					try {
-						Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false);
+						Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false, trackedObject);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 

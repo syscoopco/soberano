@@ -33,13 +33,14 @@ public class PrintTicketButtonComposer extends SelectorComposer {
 		
 		try{
 			Integer orderId = ((Intbox) btnPrint.getParent().getParent().getParent().query("#wndContentPanel").query("#intOrderNumber")).getValue();
-			PrintableData pd = new Order(orderId).retrieveTicket();
+			Order order = new Order(orderId);
+			PrintableData pd = order.retrieveTicket();
 			if (!pd.getTextToPrint().isEmpty()) {				
 				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 												"records/tickets/" + 
 												"TICKET_" + orderId + ".pdf";
 				try {
-					Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false);
+					Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false, order);
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 

@@ -324,4 +324,11 @@
  	</bean>
  	<bean name="transfermovil" class="co.syscoop.soberano.beans.Transfermovil">
  	</bean>
+ 	<bean name="mlc" class="co.syscoop.soberano.beans.MLC">
+ 	</bean>
+ 	
+ 	<!-- printer profile beans -->
+ 	<bean name="facturalanuevaprinterprofile" class="co.syscoop.soberano.beans.FacturaLaNuevaPrinterProfile">
+ 	</bean>
+ 	 	
 </beans>

@@ -29,13 +29,16 @@ import org.cups4j.CupsPrinter;
 import org.cups4j.PrintJob;
 import org.cups4j.PrintJob.Builder;
 import org.cups4j.PrintRequestResult;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.zkoss.zul.Messagebox;
 import com.github.anastaciocintra.escpos.EscPos;
 import com.github.anastaciocintra.output.PrinterOutputStream;
 
+import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.WSocketClient;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
+import co.syscoop.soberano.beans.IPDFDocumentToPrint;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
@@ -276,12 +279,26 @@ public class Printer {
 							Integer printerProfileId,
 							String fileToPrintFullPath,
 							String printJobName,
-							Boolean _3LF) throws Exception {
+							Boolean _3LF,
+							Object objectToPrint) throws Exception {
 		PrinterProfile printerProfile = new PrinterProfile(printerProfileId);
 		printerProfile.get();
 		Printer printer = new Printer(printerProfile);
-		createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
-		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+		
+		//there is a bean for more printing customization
+		IPDFDocumentToPrint pp = null;
+		try {
+			pp = (IPDFDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
+			pp.createPDFFile(objectToPrint, fileToPrintFullPath);
+			pp.printPDFFile(fileToPrintFullPath);
+		}
+		catch(NoSuchBeanDefinitionException nsbdex) {			
+			createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
+			printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+		}
+		catch(Exception ex) {
+			throw ex;
+		}
 	}
 	
 	public static void printReport(TrackedObject trackedObject, 
@@ -302,7 +319,7 @@ public class Printer {
 			try {
 				Printer.print(translate ? Translator.translate(pd.getTextToPrint()) : pd.getTextToPrint(), 
 							pd.getPrinterProfile(), pdfFileToPrintFullPath, 
-							"printJobPrefix" + trackedObject.getId(), _3LF);
+							"printJobPrefix" + trackedObject.getId(), _3LF, null);
 			}
 			catch(Exception ex) {
 				ExceptionTreatment.logAndShow(ex, 

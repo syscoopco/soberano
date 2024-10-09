@@ -2,6 +2,7 @@ package co.syscoop.soberano.composers;
 
 import java.util.Base64;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -10,7 +11,9 @@ import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 
+import co.syscoop.soberano.beans.IPDFDocumentToPrint;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DebtorRequiredException;
@@ -67,11 +70,20 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 					PrinterProfile printerProfile = new PrinterProfile(qrwr.getPrinterProfileId());
 					printerProfile.get();
 					Printer printer = new Printer(printerProfile);
-					Printer.createFile(printer,
-										Translator.translate(qrwr.getReport()),
-										qrwr.getPrinterProfileId(),
-										fileToPrintFullPath,
-										false);
+					
+					//there is a bean for more printing customization
+					IPDFDocumentToPrint pp = null;
+					try {
+						pp = (IPDFDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
+						pp.createPDFFile(new Order(orderId), fileToPrintFullPath);
+					}
+					catch(NoSuchBeanDefinitionException nsbdex) {			
+						Printer.createFile(printer,
+											Translator.translate(qrwr.getReport()),
+											qrwr.getPrinterProfileId(),
+											fileToPrintFullPath,
+											false);
+					}
 					Executions.sendRedirect("/order.zul?id=" + orderId + 
 														"&report=" + Base64.getEncoder().encodeToString(fileToPrintFullPath.getBytes()));
 					/*****/
