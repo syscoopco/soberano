@@ -26,6 +26,7 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
 		PDPageContentStream content = new PDPageContentStream(document,page);
 
 		//generate data for first page
+		
 
 		content.close();
 
