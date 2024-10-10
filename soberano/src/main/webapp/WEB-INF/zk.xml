@@ -31,22 +31,8 @@
   	<listener>
     	<listener-class>co.syscoop.soberano.initialization.SoberanoSessionInit</listener-class>
   	</listener>
-  	
-  	<!-- ZK EVAL -->
-<!--   	<listener> -->
-<!-- 		<listener-class>org.zkoss.zk.ui.util.DesktopRecycle</listener-class> -->
-<!-- 	</listener> -->
-<!-- 	<library-property> -->
-<!-- 		<name>org.zkoss.zul.grid.rod</name> -->
-<!-- 		<value>true</value> -->
-<!-- 	</library-property> -->
-<!-- 	<library-property> -->
-<!-- 		<name>org.zkoss.zul.listbox.rod</name> -->
-<!-- 		<value>true</value> -->
-<!-- 	</library-property> -->
-	<!-- END of ZK EVAL -->
-  	
-  	<!-- cache. true for production -->
+	
+	<!-- cache. true for production -->
 	<library-property>
 		<name>cache</name>
 		<value>true</value>
@@ -67,6 +53,16 @@
     <!-- theme -->
     <library-property>
     	<name>org.zkoss.theme.preferred</name>
-	    <value>sapphire</value> <!-- or silvertail, atlantic, deepsea, gardensalad etc. -->
+	    <value>sapphire</value> <!-- breeze, icecube, sapphire, silvertail -->
+	</library-property>
+	
+	<!-- render on demand -->
+	<library-property>
+		<name>org.zkoss.zul.grid.rod</name>
+		<value>true</value>
+	</library-property>
+	<library-property>
+		<name>org.zkoss.zul.listbox.rod</name>
+		<value>true</value>
 	</library-property>
 </zk>

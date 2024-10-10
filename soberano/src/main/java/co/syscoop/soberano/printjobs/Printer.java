@@ -180,6 +180,18 @@ public class Printer {
 	    }
 	}
 	
+	public static void print(String fileToPrintFullPath, String printerNameParam, String jobName) throws SoberanoException {
+		try {
+			print(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName);
+		}
+		catch (Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + jobName + ". DETAILS: " + ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+	    }
+	}
+	
 	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
@@ -290,7 +302,7 @@ public class Printer {
 		try {
 			pp = (IPDFDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
 			pp.createPDFFile(objectToPrint, fileToPrintFullPath);
-			pp.printPDFFile(fileToPrintFullPath);
+			pp.printPDFFile(fileToPrintFullPath, printerProfile.getPrinterName(), printJobName);
 		}
 		catch(NoSuchBeanDefinitionException nsbdex) {			
 			createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
