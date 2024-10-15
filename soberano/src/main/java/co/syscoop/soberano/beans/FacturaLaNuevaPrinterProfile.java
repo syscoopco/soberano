@@ -1,8 +1,12 @@
 package co.syscoop.soberano.beans;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
@@ -11,6 +15,10 @@ import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
 import co.syscoop.soberano.printjobs.Printer;
+import co.syscoop.soberano.util.rowdata.InvoiceDataRowData;
+import co.syscoop.soberano.domain.tracked.Order;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.SoberanoException;
 
 public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
 	
@@ -66,15 +74,10 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
         //blank lines
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.showText("");
-        
-        //invoice number
-        contentStream.newLineAtOffset(0, -LEADING);
-        contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE);       
-        contentStream.showText("NO. FACTURA:");
 	}
 	
 	@Override
-	public void createPDFFile(Object objectToPrint, String fileToPrintFullPath) throws IOException {
+	public void createPDFFile(Object objectToPrint, String fileToPrintFullPath) throws IOException, SQLException, SoberanoException {
 		
 		PDDocument document = new PDDocument();		
 		PDRectangle mediaBox = new PDRectangle(612, 792);
@@ -86,6 +89,19 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
 		contentStream.beginText();
 
 		insertInvoiceHeader(contentStream);
+		
+		List<Object> invoiceData = null;
+		try {
+			invoiceData = ((Order) objectToPrint).getInvoiceData();		
+		}
+		catch(Exception ex) {
+			throw new NotEnoughRightsException();
+		}		
+		
+		//invoice number
+        contentStream.newLineAtOffset(0, -LEADING);
+        contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE);       
+        contentStream.showText("NO. FACTURA: " + (invoiceData == null || invoiceData.size() == 0 ? "" : ((InvoiceDataRowData) invoiceData.get(0)).getOrderId()));
                 
         //invoice type
         contentStream.newLineAtOffset(0, -LEADING);
@@ -99,7 +115,7 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
         //date
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE); 
-        contentStream.showText("FECHA DE EMISIÓN:");
+        contentStream.showText("FECHA DE EMISIÓN: " + (invoiceData == null || invoiceData.size() == 0 ? "" : ((InvoiceDataRowData) invoiceData.get(0)).getInvoiceDate()));
                 
         //blank lines
         contentStream.newLineAtOffset(0, -LEADING);
@@ -137,11 +153,12 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
         
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(INVOICE_H2_FONT_TYPE, INVOICE_H2_FONT_SIZE); 
-        contentStream.showText("NOMBRE:");
+        contentStream.showText("NOMBRE: " + (invoiceData == null || invoiceData.size() == 0 ? "" : ((InvoiceDataRowData) invoiceData.get(0)).getCustomerName()));
         
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(INVOICE_H2_FONT_TYPE, INVOICE_H2_FONT_SIZE); 
-        contentStream.showText("DIRECCIÓN:");
+        String contactData = "CONTACTO: " + (invoiceData == null || invoiceData.size() == 0 ? "" : ((InvoiceDataRowData) invoiceData.get(0)).getContactData());
+        contentStream.showText(contactData.replace("\r", " "));
                 
         //blank lines
         contentStream.newLineAtOffset(0, -LEADING);
@@ -154,49 +171,72 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
         
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 
-        contentStream.showText("CÓDIGO   NO     DESCRIPCIÓN                         UM   CANTIDAD   PRECIO       IMPORTE");
+        contentStream.showText(StringUtils.leftPad("CÓDIGO", 7, " ") + "  "
+        						+ StringUtils.leftPad("NO", 4, " ")  + "  "
+        						+ StringUtils.rightPad("DESCRIPCIÓN", 33, " ") + "  "
+        						+ StringUtils.leftPad("UM", 3, " ") + "  "
+        						+ StringUtils.leftPad("CANTIDAD", 8, " ") + "  "
+        						+ StringUtils.leftPad("PRECIO", 9, " ") + "  " 
+        						+ StringUtils.leftPad("IMPORTE", 10, " "));
         
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 
         contentStream.showText("________________________________________________________________________________________");
         
-        float freeSpace = 750 - 22 * LEADING - 42;
-        
-        Integer pageCount = 1;
+        float freeSpace = 750 - 22 * LEADING - 42;        
+        Integer pageCount = 1;        
+        BigDecimal amountToPay = new BigDecimal(0);
+        if (!(invoiceData == null || invoiceData.size() == 0)) {
         	
-        for (int i = 1; i < 55; i++) {
-        	contentStream.newLineAtOffset(0, -LEADING);
-            contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 
-            contentStream.showText("188888   11     descripción de artículo de lavand   U    12345678   111.11       1111.11");
-            freeSpace = freeSpace - LEADING;
-            
-            if (freeSpace < 151) {
-            	
-            	//blank lines
-                contentStream.newLineAtOffset(0, -LEADING);
-                contentStream.showText("");
+        	Integer i = 1;
+        	for (Object invoiceDataElement : invoiceData) {
+        		
+        		InvoiceDataRowData invoiceDataRowData = (InvoiceDataRowData) invoiceDataElement;
+        		
+        		contentStream.newLineAtOffset(0, -LEADING);
+                contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 
+                contentStream.showText(StringUtils.leftPad(invoiceDataRowData.getInventoryItemCode(), 7, " ") + "  "
+                						+ StringUtils.leftPad(i.toString(), 4, " ") + "  "
+                						+ StringUtils.rightPad(invoiceDataRowData.getInventoryItemName(), 33, " ") + "  "
+                						+ StringUtils.leftPad(invoiceDataRowData.getUnit(), 3, " ") + "  "
+                						+ StringUtils.leftPad(invoiceDataRowData.getQuantity().toPlainString(), 8, " ") + "  "
+                						+ StringUtils.leftPad(invoiceDataRowData.getItemPrice().toPlainString(), 9, " ") + "  "
+                						+ StringUtils.leftPad(invoiceDataRowData.getItemAmount().toPlainString(), 10, " "));
+                i++;
+                amountToPay = amountToPay.add(invoiceDataRowData.getItemAmount());
+                freeSpace = freeSpace - LEADING;
                 
-                //page number
-                contentStream.newLineAtOffset(0, -LEADING);
-                contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE); 
-                contentStream.showText("Página " + pageCount.toString());
-            	
-            	mediaBox = new PDRectangle(612, 792);        		
-        		page = new PDPage(mediaBox);
-        		document.addPage(page);
-        		contentStream.close();
-        		contentStream = new PDPageContentStream(document,page);
-        		contentStream.setLeading(LEADING);
-        		contentStream.beginText();
-        		insertInvoiceHeader(contentStream);
-        		freeSpace = 750 - 42;
-        		pageCount++;
+                if (freeSpace < 151) {
+                	
+                	//blank lines
+                    contentStream.newLineAtOffset(0, -LEADING);
+                    contentStream.showText("");
+                    
+                    //page number
+                    contentStream.newLineAtOffset(0, -LEADING);
+                    contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE); 
+                    contentStream.showText("Página " + pageCount.toString());
+                	
+                	mediaBox = new PDRectangle(612, 792);        		
+            		page = new PDPage(mediaBox);
+            		document.addPage(page);
+            		contentStream.close();
+            		contentStream = new PDPageContentStream(document,page);
+            		contentStream.setLeading(LEADING);
+            		contentStream.beginText();
+            		insertInvoiceHeader(contentStream);
+            		freeSpace = 750 - 42;
+            		pageCount++;
+                }
             }
         }
         
         contentStream.newLineAtOffset(0, -LEADING);
-        contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 
-        contentStream.showText("                                                                         TOTAL:");
+        contentStream.setFont(INVOICE_H1_FONT_TYPE, INVOICE_H1_FONT_SIZE); 
+        contentStream.showText("DESCUENTO: " 
+        						+  (invoiceData == null || invoiceData.size() == 0 ? "" : ((InvoiceDataRowData) invoiceData.get(0)).getOrderDiscount().toString()) 
+        						+ "%                                                                                                              A PAGAR: "
+        						+ amountToPay.toPlainString());
         
         contentStream.newLineAtOffset(0, -LEADING);
         contentStream.setFont(ITEMS_FONT_TYPE, ITEMS_FONT_SIZE); 

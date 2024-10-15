@@ -24,6 +24,9 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 		((Intbox) wndContentPanel.query("include").query("#intMinutes")).setValue(configuration.getShiftOpeningMinutes());
 		((Checkbox) wndContentPanel.query("include").query("#chkFirstOrderRequiresCashOperation")).setChecked(configuration.getFirstOrderRequiresCashOperation());
 		((Checkbox) wndContentPanel.query("include").query("#chkSpiOperationRequiresConfirmation")).setChecked(configuration.getSpiOperationRequiresConfirmation());
+		((Checkbox) wndContentPanel.query("include").query("#chkCompensateDeliveryProviderRates")).setChecked(configuration.getCompensateDeliveryProviderRates());
+		((Checkbox) wndContentPanel.query("include").query("#chkDoNotSellInCaseOfStockZero")).setChecked(configuration.getDoNotSellInCaseOfStockZero());
+		((Checkbox) wndContentPanel.query("include").query("#chkGroupProcessRunOutputAllocations")).setChecked(configuration.getGroupProcessRunOutputAllocations());
 	}
 	
 	@Override
@@ -45,7 +48,10 @@ public class ConfigurationFormHelper extends TrackedObjectFormHelper {
 												((Intbox) incDetails.query("#intHour")).getValue(),
 												((Intbox) incDetails.query("#intMinutes")).getValue(),
 												((Checkbox) incDetails.query("#chkFirstOrderRequiresCashOperation")).isChecked(),
-												((Checkbox) incDetails.query("#chkSpiOperationRequiresConfirmation")).isChecked()));
+												((Checkbox) incDetails.query("#chkSpiOperationRequiresConfirmation")).isChecked(),
+												((Checkbox) incDetails.query("#chkCompensateDeliveryProviderRates")).isChecked(),
+												((Checkbox) incDetails.query("#chkDoNotSellInCaseOfStockZero")).isChecked(),
+												((Checkbox) incDetails.query("#chkGroupProcessRunOutputAllocations")).isChecked()));
 		return super.getTrackedObject().modify();
 	}
 }

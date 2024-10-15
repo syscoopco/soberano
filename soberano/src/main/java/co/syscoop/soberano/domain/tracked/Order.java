@@ -16,6 +16,7 @@ import org.zkoss.zul.Messagebox;
 
 import co.syscoop.soberano.database.relational.ActivityMapper;
 import co.syscoop.soberano.database.relational.CounterOrderMapper;
+import co.syscoop.soberano.database.relational.InvoiceDataMapper;
 import co.syscoop.soberano.database.relational.OrderedItemMapper;
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
@@ -602,6 +603,16 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("orderid", this.getId());
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());		
 		return query(qryStr, parametersMap, new OrderedItemMapper());
+	}
+	
+	public List<Object> getInvoiceData() throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getInvoiceData\"(:orderid, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderid", this.getId());
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());	
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return query(qryStr, parametersMap, new InvoiceDataMapper());
 	}
 	
 	public Integer moveOrderedItemToOrder(Integer fromOrderId, Integer toOrderId, Integer processRunId) throws Exception {

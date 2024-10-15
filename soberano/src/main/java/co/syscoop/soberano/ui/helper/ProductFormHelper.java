@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
@@ -54,6 +55,8 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), product.getStringId());
 		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), product.getName());
 		
+		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPosition"), product.getPosition());
+		
 		Combobox cmbUnit = (Combobox) incDetails.query("#cmbUnit");
 		UnitSelectionViewModel uSelectionViewModel = new UnitSelectionViewModel();
 		cmbUnit.setModel(uSelectionViewModel.getModel());
@@ -78,6 +81,8 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 			ZKUtilitity.setValueWOValidation(cmbCostCenter, product.getCostCenter());
 		else
 			cmbCostCenter.setSelectedItem(null);
+		
+		((Checkbox) incDetails.query("#chkIsAnAddition")).setChecked(product.getIsAnAddition());
 		
 		((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
 	}
@@ -117,6 +122,8 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 							iCostCenterItem == null ? null : ((DomainObject) iCostCenterItem.getValue()).getId(),
 							true,
 							0,
+							((Intbox) incDetails.query("#intPosition")).getValue(),
+							((Checkbox) incDetails.query("#chkIsAnAddition")).isChecked(),
 							productCategories))
 						.record();
 	}
@@ -150,6 +157,8 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 												iCostCenterId,
 												true,
 												0,
+												((Intbox) incDetails.query("#intPosition")).getValue(),
+												((Checkbox) incDetails.query("#chkIsAnAddition")).isChecked(),
 												productCategories));
 		return super.getTrackedObject().modify();
 	}

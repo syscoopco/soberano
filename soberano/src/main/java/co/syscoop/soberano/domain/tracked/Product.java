@@ -28,6 +28,8 @@ public class Product extends InventoryItem {
 	private Integer costCenter = 0;
 	private Integer process = 0;
 	private BigDecimal oneRunQuantity = new BigDecimal(0);
+	private Integer position = 0;
+	private Boolean isAnAddition = false;
 	
 	//product categories
 	private ArrayList<ProductCategory> productCategories = new ArrayList<ProductCategory>();
@@ -54,7 +56,9 @@ public class Product extends InventoryItem {
 					Integer unit,
 					Integer costCenter,
 					Boolean isEnabled,
-					Integer process) {
+					Integer process,
+					Integer position,
+					Boolean isAnAddition) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(inventoryItemCode);
 		this.setQualifiedName(name + " : " + inventoryItemCode);
@@ -65,6 +69,8 @@ public class Product extends InventoryItem {
 		this.setCostCenter(costCenter);
 		this.setIsEnabled(isEnabled);
 		this.setProcess(process);
+		this.setPosition(position);
+		this.setIsAnAddition(isAnAddition);
 	}
 	
 	public Product(Integer id, 
@@ -78,6 +84,8 @@ public class Product extends InventoryItem {
 			Integer costCenter,
 			Boolean isEnabled,
 			Integer process,
+			Integer position,
+			Boolean isAnAddition,
 			ArrayList<ProductCategory> productCategories) {
 		this(id, 
 			entityTypeInstanceId, 
@@ -89,7 +97,9 @@ public class Product extends InventoryItem {
 			unit,
 			costCenter,
 			isEnabled,
-			process);
+			process,
+			position,
+			isAnAddition);
 		this.productCategories = productCategories;
 		fillProductCategoryIds();
 	}
@@ -111,6 +121,8 @@ public class Product extends InventoryItem {
 				+ "											:price, "
 				+ "											:referencePrice, "
 				+ "											:isEnabled, "
+				+ "											:position, "
+				+ "											:isAnAddition, "
 				+ "											:productCategories, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
@@ -122,6 +134,8 @@ public class Product extends InventoryItem {
 		recordParameters.addValue("price", this.getPrice());
 		recordParameters.addValue("referencePrice", this.getReferencePrice());
 		recordParameters.addValue("isEnabled", this.isEnabled);
+		recordParameters.addValue("position", this.position);
+		recordParameters.addValue("isAnAddition", this.isAnAddition);
 		recordParameters.addValue("productCategories", createArrayOfSQLType("integer", productCategoryIds));
 		
 		Integer qryResult = super.record();
@@ -141,6 +155,8 @@ public class Product extends InventoryItem {
 				+ "											:price, "
 				+ "											:referencePrice, "
 				+ "											:isEnabled, "
+				+ "											:position, "
+				+ "											:isAnAddition, "
 				+ "											:productCategories, "
 				+ "											:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
@@ -153,6 +169,8 @@ public class Product extends InventoryItem {
 		modifyParameters.addValue("price", this.getPrice());
 		modifyParameters.addValue("referencePrice", this.getReferencePrice());
 		modifyParameters.addValue("isEnabled", this.isEnabled);
+		modifyParameters.addValue("position", this.position);
+		modifyParameters.addValue("isAnAddition", this.isAnAddition);
 		modifyParameters.addValue("productCategories", createArrayOfSQLType("integer", productCategoryIds));
 		
 		Integer qryResult = super.modify();
@@ -291,7 +309,9 @@ public class Product extends InventoryItem {
 											rs.getInt("itemUnit"),
 											rs.getInt("costCenter"),
 											rs.getBoolean("isEnabled"),
-											rs.getInt("itemProcess"));
+											rs.getInt("itemProcess"),
+											rs.getInt("productPosition"),
+											rs.getBoolean("productIsAddition"));
 	        	}
 	        	product.getProductCategories().add(new ProductCategory(rs.getInt("categoryId"), rs.getString("categoryName")));
 	        }
@@ -327,7 +347,9 @@ public class Product extends InventoryItem {
 		setPrice(sourceProduct.getPrice());
 		setReferencePrice(sourceProduct.getReferencePrice());
 		setIsEnabled(sourceProduct.getIsEnabled());
-		setProcess(sourceProduct.process);
+		setProcess(sourceProduct.getProcess());
+		setPosition(sourceProduct.getPosition());
+		setIsAnAddition(sourceProduct.getIsAnAddition());
 		setProductCategories(sourceProduct.getProductCategories());
 		fillProductCategoryIds();
 	}
@@ -391,5 +413,21 @@ public class Product extends InventoryItem {
 
 	public void setOneRunQuantity(BigDecimal oneRunQuantity) {
 		this.oneRunQuantity = oneRunQuantity;
+	}
+
+	public Integer getPosition() {
+		return position;
+	}
+
+	public void setPosition(Integer position) {
+		this.position = position;
+	}
+
+	public Boolean getIsAnAddition() {
+		return isAnAddition;
+	}
+
+	public void setIsAnAddition(Boolean isAnAddition) {
+		this.isAnAddition = isAnAddition;
 	}
 }

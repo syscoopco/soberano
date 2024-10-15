@@ -15,16 +15,24 @@ public class Configuration extends BusinessActivityTrackedObject {
 	private Integer shiftOpeningMinutes = 0;
 	private Boolean firstOrderRequiresCashOperation = false;
 	private Boolean spiOperationRequiresConfirmation = false;
+	private Boolean compensateDeliveryProviderRates = false;
+	private Boolean doNotSellInCaseOfStockZero = false;
+	private Boolean groupProcessRunOutputAllocations = false;
 	
 	public Configuration() {}
 	
 	public Configuration(BigDecimal surcharge, Integer shiftOpeningHour, Integer shiftOpeningMinutes, 
-						Boolean firstOrderRequiresCashOperation, Boolean spiOperationRequiresConfirmation) {
+						Boolean firstOrderRequiresCashOperation, Boolean spiOperationRequiresConfirmation,
+						Boolean compensateDeliveryProviderRates, Boolean doNotSellInCaseOfStockZero,
+						Boolean groupProcessRunOutputAllocations) {
 		setSurcharge(surcharge);
 		setShiftOpeningHour(shiftOpeningHour);
 		setShiftOpeningMinutes(shiftOpeningMinutes);
 		setFirstOrderRequiresCashOperation(firstOrderRequiresCashOperation);
 		setSpiOperationRequiresConfirmation(spiOperationRequiresConfirmation);
+		setCompensateDeliveryProviderRates(compensateDeliveryProviderRates);
+		setDoNotSellInCaseOfStockZero(doNotSellInCaseOfStockZero);
+		setGroupProcessRunOutputAllocations(groupProcessRunOutputAllocations);
 	}
 	
 	public final class ConfigurationMapper implements RowMapper<Object> {
@@ -39,7 +47,10 @@ public class Configuration extends BusinessActivityTrackedObject {
 													rs.getInt("shiftOpeningHour"),
 													rs.getInt("shiftOpeningMinutes"),
 													rs.getBoolean("firstOrderRequiresCashOperation"),
-													rs.getBoolean("spiOperationRequiresConfirmation"));
+													rs.getBoolean("spiOperationRequiresConfirmation"),
+													rs.getBoolean("compensateDeliveryProviderRates"),
+													rs.getBoolean("doNotSellInCaseOfStockZero"),
+													rs.getBoolean("groupProcessRunOutputAllocations"));
 				}
 				return configuration;
 			}
@@ -67,6 +78,9 @@ public class Configuration extends BusinessActivityTrackedObject {
 								+ " 								:shiftopeningminutes, "
 								+ "									:firstorderrequirescashoperation, "
 								+ "									:spiOperationRequiresConfirmation, "
+								+ "									:compensateDeliveryProviderRates, "
+								+ "									:doNotSellInCaseOfStockZero, "
+								+ "									:groupProcessRunOutputAllocations, "
 								+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("surcharge", this.getSurcharge());
@@ -74,6 +88,9 @@ public class Configuration extends BusinessActivityTrackedObject {
 		modifyParameters.addValue("shiftopeningminutes", this.getShiftOpeningMinutes());
 		modifyParameters.addValue("firstorderrequirescashoperation", this.getFirstOrderRequiresCashOperation());
 		modifyParameters.addValue("spiOperationRequiresConfirmation", this.getSpiOperationRequiresConfirmation());
+		modifyParameters.addValue("compensateDeliveryProviderRates", this.getCompensateDeliveryProviderRates());
+		modifyParameters.addValue("doNotSellInCaseOfStockZero", this.getDoNotSellInCaseOfStockZero());
+		modifyParameters.addValue("groupProcessRunOutputAllocations", this.getGroupProcessRunOutputAllocations());
 		
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
@@ -89,6 +106,9 @@ public class Configuration extends BusinessActivityTrackedObject {
 		setShiftOpeningMinutes(sourceConf.getShiftOpeningMinutes());
 		setFirstOrderRequiresCashOperation(sourceConf.getFirstOrderRequiresCashOperation());
 		setSpiOperationRequiresConfirmation(sourceConf.getSpiOperationRequiresConfirmation());
+		setCompensateDeliveryProviderRates(sourceConf.getCompensateDeliveryProviderRates());
+		setDoNotSellInCaseOfStockZero(sourceConf.getDoNotSellInCaseOfStockZero());
+		setGroupProcessRunOutputAllocations(sourceConf.getGroupProcessRunOutputAllocations());
 	}
 
 	public BigDecimal getSurcharge() {
@@ -129,5 +149,29 @@ public class Configuration extends BusinessActivityTrackedObject {
 
 	public void setSpiOperationRequiresConfirmation(Boolean spiOperationRequiresConfirmation) {
 		this.spiOperationRequiresConfirmation = spiOperationRequiresConfirmation;
+	}
+
+	public Boolean getCompensateDeliveryProviderRates() {
+		return compensateDeliveryProviderRates;
+	}
+
+	public void setCompensateDeliveryProviderRates(Boolean compensateDeliveryProviderRates) {
+		this.compensateDeliveryProviderRates = compensateDeliveryProviderRates;
+	}
+
+	public Boolean getDoNotSellInCaseOfStockZero() {
+		return doNotSellInCaseOfStockZero;
+	}
+
+	public void setDoNotSellInCaseOfStockZero(Boolean doNotSellInCaseOfStockZero) {
+		this.doNotSellInCaseOfStockZero = doNotSellInCaseOfStockZero;
+	}
+
+	public Boolean getGroupProcessRunOutputAllocations() {
+		return groupProcessRunOutputAllocations;
+	}
+
+	public void setGroupProcessRunOutputAllocations(Boolean groupProcessRunOutputAllocations) {
+		this.groupProcessRunOutputAllocations = groupProcessRunOutputAllocations;
 	}
 }

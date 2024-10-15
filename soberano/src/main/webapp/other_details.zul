@@ -22,5 +22,11 @@
 		<checkbox id="chkFirstOrderRequiresCashOperation" checked="false" label="${labels.caption.field.firstOrderRequiresCashOperation}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkSpiOperationRequiresConfirmation" checked="false" label="${labels.caption.field.spiOperationRequiresConfirmation}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkCompensateDeliveryProviderRates" checked="false" label="${labels.caption.field.compensateDeliveryProviderRates}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkDoNotSellInCaseOfStockZero" checked="false" label="${labels.caption.field.doNotSellInCaseOfStockZero}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<checkbox id="chkGroupProcessRunOutputAllocations" checked="false" label="${labels.caption.field.groupProcessRunOutputAllocations}" sclass="Caption"></checkbox>
 	</vbox>
 </zk>

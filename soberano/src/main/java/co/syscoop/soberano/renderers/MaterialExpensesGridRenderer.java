@@ -19,6 +19,7 @@ import org.zkoss.zul.Vbox;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.domain.tracked.MaterialExpense;
 import co.syscoop.soberano.util.SpringUtility;
@@ -164,6 +165,12 @@ public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 				catch(NotEnoughRightsException ex) {
 					ExceptionTreatment.logAndShow(ex, 
 							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(ShiftHasBeenClosedException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.shiftHasBeenClosed"), 
 							Labels.getLabel("messageBoxTitle.Warning"),
 							Messagebox.EXCLAMATION);
 				}
