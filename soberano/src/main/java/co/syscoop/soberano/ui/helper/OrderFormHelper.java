@@ -572,6 +572,30 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 				cellOi.appendChild(vboxOi);
 				rowOi.appendChild(cellOi);
+				
+				//additions
+				Hbox hboxChooseAddition = new Hbox();
+				hboxChooseAddition.setAlign("center");
+				hboxChooseAddition.setPack("end");
+				boxOi.appendChild(new Separator("horizontal"));
+				boxOi.appendChild(new Separator("horizontal"));
+				boxOi.appendChild(new Separator("horizontal"));
+				boxOi.appendChild(new Separator("horizontal"));
+				boxOi.appendChild(hboxChooseAddition);
+				
+				Button btnAddAddition = new Button("+");
+				btnAddAddition.setId("btnAddAddition" + oi.getProcessRunId().toString());
+				
+				btnAddAddition.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+
+						
+					}
+				});			
+				
+				hboxChooseAddition.appendChild(btnAddAddition);
 			}
 		}
 	}
