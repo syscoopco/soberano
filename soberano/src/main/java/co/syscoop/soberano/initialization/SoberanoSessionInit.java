@@ -9,6 +9,7 @@ import org.zkoss.zk.ui.util.SessionInit;
 import co.syscoop.soberano.domain.tracked.Counter;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.view.viewmodel.AdditionSelectionForOrderViewModel;
 
 public class SoberanoSessionInit implements SessionInit {
 
@@ -61,5 +62,6 @@ public class SoberanoSessionInit implements SessionInit {
 		
 		sess.setAttribute("production_line_board_grid_order_column", "allocationId");
 		sess.setAttribute("production_line_board_grid_sort_direction", "ASC");
+		sess.setAttribute("addition_selection_view_model", new AdditionSelectionForOrderViewModel());
 	}	
 }

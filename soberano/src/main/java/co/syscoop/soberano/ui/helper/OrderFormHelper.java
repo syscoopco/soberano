@@ -1,7 +1,11 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
@@ -574,28 +578,33 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 				rowOi.appendChild(cellOi);
 				
 				//additions
-				Hbox hboxChooseAddition = new Hbox();
-				hboxChooseAddition.setAlign("center");
-				hboxChooseAddition.setPack("end");
-				boxOi.appendChild(new Separator("horizontal"));
-				boxOi.appendChild(new Separator("horizontal"));
-				boxOi.appendChild(new Separator("horizontal"));
-				boxOi.appendChild(new Separator("horizontal"));
-				boxOi.appendChild(hboxChooseAddition);
-				
-				Button btnAddAddition = new Button("+");
-				btnAddAddition.setId("btnAddAddition" + oi.getProcessRunId().toString());
-				
-				btnAddAddition.addEventListener("onClick", new EventListener() {
+				//TODO: additions management testing is pending. sessions are unavailable on junit testing context
+				if (!SpringUtility.underTesting()) {
+					Hbox hboxChooseAddition = new Hbox();
+					hboxChooseAddition.setAlign("center");
+					hboxChooseAddition.setPack("end");
+					boxOi.appendChild(new Separator("horizontal"));
+					boxOi.appendChild(new Separator("horizontal"));
+					boxOi.appendChild(new Separator("horizontal"));
+					boxOi.appendChild(new Separator("horizontal"));
+					boxOi.appendChild(hboxChooseAddition);
+					
+					Map arg = new HashMap();
+					arg.put("additionSelectionViewModel", Executions.getCurrent().getSession().getAttribute("addition_selection_view_model"));
+					Executions.createComponents("/addition_combobox.zul", hboxChooseAddition, arg);
+					
+					Button btnAddAddition = new Button("+");
+					btnAddAddition.setId("btnAddAddition" + oi.getProcessRunId().toString());				
+					btnAddAddition.addEventListener("onClick", new EventListener() {
 
-					@Override
-					public void onEvent(Event event) throws Exception {
+						@Override
+						public void onEvent(Event event) throws Exception {
 
-						
-					}
-				});			
-				
-				hboxChooseAddition.appendChild(btnAddAddition);
+							Combobox cmbAddition = (Combobox) btnAddAddition.getParent().query("combobox");
+						}
+					});				
+					hboxChooseAddition.appendChild(btnAddAddition);
+				}
 			}
 		}
 	}

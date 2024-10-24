@@ -21,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(10)
 
-@Disabled
+//@Disabled
 
 class OO10_CostCenterTest_check_modifying extends CostCenterActionTest {
 

@@ -289,6 +289,14 @@ public class Product extends InventoryItem {
 					new ProductMapperWithStringId());
 	}
 	
+	public List<Object> getAdditionsWithUnitsForOrder() throws SQLException {
+		
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Product_getAdditionsWithStringIdForOrder\"(:loginname)",
+					getAllQueryNamedParameters, 
+					new ProductMapperWithStringId());
+	}
+	
 	public final class ProductExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
