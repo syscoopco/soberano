@@ -16,6 +16,7 @@ public class OrderItem {
 	private BigDecimal endedRuns;
 	private String currency;
 	private BigDecimal oneRunQuantity = new BigDecimal(0);
+	private Integer thisIsAnAdditionOf = null;
 	
 	public Integer getProcessRunId() {
 		return processRunId;
@@ -111,5 +112,13 @@ public class OrderItem {
 
 	public void setInventoryItemCode(String inventoryItemCode) {
 		this.inventoryItemCode = inventoryItemCode;
+	}
+
+	public Integer getThisIsAnAdditionOf() {
+		return thisIsAnAdditionOf;
+	}
+
+	public void setThisIsAnAdditionOf(Integer thisIsAnAdditionOf) {
+		this.thisIsAnAdditionOf = thisIsAnAdditionOf;
 	}
 }

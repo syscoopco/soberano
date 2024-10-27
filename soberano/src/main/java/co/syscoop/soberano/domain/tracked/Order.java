@@ -213,6 +213,7 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setDiscountedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("discountedRuns"));
 	        	orderItem.setEndedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("endedRuns"));	
 	        	orderItem.setCurrency(processRunId == 0 ? "" : rs.getString("currency"));
+	        	orderItem.setThisIsAnAdditionOf(rs.getInt("thisIsAnAdditionOf"));
 	        	
 	        	//currently it's prevented to change the system currency while some order is ongoing (RULE_CONSTRAINT_15), so
 	        	//order's process runs share the currency
@@ -303,6 +304,21 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("itemId", itemId);
 		parametersMap.put("description", description);
 		parametersMap.put("runs", runs);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer orderAddition(Integer itemId, Integer processRunId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_orderAddition\"(:orderId, "
+							+ "								:itemId, "
+							+ "								:processRunId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("itemId", itemId);
+		parametersMap.put("processRunId", processRunId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}

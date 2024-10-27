@@ -96,6 +96,8 @@ execute the following commands:
 	
 	listen_addresses = '*'
 	
+14.1) In file postgresql.conf, set isolation level to 'serializable'.
+	
 15) Enable connections from local host, by a proper database user (login role). This
 	is done by adding lines to pg_hba.conf file. For example:
 	

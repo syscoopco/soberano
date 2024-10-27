@@ -269,145 +269,147 @@
 		</dependency>
 				
 		<!-- ZK dependencies EE -->
+		<!-- TODO: ZKEE dependencies is commented due to a TypeError raises in spi.zul
+					when clicking on input, movement, or losses box of a spi row.-->
 		
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zcommon</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zel</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zhtml</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zk</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkbind</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkmax</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkplus</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkwebfragment</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zul</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zweb</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkex</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>breeze</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>iceblue</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>sapphire</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>silvertail</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>bsh</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>zk</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>${zkee.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zcommon</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zel</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zhtml</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zk</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zkbind</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zkmax</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zkplus</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zkwebfragment</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zul</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zweb</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>zkex</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk.theme</groupId> -->
+<!-- 			<artifactId>breeze</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk.theme</groupId> -->
+<!-- 			<artifactId>iceblue</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk.theme</groupId> -->
+<!-- 			<artifactId>sapphire</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk.theme</groupId> -->
+<!-- 			<artifactId>silvertail</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>jasperreports</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>zk</groupId> -->
+<!-- 			<artifactId>bsh</artifactId> -->
+<!-- 			<version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>zk</groupId> -->
+<!-- 		    <artifactId>guava</artifactId> -->
+<!-- 		    <version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
 		
 		<!-- Zk CE -->
 		
-<!-- 		<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>breeze</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 	  	</dependency> -->
-<!-- 	  	<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>atlantic</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>sapphire</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>silvertail</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.zkoss.zk</groupId> -->
-<!-- 		    <artifactId>zk</artifactId> -->
-<!-- 		    <version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.zkoss.common</groupId> -->
-<!-- 		    <artifactId>zcommon</artifactId> -->
-<!-- 		    <version>${zk.version}</version> -->
-<!-- 		</dependency>	 -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zkbind</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zkplus</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zhtml</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
+		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>breeze</artifactId>
+		  	<version>${zk.version}</version>
+	  	</dependency>
+	  	<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>atlantic</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>sapphire</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.zkoss.theme</groupId>
+		  	<artifactId>silvertail</artifactId>
+		  	<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.zkoss.zk</groupId>
+		    <artifactId>zk</artifactId>
+		    <version>${zk.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.zkoss.common</groupId>
+		    <artifactId>zcommon</artifactId>
+		    <version>${zk.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkbind</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zkplus</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.zkoss.zk</groupId>
+			<artifactId>zhtml</artifactId>
+			<version>${zk.version}</version>
+		</dependency>
 		 
 		<!-- ZATS MIMIC for ZK web application testing  --> 
 		 
