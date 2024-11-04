@@ -63,6 +63,9 @@ public class Order extends BusinessActivityTrackedObject {
 	//the key is a category + a description 
 	private HashMap<String, ArrayList<OrderItem>> orderItems = new HashMap<String, ArrayList<OrderItem>>();
 	
+	//additions
+	private ArrayList<OrderItem> additions = new ArrayList<OrderItem>();
+	
 	public Order(Integer id,
 				String label,
 				String counters,
@@ -191,14 +194,22 @@ public class Order extends BusinessActivityTrackedObject {
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
 	        		descriptionCurrentlyBeingExtracted = null;
-	        		order.getCategories().add(categoryCurrentlyBeingExtracted);
-	        		order.getDescriptions().put(categoryCurrentlyBeingExtracted, new ArrayList<String>());
-	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted, new ArrayList<OrderItem>());
+	        		
+	        		//addition categories are ignored
+	        		if (!(rs.getInt("thisIsAnAdditionOf") > 0)) {
+	        			order.getCategories().add(categoryCurrentlyBeingExtracted);
+		        		order.getDescriptions().put(categoryCurrentlyBeingExtracted, new ArrayList<String>());
+		        		order.getOrderItems().put(categoryCurrentlyBeingExtracted, new ArrayList<OrderItem>());
+	        		}
 	        	}
 	        	if (descriptionCurrentlyBeingExtracted == null || !descriptionCurrentlyBeingExtracted.equals(rs.getString("description"))) {
-	        		descriptionCurrentlyBeingExtracted = rs.getString("description");
-	        		order.getDescriptions().get(categoryCurrentlyBeingExtracted).add(descriptionCurrentlyBeingExtracted);	        		
-	        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());   
+	        		
+	        		//addition descriptions are ignored
+	        		if (!(rs.getInt("thisIsAnAdditionOf") > 0)) {
+	        			descriptionCurrentlyBeingExtracted = rs.getString("description");
+		        		order.getDescriptions().get(categoryCurrentlyBeingExtracted).add(descriptionCurrentlyBeingExtracted);	        		
+		        		order.getOrderItems().put(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted, new ArrayList<OrderItem>());
+	        		}
 	        	}
 	        	OrderItem orderItem = new OrderItem();
 	        	Integer processRunId = rs.getInt("processRunId");
@@ -214,13 +225,17 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setEndedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("endedRuns"));	
 	        	orderItem.setCurrency(processRunId == 0 ? "" : rs.getString("currency"));
 	        	orderItem.setThisIsAnAdditionOf(rs.getInt("thisIsAnAdditionOf"));
+	        	if (rs.getInt("thisIsAnAdditionOf") > 0) {order.getAdditions().add(orderItem);} 
 	        	
 	        	//currently it's prevented to change the system currency while some order is ongoing (RULE_CONSTRAINT_15), so
 	        	//order's process runs share the currency
 	        	order.setCurrencyCode(orderItem.getCurrency());
 	        	
 	        	orderItem.setOneRunQuantity(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("oneRunQuantity"));
-	        	order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
+	        	
+	        	if (!(rs.getInt("thisIsAnAdditionOf") > 0)) {
+	        		order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
+	        	}	        	
 	        }
 	        return order;
 		}
@@ -289,6 +304,7 @@ public class Order extends BusinessActivityTrackedObject {
 		setOrderItems((sourceOrder).getOrderItems());
 		deliveryContactData = new ContactData(sourceOrder.getDeliveryContactData());
 		setPrinterProfile((sourceOrder).getPrinterProfile());
+		setAdditions((sourceOrder).getAdditions());
 	}
 	
 	public Integer make(Integer itemId, String description, BigDecimal runs) throws Exception {
@@ -338,6 +354,19 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("processRunId", processRunId);
 		parametersMap.put("inventoryItemCode", inventoryItemCode);
 		parametersMap.put("runsToCancel", runsToCancel);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer cancelAddition(Integer processRunId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_cancelAddition\"(:lang, "
+							+ "								:processRunId, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("processRunId", processRunId);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
@@ -816,5 +845,13 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setDeliveryContactData(ContactData deliveryContactData) {
 		this.deliveryContactData = deliveryContactData;
+	}
+
+	public ArrayList<OrderItem> getAdditions() {
+		return additions;
+	}
+
+	public void setAdditions(ArrayList<OrderItem> additions) {
+		this.additions = additions;
 	}
 }

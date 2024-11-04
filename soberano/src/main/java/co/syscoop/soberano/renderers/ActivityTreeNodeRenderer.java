@@ -75,7 +75,9 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 								vboxOrderItems.getChildren().clear();
 								OrderFormHelper.renderOrderItems(order, 
 																vboxOrderItems, 
-																true);
+																true,
+																boxDetails);
+								OrderFormHelper.renderAdditions(order);
 							}
 							else {
 								Vbox vbox = new Vbox();

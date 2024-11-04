@@ -2,25 +2,16 @@ package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.util.HashMap;
-
-import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
-import org.zkoss.zul.Div;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
-import org.zkoss.zul.Window;
-
 import co.syscoop.soberano.domain.tracked.Unit;
-import co.syscoop.soberano.domain.tracked.Order;
-import co.syscoop.soberano.domain.tracked.ProcessRun;
-import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
@@ -177,7 +168,6 @@ public class OrderManagementComposer extends OrderComposer {
 		}
     }
 	
-	@SuppressWarnings("unchecked")
 	@Listen("onClick = button#btnMake")
     public void btnMake_onClick() throws SoberanoException {
 		
@@ -192,79 +182,8 @@ public class OrderManagementComposer extends OrderComposer {
 					throw new NotEnoughRightsException();						
 				}
 				else {
-					//there's not ZK web application context under testing
-					if (!SpringUtility.underTesting()) {
-						
-						//print order's process run allocations
-						try {
-							Integer orderId = intObjectId.getValue();
-							for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(orderId)) {
-								try{
-									Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
-									Integer productionLineId = ((ProcessRunOutputAllocation) object).getProductionLineId();
-									
-									//print allocation only in case it wasn't printed yet
-									HashMap<Integer, HashMap<Integer, Boolean>> thisOrderPrintedAllocations = 
-											((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
-																								getCurrent().
-																								getDesktop().
-																								getWebApp().
-																								getAttribute("printed_allocations")).
-																									get(orderId);
-									
-									//order hasn't been collected. it's still open.
-									if (thisOrderPrintedAllocations != null) {										
-										HashMap<Integer, Boolean> productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
-										
-										if (productionLineAllocations == null) {
-											thisOrderPrintedAllocations.put(productionLineId, new HashMap<Integer, Boolean>());
-											productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
-										}
-										
-										Boolean allocationWasPrinted = 
-												productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
-										
-										//allocation was not printed yet
-										if (!allocationWasPrinted) {
-											/* TODO: global setting to enable this code to print allocations: one by one on making request. 
-											Printer.printReport((ProcessRunOutputAllocation) object, 
-													SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
-													"records/production_lines/" + 
-													"ALLOCATION_" + allocationId + ".pdf",
-													"ALLOCATION_",
-													true,
-													true,
-													true);
-											productionLineAllocations.put(allocationId, true);
-											*/											
-										}																			
-									}
-								}
-								catch(Exception ex) {
-									throw ex;
-								}
-							}
-						}
-						catch(Exception ex) {
-							throw ex;
-						}
-					}				
-					Order order = new Order(intObjectId.getValue());
-					order.get();
-					Window wndContentPanel = (Window) boxDetails.query("#wndContentPanel");
-					OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
-					Vbox vboxOrderItems = (Vbox) boxDetails.query("#wndOrderItems").query("#divOrderItems").query("#vboxOrderItems");
-					if (vboxOrderItems == null) {
-						vboxOrderItems = new Vbox();
-						vboxOrderItems.setId("vboxOrderItems");
-						vboxOrderItems.setHflex("1");
-						Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
-						divOrderItems.appendChild(vboxOrderItems);
-					}
-					vboxOrderItems.getChildren().clear();
-					OrderFormHelper.renderOrderItems(order, 
-													vboxOrderItems, 
-													true);
+					Integer orderId = intObjectId.getValue();
+					OrderFormHelper.updateForm(orderId, boxDetails);
 					btnDec.setDisabled(true);
 					cmbItemToOrder.setSelectedItem(null);
 					txtQuantityExpression.setValue("0");
