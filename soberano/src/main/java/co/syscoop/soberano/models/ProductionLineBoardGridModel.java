@@ -38,7 +38,7 @@ public class ProductionLineBoardGridModel extends SoberanoAbstractListModel<Obje
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = new ProcessRunOutputAllocation(productionLineId).getAll(_orderBy == null?"allocationId":_orderBy,
+				_cache = new ProcessRunOutputAllocation(productionLineId).getAll(_orderBy == null?"processRunIdPair":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 

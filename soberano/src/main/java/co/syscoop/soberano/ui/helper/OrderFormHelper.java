@@ -303,7 +303,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static void renderAdditionItems(OrderItem oi, Order order) {
+	private static void renderAdditionItems(OrderItem oi, Order order, Window wndContentPanel) {
 		
 		ConfirmationOrderTreeitem parentProcessRunTreeitem = (ConfirmationOrderTreeitem) parentProcessRunTreeitems.get(oi.getThisIsAnAdditionOf().toString());
 		Treechildren parentProcessRunTreechildren = (Treechildren) parentProcessRunTreeitem.query("treechildren");		
@@ -332,6 +332,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					try {
 						order.cancelAddition(oi.getProcessRunId());
+						event.getTarget().getParent().getParent().detach();
+						OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
 					}
 					catch(NotEnoughRightsException ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -865,9 +867,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 	}
 	
-	public static void renderAdditions(Order order) {
+	public static void renderAdditions(Order order, Window wndContentPanel) {
 		for (OrderItem oi : order.getAdditions()) {
-			renderAdditionItems(oi, order);
+			renderAdditionItems(oi, order, wndContentPanel);
 		}
 	}
 	
@@ -947,7 +949,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 										vboxOrderItems, 
 										true,
 										boxDetails);
-		OrderFormHelper.renderAdditions(order);
+		OrderFormHelper.renderAdditions(order, wndContentPanel);
 	}
 	
 	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement, Vbox boxDetails) throws Exception {
@@ -957,7 +959,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		vbox.setId("vboxOrderItems");
 		vbox.setHflex("1");
 		OrderFormHelper.renderOrderItems(order, vbox, itsForManagement, boxDetails);
-		renderAdditions(order);
+		renderAdditions(order, wndContentPanel);
 		Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
 		divOrderItems.appendChild(vbox);
 	}

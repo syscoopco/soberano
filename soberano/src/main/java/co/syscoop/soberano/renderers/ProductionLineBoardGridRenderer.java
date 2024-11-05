@@ -51,6 +51,9 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		//order column
 		row.appendChild(new Label(plbRowData.getAllocationOrder()));
 		
+		//process run and its parent in case it is an addition
+		row.appendChild(new Label(plbRowData.getProcessRunIdPair()));
+		
 		//action column
 		Vbox actionCell = new Vbox();
 		actionCell.setHflex("1");

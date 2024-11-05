@@ -14,6 +14,7 @@ public class ProductionLineBoardRowData {
 	private String allocationOrder = "";
 	private ActionRequested actionRequested = ActionRequested.NONE;
 	private boolean confirmationRequested = false;
+	private String processRunIdPair = "";
 	
 	public Integer getAllocationId() {
 		return allocationId;
@@ -97,5 +98,13 @@ public class ProductionLineBoardRowData {
 		actionRequested = ActionRequested.NONE;
 		confirmationRequested = false;
 		row.setStyle("background-color:transparent;");
+	}
+
+	public String getProcessRunIdPair() {
+		return processRunIdPair;
+	}
+
+	public void setProcessRunIdPair(String processRunIdPair) {
+		this.processRunIdPair = processRunIdPair;
 	}
 }

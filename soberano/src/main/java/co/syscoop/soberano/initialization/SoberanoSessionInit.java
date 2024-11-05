@@ -60,8 +60,8 @@ public class SoberanoSessionInit implements SessionInit {
 			ExceptionTreatment.log(ex);
 		}
 		
-		sess.setAttribute("production_line_board_grid_order_column", "allocationId");
-		sess.setAttribute("production_line_board_grid_sort_direction", "ASC");
+		sess.setAttribute("production_line_board_grid_order_column", "processRunIdPair");
+		sess.setAttribute("production_line_board_grid_sort_direction", "DESC");
 		sess.setAttribute("addition_selection_view_model", new AdditionSelectionForOrderViewModel());
 	}	
 }
