@@ -100,6 +100,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		return (new ProductionLine(0,
 									0,
 									((Textbox) incDetails.query("#txtName")).getValue(),
+									0,
 									objectUsingThisIds,
 									objectUsingThisNames)).record();
 	}
@@ -113,6 +114,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		super.setTrackedObject(new ProductionLine(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 												0,
 												((Textbox) incDetails.query("#txtName")).getValue(),
+												0,
 												objectUsingThisIds,
 												objectUsingThisNames));
 		return super.getTrackedObject().modify();

@@ -54,6 +54,12 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		//process run and its parent in case it is an addition
 		row.appendChild(new Label(plbRowData.getProcessRunIdPair()));
 		
+		//mark addition rows
+		Integer delimiterIdx = plbRowData.getProcessRunIdPair().indexOf(":");
+		if (!plbRowData.getProcessRunIdPair().substring(delimiterIdx + 1).equals(plbRowData.getProcessRunIdPair().substring(0, delimiterIdx))) {
+			row.setStyle("background-color:lime;");
+		}
+		
 		//action column
 		Vbox actionCell = new Vbox();
 		actionCell.setHflex("1");

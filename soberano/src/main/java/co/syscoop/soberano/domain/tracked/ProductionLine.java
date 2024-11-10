@@ -32,19 +32,23 @@ public class ProductionLine extends TrackedObject {
 	
 	public ProductionLine(Integer id, 
 			Integer entityTypeInstanceId, 
-			String name) {
+			String name,
+			Integer printerProfile) {
 		super(id, entityTypeInstanceId, name);
 		this.setQualifiedName(name);
+		this.setPrinterProfile(printerProfile);
 	}
 	
 	public ProductionLine(Integer id, 
 			Integer entityTypeInstanceId, 
 			String name,
+			Integer printerProfile,
 			ArrayList<Integer> objectUsingThisIds,
 			ArrayList<String> objectUsingThisQualifiedNames) {
 		this(id, 
 			entityTypeInstanceId, 
-			name);	
+			name,
+			printerProfile);	
 		this.objectUsingThisIds = objectUsingThisIds;
 		this.objectUsingThisQualifiedNames = objectUsingThisQualifiedNames;
 	}
@@ -112,7 +116,8 @@ public class ProductionLine extends TrackedObject {
 				if (!rs.wasNull()) {
 					productionLine = new ProductionLine(id,
 														rs.getInt("entityTypeInstanceId"), 
-														rs.getString("productionLineName"));
+														rs.getString("productionLineName"),
+														rs.getInt("printerProfile"));
 				}
 				return productionLine;
 			}
@@ -150,6 +155,7 @@ public class ProductionLine extends TrackedObject {
 		setEntityTypeInstanceId(sourceProductionLine.getEntityTypeInstanceId());
 		setName(sourceProductionLine.getName());
 		setQualifiedName(sourceProductionLine.getQualifiedName());
+		setPrinterProfile(sourceProductionLine.getPrinterProfile());
 		setObjectUsingThisIds(sourceProductionLine.getObjectUsingThisIds());
 		setObjectUsingThisQualifiedNames(sourceProductionLine.getObjectUsingThisQualifiedNames());
 	}

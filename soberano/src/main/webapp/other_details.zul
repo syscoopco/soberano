@@ -25,7 +25,7 @@
 		<separator></separator>
 		<checkbox id="chkCompensateDeliveryProviderRates" checked="false" label="${labels.caption.field.compensateDeliveryProviderRates}" sclass="Caption"></checkbox>
 		<separator></separator>
-		<checkbox id="chkDoNotSellInCaseOfStockZero" checked="false" label="${labels.caption.field.doNotSellInCaseOfStockZero}" sclass="Caption"></checkbox>
+		<checkbox disabled="true" id="chkDoNotSellInCaseOfStockZero" checked="false" label="${labels.caption.field.doNotSellInCaseOfStockZero}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkGroupProcessRunOutputAllocations" checked="false" label="${labels.caption.field.groupProcessRunOutputAllocations}" sclass="Caption"></checkbox>
 	</vbox>

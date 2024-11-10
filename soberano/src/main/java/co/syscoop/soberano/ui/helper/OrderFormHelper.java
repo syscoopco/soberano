@@ -34,8 +34,6 @@ import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Order;
-import co.syscoop.soberano.domain.tracked.ProcessRun;
-import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
 import co.syscoop.soberano.enums.Stage;
@@ -873,65 +871,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static void updateForm(Integer orderId, Vbox boxDetails) throws Exception {		
 
-		//there's not ZK web application context under testing
-		if (!SpringUtility.underTesting()) {
-			
-			//print order's process run allocations
-			try {
-				for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(orderId)) {
-					try{
-						Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
-						Integer productionLineId = ((ProcessRunOutputAllocation) object).getProductionLineId();
-						
-						//print allocation only in case it wasn't printed yet
-						HashMap<Integer, HashMap<Integer, Boolean>> thisOrderPrintedAllocations = 
-								((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
-																					getCurrent().
-																					getDesktop().
-																					getWebApp().
-																					getAttribute("printed_allocations")).
-																						get(orderId);
-						
-						//order hasn't been collected. it's still open.
-						if (thisOrderPrintedAllocations != null) {										
-							HashMap<Integer, Boolean> productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
-							
-							if (productionLineAllocations == null) {
-								thisOrderPrintedAllocations.put(productionLineId, new HashMap<Integer, Boolean>());
-								productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
-							}
-							
-							Boolean allocationWasPrinted = 
-									productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
-							
-							//allocation was not printed yet
-							if (!allocationWasPrinted) {
-								/* TODO: global setting to enable this code to print allocations: one by one on making request. 
-								Printer.printReport((ProcessRunOutputAllocation) object, 
-										SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
-										"records/production_lines/" + 
-										"ALLOCATION_" + allocationId + ".pdf",
-										"ALLOCATION_",
-										true,
-										true,
-										true);
-								productionLineAllocations.put(allocationId, true);
-								*/											
-							}																			
-						}
-					}
-					catch(Exception ex) {
-						throw ex;
-					}
-				}
-			}
-			catch(Exception ex) {
-				throw ex;
-			}
-		}				
 		Order order = new Order(orderId);
 		order.get();
 		Window wndContentPanel = (Window) boxDetails.query("#wndContentPanel");

@@ -1,6 +1,7 @@
 package co.syscoop.soberano.composers;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import org.zkoss.zk.ui.Component;
@@ -13,10 +14,10 @@ import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Vbox;
 
-import co.syscoop.soberano.domain.tracked.CashRegister;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
+import co.syscoop.soberano.domain.tracked.ProductionLine;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
@@ -73,8 +74,11 @@ public class ProduceButtonComposer extends SelectorComposer {
 					"ORDER_" + orderId + "_ALLOCATIONS" + ".pdf");
 			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-			String textToprint = orderId + " | " + order.getCountersStr() + " | " + dateFormat.format(new Date()) + "\n\n";
 			
+			String header = orderId + " | " + order.getCountersStr() + " | " + dateFormat.format(new Date()) + "\n\n";
+									
+			ArrayList<Integer> productionLineIds = new ArrayList<>();
+			HashMap<Integer, String> textsToPrint = new HashMap<Integer, String>();
 			if (!SpringUtility.underTesting()) {
 				
 				//print order's process run allocations
@@ -83,6 +87,8 @@ public class ProduceButtonComposer extends SelectorComposer {
 						try{
 							Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
 							Integer productionLineId = ((ProcessRunOutputAllocation) object).getProductionLineId();
+							if (productionLineIds.indexOf(productionLineId) == -1) productionLineIds.add(productionLineId);
+							
 							String description = ((ProcessRunOutputAllocation) object).getDescription();
 							String itemName = ((ProcessRunOutputAllocation) object).getItemName();
 							
@@ -108,13 +114,31 @@ public class ProduceButtonComposer extends SelectorComposer {
 										productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
 								
 								//allocation was not printed yet
-								if (!allocationWasPrinted) {									
-									if (!description.isEmpty()) {
-										textToprint = textToprint + description + "\n";
+								if (!allocationWasPrinted || allocationId == 0) {
+									
+									//allocations grouped
+									if (allocationId == 0) {
+										
+										//only allocations of the order printing was requested (btnProduce pushed)
+										if (((ProcessRunOutputAllocation) object).getOrderId().equals(orderId)) {
+											if (textsToPrint.get(productionLineId) == null) {
+												textsToPrint.put(productionLineId, header + description + "\n");
+											}
+										}
 									}
-									textToprint = textToprint + itemName + "\n\n";						
-									productionLineAllocations.put(allocationId, true);
-								}																			
+									else {
+										if (textsToPrint.get(productionLineId) == null) {
+											textsToPrint.put(productionLineId, header + "\n");
+										}
+										
+										if (!description.isEmpty()) {											
+											textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + description + "\n");
+										}
+									}
+									
+									productionLineAllocations.put(allocationId, true);							
+									textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + itemName + "\n\n");
+								}
 							}
 						}
 						catch(Exception ex) {
@@ -127,12 +151,14 @@ public class ProduceButtonComposer extends SelectorComposer {
 				}
 			}
 			
-			CashRegister cashRegister = new CashRegister(1);
-			cashRegister.get();			
-			Printer.print(Translator.translate(textToprint),
-												cashRegister, //order, 
-												fileToPrintFullPath,
-												true);
+			for (Integer plId : productionLineIds) {
+				ProductionLine productionLine = new ProductionLine(plId);
+				productionLine.get();
+				Printer.print(Translator.translate(textsToPrint.get(plId) != null ? textsToPrint.get(plId) : ""),
+							productionLine,
+							fileToPrintFullPath + "-" + plId.toString(),
+							true);
+			}
 		}
 		catch(Exception ex)	{
 			ExceptionTreatment.logAndShow(ex, 

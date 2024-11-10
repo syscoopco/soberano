@@ -23,7 +23,7 @@
 					</column>
 					<column align="right" label="${labels.pageProductionLineBoard.grid.Order}" sort="auto(allocationOrder)">
 					</column>
-					<column align="right" label="${labels.pageProductionLineBoard.grid.ProcessRun}" sort="auto(processRunIdPair)" sortDirection="descending">
+					<column align="right" label="${labels.pageProductionLineBoard.grid.ProcessRun}" sort="auto(processRunIdPair)" sortDirection="ascending">
 					</column>
 					<column align="center" label="${labels.pageProductionLineBoard.grid.Action}">
 					</column>

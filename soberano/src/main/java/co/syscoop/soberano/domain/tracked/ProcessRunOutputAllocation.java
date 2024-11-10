@@ -19,6 +19,7 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 	private Integer productionLineId = 0;
 	private String description = "";
 	private String itemName = "";
+	private Integer orderId = 0;
 	
 	public Integer getProductionLineId() {
 		return productionLineId;
@@ -134,5 +135,13 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 }
