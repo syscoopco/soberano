@@ -14,6 +14,7 @@ public class CustomerTreeNodeRenderer extends DomainObjectTreeNodeRenderer {
 
 	public CustomerTreeNodeRenderer(String pageToRefreshZulURI) {
 		super(pageToRefreshZulURI);
+		super.setDontDetachAnItemWhenDisablingIt(true);
 	}
 
 	@Override

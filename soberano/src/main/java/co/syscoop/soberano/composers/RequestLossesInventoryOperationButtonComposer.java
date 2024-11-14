@@ -12,13 +12,14 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Popup;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.InventoryItem;
 import co.syscoop.soberano.domain.tracked.InventoryOperation;
@@ -58,6 +59,9 @@ public class RequestLossesInventoryOperationButtonComposer extends SPICellButton
 	@Wire
 	private Intbox intAcquirableMaterialId;
 	
+	@Wire
+	private Button btnLossesRequest;
+	
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
@@ -74,16 +78,12 @@ public class RequestLossesInventoryOperationButtonComposer extends SPICellButton
 			inventoryItems.add(new InventoryItem(lblLossesItemId.getValue(), ""));
 			units.add(new Unit(intLossesUnitId.getValue()));
 			
-//			quantities.add(decLossesQuantity.getValue().compareTo(decLossesCurrentQuantity.getValue()) > 0 
-//							? decLossesQuantity.getValue().subtract(decLossesCurrentQuantity.getValue())
-//							: new BigDecimal(0));
-			
-			quantities.add(decLossesQuantity.getValue().compareTo(new BigDecimal(0)) > 0 
-					? decLossesQuantity.getValue() 
-					: new BigDecimal(0));
+			quantities.add(decLossesQuantity.getValue() != null ? 
+								decLossesQuantity.getValue().compareTo(new BigDecimal(0)) > 0 ? decLossesQuantity.getValue() : new BigDecimal(0) 
+																: new BigDecimal(0));
 			
 			if (cmbLossesToWarehouse.getSelectedItem() == null || cmbLossesWorker.getSelectedItem() == null) {
-				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				((Window) btnLossesRequest.getParent().getParent().getParent()).detach();
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
@@ -91,17 +91,14 @@ public class RequestLossesInventoryOperationButtonComposer extends SPICellButton
 					throw new SameWarehouseException();
 				}
 				
-				Datebox dateShift = (Datebox) intAcquirableMaterialId.getParent().getParent().
-																	getParent().getParent().
-																	getParent().getParent().
-																	getParent().query("#dateShift");
+				Datebox dateShift = (Datebox) btnLossesRequest.getParent().getParent().getParent().getParent().query("#dateShift");
 				Integer qryResult = (new InventoryOperation(intLossesFromWarehouse.getValue(),
 															((DomainObject) cmbLossesToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbLossesWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
 															quantities)).request(dateShift.getText());
-				((Popup) cmbLossesToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				((Window) btnLossesRequest.getParent().getParent().getParent()).detach();
 				if (qryResult == -1) {
 					throw new NotEnoughRightsException();
 				}
@@ -114,12 +111,7 @@ public class RequestLossesInventoryOperationButtonComposer extends SPICellButton
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
-				updateSPIRow(intAcquirableMaterialId);
-				
-//				((Button) cmbLossesToWarehouse.getParent().getParent().getParent().getParent()
-//						.getParent().getParent().getParent().getParent()
-//						.getParent().getParent()
-//						.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
+				updateSPIRow((Combobox) dateShift.query("#cmbWarehouse"), intAcquirableMaterialId);
 			}
 		}
 		catch(CannotAcquireLockException ex) {

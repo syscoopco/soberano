@@ -11,13 +11,14 @@ import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
+import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Messagebox;
-import org.zkoss.zul.Popup;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.InventoryItem;
 import co.syscoop.soberano.domain.tracked.InventoryOperation;
@@ -57,6 +58,9 @@ public class RequestMovementInventoryOperationButtonComposer extends SPICellButt
 	@Wire
 	private Intbox intAcquirableMaterialId;
 	
+	@Wire
+	private Button btnMovementRequest;
+	
 	@Listen("onClick = button#btnMovementRequest")
     public void btnMovementRequest_onClick() throws Exception {
 		
@@ -68,16 +72,12 @@ public class RequestMovementInventoryOperationButtonComposer extends SPICellButt
 			inventoryItems.add(new InventoryItem(lblMovementItemId.getValue(), ""));
 			units.add(new Unit(intMovementUnitId.getValue()));
 			
-//			quantities.add(decMovementQuantity.getValue().compareTo(decMovementCurrentQuantity.getValue()) > 0 
-//							? decMovementQuantity.getValue().subtract(decMovementCurrentQuantity.getValue())
-//							: new BigDecimal(0));
-			
-			quantities.add(decMovementQuantity.getValue().compareTo(new BigDecimal(0)) > 0 
-					? decMovementQuantity.getValue() 
-					: new BigDecimal(0));
+			quantities.add(decMovementQuantity.getValue() != null ? 
+								decMovementQuantity.getValue().compareTo(new BigDecimal(0)) > 0 ? decMovementQuantity.getValue() : new BigDecimal(0) 
+																: new BigDecimal(0));
 			
 			if (cmbMovementToWarehouse.getSelectedItem() == null || cmbMovementWorker.getSelectedItem() == null) {
-				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				((Window) btnMovementRequest.getParent().getParent().getParent()).detach();
 				throw new SomeFieldsContainWrongValuesException(); 
 			}
 			else {
@@ -85,17 +85,14 @@ public class RequestMovementInventoryOperationButtonComposer extends SPICellButt
 					throw new SameWarehouseException();
 				}
 				
-				Datebox dateShift = (Datebox) intAcquirableMaterialId.getParent().getParent().
-																	getParent().getParent().
-																	getParent().getParent().
-																	getParent().query("#dateShift");
+				Datebox dateShift = (Datebox) btnMovementRequest.getParent().getParent().getParent().getParent().query("#dateShift");
 				Integer qryResult = (new InventoryOperation(intMovementFromWarehouse.getValue(),
 															((DomainObject) cmbMovementToWarehouse.getSelectedItem().getValue()).getId(),
 															((DomainObject) cmbMovementWorker.getSelectedItem().getValue()).getId(),
 															inventoryItems,
 															units,
 															quantities)).request(dateShift.getText());
-				((Popup) cmbMovementToWarehouse.getParent().getParent().getParent().getParent().query("popup")).close();
+				((Window) btnMovementRequest.getParent().getParent().getParent()).detach();
 				if (qryResult == -1) {
 					throw new NotEnoughRightsException();
 				}
@@ -108,12 +105,7 @@ public class RequestMovementInventoryOperationButtonComposer extends SPICellButt
 				else if (qryResult == -4) {
 					throw new SomeFieldsContainWrongValuesException();
 				}
-				updateSPIRow(intAcquirableMaterialId);
-				
-//				((Button) cmbMovementToWarehouse.getParent().getParent().getParent().getParent()
-//						.getParent().getParent().getParent().getParent()
-//						.getParent().getParent()
-//						.query("north").query("hlayout").query("#btnAlert")).setVisible(true);
+				updateSPIRow((Combobox) dateShift.query("#cmbWarehouse"), intAcquirableMaterialId);
 			}
 		}
 		catch(CannotAcquireLockException ex) {

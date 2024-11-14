@@ -9,8 +9,8 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Intbox;
-import org.zkoss.zul.Popup;
 import org.zkoss.zul.Row;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.database.relational.SPIExtractor;
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -26,12 +26,8 @@ public class SPICellButtonComposer extends SelectorComposer {
           super.doAfterCompose(comp);
     }
 	
-	protected void updateSPIRow(Intbox intAcquirableMaterialId) throws Exception, SQLException {
+	protected void updateSPIRow(Combobox cmbWarehouse, Intbox intAcquirableMaterialId) throws Exception, SQLException {
 		
-		Combobox cmbWarehouse = (Combobox) intAcquirableMaterialId.getParent().getParent().
-														getParent().getParent().
-														getParent().getParent().
-														getParent().query("#cmbWarehouse");
 		Datebox dateShift = (Datebox) cmbWarehouse.query("#dateShift");
 		Checkbox chkWithOpeningStock = (Checkbox) cmbWarehouse.query("#chkWithOpeningStock");
 		Checkbox chkWithStockOnClosure = (Checkbox) cmbWarehouse.query("#chkWithStockOnClosure");
@@ -47,7 +43,7 @@ public class SPICellButtonComposer extends SelectorComposer {
 								chkSurplus.isChecked(),
 								"")).getAll("inventoryItemName", true, 1, 0, new SPIExtractor()).get(0);
 		
-		Row spiRow = (Row) ((Popup) intAcquirableMaterialId.getParent().getParent().getParent().getParent().query("popup")).getAttribute("SPIRow");
+		Row spiRow = (Row) ((Window) intAcquirableMaterialId.getParent().getParent().getParent()).getAttribute("SPIRow");
 		((Decimalbox) spiRow.getChildren().get(4)).setValue(spi.getOpening());
 		((Decimalbox) spiRow.getChildren().get(5)).setValue(spi.getInput());
 		((Decimalbox) spiRow.getChildren().get(6)).setValue(spi.getLosses());

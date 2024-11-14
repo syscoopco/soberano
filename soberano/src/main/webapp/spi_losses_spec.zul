@@ -1,0 +1,37 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window hflex="min" height="300px" contentStyle="overflow:auto" closable="true" title="${labels.spi.LossesSpecification}" mode="modal">
+		<vbox hflex="1" height="300px">
+			<hbox hflex="1" vflex="min">
+				<label id="lblLossesItem" value="${arg.lossesItemName}"/>
+				<label id="lblLossesItemId" visible="false" value="${arg.lossesItemId}"/>
+				<separator></separator>
+				<intbox id="intLossesUnitId" visible="false" value="${arg.lossesItemUnitId}"/>
+				<label id="lblLossesUnit" value="${arg.lossesItemUnitName}"/>
+				<intbox id="intAcquirableMaterialId" visible="false" value="${arg.lossesAcquirableMaterialId}"/>
+			</hbox>
+			<intbox id="intLossesFromWarehouse" visible="false" value="${arg.lossesFromWarehouse}"/>			
+			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.LossesWarehouseSelectionViewModel')">
+				<combobox id="cmbLossesToWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.to}">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>
+			</hbox>
+			<decimalbox format="####.########" scale="8" id="decLossesQuantity" hflex="1" placeholder="${labels.placeholder.quantity}" constraint="no negative"/>
+			<decimalbox visible="false" id="decLossesCurrentQuantity"/>
+			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WorkerSelectionViewModelForSPI')">
+				<combobox id="cmbLossesWorker" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.worker}">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>		
+			</hbox>
+			<hbox hflex="1" align="center" pack="center">
+				<button id="btnLossesRequest" label="${labels.caption.action.request}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RequestLossesInventoryOperationButtonComposer"></button>
+			</hbox>
+		</vbox>
+	</window>
+</zk>

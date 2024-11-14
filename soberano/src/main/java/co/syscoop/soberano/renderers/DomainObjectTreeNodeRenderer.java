@@ -27,6 +27,8 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 	@SuppressWarnings("unused")
 	private String pageToRefreshZulURI = "";
 	
+	private Boolean setDontDetachAnItemWhenDisablingIt = false;
+	
 	private HashMap<Treeitem, ActionRequested> requestedActions = new HashMap<Treeitem, ActionRequested>();
 	
 	public DomainObjectTreeNodeRenderer(String pageToRefreshZulURI) {
@@ -109,7 +111,14 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 							((Button) item.query("#wndShowingAll").getParent().getParent().getParent().getParent().query("south").getParent().getParent().query("#incSouth").query("#btnApply")).setDisabled(true);
 							
 							//remove the treeitem
-							item.detach();
+							if (setDontDetachAnItemWhenDisablingIt) {
+								
+								//in cases of huge amount of items, detaching (rerendering) is costly. so, just color the treecell background
+								((Treecell) item.query("treecell")).setStyle("background-color:red;");
+							}
+							else {
+								item.detach();
+							}
 						}
 					}
 					else {
@@ -134,5 +143,13 @@ public abstract class DomainObjectTreeNodeRenderer implements TreeitemRenderer<D
 	public void cancelRequestedAction(Treeitem item) {
 		requestedActions.remove(item);
 		((Treecell) item.query("treecell")).setStyle("background-color:transparent;");
+	}
+
+	public Boolean getDontDetachAnItemWhenDisablingIt() {
+		return setDontDetachAnItemWhenDisablingIt;
+	}
+
+	public void setDontDetachAnItemWhenDisablingIt(Boolean dontDetachAnItemWhenDisablingIt) {
+		this.setDontDetachAnItemWhenDisablingIt = dontDetachAnItemWhenDisablingIt;
 	}
 }
