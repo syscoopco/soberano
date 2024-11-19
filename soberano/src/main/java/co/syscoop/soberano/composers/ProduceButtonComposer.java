@@ -157,7 +157,10 @@ public class ProduceButtonComposer extends SelectorComposer {
 				Printer.print(Translator.translate(textsToPrint.get(plId) != null ? textsToPrint.get(plId) : ""),
 							productionLine,
 							fileToPrintFullPath + "-" + plId.toString(),
-							true);
+							false /*true better to use computer printer 
+									settings to control feeds or blank 
+									lines printing at the end of page 
+									or document*/);
 			}
 		}
 		catch(Exception ex)	{
