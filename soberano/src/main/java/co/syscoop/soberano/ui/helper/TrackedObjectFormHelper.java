@@ -29,7 +29,7 @@ public abstract class TrackedObjectFormHelper {
 		
 		//selected item is null when the object is loaded with an id passed
 		//through URL query string, instead of clicking on a tree item.
-		if (treeObjects.getSelectedItem() != null) {
+		if (treeObjects != null && treeObjects.getSelectedItem() != null) {
 			treeObjects.getSelectedItem().setLabel(trackedObject.getQualifiedName());
 		}
 	}

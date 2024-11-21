@@ -5,7 +5,7 @@
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageCustomers.WindowTitle}" sclass="PageTitle"/>
 	<hbox self="@define(showingAllPanelHeader)" width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel')">
-		<combobox id="cmbIntelliSearch" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.ViewModelComposer">
+		<combobox id="cmbIntelliSearch" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.CustomerViewModelComposer">
 			<template name="model">
 				<comboitem label="@load(each.name)" value="@load(each)">
 				</comboitem>
@@ -14,12 +14,36 @@
 		<button id="btnNew" label="+" href="/new_customer.zul" sclass="BarButton NewButton"></button>		
 	</hbox>
 	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
+		<!-- 
 		<tree id="treeObjects" apply="co.syscoop.soberano.composers.CustomersTreeComposer">
 			<treecols>
 				<treecol>
 				</treecol>
 			</treecols>
 		</tree>
+		-->
+		
+		<!-- optimization for large amount of customers -->
+		<zscript>
+			<![CDATA[
+		  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();
+		  		co.syscoop.soberano.renderers.CustomersGridRenderer renderer = new co.syscoop.soberano.renderers.CustomersGridRenderer();
+			]]>
+		</zscript>
+		<vbox hflex="1">
+			<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
+				<columns sizable="true">
+					<column align="left" label="${labels.caption.columnHeader.name}" sort="auto(domainObjectName)" sortDirection="ascending">
+					</column>
+					<column align="left" visible="false" sort="auto(domainObjectId)">
+					</column>
+					<column align="center" label="${labels.caption.columnHeader.action}">					
+					</column>
+				</columns>
+			</grid>
+		</vbox>
+		<!-- end of optimization for large amount of customers -->
+		
 	</window>
 	<include id="incDetails" self="@define(detailsPanel)" src="/customer.zul" visible="false"></include>	
 	<button id="btnApply" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ModifyCustomerButtonComposer"></button>

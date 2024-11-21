@@ -9,7 +9,6 @@ import java.util.List;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
@@ -19,7 +18,8 @@ public class Customer extends TrackedObject {
 	private String firstName = "";
 	private String lastName = "";
 	private BigDecimal discount = new BigDecimal(0.0);
-	private ContactData contactData = null;	
+	private ContactData contactData = null;
+	private String nameFilterStr = "";
 	
 	public Customer() {
 		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Customer_getAll\"(:loginname)";
@@ -28,6 +28,14 @@ public class Customer extends TrackedObject {
 	
 	public Customer(Integer id) {
 		super(id);
+	}
+	
+	public Customer(String nameFilterStr) {
+		this.setNameFilterStr(nameFilterStr);
+		getAllQuery = "SELECT * FROM soberano.\"fn_Customer_getAll\"(:nameFilterStr, :loginname)";
+		getCountQuery = "SELECT soberano.\"fn_Customer_getCount\"(:nameFilterStr, :loginname) AS count";
+		getAllQueryNamedParameters = new HashMap<String, Object>();
+		getAllQueryNamedParameters.put("nameFilterStr", nameFilterStr);
 	}
 	
 	public Customer(Integer id,
@@ -228,12 +236,12 @@ public class Customer extends TrackedObject {
 
 	@Override
 	public List<Object> getAll(String orderByColumn, Boolean descOrder, Integer limit, Integer offset, ResultSetExtractor<List<Object>> extractor) throws SQLException {
-		return null;
+		return super.getAll(orderByColumn, descOrder, limit, offset, extractor);
 	}
 	
 	@Override
 	public Integer getCount() throws SQLException {
-		return 0;
+		return super.getCount();
 	}
 
 	public BigDecimal getDiscount() {
@@ -268,5 +276,13 @@ public class Customer extends TrackedObject {
 	@Override
 	public PrintableData getReportMinimal() throws SQLException {
 		return null;
+	}
+
+	public String getNameFilterStr() {
+		return nameFilterStr;
+	}
+
+	public void setNameFilterStr(String nameFilterStr) {
+		this.nameFilterStr = nameFilterStr;
 	}
 }

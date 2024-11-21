@@ -21,10 +21,9 @@ import co.syscoop.soberano.view.viewmodel.PrinterProfileSelectionViewModel;
 
 public class CustomerFormHelper extends TrackedObjectFormHelper {
 	
-	@Override
-	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+	public void fillForm(Include incDetails, Integer customerId) throws SQLException {
 		
-		Customer customer = new Customer(((DomainObject) data.getData().getValue()).getId());
+		Customer customer = new Customer(customerId);
 		customer.get();
 		
 		//store in the form the ids of shown object for subsequent modification
@@ -72,6 +71,12 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 		ZKUtilitity.setValueWOValidation(cmbMunicipality, customer.getContactData().getMunicipalityId().toString());
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), customer.getContactData().getLatitude());
 		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), customer.getContactData().getLongitude());
+	}
+	
+	@Override
+	public void fillForm(Include incDetails, DefaultTreeNode<NodeData> data) throws SQLException {
+		
+		fillForm(incDetails, ((DomainObject) data.getData().getValue()).getId());
 	}
 
 	@Override

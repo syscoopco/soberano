@@ -11827,6 +11827,59 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_getCount\"(qnfilter text, loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "DECLARE\n"
+						+ "	count integer;\n"
+						+ "BEGIN\n"
+						+ "	SELECT COUNT(*) FROM soberano.\"fn_Customer_getAll\"(qnfilter, loginname) INTO count;\n"
+						+ "	RETURN count;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_getAll\"(\n"
+						+ "	qnfilter character varying,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		--in domainObjectName is returned the qualified name of the customer\n"
+						+ "		RETURN QUERY SELECT \"CustomerHasCustomerId\", qualifiedName\n"
+						+ "						FROM (SELECT DISTINCT \"CustomerHasCustomerId\", \n"
+						+ "							  				(\"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || u.\"This_includes_EmailAddress\" || ' : ' || u.\"This_includes_PhoneNumber\") qualifiedName\n"
+						+ "						FROM /*metamodel.\"fn_EntityTypeInstance_getDecisions\"(22, 1, loginname) instance\n"
+						+ "							INNER JOIN*/ soberano.\"Customer\" customer\n"
+						+ "								/*ON instance.\"InstanceId\" = customer.\"This_is_identified_by_EntityTypeInstance_id\"\n"
+						+ "							  		AND (qnFilter IS NULL \n"
+						+ "											OR qnFilter = ''\n"
+						+ "											OR \"This_has_FirstName\" LIKE '%' || qnFilter || '%'\n"
+						+ "											OR \"This_has_LastName\" LIKE '%' || qnFilter || '%')*/\n"
+						+ "							INNER JOIN soberano.\"ContactData\" u\n"
+						+ "								ON u.\"ContactDataHasContactDataId\" = customer.\"This_has_ContactData_with_ContactDataHasContactDataId\"\n"
+						+ "							  		AND (qnFilter IS NULL \n"
+						+ "											OR qnFilter = ''\n"
+						+ "											OR u.\"This_includes_EmailAddress\" LIKE '%' || qnFilter || '%'\n"
+						+ "											OR u.\"This_includes_PhoneNumber\" LIKE '%' || qnFilter || '%'\n"
+						+ "											OR \"This_has_FirstName\" LIKE '%' || qnFilter || '%'\n"
+						+ "											OR \"This_has_LastName\" LIKE '%' || qnFilter || '%'\n"
+						+ "							 				OR qnFilter = \"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || u.\"This_includes_EmailAddress\" || ' : ' || u.\"This_includes_PhoneNumber\")) sq\n"
+						+ "						ORDER BY qualifiedName;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_create\"(\n"
 						+ "	firstname character varying,\n"
 						+ "	lastname character varying,\n"
