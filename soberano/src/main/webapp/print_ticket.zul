@@ -8,6 +8,15 @@
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<intbox id="intObjectId" value="1" visible="false" readonly="true"/>
 		<vbox vflex="1" id="boxDetails" hflex="1" apply="co.syscoop.soberano.composers.ClearTicketBoxComposer">
+			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.SoldProductSelectionViewModel')">
+				<combobox id="cmbProduct" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.typeAProductName}">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)">
+						</comboitem>
+					</template>
+				</combobox>		
+			</hbox>
+			<separator></separator>
 			<label value="${labels.caption.field.orderNumber}" sclass="Caption"></label>
 			<hbox vflex="1" hflex="1">
 				<intbox hflex="1" id="intOrderNumber" placeholder="${labels.caption.field.orderNumberPlaceholder}"/>

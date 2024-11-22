@@ -361,6 +361,35 @@ public class Product extends InventoryItem {
 		setProductCategories(sourceProduct.getProductCategories());
 		fillProductCategoryIds();
 	}
+	
+	public final class SoldProductMapper implements RowMapper<Object> {
+
+		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				Product domainObject = new Product();
+				Integer id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					domainObject.setId(id);
+					domainObject.setName(rs.getString("domainObjectName"));
+				}
+				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getSold() throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());	
+		return query("SELECT * FROM soberano.\"fn_Product_getSold\"(:loginname)", 
+					qryParams, 
+					new SoldProductMapper());
+	}
 
 	public BigDecimal getPrice() {
 		return price;
