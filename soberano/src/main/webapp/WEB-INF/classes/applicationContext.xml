@@ -56,8 +56,8 @@
  		<security:intercept-url pattern="/reports/*" access="isFullyAuthenticated()"/>
  		
  		<!-- sessions -->
- 		<security:session-management session-fixation-protection="migrateSession">
-			<security:concurrency-control max-sessions="1"/>
+ 		<security:session-management session-fixation-protection="migrateSession" invalid-session-url="/welcome.zul">
+			<security:concurrency-control max-sessions="1" expired-url="/welcome.zul"/>
 		</security:session-management>
 		
 		<!-- login / logout -->
