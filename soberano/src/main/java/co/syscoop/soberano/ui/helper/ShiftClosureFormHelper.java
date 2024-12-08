@@ -1,5 +1,6 @@
 package co.syscoop.soberano.ui.helper;
 
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
@@ -74,7 +75,7 @@ public class ShiftClosureFormHelper extends BusinessActivityTrackedObjectFormHel
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 	

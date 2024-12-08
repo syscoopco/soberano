@@ -1,5 +1,6 @@
 package co.syscoop.soberano.ui.helper;
 
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Box;
 import co.syscoop.soberano.domain.tracked.BusinessActivityTrackedObject;
 import co.syscoop.soberano.renderers.ActionRequested;
@@ -20,7 +21,7 @@ public abstract class BusinessActivityTrackedObjectFormHelper {
 	
 	public abstract Integer billFromForm(Box boxDetails);
 	
-	public abstract Integer makeFromForm(Box boxDetails) throws Exception;
+	public abstract Integer makeFromForm(Component boxDetails) throws Exception;
 
 	public abstract void cleanForm(Box boxDetails);
 

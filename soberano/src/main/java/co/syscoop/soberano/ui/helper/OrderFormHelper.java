@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -362,7 +363,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 										OrderItem oi, 
 										HashMap<String, Treeitem> parentProcessRunTreeitems,
 										Order order,
-										Vbox boxDetails) {
+										Component boxDetails) {
 		
 		ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
 		Vbox vboxOi = new Vbox();
@@ -645,7 +646,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						String desc, 
 						Treechildren chdnOic, 
 						Boolean itsForManagement, 
-						Vbox boxDetails) {
+						Component boxDetails) {
 		
 		if (!itsForManagement) {
 			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
@@ -821,7 +822,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		return order;
 	}
 	
-	public static void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement, Vbox boxDetails) {
+	public static void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement, Component boxDetails) {
 		
 		Integer catIx = 0;
 		for (String cat : order.getCategories()) {
@@ -871,7 +872,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 	}
 	
-	public static void updateForm(Integer orderId, Vbox boxDetails) throws Exception {		
+	public static void updateForm(Integer orderId, Component boxDetails) throws Exception {		
 
 		Order order = new Order(orderId);
 		order.get();
@@ -931,7 +932,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	}
 	
 	@Override
-	public Integer makeFromForm(Box boxDetails) throws Exception {
+	public Integer makeFromForm(Component boxDetails) throws Exception {
 		
 		Comboitem cmbiItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder")).getSelectedItem();
 		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");

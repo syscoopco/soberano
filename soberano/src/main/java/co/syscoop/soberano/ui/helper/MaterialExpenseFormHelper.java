@@ -1,6 +1,8 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
+
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Combobox;
@@ -91,7 +93,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 }

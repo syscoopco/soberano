@@ -2,6 +2,9 @@ package co.syscoop.soberano.composers;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -12,6 +15,7 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Vbox;
 import co.syscoop.soberano.domain.tracked.Unit;
+import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
@@ -22,6 +26,7 @@ import co.syscoop.soberano.ui.helper.OrderFormHelper;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
+import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings({ "serial" })
 public class OrderManagementComposer extends OrderComposer {
@@ -50,6 +55,9 @@ public class OrderManagementComposer extends OrderComposer {
 	@Wire
 	private Decimalbox decOneRunQuantity;
 	
+	@Wire
+	private Button btnMakeFromAdditionsWindow;
+	
 	private void checkRuns() {
 		
 		if (decQuantity.getValue().compareTo(new BigDecimal(0)) <= 0) {
@@ -57,10 +65,12 @@ public class OrderManagementComposer extends OrderComposer {
 			txtQuantityExpression.setValue("0");
 			btnDec.setDisabled(true);
 			btnMake.setDisabled(true);
+			btnMakeFromAdditionsWindow.setDisabled(true);
 		}
 		else {
 			btnDec.setDisabled(false);
 			btnMake.setDisabled(false);
+			btnMakeFromAdditionsWindow.setDisabled(false);
 		}
 	}
 	
@@ -73,6 +83,7 @@ public class OrderManagementComposer extends OrderComposer {
 	private void processItemToOrderSelection() throws SQLException {
 		
 		btnMake.setDisabled(true);
+		btnMakeFromAdditionsWindow.setDisabled(true);
 		cleanOrderItemInputForm();
 		cmbUnit.getChildren().clear();
 		if (cmbItemToOrder.getSelectedItem() != null) {
@@ -212,4 +223,75 @@ public class OrderManagementComposer extends OrderComposer {
 										Messagebox.ERROR);
 		}
     }
+	
+	@Listen("onClick = button#btnMakeFromAdditionsWindow")
+    public void btnMakeFromAdditionsWindow_onClick() throws SoberanoException {
+		
+		try {
+			btnMakeFromAdditionsWindow.setDisabled(true);
+			if (decQuantity.getValue().compareTo(new BigDecimal(0)) > 0) {	
+				Component boxDetails = btnMakeFromAdditionsWindow.query("#boxDetails");
+				Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
+				Decimalbox decOneRunQuantity = (Decimalbox) boxDetails.query("#decOneRunQuantity");
+				Textbox txtSpecialInstructions = (Textbox) boxDetails.query("#txtSpecialInstructions");
+				BigDecimal runs = decQuantity.getValue().divide(decOneRunQuantity.getValue());
+				Combobox cmbItemToOrder = (Combobox) boxDetails.query("#cmbItemToOrder");
+				Comboitem cmbiItemToOrder = cmbItemToOrder.getSelectedItem() == null ? (Comboitem) cmbItemToOrder.getChildren().get(0)  : cmbItemToOrder.getSelectedItem();
+				if (cmbiItemToOrder == null || runs.compareTo(new BigDecimal(0)) <= 0) {
+					throw new SomeFieldsContainWrongValuesException();
+				}
+				else {					
+					ArrayList<Integer> additions = new ArrayList<Integer>();
+					for (Component comp : boxDetails.query("#spanAdditions").getChildren()) {
+						if ((Boolean) comp.getAttribute("checked")) {
+							additions.add((Integer) comp.getAttribute("productId"));
+							
+							((Button) comp).setWidth("100px");
+							((Button) comp).setHeight("100px");
+							((Button) comp).setStyle("margin-left: 3px; margin-top: 3px;");
+							comp.setAttribute("checked", false);
+						}
+					}					
+					int result = new Order((Integer) btnMakeFromAdditionsWindow.getAttribute("orderId"))
+							.make(((DomainObject) cmbiItemToOrder.getValue()).getId(),
+									txtSpecialInstructions.getValue(),
+									runs,
+									additions);
+					if (result == -1) {
+						btnMakeFromAdditionsWindow.setDisabled(false);
+						throw new NotEnoughRightsException();						
+					}
+					else {
+						Order order = new Order((Integer) btnMakeFromAdditionsWindow.getAttribute("orderId"));
+						((Textbox) boxDetails.query("#txtTicket")).setValue(Translator.translate(order.getReport()));						
+						btnDec.setDisabled(true);
+						cmbItemToOrder.setSelectedItem(null);
+						cmbItemToOrder.setText("");
+						txtQuantityExpression.setValue("0");
+						decQuantity.setValue(new BigDecimal(0));
+					}
+				}
+			}
+		}
+		catch(SomeFieldsContainWrongValuesException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.validation.someFieldsContainWrongValues"), 
+					Labels.getLabel("messageBoxTitle.Validation"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(NotEnoughRightsException ex) {
+			btnMake.setDisabled(false);
+			ExceptionTreatment.logAndShow(ex, 
+										Labels.getLabel("message.permissions.NotEnoughRights"), 
+										Labels.getLabel("messageBoxTitle.Warning"),
+										Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex)	{
+			btnMake.setDisabled(false);
+			ExceptionTreatment.logAndShow(ex, 
+										ex.getMessage(), 
+										Labels.getLabel("messageBoxTitle.Error"),
+										Messagebox.ERROR);
+		}
+	}
 }

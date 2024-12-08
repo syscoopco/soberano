@@ -1,0 +1,41 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="wndCompleteAddition" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.howMany}" mode="modal">
+		<hlayout width="100%" vflex="1">
+			<vbox hflex="1" vflex="1" id="boxDetails" apply="co.syscoop.soberano.composers.OrderManagementComposer">
+				<groupbox width="100%">
+					<vbox hflex="1">
+						<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProductSelectionForOrderViewModel')">
+							<combobox id="cmbItemToOrder" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.itemToOrder}" apply="co.syscoop.soberano.composers.ItemToOrderComboboxComposer">
+								<template name="model">
+									<comboitem label="@load(each.name)" value="@load(each)">
+									</comboitem>
+								</template>
+							</combobox>
+							<textbox id="txtSpecialInstructions" maxlength="100" hflex="1" placeholder="${labels.placeholder.specialInstructions}"/>
+						</hbox>
+						<hbox hflex="1" align="center">
+							<button id="btnInc" label="+"></button>
+							<button disabled="true" id="btnDec" label="-"></button>
+							<decimalbox id="decOneRunQuantity" format="####.########" scale="8" value="0" visible="false"></decimalbox>
+							
+							<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+							<decimalbox visible="false" format="####.########" scale="8" id="decQuantity" hflex="1"/>
+							<combobox readonly="true" disabled="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
+												
+							<button disabled="true" id="btnMakeFromAdditionsWindow" label="${labels.caption.action.add}" hflex="1"></button>
+							<button visible="false" disabled="true" id="btnMake" hflex="1"></button>
+						</hbox>
+					</vbox>
+				</groupbox>
+				<panel hflex="1" vflex="1" title="${labels.pageOrder.additions}" id="pnlAdditions" border="none" collapsible="false">
+					<panelchildren style="overflow: auto">
+						<span id="spanAdditions" height="100%" width="100%">
+						</span>
+					</panelchildren>
+				</panel>
+			</vbox>
+			<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
+		</hlayout>
+	</window>
+</zk>

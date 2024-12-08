@@ -146,7 +146,7 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 }

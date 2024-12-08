@@ -173,7 +173,7 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 }

@@ -1,0 +1,17 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="wndItemsToAdd" hflex="min" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.addItemsToOrder}" mode="modal">
+		<panel height="50%" width="100%" title="${labels.pageProductCategories.WindowTitle}" id="pnlCategories" border="none" collapsible="false">
+			<panelchildren style="overflow: auto">
+				<span id="spanCategories" height="100%" width="100%">
+				</span>
+			</panelchildren>
+		</panel>
+		<panel height="50%" width="100%" title="${labels.pageProducts.WindowTitle}" id="pnlProducts" border="none" collapsible="false">
+			<panelchildren style="overflow: auto">
+				<span id="spanProducts" height="100%" width="100%">
+				</span>
+			</panelchildren>
+		</panel>
+	</window>
+</zk>

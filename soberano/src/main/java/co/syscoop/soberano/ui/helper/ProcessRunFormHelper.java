@@ -260,7 +260,7 @@ public class ProcessRunFormHelper extends BusinessActivityTrackedObjectFormHelpe
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 }

@@ -324,6 +324,25 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer make(Integer itemId, String description, BigDecimal runs, ArrayList<Integer> additions) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_make\"(:orderId, "
+							+ "								:itemId, "
+							+ "								:description, "
+							+ "								:runs, "
+							+ "								:additions, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("itemId", itemId);
+		parametersMap.put("description", description);
+		parametersMap.put("runs", runs);
+		parametersMap.put("additions", createArrayOfSQLType("integer", additions.toArray()));
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public Integer orderAddition(Integer itemId, Integer processRunId) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.

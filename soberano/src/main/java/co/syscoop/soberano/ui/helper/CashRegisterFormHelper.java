@@ -435,7 +435,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 	}
 
 	@Override
-	public Integer makeFromForm(Box boxDetails) {
+	public Integer makeFromForm(Component boxDetails) {
 		return null;
 	}
 }

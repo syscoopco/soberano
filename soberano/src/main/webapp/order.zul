@@ -65,7 +65,7 @@
 			<groupbox width="100%">
 				<vbox hflex="1">
 					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProductSelectionForOrderViewModel')">
-						<combobox id="cmbItemToOrder" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.itemToOrder}" apply="co.syscoop.soberano.composers.ViewModelComposer">
+						<combobox id="cmbItemToOrder" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.itemToOrder}" apply="co.syscoop.soberano.composers.ItemToOrderComboboxComposer">
 							<template name="model">
 								<comboitem label="@load(each.name)" value="@load(each)">
 								</comboitem>
@@ -83,6 +83,7 @@
 						<combobox readonly="true" disabled="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
 											
 						<button disabled="true" id="btnMake" label="${labels.caption.action.add}" hflex="1"></button>
+						<button visible="false" disabled="true" id="btnMakeFromAdditionsWindow" hflex="1"></button>
 					</hbox>
 				</vbox>
 			</groupbox>

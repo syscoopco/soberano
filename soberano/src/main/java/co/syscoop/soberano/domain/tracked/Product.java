@@ -250,6 +250,13 @@ public class Product extends InventoryItem {
 		return super.getAll(stringId);
 	}
 	
+	public List<DomainObject> getAll(Integer categoryId) throws SQLException {
+		
+		getAllQuery = "SELECT * FROM soberano.\"fn_Product_getAll\"(:categoryId, :loginname)";
+		getAllQueryNamedParameters.put("categoryId", categoryId);	
+		return super.getAll(false);
+	}
+	
 	public final class ProductMapperWithStringId implements RowMapper<Object> {
 
 		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -286,6 +293,16 @@ public class Product extends InventoryItem {
 		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
 		return query("SELECT * FROM soberano.\"fn_Product_getAllWithStringIdForOrder\"(:loginname)", 
 					getAllQueryNamedParameters, 
+					new ProductMapperWithStringId());
+	}
+	
+	public List<Object> getWithUnitForOrder() throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("productId", this.getId());
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Product_getWithStringIdForOrder\"(:productId, :loginname)", 
+					qryParams, 
 					new ProductMapperWithStringId());
 	}
 	
