@@ -60,6 +60,13 @@
 		</hbox>
 		<separator></separator>
 		<checkbox id="chkIsAnAddition" checked="false" label="${labels.caption.field.isAnAddition}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<label value="${labels.caption.field.picture}" sclass="Caption"></label>
+		<hbox width="100%" align="center">
+			<label id="lblNoPicture" visible="true" value="${labels.caption.field.none}"></label>
+			<a id="aDownload" visible="false" label="${labels.caption.action.download}" apply="co.syscoop.soberano.composers.DownloadProductPictureButtonComposer"></a>
+			<button id="btnUpload" label="${labels.caption.action.upload}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.UploadProductPictureButtonComposer"></button>
+		</hbox>		
 				
 		<intbox id="intProcessId" visible="false"/>
 	</vbox>	

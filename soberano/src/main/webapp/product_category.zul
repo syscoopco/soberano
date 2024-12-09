@@ -8,5 +8,12 @@
 		<intbox id="intPosition" hflex="1" placeholder="${labels.caption.field.positionPlaceholder}" constraint="no empty, no negative"/>
 		<separator></separator>
 		<checkbox id="chkDisabled" checked="false" label="${labels.caption.field.disabled}" sclass="Caption"></checkbox>
+		<separator></separator>
+		<label value="${labels.caption.field.picture}" sclass="Caption"></label>
+		<hbox width="100%" align="center">
+			<label id="lblNoPicture" visible="true" value="${labels.caption.field.none}"></label>
+			<a id="aDownload" visible="false" label="${labels.caption.action.download}" apply="co.syscoop.soberano.composers.DownloadProductCategoryPictureButtonComposer"></a>
+			<button id="btnUpload" label="${labels.caption.action.upload}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.UploadProductCategoryPictureButtonComposer"></button>
+		</hbox>	
 	</vbox>	
 </zk>

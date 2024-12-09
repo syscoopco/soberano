@@ -18,6 +18,7 @@ import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Translator;
 
 @SuppressWarnings("serial")
@@ -66,11 +67,16 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 		Span spanAdditions = (Span) window.query("#spanAdditions");
 		for (Object doo : (new Product()).getAdditionsWithUnitsForOrder()) {					
 			Button additionButton = new Button();
-			additionButton.setLabel(((DomainObject) doo).getName());
 			additionButton.setStyle("margin-left: 3px; margin-top: 3px;");
 			additionButton.setHeight("100px");
 			additionButton.setWidth("100px");
 			additionButton.setOrient("vertical");
+			if (((Product) doo).getPicture() != null) {
+				additionButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture()));
+				additionButton.setTooltiptext(((Product) doo).getName());
+			}
+			else
+				additionButton.setLabel(((DomainObject) doo).getName());
 								
 			additionButton.addEventListener("onClick", new EventListener() {
 
@@ -98,20 +104,25 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 		spanProducts.getChildren().clear();
 		
 		Product product = new Product();
-		for (DomainObject doo : product.getAll(categoryId)) {					
+		for (Object doo : product.getAll(categoryId)) {					
 			Button prodButton = new Button();
-			prodButton.setLabel(doo.getName());
 			prodButton.setStyle("margin-left: 3px; margin-top: 3px;");
 			prodButton.setHeight("100px");
 			prodButton.setWidth("100px");
 			prodButton.setOrient("vertical");
+			if (((Product) doo).getPicture() != null) {
+				prodButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture()));
+				prodButton.setTooltiptext(((Product) doo).getName());
+			}
+			else
+				prodButton.setLabel(((Product) doo).getName());
 			
 			prodButton.addEventListener("onClick", new EventListener() {
 
 				@Override
 				public void onEvent(Event event) throws Exception {
 					
-					productButtonHandler(orderId, doo.getId(), doo.getName(), spanProductsParentWindow);
+					productButtonHandler(orderId, ((Product) doo).getId(), ((Product) doo).getName(), spanProductsParentWindow);
 				}
 			});
 			
@@ -139,20 +150,25 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 									
 					ProductCategory productCategory = new ProductCategory();
 					Span spanCategories = (Span) window.query("#spanCategories");
-					for (DomainObject doo : productCategory.getAll(false)) {					
-						Button catButton = new Button();
-						catButton.setLabel(doo.getName());
+					for (Object doo : productCategory.getAllWithPicture()) {					
+						Button catButton = new Button();						
 						catButton.setStyle("margin-left: 3px; margin-top: 3px;");
 						catButton.setHeight("100px");
 						catButton.setWidth("100px");
 						catButton.setOrient("vertical");
+						if (((ProductCategory) doo).getPicture() != null) {
+							catButton.setImageContent(Utils.createImageFromBytes(((ProductCategory) doo).getPicture()));
+							catButton.setTooltiptext(((ProductCategory) doo).getName());
+						}
+						else
+							catButton.setLabel(((ProductCategory) doo).getName());
 											
 						catButton.addEventListener("onClick", new EventListener() {
 
 							@Override
 							public void onEvent(Event event) throws Exception {
 								
-								categoryButtonHandler(doo.getId(), orderId, window);
+								categoryButtonHandler(((ProductCategory) doo).getId(), orderId, window);
 							}
 						});
 						

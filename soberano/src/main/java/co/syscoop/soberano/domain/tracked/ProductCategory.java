@@ -4,19 +4,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class ProductCategory extends TrackedObject {
 
 	private Integer position = 0;
 	private Boolean isEnabled = true;
+	private byte[] picture;
 	
 	public ProductCategory(Integer id) {
 		super(id);
@@ -26,11 +30,13 @@ public class ProductCategory extends TrackedObject {
 					Integer entityTypeInstanceId, 
 					String name, 
 					Integer position, 
-					Boolean isEnabled) {
+					Boolean isEnabled,
+					byte[] picture) {
 		super(id, entityTypeInstanceId, name);
 		this.setQualifiedName(name);
 		this.setPosition(position);
 		this.setIsEnabled(isEnabled);
+		this.setPicture(picture);
 	}
 	
 	public ProductCategory() {
@@ -57,6 +63,21 @@ public class ProductCategory extends TrackedObject {
 		
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
+	}
+	
+	
+	public Integer uploadPicture() throws SQLException, Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String uploadQuery = "SELECT soberano.\"fn_ProductCategory_uploadPicture\"(:productCategoryId, "
+				+ "											:picture, "
+				+ "											:loginname) AS queryresult";
+		Map<String,	Object> qryParams = new HashMap<String,	Object>();
+		qryParams.put("productCategoryId", this.getId());
+		qryParams.put("picture", this.getPicture());
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		
+		return (Integer) super.query(uploadQuery, qryParams, new QueryObjectResultMapper()).get(0);
 	}
 	
 	@Override
@@ -108,7 +129,8 @@ public class ProductCategory extends TrackedObject {
 										rs.getInt("entityTypeInstanceId"),
 										rs.getString("categoryName"),
 										rs.getInt("categoryPosition"),
-										rs.getBoolean("isEnabled"));
+										rs.getBoolean("isEnabled"),
+										rs.getBytes("productPicture"));
 				}
 				return category;
 			}
@@ -137,6 +159,7 @@ public class ProductCategory extends TrackedObject {
 		setName(sourceCategory.getName());
 		setPosition(sourceCategory.getPosition());
 		setIsEnabled(sourceCategory.getIsEnabled());
+		setPicture(sourceCategory.getPicture());
 	}
 	
 	@Override
@@ -165,6 +188,34 @@ public class ProductCategory extends TrackedObject {
 		return null;
 	}
 	
+	public final class ProductCategoryMapperWithPicture implements RowMapper<Object> {
+
+		public ProductCategory mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				ProductCategory prod = new ProductCategory();
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					prod.setId(id);
+					prod.setName(rs.getString("domainObjectName"));
+					prod.setPicture(rs.getBytes("productPicture"));
+				}
+				return prod;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAllWithPicture() throws SQLException {
+		
+		getAllQuery = "SELECT * FROM soberano.\"fn_ProductCategory_getAllWithPicture\"(:loginname)";
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return query(getAllQuery, getAllQueryNamedParameters, new ProductCategoryMapperWithPicture());
+	}
+	
 	@Override
 	public Integer getCount() throws SQLException {
 		return 0;
@@ -178,5 +229,13 @@ public class ProductCategory extends TrackedObject {
 	@Override
 	public PrintableData getReportMinimal() throws SQLException {
 		return null;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 }

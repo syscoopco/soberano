@@ -30,6 +30,7 @@ public class Product extends InventoryItem {
 	private BigDecimal oneRunQuantity = new BigDecimal(0);
 	private Integer position = 0;
 	private Boolean isAnAddition = false;
+	private byte[] picture;
 	
 	//product categories
 	private ArrayList<ProductCategory> productCategories = new ArrayList<ProductCategory>();
@@ -58,7 +59,8 @@ public class Product extends InventoryItem {
 					Boolean isEnabled,
 					Integer process,
 					Integer position,
-					Boolean isAnAddition) {
+					Boolean isAnAddition,
+					byte[] picture) {
 		super(id, entityTypeInstanceId, name);
 		this.setStringId(inventoryItemCode);
 		this.setQualifiedName(name + " : " + inventoryItemCode);
@@ -71,6 +73,7 @@ public class Product extends InventoryItem {
 		this.setProcess(process);
 		this.setPosition(position);
 		this.setIsAnAddition(isAnAddition);
+		this.setPicture(picture);
 	}
 	
 	public Product(Integer id, 
@@ -86,6 +89,7 @@ public class Product extends InventoryItem {
 			Integer process,
 			Integer position,
 			Boolean isAnAddition,
+			byte[] picture,
 			ArrayList<ProductCategory> productCategories) {
 		this(id, 
 			entityTypeInstanceId, 
@@ -99,7 +103,8 @@ public class Product extends InventoryItem {
 			isEnabled,
 			process,
 			position,
-			isAnAddition);
+			isAnAddition,
+			picture);
 		this.productCategories = productCategories;
 		fillProductCategoryIds();
 	}
@@ -180,6 +185,20 @@ public class Product extends InventoryItem {
 		return qryResult == 0 ? qryResult : -1;
 	}
 	
+	public Integer uploadPicture() throws SQLException, Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String uploadQuery = "SELECT soberano.\"fn_Product_uploadPicture\"(:productId, "
+				+ "											:picture, "
+				+ "											:loginname) AS queryresult";
+		Map<String,	Object> qryParams = new HashMap<String,	Object>();
+		qryParams.put("productId", this.getId());
+		qryParams.put("picture", this.getPicture());
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		
+		return (Integer) super.query(uploadQuery, qryParams, new QueryObjectResultMapper()).get(0);
+	}
+	
 	@Override
 	public Integer disable() throws SQLException, Exception {
 					
@@ -250,11 +269,33 @@ public class Product extends InventoryItem {
 		return super.getAll(stringId);
 	}
 	
-	public List<DomainObject> getAll(Integer categoryId) throws SQLException {
+	public final class ProductMapperWithPicture implements RowMapper<Object> {
+
+		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				Product prod = new Product();
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					prod.setId(id);
+					prod.setName(rs.getString("domainObjectName"));
+					prod.setPicture(rs.getBytes("productPicture"));
+				}
+				return prod;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAll(Integer categoryId) throws SQLException {
 		
 		getAllQuery = "SELECT * FROM soberano.\"fn_Product_getAll\"(:categoryId, :loginname)";
-		getAllQueryNamedParameters.put("categoryId", categoryId);	
-		return super.getAll(false);
+		getAllQueryNamedParameters.put("categoryId", categoryId);
+		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return query(getAllQuery, getAllQueryNamedParameters, new ProductMapperWithPicture());
 	}
 	
 	public final class ProductMapperWithStringId implements RowMapper<Object> {
@@ -272,6 +313,30 @@ public class Product extends InventoryItem {
 					domainObject.setOneRunQuantity(rs.getBigDecimal("oneRunQuantity"));
 				}
 				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public final class ProductMapperWithStringIdAndPicture implements RowMapper<Object> {
+
+		public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				Product prod = new Product();
+				Integer id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					prod.setId(id);
+					prod.setStringId(rs.getString("domainObjectStringId"));
+					prod.setName(rs.getString("domainObjectName"));
+					prod.setUnit(rs.getInt("unit"));
+					prod.setOneRunQuantity(rs.getBigDecimal("oneRunQuantity"));
+					prod.setPicture(rs.getBytes("productPicture"));
+				}
+				return prod;
 			}
 			catch(Exception ex)
 			{
@@ -311,7 +376,7 @@ public class Product extends InventoryItem {
 		getAllQueryNamedParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());		
 		return query("SELECT * FROM soberano.\"fn_Product_getAdditionsWithStringIdForOrder\"(:loginname)",
 					getAllQueryNamedParameters, 
-					new ProductMapperWithStringId());
+					new ProductMapperWithStringIdAndPicture());
 	}
 	
 	public final class ProductExtractor implements ResultSetExtractor<Object> {
@@ -336,7 +401,8 @@ public class Product extends InventoryItem {
 											rs.getBoolean("isEnabled"),
 											rs.getInt("itemProcess"),
 											rs.getInt("productPosition"),
-											rs.getBoolean("productIsAddition"));
+											rs.getBoolean("productIsAddition"),
+											rs.getBytes("productPicture"));
 	        	}
 	        	product.getProductCategories().add(new ProductCategory(rs.getInt("categoryId"), rs.getString("categoryName")));
 	        }
@@ -375,6 +441,7 @@ public class Product extends InventoryItem {
 		setProcess(sourceProduct.getProcess());
 		setPosition(sourceProduct.getPosition());
 		setIsAnAddition(sourceProduct.getIsAnAddition());
+		setPicture(sourceProduct.getPicture());
 		setProductCategories(sourceProduct.getProductCategories());
 		fillProductCategoryIds();
 	}
@@ -483,5 +550,13 @@ public class Product extends InventoryItem {
 
 	public void setIsAnAddition(Boolean isAnAddition) {
 		this.isAnAddition = isAnAddition;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
 	}
 }

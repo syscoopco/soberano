@@ -14,6 +14,8 @@ import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Label;
+import org.zkoss.zul.A;
 
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.tracked.ProductCategory;
@@ -84,6 +86,15 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		
 		((Checkbox) incDetails.query("#chkIsAnAddition")).setChecked(product.getIsAnAddition());
 		
+		if (product.getPicture() == null) {
+			((Label) incDetails.query("#lblNoPicture")).setVisible(true);
+			((A) incDetails.query("#aDownload")).setVisible(false);
+		}
+		else {
+			((Label) incDetails.query("#lblNoPicture")).setVisible(false);
+			((A) incDetails.query("#aDownload")).setVisible(true);
+		}
+		
 		((Intbox) incDetails.query("#intProcessId")).setValue(product.getProcess());
 	}
 
@@ -124,6 +135,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 							0,
 							((Intbox) incDetails.query("#intPosition")).getValue(),
 							((Checkbox) incDetails.query("#chkIsAnAddition")).isChecked(),
+							null,
 							productCategories))
 						.record();
 	}
@@ -159,6 +171,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 												0,
 												((Intbox) incDetails.query("#intPosition")).getValue(),
 												((Checkbox) incDetails.query("#chkIsAnAddition")).isChecked(),
+												null,
 												productCategories));
 		return super.getTrackedObject().modify();
 	}

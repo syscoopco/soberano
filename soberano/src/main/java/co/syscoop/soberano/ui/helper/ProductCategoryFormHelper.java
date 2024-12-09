@@ -3,11 +3,13 @@ package co.syscoop.soberano.ui.helper;
 import java.sql.SQLException;
 
 import org.zkoss.zk.ui.util.Clients;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.domain.untracked.DomainObject;
@@ -35,6 +37,15 @@ public class ProductCategoryFormHelper extends TrackedObjectFormHelper {
 		
 		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPosition"), category.getPosition());
 		((Checkbox) incDetails.query("#chkDisabled")).setChecked(!category.getIsEnabled());
+		
+		if (category.getPicture() == null) {
+			((Label) incDetails.query("#lblNoPicture")).setVisible(true);
+			((A) incDetails.query("#aDownload")).setVisible(false);
+		}
+		else {
+			((Label) incDetails.query("#lblNoPicture")).setVisible(false);
+			((A) incDetails.query("#aDownload")).setVisible(true);
+		}
 	}
 
 	@Override
@@ -52,7 +63,8 @@ public class ProductCategoryFormHelper extends TrackedObjectFormHelper {
 									0,
 									((Textbox) incDetails.query("#txtName")).getValue(),
 									((Intbox) incDetails.query("#intPosition")).getValue(),
-									!((Checkbox) incDetails.query("#chkDisabled")).isChecked()))
+									!((Checkbox) incDetails.query("#chkDisabled")).isChecked(),
+									null))
 				.record();
 	}
 
@@ -63,7 +75,8 @@ public class ProductCategoryFormHelper extends TrackedObjectFormHelper {
 													0,
 													((Textbox) incDetails.query("#txtName")).getValue(),
 													((Intbox) incDetails.query("#intPosition")).getValue(),
-													!((Checkbox) incDetails.query("#chkDisabled")).isChecked()));
+													!((Checkbox) incDetails.query("#chkDisabled")).isChecked(),
+													null));
 		return super.getTrackedObject().modify();
 	}
 }
