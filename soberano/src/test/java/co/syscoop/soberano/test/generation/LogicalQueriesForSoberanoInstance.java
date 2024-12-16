@@ -12107,7 +12107,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "											OR u.\"This_includes_PhoneNumber\" LIKE '%' || qnFilter || '%'\n"
 						+ "											OR \"This_has_FirstName\" LIKE '%' || qnFilter || '%'\n"
 						+ "											OR \"This_has_LastName\" LIKE '%' || qnFilter || '%'\n"
-						+ "							 				OR qnFilter = \"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || u.\"This_includes_EmailAddress\" || ' : ' || u.\"This_includes_PhoneNumber\")) sq\n"
+						+ "							 				OR qnFilter = \"This_has_FirstName\" || ' ' || \"This_has_LastName\" || ' : ' || u.\"This_includes_EmailAddress\" || ' : ' || u.\"This_includes_PhoneNumber\")\n"
+						+ "							 INNER JOIN metamodel.\"EntityTypeInstance\" eti\n"
+						+ "							 	ON eti.\"EntityTypeInstanceHasEntityTypeInstanceId\" = customer.\"This_is_identified_by_EntityTypeInstance_id\"\n"
+						+ "							 		AND eti.\"This_is_in_Stage_with_StageHasStageId\" = 2) sq\n"
 						+ "						ORDER BY qualifiedName;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
