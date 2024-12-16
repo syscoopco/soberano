@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.opentest4j.AssertionFailedError;
+import org.zkoss.lang.Library;
+import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
@@ -27,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
@@ -36,6 +38,10 @@ class O6_WarehouseTest_with_entry_processes_record extends WarehouseActionTest {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
+		//to runtime locale not available under 
+		//testing environment
 		
 		Zats.init("./src/main/webapp");
 	}

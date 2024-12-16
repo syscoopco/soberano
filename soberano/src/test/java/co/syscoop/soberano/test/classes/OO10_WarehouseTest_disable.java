@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.opentest4j.AssertionFailedError;
+import org.zkoss.lang.Library;
+import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 
 import co.syscoop.soberano.test.helper.WarehouseActionTest;
@@ -17,12 +19,16 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(10)
 
-@Disabled
+//@Disabled
 
 class OO10_WarehouseTest_disable extends WarehouseActionTest{
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
+		//to runtime locale not available under 
+		//testing environment
 		
 		Zats.init("./src/main/webapp");	
 	}

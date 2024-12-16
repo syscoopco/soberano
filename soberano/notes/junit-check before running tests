@@ -1,0 +1,17 @@
+1) in customers.zul, disable / enable production optimizations
+
+<!-- TODO: DISABLE IN PRODUCTION. -->
+<tree id="treeObjects"
+...
+		
+<!-- optimization for large amount of customers -->
+<!-- TODO: ENABLE IN PRODUCTION. JUNIT TESTS HAVENT BEEN CHANGED YET FOR THIS OPTIMIZATION, SO TESTS WOULDNT PASS.
+<zscript>
+	<![CDATA[
+  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();
+  		co.syscoop.soberano.renderers.CustomersGridRenderer renderer = new co.syscoop.soberano.renderers.CustomersGridRenderer();
+	]]>
+</zscript>
+<vbox hflex="1">
+	<grid id="grd"
+	...

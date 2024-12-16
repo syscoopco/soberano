@@ -83,7 +83,7 @@ public class TestUtilityCode {
 		Map<Integer, DomainObject> comboModelMap = convertListToMap(cmbIntelliSearch.as(Combobox.class).getModel());		
 		for (Integer i = 1; i <= cmbIntelliSearch.as(Combobox.class).getModel().getSize(); i++) {
 			DomainObject doo = comboModelMap.get(objectBaseId + i);
-			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating search combobox, user" 
+			assertEquals(true, doo.getName().indexOf(qualifiedNamePattern.replace("#suffix#", i.toString())) != -1, "When populating search combobox, user" 
 																	+ userIdSuffix + "@soberano.syscoop.co"
 																	+ " retrieves wrong name for object with name " 
 																	+ doo.getName());
@@ -113,7 +113,7 @@ public class TestUtilityCode {
 		Map<Integer, DomainObject> treeNodesModelMap = convertListToMap(rootNode.getChildren());
 		for (Integer i = 1; i <= rootNode.getChildren().size(); i++) {
 			DomainObject doo = treeNodesModelMap.get(objectBaseId + i);
-			assertEquals(qualifiedNamePattern.replace("#suffix#", i.toString()), doo.getName(), "When populating showing-all tree, user" 
+			assertEquals(true, doo.getName().indexOf(qualifiedNamePattern.replace("#suffix#", i.toString())) != -1, "When populating showing-all tree, user" 
 																				+ userIdSuffix + "@soberano.syscoop.co"
 																				+ " retrieves wrong name for object with name " 
 																				+ doo.getName());

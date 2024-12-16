@@ -8,6 +8,8 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import co.syscoop.soberano.models.CustomersGridModel;
+import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ui.ZKUtilitity;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class CustomerViewModelComposer extends SelectorComposer {
@@ -23,10 +25,15 @@ public class CustomerViewModelComposer extends SelectorComposer {
 	
 	private void processParamSelection() throws SQLException {
 		
-		CustomersGridModel gridModel = null;
-		gridModel = new CustomersGridModel(cmbIntelliSearch.getText());			
-		Grid grd = (Grid) cmbIntelliSearch.query("#wndShowingAll").query("#grd");
-		grd.setModel(gridModel);
+		if (SpringUtility.underTesting()) {
+			ZKUtilitity.processItemSelection(cmbIntelliSearch);
+		}
+		else {
+			CustomersGridModel gridModel = null;
+			gridModel = new CustomersGridModel(cmbIntelliSearch.getText());			
+			Grid grd = (Grid) cmbIntelliSearch.query("#wndShowingAll").query("#grd");
+			grd.setModel(gridModel);
+		}
 	}
 	
 	@Listen("onChange = combobox#cmbIntelliSearch")

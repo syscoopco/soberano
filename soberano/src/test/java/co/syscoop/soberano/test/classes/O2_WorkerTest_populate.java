@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 * Notice, a worker is defined by its assignments.
 */
 @Order(2)
-@Disabled
+//@Disabled
 class O2_WorkerTest_populate extends TestClass {
 
 	@BeforeAll

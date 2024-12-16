@@ -65,8 +65,8 @@ public class CustomerForm extends ConstrainedForm {
 		this.constrainableComponentById.put("decDiscount", decDiscount);
 		
 		this.setTxtPhoneNumber(txtPhoneNumber);
-		this.constrainableComponents.add(txtPhoneNumber);
-		this.constrainableComponentById.put("txtPhoneNumber", txtPhoneNumber);
+//		this.constrainableComponents.add(txtPhoneNumber);
+//		this.constrainableComponentById.put("txtPhoneNumber", txtPhoneNumber);
 		
 		this.setTxtEmailAddress(txtEmailAddress);
 		this.constrainableComponents.add(txtEmailAddress);

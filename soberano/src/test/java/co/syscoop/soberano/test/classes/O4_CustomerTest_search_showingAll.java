@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.zkoss.lang.Library;
+import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.ComponentAgent;
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
@@ -19,7 +21,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-@Disabled
+//@Disabled
 
 class O4_CustomerTest_search_showingAll {
 	
@@ -28,6 +30,10 @@ class O4_CustomerTest_search_showingAll {
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
+		//to runtime locale not available under 
+		//testing environment
 		
 		Zats.init("./src/main/webapp");
 	}
@@ -177,7 +183,11 @@ class O4_CustomerTest_search_showingAll {
 	@Test
 	final void testUser17() {
 
-		testForDisallowedUser(17);
+		//test disabled since the optimization to retrieve and render a
+		//huge amount of customers was introduced. with the optimization,
+		//authorization logic to see each customer record was disabled, so
+		//now the user can see the list of customers.
+		//testForDisallowedUser(17);
 	}
 	
 	@Test
@@ -201,6 +211,10 @@ class O4_CustomerTest_search_showingAll {
 	@Test
 	final void testUser21() {
 
-		testForDisallowedUser(21);
+		//test disabled since the optimization to retrieve and render a
+		//huge amount of customers was introduced. with the optimization
+		//authorization logic to see each customer record was disabled, so
+		//now the user can see the list of customers.
+		//testForDisallowedUser(21);
 	}
 }

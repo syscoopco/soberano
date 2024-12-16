@@ -6,10 +6,15 @@ import java.math.BigDecimal;
 
 import org.zkoss.zats.mimic.DesktopAgent;
 import org.zkoss.zats.mimic.Zats;
+import org.zkoss.zats.mimic.operation.InputAgent;
+import org.zkoss.zk.ui.Component;
 import org.zkoss.zul.Combobox;
+import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Textbox;
+
+import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.util.SpringUtility;
 
 public class CustomerActionTest extends ActionTest {
@@ -51,6 +56,35 @@ public class CustomerActionTest extends ActionTest {
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#dblLatitude").as(Doublebox.class), 
 												cmbIntelliSearchAgent.query("#incDetails").query("#incContactData").query("#dblLongitude").as(Doublebox.class));
 		return customerForm;
+	}
+	
+	@Override
+	protected void selectComboitemByLabel(Combobox comp, String label) {
+		
+		try {
+			for (Component co : comp.getChildren()) {
+				Comboitem item = (Comboitem) co;
+				if (((DomainObject) item.getValue()).getName().toLowerCase().indexOf(label.toLowerCase()) != -1) {
+					comp.setSelectedItem(item);
+					break;
+				}
+			}
+		} 
+		catch(Exception ex) 
+		{
+			/*This is to, under testing, avoid halting cause java.lang.IllegalStateException
+			with detailMessage: Components can be accessed only in event listeners.
+			Line 305 in ZK UiEngineImpl.java file*/
+		}
+	}
+	
+	@Override
+	protected void loadObjectDetails(String qualifiedName) {
+		
+		InputAgent cmbIntelliSearchInputAgent = cmbIntelliSearchAgent.as(InputAgent.class);
+		cmbIntelliSearchInputAgent.typing(qualifiedName);
+		selectComboitemByLabel(cmbIntelliSearch, qualifiedName);		
+		cmbIntelliSearchAgent.click(); 	//needed to trigger cmbIntelliSearch's onClick event under testing
 	}
 	
 	protected void checkCustomer(String firstName,

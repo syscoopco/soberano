@@ -12,19 +12,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.opentest4j.AssertionFailedError;
+import org.zkoss.lang.Library;
+import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.WorkerActionTest;
 
 @Order(7)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_WorkerTest_disable extends WorkerActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
+		//to runtime locale not available under 
+		//testing environment
 		
 		Zats.init("./src/main/webapp");	
 	}

@@ -12,19 +12,25 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.opentest4j.AssertionFailedError;
+import org.zkoss.lang.Library;
+import org.zkoss.web.Attributes;
 import org.zkoss.zats.mimic.Zats;
 import co.syscoop.soberano.test.helper.TestUtilityCode;
 import co.syscoop.soberano.test.helper.CustomerActionTest;
 
 @Order(7)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_CustomerTest_disable extends CustomerActionTest {
 	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
+		
+		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
+		//to runtime locale not available under 
+		//testing environment
 		
 		Zats.init("./src/main/webapp");	
 	}
@@ -44,25 +50,24 @@ class O7_CustomerTest_disable extends CustomerActionTest {
 	void tearDown() throws Exception {
 	}
 
-//  TODO: commented since, for preventing bad performance in case of huge data, customer tree items are not detached from tree when disabling them. instead, their tree cell backgrounds are red colored.
-//	@Test
-//	@Order(1)
-//	final void testCase1() {
-//		TestUtilityCode.testDisablingObject("/customers.zul", "user1@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
-//	}
-//	
-//		
-//	@Test
-//	@Order(2)
-//	final void testCase2() {
-//		try {
-//			TestUtilityCode.testDisablingObject("/customers.zul", "user2@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
-//		}
-//		catch(AssertionFailedError ex) {
-//			fail(ex.getMessage());
-//		}
-//		catch(Throwable ex) {
-//			testNotEnoughRightsException(ex);
-//		}
-//	}
+	@Test
+	@Order(1)
+	final void testCase1() {
+		TestUtilityCode.testDisablingObject("/customers.zul", "user1@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
+	}
+	
+		
+	@Test
+	@Order(2)
+	final void testCase2() {
+		try {
+			TestUtilityCode.testDisablingObject("/customers.zul", "user2@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			testNotEnoughRightsException(ex);
+		}
+	}
 }

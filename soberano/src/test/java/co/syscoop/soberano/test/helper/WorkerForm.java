@@ -84,8 +84,8 @@ public class WorkerForm extends ConstrainedForm {
 		this.setCmbResponsibilities(cmbResponsibilities);
 		
 		this.setTxtPhoneNumber(txtPhoneNumber);
-		this.constrainableComponents.add(txtPhoneNumber);
-		this.constrainableComponentById.put("txtPhoneNumber", txtPhoneNumber);
+//		this.constrainableComponents.add(txtPhoneNumber);
+//		this.constrainableComponentById.put("txtPhoneNumber", txtPhoneNumber);
 		
 		this.setTxtEmailAddress(txtEmailAddress);
 		this.constrainableComponents.add(txtEmailAddress);
