@@ -11565,7 +11565,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "												ON allde.\"DecisionName\" = userde.\"DecisionName\")\n"
 						+ "				) THEN\n"
 						+ "				\n"
-						+ "			PERFORM soberano.\"fn_InventoryOperation_confirmRequestedOperation\"(inventoryoperationid, null);\n"
+						+ "			PERFORM soberano.\"fn_InventoryOperation_confirmRequestedOperation\"(inventoryoperationid, null::timestamp with time zone);\n"
 						+ "			\n"
 						+ "			qryResult := 0;\n"
 						+ "		END IF;\n"
