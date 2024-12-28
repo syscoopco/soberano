@@ -1,8 +1,12 @@
 2024-12-16:
-Fix: Disabled customers were shown in the grid of customers.zul, when huge customers loading optimization was enabled.
+Fix: When huge customers loading optimization was enabled, Disabled customers were shown in the grid of customers.zul.
 
 Fix: A 'No empty' constraints to the fields of additional (global) settings in other.zul was added.
 
-Fix: of soberano."fn_InventoryOperation_confirmRequestedOperation"(inventoryoperationid integer, loginname character varying).
-	A wrong function was called in the line 88 line 88, PERFORM soberano."fn_InventoryOperation_confirmRequestedOperation"(inventoryoperationid, null);
+Fix: A wrong function was called in the line 88 line 88, PERFORM soberano."fn_InventoryOperation_confirmRequestedOperation"(inventoryoperationid, null).
 	The type of the second parameter, passed as null, was specified.
+	
+Fix: In the grid of production_line_board.zul, a null exception was thrown when rendering production allocations not triggered by orders.
+	COALESCE and GROUP BY clauses of fn_ProcessRunOutputAllocation_getAll were fixed.
+	
+Minor correction: "Runs" ("Corridas") was translated to "Batches" ("Tandas").

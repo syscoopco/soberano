@@ -7,7 +7,7 @@
 		<label value="${labels.caption.field.position}" sclass="Caption"></label>			
 		<intbox id="intPosition" hflex="1" placeholder="${labels.caption.field.positionPlaceholder}" constraint="no empty, no negative"/>
 		<separator></separator>
-		<checkbox id="chkDisabled" checked="false" label="${labels.caption.field.disabled}" sclass="Caption"></checkbox>
+		<checkbox visible="false" id="chkDisabled" checked="false" label="${labels.caption.field.disabled}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<label value="${labels.caption.field.picture}" sclass="Caption"></label>
 		<hbox width="100%" align="center">
