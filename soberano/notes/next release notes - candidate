@@ -1,5 +1,6 @@
-2024-12-16:
-Fix: When huge customers loading optimization was enabled, Disabled customers were shown in the grid of customers.zul.
+New: User manual rev. 1.
+
+Fix: When huge customers loading optimization was enabled, disabled customers were shown in the grid of customers.zul.
 
 Fix: A 'No empty' constraints to the fields of additional (global) settings in other.zul was added.
 
@@ -9,4 +10,4 @@ Fix: A wrong function was called in the line 88 line 88, PERFORM soberano."fn_In
 Fix: In the grid of production_line_board.zul, a null exception was thrown when rendering production allocations not triggered by orders.
 	COALESCE and GROUP BY clauses of fn_ProcessRunOutputAllocation_getAll were fixed.
 	
-Minor correction: "Runs" ("Corridas") was translated to "Batches" ("Tandas").
+Minor correction: "Runs" ("Corridas") was replaced by "Batches" ("Tandas").
