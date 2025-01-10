@@ -7,6 +7,7 @@ public class ShiftClosureRowData {
 	private Date shift = null;
 	private Date closureTime = null;
 	private Date recordingDate = null;
+	private Integer stageId = 0;
 	
 	public ShiftClosureRowData(Integer shiftClosureId) {
 		this.shiftClosureId = shiftClosureId;
@@ -42,5 +43,13 @@ public class ShiftClosureRowData {
 
 	public void setClosureTime(Date closureTime) {
 		this.closureTime = closureTime;
+	}
+
+	public Integer getStageId() {
+		return stageId;
+	}
+
+	public void setStageId(Integer stageId) {
+		this.stageId = stageId;
 	}
 }

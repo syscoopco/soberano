@@ -1,8 +1,10 @@
 1.0.1
 
-New:
+New: shift_closures.zul now shows canceled closures too.
 
-Fix:
+New: A new decision was added to check canceled shift closures in table "metamodel"."ResponsibilityFilter"
+
+Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table "metamodel"."ResponsibilityFilter"
 
 Minor correction: 
 

@@ -22,6 +22,7 @@ public class ShiftClosureExtractor implements ResultSetExtractor<List<Object>> {
         	shiftClosureRowData.setShift(rs.getDate("shift"));
         	shiftClosureRowData.setClosureTime(rs.getTimestamp("closureTime"));
         	shiftClosureRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
+        	shiftClosureRowData.setStageId(rs.getInt("stageId"));
         	shiftClosureTableData.add(shiftClosureRowData);
         }
         return shiftClosureTableData;

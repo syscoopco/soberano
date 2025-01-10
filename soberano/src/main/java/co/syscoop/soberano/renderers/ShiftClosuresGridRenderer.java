@@ -95,7 +95,6 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		btnSPI.setWidth("90%");
 		//btnSPI.setHref("/spi.zul?sd=" + shiftStr);
 
-
 		//add listener to spi loading button
 		btnSPI.addEventListener("onClick", new EventListener() {
 
@@ -116,6 +115,12 @@ public class ShiftClosuresGridRenderer extends DomainObjectRowRenderer {
 		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
 		btnCancel.setId(btnCancel.getUuid());
 		btnCancel.setWidth("90%");
+		
+		//if shift closure is cancelled,
+		if (shift.getStageId() == 5) {
+			btnCancel.setDisabled(true);
+			btnCancel.setLabel(Labels.getLabel("translation.stage.Canceled"));
+		}
 		
 		//add listener to cancel the closure
 		btnCancel.addEventListener("onClick", new EventListener() {

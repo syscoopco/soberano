@@ -1971,7 +1971,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "					\"Decision_is_contextual\")\n"
 						+ "	VALUES (20001, 'Add', 20, 20001, 20002, 'false'),\n"
 						+ "		(20002, 'Cancel', 20, 20002, 20003, 'false'),\n"
-						+ "		(20003, 'Check', 20, 20002, 20002, 'false');\n"
+						+ "		(20003, 'Check', 20, 20002, 20002, 'false'),\n"
+						+ "		(20004, 'Check', 20, 20003, 20003, 'false');\n"
 						+ "			\n"
 						+ "--responsability filters\n"
 						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
@@ -1980,13 +1981,20 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			VALUES (20, 'Shift manager', 20001),\n"
 						+ "				(20, 'Manager assistant', 20001),\n"
 						+ "				(20, 'Accountant', 20001),\n"
-						+ "				(20, 'Auditor', 20001),\n"
 						+ "				(20, 'Manager', 20001),\n"
+						
 						+ "				(20, 'Shift manager', 20002),\n"
 						+ "				(20, 'Manager assistant', 20002),\n"
 						+ "				(20, 'Accountant', 20002),\n"
-						+ "				(20, 'Auditor', 20002),\n"
-						+ "				(20, 'Manager', 20002);",
+						+ "				(20, 'Manager', 20002),\n"
+						
+						+ "				(20, 'Auditor', 20003),\n"
+						
+						+ "				(20, 'Shift manager', 20004),\n"
+						+ "				(20, 'Manager assistant', 20004),\n"
+						+ "				(20, 'Accountant', 20004),\n"
+						+ "				(20, 'Auditor', 20004),\n"
+						+ "				(20, 'Manager', 20004);",
 						
 						
 						
@@ -7838,7 +7846,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_ShiftClosure_getAll\"(\n"
 						+ "	lang character,\n"
 						+ "	loginname character varying)\n"
-						+ "    RETURNS TABLE(\"shiftClosureId\" integer, shift date, \"closureTime\" timestamp with time zone, \"recordingDate\" timestamp with time zone) \n"
+						+ "    RETURNS TABLE(\"shiftClosureId\" integer, shift date, \"closureTime\" timestamp with time zone, \n"
+						+ "				  \"recordingDate\" timestamp with time zone, \"stageId\" integer) \n"
 						+ "    LANGUAGE 'plpgsql'\n"
 						+ "    COST 100\n"
 						+ "    VOLATILE PARALLEL UNSAFE\n"
@@ -7850,7 +7859,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "						FROM (SELECT DISTINCT shiftclosure.\"ShiftClosureHasShiftClosureId\",\n"
 						+ "							  					shiftclosure.\"This_is_of_Shift\",\n"
 						+ "							  					\"This_has_ClosureTime\",							  					\n"
-						+ "							  					eti.\"This_is_created_at_Timestamp\" recordingDate\n"
+						+ "							  					eti.\"This_is_created_at_Timestamp\" recordingDate,\n"
+						+ "							  					eti.\"This_is_in_Stage_with_StageHasStageId\"\n"
 						+ "									FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(20, 1, loginname) instance\n"
 						+ "										INNER JOIN soberano.\"ShiftClosure\" shiftclosure\n"
 						+ "											ON instance.\"InstanceId\" = shiftclosure.\"This_is_identified_by_EntityTypeInstance_id\"\n"
