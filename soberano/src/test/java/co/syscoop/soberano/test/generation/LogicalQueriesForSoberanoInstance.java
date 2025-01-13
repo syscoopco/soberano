@@ -1982,11 +1982,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(20, 'Manager assistant', 20001),\n"
 						+ "				(20, 'Accountant', 20001),\n"
 						+ "				(20, 'Manager', 20001),\n"
+						+ "				(20, 'Checker', 20001),\n"
 						
 						+ "				(20, 'Shift manager', 20002),\n"
 						+ "				(20, 'Manager assistant', 20002),\n"
 						+ "				(20, 'Accountant', 20002),\n"
 						+ "				(20, 'Manager', 20002),\n"
+						+ "				(20, 'Checker', 20002),\n"
 						
 						+ "				(20, 'Auditor', 20003),\n"
 						
@@ -1994,6 +1996,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "				(20, 'Manager assistant', 20004),\n"
 						+ "				(20, 'Accountant', 20004),\n"
 						+ "				(20, 'Auditor', 20004),\n"
+						+ "				(20, 'Checker', 20004),\n"
 						+ "				(20, 'Manager', 20004);",
 						
 						
@@ -6914,7 +6917,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		inputStockChangeRecord record;\n"
 						+ "		systemCurrencyId integer;\n"
 						+ "	BEGIN\n"
-						+ "		PERFORM soberano.\"fn_Stock_restoreToStateBefore\"(startDateTime, \"InventoryItemHasInventoryItemCode\")\n"
+						+ "		PERFORM soberano.\"fn_Stock_restoreToStateBefore\"(startDateTime - make_interval(days := 1), \"InventoryItemHasInventoryItemCode\")\n"
 						+ "			FROM soberano.\"InventoryItem\";\n"
 						+ "			\n"
 						+ "		SELECT \"CurrencyHasCurrencyId\" \n"
@@ -6929,7 +6932,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "										\"This_is_called_with_InventoryItem_with_InventoryItemHasInventor\" inventoryItem,\n"
 						+ "										\"This_is_called_with_Warehouse_with_WarehouseHasWarehouseId\" warehouse\n"
 						+ "									FROM soberano.\"StockChange\"\n"
-						+ "									WHERE \"This_is_at_DateTime\" >= startDateTime \n"
+						+ "									WHERE \"This_is_at_DateTime\" >= startDateTime - make_interval(days := 1) \n"
 						+ "									ORDER BY \"This_is_at_DateTime\" ASC, \"StockChangeHasStockChangeId\" ASC LOOP\n"
 						+ "									\n"
 						+ "			/*this stock change record corresponds to a process run input. it needs to be rerun.*/\n"

@@ -23,11 +23,11 @@
 				</treecol>
 			</treecols>
 		</tree>
-		 -->
-		
-				
+		-->
+						
 		<!-- optimization for large amount of customers -->
 		<!-- TODO: ENABLE IN PRODUCTION. JUNIT TESTS HAVENT BEEN CHANGED YET FOR THIS OPTIMIZATION, SO TESTS WOULDNT PASS. -->
+		 
 		<zscript>
 			<![CDATA[
 		  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();
@@ -46,6 +46,7 @@
 				</columns>
 			</grid>
 		</vbox>
+		
 		
 		<!-- end of optimization for large amount of customers -->
 		

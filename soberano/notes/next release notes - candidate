@@ -1,11 +1,15 @@
-1.0.1
+1.0.2
 
-New: shift_closures.zul now shows canceled closures too.
+New: shift_closures.zul now shows canceled closures too. So, a new decision was added to check canceled shift closures 
+	in table "metamodel"."ResponsibilityFilter"
+	
+New: A checker is authorized to record and cancel shift closures.
 
-New: A new decision was added to check canceled shift closures in table "metamodel"."ResponsibilityFilter"
+Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table 
+	"metamodel"."ResponsibilityFilter"
 
-Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table "metamodel"."ResponsibilityFilter"
-
-Minor correction: 
+Minor correction: In the pl/pgsql function soberano."fn_Stock_recalculateInventoryFrom\"(startdatetime timestamp with time zone),
+					now recalculation if made from a day before the occurrence of the operation that triggered the recalculation.
+					This is to avoid missing stock change records during the recalculation.
 
 Typo: User manual, page 102: “las existencia” replaced by “las existencias”.
