@@ -82,7 +82,7 @@ public class ChangeDeliveryProviderComboboxComposer extends SelectorComposer {
 	
 	@Listen("onSelect = combobox#cmbDeliveryProvider")
     public void cmbDeliveryProvider_onSelect() throws Exception {
-		changeDeliveryProvider();		
+		//changeDeliveryProvider();		
     }
     	
 	@Listen("onChange = combobox#cmbDeliveryProvider")

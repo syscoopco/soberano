@@ -248,6 +248,31 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 					throw new NotEnoughRightsException();
 				}
 			}
+			else if (txtShownReport.getText().equals("cancellations")) {
+				PrintableData pd = new ShiftClosure(scId).getCancellationsReportWithPrinterProfile();
+				if (!pd.getTextToPrint().isEmpty()) {				
+					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+												"records/closures/" + 
+												"CLOSURE_CANCELLATIONS_" + scId + ".pdf";
+					try {
+						Printer.print(Translator.translate(pd.getTextToPrint()), 
+									pd.getPrinterProfile(), 
+									fileToPrintFullPath, 
+									"CLOSURE_CANCELLATIONS_" + scId,
+									false,
+									null);
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.error.ConfigurePrinterProfile"), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+					}
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
 			else {//print general report
 				PrintableData pd = new ShiftClosure(scId).getReportWithPrinterProfile();
 				if (!pd.getTextToPrint().isEmpty()) {				

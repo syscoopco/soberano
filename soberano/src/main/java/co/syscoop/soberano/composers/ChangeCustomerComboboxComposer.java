@@ -69,7 +69,7 @@ public class ChangeCustomerComboboxComposer extends SelectorComposer {
 	
 	@Listen("onSelect = combobox#cmbCustomer")
     public void cmbCustomer_onSelect() throws Exception {
-		changeCustomer();		
+		//changeCustomer();		
     }
     	
 	@Listen("onChange = combobox#cmbCustomer")

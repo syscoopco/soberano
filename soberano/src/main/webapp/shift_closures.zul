@@ -15,33 +15,6 @@
 	</window>
 	<include id="incGrid" self="@define(detailsPanel)" src="/shift_closures_history.zul"></include>
 	
-	<!-- block for template.zul 
-	<window id="wndContentPanel" self="@define(contentPanel)" contentStyle="overflow:auto">
-		<vbox id="boxDetails" height="300px" width="100%" apply="co.syscoop.soberano.composers.ShiftClosuresComposer">
-			<intbox id="intObjectId" value="1" visible="false" readonly="true"/>
-			<textbox id="txtShownReport" value="general" visible="false"/>
-			<textbox id="txtReport" multiline="true" height="300px" hflex="1" readonly="true" placeholder="${labels.placeholder.report}"/>
-			<separator></separator>
-			<hbox width="100%">
-				<button id="btnGeneral" label="${labels.caption.action.general}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralReportLoadingButtonComposer"></button>
-				<button id="btnGeneralFull" label="${labels.caption.action.generalFull}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralFullReportLoadingButtonComposer"></button>
-				<button id="btnHouseBill" label="${labels.caption.action.houseBill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureHouseBillReportLoadingButtonComposer"></button>
-				<button id="btnCashRegister" label="${labels.caption.action.cashRegister}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCashRegisterReportLoadingButtonComposer"></button>
-				<button id="btnReceivables" label="${labels.caption.action.receivables}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureReceivablesReportLoadingButtonComposer"></button>
-				<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
-					<combobox id="cmbCostCenter" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.costCenter}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
-						<template name="model">
-							<comboitem label="@load(each.name)" value="@load(each)">
-							</comboitem>
-						</template>
-					</combobox>	
-				</hbox>
-			</hbox>
-			<separator></separator>
-			<include id="incGrid" src="/shift_closures_history.zul"></include>
-		</vbox>	
-	</window>
-	-->
 	<hbox id="hboxReportButtons" hflex="1" align="start" self="@define(decisionButton)" apply="co.syscoop.soberano.composers.ShiftClosuresComposer">
 		<button id="btnGeneral" label="${labels.caption.action.general}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralReportLoadingButtonComposer"></button>
 		<button id="btnGeneralFull" label="${labels.caption.action.generalFull}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralFullReportLoadingButtonComposer"></button>
@@ -66,6 +39,7 @@
 				</template>
 			</combobox>	
 		</hbox>
+		<button id="btnCancellations" label="${labels.caption.action.cancellations}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCancellationsReportLoadingButtonComposer"></button>
 	</hbox>
 	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintShiftClosureReportButtonComposer"></button>

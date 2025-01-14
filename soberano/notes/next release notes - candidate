@@ -5,6 +5,14 @@ New: shift_closures.zul now shows canceled closures too. So, a new decision was 
 	
 New: A checker is authorized to record and cancel shift closures.
 
+New: Only managers can cancel past shift closures.
+
+New: When changing an order's customer, previous and new customer are now logged.
+
+New: When changing an order's delivery provider, previous and new provider are now logged.
+
+New: Cancellations shift closure report added (removed ordered items, removed order additions, and changes on order customer and delivery provider).
+
 Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table 
 	"metamodel"."ResponsibilityFilter"
 
