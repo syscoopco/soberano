@@ -12,8 +12,10 @@ import org.zkoss.zul.Comboitem;
 import org.zkoss.zul.Grid;
 import org.zkoss.zul.Label;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 import org.zkoss.zul.Checkbox;
 
+import co.syscoop.soberano.composers.ItemToOrderComboboxComposer;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.FirstOrderRequiresCashOperationException;
@@ -21,6 +23,7 @@ import co.syscoop.soberano.exception.OnlyOneOrderPerCounterIsPermittedException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.SpringUtility;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -45,6 +48,7 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 	public Integer recordFromForm(Box boxDetails) throws Exception {
 				
 		Comboitem cmbiCustomer = ((Combobox) boxDetails.query("#cmbCustomer")).getSelectedItem();
+		Comboitem cmbiProvider = ((Combobox) boxDetails.query("#cmbDeliveryProvider")).getSelectedItem();
 		fillCounters(boxDetails);
 		if (counters.size() == 0) {
 			throw new SomeFieldsContainWrongValuesException();
@@ -53,7 +57,8 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 			String orderLabel = ((Textbox) boxDetails.query("#txtLabel")).getValue();
 			newOrderId = (new Order(orderLabel,
 									counters, 
-									cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null).record());
+									cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null,
+									cmbiProvider != null ? ((DomainObject) cmbiProvider.getValue()).getId() : null).record());
 			if (newOrderId == -4) {
 				throw new SomeFieldsContainWrongValuesException();
 			}
@@ -127,7 +132,20 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 
 	@Override
 	public void cleanForm(Box boxDetails) {
-		Executions.sendRedirect("/order.zul?id=" + newOrderId);
+		
+		String fastModeParamStr = ZKUtility.parseURLQueryStringForParam("fast");
+		if (!fastModeParamStr.isEmpty()) {
+			Boolean fastMode = Boolean.parseBoolean(fastModeParamStr);
+			if (!fastMode) {
+				Executions.sendRedirect("/order.zul?id=" + newOrderId);
+			}
+			else {
+				ItemToOrderComboboxComposer.openFastOrderingWindow((Window) boxDetails.query("#wndContentPanel"), newOrderId);
+			}
+		}
+		else {
+			Executions.sendRedirect("/order.zul?id=" + newOrderId);
+		}	
 	}
 
 	@Override

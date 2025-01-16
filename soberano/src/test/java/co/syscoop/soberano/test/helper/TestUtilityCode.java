@@ -29,7 +29,7 @@ import co.syscoop.soberano.beans.SoberanoDatasource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class TestUtilityCode {
 
@@ -136,7 +136,7 @@ public class TestUtilityCode {
 		for (Component comp : treeChildren.getChildren()) {
 			Treeitem item = (Treeitem) comp;
 			if (((Treeitem) comp).getLabel().toLowerCase().contains(objectToDisableTextIdFragment.toLowerCase())) {				
-				DefaultTreeNode<NodeData> nodeData = (DefaultTreeNode<NodeData>) ((TreeNode) ZKUtilitity.getAssociatedNode(item, treeObjects));
+				DefaultTreeNode<NodeData> nodeData = (DefaultTreeNode<NodeData>) ((TreeNode) ZKUtility.getAssociatedNode(item, treeObjects));
 				DomainObject doo = (DomainObject) nodeData.getData().getValue();
 				ComponentAgent btnDisableAgent = treeChildrenAgent.query("#btnDisable" + doo.getId().toString());
 				btnDisableAgent.click();

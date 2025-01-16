@@ -12,7 +12,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Provider;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class ProviderFormHelper extends TrackedObjectFormHelper {
 	
@@ -30,14 +30,14 @@ public class ProviderFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), provider.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), provider.getName());
 	}
 
 	@Override
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 	}
 
 	@Override

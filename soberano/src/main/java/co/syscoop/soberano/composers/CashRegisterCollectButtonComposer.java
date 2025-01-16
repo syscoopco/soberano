@@ -27,7 +27,7 @@ import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
 
@@ -56,7 +56,7 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 			
 			if (!qrwr.getReport().isEmpty()) {
 				
-				Integer orderId = ZKUtilitity.getObjectIdFromURLQuery("oid");
+				Integer orderId = ZKUtility.getObjectIdFromURLQuery("oid");
 				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 												"records/tickets/" + 
 												"TICKET_" + orderId + ".pdf";

@@ -13,7 +13,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.CostCenter;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel;
 
 public class CostCenterFormHelper extends TrackedObjectFormHelper {
@@ -32,14 +32,14 @@ public class CostCenterFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), costCenter.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), costCenter.getName());
 		
 		Combobox cmbInputWarehouse = (Combobox) incDetails.query("#cmbInputWarehouse");
 		WarehouseSelectionViewModel wSelectionViewModel = new WarehouseSelectionViewModel();
 		cmbInputWarehouse.setModel(wSelectionViewModel.getModel());
 		
 		if (costCenter.getInputWarehouse() > 0) 
-			ZKUtilitity.setValueWOValidation(cmbInputWarehouse, costCenter.getInputWarehouse());
+			ZKUtility.setValueWOValidation(cmbInputWarehouse, costCenter.getInputWarehouse());
 		else
 			(cmbInputWarehouse).setSelectedItem(null);
 		
@@ -48,7 +48,7 @@ public class CostCenterFormHelper extends TrackedObjectFormHelper {
 		cmbOutputWarehouse.setModel(owSelectionViewModel.getModel());
 			
 		if (costCenter.getOutputWarehouse() > 0) 
-			ZKUtilitity.setValueWOValidation(cmbOutputWarehouse, costCenter.getOutputWarehouse());
+			ZKUtility.setValueWOValidation(cmbOutputWarehouse, costCenter.getOutputWarehouse());
 		else
 			(cmbOutputWarehouse).setSelectedItem(null);
 	}
@@ -57,9 +57,9 @@ public class CostCenterFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#cmbInputWarehouse"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#cmbOutputWarehouse"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#cmbInputWarehouse"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#cmbOutputWarehouse"), "");
 	}
 
 	@Override

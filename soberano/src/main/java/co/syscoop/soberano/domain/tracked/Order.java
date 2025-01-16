@@ -43,6 +43,7 @@ public class Order extends BusinessActivityTrackedObject {
 	private String customerStr = "";
 	private String deliverTo = "";
 	private String deliveryBy = "";
+	private Integer deliveryById = 0;
 	private Integer discount = 0;
 	private BigDecimal amount = new BigDecimal(0); //in order currency
 	private BigDecimal collectedAmount = new BigDecimal(0); //in order currency
@@ -138,18 +139,25 @@ public class Order extends BusinessActivityTrackedObject {
 		this.customer = customer;
 	}
 	
+	public Order(String label, ArrayList<String> counters, Integer customer, Integer provider) {
+		this(label,counters, customer);
+		this.deliveryById = provider;
+	}
+	
 	@Override
 	public Integer record() throws Exception {
 					
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		recordQuery = "SELECT soberano.\"fn_Order_create\"(:label, "
 				+ "											:counters, "						
-				+ "											:customer, "	
+				+ "											:customer, "
+				+ "											:provider, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("label", this.getLabel());	
 		recordParameters.addValue("counters", createArrayOfSQLType("varchar", this.getCounters().toArray()));
-		recordParameters.addValue("customer", this.getCustomer());		
+		recordParameters.addValue("customer", this.getCustomer());
+		recordParameters.addValue("provider", this.getDeliveryById());		
 		return super.record();
 	}
 	
@@ -600,6 +608,17 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer checkDeliveryProviderZone(Integer providerId, Integer customerId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_checkDeliveryProviderZone\"(:providerId, "
+									+ "										:customerId) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("providerId", providerId);
+		parametersMap.put("customerId", customerId);
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public Integer changeDeliveryAddress(String emailAddress,
 										String mobilePhoneNumber,
 										String address,
@@ -872,5 +891,13 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setAdditions(ArrayList<OrderItem> additions) {
 		this.additions = additions;
+	}
+
+	public Integer getDeliveryById() {
+		return deliveryById;
+	}
+
+	public void setDeliveryById(Integer deliveryById) {
+		this.deliveryById = deliveryById;
 	}
 }

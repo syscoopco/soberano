@@ -15,7 +15,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Customer;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.view.viewmodel.CountrySelectionViewModel;
 import co.syscoop.soberano.view.viewmodel.PrinterProfileSelectionViewModel;
 
@@ -34,9 +34,9 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtFirstName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFirstName"), customer.getFirstName());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtLastName"), customer.getLastName());
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decDiscount"), customer.getDiscount());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtFirstName"), customer.getFirstName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtLastName"), customer.getLastName());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decDiscount"), customer.getDiscount());
 		
 		Combobox cmbPrinterProfile = (Combobox) incDetails.query("#cmbPrinterProfile");
 		PrinterProfileSelectionViewModel pfSelectionViewModel = new PrinterProfileSelectionViewModel();
@@ -47,30 +47,30 @@ public class CustomerFormHelper extends TrackedObjectFormHelper {
 			cmbPrinterProfile.setText("");
 		}			
 		else
-			ZKUtilitity.setValueWOValidation(cmbPrinterProfile, customer.getPrinterProfile());
+			ZKUtility.setValueWOValidation(cmbPrinterProfile, customer.getPrinterProfile());
 			
 		
 		Include incContactData = (Include) incDetails.query("#incContactData");
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), customer.getContactData().getMobilePhoneNumber());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), customer.getContactData().getEmailAddress());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), customer.getContactData().getAddress());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), customer.getContactData().getPostalCode());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), customer.getContactData().getTown());
-		ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), customer.getContactData().getCity());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), customer.getContactData().getMobilePhoneNumber());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), customer.getContactData().getEmailAddress());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), customer.getContactData().getAddress());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), customer.getContactData().getPostalCode());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtTown"), customer.getContactData().getTown());
+		ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtCity"), customer.getContactData().getCity());
 		Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
 		
 		CountrySelectionViewModel cSelectionViewModel = new CountrySelectionViewModel();
 		cmbCountry.setModel(cSelectionViewModel.getModel());
 		
-		ZKUtilitity.setValueWOValidation(cmbCountry, customer.getContactData().getCountryCode());
+		ZKUtility.setValueWOValidation(cmbCountry, customer.getContactData().getCountryCode());
 		Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
 		CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
-		ZKUtilitity.setValueWOValidation(cmbProvince, customer.getContactData().getProvinceId().toString());
+		ZKUtility.setValueWOValidation(cmbProvince, customer.getContactData().getProvinceId().toString());
 		Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
 		ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
-		ZKUtilitity.setValueWOValidation(cmbMunicipality, customer.getContactData().getMunicipalityId().toString());
-		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), customer.getContactData().getLatitude());
-		ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), customer.getContactData().getLongitude());
+		ZKUtility.setValueWOValidation(cmbMunicipality, customer.getContactData().getMunicipalityId().toString());
+		ZKUtility.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), customer.getContactData().getLatitude());
+		ZKUtility.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), customer.getContactData().getLongitude());
 	}
 	
 	@Override

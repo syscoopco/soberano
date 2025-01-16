@@ -25,7 +25,7 @@ import co.syscoop.soberano.domain.tracked.DeliveryProvider;
 import co.syscoop.soberano.domain.untracked.DeliveryFee;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 	
@@ -49,7 +49,7 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 			decFee.setReadonly(true);
 			hbox.appendChild(decFee);
 			
-			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + country + "_" + postalCode, hbox);
+			ZKUtility.addRowDeletionButton("btnInputRowDeletion" + country + "_" + postalCode, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnFees.appendChild(treeItem);
@@ -74,9 +74,9 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Checkbox) incDetails.query("#chkIsReseller")).setChecked(false);
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblRate"), 0.0);
+		ZKUtility.setValueWOValidation((Doublebox) incDetails.query("#dblRate"), 0.0);
 		((Treechildren) incDetails.query("#tchdnFees")).getChildren().clear();
 	}
 	
@@ -93,9 +93,9 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), deliveryProvider.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), deliveryProvider.getName());
 		((Checkbox) incDetails.query("#chkIsReseller")).setChecked(deliveryProvider.getIsReseller());
-		ZKUtilitity.setValueWOValidation((Doublebox) incDetails.query("#dblRate"), deliveryProvider.getRate());
+		ZKUtility.setValueWOValidation((Doublebox) incDetails.query("#dblRate"), deliveryProvider.getRate());
 						
 		Treechildren tchdnFees = (Treechildren) incDetails.query("#tchdnFees");
 		tchdnFees.getChildren().clear();

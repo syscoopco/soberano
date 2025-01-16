@@ -9,7 +9,7 @@ import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Combobox;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 	
@@ -19,7 +19,7 @@ public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
 			Combobox cmbFromWarehouse = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbFromWarehouse");					
-			ZKUtilitity.setValueWOValidation(cmbFromWarehouse, warehouseId);
+			ZKUtility.setValueWOValidation(cmbFromWarehouse, warehouseId);
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
@@ -39,7 +39,7 @@ public class InventoryOperationInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			warehouseId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 

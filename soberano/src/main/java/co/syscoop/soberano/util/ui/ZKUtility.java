@@ -28,7 +28,7 @@ import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treeitem;
 import org.zkoss.zul.Treerow;
 
-public class ZKUtilitity {
+public class ZKUtility {
 	
 	public static void setValueWOValidation(Textbox comp, String value) {
 		Constraint constraint = comp.getConstraint();
@@ -127,7 +127,7 @@ public class ZKUtilitity {
 			return 0; 
 		}
 		else {
-			return Integer.parseInt(ZKUtilitity.splitQuery().get(idParamName).get(0));
+			return Integer.parseInt(ZKUtility.splitQuery().get(idParamName).get(0));
 		}
 	}
 	
@@ -136,7 +136,7 @@ public class ZKUtilitity {
 			return ""; 
 		}
 		else {
-			return ZKUtilitity.splitQuery().get(idParamName).get(0);
+			return ZKUtility.splitQuery().get(idParamName).get(0);
 		}
 	}
 	
@@ -145,7 +145,7 @@ public class ZKUtilitity {
 			return false; 
 		}
 		else {
-			return Boolean.parseBoolean(ZKUtilitity.splitQuery().get(idParamName).get(0));
+			return Boolean.parseBoolean(ZKUtility.splitQuery().get(idParamName).get(0));
 		}
 	}
 	
@@ -154,7 +154,7 @@ public class ZKUtilitity {
 			return ""; 
 		}
 		else {
-			return ZKUtilitity.splitQuery().get("report").get(0);
+			return ZKUtility.splitQuery().get("report").get(0);
 		}
 	}
 	

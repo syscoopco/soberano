@@ -6,7 +6,7 @@ import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 @SuppressWarnings("serial")
@@ -16,7 +16,7 @@ public class PrintOrderButtonComposer extends PrintButtonComposer {
     	
 		try {
 			super.doAfterCompose(comp);
-			trackedObject = new Order(ZKUtilitity.getObjectIdFromURLQuery("id"));
+			trackedObject = new Order(ZKUtility.getObjectIdFromURLQuery("id"));
 			trackedObject.get();
 			fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 									"records/orders/" + 

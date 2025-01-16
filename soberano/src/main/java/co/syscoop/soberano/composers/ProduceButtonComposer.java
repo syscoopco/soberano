@@ -21,7 +21,7 @@ import co.syscoop.soberano.domain.tracked.ProductionLine;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
 
@@ -39,7 +39,7 @@ public class ProduceButtonComposer extends SelectorComposer {
     	
 		try {
 			super.doAfterCompose(comp);
-			orderId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			orderId = ZKUtility.getObjectIdFromURLQuery("id");
 			setFileToPrintFullPath(SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 									"records/production_lines/" + 
 									"ORDER_" + orderId + "_ALLOCATIONS" + ".pdf");

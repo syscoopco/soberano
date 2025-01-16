@@ -43,7 +43,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Translator;
 
 public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -752,7 +752,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			
 			try {
 				cmbCustomer.setText(order.getCustomerStr());
-				ZKUtilitity.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
+				ZKUtility.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
 				
 				((Textbox) wndContentPanel.query("#wndOrderItems").query("#wndTicket").query("#txtTicket")).
 					setValue(Translator.translate(order.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint()));
@@ -762,26 +762,26 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					Combobox cmbDeliveryProvider = (Combobox) wndContentPanel.query("#cmbDeliveryProvider");					
 					cmbDeliveryProvider.setText(order.getDeliveryBy());
-					ZKUtilitity.selectComboitemByLabel(cmbDeliveryProvider, order.getDeliveryBy());
+					ZKUtility.selectComboitemByLabel(cmbDeliveryProvider, order.getDeliveryBy());
 					
 					//fill out the delivery address form
 					Include incContactData = (Include) wndContentPanel.query("popup").query("include").query("#incContactData");
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), order.getDeliveryContactData().getMobilePhoneNumber());
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), order.getDeliveryContactData().getEmailAddress());
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), order.getDeliveryContactData().getAddress());
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), order.getDeliveryContactData().getPostalCode());
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtTown"), order.getDeliveryContactData().getTown());
-					ZKUtilitity.setValueWOValidation((Textbox) incContactData.query("#txtCity"), order.getDeliveryContactData().getCity());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtPhoneNumber"), order.getDeliveryContactData().getMobilePhoneNumber());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtEmailAddress"), order.getDeliveryContactData().getEmailAddress());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtAddress"), order.getDeliveryContactData().getAddress());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#cmbPostalCode"), order.getDeliveryContactData().getPostalCode());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtTown"), order.getDeliveryContactData().getTown());
+					ZKUtility.setValueWOValidation((Textbox) incContactData.query("#txtCity"), order.getDeliveryContactData().getCity());
 					Combobox cmbCountry = (Combobox) incContactData.query("#cmbCountry");
-					ZKUtilitity.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
+					ZKUtility.setValueWOValidation(cmbCountry, order.getDeliveryContactData().getCountryCode());
 					Combobox cmbProvince = (Combobox) incContactData.query("#cmbProvince");
 					CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
-					ZKUtilitity.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
+					ZKUtility.setValueWOValidation(cmbProvince, order.getDeliveryContactData().getProvinceId().toString());
 					Combobox cmbMunicipality = (Combobox) incContactData.query("#cmbMunicipality");
 					ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
-					ZKUtilitity.setValueWOValidation(cmbMunicipality, order.getDeliveryContactData().getMunicipalityId().toString());
-					ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), order.getDeliveryContactData().getLatitude());
-					ZKUtilitity.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), order.getDeliveryContactData().getLongitude());
+					ZKUtility.setValueWOValidation(cmbMunicipality, order.getDeliveryContactData().getMunicipalityId().toString());
+					ZKUtility.setValueWOValidation((Doublebox) incContactData.query("#dblLatitude"), order.getDeliveryContactData().getLatitude());
+					ZKUtility.setValueWOValidation((Doublebox) incContactData.query("#dblLongitude"), order.getDeliveryContactData().getLongitude());
 				}
 			}
 			catch(Exception ex) {

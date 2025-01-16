@@ -13,7 +13,7 @@ import org.zkoss.zul.Grid;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.SPIGridModel;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class SPIInitiator implements Initiator, InitiatorExt {
 	
@@ -38,8 +38,8 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			
 			try {
 				try {dateShift.setText(shiftDateStr);} catch(Exception ex) {};
-				try {ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);} catch(Exception ex) {};
-				try {ZKUtilitity.setValueWOValidation(cmbWarehouse, acquirableMaterialId);} catch(Exception ex) {};
+				try {ZKUtility.setValueWOValidation(cmbWarehouse, warehouseId);} catch(Exception ex) {};
+				try {ZKUtility.setValueWOValidation(cmbWarehouse, acquirableMaterialId);} catch(Exception ex) {};
 				try {chkWithOpeningStock.setChecked(withOpeningStock);} catch(Exception ex) {};
 				try {chkWithStockOnClosure.setChecked(withStockOnClosure);} catch(Exception ex) {};
 				try {chkWithChanges.setChecked(withChanges);} catch(Exception ex) {};
@@ -116,13 +116,13 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			try {shiftDateStr = ZKUtilitity.getObjectStrIdFromURLQuery("sd");} catch(Exception ex) {shiftDateStr = "";};
-			try {warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");} catch(Exception ex) {warehouseId = 0;};			
-			try {acquirableMaterialId = ZKUtilitity.getObjectIdFromURLQuery("item");} catch(Exception ex) {setAcquirableMaterialId(0);};
-			try {withOpeningStock = ZKUtilitity.getBooleanParamFromURLQuery("wos");} catch(Exception ex) {withOpeningStock = false;};			
-			try {withStockOnClosure = ZKUtilitity.getBooleanParamFromURLQuery("wsoc");} catch(Exception ex) {withStockOnClosure = false;};
-			try {withChanges = ZKUtilitity.getBooleanParamFromURLQuery("wc");} catch(Exception ex) {withChanges = false;};
-			try {withSurplus = ZKUtilitity.getBooleanParamFromURLQuery("ws");} catch(Exception ex) {withSurplus = false;};
+			try {shiftDateStr = ZKUtility.getObjectStrIdFromURLQuery("sd");} catch(Exception ex) {shiftDateStr = "";};
+			try {warehouseId = ZKUtility.getObjectIdFromURLQuery("id");} catch(Exception ex) {warehouseId = 0;};			
+			try {acquirableMaterialId = ZKUtility.getObjectIdFromURLQuery("item");} catch(Exception ex) {setAcquirableMaterialId(0);};
+			try {withOpeningStock = ZKUtility.getBooleanParamFromURLQuery("wos");} catch(Exception ex) {withOpeningStock = false;};			
+			try {withStockOnClosure = ZKUtility.getBooleanParamFromURLQuery("wsoc");} catch(Exception ex) {withStockOnClosure = false;};
+			try {withChanges = ZKUtility.getBooleanParamFromURLQuery("wc");} catch(Exception ex) {withChanges = false;};
+			try {withSurplus = ZKUtility.getBooleanParamFromURLQuery("ws");} catch(Exception ex) {withSurplus = false;};
 		}
 		catch(Exception ex) {
 			shiftDateStr = "";

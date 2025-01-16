@@ -1,6 +1,10 @@
 <?page contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="wndCompleteAddition" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.howMany}" mode="modal">
+		<hbox style="border: normal;" width="100%" pack="start" align="center">
+			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
+		</hbox>
+		<separator></separator>
 		<hlayout width="100%" vflex="1">
 			<vbox hflex="1" vflex="1" id="boxDetails" apply="co.syscoop.soberano.composers.OrderManagementComposer">
 				<groupbox width="100%">
@@ -37,5 +41,11 @@
 			</vbox>
 			<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
 		</hlayout>
+		<separator></separator>
+		<hbox style="border: normal;" width="100%" pack="end" align="center">
+			<button id="btnProduce" label="${labels.caption.action.produce}" sclass="DecisionButton"></button>
+			<button id="btnBill" label="${labels.caption.action.bill}" sclass="DecisionButton"></button>
+			<button id="btnPrint" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
+		</hbox>		
 	</window>
 </zk>

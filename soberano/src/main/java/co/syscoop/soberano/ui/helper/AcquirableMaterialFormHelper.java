@@ -17,7 +17,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.view.viewmodel.UnitSelectionViewModel;
 
 public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
@@ -36,29 +36,29 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), acquirableMaterial.getStringId());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), acquirableMaterial.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), acquirableMaterial.getStringId());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), acquirableMaterial.getName());
 		
 		Combobox cmbUnit = (Combobox) incDetails.query("#cmbUnit");
 		UnitSelectionViewModel uSelectionViewModel = new UnitSelectionViewModel();
 		cmbUnit.setModel(uSelectionViewModel.getModel());
 		
 		if (acquirableMaterial.getUnit() > 0) 
-			ZKUtilitity.setValueWOValidation(cmbUnit, acquirableMaterial.getUnit());
+			ZKUtility.setValueWOValidation(cmbUnit, acquirableMaterial.getUnit());
 		else
 			(cmbUnit).setSelectedItem(null);
 			
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), acquirableMaterial.getMinimumInventoryLevel());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), acquirableMaterial.getMinimumInventoryLevel());
 	}
 
 	@Override
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#cmbUnit"), "");		
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#cmbUnit"), "");		
 	}
 
 	@Override

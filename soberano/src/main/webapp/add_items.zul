@@ -1,6 +1,10 @@
 <?page contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="wndItemsToAdd" hflex="min" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.addItemsToOrder}" mode="modal">
+		<hbox style="border: normal;" width="100%" pack="start" align="center">
+			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
+		</hbox>
+		<separator></separator>
 		<panel height="50%" width="100%" title="${labels.pageProductCategories.WindowTitle}" id="pnlCategories" border="none" collapsible="false">
 			<panelchildren style="overflow: auto">
 				<span id="spanCategories" height="100%" width="100%">

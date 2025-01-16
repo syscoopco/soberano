@@ -21,7 +21,7 @@ import co.syscoop.soberano.domain.tracked.Warehouse;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.tracked.Process;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class WarehouseFormHelper extends TrackedObjectFormHelper {
 	
@@ -51,8 +51,8 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), warehouse.getName());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), warehouse.getStringId());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), warehouse.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), warehouse.getStringId());
 		
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(warehouse.getIsProcurementWarehouse());
 		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(warehouse.getIsSalesWarehouse());
@@ -69,8 +69,8 @@ public class WarehouseFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Checkbox) incDetails.query("#chkProcurementWarehouse")).setChecked(false);
 		((Checkbox) incDetails.query("#chkSalesWarehouse")).setChecked(false);
 		((Checkbox) incDetails.query("#chkLossesWarehouse")).setChecked(false);

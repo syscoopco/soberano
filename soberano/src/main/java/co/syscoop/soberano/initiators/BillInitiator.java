@@ -13,7 +13,7 @@ import org.zkoss.zul.Window;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class BillInitiator implements Initiator, InitiatorExt {
 	
@@ -49,7 +49,7 @@ public class BillInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			orderId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			orderId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			orderId = 0; 

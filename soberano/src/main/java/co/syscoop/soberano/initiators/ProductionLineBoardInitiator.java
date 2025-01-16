@@ -15,7 +15,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.ProductionLineBoardGridModel;
 import co.syscoop.soberano.renderers.ProductionLineBoardGridRenderer;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	
@@ -25,7 +25,7 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
 			Combobox cmbProductionLine = (Combobox) comps[1].query("#cmbProductionLine");					
-			ZKUtilitity.setValueWOValidation(cmbProductionLine, productionLineId);
+			ZKUtility.setValueWOValidation(cmbProductionLine, productionLineId);
 			
 			ProductionLineBoardGridModel productionLineBoardGridModel = null;
 			if (cmbProductionLine.getSelectedItem() != null) {
@@ -64,7 +64,7 @@ public class ProductionLineBoardInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			productionLineId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

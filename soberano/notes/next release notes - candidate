@@ -1,5 +1,9 @@
 1.0.2
 
+New: A delivery services provider can now be specified when creating a new order.
+
+New: Order creation, production and collecting is now possible from icons-based order management window.
+
 New: shift_closures.zul now shows canceled closures too. So, a new decision was added to check canceled shift closures 
 	in table "metamodel"."ResponsibilityFilter"
 	

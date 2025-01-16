@@ -19,7 +19,7 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 	
@@ -36,7 +36,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + entityTypeInstanceId, hbox);
+			ZKUtility.addRowDeletionButton("btnInputRowDeletion" + entityTypeInstanceId, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnPrintJobsSources.appendChild(treeItem);
@@ -58,18 +58,18 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), "");
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(false);
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(false);
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), 0);
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), 0);
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), 0);
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), 0);
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), 0);
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), 0);
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), 0);
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), 0);
 		((Checkbox) incDetails.query("#chkCompactFormat")).setChecked(false);
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), "");
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), "");
 		((Treechildren) incDetails.query("#tchdnPrintJobsSources")).getChildren().clear();
 	}
 	
@@ -86,18 +86,18 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getName());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), printerProfile.getPrintServer());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), printerProfile.getPrinterName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), printerProfile.getPrintServer());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), printerProfile.getPrinterName());
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(printerProfile.getIsDefaultPrinter());
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(printerProfile.getIsManagementPrinter());
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), printerProfile.getFontSize());
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), printerProfile.getPageWidth());
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), printerProfile.getPageHeight());
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), printerProfile.getMargin());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), printerProfile.getFontSize());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageWitdth"), printerProfile.getPageWidth());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageHeight"), printerProfile.getPageHeight());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPageMargin"), printerProfile.getMargin());
 		((Checkbox) incDetails.query("#chkCompactFormat")).setChecked(printerProfile.getCompactFormat());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), printerProfile.getHeader());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), printerProfile.getFooter());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtHeader"), printerProfile.getHeader());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtFooter"), printerProfile.getFooter());
 			
 		Treechildren tchdnPrintJobsSources = (Treechildren) incDetails.query("#tchdnPrintJobsSources");
 		tchdnPrintJobsSources.getChildren().clear();

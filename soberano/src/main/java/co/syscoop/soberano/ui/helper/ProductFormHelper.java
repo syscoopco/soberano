@@ -23,7 +23,7 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.StringIdCodeGenerator;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel;
 import co.syscoop.soberano.view.viewmodel.ProductCategorySelectionViewModel;
 import co.syscoop.soberano.view.viewmodel.UnitSelectionViewModel;
@@ -50,37 +50,37 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		cmbCategory.setModel(pcSelectionViewModel.getModel());
 		
 		if (product.getProductCategoryIds().length > 0)
-			ZKUtilitity.setValueWOValidation(cmbCategory, product.getProductCategoryIds()[0]);
+			ZKUtility.setValueWOValidation(cmbCategory, product.getProductCategoryIds()[0]);
 		else
 			(cmbCategory).setSelectedItem(null);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), product.getStringId());
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), product.getName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), product.getStringId());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), product.getName());
 		
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intPosition"), product.getPosition());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intPosition"), product.getPosition());
 		
 		Combobox cmbUnit = (Combobox) incDetails.query("#cmbUnit");
 		UnitSelectionViewModel uSelectionViewModel = new UnitSelectionViewModel();
 		cmbUnit.setModel(uSelectionViewModel.getModel());
 		
 		if (product.getUnit() > 0) 
-			ZKUtilitity.setValueWOValidation(cmbUnit, product.getUnit());
+			ZKUtility.setValueWOValidation(cmbUnit, product.getUnit());
 		else
 			(cmbUnit).setSelectedItem(null);
 		
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), product.getMinimumInventoryLevel());
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), product.getPrice());
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), product.getReferencePrice());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), product.getMinimumInventoryLevel());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), product.getPrice());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), product.getReferencePrice());
 		
 		//testing purpose. this control isn't visible
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePriceForTesting"), product.getReferencePrice());
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePriceForTesting"), product.getReferencePrice());
 		
 		Combobox cmbCostCenter = (Combobox) incDetails.query("#cmbCostCenter");
 		CostCenterSelectionViewModel ccSelectionViewModel = new CostCenterSelectionViewModel();
 		cmbCostCenter.setModel(ccSelectionViewModel.getModel());
 		
 		if (product.getCostCenter() > 0) 
-			ZKUtilitity.setValueWOValidation(cmbCostCenter, product.getCostCenter());
+			ZKUtility.setValueWOValidation(cmbCostCenter, product.getCostCenter());
 		else
 			cmbCostCenter.setSelectedItem(null);
 		
@@ -102,10 +102,10 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), new BigDecimal(0.0));
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), new BigDecimal(0.0));
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), new StringIdCodeGenerator().getTenCharsRandomString(""));
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), new BigDecimal(0.0));
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), new BigDecimal(0.0));
 	}
 
 	@Override

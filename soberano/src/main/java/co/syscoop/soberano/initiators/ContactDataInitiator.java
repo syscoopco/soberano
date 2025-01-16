@@ -10,7 +10,7 @@ import org.zkoss.zul.Combobox;
 import co.syscoop.soberano.ui.helper.CountryComboboxHelper;
 import co.syscoop.soberano.ui.helper.ProvinceComboboxHelper;
 import co.syscoop.soberano.util.ui.ComboboxHelper;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class ContactDataInitiator implements Initiator, InitiatorExt {
 	
@@ -20,10 +20,10 @@ public class ContactDataInitiator implements Initiator, InitiatorExt {
 			Component incDetails = comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");
 			Component incContactData = incDetails.query("#incContactData");
 			Combobox cmbCountry = (Combobox) incContactData.query("combobox").query("#cmbCountry");
-			ZKUtilitity.setValueWOValidation(cmbCountry, "__");
+			ZKUtility.setValueWOValidation(cmbCountry, "__");
 			Combobox cmbProvince = (Combobox) cmbCountry.query("#cmbProvince");
 			CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
-			ZKUtilitity.setValueWOValidation(cmbProvince, new Integer(0).toString());
+			ZKUtility.setValueWOValidation(cmbProvince, new Integer(0).toString());
 			Combobox cmbMunicipality = (Combobox) cmbCountry.query("#cmbMunicipality");
 			ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
 			cmbMunicipality.setSelectedItem(ComboboxHelper.getItemByText(cmbMunicipality, "__"));

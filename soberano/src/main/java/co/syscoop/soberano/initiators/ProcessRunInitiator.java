@@ -10,7 +10,7 @@ import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.ProcessRunFormHelper;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class ProcessRunInitiator implements Initiator, InitiatorExt {
 	
@@ -40,7 +40,7 @@ public class ProcessRunInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			processRunId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			processRunId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			processRunId = 0; 

@@ -26,7 +26,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.rowdata.ProcessIORowData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class ProcessFormHelper extends TrackedObjectFormHelper {
@@ -78,7 +78,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			hbox.appendChild(intUnitId);
 			
 			if (!runMode) {
-				ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + inventoryItemId, hbox);
+				ZKUtility.addRowDeletionButton("btnInputRowDeletion" + inventoryItemId, hbox);
 			}
 			
 			treeItem.getTreerow().appendChild(treeCell);
@@ -137,7 +137,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			hbox.appendChild(lblWeightUnit);
 			
 			if (!runMode) {
-				ZKUtilitity.addRowDeletionButton("btnOutputRowDeletion" + inventoryItemId, hbox);
+				ZKUtility.addRowDeletionButton("btnOutputRowDeletion" + inventoryItemId, hbox);
 			}			
 			
 			treeItem.getTreerow().appendChild(treeCell);
@@ -186,8 +186,8 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
-		ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), new BigDecimal(0.0));
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), new BigDecimal(0.0));
 		((Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs")).getChildren().clear();
 		((Treechildren) incDetails.query("#incProcessIOs").query("#tchdnOutputs")).getChildren().clear();
 	}
@@ -206,8 +206,8 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			Clients.scrollIntoView(incDetails.query("#txtName"));
 			((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 			
-			ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), process.getName());
-			ZKUtilitity.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), process.getFixedCost());
+			ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), process.getName());
+			ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decFixedCost"), process.getFixedCost());
 		}
 		
 		Treechildren tchdnInputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs");

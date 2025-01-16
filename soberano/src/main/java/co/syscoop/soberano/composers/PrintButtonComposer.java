@@ -20,7 +20,7 @@ import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 import co.syscoop.soberano.vocabulary.Translator;
 
@@ -73,8 +73,8 @@ public class PrintButtonComposer extends SelectorComposer {
 						"records/orders/" + 
 						"ORDER_" + (trackedObject.getId() == 0 ? trackedObject.getStringId() : trackedObject.getId() + ".pdf");
 				
-				String report = ZKUtilitity.getReportFromURLQuery();
-				Integer orderIdFromURL = ZKUtilitity.getObjectIdFromURLQuery("id");
+				String report = ZKUtility.getReportFromURLQuery();
+				Integer orderIdFromURL = ZKUtility.getObjectIdFromURLQuery("id");
 				if (!report.isEmpty() && orderIdFromURL.equals(trackedObject.getId())) {
 					
 					//file to print path is passed in report param

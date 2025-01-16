@@ -12,7 +12,7 @@ import org.zkoss.zul.Grid;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.StockGridModel;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class StockInitiator implements Initiator, InitiatorExt {
 	
@@ -22,7 +22,7 @@ public class StockInitiator implements Initiator, InitiatorExt {
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
 			Combobox cmbWarehouse = (Combobox) comps[0].getPreviousSibling().query("#center").query("combobox").query("#cmbWarehouse");					
-			ZKUtilitity.setValueWOValidation(cmbWarehouse, warehouseId);
+			ZKUtility.setValueWOValidation(cmbWarehouse, warehouseId);
 			
 			StockGridModel stockGridModel = null;
 			if (cmbWarehouse.getSelectedItem() != null) {
@@ -54,7 +54,7 @@ public class StockInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			warehouseId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			warehouseId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			warehouseId = 0; 

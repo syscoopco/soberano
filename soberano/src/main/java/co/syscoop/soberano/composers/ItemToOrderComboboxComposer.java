@@ -24,7 +24,7 @@ import co.syscoop.soberano.vocabulary.Translator;
 @SuppressWarnings("serial")
 public class ItemToOrderComboboxComposer extends ViewModelComposer {
 	
-	private void additionButtonHandler(Button button) {
+	private static void additionButtonHandler(Button button) {
 		
 		if (button.getWidth().equals("100px")) {
 			button.setWidth("97px");
@@ -41,7 +41,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void productButtonHandler(Integer orderId, Integer productId, String productName, Window spanProductsParentWindow) throws Exception {
+	private static void productButtonHandler(Integer orderId, Integer productId, String productName, Window spanProductsParentWindow) throws Exception {
 		
 		Window window = (Window) Executions.createComponents("./complete_addition.zul", spanProductsParentWindow, null);
 		window.setTitle(Labels.getLabel("pageOrder.howMany") + 
@@ -98,7 +98,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private void categoryButtonHandler(Integer categoryId, Integer orderId, Window spanProductsParentWindow) throws Exception {
+	private static void categoryButtonHandler(Integer categoryId, Integer orderId, Window spanProductsParentWindow) throws Exception {
 		
 		Span spanProducts = (Span) spanProductsParentWindow.query("#spanProducts");
 		spanProducts.getChildren().clear();
@@ -131,6 +131,57 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
+	static public void openFastOrderingWindow(Window wndContentPanel, Integer orderId) {
+		
+		try {
+			Window window = (Window) Executions.createComponents("./add_items.zul", wndContentPanel, null);
+			window.setTitle(Labels.getLabel("pageOrder.addItemsToOrder") + " " + orderId);
+			window.setWidth("90%");
+			window.setHeight("90%");
+							
+			ProductCategory productCategory = new ProductCategory();
+			Span spanCategories = (Span) window.query("#spanCategories");
+			for (Object doo : productCategory.getAllWithPicture()) {					
+				Button catButton = new Button();						
+				catButton.setStyle("margin-left: 3px; margin-top: 3px;");
+				catButton.setHeight("100px");
+				catButton.setWidth("100px");
+				catButton.setOrient("vertical");
+				if (((ProductCategory) doo).getPicture() != null) {
+					catButton.setImageContent(Utils.createImageFromBytes(((ProductCategory) doo).getPicture()));
+					catButton.setTooltiptext(((ProductCategory) doo).getName());
+				}
+				else
+					catButton.setLabel(((ProductCategory) doo).getName());
+									
+				catButton.addEventListener("onClick", new EventListener() {
+
+					@Override
+					public void onEvent(Event event) throws Exception {
+						
+						categoryButtonHandler(((ProductCategory) doo).getId(), orderId, window);
+					}
+				});
+				
+				spanCategories.appendChild(catButton);
+			}
+			
+			window.addEventListener("onClose", new EventListener() {
+
+				@Override
+				public void onEvent(Event event) throws Exception {
+					
+					Executions.sendRedirect("/order.zul?id=" + orderId);
+				}
+			});
+	        window.doModal();
+		}
+		catch(Exception ex) {
+			
+		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void doAfterCompose(Component comp) throws Exception {
     	
         super.doAfterCompose(comp);        
@@ -140,54 +191,8 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 			public void onEvent(Event event) throws Exception {
 				
 				Window wndContentPanel = (Window) comp.query("#wndContentPanel");
-				
-				try {
-					Integer orderId = ((Intbox) wndContentPanel.query("#intObjectId")).getValue();
-					Window window = (Window) Executions.createComponents("./add_items.zul", wndContentPanel, null);
-					window.setTitle(Labels.getLabel("pageOrder.addItemsToOrder") + " " + orderId);
-					window.setWidth("90%");
-					window.setHeight("90%");
-									
-					ProductCategory productCategory = new ProductCategory();
-					Span spanCategories = (Span) window.query("#spanCategories");
-					for (Object doo : productCategory.getAllWithPicture()) {					
-						Button catButton = new Button();						
-						catButton.setStyle("margin-left: 3px; margin-top: 3px;");
-						catButton.setHeight("100px");
-						catButton.setWidth("100px");
-						catButton.setOrient("vertical");
-						if (((ProductCategory) doo).getPicture() != null) {
-							catButton.setImageContent(Utils.createImageFromBytes(((ProductCategory) doo).getPicture()));
-							catButton.setTooltiptext(((ProductCategory) doo).getName());
-						}
-						else
-							catButton.setLabel(((ProductCategory) doo).getName());
-											
-						catButton.addEventListener("onClick", new EventListener() {
-
-							@Override
-							public void onEvent(Event event) throws Exception {
-								
-								categoryButtonHandler(((ProductCategory) doo).getId(), orderId, window);
-							}
-						});
-						
-						spanCategories.appendChild(catButton);
-					}
-					
-					window.addEventListener("onClose", new EventListener() {
-
-						@Override
-						public void onEvent(Event event) throws Exception {
-							
-							Executions.sendRedirect("/order.zul?id=" + orderId);
-						}
-					});
-			        window.doModal();
-				}
-				catch(Exception ex) {
-					
-				}
+				Integer orderId = ((Intbox) wndContentPanel.query("#intObjectId")).getValue();
+				openFastOrderingWindow(wndContentPanel, orderId);
 			}
 		});
 	}

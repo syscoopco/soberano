@@ -10,7 +10,7 @@ import org.zkoss.zul.Include;
 import org.zkoss.zul.Treeitem;
 
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ViewModelComposer extends SelectorComposer {
@@ -29,7 +29,7 @@ public class ViewModelComposer extends SelectorComposer {
 	@Listen("onChange = combobox#cmbIntelliSearch")
     public void cmbIntelliSearch_onChange() throws SQLException {
 	
-		ZKUtilitity.processItemSelection(cmbIntelliSearch);
+		ZKUtility.processItemSelection(cmbIntelliSearch);
 	}
 	
 	/*
@@ -39,6 +39,6 @@ public class ViewModelComposer extends SelectorComposer {
 	@Listen("onClick = combobox#cmbIntelliSearch")
     public void cmbIntelliSearch_onClick() throws SQLException {
 	
-		if (SpringUtility.underTesting()) ZKUtilitity.processItemSelection(cmbIntelliSearch);
+		if (SpringUtility.underTesting()) ZKUtility.processItemSelection(cmbIntelliSearch);
 	}
 }

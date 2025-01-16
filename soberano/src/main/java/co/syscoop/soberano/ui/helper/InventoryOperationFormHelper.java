@@ -29,7 +29,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WrongDateTimeException;
 import co.syscoop.soberano.models.InventoryOperationsGridModel;
 import co.syscoop.soberano.renderers.ActionRequested;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -74,7 +74,7 @@ public class InventoryOperationFormHelper extends BusinessActivityTrackedObjectF
 			intUnitId.setVisible(false);
 			hbox.appendChild(intUnitId);
 			
-			ZKUtilitity.addRowDeletionButton("btnRowDeletion" + inventoryItemId, hbox);
+			ZKUtility.addRowDeletionButton("btnRowDeletion" + inventoryItemId, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnMove.appendChild(treeItem);

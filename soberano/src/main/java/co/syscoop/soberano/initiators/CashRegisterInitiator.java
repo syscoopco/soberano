@@ -10,7 +10,7 @@ import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.CashRegisterFormHelper;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class CashRegisterInitiator implements Initiator, InitiatorExt {
 	
@@ -41,13 +41,13 @@ public class CashRegisterInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			if (ZKUtilitity.splitQuery().get("crid") == null) {
+			if (ZKUtility.splitQuery().get("crid") == null) {
 				cashRegisterId = 1;
 			}
 			else {
-				cashRegisterId = Integer.parseInt(ZKUtilitity.splitQuery().get("crid").get(0));
+				cashRegisterId = Integer.parseInt(ZKUtility.splitQuery().get("crid").get(0));
 			}
-			orderId = Integer.parseInt(ZKUtilitity.splitQuery().get("oid").get(0));
+			orderId = Integer.parseInt(ZKUtility.splitQuery().get("oid").get(0));
 		}
 		catch(Exception ex) {
 			cashRegisterId = 1; 

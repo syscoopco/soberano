@@ -18,7 +18,7 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.ProductionLine;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 	
@@ -35,7 +35,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 			Hbox hbox = new Hbox();
 			treeCell.appendChild(hbox);
 			
-			ZKUtilitity.addRowDeletionButton("btnInputRowDeletion" + id, hbox);
+			ZKUtility.addRowDeletionButton("btnInputRowDeletion" + id, hbox);
 			
 			treeItem.getTreerow().appendChild(treeCell);
 			tchdnCostCenters.appendChild(treeItem);
@@ -57,7 +57,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtName"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), "");
 		((Treechildren) incDetails.query("#tchdnCostCenters")).getChildren().clear();
 	}
 	
@@ -74,7 +74,7 @@ public class ProductionLineFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtName"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtName"), productionLine.getQualifiedName());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), productionLine.getQualifiedName());
 					
 		Treechildren tchdnCostCenters = (Treechildren) incDetails.query("#tchdnCostCenters");
 		tchdnCostCenters.getChildren().clear();

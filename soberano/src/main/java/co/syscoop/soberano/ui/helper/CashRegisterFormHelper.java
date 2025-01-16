@@ -43,7 +43,7 @@ import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.UndeterminedErrorException;
 import co.syscoop.soberano.renderers.ActionRequested;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
 public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHelper {
@@ -88,7 +88,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			order.get();
 			((Decimalbox) wndContentPanel.query("#decToCollect")).setValue(order.getAmountToCollect());
 			if (order.getCustomer() != 0) {
-				ZKUtilitity.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
+				ZKUtility.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
 			}
 			if (order.getStageId() == Stage.ONGOING || order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
 				wndContentPanel.query("#hboxToCollect").setVisible(true);

@@ -9,7 +9,7 @@ import org.zkoss.zul.TreeNode;
 import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public abstract class TrackedObjectFormHelper {
 	
@@ -19,7 +19,7 @@ public abstract class TrackedObjectFormHelper {
 	public void fillForm(Include incDetails, Treeitem treeItem) throws SQLException {
 		
 		Tree treeObjects = treeItem.getTree();
-		TreeNode treeNode= (TreeNode) ZKUtilitity.getAssociatedNode(treeItem, treeObjects);
+		TreeNode treeNode= (TreeNode) ZKUtility.getAssociatedNode(treeItem, treeObjects);
 		fillForm(incDetails, (DefaultTreeNode<NodeData>) treeNode);
 	}
 	

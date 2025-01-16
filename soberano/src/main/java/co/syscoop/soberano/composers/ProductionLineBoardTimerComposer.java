@@ -6,7 +6,7 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class ProductionLineBoardTimerComposer extends SelectorComposer {
@@ -17,7 +17,7 @@ public class ProductionLineBoardTimerComposer extends SelectorComposer {
 	public void doAfterCompose(Component comp) throws Exception {
 		super.doAfterCompose(comp);		
 		try {
-			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			productionLineId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

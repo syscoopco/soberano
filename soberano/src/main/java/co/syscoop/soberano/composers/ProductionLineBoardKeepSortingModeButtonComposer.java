@@ -10,7 +10,7 @@ import org.zkoss.zul.ListModel;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.ProductionLineBoardGridModel;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class ProductionLineBoardKeepSortingModeButtonComposer extends SelectorComposer {
@@ -32,7 +32,7 @@ public class ProductionLineBoardKeepSortingModeButtonComposer extends SelectorCo
 		}
 		Integer productionLineId = 0;
 		try {
-			productionLineId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			productionLineId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			productionLineId = 0;

@@ -9,7 +9,7 @@ import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Grid;
 import co.syscoop.soberano.models.CustomersGridModel;
 import co.syscoop.soberano.util.SpringUtility;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class CustomerViewModelComposer extends SelectorComposer {
@@ -26,7 +26,7 @@ public class CustomerViewModelComposer extends SelectorComposer {
 	private void processParamSelection() throws SQLException {
 		
 		if (SpringUtility.underTesting()) {
-			ZKUtilitity.processItemSelection(cmbIntelliSearch);
+			ZKUtility.processItemSelection(cmbIntelliSearch);
 		}
 		else {
 			CustomersGridModel gridModel = null;

@@ -11,7 +11,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.Counter;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class CounterFormHelper extends TrackedObjectFormHelper {
 	
@@ -29,9 +29,9 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
 		((Button) incDetails.getParent().query("#incSouth").query("#btnApply")).setDisabled(false);
 		
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), counter.getStringId());
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), counter.getStringId());
 		
-		ZKUtilitity.setValueWOValidation((Intbox) incDetails.query("#intNumberOfReceivers"), counter.getNumberOfReceivers());
+		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intNumberOfReceivers"), counter.getNumberOfReceivers());
 		((Checkbox) incDetails.query("#chkIsSurcharged")).setChecked(counter.getIsSurcharged());
 		((Checkbox) incDetails.query("#chkDisabled")).setChecked(!counter.getIsEnabled());
 		((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).setChecked(counter.getOnlyOneOrderIsPermitted());
@@ -41,7 +41,7 @@ public class CounterFormHelper extends TrackedObjectFormHelper {
 	public void cleanForm(Include incDetails) {
 		
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
-		ZKUtilitity.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
+		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtCode"), "");
 		((Checkbox) incDetails.query("#chkIsSurcharged")).setChecked(false);
 		((Checkbox) incDetails.query("#chkDisabled")).setChecked(false);
 		((Checkbox) incDetails.query("#chkOnlyOneOrderIsPermitted")).setChecked(false);

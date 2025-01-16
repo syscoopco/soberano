@@ -16,7 +16,7 @@ import org.zkoss.zul.Textbox;
 import co.syscoop.soberano.domain.tracked.ShiftClosure;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
-import co.syscoop.soberano.util.ui.ZKUtilitity;
+import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Translator;
 
 public class ShiftClosuresInitiator implements Initiator, InitiatorExt {
@@ -67,7 +67,7 @@ public class ShiftClosuresInitiator implements Initiator, InitiatorExt {
 	@Override
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
-			shiftClosureId = ZKUtilitity.getObjectIdFromURLQuery("id");
+			shiftClosureId = ZKUtility.getObjectIdFromURLQuery("id");
 		}
 		catch(Exception ex) {
 			shiftClosureId = 0; 
