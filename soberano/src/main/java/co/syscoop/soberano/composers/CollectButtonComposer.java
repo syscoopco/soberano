@@ -8,6 +8,7 @@ import org.zkoss.zul.Intbox;
 
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
+import co.syscoop.soberano.util.ui.ZKUtility;
 
 @SuppressWarnings({ "serial" })
 public class CollectButtonComposer extends BusinessActivityTrackedObjectButtonComposer {
@@ -26,6 +27,10 @@ public class CollectButtonComposer extends BusinessActivityTrackedObjectButtonCo
 	@Listen("onClick = button#btnCollect")
     public void btnCollect_onClick() {
 	
-		Executions.sendRedirect("/cash_register.zul?oid=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString());
+		try {
+			Executions.sendRedirect("/cash_register.zul?oid=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString() + "&fast=" + ZKUtility.getBooleanParamFromURLQuery("fast"));
+		} catch (Exception e) {
+			Executions.sendRedirect("/cash_register.zul?oid=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString() + "&fast=false");
+		}
 	}
 }

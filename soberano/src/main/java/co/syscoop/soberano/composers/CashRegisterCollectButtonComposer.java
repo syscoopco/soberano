@@ -10,6 +10,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.beans.IPDFDocumentToPrint;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
@@ -84,8 +85,14 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 											fileToPrintFullPath,
 											false);
 					}
-					Executions.sendRedirect("/order.zul?id=" + orderId + 
-														"&report=" + Base64.getEncoder().encodeToString(fileToPrintFullPath.getBytes()));
+					
+					if (ZKUtility.getBooleanParamFromURLQuery("fast")) {
+						ItemToOrderComboboxComposer.openFastOrderingWindow((Window) boxDetails.query("#wndContentPanel"), orderId);
+					}
+					else {
+						Executions.sendRedirect("/order.zul?id=" + orderId + 
+								"&report=" + Base64.getEncoder().encodeToString(fileToPrintFullPath.getBytes()));
+					}
 					/*****/
 				}
 				catch(Exception ex) {
