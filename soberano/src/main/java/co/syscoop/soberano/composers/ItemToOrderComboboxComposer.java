@@ -44,6 +44,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 	private static void productButtonHandler(Integer orderId, Integer productId, String productName, Window spanProductsParentWindow) throws Exception {
 		
 		Window window = (Window) Executions.createComponents("./complete_addition.zul", spanProductsParentWindow, null);
+		window.setAttribute("orderId", orderId);		
 		window.setTitle(Labels.getLabel("pageOrder.howMany") + 
 										" " + 
 										productName + 

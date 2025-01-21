@@ -19,9 +19,8 @@ New: Cancellations shift closure report added (removed ordered items, removed or
 
 Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table 
 	"metamodel"."ResponsibilityFilter"
-
-Minor correction: In the pl/pgsql function soberano."fn_Stock_recalculateInventoryFrom\"(startdatetime timestamp with time zone),
-					now recalculation if made from a day before the occurrence of the operation that triggered the recalculation.
-					This is to avoid missing stock change records during the recalculation.
+	
+Fix: A bug in FUNCTION soberano."fn_Stock_restoreToStateBefore"(startdatetime timestamp with time zone, inventoryitem character varying) prevented
+	restoring stock to its state before the recalculation starting date.
 
 Typo: User manual, page 102: “las existencia” replaced by “las existencias”.

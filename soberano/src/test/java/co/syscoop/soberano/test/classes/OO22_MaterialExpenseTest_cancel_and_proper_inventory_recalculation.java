@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(22)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO22_MaterialExpenseTest_cancel_and_proper_inventory_recalculation extends MaterialExpenseActionTest {

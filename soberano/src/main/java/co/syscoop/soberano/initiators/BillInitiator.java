@@ -18,6 +18,7 @@ import co.syscoop.soberano.util.ui.ZKUtility;
 public class BillInitiator implements Initiator, InitiatorExt {
 	
 	private Integer orderId = 1;
+	private Boolean fast = false;
 
 	@Override
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
@@ -28,7 +29,7 @@ public class BillInitiator implements Initiator, InitiatorExt {
 				form.initFormForBilling((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), orderId);
 			}
 			else {
-				Executions.sendRedirect("/cash_register.zul?oid=" + orderId);
+				Executions.sendRedirect("/cash_register.zul?oid=" + orderId + "&fast=" + fast.toString());
 			}
 		}
 		catch(Exception ex) {
@@ -50,10 +51,20 @@ public class BillInitiator implements Initiator, InitiatorExt {
 	public void doInit(Page page, Map<String, Object> args) throws Exception {
 		try {
 			orderId = ZKUtility.getObjectIdFromURLQuery("id");
+			fast = ZKUtility.getBooleanParamFromURLQuery("fast");
 		}
 		catch(Exception ex) {
 			orderId = 0; 
+			fast = false;
 			ExceptionTreatment.log(ex);
 		}
+	}
+
+	public Boolean getFast() {
+		return fast;
+	}
+
+	public void setFast(Boolean fast) {
+		this.fast = fast;
 	}
 }

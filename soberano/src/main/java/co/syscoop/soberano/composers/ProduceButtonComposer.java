@@ -13,12 +13,12 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Vbox;
-
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.ProcessRun;
 import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.tracked.ProductionLine;
 import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.ui.ZKUtility;
@@ -61,18 +61,12 @@ public class ProduceButtonComposer extends SelectorComposer {
 	}
 	
 	@SuppressWarnings("unchecked")
-	@Listen("onClick = button#btnProduce")
-    public void btnProduce_onClick() throws Throwable {
+	public static void produce(Integer orderId, String fileToPrintFullPath) throws SoberanoException {
 		
 		try {
-			Vbox boxDetails = (Vbox) btnProduce.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
-			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
 			Order order = new Order(orderId);
 			order.get();		
-			setFileToPrintFullPath(SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
-					"records/production_lines/" + 
-					"ORDER_" + orderId + "_ALLOCATIONS" + ".pdf");
-			
+						
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 			
 			String header = orderId + " | " + order.getCountersStr() + " | " + dateFormat.format(new Date()) + "\n\n";
@@ -168,6 +162,19 @@ public class ProduceButtonComposer extends SelectorComposer {
 										Labels.getLabel("message.error.ConfigurePrinterProfile"), 
 										Labels.getLabel("messageBoxTitle.Error"),
 										Messagebox.ERROR);
+		}
+	}
+	
+	@Listen("onClick = button#btnProduce")
+    public void btnProduce_onClick() throws Throwable {
+		
+		try {
+			Vbox boxDetails = (Vbox) btnProduce.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
+			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
+			produce(orderId, fileToPrintFullPath);
+		}
+		catch(Exception ex)	{
+			throw ex;
 		}
 	}
 }

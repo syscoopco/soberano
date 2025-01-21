@@ -34,7 +34,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(37)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO37_StockTest_check_following_order_reopening_and_recollecting extends StockActionTest {
@@ -124,7 +124,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 										"mmaterial2",
 										462.592,
 										"kg",										
-										10359830.2708039);
+										11169103.75445334);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -158,7 +158,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
-										1000007000.0,
+										1000002005.0,
 										"mg",
 										155.58669895074);
 		}
@@ -338,7 +338,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
 										"mp1",
 										"mproduct1",
-										6.0,
+										5001.0,
 										"kg",
 										64889662.7880384);
 		}
