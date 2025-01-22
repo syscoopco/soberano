@@ -34,7 +34,7 @@ public class ProduceFromFastOrderingWindowButtonComposer extends SelectorCompose
     public void btnProduce_onClick() throws Throwable {
 		
 		try {
-			Integer orderId = (Integer) btnProduce.getParent().getParent().getParent().query("#wndCompleteAddition").getAttribute("orderId");
+			Integer orderId = (Integer) btnProduce.query("#" + btnProduce.getAttribute("parentWindow")).getAttribute("orderId");
 			ProduceButtonComposer.produce(orderId, 
 										SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 										"records/production_lines/" + 

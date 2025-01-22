@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.select.annotation.Listen;
-import org.zkoss.zul.Box;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.ui.helper.BusinessActivityTrackedObjectFormHelper;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
@@ -21,13 +20,12 @@ public class BillFromFastOrderingWindowButtonComposer extends BusinessActivityTr
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-          boxDetails = (Box) btnBill.query("#wndCompleteAddition").query("#boxDetails");
     }
 	
 	@Listen("onClick = button#btnBill")
     public void btnBill_onClick() {
 	
-		Integer orderId = (Integer) btnBill.getParent().getParent().getParent().query("#wndCompleteAddition").getAttribute("orderId");
+		Integer orderId = (Integer) btnBill.query("#" + btnBill.getAttribute("parentWindow")).getAttribute("orderId");
         Order order = new Order(orderId);
 		try {
 			if (order.getCanceledRunsCount().compareTo(new BigDecimal(0)) > 0) {

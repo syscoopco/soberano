@@ -139,6 +139,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 			window.setTitle(Labels.getLabel("pageOrder.addItemsToOrder") + " " + orderId);
 			window.setWidth("90%");
 			window.setHeight("90%");
+			window.setAttribute("orderId", orderId);
 							
 			ProductCategory productCategory = new ProductCategory();
 			Span spanCategories = (Span) window.query("#spanCategories");
@@ -191,9 +192,12 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				
-				Window wndContentPanel = (Window) comp.query("#wndContentPanel");
-				Integer orderId = ((Intbox) wndContentPanel.query("#intObjectId")).getValue();
-				openFastOrderingWindow(wndContentPanel, orderId);
+				try {
+					Window wndContentPanel = (Window) comp.query("#wndContentPanel");
+					Integer orderId = ((Intbox) wndContentPanel.query("#intObjectId")).getValue();
+					openFastOrderingWindow(wndContentPanel, orderId);
+				}
+				catch(NullPointerException ex) {}				
 			}
 		});
 	}

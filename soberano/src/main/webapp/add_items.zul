@@ -1,21 +1,33 @@
 <?page contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="wndItemsToAdd" hflex="min" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.addItemsToOrder}" mode="modal">
-		<hbox style="border: normal;" width="100%" pack="start" align="center">
-			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
-		</hbox>
-		<separator></separator>
-		<panel height="50%" width="100%" title="${labels.pageProductCategories.WindowTitle}" id="pnlCategories" border="none" collapsible="false">
+		<panel vflex="4" width="100%" title="${labels.pageProductCategories.WindowTitle}" id="pnlCategories" border="none" collapsible="false">
 			<panelchildren style="overflow: auto">
 				<span id="spanCategories" height="100%" width="100%">
 				</span>
 			</panelchildren>
 		</panel>
-		<panel height="50%" width="100%" title="${labels.pageProducts.WindowTitle}" id="pnlProducts" border="none" collapsible="false">
+		<panel vflex="4" width="100%" title="${labels.pageProducts.WindowTitle}" id="pnlProducts" border="none" collapsible="false">
 			<panelchildren style="overflow: auto">
 				<span id="spanProducts" height="100%" width="100%">
 				</span>
 			</panelchildren>
 		</panel>
+		<separator></separator>
+		<hbox style="border: normal;" width="100%" pack="end" align="center">
+			<button id="btnProduce" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndItemsToAdd"/>
+			</button>
+			<button id="btnBill" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndItemsToAdd"/>
+			</button>
+			<button id="btnPrint" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndItemsToAdd"/>
+			</button>
+			<separator></separator>
+			<separator></separator>
+			<separator></separator>
+			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
+		</hbox>
 	</window>
 </zk>

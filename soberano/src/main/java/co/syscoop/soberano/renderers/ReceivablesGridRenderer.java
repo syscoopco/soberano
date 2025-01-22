@@ -6,6 +6,7 @@ import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
+import org.zkoss.zul.A;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Group;
@@ -44,7 +45,11 @@ public class ReceivablesGridRenderer extends DomainObjectRowRenderer {
 		row.appendChild(new Label(receivable.getDebtor()));
 		
 		//order
-		row.appendChild(new Label(receivable.getOrder().toString()));
+		A a = new A();
+		a.setLabel(receivable.getOrder().toString());
+		a.setHref("/order.zul?id=" + receivable.getOrder());
+		a.setTarget("_blank");
+		row.appendChild(a);
 		
 		//amount due
 		Decimalbox decAmountDue = new Decimalbox(receivable.getAmountDue());

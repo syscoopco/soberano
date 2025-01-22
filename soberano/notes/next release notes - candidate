@@ -1,8 +1,10 @@
 1.0.2
 
+New: In the receivables table, the column Order now contains an link to the corresponding order form.
+
 New: A delivery services provider can now be specified when creating a new order.
 
-New: Order creation, production and collecting is now possible from icons-based order management window.
+New: Order creation, production, printing and collecting is now possible from icons-based order management window.
 
 New: shift_closures.zul now shows canceled closures too. So, a new decision was added to check canceled shift closures 
 	in table "metamodel"."ResponsibilityFilter"
@@ -22,5 +24,12 @@ Fix: Auditor responsibility was able to record and cancel a shift closure. These
 	
 Fix: A bug in FUNCTION soberano."fn_Stock_restoreToStateBefore"(startdatetime timestamp with time zone, inventoryitem character varying) prevented
 	restoring stock to its state before the recalculation starting date.
+	
+Fix: Logs of soberano."fn_Order_changeDeliveryProvider" and soberano."fn_Order_changeCustomer" were wrongly translated and shown in shift closure
+	cancellations report.
 
-Typo: User manual, page 102: “las existencia” replaced by “las existencias”.
+User manual: 1) pag. 18, 21, 22, 25: asistente de administrador, cajero, contador y jefe de turno solo pueden cancelar cierre del turno actual.
+			2) pag. 21: se autoriza al cajero a cerrar turno.
+			3) pag. 102: “las existencia” por “las existencias”.
+			4) pag. 134, 135, 136: se actualizan los formularios de adición de artículos mediante iconos, permitiéndose producir, facturar e imprimir pedido desde esos formularios, así como crear un nuevo pedido.
+			5) referencias no resueltas apuntando al procedimientos de configuración global.

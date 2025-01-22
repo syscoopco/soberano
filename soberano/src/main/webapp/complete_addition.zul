@@ -1,10 +1,6 @@
 <?page contentType="text/html;charset=UTF-8"?>
 <zk>
 	<window id="wndCompleteAddition" contentStyle="overflow:auto" closable="true" title="${labels.pageOrder.howMany}" mode="modal">
-		<hbox style="border: normal;" width="100%" pack="start" align="center">
-			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
-		</hbox>
-		<separator></separator>
 		<hlayout width="100%" vflex="1">
 			<vbox hflex="1" vflex="1" id="boxDetails" apply="co.syscoop.soberano.composers.OrderManagementComposer">
 				<groupbox width="100%">
@@ -43,9 +39,19 @@
 		</hlayout>
 		<separator></separator>
 		<hbox style="border: normal;" width="100%" pack="end" align="center">
-			<button id="btnProduce" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceFromFastOrderingWindowButtonComposer"></button>
-			<button id="btnBill" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillFromFastOrderingWindowButtonComposer"></button>
-			<button id="btnPrint" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintFromFastOrderingWindowButtonComposer"></button>
-		</hbox>		
+			<button id="btnProduce" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndCompleteAddition"/>
+			</button>
+			<button id="btnBill" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndCompleteAddition"/>
+			</button>
+			<button id="btnPrint" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintFromFastOrderingWindowButtonComposer">
+				<custom-attributes parentWindow="wndCompleteAddition"/>
+			</button>
+			<separator></separator>
+			<separator></separator>
+			<separator></separator>
+			<button id="btnNewOrder" label="${labels.caption.action.newOrder}" href="/new_order.zul?fast=true" sclass="DecisionButton"></button>
+		</hbox>	
 	</window>
 </zk>

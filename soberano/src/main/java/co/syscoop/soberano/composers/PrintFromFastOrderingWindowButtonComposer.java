@@ -35,7 +35,7 @@ public class PrintFromFastOrderingWindowButtonComposer extends SelectorComposer 
     public void btnProduce_onClick() throws Throwable {
 		
 		try {
-			Integer orderId = (Integer) btnPrint.getParent().getParent().getParent().query("#wndCompleteAddition").getAttribute("orderId");
+			Integer orderId = (Integer) btnPrint.query("#" + btnPrint.getAttribute("parentWindow")).getAttribute("orderId");
 			PrintTicketButtonComposer.print(orderId,
 											SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 											"records/tickets/" + 
