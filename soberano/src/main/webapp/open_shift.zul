@@ -1,0 +1,14 @@
+<?page contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window hflex="min" height="300px" contentStyle="overflow:auto" closable="true" title="${labels.caption.title.openShift}" mode="modal">
+		<vbox hflex="1" height="300px">
+			<label value="${labels.message.openShift}"/>
+			<separator></separator>
+			<separator></separator>
+			<hbox hflex="1" align="center" pack="center">
+				<button id="btnOpenShift" label="${labels.caption.action.openShift}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.OpenShiftButtonComposer"></button>
+				<button id="btnGoToClosures" label="${labels.caption.action.goToClosures}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.OpenShiftButtonComposer"></button>
+			</hbox>
+		</vbox>
+	</window>
+</zk>

@@ -4,6 +4,7 @@ import org.springframework.dao.CannotAcquireLockException;
 import org.springframework.dao.ConcurrencyFailureException;
 import org.springframework.dao.DuplicateKeyException;
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.WrongValueException;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -11,6 +12,7 @@ import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.exception.AtLeastOneInventoryItemMustBeMovedException;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
@@ -70,6 +72,11 @@ public class BusinessActivityTrackedObjectButtonComposer extends SelectorCompose
 			Integer newObjectid = trackedObjectFormHelper.recordFromForm(boxDetails);
 			if (newObjectid == -1) {
 				throw new NotEnoughRightsException();						
+			}
+			//the shift has not been opened or it was already closed
+			else if (newObjectid == -4 || newObjectid == -5) {
+				Window window = (Window) Executions.createComponents("./open_shift.zul", boxDetails.getParent().getParent().query("#wndTemplate"), null);
+				window.doModal();	
 			}
 			else {
 				//clean form

@@ -698,6 +698,14 @@ public class Order extends BusinessActivityTrackedObject {
 		return query(qryStr, parametersMap, new InvoiceDataMapper());
 	}
 	
+	public Integer openShift() throws SQLException {
+		
+		String qryStr = "SELECT soberano.\"fn_Order_openShift\"(:loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public Integer moveOrderedItemToOrder(Integer fromOrderId, Integer toOrderId, Integer processRunId) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.

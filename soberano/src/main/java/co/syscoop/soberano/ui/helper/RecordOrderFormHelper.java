@@ -59,10 +59,7 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 									counters, 
 									cmbiCustomer != null ? ((DomainObject) cmbiCustomer.getValue()).getId() : null,
 									cmbiProvider != null ? ((DomainObject) cmbiProvider.getValue()).getId() : null).record());
-			if (newOrderId == -4) {
-				throw new SomeFieldsContainWrongValuesException();
-			}
-			else if (newOrderId == -3) {
+			if (newOrderId == -3) {
 				throw new FirstOrderRequiresCashOperationException();
 			}
 			else if (newOrderId == -2) {

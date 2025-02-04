@@ -1,35 +1,20 @@
-1.0.2
+1.0.3
 
-New: In the receivables table, the column Order now contains an link to the corresponding order form.
+New: Concept OpenShift added to conceptual model.
 
-New: A delivery services provider can now be specified when creating a new order.
+New: Now, as a condition to create an order, it's explicitly required to open a shift. The current day or tomorrow day
+	shift can be opened. A day can be open only once and will remain in that state forever. Another condition to create an
+	order is that current day or tomorrow day shift has not been closed. For the second condition to be met, a closure
+	can be canceled. 
 
-New: Order creation, production, printing and collecting is now possible from icons-based order management window.
+New: When the option 'First order on current shift requires a previous cash operation.' is unchecked, the cash register is
+	emptied upon the creation of the first order of the shift by means of automatic withdrawals executed by soberano.user.top 
+	(superuser). Otherwise, it's required a cash register operation (deposit, withdrawal, balancing) to be executed by a user.
 
-New: shift_closures.zul now shows canceled closures too. So, a new decision was added to check canceled shift closures 
-	in table "metamodel"."ResponsibilityFilter"
-	
-New: A checker is authorized to record and cancel shift closures.
+New: It was removed the function to migrate data from SYSCOOP-gastro DB to Soberano DB.
 
-New: Only managers can cancel past shift closures.
+Fix: A bug in soberano."fn_InventoryOperation_getSPI"(shiftdatestr character varying, warehouseid integer,
+	acquirablematerialid integer, lang character, loginname character varying) made wrong values were returned
+	for future days when the current day was already closed. 
 
-New: When changing an order's customer, previous and new customer are now logged.
-
-New: When changing an order's delivery provider, previous and new provider are now logged.
-
-New: Cancellations shift closure report added (removed ordered items, removed order additions, and changes on order customer and delivery provider).
-
-Fix: Auditor responsibility was able to record and cancel a shift closure. These rights were removed from table 
-	"metamodel"."ResponsibilityFilter"
-	
-Fix: A bug in FUNCTION soberano."fn_Stock_restoreToStateBefore"(startdatetime timestamp with time zone, inventoryitem character varying) prevented
-	restoring stock to its state before the recalculation starting date.
-	
-Fix: Logs of soberano."fn_Order_changeDeliveryProvider" and soberano."fn_Order_changeCustomer" were wrongly translated and shown in shift closure
-	cancellations report.
-
-User manual: 1) pag. 18, 21, 22, 25: asistente de administrador, cajero, contador y jefe de turno solo pueden cancelar cierre del turno actual.
-			2) pag. 21: se autoriza al cajero a cerrar turno.
-			3) pag. 102: “las existencia” por “las existencias”.
-			4) pag. 134, 135, 136: se actualizan los formularios de adición de artículos mediante iconos, permitiéndose producir, facturar e imprimir pedido desde esos formularios, así como crear un nuevo pedido.
-			5) referencias no resueltas apuntando al procedimientos de configuración global.
+User manual:
