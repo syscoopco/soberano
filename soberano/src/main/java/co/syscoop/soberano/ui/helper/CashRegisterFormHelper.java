@@ -58,6 +58,7 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		if (orderId != null) {
 			((Intbox) wndContentPanel.query("#intSelectedOrder")).setValue(orderId);
 			wndContentPanel.query("#hboxChange").setVisible(true);
+			wndContentPanel.query("#hboxTip").setVisible(true);
 			Hbox hboxDecisionButtons = (Hbox) wndContentPanel.getParent().query("#incSouth").query("#hboxDecisionButtons");
 			hboxDecisionButtons.query("#btnDeposit").setVisible(false);
 			hboxDecisionButtons.query("#btnWithdraw").setVisible(false);
@@ -334,10 +335,15 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 		if (requestedAction != null && requestedAction.equals(ActionRequested.RECORD)) {
 			fillAmounts(boxDetails, false);
 			Integer orderId = ((Intbox) boxDetails.query("#intSelectedOrder")).getValue();
+			
+			Decimalbox decTip = (Decimalbox) boxDetails.query("#decTip");
+			BigDecimal tip = decTip.getValue() == null ? new BigDecimal(0) : decTip.getValue();
+			
 			qrwr = (new Order(orderId).collect(((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue(),
 										currencyIds, 
 										amounts,
 										notes,
+										tip,
 										cmbCustomer.getSelectedItem() == null ? null : ((DomainObject) cmbCustomer.getSelectedItem().getValue()).getId()));
 			if (qrwr.getResult() == -1) {
 				throw new NotEnoughRightsException();						

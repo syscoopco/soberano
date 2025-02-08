@@ -54,6 +54,15 @@
 			</cell>
 		</hbox>
 		<separator></separator>
+		<hbox id="hboxTip" width="100%" align="center" visible="false">
+			<cell align="left">
+				<label value="${labels.caption.field.Tip}" sclass="CollectingLabel"></label>
+			</cell>
+			<cell hflex="1" align="center">
+				<decimalbox id="decTip" format="####.########" scale="8" readonly="false" sclass="CollectingTextbox" value="0.00" constraint="no empty"/>
+			</cell>
+		</hbox>
+		<separator></separator>
 		<label value="${labels.caption.field.Notes}" sclass="Caption"></label>			
 		<textbox id="txtNotes" maxlength="1000" multiline="true" hflex="1" sclass="NotesTextbox"/>
 		<separator></separator>

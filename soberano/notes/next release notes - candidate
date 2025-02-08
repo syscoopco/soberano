@@ -1,5 +1,10 @@
 1.0.3
 
+New: It's was added the field Tip to the cash register form. This allows those businesses not wanting to deposit tips in 
+	the cash register to specify a tip linked to an order, at the moment of collecting it. In case of order reopening, the
+	tips are removed from the database. It's assumed specified tips are in system currency. The tip's amount has no 
+	restrictions. They could be any amounts not derived from the order amount nor change at all.
+
 New: Concept OpenShift added to conceptual model.
 
 New: Now, as a condition to create an order, it's explicitly required to open a shift. The current day or tomorrow day

@@ -546,6 +546,7 @@ public class Order extends BusinessActivityTrackedObject {
 							ArrayList<Integer> currencyIds, 
 							ArrayList<BigDecimal> amounts,
 							String notes,
+							BigDecimal tip,
 							Integer customer) throws SQLException, Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -554,6 +555,7 @@ public class Order extends BusinessActivityTrackedObject {
 				+ "											:lang, "
 				+ "											:currencyIds, "
 				+ "											:amounts, "
+				+ "											:tip, "
 				+ "											:notes, "
 				+ "											:customer, "
 				+ "											:loginname) AS queryresult";
@@ -564,6 +566,7 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());	
 		parametersMap.put("currencyIds", createArrayOfSQLType("integer", currencyIds.toArray()));
 		parametersMap.put("amounts", createArrayOfSQLType("numeric", amounts.toArray()));
+		parametersMap.put("tip", tip);
 		parametersMap.put("notes", notes);
 		parametersMap.put("customer", customer);
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());

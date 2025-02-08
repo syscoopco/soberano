@@ -20,13 +20,13 @@ public class ContactDataInitiator implements Initiator, InitiatorExt {
 			Component incDetails = comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel").query("#incDetails");
 			Component incContactData = incDetails.query("#incContactData");
 			Combobox cmbCountry = (Combobox) incContactData.query("combobox").query("#cmbCountry");
-			ZKUtility.setValueWOValidation(cmbCountry, "__");
+			ZKUtility.setValueWOValidation(cmbCountry, "CU");
 			Combobox cmbProvince = (Combobox) cmbCountry.query("#cmbProvince");
 			CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
-			ZKUtility.setValueWOValidation(cmbProvince, new Integer(0).toString());
+			ZKUtility.setValueWOValidation(cmbProvince, new Integer(2).toString());
 			Combobox cmbMunicipality = (Combobox) cmbCountry.query("#cmbMunicipality");
 			ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
-			cmbMunicipality.setSelectedItem(ComboboxHelper.getItemByText(cmbMunicipality, "__"));
+			cmbMunicipality.setSelectedItem(ComboboxHelper.getItemByText(cmbMunicipality, "Plaza de la Revolución"));
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
