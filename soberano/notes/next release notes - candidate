@@ -1,4 +1,4 @@
-1.0.3
+v1.0.3 release
 
 New: It was added the field Tip to the cash register form. This allows those businesses not 
 	wanting to deposit tips in the cash register to specify a tip linked to an order, at the 
