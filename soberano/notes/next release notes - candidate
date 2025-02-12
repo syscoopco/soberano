@@ -1,21 +1,23 @@
 1.0.3
 
-New: It was added the field Tip to the cash register form. This allows those businesses not wanting to deposit tips in 
-	the cash register to specify a tip linked to an order, at the moment of collecting it. In case of order reopening, the
-	tips are removed from the database. It's assumed specified tips are in system currency. The tip's amount has no 
-	restrictions. They could be any amounts not derived from the order amount nor change either.
+New: It was added the field Tip to the cash register form. This allows those businesses not 
+	wanting to deposit tips in the cash register to specify a tip linked to an order, at the 
+	moment of collecting it. In case of order reopening, the tips are removed from the database. 
+	It's assumed specified tips are in system currency. A tip's amount has no restrictions. 
+	They could be any amount not derived from the order amount nor change either.
 
 New: Concept OpenShift added to conceptual model.
 
-New: Now, as a condition to create an order, it's explicitly required to open a day. The current day or tomorrow day
-	can be opened. A day can be opened only once and will remain in that state forever. Another condition to create an
-	order is that current day or tomorrow day shift has not been closed. For the second condition to be met, a closure
-	can be canceled. 
+New: Now, as a condition to create an order, it's explicitly required to open a day. The current 
+	day or tomorrow day can be opened. A day can be opened only once and will remain in that state 
+	forever. Another condition to create an order is that current day or tomorrow day shift has not 
+	been closed. For the second condition to be met, a closure can be canceled. 
 
-New: When the option 'First order on current shift requires a previous cash operation.' is unchecked, and no cash register
-	operation has been realized after the last open day was opened, the cash register is emptied upon the creation of the first 
-	order after the opening time of the last open day, by means of automatic withdrawals executed on behalf soberano.user.top 
-	(superuser). Otherwise, it's required a cash register operation (deposit, withdrawal, balancing) to be executed by a user.
+New: When the option 'First order on current shift requires a previous cash operation.' is unchecked,
+	and no cash register operation has been realized after the last open day was opened, the cash register 
+	is emptied upon the creation of the first order after the opening time of the last open day, by means 
+	of automatic withdrawals executed on behalf soberano.user.top (superuser). Otherwise, it's required a 
+	cash register operation (deposit, withdrawal, balancing) to be executed by a user.
 
 New: It was removed the function to migrate data from SYSCOOP-gastro DB to Soberano DB.
 
@@ -23,17 +25,15 @@ Fix: A bug in soberano."fn_InventoryOperation_getSPI"(shiftdatestr character var
 	acquirablematerialid integer, lang character, loginname character varying) made wrong values were returned
 	for future days when the current day was already closed. 
 
-User manual: Revision 3.0, corresponding to v1.0.3. 
+User manual: Revision 3.0, corresponding to v1.0.3.
 			Cambios respecto a la revisión anterior:
 			1) pág. 57: Se actualizan los conceptos de día, turno y cierre.
-			2) pág. 127: En paso 5 de procedimiento 12.1.1, se agrega “En 
-				este punto, el usuario deberá decidir si abrir el turno del 
-				día, o ir al formulario de cierres para cancelar el turno 
-				del día y proseguir con el registro del nuevo pedido.”.
-			3) pág. 142: En paso 3 de procedimiento 12.1.18, se agrega 
-				“Se excluyen los artículos de pedidos vinculados a cuentas 
-				por cobrar.”
-			4) pág. 158: En el párrafo que explica la opción ‘El primer 
-				pedido del turno actual requiere una operación previa de 
-				caja.’, correcciones ortográficas y se agrega la explicación 
-				para cuando la opción se deje sin marcar.
+			2) pág. 127: En paso 5 de procedimiento 12.1.1, se agrega “En este punto, el usuario deberá decidir 
+				si abrir el turno del día, o ir al formulario de cierres para cancelar el turno del día y proseguir 
+				con el registro del nuevo pedido.”.
+			3) pág. 142: En paso 3 de procedimiento 12.1.18, se agrega “Se excluyen los artículos de pedidos 
+				vinculados a cuentas por cobrar.”
+			4) pág. 158: En el párrafo que explica la opción ‘El primer pedido del turno actual requiere una 
+				operación previa de caja.’, correcciones ortográficas y se agrega la explicación para cuando 
+				la opción se deje sin marcar.
+			

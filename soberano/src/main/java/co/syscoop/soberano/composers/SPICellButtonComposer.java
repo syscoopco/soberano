@@ -1,6 +1,7 @@
 package co.syscoop.soberano.composers;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
@@ -34,22 +35,28 @@ public class SPICellButtonComposer extends SelectorComposer {
 		Checkbox chkWithChanges = (Checkbox) cmbWarehouse.query("#chkWithChanges");
 		Checkbox chkSurplus = (Checkbox) cmbWarehouse.query("#chkSurplus");
 		
-		SPIRowData spi = (SPIRowData)(new SPI(dateShift.getText(), 
-								((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
-								intAcquirableMaterialId.getValue(), 
-								chkWithOpeningStock.isChecked(),
-								chkWithStockOnClosure.isChecked(),
-								chkWithChanges.isChecked(),
-								chkSurplus.isChecked(),
-								"")).getAll("inventoryItemName", true, 1, 0, new SPIExtractor()).get(0);
+		List<Object> spiQryResults = (new SPI(dateShift.getText(), 
+												((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+												intAcquirableMaterialId.getValue(), 
+												chkWithOpeningStock.isChecked(),
+												chkWithStockOnClosure.isChecked(),
+												chkWithChanges.isChecked(),
+												chkSurplus.isChecked(),
+												"")).getAll("inventoryItemName", true, 1, 0, new SPIExtractor());
 		
 		Row spiRow = (Row) ((Window) intAcquirableMaterialId.getParent().getParent().getParent()).getAttribute("SPIRow");
-		((Decimalbox) spiRow.getChildren().get(4)).setValue(spi.getOpening());
-		((Decimalbox) spiRow.getChildren().get(5)).setValue(spi.getInput());
-		((Decimalbox) spiRow.getChildren().get(6)).setValue(spi.getLosses());
-		((Decimalbox) spiRow.getChildren().get(7)).setValue(spi.getMovement());
-		((Decimalbox) spiRow.getChildren().get(8)).setValue(spi.getAvailable());
-		((Decimalbox) spiRow.getChildren().get(9)).setValue(spi.getOutput());
-		((Decimalbox) spiRow.getChildren().get(10)).setValue(spi.getEnding());
+		if (spiQryResults.size() > 0) {
+			SPIRowData spi = (SPIRowData) spiQryResults.get(0);
+			((Decimalbox) spiRow.getChildren().get(4)).setValue(spi.getOpening());
+			((Decimalbox) spiRow.getChildren().get(5)).setValue(spi.getInput());
+			((Decimalbox) spiRow.getChildren().get(6)).setValue(spi.getLosses());
+			((Decimalbox) spiRow.getChildren().get(7)).setValue(spi.getMovement());
+			((Decimalbox) spiRow.getChildren().get(8)).setValue(spi.getAvailable());
+			((Decimalbox) spiRow.getChildren().get(9)).setValue(spi.getOutput());
+			((Decimalbox) spiRow.getChildren().get(10)).setValue(spi.getEnding());
+		}
+		else {
+			spiRow.detach();
+		}		
 	}
 }
