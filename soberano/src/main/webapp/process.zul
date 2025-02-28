@@ -7,6 +7,7 @@
 		<label value="${labels.caption.field.fixedCost}" sclass="Caption"></label>
 		<decimalbox id="decFixedCost" format="####.########" scale="8" hflex="1" placeholder="${labels.caption.field.fixedCostPlaceholder}" constraint="no empty, no negative"/>
 		<separator></separator>
-		<include id="incProcessIOs" src="/process_ios.zul"></include>	
+		<include id="incProcessIOs" src="/process_ios.zul"></include>
+		<include id="incSubprocesses" src="/process_subprocesses.zul"></include>
 	</vbox>	
 </zk>

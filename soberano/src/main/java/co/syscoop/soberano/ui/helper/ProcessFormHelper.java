@@ -26,6 +26,7 @@ import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.exception.WeightsMustSum100;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.rowdata.ProcessIORowData;
+import co.syscoop.soberano.util.rowdata.ProcessSubprocessRowData;
 import co.syscoop.soberano.util.ui.ZKUtility;
 import co.syscoop.soberano.vocabulary.Labels;
 
@@ -38,6 +39,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	private ArrayList<Unit> outputUnits = new ArrayList<Unit>();
 	private ArrayList<BigDecimal> outputQuantities = new ArrayList<BigDecimal>();
 	private ArrayList<Integer> weights = new ArrayList<Integer>();
+	private ArrayList<Integer> subprocesses = new ArrayList<Integer>();
 		
 	public static void addInput(String inventoryItemName,
 								String inventoryItemId,
@@ -145,6 +147,39 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 		}
 	}
 	
+	public static void addSubprocess(String processName,
+			Integer processId,
+			Treechildren tchdnSubprocesses,
+			Boolean runMode,
+			BigDecimal runs) throws SomeFieldsContainWrongValuesException {
+		
+			Treeitem treeItem = new Treeitem(processName, processId);
+			Treecell treeCell = new Treecell();
+			
+			Hbox hbox = new Hbox();
+			treeCell.appendChild(hbox);			
+			
+			if (!runMode) {
+				ZKUtility.addRowDeletionButton("btnSubprocessRowDeletion" + processId, hbox);
+			}			
+			
+			treeItem.getTreerow().appendChild(treeCell);
+			tchdnSubprocesses.appendChild(treeItem);
+		}
+	
+	public static void addSubprocess(String processName,
+									Integer processId,
+									Treechildren tchdnSubprocesses) throws SomeFieldsContainWrongValuesException {
+		
+		Treeitem treeItem = new Treeitem(processName, processId);
+		Treecell treeCell = new Treecell();
+		Hbox hbox = new Hbox();
+		treeCell.appendChild(hbox);
+		ZKUtility.addRowDeletionButton("btnSubprocessRowDeletion" + processId, hbox);				
+		treeItem.getTreerow().appendChild(treeCell);
+		tchdnSubprocesses.appendChild(treeItem);
+	}
+	
 	static private void fillArrays(ArrayList<InventoryItem> inputInventoryItems,
 									ArrayList<Unit> inputUnits,
 									ArrayList<BigDecimal> inputQuantities,
@@ -152,6 +187,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 									ArrayList<Unit> outputUnits,
 									ArrayList<BigDecimal> outputQuantities,
 									ArrayList<Integer> weights,
+									ArrayList<Integer> subprocesses,
 									Include incDetails) {
 		Treechildren tchdnInputs = (Treechildren) incDetails.query("#incProcessIOs").query("#tchdnInputs");
 		inputInventoryItems.clear();
@@ -179,6 +215,12 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 						((Label) item.query("#lblOutputUnit" + inventoryItemId)).getValue()));
 			outputQuantities.add(((Decimalbox) item.query("#decOutputQuantity" +  inventoryItemId)).getValue());
 			weights.add(((Intbox) item.query("#intWeight" +  inventoryItemId)).getValue());
+		}
+		
+		Treechildren tchdnSubprocesses = (Treechildren) incDetails.query("#incSubprocesses").query("#tchdnSubprocesses");
+		subprocesses.clear();
+		for (Component item : tchdnSubprocesses.getChildren()) {
+			subprocesses.add(((Treeitem) item).getValue());
 		}
 	}
 	
@@ -244,6 +286,20 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 				e.printStackTrace();
 			}
 		}
+		
+		Treechildren tchdnSubprocesses = (Treechildren) incDetails.query("#incSubprocesses").query("#tchdnSubprocesses");
+		tchdnSubprocesses.getChildren().clear();
+		for (Object subprocess : process.getProcessSubprocesses(id)) {
+			try {
+				addSubprocess(((ProcessSubprocessRowData) subprocess).getItemName(),
+						((ProcessSubprocessRowData) subprocess).getItemId(),
+						tchdnSubprocesses,
+						runMode,
+						runs);
+			} catch (SomeFieldsContainWrongValuesException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	@Override
@@ -275,6 +331,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 					outputUnits, 
 					outputQuantities, 
 					weights, 
+					subprocesses,
 					incDetails);
 		if (weightsSum100()) {
 			return (new Process(0,
@@ -302,6 +359,7 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 				outputUnits, 
 				outputQuantities, 
 				weights, 
+				subprocesses,
 				incDetails);
 		super.setTrackedObject(new Process(((Intbox) incDetails.getParent().query("#intId")).getValue(),
 											0,
@@ -313,7 +371,8 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 											outputItems,
 											outputUnits,
 											outputQuantities,
-											weights));
+											weights,
+											subprocesses));
 		if (weightsSum100()) {
 			return super.getTrackedObject().modify();
 		}
@@ -323,5 +382,13 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 	public void initForm(Include incDetails, Integer processId) throws Exception {
 		
 		fillForm(incDetails, processId, false, new BigDecimal(1));
+	}
+
+	public ArrayList<Integer> getSubprocesses() {
+		return subprocesses;
+	}
+
+	public void setSubprocesses(ArrayList<Integer> subprocesses) {
+		this.subprocesses = subprocesses;
 	}
 }

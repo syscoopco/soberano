@@ -47,7 +47,7 @@ public class PaymentProcessorWindow extends Window {
 		BigDecimal countedInSystemCurrency = ((Decimalbox) wndContentPanel.query("#decCounted")).getValue();
 		BigDecimal toCollect = null;
 		if (toCollectInSystemCurrency != null && countedInSystemCurrency != null) {
-			toCollect = (toCollectInSystemCurrency.subtract(countedInSystemCurrency)).divide(currency.getExchangeRate(), 8, BigDecimal.ROUND_HALF_EVEN);
+			toCollect = (toCollectInSystemCurrency.subtract(countedInSystemCurrency)).divide(currency.getExchangeRate(), 8, BigDecimal.ROUND_UP);
 		}
 		else {
 			toCollect = new BigDecimal(0);

@@ -1,39 +1,24 @@
-v1.0.3 release
+v1.0.4 release
 
-New: It was added the field Tip to the cash register form. This allows those businesses not 
-	wanting to deposit tips in the cash register to specify a tip linked to an order, at the 
-	moment of collecting it. In case of order reopening, the tips are removed from the database. 
-	It's assumed specified tips are in system currency. A tip's amount has no restrictions. 
-	They could be any amount not derived from the order amount nor change either.
-
-New: Concept OpenShift added to conceptual model.
-
-New: Now, as a condition to create an order, it's explicitly required to open a day. The current 
-	day or tomorrow day can be opened. A day can be opened only once and will remain in that state 
-	forever. Another condition to create an order is that current day or tomorrow day shift has not 
-	been closed. For the second condition to be met, a closure can be canceled. 
-
-New: When the option 'First order on current shift requires a previous cash operation.' is unchecked,
-	and no cash register operation has been realized after the last open day was opened, the cash register 
-	is emptied upon the creation of the first order after the opening time of the last open day, by means 
-	of automatic withdrawals executed on behalf soberano.user.top (superuser). Otherwise, it's required a 
-	cash register operation (deposit, withdrawal, balancing) to be executed by a user.
-
-New: It was removed the function to migrate data from SYSCOOP-gastro DB to Soberano DB.
-
-Fix: A bug in soberano."fn_InventoryOperation_getSPI"(shiftdatestr character varying, warehouseid integer,
-	acquirablematerialid integer, lang character, loginname character varying) made wrong values were returned
-	for future days when the current day was already closed. 
-
-User manual: Revision 3.0, corresponding to v1.0.3.
-			Cambios respecto a la revisión anterior:
-			1) pág. 57: Se actualizan los conceptos de día, turno y cierre.
-			2) pág. 127: En paso 5 de procedimiento 12.1.1, se agrega “En este punto, el usuario deberá decidir 
-				si abrir el turno del día, o ir al formulario de cierres para cancelar el turno del día y proseguir 
-				con el registro del nuevo pedido.”.
-			3) pág. 142: En paso 3 de procedimiento 12.1.18, se agrega “Se excluyen los artículos de pedidos 
-				vinculados a cuentas por cobrar.”
-			4) pág. 158: En el párrafo que explica la opción ‘El primer pedido del turno actual requiere una 
-				operación previa de caja.’, correcciones ortográficas y se agrega la explicación para cuando 
-				la opción se deje sin marcar.
-			
+New: Concept "Process 1 is a subprocess of Process 2" added to conceptual model, playing Process 1 the role of Subprocess.
+	Each time a Process 2's process run is executed r times, a number of Process1's runs equal to r are also executed as
+	part of the same transaction.
+	
+	Subprocesses are only executed when closing order's process runs. So, configured subprocesses of a process not connected
+	to an order aren't executed (just ignored).
+	
+	It's assumed a subprocess is a product's process. Otherwise, the inventory couldn't be properly updated.
+	
+	The purpose of subprocesses is to save time by avoiding repetitive configuration tasks. This is achieved by sharing 
+	subprocesses among many product (non acquirable) processes whose recipes (inputs) often change in time. For example:
+	beer / run / tequila / ... brands used in cocktails and garnish ingredients.
+	
+	In Michelada recipe, instead of using Cristal Beer or Bucanero Beer as input, it would be used just Beer as subprocess.
+	There would be the product Beer configured, with the corresponding process having the correct beer as input. It wouldn't 
+	be required to change all the beer based cocktail recipes any time the available beer changes. Instead, only the process
+	Beer is required to be modified.
+	
+Fix: In the payment processor modal window, the amount to collect is rounded up (with a precision of 8 decimal places). Before,
+	it was rounded half even, causing inconveniences with high precision exchange rates.
+	
+User manual: pág. 64: Se añade la explicación de subprocesos.

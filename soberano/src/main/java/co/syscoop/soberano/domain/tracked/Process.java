@@ -16,6 +16,7 @@ import org.zkoss.util.Locales;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.database.relational.ObjectMapper;
 import co.syscoop.soberano.database.relational.ProcessIOMapper;
+import co.syscoop.soberano.database.relational.ProcessSubprocessMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ProcessRunningException;
@@ -35,6 +36,7 @@ public class Process extends TrackedObject {
 	private ArrayList<Integer> outputUnitIds = null;
 	private ArrayList<BigDecimal> outputQuantities = new ArrayList<BigDecimal>();
 	private ArrayList<Integer> weights = new ArrayList<Integer>();
+	private ArrayList<Integer> subprocesses = new ArrayList<Integer>();
 	
 	private void fillInputInventoryItemIds() {
 		inputInventoryItemCodes = new ArrayList<String>();
@@ -108,6 +110,32 @@ public class Process extends TrackedObject {
 		this.weights = weights;
 	}
 	
+	public Process(Integer id, 
+			Integer entityTypeInstanceId, 
+			String name,
+			BigDecimal fixedCost,
+			ArrayList<InventoryItem> inputInventoryItems,
+			ArrayList<Unit> inputUnits,
+			ArrayList<BigDecimal> inputQuantities,
+			ArrayList<InventoryItem> outputInventoryItems,
+			ArrayList<Unit> outputUnits,
+			ArrayList<BigDecimal> outputQuantities,
+			ArrayList<Integer> weights,
+			ArrayList<Integer> subprocesses) {
+		this(id, 
+			entityTypeInstanceId, 
+			name,
+			fixedCost,
+			inputInventoryItems,
+			inputUnits,
+			inputQuantities,
+			outputInventoryItems,
+			outputUnits,
+			outputQuantities,
+			weights);
+		this.setSubprocesses(subprocesses);
+	}
+	
 	public Process() {
 		getAllQuery = "SELECT * FROM soberano.\"" + "fn_Process_getAll\"(:loginname)";
 		getAllQueryNamedParameters = new HashMap<String, Object>();
@@ -158,6 +186,7 @@ public class Process extends TrackedObject {
 						+ "									:outputQuantities, "
 						+ "									:outputUnits, "
 						+ "									:weights, "		
+						+ "									:subprocesses, "		
 						+ "									:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
 		modifyParameters.addValue("processId", this.getId());
@@ -172,6 +201,7 @@ public class Process extends TrackedObject {
 		modifyParameters.addValue("outputQuantities", createArrayOfSQLType("numeric", this.outputQuantities.toArray()));
 		modifyParameters.addValue("outputUnits", createArrayOfSQLType("integer", this.getOutputUnitIds().toArray()));
 		modifyParameters.addValue("weights", createArrayOfSQLType("integer", this.getWeights().toArray()));
+		modifyParameters.addValue("subprocesses", createArrayOfSQLType("integer", this.getSubprocesses().toArray()));
 		
 		Integer qryResult = super.modify();
 		if (qryResult == -2) {
@@ -255,6 +285,16 @@ public class Process extends TrackedObject {
 		parametersMap.put("lang", Locales.getCurrent().getLanguage());
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(qryStr, parametersMap, new ProcessIOMapper());
+	}
+	
+	public List<Object> getProcessSubprocesses(Integer processId) throws SQLException {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_Process_getProcessSubprocesses\"(:processId, :lang, :loginname)";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processId", processId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(qryStr, parametersMap, new ProcessSubprocessMapper());
 	}
 
 	@Override
@@ -400,5 +440,13 @@ public class Process extends TrackedObject {
 	@Override
 	public PrintableData getReportMinimal() throws SQLException {
 		return null;
+	}
+
+	public ArrayList<Integer> getSubprocesses() {
+		return subprocesses;
+	}
+
+	public void setSubprocesses(ArrayList<Integer> subprocesses) {
+		this.subprocesses = subprocesses;
 	}
 }
