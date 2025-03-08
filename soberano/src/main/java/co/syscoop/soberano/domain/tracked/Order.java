@@ -23,6 +23,7 @@ import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.database.relational.QueryResultWithReportMapper;
+import co.syscoop.soberano.database.relational.QueryStringResultMapper;
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
@@ -475,6 +476,21 @@ public class Order extends BusinessActivityTrackedObject {
 		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(qryStr, parametersMap, new PrintableDataMapper()).get(0);
 	}
+	
+	public String getProductionLineGroupedAllocations(Integer productionLineId) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT * FROM soberano.\"fn_Order_getProductionLineGroupedAllocations\"(:orderId, "
+							+ "								:productionLineId, "
+							+ "								:lang, "
+							+ "								:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("productionLineId", productionLineId);
+		parametersMap.put("lang", Locales.getCurrent().getLanguage());
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (String) super.query(qryStr, parametersMap, new QueryStringResultMapper()).get(0);
+	}	
 	
 	public PrintableData retrieveTicket() throws SQLException {
 		

@@ -19,6 +19,10 @@ public class SoberanoInit implements WebAppInit {
 								Boolean /*true if allocation was already printed*/>>> printedAllocations =
 				new HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>();
 	
+	private HashMap<Integer /*order id*/, 
+					HashMap<Integer /*production line id*/, String /*lastPrintedGroupedAllocation*/>> lastPrintedGroupedAllocations =
+				new HashMap<Integer, HashMap<Integer, String>>();
+	
 	@Override
 	public void init(WebApp wapp) throws Exception {
 		
@@ -28,5 +32,6 @@ public class SoberanoInit implements WebAppInit {
 		
 		//initialize printed allocations
 		wapp.setAttribute("printed_allocations", printedAllocations);
+		wapp.setAttribute("last_printed_grouped_allocations", lastPrintedGroupedAllocations);
 	}
 }

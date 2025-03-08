@@ -1,24 +1,11 @@
-v1.0.4 release
+v1.0.5 release
 
-New: Concept "Process 1 is a subprocess of Process 2" added to conceptual model, playing Process 1 the role of Subprocess.
-	Each time a Process 2's process run is executed r times, a number of Process1's runs equal to r are also executed as
-	part of the same transaction.
+New: 
 	
-	Subprocesses are only executed when closing order's process runs. So, configured subprocesses of a process not connected
-	to an order aren't executed (just ignored).
+Fix: In process_runs.zul, final product processes were excluded, so there was no way to get the cost from UI.
+	Fixed by changing plpgsql FUNCTION soberano."fn_Process_getAllToRun"(character varying).
 	
-	It's assumed a subprocess is a product's process. Otherwise, the inventory couldn't be properly updated.
+Fix: Production line vauchers were printed even in cases they didn't change. This happened when grouped production
+	allocations were enabled.
 	
-	The purpose of subprocesses is to save time by avoiding repetitive configuration tasks. This is achieved by sharing 
-	subprocesses among many product (non acquirable) processes whose recipes (inputs) often change in time. For example:
-	beer / run / tequila / ... brands used in cocktails and garnish ingredients.
-	
-	In Michelada recipe, instead of using Cristal Beer or Bucanero Beer as input, it would be used just Beer as subprocess.
-	There would be the product Beer configured, with the corresponding process having the correct beer as input. It wouldn't 
-	be required to change all the beer based cocktail recipes any time the available beer changes. Instead, only the process
-	Beer is required to be modified.
-	
-Fix: In the payment processor modal window, the amount to collect is rounded up (with a precision of 8 decimal places). Before,
-	it was rounded half even, causing inconveniences with high precision exchange rates.
-	
-User manual: pág. 64: Se añade la explicación de subprocesos.
+User manual: 

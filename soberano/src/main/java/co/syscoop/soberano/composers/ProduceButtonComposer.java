@@ -107,17 +107,43 @@ public class ProduceButtonComposer extends SelectorComposer {
 								Boolean allocationWasPrinted = 
 										productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
 								
-								//allocation was not printed yet
+								//allocation was not printed yet, or it's grouped
 								if (!allocationWasPrinted || allocationId == 0) {
 									
 									//allocations grouped
 									if (allocationId == 0) {
 										
-										//only allocations of the order printing was requested (btnProduce pushed)
-										if (((ProcessRunOutputAllocation) object).getOrderId().equals(orderId)) {
-											if (textsToPrint.get(productionLineId) == null) {
-												textsToPrint.put(productionLineId, header + description + "\n");
-											}
+										HashMap<Integer, String> thisOrderLastPrintedGroupedAllocations =
+												((HashMap<Integer, HashMap<Integer, String>>) Executions.
+																								getCurrent().
+																								getDesktop().
+																								getWebApp().
+																								getAttribute("last_printed_grouped_allocations")).get(orderId);
+										
+										String thisProductionLineLastPrintedAllocationsForThatOrder = "";
+										
+										if (thisOrderLastPrintedGroupedAllocations == null) {											
+											((HashMap<Integer, HashMap<Integer, String>>) Executions.
+																							getCurrent().
+																							getDesktop().
+																							getWebApp().
+																							getAttribute("last_printed_grouped_allocations")).put(orderId, new HashMap<Integer, String>());
+											thisOrderLastPrintedGroupedAllocations = ((HashMap<Integer, HashMap<Integer, String>>) Executions.
+													getCurrent().
+													getDesktop().
+													getWebApp().
+													getAttribute("last_printed_grouped_allocations")).get(orderId);
+										}
+										else {
+											thisProductionLineLastPrintedAllocationsForThatOrder = thisOrderLastPrintedGroupedAllocations.get(productionLineId);
+										}										
+										
+										String thisProductionLineCurrentAllocationsForThatOrder = (new Order(orderId)).getProductionLineGroupedAllocations(productionLineId);
+										
+										//allocations changed since last printing
+										if (!thisProductionLineCurrentAllocationsForThatOrder.equals(thisProductionLineLastPrintedAllocationsForThatOrder)) {
+											thisOrderLastPrintedGroupedAllocations.put(productionLineId, thisProductionLineCurrentAllocationsForThatOrder);
+											textsToPrint.put(productionLineId, header + description + "\n" + thisProductionLineCurrentAllocationsForThatOrder);
 										}
 									}
 									else {
@@ -128,10 +154,10 @@ public class ProduceButtonComposer extends SelectorComposer {
 										if (!description.isEmpty()) {											
 											textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + description + "\n");
 										}
+										
+										productionLineAllocations.put(allocationId, true);							
+										textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + itemName + "\n\n");
 									}
-									
-									productionLineAllocations.put(allocationId, true);							
-									textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + itemName + "\n\n");
 								}
 							}
 						}
