@@ -25,10 +25,12 @@
 				<menu label="${labels.menuItem.Reports}" sclass="BarMenu">
 					<menupopup>
 						<menuitem disabled="true" label="${labels.menuItem.OperationsReport}" href="operations_report.zul"/>
-						<menuitem disabled="true" label="${labels.menuItem.SalesReport}" href="sales_report.zul"/>
-						<menuitem disabled="true" label="${labels.menuItem.ExpensesReport}" href="Expenses_report.zul"/>
-						<menuitem disabled="true" label="${labels.menuItem.CanceledOrdersReport}" href="canceled_report.zul"/>
 						<menuitem disabled="true" label="${labels.menuItem.ShoppingList}" href="shopping_list.zul"/>
+						<menu label="${labels.menuItem.DeliveryProviders}" sclass="BarMenu">
+							<menupopup>
+								<menuitem label="${labels.menuItem.Collection}" href="delivery_provider_collection_report.zul"/>
+							</menupopup>
+						</menu>
 					</menupopup>
 				</menu>
 				<menuitem label="${labels.menuItem.Receivables}" href="receivables.zul"/>													

@@ -9,7 +9,12 @@
 		<separator></separator>
 		<label value="${labels.caption.field.discount}" sclass="Caption"></label>		
 		<hbox width="100%">
+			<decimalbox id="decDiscount" format="####.########" scale="8" value="0" constraint="no empty"/>
+			
+			<!-- commented to allow customer negative discounts (equivalent to customer scope surcharges)
 			<decimalbox id="decDiscount" format="####.########" scale="8" value="0" constraint="no negative, no empty"/>
+			 -->
+			
 			<label value=" % "></label>
 		</hbox>
 		<separator></separator>		

@@ -10,7 +10,7 @@
 		<vbox vflex="1" id="boxDetails" width="100%" apply="co.syscoop.soberano.composers.SPIComposer">
 			<vbox width="100%">
 				<hbox hflex="1" align="center">
-					<label value="${labels.caption.columnHeader.shift}" sclass="Caption"></label>
+					<label value="${labels.caption.field.shift}" sclass="Caption"></label>
 					<separator></separator>	
 					<datebox id="dateShift" compact="false" buttonVisible="true" format="yyyy-MM-dd"/>
 				</hbox>

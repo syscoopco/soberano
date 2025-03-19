@@ -1,11 +1,15 @@
-v1.0.5 release
+v1.0.6 release
 
-New: 
+New: The restriction enforcing customer scope positive discount was removed. This allows to configure negative discounts.
+	That's equivalent to customer scope surcharges.
 	
-Fix: In process_runs.zul, final product processes were excluded, so there was no way to get the cost from UI.
-	Fixed by changing plpgsql FUNCTION soberano."fn_Process_getAllToRun"(character varying).
+New: Delivery providers collection report added.
 	
-Fix: Production line vauchers were printed even in cases they didn't change. This happened when grouped production
-	allocations were enabled.
+Fix: Production allocations vauchers are now printed only once and just the changed content.
 	
 User manual: 
+
+1) pág. 16: Nueva responsabilidad de Administrador: “Imprimir informe de recaudación por proveedor de servicios de entrega”
+2) pág. 19: Nueva responsabilidad de Auditor: “Imprimir informe de recaudación por proveedor de servicios de entrega”
+3) pág. 151: Se añade “Descuentos negativos por cliente ...”.
+4) pág. 161: Se inserta el capítulo  20 de Informes.

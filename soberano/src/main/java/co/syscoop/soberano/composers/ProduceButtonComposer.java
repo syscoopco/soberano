@@ -77,6 +77,8 @@ public class ProduceButtonComposer extends SelectorComposer {
 				
 				//print order's process run allocations
 				try {
+					ArrayList<Integer> printedGroupedproductionLineIds = new ArrayList<>();
+					
 					for (Object object : (new ProcessRun()).getOrderProcessRunAllocations(orderId)) {
 						try{
 							Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
@@ -138,13 +140,17 @@ public class ProduceButtonComposer extends SelectorComposer {
 											thisProductionLineLastPrintedAllocationsForThatOrder = thisOrderLastPrintedGroupedAllocations.get(productionLineId);
 										}										
 										
-										String thisProductionLineCurrentAllocationsForThatOrder = (new Order(orderId)).getProductionLineGroupedAllocations(productionLineId);
-										
-										//allocations changed since last printing
-										if (!thisProductionLineCurrentAllocationsForThatOrder.equals(thisProductionLineLastPrintedAllocationsForThatOrder)) {
-											thisOrderLastPrintedGroupedAllocations.put(productionLineId, thisProductionLineCurrentAllocationsForThatOrder);
-											textsToPrint.put(productionLineId, header + description + "\n" + thisProductionLineCurrentAllocationsForThatOrder);
-										}
+										if (printedGroupedproductionLineIds.indexOf(productionLineId) == -1) {											
+											
+											String thisProductionLineCurrentAllocationsForThatOrder = (new Order(orderId)).getProductionLineGroupedAllocations(productionLineId);
+											
+											//allocations changed since last printing
+											if (!thisProductionLineCurrentAllocationsForThatOrder.equals(thisProductionLineLastPrintedAllocationsForThatOrder)) {
+												thisOrderLastPrintedGroupedAllocations.put(productionLineId, thisProductionLineCurrentAllocationsForThatOrder);
+												textsToPrint.put(productionLineId, header + description + "\n" + thisProductionLineCurrentAllocationsForThatOrder);
+											}
+											printedGroupedproductionLineIds.add(productionLineId);
+										}										
 									}
 									else {
 										if (textsToPrint.get(productionLineId) == null) {
