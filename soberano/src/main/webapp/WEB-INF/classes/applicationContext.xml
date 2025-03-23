@@ -326,6 +326,8 @@
  	</bean>
  	<bean name="mlc" class="co.syscoop.soberano.beans.MLC">
  	</bean>
+ 	<bean name="lnbits_cubabitcoin_org" class="co.syscoop.soberano.beans.lnbits_cubabitcoin_org">
+ 	</bean>
  	
  	<!-- printer profile beans -->
  	<bean name="facturalanuevaprinterprofile" class="co.syscoop.soberano.beans.FacturaLaNuevaPrinterProfile">

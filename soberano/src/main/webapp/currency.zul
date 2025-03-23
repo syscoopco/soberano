@@ -20,6 +20,7 @@
 			<comboitem label="EnZona" value="3"/>
 			<comboitem label="Transfermovil" value="4"/>
 			<comboitem label="MLC" value="5"/>
+			<comboitem label="lnbits_cubabitcoin_org" value="6"/>
 		</combobox>
 		<separator></separator>
 		<label value="${labels.caption.field.exchangeRate}" sclass="Caption"></label>

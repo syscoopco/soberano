@@ -1,15 +1,7 @@
-v1.0.6 release
+v1.0.7 release
 
-New: The restriction enforcing customer scope positive discount was removed. This allows to configure negative discounts.
-	That's equivalent to customer scope surcharges.
+New: Payment processor for lnbits.cubabitcoin.org added.
 	
-New: Delivery providers collection report added.
+Fix: 
 	
-Fix: Production allocations vauchers are now printed only once, and just the changed content.
-	
-User manual: 
-
-1) pág. 16: Nueva responsabilidad de Administrador: “Imprimir informe de recaudación por proveedor de servicios de entrega”
-2) pág. 19: Nueva responsabilidad de Auditor: “Imprimir informe de recaudación por proveedor de servicios de entrega”
-3) pág. 151: Se añade “Descuentos negativos por cliente ...”.
-4) pág. 161: Se inserta el capítulo  20 de Informes.
+User manual:

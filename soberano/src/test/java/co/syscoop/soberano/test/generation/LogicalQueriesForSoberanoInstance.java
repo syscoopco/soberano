@@ -2217,7 +2217,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	 		(2, 'Tropipay'),\n"
 						+ "	 		(3, 'EnZona'),\n"
 						+ "			(4, 'Transfermovil'),\n"
-						+ "			(5, 'MLC');",
+						+ "			(5, 'MLC'),\n"
+						+ "			(6, 'lnbits_cubabitcoin_org');",
 						
 						
 						
@@ -2225,7 +2226,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	\"ParameterHasParameterId\", \"This_has_Name\")\n"
 						+ "	VALUES (1, 'client_id'),\n"
 						+ "			(2, 'client_secret'),\n"
-						+ "			(3, 'Authorization');",
+						+ "			(3, 'Authorization'),\n"
+						+ "			(4, 'X-Api-Key');",
 						
 						
 						
@@ -2233,7 +2235,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	\"ParameterValue\", \"ParameterHasParameterId\", \"PaymentProcessorHasPaymentProcessorId\")\n"
 						+ "	VALUES ('6dd47483d77063961d2fec65e83cf5da', 1, 2),\n"
 						+ "			('bf7b18799d1ff55a7cb49ab2e93e0379', 2, 2),\n"
-						+ "			('2dda1dd6-c2b8-44ca-bda9-477c3e42956a', 3, 1);",
+						+ "			('2dda1dd6-c2b8-44ca-bda9-477c3e42956a', 3, 1),\n"
+						+ "			('11111111111111111111111111111111', 4, 6);",
 						
 						
 						
@@ -16013,6 +16016,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "	previousparentprocessrunid integer;\n"
 						+ "	additionsCount integer;\n"
 						+ "	\n"
+						+ "	lastProcessRunId text; \n"
+						+ "	\n"
 						+ "BEGIN\n"
 						+ "	ticket := '';\n"
 						+ "	\n"
@@ -16102,15 +16107,16 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			\n"
 						+ "			INSERT INTO soberano.\"z-allocationsAlreadyRequestedForPrinted\"(\"ProcessRun\")\n"
 						+ "				VALUES (itemRecord.\"processrunid\");\n"
+						+ "				\n"
+						+ "			lastProcessRunId := CAST(itemRecord.parentprocessrunid AS text);\n"
 						+ "			\n"
 						+ "		END LOOP;		\n"
-						+ "		RETURN ticket;\n"
+						+ "		RETURN ticket || chr(13) || lastProcessRunId;\n"
 						+ "	ELSE\n"
 						+ "		RETURN '';\n"
 						+ "	END IF;	\n"
 						+ "END;\n"
-						+ "$BODY$;\n"
-						+ "",
+						+ "$BODY$;",
 						
 						
 						
