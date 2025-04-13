@@ -1,24 +1,8 @@
-v1.0.8 release
+v1.0.9 release
 
-New: plpgsql FUNCTION soberano."z-fn_Helper_process_modify"(character varying, character varying[], inputqties numeric[], character varying[])
-	for easing process configuration directly on database, or migration, or data entering, ...
+New: Now, it's had the chance to open a day until the opening hour of next day. Opening hour is 
+	configured in menu Configuration -> Others. Before, it was next day at 12AM.
 	
-New: In order.zul , enforce that "subprocess" is an illegal value for the text box 'Special instructions...'
-	
-Fix: Default Tomcat DB connection pool parameters changed.
-
-Fix: Avoid showing subprocess entries in order form (FUNCTION soberano."fn_Order_get")
-
-Fix: Avoid showing subprocess entries in order tickets (FUNCTION soberano."fn_Order_getTicket")
-
-Fix: Avoid retrieving subprocess allocations (FUNCTION soberano."fn_Order_getProductionLineGroupedAllocations")
-
-Fix: Avoid retrieving subprocess allocations (FUNCTION soberano."fn_ProcessRunOutputAllocation_getAll")
-
-Fix: Avoid showing subprocess allocations in report (FUNCTION soberano."fn_ProcessRunOutputAllocation_getReport")
-
-Fix: Avoid showing subprocess allocations in report (FUNCTION soberano."fn_ProcessRunOutputAllocation_getReportMinimal")
-
-Fix: Delete subprocess process runs upon order reopening (FUNCTION soberano."fn_Order_reopen")
+Fix: Production line vauchers are printer only if they have useful information (more than 3 lines). More paper saving.
 	
 User manual:

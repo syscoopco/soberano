@@ -60,6 +60,11 @@ public class ProduceButtonComposer extends SelectorComposer {
 		this.fileToPrintFullPath = fileToPrintFullPath;
 	}
 	
+	private static int countLines(String str) {
+		String[] lines = str.split("\r\n|\r|\n");
+		return lines.length;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public static void produce(Integer orderId, String fileToPrintFullPath) throws SoberanoException {
 		
@@ -180,13 +185,17 @@ public class ProduceButtonComposer extends SelectorComposer {
 			for (Integer plId : productionLineIds) {
 				ProductionLine productionLine = new ProductionLine(plId);
 				productionLine.get();
-				Printer.print(Translator.translate(textsToPrint.get(plId) != null ? textsToPrint.get(plId) : ""),
+				
+				if (textsToPrint.get(plId) != null && countLines(textsToPrint.get(plId)) > 3) {
+					
+					Printer.print(Translator.translate(textsToPrint.get(plId)),
 							productionLine,
 							fileToPrintFullPath + "-" + plId.toString(),
 							false /*true better to use computer printer 
 									settings to control feeds or blank 
 									lines printing at the end of page 
 									or document*/);
+				}
 			}
 		}
 		catch(Exception ex)	{
