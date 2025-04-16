@@ -23,6 +23,7 @@ import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.exception.SomeFieldsContainWrongValuesException;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
+import co.syscoop.soberano.util.Mobile;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Labels;
@@ -194,7 +195,7 @@ public class OrderManagementComposer extends OrderComposer {
 				}
 				else {
 					Integer orderId = intObjectId.getValue();
-					OrderFormHelper.updateForm(orderId, boxDetails);
+					OrderFormHelper.updateForm(orderId, boxDetails, Mobile.isMobile());
 					btnDec.setDisabled(true);
 					cmbItemToOrder.setSelectedItem(null);
 					txtQuantityExpression.setValue("0");

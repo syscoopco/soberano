@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(17)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO17_ProcessRunTest_record extends ProcessRunActionTest {

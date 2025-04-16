@@ -19,7 +19,9 @@
 			<separator></separator>
 			<label value="${labels.caption.field.orderNumber}" sclass="Caption"></label>
 			<hbox vflex="1" hflex="1">
+				<button id="btnDec" label="-" apply="co.syscoop.soberano.composers.RetrieveTicketButtonComposer"></button>
 				<intbox hflex="1" id="intOrderNumber" placeholder="${labels.caption.field.orderNumberPlaceholder}"/>
+				<button id="btnInc" label="+" apply="co.syscoop.soberano.composers.RetrieveTicketButtonComposer"></button>
 				<button id="btnRetrieve" label="${labels.caption.action.retrieve}" apply="co.syscoop.soberano.composers.RetrieveTicketButtonComposer"></button>
 			</hbox>
 			<textbox id="txtReport" rows="50" multiline="true" width="100%" readonly="true" style="font-family: courier;"/>

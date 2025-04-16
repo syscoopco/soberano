@@ -51,9 +51,12 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 										" " + 
 										Labels.getLabel("pageOrder.for") +
 										" " +
-										orderId);
-		window.setWidth("80%");
-		window.setHeight("80%");
+									orderId);
+		//window.setWidth("80%");
+		//window.setHeight("80%");
+		
+		window.setWidth("100%");
+		window.setHeight("100%");
 		
 		Product product = (Product) (new Product(productId)).getWithUnitForOrder().get(0);	
 		Combobox cmbItemToOrder = (Combobox) window.query("combobox");
@@ -137,8 +140,13 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 		try {
 			Window window = (Window) Executions.createComponents("./add_items.zul", wndContentPanel, null);
 			window.setTitle(Labels.getLabel("pageOrder.addItemsToOrder") + " " + orderId);
-			window.setWidth("90%");
-			window.setHeight("90%");
+			
+			//window.setWidth("90%");
+			//window.setHeight("90%");
+			
+			window.setWidth("100%");
+			window.setHeight("100%");
+			
 			window.setAttribute("orderId", orderId);
 							
 			ProductCategory productCategory = new ProductCategory();

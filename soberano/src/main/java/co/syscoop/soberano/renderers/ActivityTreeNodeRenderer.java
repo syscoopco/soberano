@@ -19,6 +19,7 @@ import org.zkoss.zul.Window;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
+import co.syscoop.soberano.util.Mobile;
 import co.syscoop.soberano.util.rowdata.OrderRowData;
 
 public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNode<NodeData>> {
@@ -76,7 +77,8 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 								OrderFormHelper.renderOrderItems(order, 
 																vboxOrderItems, 
 																true,
-																boxDetails);
+																boxDetails,
+																Mobile.isMobile());
 								OrderFormHelper.renderAdditions(order, wndContentPanel);
 							}
 							else {

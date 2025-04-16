@@ -363,7 +363,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 										OrderItem oi, 
 										HashMap<String, Treeitem> parentProcessRunTreeitems,
 										Order order,
-										Component boxDetails) {
+										Component boxDetails, 
+										Boolean isMobile) {
 		
 		ConfirmationOrderTreeitem oiItem = new ConfirmationOrderTreeitem(order);
 		Vbox vboxOi = new Vbox();
@@ -541,17 +542,20 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 		boxOi.appendChild(lblOrderedItems);
 		
-		boxOi.appendChild(new Separator("horizontal"));
+		if (!isMobile) boxOi.appendChild(new Separator("horizontal"));
 		
 		Label lblProductUnit = new Label(oi.getProductUnit());
 		lblProductUnit.setId("lblProductUnit" + oi.getProcessRunId().toString());					
 		boxOi.appendChild(lblProductUnit);	
 		
-		boxOi.appendChild(new Separator("horizontal"));				
-		boxOi.appendChild(new Separator("horizontal"));
-		boxOi.appendChild(new Separator("horizontal"));
+		if (!isMobile) {
+			boxOi.appendChild(new Separator("horizontal"));				
+			boxOi.appendChild(new Separator("horizontal"));
+			boxOi.appendChild(new Separator("horizontal"));
+		}		
 		
-		boxOi.appendChild((new Label(Labels.getLabel("caption.field.discount"))));
+		Label lblDiscount = new Label(Labels.getLabel("caption.field.discount"));		
+		boxOi.appendChild(lblDiscount);
 		Decimalbox decDiscount = new Decimalbox();
 		decDiscount.setId("decDiscount" + oi.getProcessRunId().toString());
 		decDiscount.setConstraint("no empty, no negative");
@@ -578,7 +582,19 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		
 		Label lblProductUnit1 = new Label(oi.getProductUnit());
 		lblProductUnit1.setId("lblProductUnit1" + oi.getProcessRunId().toString());					
-		boxOi.appendChild(lblProductUnit1);					
+		boxOi.appendChild(lblProductUnit1);
+		
+		if (isMobile) {
+			decServedItems.setFormat("####.##");
+			decServedItems.setWidth("60%");
+			lblOrderedItems.setValue((oi.getOrderedRuns().setScale(2, BigDecimal.ROUND_HALF_EVEN).toString()));
+			lblProductUnit.setVisible(false);
+			btnCancelAllItems.setVisible(false);
+			
+			lblDiscount.setVisible(false);
+			decDiscount.setVisible(false);
+			lblProductUnit1.setVisible(false);
+		}
 		
 		boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 		
@@ -618,7 +634,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 							}
 							else {
 								//update form
-								updateForm(order.getId(), boxDetails);
+								updateForm(order.getId(), boxDetails, isMobile);
 							}
 						}
 					}
@@ -646,7 +662,8 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 						String desc, 
 						Treechildren chdnOic, 
 						Boolean itsForManagement, 
-						Component boxDetails) {
+						Component boxDetails,
+						Boolean isMobile) {
 		
 		if (!itsForManagement) {
 			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
@@ -729,7 +746,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		else {
 			for (OrderItem oi : order.getOrderItems().get(cat + ":" + desc)) {
 				if (oi.getThisIsAnAdditionOf() == null || oi.getThisIsAnAdditionOf() == 0) {
-					renderNonAdditionItems(chdnOic, oi, parentProcessRunTreeitems, order, boxDetails);
+					renderNonAdditionItems(chdnOic, oi, parentProcessRunTreeitems, order, boxDetails, isMobile);
 				}
 			}
 		}
@@ -822,7 +839,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		return order;
 	}
 	
-	public static void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement, Component boxDetails) {
+	public static void renderOrderItems(Order order, Vbox vboxOrderItems, Boolean itsForManagement, Component boxDetails, Boolean isMobile) {
 		
 		Integer catIx = 0;
 		for (String cat : order.getCategories()) {
@@ -860,7 +877,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					Treechildren chdnOic = new Treechildren();
 					titemDesc.appendChild(chdnOic);
 					titemDesc.setOpen(true);		
-					renderItems(order, cat, desc, chdnOic, itsForManagement, boxDetails);
+					renderItems(order, cat, desc, chdnOic, itsForManagement, boxDetails, isMobile);
 				}
 			}
 		}
@@ -872,7 +889,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 	}
 	
-	public static void updateForm(Integer orderId, Component boxDetails) throws Exception {		
+	public static void updateForm(Integer orderId, Component boxDetails, Boolean isMobile) throws Exception {		
 
 		Order order = new Order(orderId);
 		order.get();
@@ -890,30 +907,31 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		OrderFormHelper.renderOrderItems(order, 
 										vboxOrderItems, 
 										true,
-										boxDetails);
+										boxDetails,
+										isMobile);
 		OrderFormHelper.renderAdditions(order, wndContentPanel);
 	}
 	
-	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement, Vbox boxDetails) throws Exception {
+	private void initForm(Window wndContentPanel, Integer orderId, Boolean itsForManagement, Vbox boxDetails, Boolean isMobile) throws Exception {
 		
 		Order order = initForm(wndContentPanel, orderId);
 		Vbox vbox = new Vbox();
 		vbox.setId("vboxOrderItems");
 		vbox.setHflex("1");
-		OrderFormHelper.renderOrderItems(order, vbox, itsForManagement, boxDetails);
+		OrderFormHelper.renderOrderItems(order, vbox, itsForManagement, boxDetails, isMobile);
 		renderAdditions(order, wndContentPanel);
 		Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
 		divOrderItems.appendChild(vbox);
 	}
 	
-	public void initFormForManagement(Window wndContentPanel, Integer orderId) throws Exception {
+	public void initFormForManagement(Window wndContentPanel, Integer orderId, Boolean isMobile) throws Exception {
 		
-		initForm(wndContentPanel, orderId, true, (Vbox) wndContentPanel.query("#boxDetails"));
+		initForm(wndContentPanel, orderId, true, (Vbox) wndContentPanel.query("#boxDetails"), isMobile);
 	}
 	
-	public void initFormForBilling(Window wndContentPanel, Integer orderId) throws Exception {
+	public void initFormForBilling(Window wndContentPanel, Integer orderId, Boolean isMobile) throws Exception {
 		
-		initForm(wndContentPanel, orderId, false, (Vbox) wndContentPanel.query("#boxDetails"));
+		initForm(wndContentPanel, orderId, false, (Vbox) wndContentPanel.query("#boxDetails"), isMobile);
 	}
 
 	@Override

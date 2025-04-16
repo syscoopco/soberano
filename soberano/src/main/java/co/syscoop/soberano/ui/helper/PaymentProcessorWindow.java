@@ -144,8 +144,11 @@ public class PaymentProcessorWindow extends Window {
 			}
 		});
 		
-		this.setWidth("30%");
-		this.setHeight("30%");
+		//this.setWidth("30%");
+		//this.setHeight("30%");
+		
+		this.setWidth("100%");
+		this.setHeight("100%");
 	}
 	
 	public Window getWndCashRegisterContentPanel() {

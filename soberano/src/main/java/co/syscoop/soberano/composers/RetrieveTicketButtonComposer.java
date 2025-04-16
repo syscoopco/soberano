@@ -32,6 +32,12 @@ public class RetrieveTicketButtonComposer extends SelectorComposer {
 	@Wire
 	private Intbox intOrderNumber;
 	
+	@Wire
+	private Button btnDec;
+	
+	@Wire
+	private Button btnInc;
+	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -49,6 +55,80 @@ public class RetrieveTicketButtonComposer extends SelectorComposer {
 					Messagebox.EXCLAMATION);
 			}
 			else {
+				String ticket = Translator.translate(new Order(intOrderNumber.getValue()).retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
+				if (!ticket.isEmpty()) {
+					
+					//set report
+					txtReport.setValue(ticket);
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
+		}		
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+		}
+    }
+	
+	@Listen("onClick = button#btnInc")
+    public void btnInc_onClick() throws SoberanoException {
+		
+		try{
+			if (intOrderNumber.getValue() == null) {
+				Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
+						Labels.getLabel("messageBoxTitle.Warning"), 
+					0, 
+					Messagebox.EXCLAMATION);
+			}
+			else {
+				intOrderNumber.setValue(intOrderNumber.getValue() + 1);
+				String ticket = Translator.translate(new Order(intOrderNumber.getValue()).retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
+				if (!ticket.isEmpty()) {
+					
+					//set report
+					txtReport.setValue(ticket);
+				}
+				else {
+					throw new NotEnoughRightsException();
+				}
+			}
+		}		
+		catch(NotEnoughRightsException ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("message.permissions.NotEnoughRights"), 
+					Labels.getLabel("messageBoxTitle.Warning"),
+					Messagebox.EXCLAMATION);
+		}
+		catch(Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+		}
+    }
+	
+	@Listen("onClick = button#btnDec")
+    public void btnDec_onClick() throws SoberanoException {
+		
+		try{
+			if (intOrderNumber.getValue() == null) {
+				Messagebox.show(Labels.getLabel("message.validation.specifyAnOrderNumber"), 
+						Labels.getLabel("messageBoxTitle.Warning"), 
+					0, 
+					Messagebox.EXCLAMATION);
+			}
+			else {
+				intOrderNumber.setValue(intOrderNumber.getValue() - 1);
 				String ticket = Translator.translate(new Order(intOrderNumber.getValue()).retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint());
 				if (!ticket.isEmpty()) {
 					

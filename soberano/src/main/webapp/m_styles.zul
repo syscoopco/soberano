@@ -1,0 +1,561 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<!-- mobile safari browser styles -->
+	
+	<style>
+		.ms_rowtext{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:90%;
+			color:black;
+		}
+	</style>
+	<style>
+		.ms_rowboldtext{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:90%;
+			color:black;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.ms_biglinkboldlesspadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;	
+			font-size: 100%;
+			font-weight: bold;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.ms_captionextraboldlesspadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 70%;
+			font-weight: bold;
+			padding: 0px 0px;
+		}
+	</style>
+	<style>
+		.ms_checkboxcaption{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 80%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.ms_paragraphlessspace{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:70%;
+			color:black;
+			line-height:120%;
+		}
+	</style>
+	<style>
+		.ms_captionlittleextra{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 70%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.ms_bigcaptionlesspadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 100%;
+			font-weight: bold;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.ms_captionextralesspadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 70%;
+			padding: 0px 0px;
+		}
+	</style>
+	<style>
+		.ms_inputnormal{
+			background-color:white;
+			font-family:Arial;
+			color:black;
+			border:solid;
+			font-size: 70%;
+		}
+	</style>
+	<style>
+		.ms_multilineinput{
+			background-color:white;
+			font-family:Arial;
+			color:black;
+			border:solid;
+			font-size: 70%;
+			line-height:120%;
+		}
+	</style>
+	<style>
+		.ms_caption{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 30%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.ms_paragraph{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:70%;
+			color:black;
+			line-height:200%;
+		}
+	</style>
+	<style>
+		.ms_tabcaption{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 70%;
+			padding: 0px 0px;
+		}
+	</style>
+	<style>
+		.ms_comboitem {
+		    background-color:white;
+			font-family:Arial;
+			color:black;
+			font-size: 150%;
+		}
+	</style>
+	<style>
+		.ms_combo .z-combobox-popup, .z-combobox-input {
+		    font-size: 150%;
+		    color: black;
+		    padding: 5px;
+		    height: 45px;
+		}
+	</style>
+	<style>
+		.ms_mainfooter{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:70%;
+			color:indigo;	
+		}
+	</style>
+	<style>
+		.ms_captionextra{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 150%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.ms_bigcheckbox{
+			width: 25px;
+			height: 25px;
+		}
+	</style>
+	<style>
+		.ms_biginputnormal{
+			background-color:white;
+			font-family:Arial;
+			color:black;
+			border:solid;
+			font-size: 100%;
+		}
+	</style>
+	<style>
+		.ms_bigcaptionnormal{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 100%;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.ms_extrabigcaptionnormalnopadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 300%;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.ms_bigcaptionnormalmorepadding{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 100%;
+			padding:10px 10px;
+		}
+	</style>
+	<style>
+		.ms_biglink{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;	
+			font-size: 95%;
+			padding:10px 10px;
+		}
+	</style>
+	<style>
+		.ms_bigcaption{
+			background-color:transparent;
+			font-family:Arial;
+			color:black;	
+			font-size: 100%;
+			font-weight: bold;
+			padding:10px 10px;
+		}
+	</style>
+	<style>
+		.ms_bigfigure{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;	
+			font-size: 100%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.ms_title{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;	
+			font-size: 100%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.ms_banner{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;	
+			font-size: 70%;
+		}
+	</style>
+	<style>
+		.ms_welcomebanner{
+			background-color:transparent;
+			font-family:Arial;
+			color:indigo;
+			font-size:80%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.ms_link{
+			background-color:transparent;
+			font-family:Arial;
+			font-size: 67%;
+			color:indigo;
+			line-height:110%;
+		}
+	</style>
+	
+	<!-- mobile firefox browser styles -->
+
+	<style>
+		.m_rowtext{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:270%;
+			color:black;
+		}
+	</style>
+	<style>
+		.m_rowboldtext{
+			background-color:transparent;
+			font-family:Arial;
+			font-size:270%;
+			color:black;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.m_welcomebanner{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;
+			font-size:250%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.m_banner{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 200%;
+		}
+	</style>
+	<style>
+		.m_footer{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 200%;
+		}
+	</style>
+	<style>
+		.m_caption{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 100%;
+			padding: 10px 10px;
+		}
+	</style>
+	<style>
+		.m_captionlittleextra{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 200%;
+			padding: 10px 10px;
+		}
+	</style>
+	<style>
+		.m_captionextra{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 200%;
+			padding: 20px 20px;
+		}
+	</style>
+	<style>
+		.m_captionextralesspadding{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 200%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.m_captionextraboldlesspadding{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 200%;
+			font-weight: bold;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.m_tabcaption{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 200%;
+			padding: 5px 5px;
+		}
+	</style>
+	<style>
+		.m_mainbanner{
+			background-color:transparent;
+			font-family:Courier;
+			font-size:200%;
+			color:indigo;	
+		}
+	</style>
+	<style>
+		.m_mainfooter{
+			background-color:transparent;
+			font-family:Courier;
+			font-size:200%;
+			color:indigo;	
+		}
+	</style>
+	<style>
+		.m_paragraph{
+			background-color:transparent;
+			font-family:Courier;
+			font-size:200%;
+			color:black;
+			line-height:200%;
+		}
+	</style>
+	<style>
+		.m_paragraphlessspace{
+			background-color:transparent;
+			font-family:Courier;
+			font-size:200%;
+			color:black;
+			line-height:120%;
+		}
+	</style>
+	<style>
+		.m_link{
+			background-color:transparent;
+			font-family:Courier;
+			font-size: 200%;
+			color:indigo;
+			line-height:110%;
+		}
+	</style>
+	<style>
+		.m_biglink{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 300%;
+			padding:15px 15px;
+		}
+	</style>
+	<style>
+		.m_biglinkboldlesspadding{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 300%;
+			font-weight: bold;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.m_alohabackgroundlogo{
+			background-image: url(../images/minilogo_opaque.jpg);
+			background-position: 50% 50%;
+		}
+	</style>
+	<style>
+		.m_title{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 300%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.m_figure{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 230%;
+			font-weight: normal;
+		}
+	</style>
+	<style>
+		.m_bigfigure{
+			background-color:transparent;
+			font-family:Courier;
+			color:indigo;	
+			font-size: 300%;
+			font-weight: bold;
+		}
+	</style>
+	<style>
+		.m_bigcaption{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 300%;
+			font-weight: bold;
+			padding:15px 15px;
+		}
+	</style>
+	<style>
+		.m_bigcaptionlesspadding{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 300%;
+			font-weight: bold;
+			padding:5px 5px;
+		}
+	</style>
+	<style>
+		.m_bigcaptionnormal{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 300%;
+			padding:15px 15px;
+		}
+	</style>
+	<style>
+		.m_bigcaptionnormalmorepadding{
+			background-color:transparent;
+			font-family:Courier;
+			color:black;	
+			font-size: 300%;
+			padding:25px 25px;
+		}
+	</style>
+	<style>
+		.m_biginputnormal{
+			background-color:white;
+			font-family:Courier;
+			color:black;
+			border:solid;
+			font-size: 250%;
+		}
+	</style>
+	<style>
+		.m_inputnormal{
+			background-color:white;
+			font-family:Courier;
+			color:black;
+			border:solid;
+			font-size: 200%;
+		}
+	</style>
+	<style>
+		.m_multilineinput{
+			background-color:white;
+			font-family:Courier;
+			color:black;
+			border:solid;
+			font-size: 200%;
+			line-height:120%;
+		}
+	</style>
+	<style>
+		.m_bigcheckbox{
+			width: 50px;
+			height: 50px;
+		}
+	</style>
+	<style>
+		.m_extrabigcheckbox{
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+	<style>
+		.m_combo .z-combobox-popup, .z-combobox-input {
+		    font-size: 250%;
+		    color: black;
+		    padding: 5px;
+		    height: 45px;
+		}
+	</style>	
+	<style>
+		.m_comboitem {
+		    background-color:white;
+			font-family:Courier;
+			color:black;
+			font-size: 250%;
+		}
+	</style>
+</zk>

@@ -10,6 +10,7 @@ import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.ui.helper.OrderFormHelper;
+import co.syscoop.soberano.util.Mobile;
 import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class OrderInitiator implements Initiator, InitiatorExt {
@@ -20,7 +21,7 @@ public class OrderInitiator implements Initiator, InitiatorExt {
 	public void doAfterCompose(Page page, Component[] comps) throws Exception {
 		try {
 			OrderFormHelper form = new OrderFormHelper();
-			form.initFormForManagement((Window) comps[1].getParent().getParent().getParent().getParent().query("#wndContentPanel"), orderId);
+			form.initFormForManagement((Window) comps[2].query("#wndContentPanel"), orderId, Mobile.isMobile());
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();

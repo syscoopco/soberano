@@ -11,9 +11,9 @@
 									<comboitem label="@load(each.name)" value="@load(each)">
 									</comboitem>
 								</template>
-							</combobox>
-							<textbox id="txtSpecialInstructions" maxlength="100" hflex="1" placeholder="${labels.placeholder.specialInstructions}"/>
+							</combobox>							
 						</hbox>
+						<textbox id="txtSpecialInstructions" maxlength="100" hflex="1" placeholder="${labels.placeholder.specialInstructions}"/>
 						<hbox hflex="1" align="center">
 							<button id="btnInc" label="+"></button>
 							<button disabled="true" id="btnDec" label="-"></button>
@@ -22,10 +22,9 @@
 							<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
 							<decimalbox visible="false" format="####.########" scale="8" id="decQuantity" hflex="1"/>
 							<combobox readonly="true" disabled="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
-												
-							<button disabled="true" id="btnMakeFromAdditionsWindow" label="${labels.caption.action.add}" hflex="1"></button>
-							<button visible="false" disabled="true" id="btnMake" hflex="1"></button>
 						</hbox>
+						<button disabled="true" id="btnMakeFromAdditionsWindow" label="${labels.caption.action.add}" hflex="1"></button>
+						<button visible="false" disabled="true" id="btnMake" hflex="1"></button>
 					</vbox>
 				</groupbox>
 				<panel hflex="1" vflex="1" title="${labels.pageOrder.additions}" id="pnlAdditions" border="none" collapsible="false">

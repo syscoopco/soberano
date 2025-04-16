@@ -1,0 +1,154 @@
+<?page title="${labels.pageOrder.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/m_template.zul"?>
+<?init class="co.syscoop.soberano.initiators.OrderInitiator"?>
+<?init class="co.syscoop.soberano.initiators.MobilePageInitiator"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageOrder.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<intbox id="intObjectId" value="1" visible="false" readonly="true"/>
+		<vbox vflex="1" id="boxDetails" hflex="1" apply="co.syscoop.soberano.composers.OrderManagementComposer">
+			<hbox hflex="1">
+				<vbox hflex="1">
+					<label value="${labels.caption.field.label}" sclass="Caption" hflex="1"></label>			
+					<textbox id="txtLabel" readonly="true" value="" hflex="1"/>
+				</vbox>
+				<separator></separator>
+				<vbox hflex="1">
+					<label value="${labels.caption.field.counters}" sclass="Caption" hflex="1"></label>			
+					<textbox id="txtCounters" readonly="true" value="" hflex="1"/>
+				</vbox>
+				<separator></separator>
+				<vbox visible="false" hflex="1">
+					<label value="${labels.caption.field.customer}" sclass="Caption" hflex="1"></label>			
+					<hbox hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel')">
+						<combobox id="cmbCustomer" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.ChangeCustomerComboboxComposer">
+							<template name="model">
+								<comboitem label="@load(each.name)" value="@load(each)">
+								</comboitem>
+							</template>
+						</combobox>
+						<button id="btnNewCustomer" label="+" href="/new_customer.zul"></button>
+						<popup id="pp" width="80%">	
+							<window height="100%" contentStyle="overflow:auto" apply="co.syscoop.soberano.composers.ChangeDeliveryAddressButtonComposer">
+								<include id="incContactData" src="/contact_data.zul"></include>
+								<separator></separator>
+								<separator></separator>
+								<hbox width="100%" pack="end">
+									<button id="btnApply" label="${labels.caption.action.apply}" sclass="DecisionButton"></button>
+									<button id="btnCancel" label="${labels.caption.action.cancel}" sclass="DecisionButton"></button>
+								</hbox>
+							</window>
+						</popup>
+						<button onClick='pp.open(self, "before_start");' id="btnDelivery" image="./images/delivery_15.jpg" sclass="DecisionButton"></button>
+					</hbox>
+				</vbox>
+				<separator></separator>
+				<vbox visible="false" hflex="1">
+					<label value="${labels.caption.field.deliveryProvider}" sclass="Caption" hflex="1"></label>			
+					<hbox hflex="1" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.DeliveryProviderSelectionViewModel')">
+						<combobox id="cmbDeliveryProvider" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.ChangeDeliveryProviderComboboxComposer">
+							<template name="model">
+								<comboitem label="@load(each.name)" value="@load(each)">
+								</comboitem>
+							</template>
+						</combobox>
+						<button id="btnNewProvider" label="+" href="/new_delivery_provider.zul"></button>	
+					</hbox>
+				</vbox>
+			</hbox>
+			<separator></separator>
+			<label id="lblDeliverTo" visible="false" value="${labels.caption.field.deliverTo}" sclass="Caption"></label>			
+			<textbox id="txtDeliverTo" visible="false" readonly="true" maxlength="2000" multiline="true" width="100%" height="10%" sclass="NotesTextbox"/>
+			<separator></separator>
+			<groupbox width="100%">
+				<vbox hflex="1">
+					<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProductSelectionForOrderViewModel')">
+						<combobox id="cmbItemToOrder" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.itemToOrder}" apply="co.syscoop.soberano.composers.ItemToOrderComboboxComposer">
+							<template name="model">
+								<comboitem label="@load(each.name)" value="@load(each)">
+								</comboitem>
+							</template>
+						</combobox>
+						<textbox id="txtSpecialInstructions" maxlength="100" hflex="1" placeholder="${labels.placeholder.specialInstructions}" constraint="/^((?!subprocess).)*$/"/>
+					</hbox>
+					<hbox hflex="1" align="center">
+						<button id="btnInc" label="+"></button>
+						<button disabled="true" id="btnDec" label="-"></button>
+						<decimalbox id="decOneRunQuantity" format="####.########" scale="8" value="0" visible="false"></decimalbox>
+						
+						<textbox id="txtQuantityExpression" hflex="1" placeholder="${labels.placeholder.quantity}"/>
+						<decimalbox visible="false" format="####.########" scale="8" id="decQuantity" hflex="1"/>
+						<combobox visible="false" readonly="true" disabled="true" id="cmbUnit" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.unit}"/>
+											
+						<button disabled="true" id="btnMake" label="${labels.caption.action.add}" hflex="1"></button>
+						<button visible="false" disabled="true" id="btnMakeFromAdditionsWindow" hflex="1"></button>
+					</hbox>
+				</vbox>
+			</groupbox>
+			<separator></separator>
+			<separator></separator>
+			<hbox width="100%" align="center">
+				<hbox hflex="1" align="center" pack="start">
+					<label value="${labels.caption.field.discount}" sclass="Caption"></label>		
+					<separator></separator>
+					<intbox id="intDiscountTop" hflex="1" value="0" constraint="no empty, no negative"/>
+					<label value=" % "></label>
+				</hbox>
+				<hbox hflex="1" align="center" pack="end">
+					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
+					<separator></separator>
+					<decimalbox id="decAmountTop" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
+					<label id="lblCurrencyTop" value=""></label>
+					<separator></separator>
+				</hbox>	
+			</hbox>
+			<separator></separator>
+			<window id="wndOrderItems" hflex="1" vflex="1">
+				<hlayout hflex="1" vflex="1">
+					<borderlayout visible="false" width="200px" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<include src="activity_wnd.zul"/>
+						</center>	
+					</borderlayout>
+					<borderlayout id="blayoutOrderItems" hflex="1" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<div id="divOrderItems"/>
+						</center>	
+					</borderlayout>
+					<borderlayout id="blayoutTicket" visible="false" width="300px" vflex="1">
+						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
+							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto">
+								<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
+							</window>
+						</center>	
+					</borderlayout>
+				</hlayout>
+			</window>		
+			<separator></separator>
+			<hbox width="100%" align="center">
+				<hbox hflex="1" align="center" pack="start">
+					<label value="${labels.caption.field.discount}" sclass="Caption"></label>		
+					<separator></separator>
+					<intbox id="intDiscountBottom" hflex="1" value="0" constraint="no empty, no negative"/>
+					<label value=" % "></label>
+				</hbox>
+				<hbox hflex="1" align="center" pack="end">
+					<label value="${labels.caption.field.amount}" sclass="Caption"></label>		
+					<separator></separator>
+					<decimalbox id="decAmountBottom" format="####.########" scale="8" hflex="1" readonly="true" placeholder="0"/>
+					<label id="lblCurrencyBottom" value=""></label>
+					<separator></separator>
+				</hbox>	
+			</hbox>
+		</vbox>
+	</window>
+	<label id="lblStage" value="${labels.caption.field.stage}" self="@define(decisionButton)" sclass="Caption"/>
+	<textbox id="txtStage" self="@define(decisionButton)" readonly="true" value=""/>
+	<separator self="@define(decisionButton)"></separator>
+	<button id="btnProduce" self="@define(decisionButton)" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer"></button>
+	<button id="btnBill" self="@define(decisionButton)" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillButtonComposer"></button>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintOrderButtonComposer"></button>
+</zk>
