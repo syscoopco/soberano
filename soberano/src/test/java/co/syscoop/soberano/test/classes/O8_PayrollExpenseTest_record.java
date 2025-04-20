@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
@@ -86,14 +86,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -131,7 +131,7 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -167,12 +167,12 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -208,7 +208,7 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -258,14 +258,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -306,14 +306,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -349,14 +349,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -392,14 +392,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -435,14 +435,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -478,14 +478,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -519,14 +519,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user@1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -560,14 +560,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -601,14 +601,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -644,14 +644,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -687,14 +687,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -730,14 +730,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -771,14 +771,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(-2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -814,14 +814,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -857,14 +857,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -900,14 +900,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -943,14 +943,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(1));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -986,14 +986,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user3@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(3000000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -1027,14 +1027,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "abc123");
 			
@@ -1068,14 +1068,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user1@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(2000));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1003));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			
@@ -1111,14 +1111,14 @@ class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
 			ComponentAgent cmbWorkerAgent = desktop.query("textbox").query("#cmbWorker");
 			InputAgent cmbWorkerInputAgent = cmbWorkerAgent.as(InputAgent.class);
 			cmbWorkerInputAgent.typing("user2@");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), new Integer(1002));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbWorker(), Integer.valueOf(1002));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), new Integer(1001));
+			payrollExpenseForm.setComponentValue(payrollExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			payrollExpenseForm.setComponentValue(payrollExpenseForm.getTxtReference(), "");
 			

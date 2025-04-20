@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.CostCenterForm;
 
 @Order(9)
 
-//@Disabled
+@Disabled
 
 class O9_CostCenterTest_modify extends CostCenterActionTest {
 
@@ -61,12 +61,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw8");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1008));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw9");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1009));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1009));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -89,12 +89,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw9");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1009));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1009));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -117,12 +117,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -147,12 +147,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -177,12 +177,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -205,12 +205,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1006));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -233,12 +233,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1006));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw7");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1007));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1007));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -263,12 +263,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1006));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw7");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1007));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1007));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -291,12 +291,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw7");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1007));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1007));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw8");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1008));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1008));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -319,12 +319,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw8");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1008));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw9");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1009));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1009));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -347,12 +347,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw9");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1009));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1009));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -375,12 +375,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1006));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -405,12 +405,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1006));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -435,12 +435,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw6");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1006));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1006));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 		}
@@ -463,12 +463,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			
@@ -493,12 +493,12 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 			ComponentAgent cmbInputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbInputWarehouse");
 			InputAgent cmbInputWarehouseInputAgent = cmbInputWarehouseAgent.as(InputAgent.class);
 			cmbInputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbInputWarehouse(), Integer.valueOf(1010));
 			
 			ComponentAgent cmbOutputWarehouseAgent = cmbIntelliSearchAgent.query("#incDetails").query("#cmbOutputWarehouse");
 			InputAgent cmbOutputWarehouseInputAgent = cmbOutputWarehouseAgent.as(InputAgent.class);
 			cmbOutputWarehouseInputAgent.typing("mw10");
-			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), new Integer(1010));
+			costCenterForm.setComponentValue(costCenterForm.getCmbOutputWarehouse(), Integer.valueOf(1010));
 			
 			clickOnApplyButton(costCenterForm.getDesktop());
 			

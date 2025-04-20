@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(26)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO26_OrderTest_record extends NewOrderActionTest {
@@ -81,7 +81,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -117,7 +117,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -153,7 +153,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -189,7 +189,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1002));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -275,7 +275,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c1mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1001));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1001));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -309,7 +309,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c3mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1003));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1003));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -369,7 +369,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c4mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1004));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1004));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -401,7 +401,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c6mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1006));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1006));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);
@@ -435,7 +435,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c8mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), new Integer(1008));
+			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1008));
 			cmbCustomerAgent.click();
 			
 			clickOnRecordButton(desktop);

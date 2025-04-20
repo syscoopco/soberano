@@ -35,7 +35,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(13)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO13_InventoryOperationTest_record_several_more_material_expenses_as_precondition extends MaterialExpenseActionTest {
@@ -94,12 +94,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), Integer.valueOf(1002));
 			cmbMaterialAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbMaterial's onChange event isn't triggered under testing
 			
@@ -110,7 +110,7 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getTxtReference(), "inventory operation tests precond");
 			
@@ -152,12 +152,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm4");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1004));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), Integer.valueOf(1004));
 			cmbMaterialAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbMaterial's onChange event isn't triggered under testing
 			
@@ -168,7 +168,7 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getTxtReference(), "inventory operation tests precond");
 			
@@ -210,12 +210,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm6");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1006));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), Integer.valueOf(1006));
 			cmbMaterialAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbMaterial's onChange event isn't triggered under testing
 			
@@ -226,7 +226,7 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getTxtReference(), "inventory operation tests precond");
 			
@@ -268,12 +268,12 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm7");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1007));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), Integer.valueOf(1007));
 			cmbMaterialAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbMaterial's onChange event isn't triggered under testing
 			
@@ -284,7 +284,7 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getTxtReference(), "inventory operation tests precond");
 			

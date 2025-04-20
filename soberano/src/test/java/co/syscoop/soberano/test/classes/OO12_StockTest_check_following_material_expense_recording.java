@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(12)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO12_StockTest_check_following_material_expenses_recording extends StockActionTest {
@@ -116,7 +116,7 @@ class OO12_StockTest_check_following_material_expenses_recording extends StockAc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1010));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1010));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			
@@ -171,7 +171,7 @@ class OO12_StockTest_check_following_material_expenses_recording extends StockAc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1009));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1009));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			

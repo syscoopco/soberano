@@ -29,7 +29,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
-//@Disabled
+@Disabled
 @TestMethodOrder(OrderAnnotation.class)
 class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 	
@@ -100,7 +100,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), 1);		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf(1));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -165,7 +165,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((1)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -196,7 +196,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf(2));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -229,7 +229,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(2));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf(2));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -260,7 +260,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((5)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -293,7 +293,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf(5));	
 			
 			clickOnRecordButton(desktop);
 		}
@@ -324,7 +324,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((4)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -357,7 +357,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((4)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -388,7 +388,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((5)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -421,7 +421,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(5));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((5)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -452,7 +452,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((6)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -485,7 +485,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(6));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((6)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -516,7 +516,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((8)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -549,7 +549,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((8)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -580,7 +580,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((8)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -613,7 +613,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(8));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((8)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -644,7 +644,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((1)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -677,7 +677,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(1));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((1)));		
 			
 			clickOnRecordButton(desktop);
 		}
@@ -708,7 +708,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((4)));		
 			
 			clickOnRecordButton(desktop);
 			
@@ -741,7 +741,7 @@ class O3_AcquirableMaterialTest_record extends AcquirableMaterialActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milligram");
-			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), new Integer(4));		
+			acquirableMaterialForm.setComponentValue(acquirableMaterialForm.getCmbUnit(), Integer.valueOf((4)));		
 			
 			clickOnRecordButton(desktop);
 			

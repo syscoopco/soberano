@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(12)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO12_ProductTest_record extends ProductActionTest {
@@ -114,17 +114,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -169,12 +169,12 @@ class OO12_ProductTest_record extends ProductActionTest {
 //			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 //			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 //			cmbCategoryInputAgent.typing("mcat1");
-//			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+//			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1001));
 //			
 //			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 //			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 //			cmbCostCenterInputAgent.typing("mcc4");
-//			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+//			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 //			
 //			clickOnRecordButton(desktop);
 //			
@@ -213,7 +213,7 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
@@ -222,7 +222,7 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -261,12 +261,12 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
@@ -308,17 +308,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -361,17 +361,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat1");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1001));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -412,17 +412,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("kilogram");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(2));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(2));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -463,17 +463,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(5));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(5));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat3");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1003));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1003));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1006));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1006));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -516,17 +516,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("pound");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(5));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(5));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat3");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1003));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1003));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc6");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1006));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1006));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -567,17 +567,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(8));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(8));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat4");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1004));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1004));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc7");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1007));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1007));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -620,17 +620,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("milliliter");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(8));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(8));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat4");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1004));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1004));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc7");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1007));	
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1007));	
 			
 			clickOnRecordButton(desktop);
 		}
@@ -671,17 +671,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("liter");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(7));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(7));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat5");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1005));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1005));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc8");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1008));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1008));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -722,17 +722,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat6");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1006));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1006));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc9");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1009));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1009));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -773,17 +773,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(6));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat7");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1007));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1007));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc10");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1010));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1010));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -826,17 +826,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(6));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat7");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1007));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1007));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc10");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1010));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1010));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -877,17 +877,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("gram");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(3));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(3));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc4");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1004));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1004));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -928,17 +928,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -981,17 +981,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -1034,17 +1034,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("piece");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(1));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(1));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat8");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1008));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1008));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 		}
@@ -1085,17 +1085,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(6));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -1138,17 +1138,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(6));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 			
@@ -1191,17 +1191,17 @@ class OO12_ProductTest_record extends ProductActionTest {
 			ComponentAgent cmbUnitAgent = desktop.query("textbox").query("#cmbUnit");
 			InputAgent cmbUnitInputAgent = cmbUnitAgent.as(InputAgent.class);
 			cmbUnitInputAgent.typing("ounce");
-			productForm.setComponentValue(productForm.getCmbUnit(), new Integer(6));
+			productForm.setComponentValue(productForm.getCmbUnit(), Integer.valueOf(6));
 			
 			ComponentAgent cmbCategoryAgent = desktop.query("textbox").query("#cmbCategory");
 			InputAgent cmbCategoryInputAgent = cmbCategoryAgent.as(InputAgent.class);
 			cmbCategoryInputAgent.typing("mcat2");
-			productForm.setComponentValue(productForm.getCmbCategory(), new Integer(1002));
+			productForm.setComponentValue(productForm.getCmbCategory(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbCostCenterAgent = desktop.query("textbox").query("#cmbCostCenter");
 			InputAgent cmbCostCenterInputAgent = cmbCostCenterAgent.as(InputAgent.class);
 			cmbCostCenterInputAgent.typing("mcc5");
-			productForm.setComponentValue(productForm.getCmbCostCenter(), new Integer(1005));			
+			productForm.setComponentValue(productForm.getCmbCostCenter(), Integer.valueOf(1005));			
 			
 			clickOnRecordButton(desktop);
 			

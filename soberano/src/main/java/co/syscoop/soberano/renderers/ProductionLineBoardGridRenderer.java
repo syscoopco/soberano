@@ -29,7 +29,7 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 		ProductionLineBoardRowData plbRowData = (ProductionLineBoardRowData) data;
 		
 		//id column
-		row.appendChild(new Label(new Integer(plbRowData.getAllocationId()).toString()));
+		row.appendChild(new Label(Integer.toString(plbRowData.getAllocationId())));
 		
 		//quantity column
 		row.appendChild(new Label(plbRowData.getAllocationQty()));

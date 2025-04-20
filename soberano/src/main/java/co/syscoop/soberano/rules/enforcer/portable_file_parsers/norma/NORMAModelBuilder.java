@@ -37,7 +37,7 @@ public class NORMAModelBuilder extends DefaultHandler {
     	  try {
 	    	  String localName = qname.substring(qname.indexOf(":") + 1);
 	    	  String className = "co.syscoop.soberano.rules.enforcer.metamodel." + localName;
-	    	  element = (SimpleElement)Class.forName(className).newInstance();
+	    	  element = (SimpleElement) Class.forName(className).getDeclaredConstructor().newInstance();
 	      } catch(Exception e) {}
 	      if (element == null)
 	         element = new SimpleElement();

@@ -1,16 +1,8 @@
-v1.0.9 release
+v1.0.10 release
 
-New: Now, it's had the chance to open a day until the opening hour of next day. Opening hour is 
-	configured in menu Configuration -> Others. Before, it was next day at 12AM.
-	
-New: Mobile versions of order management form added (m_order.zul and ms_order.zul). They are loaded 
-	in case web application is being accessed from mobile devices. This versions are targeting salesclerks.
-	
-New: For better usability from mobile devices, modal forms (payment processor and icon-based order 
-	management forms) are now 100%x100% (width X height).
-	
-New: In print_ticket.zul, now is easier to navigate along consecutive orders by means of go back and go forward buttons.
-	
-Fix: Production line vauchers are printer only if they have useful information (more than 3 lines). More paper saving.
-	
+New: Web application upgraded to Java 11.
+
+Fix: 
+
 User manual:
+

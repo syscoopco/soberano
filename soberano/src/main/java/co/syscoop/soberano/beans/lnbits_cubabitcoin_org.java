@@ -49,8 +49,8 @@ public class lnbits_cubabitcoin_org implements IPaymentProcessor {
 		}
 		con.disconnect();
 		
-		Double dblBTC = (Double) ((JSONObject) new JSONParser().parse(response.toString())).get("result");		
-		return new Double(dblBTC * 100000000).intValue();
+		Double dblBTC = (Double) ((JSONObject) new JSONParser().parse(response.toString())).get("result") * 100000000;
+		return dblBTC.intValue();
 	}
 
 	@Override

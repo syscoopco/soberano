@@ -10,12 +10,11 @@ import java.sql.Types;
 import java.util.ArrayList;
 
 import javax.sql.rowset.CachedRowSet;
+import javax.sql.rowset.RowSetFactory;
+import javax.sql.rowset.RowSetProvider;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-
 import org.springframework.jdbc.datasource.DataSourceUtils;
-
-import com.sun.rowset.*;
 
 public class Query {
 
@@ -141,7 +140,8 @@ public class Query {
 				else
 				{
 					resultingRows = sqlStatement.executeQuery();
-					rows = new CachedRowSetImpl();
+					RowSetFactory factory = RowSetProvider.newFactory();					
+					rows = factory.createCachedRowSet();
 					rows.populate(resultingRows);
 					return rows;
 				}

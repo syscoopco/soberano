@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
@@ -87,12 +87,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -101,7 +101,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -138,7 +138,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -147,7 +147,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -184,14 +184,14 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getDecAmount(), new BigDecimal(0.000001));
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -228,19 +228,19 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -277,12 +277,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -337,12 +337,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -351,7 +351,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -393,12 +393,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -407,7 +407,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -444,12 +444,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -458,7 +458,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -495,12 +495,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -509,7 +509,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -546,12 +546,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -560,7 +560,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -597,12 +597,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -611,7 +611,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -648,12 +648,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -662,7 +662,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -697,12 +697,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -711,7 +711,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -746,12 +746,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -760,7 +760,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -797,12 +797,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -811,7 +811,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -848,12 +848,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -862,7 +862,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -899,12 +899,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -913,7 +913,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -950,12 +950,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -964,7 +964,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1001,12 +1001,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1015,7 +1015,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1050,12 +1050,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1064,7 +1064,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1101,12 +1101,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1115,7 +1115,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1152,12 +1152,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1002));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1166,7 +1166,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1203,12 +1203,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1217,7 +1217,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1252,12 +1252,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1003));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1266,7 +1266,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "abc123");
 			
@@ -1301,12 +1301,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1001));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1315,7 +1315,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc3");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1003));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1003));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			
@@ -1352,12 +1352,12 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), new Integer(1002));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbServiceAgent = desktop.query("textbox").query("#cmbService");
 			InputAgent cmbServiceInputAgent = cmbServiceAgent.as(InputAgent.class);
 			cmbServiceInputAgent.typing("ms1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getcmbService(), Integer.valueOf(1001));
 			cmbServiceAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbService's onChange event isn't triggered under testing
 			
@@ -1366,7 +1366,7 @@ class O8_ServiceExpenseTest_record extends ServiceExpenseActionTest {
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc1");
-			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), new Integer(1001));
+			serviceExpenseForm.setComponentValue(serviceExpenseForm.getCmbCurrency(), Integer.valueOf(1001));
 			
 			serviceExpenseForm.setComponentValue(serviceExpenseForm.getTxtReference(), "");
 			

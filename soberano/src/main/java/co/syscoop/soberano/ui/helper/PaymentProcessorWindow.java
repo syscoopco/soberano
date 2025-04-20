@@ -1,6 +1,7 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 
 import org.zkoss.util.resource.Labels;
@@ -47,7 +48,7 @@ public class PaymentProcessorWindow extends Window {
 		BigDecimal countedInSystemCurrency = ((Decimalbox) wndContentPanel.query("#decCounted")).getValue();
 		BigDecimal toCollect = null;
 		if (toCollectInSystemCurrency != null && countedInSystemCurrency != null) {
-			toCollect = (toCollectInSystemCurrency.subtract(countedInSystemCurrency)).divide(currency.getExchangeRate(), 8, BigDecimal.ROUND_UP);
+			toCollect = (toCollectInSystemCurrency.subtract(countedInSystemCurrency)).divide(currency.getExchangeRate(), 8, RoundingMode.UP);
 		}
 		else {
 			toCollect = new BigDecimal(0);

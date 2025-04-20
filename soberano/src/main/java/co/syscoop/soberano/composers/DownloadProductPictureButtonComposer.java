@@ -1,5 +1,6 @@
 package co.syscoop.soberano.composers;
 
+import org.apache.bcel.util.ByteSequence;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
@@ -8,10 +9,9 @@ import org.zkoss.zul.A;
 import org.zkoss.zul.Filedownload;
 import org.zkoss.zul.Intbox;
 
-import com.sun.org.apache.bcel.internal.util.ByteSequence;
 import co.syscoop.soberano.domain.tracked.Product;
 
-@SuppressWarnings({ "serial", "rawtypes", "restriction" })
+@SuppressWarnings({ "serial", "rawtypes" })
 public class DownloadProductPictureButtonComposer extends SelectorComposer {
 	
 	@Wire

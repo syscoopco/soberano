@@ -77,7 +77,7 @@ public class ZKUtility {
 		Component curNode = lastNode;
 		while (!root.equals(curNode)) {
 			if (curNode instanceof Treeitem) {
-				l.add(0, new Integer(((Treeitem) curNode).getIndex()));
+				l.add(0, ((Treeitem) curNode).getIndex());
 			}
 			curNode = curNode.getParent();
 		}

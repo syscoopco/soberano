@@ -8,7 +8,8 @@ public class Mobile {
 		
 		String userAgent = Executions.getCurrent().getHeader("user-agent");
 		return userAgent.contains("Mobile") && userAgent.contains("Safari") ||
-				userAgent.contains("Mobile") && userAgent.contains("Firefox");
+				userAgent.contains("Mobile") && userAgent.contains("Firefox") ||
+				userAgent.contains("Android");
 	}
 	
 	/*

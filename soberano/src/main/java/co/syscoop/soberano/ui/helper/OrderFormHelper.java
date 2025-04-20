@@ -1,6 +1,7 @@
 package co.syscoop.soberano.ui.helper;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -112,7 +113,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {						
-					BigDecimal servedItems = decServedItems.getValue().add(decOneRunQuantity.getValue()).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
+					BigDecimal servedItems = decServedItems.getValue().add(decOneRunQuantity.getValue()).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros();
 					if (servedItems.compareTo(new BigDecimal(lblOrderedItems.getValue())) > 0) {
 						decServedItems.setValue(new BigDecimal(lblOrderedItems.getValue()));
 					}
@@ -127,7 +128,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					throw new NotEnoughRightsException();
 				}
 				else {
-					BigDecimal servedItems = decServedItems.getValue().subtract(decOneRunQuantity.getValue()).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
+					BigDecimal servedItems = decServedItems.getValue().subtract(decOneRunQuantity.getValue()).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros();
 					if (servedItems.compareTo(new BigDecimal(0)) < 0) {
 						decServedItems.setValue(new BigDecimal(0));
 					}
@@ -485,7 +486,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		});
 		
 		BigDecimal servedItems = oi.getOrderedRuns().subtract(oi.getCanceledRuns());
-		servedItems = servedItems.setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros();
+		servedItems = servedItems.setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros();
 		Decimalbox decServedItems = new Decimalbox(servedItems);
 		decServedItems.setFormat("####.########");
 		decServedItems.setId("decServedItems" + oi.getProcessRunId().toString());
@@ -538,7 +539,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		
 		boxOi.appendChild(new Label("/"));					
 		
-		Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
+		Label lblOrderedItems = new Label((oi.getOrderedRuns().setScale(8, RoundingMode.HALF_EVEN).toString()));
 		lblOrderedItems.setId("lblOrderedItems" + oi.getProcessRunId().toString());
 		boxOi.appendChild(lblOrderedItems);
 		
@@ -587,7 +588,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		if (isMobile) {
 			decServedItems.setFormat("####.##");
 			decServedItems.setWidth("60%");
-			lblOrderedItems.setValue((oi.getOrderedRuns().setScale(2, BigDecimal.ROUND_HALF_EVEN).toString()));
+			lblOrderedItems.setValue((oi.getOrderedRuns().setScale(2, RoundingMode.HALF_EVEN).toString()));
 			lblProductUnit.setVisible(false);
 			btnCancelAllItems.setVisible(false);
 			
@@ -715,7 +716,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					
 					boxOi.appendChild(new Label("/"));					
 					
-					Label lblCanceledItems = new Label((oi.getCanceledRuns().setScale(8, BigDecimal.ROUND_HALF_EVEN).toString()));
+					Label lblCanceledItems = new Label((oi.getCanceledRuns().setScale(8, RoundingMode.HALF_EVEN).toString()));
 					lblCanceledItems.setId("lblCanceledItems" + oi.getProcessRunId().toString());
 					boxOi.appendChild(lblCanceledItems);
 					

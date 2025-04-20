@@ -3,6 +3,7 @@ package co.syscoop.soberano.test.classes;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(28)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
@@ -124,7 +125,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -172,7 +173,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -220,7 +221,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -262,7 +263,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -304,7 +305,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 1");			
@@ -346,7 +347,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -388,7 +389,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 3");			
@@ -430,7 +431,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -472,7 +473,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 4");			
@@ -514,7 +515,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 5");			
@@ -556,7 +557,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct1 : mp1");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1001));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1001));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 6");			
@@ -598,7 +599,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 7");			
@@ -640,7 +641,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 8");			
@@ -682,7 +683,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
@@ -724,7 +725,7 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			ComponentAgent cmbItemToOrderAgent = desktop.query("textbox").query("#cmbItemToOrder");
 			InputAgent cmbItemToOrderAgentInputAgent = cmbItemToOrderAgent.as(InputAgent.class);
 			cmbItemToOrderAgentInputAgent.typing("mproduct7 : mp7");
-			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), new Integer(1007));
+			orderForm.setComponentValue(orderForm.getCmbItemToOrder(), Integer.valueOf(1007));
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 10");			
@@ -1264,16 +1265,16 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1010, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1009, new BigDecimal(1).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunServed.put(1010, new BigDecimal(2).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1009, new BigDecimal(1).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1010, new BigDecimal(2).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1009, "1.00000000");
 			processRunOrdered.put(1010, "2.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1009, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunDiscounted.put(1010, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1009, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1010, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1001,
@@ -1337,13 +1338,13 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1011, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1011, new BigDecimal(2).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1011, new BigDecimal(2).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1011, "3.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1011, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1011, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1002,
@@ -1407,13 +1408,13 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1012, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1012, new BigDecimal(4).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1012, new BigDecimal(4).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1012, "4.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1012, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1012, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1003,
@@ -1482,16 +1483,16 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1014, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1013, new BigDecimal(543.321 - 300.123).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunServed.put(1014, new BigDecimal(5 - 4).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1013, new BigDecimal(543.321 - 300.123).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1014, new BigDecimal(5 - 4).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1013, "543.32100000");
 			processRunOrdered.put(1014, "5.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1013, new BigDecimal(543.321 - 300.123).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunDiscounted.put(1014, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1013, new BigDecimal(543.321 - 300.123).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1014, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1004,
@@ -1560,16 +1561,16 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1016, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1015, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunServed.put(1016, new BigDecimal(3).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1015, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1016, new BigDecimal(3).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1015, "10.00000000");
 			processRunOrdered.put(1016, "6.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1015, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunDiscounted.put(1016, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1015, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1016, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1005,
@@ -1638,16 +1639,16 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1018, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1017, new BigDecimal(5).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunServed.put(1018, new BigDecimal(7).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1017, new BigDecimal(5).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1018, new BigDecimal(7).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1017, "5.00000000");
 			processRunOrdered.put(1018, "7.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1017, new BigDecimal(1).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
-			processRunDiscounted.put(1018, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1017, new BigDecimal(1).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1018, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1006,
@@ -1711,13 +1712,13 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1019, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1019, new BigDecimal(8).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1019, new BigDecimal(8).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1019, "8.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1019, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1019, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1007,
@@ -1781,13 +1782,13 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1020, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1020, new BigDecimal(2).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1020, new BigDecimal(2).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1020, "9.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1020, new BigDecimal(2).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1020, new BigDecimal(2).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1008,
@@ -1851,13 +1852,13 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			units.put(1021, "pcs");		
 			
 			HashMap<Integer, BigDecimal> processRunServed = new HashMap<Integer, BigDecimal>();
-			processRunServed.put(1021, new BigDecimal(10).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunServed.put(1021, new BigDecimal(10).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 			
 			HashMap<Integer, String> processRunOrdered = new HashMap<Integer, String>();
 			processRunOrdered.put(1021, "10.00000000");
 			
 			HashMap<Integer, BigDecimal> processRunDiscounted = new HashMap<Integer, BigDecimal>();
-			processRunDiscounted.put(1021, new BigDecimal(0).setScale(8, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros());
+			processRunDiscounted.put(1021, new BigDecimal(0).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros());
 	
 			testOrder(orderForm,
 					1009,

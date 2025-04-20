@@ -35,7 +35,7 @@ public class StringIdCodeGenerator {
 				return getTenCharsRandomString(inputString + intToChar.get(rng.nextInt(10)));
 			}
 			else {
-				return getTenCharsRandomString(inputString + new Integer(rng.nextInt(10)).toString());
+				return getTenCharsRandomString(inputString + Integer.toString(rng.nextInt(10)));
 			}
 		}
 	}

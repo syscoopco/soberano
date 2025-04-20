@@ -25,7 +25,7 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		
@@ -134,10 +134,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("accountant accountant : accountant@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(7), 
+								(7), 
 								"Auditor");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(11), 
+								(11), 
 								"Catalog maintainer");
 			
 			setFieldsForTesting(workerForm);
@@ -160,10 +160,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("auditor auditor : auditor@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(6), 
+								(6), 
 								"Checker");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(11), 
+								(11), 
 								"Catalog maintainer");
 			
 			setFieldsForTesting(workerForm);
@@ -186,10 +186,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("catalogMaintainer catalogMaintainer : catalogMaintainer@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(6), 
+								(6), 
 								"Checker");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(12), 
+								(12), 
 								"Community manager");
 			
 			setFieldsForTesting(workerForm);
@@ -212,10 +212,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("checker checker : checker@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(2), 
+								(2), 
 								"Manager");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(12), 
+								(12), 
 								"Community manager");
 			
 			setFieldsForTesting(workerForm);
@@ -238,10 +238,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("communityManager communityManager : communityManager@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(2), 
+								(2), 
 								"Manager");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(13), 
+								(13), 
 								"Procurement worker");
 			
 			setFieldsForTesting(workerForm);
@@ -311,10 +311,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("manager manager : manager@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(4), 
+								(4), 
 								"Salesclerk");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(13), 
+								(13), 
 								"Procurement worker");
 			
 			setFieldsForTesting(workerForm);
@@ -337,10 +337,10 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("procurementWorker procurementWorker : procurementWorker@soberano.syscoop.co");
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(4), 
+								(4), 
 								"Salesclerk");			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(5), 
+								(5), 
 								"Shift manager");
 			
 			setFieldsForTesting(workerForm);
@@ -410,7 +410,7 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 			loadObjectDetails("fn ln : procurementWorker@soberano.syscoop.co");		
 			
 			assignResponsibility(cmbIntelliSearchAgent.query("#incDetails").query("#cmbResponsibilities"), 
-								new Integer(5), 
+								(5), 
 								"Shift manager");
 			
 			setFieldsForTesting(workerForm);

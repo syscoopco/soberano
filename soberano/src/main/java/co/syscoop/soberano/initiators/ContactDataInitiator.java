@@ -23,7 +23,7 @@ public class ContactDataInitiator implements Initiator, InitiatorExt {
 			ZKUtility.setValueWOValidation(cmbCountry, "CU");
 			Combobox cmbProvince = (Combobox) cmbCountry.query("#cmbProvince");
 			CountryComboboxHelper.processCountrySelection(cmbCountry, cmbProvince);
-			ZKUtility.setValueWOValidation(cmbProvince, new Integer(2).toString());
+			ZKUtility.setValueWOValidation(cmbProvince, Integer.toString(2));
 			Combobox cmbMunicipality = (Combobox) cmbCountry.query("#cmbMunicipality");
 			ProvinceComboboxHelper.processProvinceSelection(cmbProvince, cmbMunicipality);
 			cmbMunicipality.setSelectedItem(ComboboxHelper.getItemByText(cmbMunicipality, "Plaza de la Revolución"));

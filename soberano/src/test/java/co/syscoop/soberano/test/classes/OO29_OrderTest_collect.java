@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(29)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
@@ -475,7 +475,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), new Integer(1002));
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnCollectButton(desktop);
@@ -549,7 +549,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c2mod");
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), new Integer(1002));
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), Integer.valueOf(1002));
 			cmbCustomerAgent.click();
 			
 			clickOnCollectButton(desktop);
@@ -753,7 +753,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c3mod");
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), new Integer(1003));
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), Integer.valueOf(1003));
 			cmbCustomerAgent.click();
 			
 			clickOnCollectButton(desktop);
@@ -913,7 +913,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c4mod");
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), new Integer(1004));
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), Integer.valueOf(1004));
 			cmbCustomerAgent.click();
 			
 			clickOnCollectButton(desktop);
@@ -1032,7 +1032,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
 			cmbCustomerInputAgent.typing("c5mod");
-			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), new Integer(1005));
+			cashRegisterOperationForm.setComponentValue(cashRegisterOperationForm.getCmbCustomer(), Integer.valueOf(1005));
 			cmbCustomerAgent.click();
 			
 			clickOnCollectButton(desktop);

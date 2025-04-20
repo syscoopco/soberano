@@ -5,6 +5,7 @@
 	<artifactId>soberano</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
+		<bcel>6.10.0</bcel>
 		<cglib>2.2.2</cglib>
 		<commons-dbcp2>2.9.0</commons-dbcp2>
 		<commons-fileupload>1.5</commons-fileupload>
@@ -31,7 +32,9 @@
 		<spring-ldap-core>2.4.1</spring-ldap-core>
 		<spring.version>5.2.4.RELEASE</spring.version>
 		<zats-mimic>2.1.1</zats-mimic>
+		
 <!-- 		<zk.version>9.6.0.2</zk.version> -->
+		
 		<zkee.version>9.6.5</zkee.version> <!-- 9.6.5 or 10.0.2 (requires at least Java 11) -->
 	</properties>
 	<packaging>war</packaging>
@@ -101,7 +104,11 @@
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>${commons-fileupload}</version>
 		</dependency>
-				
+		<dependency>
+			<groupId>org.apache.bcel</groupId>
+			<artifactId>bcel</artifactId>
+			<version>${bcel}</version>
+		</dependency>				
 		
 		<!-- CGLIB dependencies -->
 		<dependency>
@@ -269,9 +276,7 @@
 		</dependency>
 				
 		<!-- ZK dependencies EE -->
-		<!-- TODO: ZKEE dependencies is commented due to a TypeError raises in spi.zul
-					when clicking on input, movement, or losses box of a spi row.-->
-		
+				
 		<dependency>
 			<groupId>zk</groupId>
 			<artifactId>zcommon</artifactId>
@@ -418,8 +423,7 @@
 	      	<artifactId>zats-mimic-ext7</artifactId>
 	      	<version>${zats-mimic}</version>
 	      	<scope>test</scope>
-	    </dependency>
-			
+	    </dependency>			
 	</dependencies>
 	<build>
 		<finalName>${project.artifactId}</finalName>

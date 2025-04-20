@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(15)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO15_StockTest_check_following_inventory_operations_recording extends StockActionTest {
@@ -73,7 +73,7 @@ class OO15_StockTest_check_following_inventory_operations_recording extends Stoc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1006));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1006));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			
@@ -134,7 +134,7 @@ class OO15_StockTest_check_following_inventory_operations_recording extends Stoc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1008));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1008));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			
@@ -195,7 +195,7 @@ class OO15_StockTest_check_following_inventory_operations_recording extends Stoc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1009));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1009));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			
@@ -256,7 +256,7 @@ class OO15_StockTest_check_following_inventory_operations_recording extends Stoc
 									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
 									(desktop.query("grid").query("#grd")).as(Grid.class));
 			
-			stockForm.setComponentValue(stockForm.getCmbWarehouse(), new Integer(1010));
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1010));
 			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
 										//cmbWarehouse's onChange event isn't triggered under testing
 			

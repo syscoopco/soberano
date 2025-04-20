@@ -34,7 +34,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(16)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition extends MaterialExpenseActionTest {
@@ -88,12 +88,12 @@ class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition 
 			ComponentAgent cmbProviderAgent = desktop.query("textbox").query("#cmbProvider");
 			InputAgent cmbProviderInputAgent = cmbProviderAgent.as(InputAgent.class);
 			cmbProviderInputAgent.typing("mprov2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbProvider(), Integer.valueOf(1002));
 			
 			ComponentAgent cmbMaterialAgent = desktop.query("textbox").query("#cmbMaterial");
 			InputAgent cmbMaterialInputAgent = cmbMaterialAgent.as(InputAgent.class);
 			cmbMaterialInputAgent.typing("mm8");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), new Integer(1008));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbMaterial(), Integer.valueOf(1008));
 			cmbMaterialAgent.click(); 	//needed to force cmbUnit population. 
 										//cmbMaterial's onChange event isn't triggered under testing
 			
@@ -104,7 +104,7 @@ class OO16_ProcessRunTest_record_several_more_material_expenses_as_precondition 
 			ComponentAgent cmbCurrencyAgent = desktop.query("textbox").query("#cmbCurrency");
 			InputAgent cmbCurrencyInputAgent = cmbCurrencyAgent.as(InputAgent.class);
 			cmbCurrencyInputAgent.typing("mc2");
-			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), new Integer(1002));
+			materialExpenseForm.setComponentValue(materialExpenseForm.getCmbCurrency(), Integer.valueOf(1002));
 			
 			materialExpenseForm.setComponentValue(materialExpenseForm.getTxtReference(), "process run tests precond");
 			

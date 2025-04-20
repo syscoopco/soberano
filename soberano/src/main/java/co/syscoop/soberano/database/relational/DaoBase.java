@@ -32,7 +32,7 @@ public class DaoBase {
 		public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
 			
 			try {
-				Integer count = new Integer(rs.getInt("count"));
+				Integer count = rs.getInt("count");
 		        return count;
 			}
 			catch(Exception ex)
