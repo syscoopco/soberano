@@ -8,7 +8,8 @@
 		<bcel>6.10.0</bcel>
 		<cglib>2.2.2</cglib>
 		<commons-dbcp2>2.13.0</commons-dbcp2>
-		<commons-fileupload>1.5</commons-fileupload>
+		<commons-fileupload>1.5</commons-fileupload>		
+		<commons-io>2.19.0</commons-io>
 		<commons-lang3>3.17.0</commons-lang3>
 		<cups4j>0.7.9</cups4j>
 		<escpos-coffee>4.1.0</escpos-coffee>
@@ -88,6 +89,11 @@
 		  	<groupId>org.apache.commons</groupId>
 		  	<artifactId>commons-dbcp2</artifactId>
 		  	<version>${commons-dbcp2}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -362,31 +368,35 @@
 			<artifactId>zkex</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>atlantic</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
+		
+		 <!-- IMPORTANT!! Use theme jars of 9.6.5 ZK version -->
 		<dependency>
 			<groupId>zk.theme</groupId>
 			<artifactId>breeze</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>zk.theme</groupId>
-			<artifactId>iceblue</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
+		
+		 <!-- IMPORTANT!! Use theme jars of 9.6.5 ZK version -->
 		<dependency>
 			<groupId>zk.theme</groupId>
 			<artifactId>sapphire</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
+		
+		 <!-- IMPORTANT!! Use theme jars of 9.6.5 ZK version -->
 		<dependency>
 			<groupId>zk.theme</groupId>
 			<artifactId>silvertail</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
+		
+		 <!-- IMPORTANT!! Use theme jars of 9.6.5 ZK version -->
+		<dependency>
+			<groupId>zk.theme</groupId>
+			<artifactId>iceblue</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>zk</groupId>
 			<artifactId>jasperreports</artifactId>
@@ -412,11 +422,11 @@
 		    <artifactId>commons-fileupload2-jakarta-servlet5</artifactId>
 		    <version>${zkee.version}</version>
 		</dependency>
-		<dependency>
-		    <groupId>zk</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>${zkee.version}</version>
-		</dependency>
+<!-- 		<dependency> -->
+<!-- 		    <groupId>zk</groupId> -->
+<!-- 		    <artifactId>commons-io</artifactId> -->
+<!-- 		    <version>${zkee.version}</version> -->
+<!-- 		</dependency> -->
 		<dependency>
 		    <groupId>zk</groupId>
 		    <artifactId>encoder</artifactId>
@@ -441,11 +451,6 @@
 <!-- 		  	<version>${zk.version}</version> -->
 <!-- 	  	</dependency> -->
 <!-- 	  	<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>atlantic</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
 <!-- 		  	<groupId>org.zkoss.theme</groupId> -->
 <!-- 		  	<artifactId>sapphire</artifactId> -->
 <!-- 		  	<version>${zk.version}</version> -->

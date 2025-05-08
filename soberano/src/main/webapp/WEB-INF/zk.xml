@@ -51,13 +51,13 @@
     </library-property>
     
     <!-- theme -->
+    <!-- IMPORTANT!! Use theme jars of 9.6.5 ZK version -->
     <library-property>
     	<name>org.zkoss.theme.preferred</name>
-<!--     	<value>atlantic</value> -->
-<!-- 		<value>sapphire</value> -->
-<!--  	    <value>breeze</value> -->
-<!--  	    <value>icecube</value> -->
-	 	    <value>silvertail</value>
+<!-- 	<value>sapphire</value> -->
+		<value>breeze</value>
+<!-- 	<value>silvertail</value> -->
+<!-- 	<value>iceblue</value> -->
 	</library-property>
 	
 	<!-- render on demand -->

@@ -1,6 +1,12 @@
 v2.0.0 release
 
-New: 
+New: Web application upgraded from Java 11 to Java 17.
+
+New: javax (J2EE) namespace replaced by jakarta (Jakarta). 
+
+New: ZK upgraded to 10.1.0.
+
+New: System enhanced with Tomcat 10, which is now required.
 
 Fix: 
 
