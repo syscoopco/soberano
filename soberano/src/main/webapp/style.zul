@@ -112,6 +112,61 @@
 		.SystemTimeBox{
 			font-weight: bolder;
 			font-size: 20pt;			
-		}	
+		}
+		
+		/************/
+		/* zk styles*/
+		/************/
+		
+		.z-combobox-popup, .z-combobox-input {
+		    font-size: 100%;
+		    height: 100%;
+		}
+		    
+		.z-combobox-button {
+		    font-size: 100%;
+		    height: 100%;
+		    background: url('./images/dropdownarrow.png') no-repeat;
+		    background-size: contain;
+		}
+		
+		.z-combobox-icon {
+			font-size: 100%;
+		    height: 100%;
+			display: none;
+		}
+		
+		.z-menu-icon {
+		    font-size: 18px;
+		    position: absolute;
+		    right: 0;
+		    top: 2px;
+		    background: url('./images/dropdownarrow.png') no-repeat;
+		    background-size: contain;
+		}
+		
+		.z-icon-caret-down::before {
+			background: url('./images/dropdownarrow.png') no-repeat;
+		    background-size: contain;
+		}
+		
+		.z-icon-caret-up::before {
+			background: url('./images/dropuparrow.png') no-repeat;
+		    background-size: contain;
+		}
+		
+		.z-datebox-button {
+		    font-size: 100%;
+		    height: 100%;
+		    background: url('./images/dropdownarrow.png') no-repeat;
+		    background-size: contain;
+		}
+		
+		.z-datebox-icon {
+			font-size: 100%;
+		    height: 100%;
+			display: none;
+		}
+}
 	</style>
 </zk>

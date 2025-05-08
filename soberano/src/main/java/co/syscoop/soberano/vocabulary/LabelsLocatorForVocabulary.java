@@ -3,7 +3,7 @@ package co.syscoop.soberano.vocabulary;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
-import javax.servlet.ServletContext;
+import jakarta.servlet.ServletContext;
 
 public class LabelsLocatorForVocabulary implements org.zkoss.util.resource.LabelLocator {
 	

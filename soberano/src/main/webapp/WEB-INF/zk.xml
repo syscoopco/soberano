@@ -53,7 +53,11 @@
     <!-- theme -->
     <library-property>
     	<name>org.zkoss.theme.preferred</name>
-	    <value>sapphire</value> <!-- breeze, icecube, sapphire, silvertail -->
+<!--     	<value>atlantic</value> -->
+<!-- 		<value>sapphire</value> -->
+<!--  	    <value>breeze</value> -->
+<!--  	    <value>icecube</value> -->
+	 	    <value>silvertail</value>
 	</library-property>
 	
 	<!-- render on demand -->

@@ -12,7 +12,7 @@
 				<hbox hflex="1" align="center">
 					<label value="${labels.caption.field.shift}" sclass="Caption"></label>
 					<separator></separator>	
-					<datebox id="dateShift" compact="false" buttonVisible="true" format="yyyy-MM-dd"/>
+					<datebox id="dateShift" buttonVisible="true" format="yyyy-MM-dd"/>
 				</hbox>
 				<separator></separator>
 				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">

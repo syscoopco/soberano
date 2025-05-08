@@ -12,8 +12,8 @@ import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 
 import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
@@ -21,9 +21,9 @@ import org.zkoss.zk.ui.Executions;
 import com.fathzer.soft.javaluator.DoubleEvaluator;
 
 /*
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
+import jakarta.script.ScriptEngineManager;
+import jakarta.script.ScriptEngine;
+import jakarta.script.ScriptException;
 */
 
 public class Utils {
