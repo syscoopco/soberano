@@ -1,12 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
 	<modelVersion>4.0.0</modelVersion>
+	
 	<groupId>co.syscoop</groupId>
+	
 	<artifactId>soberano</artifactId>
+	
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<properties>
 		<bcel>6.10.0</bcel>
-		<cglib>2.2.2</cglib>
+		<cglib>3.3.0</cglib>
 		<commons-dbcp2>2.13.0</commons-dbcp2>
 		<commons-fileupload>1.5</commons-fileupload>		
 		<commons-io>2.19.0</commons-io>
@@ -19,8 +24,6 @@
 		<jasypt>1.9.3</jasypt>
 		<java-encoder>1.3.1</java-encoder>
 		<javaluator>3.0.3</javaluator>
-		<javax.servlet-api>4.0.1</javax.servlet-api>
-		<javax-ws-rs>2.1.1</javax-ws-rs>
 		<java-websocket>1.5.6</java-websocket>
 		<jersey>3.1.10</jersey>
 		<junit>5.9.0</junit>
@@ -33,24 +36,18 @@
 		<spring-dao>2.0.8</spring-dao>
 		<spring-ldap>1.3.1.RELEASE</spring-ldap>
 		<spring-ldap-core>2.4.1</spring-ldap-core>
-		
-		<!-- jakarta, zk 10.1.0, tomcat 10 -->
+		<tomcat>11.0.6</tomcat>
 		<spring.version>6.2.6</spring.version>
-		
-		<!-- jee, zk 9.6.5, tomcat 9
-		<spring.version>5.2.4.RELEASE</spring.version>
-		-->
-		
-		<zats-mimic>2.1.1</zats-mimic>
-		<zats-mimic-jakarta>4.0.0</zats-mimic-jakarta>
-		
-		<!-- zk ce		<zk.version>9.6.0.2</zk.version> -->
-		
-		<zkee.version>10.1.0</zkee.version> <!-- 9.6.5 (requires Java 8) or 10.1.0 (requires at least Java 17) -->
+		<zats-mimic-jakarta>10.0.0-jakarta</zats-mimic-jakarta>
+		<zkee.version>10.1.0</zkee.version>
 	</properties>
+	
 	<packaging>war</packaging>
+	
 	<name>The Soberano Project</name>
+	
 	<description>The Soberano Project</description>
+	
 	<licenses>
 		<license>
 			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
@@ -58,6 +55,7 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	
 	<repositories>
 		<!-- keep repositories order declaration -->
 	
@@ -67,14 +65,15 @@
 	        <name>In Project Repo</name>
 	        <url>file://${project.basedir}/libs</url>
 	    </repository>
-	
-		<!-- ZK CE -->
+	    
+	    <!-- ZK CE -->
 		<repository>
 			<id>ZK CE</id>
 			<name>ZK CE Repository</name>
 			<url>https://mavensync.zkoss.org/maven2</url>
 		</repository>
 	</repositories>
+	
 	<pluginRepositories>
 		<pluginRepository>
 			<id>zkmaven</id>
@@ -82,13 +81,14 @@
 			<url>https://mavensync.zkoss.org/maven2/</url>
 		</pluginRepository>
 	</pluginRepositories>
+	
 	<dependencies>
 	
 		<!-- Apache dependencies -->
 		<dependency>
-		  	<groupId>org.apache.commons</groupId>
-		  	<artifactId>commons-dbcp2</artifactId>
-		  	<version>${commons-dbcp2}</version>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons-fileupload}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-io</groupId>
@@ -96,10 +96,25 @@
 			<version>${commons-io}</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.bcel</groupId>
+			<artifactId>bcel</artifactId>
+			<version>${bcel}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.apache.commons</groupId>
+		  	<artifactId>commons-dbcp2</artifactId>
+		  	<version>${commons-dbcp2}</version>
+		</dependency>
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>${commons-lang3}</version>
 		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents.core5</groupId>
+		    <artifactId>httpcore5</artifactId>
+		    <version>${httpcore5}</version>
+		</dependency>					
 		<dependency>
 		    <groupId>org.apache.pdfbox</groupId>
 		    <artifactId>pdfbox</artifactId>
@@ -110,21 +125,6 @@
 		    <artifactId>pdfbox-tools</artifactId>
 		    <version>${pdfbox-tools}</version>
 		</dependency>
-		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>${commons-fileupload}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.bcel</groupId>
-			<artifactId>bcel</artifactId>
-			<version>${bcel}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.httpcomponents.core5</groupId>
-		    <artifactId>httpcore5</artifactId>
-		    <version>${httpcore5}</version>
-		</dependency>			
 		
 		<!-- CGLIB dependencies -->
 		<dependency>
@@ -188,19 +188,6 @@
 		    <version>${javaluator}</version>
 		</dependency>
 		
-		<!-- Javax dependencies -->
-		<dependency>
-		    <groupId>javax.ws.rs</groupId>
-		    <artifactId>javax.ws.rs-api</artifactId>
-		    <version>${javax-ws-rs}</version>
-		</dependency>
-		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>javax.servlet-api</artifactId>
-		    <version>${javax.servlet-api}</version>
-		    <scope>provided</scope>
-		</dependency>
-		
 		<!-- Java-WebSocket -->
 		<dependency>
 		    <groupId>org.java-websocket</groupId>
@@ -254,40 +241,30 @@
 		   	<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-test</artifactId>
-		    <version>${spring.version}</version>
-		    <scope>test</scope>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-web</artifactId>
-		    <version>${spring.version}</version>
-		</dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-dao</artifactId>
+		    <version>${spring-dao}</version>
+		</dependency>		
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-dao</artifactId>
-		    <version>${spring-dao}</version>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap</artifactId>
+		    <version>${spring-ldap}</version>
+		    <type>pom</type>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-core</artifactId>
-		    <version>${spring.version}</version>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap-core</artifactId>
+		    <version>${spring-ldap-core}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
@@ -296,19 +273,41 @@
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-ldap</artifactId>
 		    <version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.ldap</groupId>
-		    <artifactId>spring-ldap-core</artifactId>
-		    <version>${spring-ldap-core}</version>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.springframework.ldap</groupId>
-		    <artifactId>spring-ldap</artifactId>
-		    <version>${spring-ldap}</version>
-		    <type>pom</type>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<!-- Tomcat dependencies -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-juli</artifactId>
+		    <version>${tomcat}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-websocket</artifactId>
+		    <version>${tomcat}</version>
 		</dependency>
 				
 		<!-- ZK dependencies EE -->
@@ -340,17 +339,17 @@
 		</dependency>
 		<dependency>
 			<groupId>zk</groupId>
+			<artifactId>zkex</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
 			<artifactId>zkmax</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>zk</groupId>
 			<artifactId>zkplus</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>zkwebfragment</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
 		<dependency>
@@ -365,7 +364,7 @@
 		</dependency>
 		<dependency>
 			<groupId>zk</groupId>
-			<artifactId>zkex</artifactId>
+			<artifactId>zkwebfragment</artifactId>
 			<version>${zkee.version}</version>
 		</dependency>
 		
@@ -397,20 +396,11 @@
 			<version>${zkee.version}</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>zk</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>${zkee.version}</version>
-		</dependency>
+		<!-- ZK other dependencies distributed with it -->
 		<dependency>
 			<groupId>zk</groupId>
 			<artifactId>bsh</artifactId>
 			<version>${zkee.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>zk</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>${zkee.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>zk</groupId>
@@ -422,11 +412,6 @@
 		    <artifactId>commons-fileupload2-jakarta-servlet5</artifactId>
 		    <version>${zkee.version}</version>
 		</dependency>
-<!-- 		<dependency> -->
-<!-- 		    <groupId>zk</groupId> -->
-<!-- 		    <artifactId>commons-io</artifactId> -->
-<!-- 		    <version>${zkee.version}</version> -->
-<!-- 		</dependency> -->
 		<dependency>
 		    <groupId>zk</groupId>
 		    <artifactId>encoder</artifactId>
@@ -434,7 +419,7 @@
 		</dependency>
 		<dependency>
 		    <groupId>zk</groupId>
-		    <artifactId>httpcore5</artifactId>
+		    <artifactId>guava</artifactId>
 		    <version>${zkee.version}</version>
 		</dependency>
 		<dependency>
@@ -442,76 +427,28 @@
 		    <artifactId>httpcore5</artifactId>
 		    <version>${zkee.version}</version>
 		</dependency>
-		
-		<!-- Zk CE -->
-		
-<!-- 		<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>breeze</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 	  	</dependency> -->
-<!-- 	  	<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>sapphire</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
-<!-- 		  	<artifactId>silvertail</artifactId> -->
-<!-- 		  	<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.zkoss.zk</groupId> -->
-<!-- 		    <artifactId>zk</artifactId> -->
-<!-- 		    <version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>org.zkoss.common</groupId> -->
-<!-- 		    <artifactId>zcommon</artifactId> -->
-<!-- 		    <version>${zk.version}</version> -->
-<!-- 		</dependency>	 -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zkbind</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zkplus</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 			<groupId>org.zkoss.zk</groupId> -->
-<!-- 			<artifactId>zhtml</artifactId> -->
-<!-- 			<version>${zk.version}</version> -->
-<!-- 		</dependency> -->
-		 
-		<!-- ZATS MIMIC for ZK web application testing  --> 
-		
-<!-- 		this is for zk 10.x.x -->
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
 		<dependency>
 	      <groupId>org.zkoss.zats</groupId>
 	      <artifactId>zats-mimic</artifactId>
 	      <version>${zats-mimic-jakarta}</version>
 	      <scope>test</scope>
 	    </dependency>
-		 
-<!-- 		this is for zk 9.6.5 -->
-<!-- 		<dependency> -->
-<!-- 	    	<groupId>org.zkoss.zats</groupId> -->
-<!-- 	      	<artifactId>zats-mimic-ext7</artifactId> -->
-<!-- 	      	<version>${zats-mimic}</version> -->
-<!-- 	      	<scope>test</scope> -->
-<!-- 	    </dependency>			 -->
 	</dependencies>
+	
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+			
 			<!-- Run with Jetty -->
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>10.0.5</version>
+				<version>11.0.25</version>
 				<configuration>
 					<webApp>
 						<contextPath>/${project.artifactId}</contextPath>
@@ -520,26 +457,29 @@
 					</webApp>					
 				</configuration>
 			</plugin>
+			
 			<!-- Compile java -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.14.0</version>
 				<configuration>
 					<source>8</source>
 					<target>8</target>
 				</configuration>
 			</plugin>
+			
 			<!-- Build war -->
 			<plugin>
 				<artifactId>maven-war-plugin</artifactId>
 				<groupId>org.apache.maven.plugins</groupId>
-				<version>3.3.2</version>
+				<version>3.4.0</version>
 			</plugin>
+			
 			<!-- Pack zips -->
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
+				<version>3.7.1</version>
 				<executions>
 					<execution>
 						<id>webapp</id>
@@ -557,11 +497,12 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<!-- surefire -->
 			<plugin>
             	<groupId>org.apache.maven.plugins</groupId>
             	<artifactId>maven-surefire-plugin</artifactId>
-            	<version>2.22.2</version>
+            	<version>3.5.3</version>
         	</plugin>
 		</plugins>
 	</build>
