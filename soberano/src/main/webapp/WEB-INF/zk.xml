@@ -19,9 +19,10 @@
 	</device-config>
 	
 	<session-config>
+		<timeout-uri>/timeout.zul</timeout-uri>
 		<automatic-timeout>false</automatic-timeout>
 		<max-desktops-per-session>-1</max-desktops-per-session>
-		<max-requests-per-session>20</max-requests-per-session>		
+		<max-requests-per-session>1000</max-requests-per-session>		
 	    <timer-keep-alive>false</timer-keep-alive>
 	</session-config>
 	

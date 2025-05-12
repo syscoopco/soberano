@@ -2,7 +2,7 @@ package co.syscoop.soberano.initialization;
 
 import java.util.HashMap;
 
-import jakarta.servlet.ServletContext;
+import javax.servlet.ServletContext;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.WebApp;
 import org.zkoss.zk.ui.util.WebAppInit;

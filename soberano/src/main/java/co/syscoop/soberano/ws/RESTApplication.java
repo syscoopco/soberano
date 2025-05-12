@@ -1,7 +1,7 @@
 package co.syscoop.soberano.ws;
 
 import java.util.*;
-import jakarta.ws.rs.core.Application;
+import javax.ws.rs.core.Application;
 
 public class RESTApplication extends Application {
 
