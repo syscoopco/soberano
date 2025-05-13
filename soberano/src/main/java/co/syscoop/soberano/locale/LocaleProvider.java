@@ -1,7 +1,7 @@
 package co.syscoop.soberano.locale;
 
 import java.util.Locale;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.zkoss.web.Attributes;
 import org.zkoss.zk.ui.Session;
 import org.zkoss.zk.ui.util.RequestInterceptor;

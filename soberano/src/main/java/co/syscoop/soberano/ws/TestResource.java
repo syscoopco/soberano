@@ -1,6 +1,6 @@
 package co.syscoop.soberano.ws;
 
-import javax.ws.rs.*;
+import jakarta.ws.rs.*;
 
 @Path("/test/justauth")
 public class TestResource {

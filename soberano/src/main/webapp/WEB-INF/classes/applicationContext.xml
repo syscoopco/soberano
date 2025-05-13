@@ -1,3 +1,4 @@
+<!-- for spring 6.2 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
@@ -8,7 +9,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.2.xsd
         http://www.springframework.org/schema/security
-		http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/security/spring-security-6.2.xsd
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
         http://www.springframework.org/schema/util 
@@ -48,6 +49,7 @@
 		<security:intercept-url pattern="/logout" access="permitAll()"/>
 		<security:intercept-url pattern="/" access="permitAll()"/>
 		<security:intercept-url pattern="/welcome.zul" access="permitAll()"/>
+		<security:intercept-url pattern="/images/*" access="permitAll()"/>
 		
 		<!-- authenticated access -->
  		<security:intercept-url pattern="/*" access="isFullyAuthenticated()"/>
@@ -169,20 +171,27 @@
  		<property name="propagationBehavior" value="${transactions.transactionPropagationBehavior}"/>
 	</bean>
  	
- 	<!-- java properties --> 	
- 	<bean id="environmentVariablesConfiguration" class="co.syscoop.soberano.obf.PropObf">
-	</bean>	
-	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
-		<property name="config" ref="environmentVariablesConfiguration"/>		
-	</bean>	
-	<bean id="propertyConfigurer" class="org.jasypt.spring4.properties.EncryptablePropertyPlaceholderConfigurer">
-   		<constructor-arg ref="configurationEncryptor"/>
-   		<property name="locations">
-	     	<list>
-	       		<value>classpath:soberano.properties</value>
-	     	</list>
-   		</property>   		
- 	</bean>
+ 	<!-- java properties --> 
+	
+	<!-- without Jasypt -->
+	<bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:soberano.properties" />
+	</bean>
+
+	<!-- with Jasypt -->
+<!--  	<bean id="environmentVariablesConfiguration" class="co.syscoop.soberano.obf.PropObf"> -->
+<!-- 	</bean>	 -->
+<!-- 	<bean id="configurationEncryptor" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor"> -->
+<!-- 		<property name="config" ref="environmentVariablesConfiguration"/>		 -->
+<!-- 	</bean>	 -->
+<!-- 	<bean id="propertyConfigurer" class="org.jasypt.spring4.properties.EncryptablePropertyPlaceholderConfigurer"> -->
+<!--    		<constructor-arg ref="configurationEncryptor"/> -->
+<!--    		<property name="locations"> -->
+<!-- 	     	<list> -->
+<!-- 	       		<value>classpath:soberano.properties</value> -->
+<!-- 	     	</list> -->
+<!--    		</property>   		 -->
+<!--  	</bean> -->
  	
  	<!-- jdbc datasource with connection pooling for logical model generation. -->
  	<bean id="dataSourceForLogicalModelGeneration" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close" scope="singleton">
