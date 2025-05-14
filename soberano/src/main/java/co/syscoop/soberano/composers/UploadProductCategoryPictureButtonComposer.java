@@ -41,7 +41,7 @@ public class UploadProductCategoryPictureButtonComposer extends SelectorComposer
 				public void onEvent(UploadEvent event) throws Exception {
 				
 					Media media = ((org.zkoss.zk.ui.event.UploadEvent) event).getMedia();					
-					if (media.getContentType().contains("image") /*media instanceof org.zkoss.image.Image*/) {
+					if (media instanceof org.zkoss.image.Image) {
 						
 						try {
 							ProductCategory prod = (new ProductCategory(((Intbox) aDownload.query("#incDetails").getParent().query("#intId")).getValue()));

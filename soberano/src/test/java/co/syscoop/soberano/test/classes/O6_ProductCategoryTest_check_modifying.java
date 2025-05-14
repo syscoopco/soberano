@@ -67,7 +67,7 @@ class O6_ProductCategoryTest_check_modifying extends ProductCategoryActionTest{
 		try {
 			checkProductCategory("mcat1",
 								2,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -99,7 +99,7 @@ class O6_ProductCategoryTest_check_modifying extends ProductCategoryActionTest{
 		try {
 			checkProductCategory("mcat3",
 								4,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -131,7 +131,7 @@ class O6_ProductCategoryTest_check_modifying extends ProductCategoryActionTest{
 		try {
 			checkProductCategory("mcat5",
 								6,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -163,7 +163,7 @@ class O6_ProductCategoryTest_check_modifying extends ProductCategoryActionTest{
 		try {
 			checkProductCategory("mcat7",
 								8,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -195,7 +195,7 @@ class O6_ProductCategoryTest_check_modifying extends ProductCategoryActionTest{
 		try {
 			checkProductCategory("mcat9",
 								10,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

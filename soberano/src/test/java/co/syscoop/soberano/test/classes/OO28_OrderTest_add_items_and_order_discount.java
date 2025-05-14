@@ -36,7 +36,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(28)
 
-//@Disabled
+////@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
@@ -129,7 +129,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("1");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
@@ -177,7 +181,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("1");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			orderForm.setComponentValue(orderForm.getIntDiscountTop(), 0);
@@ -225,7 +233,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(1));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("1");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -267,7 +279,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(2));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("2");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -309,7 +325,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 1");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(3));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("3");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -351,7 +371,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(4));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("4");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -393,7 +417,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 3");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(543.321));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("543.321");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -435,7 +463,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("5");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -477,7 +509,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 4");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("10");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -519,7 +555,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 5");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(6));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("6");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -561,7 +601,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 6");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(5));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("5");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "2", "kg : kilogram");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -603,7 +647,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 7");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(7));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("7");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -645,7 +693,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 8");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(8));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("8");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -687,7 +739,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(9));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("9");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();
@@ -729,7 +785,11 @@ class OO28_OrderTest_add_items_and_order_discount extends OrderActionTest {
 			cmbItemToOrderAgent.click(); 	//needed to force comboitem selection composer handling under testing
 			
 			orderForm.setComponentValue(orderForm.getTxtSpecialInstructions(), "Instructions 10");			
-			orderForm.setComponentValue(orderForm.getDecQuantity(), new BigDecimal(10));
+			
+			ComponentAgent txtQuantityExpressionAgent = desktop.query("textbox").query("#txtQuantityExpression");
+			InputAgent txtQuantityExpressionAgentInputAgent = txtQuantityExpressionAgent.as(InputAgent.class);
+			txtQuantityExpressionAgentInputAgent.type("10");
+			
 			orderForm.selectComboitemByValueForcingLabel(orderForm.getCmbUnit(), "1", "pcs : piece");
 			
 			desktop.query("textbox").query("#cmbUnit").query("#btnMake").click();

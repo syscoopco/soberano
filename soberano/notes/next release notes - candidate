@@ -4,11 +4,26 @@ New: Web application upgraded from Java 11 to Java 17.
 
 New: javax (J2EE) namespace replaced by jakarta (Jakarta). 
 
+New: Spring upgraded from 5 to 6 version.
+
 New: ZK upgraded to 10.1.0.
 
 New: System enhanced with Tomcat 10, which is now required.
 
-Fix: 
+Fix: In Spring application context configuration file (applicationContext.xml), added this line:
+	
+	<security:intercept-url pattern="/zkau/view/**" access="isFullyAuthenticated()"/>
+	
+	This is required by ZK 10.1.0 for delivering image contents dynamically configured (not image source urls).
+	For example, product and product category button icons.
 
 User manual:
+
+	Development environment.
+	DBMS isolation level: serializable.
+	Assure DBMS and OS time zones are the same.
+	Configure and tune JVM heap space sizes.
+	Empirically choose the proper JVM garbage collector algorithm (https://sematext.com/java-garbage-collection-tuning/).
+	En Linux, no instalar JVM headless.
+	Tune Tomcat performance (https://www.openlogic.com/blog/troubleshooting-tomcat-errors).
 

@@ -83,7 +83,7 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 		try {
 			checkProductCategory("cat2",
 								2,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -115,7 +115,7 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 		try {
 			checkProductCategory("cat4",
 								4,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -147,7 +147,7 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 		try {
 			checkProductCategory("cat6",
 								6,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -179,7 +179,7 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 		try {
 			checkProductCategory("cat8",
 								8,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -211,7 +211,7 @@ class O4_ProductCategoryTest_check_recording extends ProductCategoryActionTest {
 		try {
 			checkProductCategory("cat10",
 								10,
-								true);
+								false /*chkDisabled is not visible true*/);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

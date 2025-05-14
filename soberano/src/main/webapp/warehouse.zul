@@ -14,7 +14,7 @@
 		<checkbox id="chkLossesWarehouse" checked="false" label="${labels.caption.field.lossesWarehouse}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<label value="${labels.form.warehouse.entryProcesses}" sclass="Caption"></label>		
-		<tree id="treeEntryProcesses" visible="false">
+		<tree id="treeEntryProcesses" visible="true">
 			<treecols>
 				<treecol>
 					<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.ProcessSelectionViewModel')">

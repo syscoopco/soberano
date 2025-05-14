@@ -314,7 +314,8 @@ class O3_CounterTest_record extends CounterActionTest {
 									(desktop.query("checkbox").query("#chkDisabled")).as(Checkbox.class));
 		try {
 			counterForm.setComponentValue(counterForm.getTxtCode(), "c8");
-			counterForm.setComponentValue(counterForm.getIntNumberOfReceivers(), 11);(desktop.query("checkbox").query("#chkIsSurcharged")).click();
+			counterForm.setComponentValue(counterForm.getIntNumberOfReceivers(), 11);
+			(desktop.query("checkbox").query("#chkIsSurcharged")).click();
 			(desktop.query("checkbox").query("#chkIsSurcharged")).as(CheckAgent.class).check(true);
 			(desktop.query("checkbox").query("#chkDisabled")).as(CheckAgent.class).check(true);
 			clickOnRecordButton(desktop);

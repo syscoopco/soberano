@@ -1,0 +1,523 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>co.syscoop</groupId>
+	<artifactId>soberano</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<properties>
+		<bcel>6.10.0</bcel>
+		<cglib>3.3.0</cglib>
+		<commons-dbcp2>2.13.0</commons-dbcp2>
+		<commons-fileupload>1.5</commons-fileupload>
+		<commons-io>2.19.0</commons-io>
+		<commons-lang3>3.17.0</commons-lang3>
+		<cups4j>0.7.9</cups4j>
+		<escpos-coffee>4.1.0</escpos-coffee>
+		<gson>2.10.1</gson>
+		<httpcore5>5.3.4</httpcore5>
+		<jakarta.servlet-api>6.1.0</jakarta.servlet-api>
+		<jasypt>1.9.3</jasypt>
+		<java-encoder>1.3.1</java-encoder>
+		<javaluator>3.0.3</javaluator>
+		<javax.servlet-api>4.0.1</javax.servlet-api>
+		<javax-ws-rs>2.1.1</javax-ws-rs>
+		<java-websocket>1.5.6</java-websocket>
+		<jersey>3.1.10</jersey>
+		<junit>5.9.0</junit>
+		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
+		<pdfbox>2.0.13</pdfbox>
+		<pdfbox-tools>2.0.13</pdfbox-tools>
+		<postgresql>42.4.2</postgresql>
+		<slf4j.version>2.0.0</slf4j.version>
+		<spring-dao>2.0.8</spring-dao>
+		<spring-ldap>1.3.1.RELEASE</spring-ldap>
+		<spring-ldap-core>2.4.1</spring-ldap-core>
+		<spring.version>6.2.6</spring.version>
+		<zats-mimic>10.0.0-jakarta</zats-mimic>
+		<zk.version>9.6.0.2</zk.version>
+		<zkee.version>10.1.0</zkee.version>
+	</properties>
+	<packaging>war</packaging>
+	<name>The Soberano Project</name>
+	<description>The Soberano Project</description>
+	<licenses>
+		<license>
+			<name>GNU LESSER GENERAL PUBLIC LICENSE, Version 3</name>
+			<url>https://www.gnu.org/licenses/lgpl.html</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<repositories>
+		<!-- keep repositories order declaration -->
+	
+		<!-- ZK EE -->
+		<repository>
+	        <id>in-project</id>
+	        <name>In Project Repo</name>
+	        <url>file://${project.basedir}/libs</url>
+	    </repository>
+	
+		<!-- ZK CE -->
+		<repository>
+			<id>ZK CE</id>
+			<name>ZK CE Repository</name>
+			<url>https://mavensync.zkoss.org/maven2</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>zkmaven</id>
+			<name>ZK Maven Plugin Repository</name>
+			<url>https://mavensync.zkoss.org/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencies>
+	
+		<!-- Apache dependencies -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.bcel</groupId>
+			<artifactId>bcel</artifactId>
+			<version>${bcel}</version>
+		</dependency>
+		<dependency>
+		  	<groupId>org.apache.commons</groupId>
+		  	<artifactId>commons-dbcp2</artifactId>
+		  	<version>${commons-dbcp2}</version>
+		</dependency>		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.httpcomponents.core5</groupId>
+		    <artifactId>httpcore5</artifactId>
+		    <version>${httpcore5}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>${pdfbox}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox-tools</artifactId>
+		    <version>${pdfbox-tools}</version>
+		</dependency>
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>${commons-fileupload}</version>
+		</dependency>				
+		
+		<!-- CGLIB dependencies -->
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>${cglib}</version>
+		</dependency>
+		
+		<!-- CUPS4J -->
+		<dependency>
+		    <groupId>org.cups4j</groupId>
+		    <artifactId>cups4j</artifactId>
+		    <version>${cups4j}</version>
+		</dependency>
+		
+		<!-- EscPos Coffee -->
+		<dependency>
+		    <groupId>com.github.anastaciocintra</groupId>
+		    <artifactId>escpos-coffee</artifactId>
+		    <version>${escpos-coffee}</version>
+		</dependency>
+		
+		<!-- Gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>${gson}</version>
+		</dependency>
+		
+		<!-- Jakarta -->
+		<dependency>
+		    <groupId>jakarta.servlet</groupId>
+		    <artifactId>jakarta.servlet-api</artifactId>
+		    <version>${jakarta.servlet-api}</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- Jasypt dependencies -->		
+		<dependency>
+		    <groupId>org.jasypt</groupId>
+		    <artifactId>jasypt</artifactId>
+		    <version>${jasypt}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.jasypt</groupId>
+		    <artifactId>jasypt-spring4</artifactId>
+		    <version>${jasypt}</version>
+		</dependency>	
+		
+		<!--  java encoder -->
+		<dependency>
+		    <groupId>org.owasp.encoder</groupId>
+		    <artifactId>encoder</artifactId>
+		    <version>${java-encoder}</version>
+		</dependency>			
+		
+		<!-- javaluator -->
+		<dependency>
+			<groupId>com.fathzer</groupId>
+		    <artifactId>javaluator</artifactId>
+		    <version>${javaluator}</version>
+		</dependency>
+		
+		<!-- Javax dependencies -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>javax.servlet</groupId> -->
+<!-- 		    <artifactId>javax.servlet-api</artifactId> -->
+<!-- 		    <version>${javax.servlet-api}</version> -->
+<!-- 		    <scope>provided</scope> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>javax.ws.rs</groupId> -->
+<!-- 		    <artifactId>javax.ws.rs-api</artifactId> -->
+<!-- 		    <version>${javax-ws-rs}</version> -->
+<!-- 		</dependency>		 -->
+		
+		<!-- Java-WebSocket -->
+		<dependency>
+		    <groupId>org.java-websocket</groupId>
+		    <artifactId>Java-WebSocket</artifactId>
+		    <version>${java-websocket}</version>
+		</dependency>	
+		
+		<!-- Jersey dependencies -->
+		<dependency>
+		    <groupId>org.glassfish.jersey.containers</groupId>
+		    <artifactId>jersey-container-servlet</artifactId>
+		    <version>${jersey}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.glassfish.jersey.inject</groupId>
+		    <artifactId>jersey-hk2</artifactId>
+		    <version>${jersey}</version>
+		</dependency>					
+		
+		<!-- JUnit dependencies -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-engine</artifactId>
+		    <version>${junit}</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<!-- PostgreSQL dependencies -->
+		<dependency>
+		    <groupId>org.postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>${postgresql}</version>
+		</dependency>
+		
+		<!-- SLf4J dependencies -->
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-simple</artifactId>
+		    <version>${slf4j.version}</version>
+		</dependency>
+		
+		<!-- Spring dependencies -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-dao</artifactId>
+		    <version>${spring-dao}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-jdbc</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap</artifactId>
+		    <version>${spring-ldap}</version>
+		    <type>pom</type>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.ldap</groupId>
+		    <artifactId>spring-ldap-core</artifactId>
+		    <version>${spring-ldap-core}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-core</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-ldap</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${spring.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-test</artifactId>
+		    <version>${spring.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>		
+				
+		<!-- ZK dependencies EE -->		
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zcommon</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zel</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zhtml</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zk</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zkbind</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zkmax</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zkplus</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zkwebfragment</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zul</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zweb</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>zkex</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk.theme</groupId>
+			<artifactId>breeze</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk.theme</groupId>
+			<artifactId>iceblue</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk.theme</groupId>
+			<artifactId>sapphire</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk.theme</groupId>
+			<artifactId>silvertail</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>zk</groupId>
+			<artifactId>bsh</artifactId>
+			<version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>zk</groupId>
+		    <artifactId>commons-fileupload2-core</artifactId>
+		    <version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>zk</groupId>
+		    <artifactId>commons-fileupload2-jakarta-servlet5</artifactId>
+		    <version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>zk</groupId>
+		    <artifactId>encoder</artifactId>
+		    <version>${zkee.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>zk</groupId>
+		    <artifactId>guava</artifactId>
+		    <version>${zkee.version}</version>
+		</dependency>
+		
+		<!-- Zk CE -->		
+<!-- 		<dependency> -->
+<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
+<!-- 		  	<artifactId>breeze</artifactId> -->
+<!-- 		  	<version>${zk.version}</version> -->
+<!-- 	  	</dependency> -->
+<!-- 	  	<dependency> -->
+<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
+<!-- 		  	<artifactId>atlantic</artifactId> -->
+<!-- 		  	<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
+<!-- 		  	<artifactId>sapphire</artifactId> -->
+<!-- 		  	<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		  	<groupId>org.zkoss.theme</groupId> -->
+<!-- 		  	<artifactId>silvertail</artifactId> -->
+<!-- 		  	<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.zkoss.zk</groupId> -->
+<!-- 		    <artifactId>zk</artifactId> -->
+<!-- 		    <version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>org.zkoss.common</groupId> -->
+<!-- 		    <artifactId>zcommon</artifactId> -->
+<!-- 		    <version>${zk.version}</version> -->
+<!-- 		</dependency>	 -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.zkoss.zk</groupId> -->
+<!-- 			<artifactId>zkbind</artifactId> -->
+<!-- 			<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.zkoss.zk</groupId> -->
+<!-- 			<artifactId>zkplus</artifactId> -->
+<!-- 			<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.zkoss.zk</groupId> -->
+<!-- 			<artifactId>zhtml</artifactId> -->
+<!-- 			<version>${zk.version}</version> -->
+<!-- 		</dependency> -->
+		 
+		<!-- ZATS MIMIC for ZK web application testing  -->		 
+		<dependency>
+	      <groupId>org.zkoss.zats</groupId>
+	      <artifactId>zats-mimic</artifactId>
+	      <version>${zats-mimic}</version>
+	      <scope>test</scope>
+	    </dependency>
+			
+	</dependencies>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- Run with Jetty -->
+			<plugin>
+				<groupId>org.eclipse.jetty</groupId>
+				<artifactId>jetty-maven-plugin</artifactId>
+				<version>10.0.5</version>
+				<configuration>
+					<webApp>
+						<contextPath>/${project.artifactId}</contextPath>
+						<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
+						<scanIntervalSeconds>5</scanIntervalSeconds>
+					</webApp>					
+				</configuration>
+			</plugin>
+			<!-- Compile java -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+			<!-- Build war -->
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>3.3.2</version>
+			</plugin>
+			<!-- Pack zips -->
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>webapp</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<finalName>soberano${packname}</finalName>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/webapp.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- surefire -->
+			<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-surefire-plugin</artifactId>
+            	<version>2.22.2</version>
+        	</plugin>
+		</plugins>
+	</build>
+</project>

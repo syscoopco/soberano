@@ -76,7 +76,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 			additionButton.setWidth("100px");
 			additionButton.setOrient("vertical");
 			if (((Product) doo).getPicture() != null) {
-				additionButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture()));
+				additionButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture(), 80, 80));
 				additionButton.setTooltiptext(((Product) doo).getName());
 			}
 			else
@@ -115,7 +115,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 			prodButton.setWidth("100px");
 			prodButton.setOrient("vertical");
 			if (((Product) doo).getPicture() != null) {
-				prodButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture()));
+				prodButton.setImageContent(Utils.createImageFromBytes(((Product) doo).getPicture(), 80, 80));
 				prodButton.setTooltiptext(((Product) doo).getName());
 			}
 			else
@@ -158,7 +158,7 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 				catButton.setWidth("100px");
 				catButton.setOrient("vertical");
 				if (((ProductCategory) doo).getPicture() != null) {
-					catButton.setImageContent(Utils.createImageFromBytes(((ProductCategory) doo).getPicture()));
+					catButton.setImageContent(Utils.createImageFromBytes(((ProductCategory) doo).getPicture(), 80, 80));
 					catButton.setTooltiptext(((ProductCategory) doo).getName());
 				}
 				else
