@@ -8,7 +8,7 @@ New: Spring upgraded from 5 to 6 version.
 
 New: ZK upgraded to 10.1.0.
 
-New: System enhanced with Tomcat 10, which is now required.
+New: System enhanced with Tomcat 10, which is now required, and PostgreSQL 17 (so 12+).
 
 Fix: In Spring application context configuration file (applicationContext.xml), added this line:
 	
