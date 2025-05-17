@@ -8,22 +8,17 @@ New: Spring upgraded from 5 to 6 version.
 
 New: ZK upgraded to 10.1.0.
 
-New: System enhanced with Tomcat 10, which is now required, and PostgreSQL 17 (so 12+).
+New: System enhanced with Tomcat 11, which is now required, and PostgreSQL 17 (so 12+).
 
-Fix: In Spring application context configuration file (applicationContext.xml), added this line:
+Fix: In Spring application context configuration file (applicationContext.xml), added these lines:
+
+	<security:intercept-url pattern="/images/*" access="permitAll()"/>
+	
+	This is required by ZK 10.1.0 for delivering icons decorating buttons and other components.
 	
 	<security:intercept-url pattern="/zkau/view/**" access="isFullyAuthenticated()"/>
 	
 	This is required by ZK 10.1.0 for delivering image contents dynamically configured (not image source urls).
-	For example, product and product category button icons.
+	For example, product and product category button icons in fast ordering form.
 
 User manual:
-
-	Development environment.
-	DBMS isolation level: serializable.
-	Assure DBMS and OS time zones are the same.
-	Configure and tune JVM heap space sizes.
-	Empirically choose the proper JVM garbage collector algorithm (https://sematext.com/java-garbage-collection-tuning/).
-	En Linux, no instalar JVM headless.
-	Tune Tomcat performance (https://www.openlogic.com/blog/troubleshooting-tomcat-errors).
-

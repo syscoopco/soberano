@@ -34,6 +34,7 @@
 		<spring-ldap>1.3.1.RELEASE</spring-ldap>
 		<spring-ldap-core>2.4.1</spring-ldap-core>
 		<spring.version>6.2.6</spring.version>
+		<tomcat>11.0.7</tomcat>
 		<zats-mimic>10.0.0-jakarta</zats-mimic>
 		<zk.version>9.6.0.2</zk.version>
 		<zkee.version>10.1.0</zkee.version>
@@ -51,19 +52,19 @@
 	<repositories>
 		<!-- keep repositories order declaration -->
 	
-		<!-- ZK EE -->
-		<repository>
-	        <id>in-project</id>
-	        <name>In Project Repo</name>
-	        <url>file://${project.basedir}/libs</url>
-	    </repository>
-	
 		<!-- ZK CE -->
 		<repository>
 			<id>ZK CE</id>
 			<name>ZK CE Repository</name>
 			<url>https://mavensync.zkoss.org/maven2</url>
 		</repository>
+	
+		<!-- ZK EE -->
+		<repository>
+	        <id>in-project</id>
+	        <name>In Project Repo</name>
+	        <url>file://${project.basedir}/libs</url>
+	    </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -294,8 +295,20 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
-		</dependency>		
-				
+		</dependency>
+		
+		<!-- Tomcat dependencies -->
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-juli</artifactId>
+		    <version>${tomcat}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.tomcat</groupId>
+		    <artifactId>tomcat-websocket</artifactId>
+		    <version>${tomcat}</version>
+		</dependency>
+						
 		<!-- ZK dependencies EE -->		
 		<dependency>
 			<groupId>zk</groupId>
