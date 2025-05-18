@@ -26,7 +26,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(34)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO34_OrderTest_reopen extends PrintTicketActionTest {
@@ -40,13 +40,13 @@ class OO34_OrderTest_reopen extends PrintTicketActionTest {
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

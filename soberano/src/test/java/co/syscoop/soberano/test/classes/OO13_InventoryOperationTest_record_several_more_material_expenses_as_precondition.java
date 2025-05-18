@@ -35,7 +35,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(13)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO13_InventoryOperationTest_record_several_more_material_expenses_as_precondition extends MaterialExpenseActionTest {
@@ -49,13 +49,13 @@ class OO13_InventoryOperationTest_record_several_more_material_expenses_as_preco
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

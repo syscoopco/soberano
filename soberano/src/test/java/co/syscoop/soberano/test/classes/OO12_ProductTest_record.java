@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(12)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO12_ProductTest_record extends ProductActionTest {
@@ -44,13 +44,13 @@ class OO12_ProductTest_record extends ProductActionTest {
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

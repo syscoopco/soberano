@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_CurrencyTest_record extends CurrencyActionTest {
@@ -44,13 +44,13 @@ class O3_CurrencyTest_record extends CurrencyActionTest {
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

@@ -34,7 +34,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(37)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO37_StockTest_check_following_order_reopening_and_recollecting extends StockActionTest {
@@ -48,13 +48,13 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

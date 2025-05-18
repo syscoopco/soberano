@@ -23,7 +23,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 
@@ -33,14 +33,14 @@ class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

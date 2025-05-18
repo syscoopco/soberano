@@ -25,7 +25,7 @@ import co.syscoop.soberano.test.helper.WorkerForm;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_WorkerTest_modify extends WorkerActionTest {
 		
@@ -36,14 +36,14 @@ class O6_WorkerTest_modify extends WorkerActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

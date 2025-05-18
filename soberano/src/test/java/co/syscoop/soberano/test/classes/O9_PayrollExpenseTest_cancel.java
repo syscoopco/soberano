@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(9)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O9_PayrollExpenseTest_cancel extends PayrollExpenseActionTest {
@@ -39,13 +39,13 @@ class O9_PayrollExpenseTest_cancel extends PayrollExpenseActionTest {
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

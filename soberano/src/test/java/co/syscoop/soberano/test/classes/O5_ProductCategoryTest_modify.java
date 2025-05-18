@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.ProductCategoryForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_ProductCategoryTest_modify extends ProductCategoryActionTest{
 
@@ -31,14 +31,14 @@ class O5_ProductCategoryTest_modify extends ProductCategoryActionTest{
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

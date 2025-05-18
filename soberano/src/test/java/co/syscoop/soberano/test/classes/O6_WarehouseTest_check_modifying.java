@@ -23,7 +23,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_WarehouseTest_check_modifying extends WarehouseActionTest {
 
@@ -34,7 +34,7 @@ class O6_WarehouseTest_check_modifying extends WarehouseActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/warehouses.zul");
 		
@@ -50,7 +50,7 @@ class O6_WarehouseTest_check_modifying extends WarehouseActionTest {
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

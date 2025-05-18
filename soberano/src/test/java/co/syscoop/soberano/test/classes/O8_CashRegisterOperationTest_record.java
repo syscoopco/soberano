@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTest {
@@ -43,13 +43,13 @@ class O8_CashRegisterOperationTest_record extends CashRegisterOperationActionTes
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

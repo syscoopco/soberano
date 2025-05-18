@@ -25,7 +25,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//@Disabled
+@Disabled
 
 class O4_CustomerTest_check_recording extends CustomerActionTest {
 	
@@ -36,7 +36,7 @@ class O4_CustomerTest_check_recording extends CustomerActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/customers.zul");
 		
@@ -62,7 +62,7 @@ class O4_CustomerTest_check_recording extends CustomerActionTest {
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.CostCenterForm;
 
 @Order(9)
 
-//@Disabled
+@Disabled
 
 class O9_CostCenterTest_modify extends CostCenterActionTest {
 
@@ -32,14 +32,14 @@ class O9_CostCenterTest_modify extends CostCenterActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

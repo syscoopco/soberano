@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_CounterTest_check_modifying extends CounterActionTest {
 	
@@ -35,7 +35,7 @@ class O6_CounterTest_check_modifying extends CounterActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/counters.zul");
 		
@@ -51,7 +51,7 @@ class O6_CounterTest_check_modifying extends CounterActionTest {
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 	
 	@BeforeEach

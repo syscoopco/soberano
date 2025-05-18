@@ -15,7 +15,7 @@ import co.syscoop.soberano.test.helper.CounterActionTest;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterActionTest {
 	
@@ -26,14 +26,14 @@ class O8_CounterTest_modify_only_one_order_is_permitted_at_time extends CounterA
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

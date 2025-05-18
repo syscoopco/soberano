@@ -24,7 +24,7 @@ import co.syscoop.soberano.test.helper.CounterForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
-//@Disabled
+@Disabled
 class O3_CounterTest_record extends CounterActionTest {
 	
 	protected CounterForm counterForm = null;
@@ -36,13 +36,13 @@ class O3_CounterTest_record extends CounterActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

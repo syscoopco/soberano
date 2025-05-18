@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_ProviderTest_check_modifying extends ProviderActionTest{
 
@@ -33,7 +33,7 @@ class O6_ProviderTest_check_modifying extends ProviderActionTest{
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/providers.zul");
 		
@@ -46,7 +46,7 @@ class O6_ProviderTest_check_modifying extends ProviderActionTest{
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

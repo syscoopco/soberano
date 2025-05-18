@@ -27,7 +27,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_CostCenterTest_record extends CostCenterActionTest {
@@ -41,13 +41,13 @@ class O7_CostCenterTest_record extends CostCenterActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

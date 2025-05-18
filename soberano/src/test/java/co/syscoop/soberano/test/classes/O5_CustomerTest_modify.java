@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.CustomerForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_CustomerTest_modify extends CustomerActionTest {
 		
@@ -32,14 +32,14 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

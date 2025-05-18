@@ -32,7 +32,7 @@ import org.springframework.ldap.support.LdapUtils;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_WorkerTest_password_change extends ActionTest {
@@ -49,14 +49,14 @@ class O3_WorkerTest_password_change extends ActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

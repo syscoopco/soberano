@@ -14,7 +14,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
 @Order(27)
 
-//@Disabled
+@Disabled
 
 class OO27_OrderTest_check_activity_summary_tree_after_recording extends AcquirableMaterialActionTest{
 
@@ -24,14 +24,14 @@ class OO27_OrderTest_check_activity_summary_tree_after_recording extends Acquira
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

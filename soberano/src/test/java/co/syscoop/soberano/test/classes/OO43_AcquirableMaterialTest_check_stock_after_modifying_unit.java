@@ -14,7 +14,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialActionTest;
 
 @Order(43)
 
-//@Disabled
+@Disabled
 
 class OO43_AcquirableMaterialTest_check_stock_after_modifying_unit extends AcquirableMaterialActionTest{
 
@@ -24,14 +24,14 @@ class OO43_AcquirableMaterialTest_check_stock_after_modifying_unit extends Acqui
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

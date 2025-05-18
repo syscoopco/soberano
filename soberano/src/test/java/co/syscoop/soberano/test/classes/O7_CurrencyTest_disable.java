@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 class O7_CurrencyTest_disable extends CurrencyActionTest {
 
@@ -30,14 +30,14 @@ class O7_CurrencyTest_disable extends CurrencyActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

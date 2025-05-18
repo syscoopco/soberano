@@ -25,7 +25,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(13)
 
-//@Disabled
+@Disabled
 
 class OO13_ProductTest_check_recording extends ProductActionTest {
 	
@@ -36,7 +36,7 @@ class OO13_ProductTest_check_recording extends ProductActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/products.zul");
 		
@@ -57,7 +57,7 @@ class OO13_ProductTest_check_recording extends ProductActionTest {
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

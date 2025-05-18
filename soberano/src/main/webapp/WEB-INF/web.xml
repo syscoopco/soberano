@@ -67,11 +67,11 @@
 		-->
 		<!-- [Optional] Specifies the default log level: OFF, ERROR, WARNING,
 			INFO, DEBUG and FINER. If not specified, the system default is used.
+		-->
 		<init-param>
 			<param-name>log-level</param-name>
-			<param-value>OFF</param-value>
+			<param-value>DEBUG</param-value>
 		</init-param>
-		-->
 		
 		<load-on-startup>1</load-on-startup><!-- Must -->
 	</servlet>

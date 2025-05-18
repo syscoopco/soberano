@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.WarehouseForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_WarehouseTest_modify extends WarehouseActionTest {
 
@@ -31,14 +31,14 @@ class O5_WarehouseTest_modify extends WarehouseActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

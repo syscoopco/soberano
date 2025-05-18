@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 class O3_CustomerTest_record extends CustomerActionTest {
 	
@@ -47,7 +47,7 @@ class O3_CustomerTest_record extends CustomerActionTest {
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

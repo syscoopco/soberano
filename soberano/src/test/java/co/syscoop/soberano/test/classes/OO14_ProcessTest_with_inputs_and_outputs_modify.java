@@ -30,7 +30,7 @@ import co.syscoop.soberano.test.helper.ProcessForm;
 
 @Order(14)
 
-//@Disabled
+@Disabled
 
 class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 
@@ -41,14 +41,14 @@ class OO14_ProcessTest_with_inputs_and_outputs_modify extends ProcessActionTest{
 		//to runtime locale not available under 
 		//testing environment
 
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

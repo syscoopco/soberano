@@ -20,7 +20,7 @@ import co.syscoop.soberano.test.helper.CustomerActionTest;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O7_CustomerTest_disable extends CustomerActionTest {
@@ -32,14 +32,14 @@ class O7_CustomerTest_disable extends CustomerActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

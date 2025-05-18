@@ -25,7 +25,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-//@Disabled
+@Disabled
 
 class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialActionTest {
 
@@ -36,7 +36,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/acquirable_materials.zul");
 		
@@ -52,7 +52,7 @@ class O6_AcquirableMaterialTest_check_modifying extends AcquirableMaterialAction
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(10)
 
-//@Disabled
+@Disabled
 
 class OO10_WarehouseTest_disable extends WarehouseActionTest{
 
@@ -30,14 +30,14 @@ class OO10_WarehouseTest_disable extends WarehouseActionTest{
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

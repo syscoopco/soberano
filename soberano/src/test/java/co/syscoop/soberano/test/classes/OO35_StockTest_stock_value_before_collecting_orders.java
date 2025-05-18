@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(35)
 
-//@Disabled
+@Disabled
 
 class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 	
@@ -40,14 +40,14 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

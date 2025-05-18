@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 
@@ -33,7 +33,7 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/cost_centers.zul");
 		
@@ -48,7 +48,7 @@ class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

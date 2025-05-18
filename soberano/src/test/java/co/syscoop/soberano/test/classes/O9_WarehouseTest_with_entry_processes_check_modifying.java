@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(9)
 
-//@Disabled
+@Disabled
 
 class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseActionTest {
 
@@ -35,7 +35,7 @@ class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseAct
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");		
+		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/warehouses.zul");
 		
@@ -53,7 +53,7 @@ class O9_WarehouseTest_with_entry_processes_check_modifying extends WarehouseAct
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

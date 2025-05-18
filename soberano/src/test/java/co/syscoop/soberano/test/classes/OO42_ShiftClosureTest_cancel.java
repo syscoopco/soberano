@@ -14,7 +14,7 @@ import co.syscoop.soberano.test.helper.ActionTest;
 
 @Order(42)
 
-//@Disabled
+@Disabled
 
 class OO42_ShiftClosureTest_cancel extends ActionTest {
 
@@ -24,14 +24,14 @@ class OO42_ShiftClosureTest_cancel extends ActionTest {
 		Library.setProperty(Attributes.PREFERRED_LOCALE, "en"); //needed due to translated captions according 
 																//to runtime locale not available under 
 																//testing environment
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

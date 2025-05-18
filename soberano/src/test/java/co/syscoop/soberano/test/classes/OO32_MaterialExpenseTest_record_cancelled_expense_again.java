@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(32)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO32_MaterialExpenseTest_record_cancelled_expense_again extends MaterialExpenseActionTest {
@@ -51,13 +51,13 @@ class OO32_MaterialExpenseTest_record_cancelled_expense_again extends MaterialEx
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

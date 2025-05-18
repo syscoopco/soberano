@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.ProviderForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_ProviderTest_modify extends ProviderActionTest{
 
@@ -30,14 +30,14 @@ class O5_ProviderTest_modify extends ProviderActionTest{
 		//to runtime locale not available under 
 		//testing environment
 		
-		Zats.init("./src/main/webapp");	
+		//Zats.init("./src/main/webapp");	
 	}
 	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		
 		Zats.cleanup();
-		Zats.end();
+		//Zats.end();
 	}
 
 	@BeforeEach

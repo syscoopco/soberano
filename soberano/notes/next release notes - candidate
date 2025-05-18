@@ -1,4 +1,4 @@
-v2.0.0 release
+v2.0.0 release El Cotorro
 
 New: Web application upgraded from Java 11 to Java 17.
 
@@ -21,4 +21,4 @@ Fix: In Spring application context configuration file (applicationContext.xml), 
 	This is required by ZK 10.1.0 for delivering image contents dynamically configured (not image source urls).
 	For example, product and product category button icons in fast ordering form.
 
-User manual:
+User manual: No changes.
