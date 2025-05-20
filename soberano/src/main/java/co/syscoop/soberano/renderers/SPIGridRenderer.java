@@ -2,6 +2,7 @@ package co.syscoop.soberano.renderers;
 
 import java.util.HashMap;
 
+import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
@@ -10,10 +11,12 @@ import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Intbox;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.rowdata.SPIRowData;
 
 public class SPIGridRenderer extends DomainObjectRowRenderer {
@@ -51,18 +54,26 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				
-				Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
-				
-				HashMap<String, Object> args = new HashMap<String, Object>();
-				args.put("inputItemId", spiRowData.getInventoryItemCode());
-				args.put("inputItemName", spiRowData.getInventoryItemName());
-				args.put("inputItemUnitId", spiRowData.getUnitId());
-				args.put("inputItemUnitName", spiRowData.getUnit());
-				args.put("inputAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
-				args.put("inputToWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
-				Window window = (Window) Executions.createComponents("./spi_input_spec.zul", cmbWarehouse.getParent(), args);
-				window.setAttribute("SPIRow", row);
-		        window.doModal();	
+				try {
+					Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
+					
+					HashMap<String, Object> args = new HashMap<String, Object>();
+					args.put("inputItemId", spiRowData.getInventoryItemCode());
+					args.put("inputItemName", spiRowData.getInventoryItemName());
+					args.put("inputItemUnitId", spiRowData.getUnitId());
+					args.put("inputItemUnitName", spiRowData.getUnit());
+					args.put("inputAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
+					args.put("inputToWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
+					Window window = (Window) Executions.createComponents("./spi_input_spec.zul", cmbWarehouse.getParent(), args);
+					window.setAttribute("SPIRow", row);
+			        window.doModal();
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.selectAWarehouseFromTheList"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
 			}
 		});
 		row.appendChild(decInput);
@@ -78,18 +89,26 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				
-				Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
-				
-				HashMap<String, Object> args = new HashMap<String, Object>();
-				args.put("lossesItemId", spiRowData.getInventoryItemCode());
-				args.put("lossesItemName", spiRowData.getInventoryItemName());
-				args.put("lossesItemUnitId", spiRowData.getUnitId());
-				args.put("lossesItemUnitName", spiRowData.getUnit());
-				args.put("lossesAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
-				args.put("lossesFromWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
-				Window window = (Window) Executions.createComponents("./spi_losses_spec.zul", cmbWarehouse.getParent(), args);
-				window.setAttribute("SPIRow", row);
-				window.doModal();
+				try {
+					Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
+					
+					HashMap<String, Object> args = new HashMap<String, Object>();
+					args.put("lossesItemId", spiRowData.getInventoryItemCode());
+					args.put("lossesItemName", spiRowData.getInventoryItemName());
+					args.put("lossesItemUnitId", spiRowData.getUnitId());
+					args.put("lossesItemUnitName", spiRowData.getUnit());
+					args.put("lossesAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
+					args.put("lossesFromWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
+					Window window = (Window) Executions.createComponents("./spi_losses_spec.zul", cmbWarehouse.getParent(), args);
+					window.setAttribute("SPIRow", row);
+					window.doModal();
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.selectAWarehouseFromTheList"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
 			}
 		});		
 		row.appendChild(decLosses);
@@ -105,18 +124,26 @@ public class SPIGridRenderer extends DomainObjectRowRenderer {
 			@Override
 			public void onEvent(Event event) throws Exception {
 				
-				Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
-				
-				HashMap<String, Object> args = new HashMap<String, Object>();
-				args.put("movementItemId", spiRowData.getInventoryItemCode());
-				args.put("movementItemName", spiRowData.getInventoryItemName());
-				args.put("movementItemUnitId", spiRowData.getUnitId());
-				args.put("movementItemUnitName", spiRowData.getUnit());
-				args.put("movementAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
-				args.put("movementFromWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
-				Window window = (Window) Executions.createComponents("./spi_movement_spec.zul", cmbWarehouse.getParent(), args);
-				window.setAttribute("SPIRow", row);
-				window.doModal();
+				try {
+					Combobox cmbWarehouse = (Combobox) row.getParent().getParent().getParent().getParent().getParent().query("#cmbWarehouse");
+					
+					HashMap<String, Object> args = new HashMap<String, Object>();
+					args.put("movementItemId", spiRowData.getInventoryItemCode());
+					args.put("movementItemName", spiRowData.getInventoryItemName());
+					args.put("movementItemUnitId", spiRowData.getUnitId());
+					args.put("movementItemUnitName", spiRowData.getUnit());
+					args.put("movementAcquirableMaterialId", spiRowData.getAcquirableMaterialId());
+					args.put("movementFromWarehouse", ((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());
+					Window window = (Window) Executions.createComponents("./spi_movement_spec.zul", cmbWarehouse.getParent(), args);
+					window.setAttribute("SPIRow", row);
+					window.doModal();
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.selectAWarehouseFromTheList"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
 			}
 		});	
 		row.appendChild(decMovement);

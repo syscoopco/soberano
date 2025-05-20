@@ -45,6 +45,7 @@
 		<security:intercept-url pattern="/zkau/web/**/js/**" method="GET" access="permitAll()"/>
 		<security:intercept-url pattern="/zkau/web/**/zul/css/**" method="GET" access="permitAll()"/>
 		<security:intercept-url pattern="/zkau/web/**/img/**" method="GET" access="permitAll()"/>
+		<security:intercept-url pattern="/zkau/web/**/zul/less/font/**" method="GET" access="permitAll()"/>
 		<security:intercept-url pattern="/login" access="permitAll()"/>
 		<security:intercept-url pattern="/logout" access="permitAll()"/>
 		<security:intercept-url pattern="/" access="permitAll()"/>

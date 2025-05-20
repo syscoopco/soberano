@@ -1041,6 +1041,14 @@ public class LogicalQueriesForSoberanoMetamodel extends LogicalQueriesBatch {
 				
 				
 				
+				"CREATE INDEX IF NOT EXISTS index18\n"
+				+ "    ON metamodel.\"Vote\" USING btree\n"
+				+ "    (\"This_is_on_Timestamp\" ASC NULLS LAST)\n"
+				+ "    WITH (deduplicate_items=True)\n"
+				+ "    TABLESPACE pg_default;",
+				
+				
+				
 				"CREATE OR REPLACE FUNCTION metamodel.\"fn_User_InstanceCreationDecision\"(\n"
 				+ "	ownerauthority integer,\n"
 				+ "	entitytype character varying,\n"

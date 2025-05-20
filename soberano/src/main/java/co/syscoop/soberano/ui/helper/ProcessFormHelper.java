@@ -287,18 +287,24 @@ public class ProcessFormHelper extends TrackedObjectFormHelper {
 			}
 		}
 		
-		Treechildren tchdnSubprocesses = (Treechildren) incDetails.query("#incSubprocesses").query("#tchdnSubprocesses");
-		tchdnSubprocesses.getChildren().clear();
-		for (Object subprocess : process.getProcessSubprocesses(id)) {
-			try {
-				addSubprocess(((ProcessSubprocessRowData) subprocess).getItemName(),
-						((ProcessSubprocessRowData) subprocess).getItemId(),
-						tchdnSubprocesses,
-						runMode,
-						runs);
-			} catch (SomeFieldsContainWrongValuesException e) {
-				e.printStackTrace();
+		try {
+			Treechildren tchdnSubprocesses = (Treechildren) incDetails.query("#incSubprocesses").query("#tchdnSubprocesses");
+			tchdnSubprocesses.getChildren().clear();
+			for (Object subprocess : process.getProcessSubprocesses(id)) {
+				try {
+					addSubprocess(((ProcessSubprocessRowData) subprocess).getItemName(),
+							((ProcessSubprocessRowData) subprocess).getItemId(),
+							tchdnSubprocesses,
+							runMode,
+							runs);
+				} catch (SomeFieldsContainWrongValuesException e) {
+					e.printStackTrace();
+				}
 			}
+		}
+		catch(Exception ex) {
+			//In process_runs.zul, subprocesses are not shown and that throws an 
+			//exception due the corresponding components are don't exist in the page.
 		}
 	}
 	

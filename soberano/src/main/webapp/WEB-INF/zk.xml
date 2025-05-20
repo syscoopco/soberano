@@ -59,7 +59,7 @@
     <library-property>
     	<name>org.zkoss.theme.preferred</name>
 <!-- 	<value>sapphire</value> -->
-		<value>breeze</value>
+		<value>breeze</value> <!-- default theme since v2.0.0 -->
 <!-- 	<value>silvertail</value> -->
 <!-- 	<value>iceblue</value> -->
 	</library-property>
