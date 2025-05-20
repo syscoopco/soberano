@@ -14282,8 +14282,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							INNER JOIN soberano.\"UnitHasAcronymInLanguage\" unit\n"
 						+ "										ON unit.\"UnitHasUnitId\" = item.\"This_is_measured_in_Unit_with_UnitHasUnitId\"\n"
 						+ "											AND unit.\"Language\" = lang\n"
-						+ "							WHERE --user can make decisions on process run\n"
-						+ "									(EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(27, 1, loginname)))\n"
+						+ "							--WHERE --user can make decisions on process run\n"
+						+ "							--		(EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(27, 1, loginname)))\n"
 						+ "						ORDER BY item.\"InventoryItemHasInventoryItemCode\" ASC;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
@@ -14315,8 +14315,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							INNER JOIN soberano.\"UnitHasAcronymInLanguage\" unit\n"
 						+ "								ON unit.\"UnitHasUnitId\" = item.\"This_is_measured_in_Unit_with_UnitHasUnitId\"\n"
 						+ "									AND unit.\"Language\" = lang\n"
-						+ "							WHERE --user can make decisions on process runs\n"
-						+ "									(EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(27, 1, loginname)))\n"
+						+ "							--WHERE --user can make decisions on process runs\n"
+						+ "							--		(EXISTS(SELECT * FROM metamodel.\"fn_EntityTypeInstance_getDecisions\"(27, 1, loginname)))\n"
 						+ "						ORDER BY item.\"InventoryItemHasInventoryItemCode\" ASC;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",

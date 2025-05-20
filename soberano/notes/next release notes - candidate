@@ -1,24 +1,8 @@
-v2.0.0 release El Cotorro
+v2.0.1 candidate
 
-New: Web application upgraded from Java 11 to Java 17.
+New:
 
-New: javax (J2EE) namespace replaced by jakarta (Jakarta). 
-
-New: Spring upgraded from 5 to 6 version.
-
-New: ZK upgraded to 10.1.0.
-
-New: System enhanced with Tomcat 11, which is now required, and PostgreSQL 17 (so 12+).
-
-Fix: In Spring application context configuration file (applicationContext.xml), added these lines:
-
-	<security:intercept-url pattern="/images/*" access="permitAll()"/>
-	
-	This is required by ZK 10.1.0 for delivering icons decorating buttons and other components.
-	
-	<security:intercept-url pattern="/zkau/view/**" access="isFullyAuthenticated()"/>
-	
-	This is required by ZK 10.1.0 for delivering image contents dynamically configured (not image source urls).
-	For example, product and product category button icons in fast ordering form.
+Fix: PSQL functions soberano."fn_ProcessRun_getInputs" and soberano."fn_ProcessRun_getOutputs" optimized for
+	fast rows retrieval.
 
 User manual: No changes.
