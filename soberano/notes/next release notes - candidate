@@ -9,6 +9,8 @@ New: Created new index on the largest table:
 	    ("This_is_on_Timestamp" ASC NULLS LAST)
 	    WITH (deduplicate_items=True)
 	    TABLESPACE pg_default;
+	    
+New: Shift closure full and cost center reports can now be exported to a csv file.
 
 Fix: PSQL functions fn_ProcessRun_getReport, soberano."fn_ProcessRun_getInputs" and soberano."fn_ProcessRun_getOutputs" optimized for
 	fast rows retrieval.
