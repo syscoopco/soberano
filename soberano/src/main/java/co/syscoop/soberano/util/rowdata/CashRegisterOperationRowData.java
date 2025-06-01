@@ -9,6 +9,7 @@ public class CashRegisterOperationRowData {
 	private String worker = "";
 	private String description = "";
 	private Date recordingDate = null;
+	private Integer stageId = 0;
 	
 	public CashRegisterOperationRowData(Integer cashRegisterOperationId) {
 		this.setCashRegisterOperationId(cashRegisterOperationId);
@@ -60,5 +61,13 @@ public class CashRegisterOperationRowData {
 
 	public void setEntityTypeInstanceId(Integer entityTypeInstanceId) {
 		this.entityTypeInstanceId = entityTypeInstanceId;
+	}
+
+	public Integer getStageId() {
+		return stageId;
+	}
+
+	public void setStageId(Integer stageId) {
+		this.stageId = stageId;
 	}
 }

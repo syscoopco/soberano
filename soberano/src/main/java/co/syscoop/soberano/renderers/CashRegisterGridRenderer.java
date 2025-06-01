@@ -3,6 +3,7 @@ package co.syscoop.soberano.renderers;
 import java.text.SimpleDateFormat;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
@@ -18,6 +19,7 @@ import co.syscoop.soberano.domain.tracked.Deposit;
 import co.syscoop.soberano.domain.tracked.Withdrawal;
 import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.rowdata.CashRegisterOperationRowData;
@@ -110,6 +112,93 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 								Messagebox.ERROR);
 				}				
 			}
+		});
+		
+		Button btnCancel = new Button(Labels.getLabel("caption.action.cancel"));
+		btnCancel.setId(btnCancel.getUuid());
+		btnCancel.setWidth("90%");
+		
+		//if operation is cancelled,
+		if (cashRegisterOperation.getStageId() == 5) {
+			btnCancel.setDisabled(true);
+			btnCancel.setLabel(Labels.getLabel("translation.stage.Canceled"));
+		}
+		
+		btnCancel.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+
+				try{
+					Integer cashRegisterOperationId = cashRegisterOperation.getCashRegisterOperationId();
+					if (cashRegisterOperation.getOperation().equals("tt_DEPOSIT_tt")) {
+						Deposit deposit = new Deposit();
+						deposit.setId(cashRegisterOperationId);
+						if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
+							int result = deposit.disable();
+							if (result == -1) {
+								throw new NotEnoughRightsException();
+							}
+							else {					
+								Executions.sendRedirect("/cash_register.zul?id=1");
+							}
+						}
+						else {
+							requestDeletion(row);
+						}
+					}
+					else if (cashRegisterOperation.getOperation().equals("tt_WITHDRAWAL_tt")) {
+						Withdrawal withdrawal = new Withdrawal();
+						withdrawal.setId(cashRegisterOperationId);
+						if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
+							int result = withdrawal.disable();
+							if (result == -1) {
+								throw new NotEnoughRightsException();
+							}
+							else {					
+								Executions.sendRedirect("/cash_register.zul?id=1");
+							}
+						}
+						else {
+							requestDeletion(row);
+						}
+					}
+					else if (cashRegisterOperation.getOperation().equals("tt_BALANCING_tt")) {
+						Balancing balancing = new Balancing();
+						balancing.setId(cashRegisterOperationId);
+						if (requestedActions.get(row) != null && requestedActions.get(row).equals(ActionRequested.DISABLE)) {
+							int result = balancing.disable();
+							if (result == -1) {
+								throw new NotEnoughRightsException();
+							}
+							else {					
+								Executions.sendRedirect("/cash_register.zul?id=1");
+							}
+						}
+						else {
+							requestDeletion(row);
+						}
+					}
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(ShiftHasBeenClosedException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.shiftHasBeenClosed"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+								ex.getMessage(), 
+								Labels.getLabel("messageBoxTitle.Error"),
+								Messagebox.ERROR);
+				}				
+			}
 		});	
 		
 		Button btnUpload = new Button(Labels.getLabel("caption.action.upload"));
@@ -122,6 +211,7 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 		btnDocument.setDisabled(true);
 			
 		actionCell.appendChild(btnPrint);
+		actionCell.appendChild(btnCancel);
 		actionCell.appendChild(btnUpload);
 		actionCell.appendChild(btnDocument);
 		row.appendChild(actionCell);

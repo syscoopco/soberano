@@ -1,4 +1,4 @@
-v2.0.1 candidate
+v2.0.1
 
 New: Preferred ZK theme changed to breeze.
 
@@ -11,6 +11,8 @@ New: Created new index on the largest table:
 	    TABLESPACE pg_default;
 	    
 New: Shift closure full and cost center reports can now be exported to a csv file.
+
+New: Cash register deposits and withdrawals can now be canceled .
 
 Fix: PSQL functions fn_ProcessRun_getReport, soberano."fn_ProcessRun_getInputs" and soberano."fn_ProcessRun_getOutputs" optimized for
 	fast rows retrieval.

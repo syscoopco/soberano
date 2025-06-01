@@ -13,6 +13,7 @@ import org.zkoss.util.Locales;
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
+import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
 import co.syscoop.soberano.exception.SoberanoException;
 import co.syscoop.soberano.util.SpringUtility;
 
@@ -100,7 +101,18 @@ public class Withdrawal extends BusinessActivityTrackedObject {
 	
 	@Override
 	public Integer disable() throws SQLException, Exception {	
-		return 0;
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		disableQuery = "SELECT soberano.\"fn_Withdrawal_disable\"(:operationId, "
+				+ "											:loginname) AS queryresult";
+		disableParameters = new MapSqlParameterSource();
+		disableParameters.addValue("operationId", this.getId());
+		
+		Integer qryResult = super.disable();
+		if (qryResult == -3) {
+			throw new ShiftHasBeenClosedException();
+		}
+		return qryResult;
 	}
 	
 	@Override

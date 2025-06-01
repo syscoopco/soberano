@@ -24,6 +24,7 @@ public final class CashRegisterOperationExtractor implements ResultSetExtractor<
         	cashRegisterOperationRowData.setWorker(rs.getString("worker"));
         	cashRegisterOperationRowData.setDescription(rs.getString("description"));
         	cashRegisterOperationRowData.setRecordingDate(rs.getTimestamp("recordingDate"));
+        	cashRegisterOperationRowData.setStageId(rs.getInt("stageId"));
         	cashRegisterOperationTableData.add(cashRegisterOperationRowData);
         }
         return cashRegisterOperationTableData;
