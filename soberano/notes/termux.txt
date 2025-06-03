@@ -16,6 +16,8 @@ How to deploy on Android 7.0 or higher
 	apt-get update
 	apt-get install
 	
+	apt install termux-api
+	
 	pkg install postgresql
 	pkg install openjdk-17
 	pkg install openldap
@@ -26,19 +28,24 @@ How to deploy on Android 7.0 or higher
 	pkg update
 	
 	wget https://archive.apache.org/dist/directory/apacheds/dist/2.0.0-M20/apacheds-2.0.0-M20.tar.gz
-	wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.74/bin/apache-tomcat-9.0.74.tar.gz
+	wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.7/bin/apache-tomcat-11.0.7.tar.gz
 	
 5) Deploy ApacheDS:
 
+	mkdir ../usr/opt
+	mkdir ../usr/opt/apacheds
 	tar -xvzf apacheds-2.0.0-M20.tar.gz
-	mv apacheds-2.0.0-M20 ../usr/opt/apacheds
+	mv apacheds-2.0.0-M20/* ../usr/opt/apacheds
+	rm -r apacheds-2.0.0-M20
 	chmod +x ../usr/opt/apacheds/bin/*.sh
 	
 6) Deploy Tomcat:
 
-	tar -xvzf apache-tomcat-9.0.74.tar.gz
-	mv apache-tomcat-9.0.74 ../usr/opt/tomcat9
-	chmod +x ../usr/opt/tomcat9/bin/*.sh
+	mkdir ../usr/opt/tomcat11
+	tar -xvzf apache-tomcat-11.0.7.tar.gz
+	mv apache-tomcat-11.0.7/* ../usr/opt/tomcat11
+	rm -r apache-tomcat-11.0.7
+	chmod +x ../usr/opt/tomcat11/bin/*.sh
 	
 7) Set up PostgreSQL environment:
 
@@ -47,12 +54,13 @@ How to deploy on Android 7.0 or higher
 	pg_ctl -D ~/postgresql_data start
 	createdb soberano
 	createuser --superuser --pwprompt postgres
-	createuser --superuser --pwprompt soberano.user.top
-	
+		
 8) Set up termux storage:
 	
 	mkdir -p $HOME/.termux/boot
 	termux-setup-storage
+	
+	UPON REQUEST, ALLOW TERMUX TO ACCESS FILES IN THE DEVICE
 	
 9) By means of Bluetooth (or USB), copy to the Android device the system files
 (startup / shutdown scripts, web application deployment .war file, a backup of 
@@ -60,7 +68,7 @@ soberano db backup in tar format, ldif files to import in apacheds):
 
 	termux-startup.sh
 	termux-shutdown.sh
-	soberano.war
+	tcptool.war
 	soberanodb.tar.backup
 	
 	pwdpolicies.ldif

@@ -1,30 +1,7 @@
-v2.0.1
+v2.0.2 candidate
 
-New: Preferred ZK theme changed to breeze.
+New: 
 
-New: Created new index on the largest table:
+Fix: 
 
-	CREATE INDEX IF NOT EXISTS index18
-	    ON metamodel."Vote" USING btree
-	    ("This_is_on_Timestamp" ASC NULLS LAST)
-	    WITH (deduplicate_items=True)
-	    TABLESPACE pg_default;
-	    
-New: Shift closure full and cost center reports can now be exported to a csv file.
-
-New: Cash register deposits and withdrawals can now be canceled .
-
-Fix: PSQL functions fn_ProcessRun_getReport, soberano."fn_ProcessRun_getInputs" and soberano."fn_ProcessRun_getOutputs" optimized for
-	fast rows retrieval.
-	
-Fix: The following line was added to Spring context XML configuration file, to allow button decorating fonts to be loaded
-	(for example, in grid, move next, move previous, move last and move first buttons):
-
-	<security:intercept-url pattern="/zkau/web/**/zul/less/font/**" method="GET" access="permitAll()"/>
-	
-	It has to do with migration to ZK 10.1.0.
-	
-Fix: In process_runs.zul, a java.lang.NullPointerException was thrown due to in that page subprocess components are not included.
-	So, a try catch block without handling code was added enclosing the proper code fragment.
-
-User manual: No changes.
+User manual: 
