@@ -1,3 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
 /data/data/com.termux/files/usr/opt/apacheds/bin/apacheds.sh default stop
 
 /data/data/com.termux/files/usr/opt/tomcat11/bin/shutdown.sh

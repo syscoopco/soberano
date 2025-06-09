@@ -1,17 +1,32 @@
 How to deploy on Android 7.0 or higher
 --------------------------------------
 
-1) Install F-Droid apk: f-droid.org/en
+1) Download F-Droid.apk from https://f-droid.org, and install it.
 
-2) By means of F-Droid, install the following applications:
+2) Run F-Droid.
 
-	termux
-	termux:Api
-	termux:Boot
+3) At the bottom, in the shortcuts bar, click on Categories.
 
-3) Open termux.
+4) Wait until repositories are synchronized. This may take a while, depending on your Internet connection speed.
 
-4) In the console, execute the following commands:
+5) Search for installer: at the bottom, click on the magnifying glass and search for "Termux".
+
+6) Click on the search result row corresponding to Termux terminal emulator, and then on the button Install.
+
+7) Using the arrow in the top left corner, go back, and repeat step 6 for installing Termux:API and Termux:Boot applications.
+
+8) In your Android installation, by means of Settings application, grant Autostart and Storage permissions to Termux, Termux:API and Termux:Boot applications.
+	Besides, enable notifications for them.
+
+9) Execute Termux. A notification box is shown.
+
+10) In the Termux's notificacion box, click on Acquire wakelock. This prevents Termux to stop due to battery saving mode and other similar phone conditions.
+
+11) Upon request, do not restrict Termux to battery status.
+
+12) Open Termux's window.
+
+13) In the Termux console (command prompt or terminal), type and execute the following commands:
 
 	apt-get update
 	apt-get install
@@ -23,6 +38,7 @@ How to deploy on Android 7.0 or higher
 	pkg install openldap
 	pkg install wget
 	pkg install man
+	pkg install openssh
 	pkg install fakeroot
 	pkg install termux-services
 	pkg update
@@ -30,24 +46,24 @@ How to deploy on Android 7.0 or higher
 	wget https://archive.apache.org/dist/directory/apacheds/dist/2.0.0-M20/apacheds-2.0.0-M20.tar.gz
 	wget https://dlcdn.apache.org/tomcat/tomcat-11/v11.0.7/bin/apache-tomcat-11.0.7.tar.gz
 	
-5) Deploy ApacheDS:
+14) Deploy ApacheDS:
 
 	mkdir ../usr/opt
 	mkdir ../usr/opt/apacheds
 	tar -xvzf apacheds-2.0.0-M20.tar.gz
 	mv apacheds-2.0.0-M20/* ../usr/opt/apacheds
 	rm -r apacheds-2.0.0-M20
-	chmod +x ../usr/opt/apacheds/bin/*.sh
+	chmod +x /data/data/com.termux/files/usr/opt/apacheds/bin/*.sh
 	
-6) Deploy Tomcat:
+15) Deploy Tomcat:
 
 	mkdir ../usr/opt/tomcat11
 	tar -xvzf apache-tomcat-11.0.7.tar.gz
 	mv apache-tomcat-11.0.7/* ../usr/opt/tomcat11
 	rm -r apache-tomcat-11.0.7
-	chmod +x ../usr/opt/tomcat11/bin/*.sh
+	chmod +x /data/data/com.termux/files/usr/opt/tomcat11/bin/*.sh
 	
-7) Set up PostgreSQL environment:
+16) Set up PostgreSQL environment:
 
 	mkdir postgresql_data
 	initdb ~/postgresql_data
@@ -55,90 +71,126 @@ How to deploy on Android 7.0 or higher
 	createdb soberano
 	createuser --superuser --pwprompt postgres
 		
-8) Set up termux storage:
+17) Set up termux storage:
 	
 	mkdir -p $HOME/.termux/boot
 	termux-setup-storage
 	
-	UPON REQUEST, ALLOW TERMUX TO ACCESS FILES IN THE DEVICE
+	IF REQUESTED, ALLOW TERMUX TO ACCESS FILES IN THE DEVICE
 	
-9) By means of Bluetooth (or USB), copy to the Android device the system files
+18) Create a script to start TCP TOOL services on boot, and make it executable:
+
+	nano .termux/boot/start-tcptool.sh
+	chmod +x .termux/boot/start-tcptool.sh
+	
+19) Add the following lines:
+
+	#!/data/data/com.termux/files/usr/bin/sh
+	termux-wake-lock
+	tcptool.sh
+	
+20) Save the script file by pressing the following key or key combinations:
+
+	CTRL + x
+	Y
+	Enter
+	
+21) By means of Bluetooth (or USB), copy to the Android device the system files
 (startup / shutdown scripts, web application deployment .war file, a backup of 
 soberano db backup in tar format, ldif files to import in apacheds):
 
-	termux-startup.sh
-	termux-shutdown.sh
+	tcptool.sh
+	tcptool-shutdown.sh
 	tcptool.war
-	soberanodb.tar.backup
+	soberanodb-v2.0.1.tar
 	
 	pwdpolicies.ldif
 	soberano.user.top.ldif
 	
-10) Assuming the above files were copied to Android device's Downloads folder,
-execute the following commands:
+22) Assuming the above files were copied to Android device's Downloads folder,
+execute the following commands to copy them to storage space managed by Termux:
 	
-	cp $HOME/storage/downloads/termux-startup.sh $HOME
-	cp $HOME/storage/downloads/termux-shutdown.sh $HOME
-	cp $HOME/storage/downloads/soberano.war $HOME
-	cp $HOME/storage/downloads/soberanodb.tar.backup $HOME
+	cp ~/storage/emulated/0/download/tcptool.sh $HOME
+	cp ~/storage/emulated/0/download/tcptool-shutdown.sh $HOME
+	cp ~/storage/emulated/0/download/tcptool.war $HOME
+	cp ~/storage/emulated/0/download/soberanodb-v2.0.1.tar $HOME
 	
-	cp $HOME/storage/downloads/pwdpolicies.ldif $HOME
-	cp $HOME/storage/downloads/soberano.user.top.ldif $HOME
+	cp ~/storage/emulated/0/download/pwdpolicies.ldif $HOME
+	cp ~/storage/emulated/0/download/soberano.user.top.ldif $HOME
 	
-11) Move some of the above files to their final location within the termux instance:
+	IT COULD BE REPLACED "emulated/0/download" BY "downloads"
+	
+23) Move some of the above files to their final location within the Termux instance:
 
-	mv termux-startup.sh /data/data/com.termux/files/usr/bin
-	mv termux-shutdown.sh /data/data/com.termux/files/usr/bin
-	mv soberano.war /data/data/com.termux/files/usr/opt/tomcat9/webapps/soberano.war
+	mv tcptool.sh /data/data/com.termux/files/usr/bin
+	mv tcptool-shutdown.sh /data/data/com.termux/files/usr/bin
+	mv tcptool.war /data/data/com.termux/files/usr/opt/tomcat11/webapps/tcptool.war
 	
-12) Make the scripts executables:
+24) Make the scripts executables:
 
-	chmod +x ../usr/bin/termux-startup.sh
-	chmod +x ../usr/bin/termux-shutdown.sh
+	chmod +x /data/data/com.termux/files/usr/bin/tcptool.sh
+	chmod +x /data/data/com.termux/files/usr/bin/tcptool-shutdown.sh
 	
-13) In this point, apacheds, tomcat and postgresql services can be started up and 
-	stopped by executing the respective commands termux-startup.sh and termux-shutdown.sh
+	In this point, apacheds, tomcat and postgresql services can be started up and 
+	stopped by executing the respective commands tcptool.sh and tcptool-shutdown.sh.
 	
-14) Enable postgresql to listen on the desired TCP/IP addresses. This is done by setting 
+25) Edit postgresql.conf by means of the command
+
+	nano postgresql_data/ṕostgresql.conf
+	
+25.1) Enable postgresql to listen on the desired TCP/IP addresses. This is done by setting 
 	listen_addresses parameter in file postgresql.conf. For example,
 	
 	listen_addresses = '*'
 	
-14.1) In file postgresql.conf, set isolation level to 'serializable'.
+25.2) In file postgresql.conf, set isolation level to 'serializable'.
+
+25.3) In file postgresql.conf, set proper timezone.
 	
-15) Enable connections from local host, by a proper database user (login role). This
+26) Enable connections from local host, by a proper database user (login role). This
 	is done by adding lines to pg_hba.conf file. For example:
 	
-	host all soberano.user.top 127.0.0.1/32 trust
-	host all postgres 127.0.0.1/32 trust
+	host all all 127.0.0.1/32 md5
 	
-16) Restore the soberano database:
+27) Start the services:
 
-	pg_restore soberanodb.tar.backup --dbname soberano -e -v -1 -W
+	tcptool.sh
 	
-17) Restart the services:
+28)	Restore the soberano database:
+
+	pg_restore soberanodb-v2.0.1.tar --dbname soberano -e -v -1 -W
 	
-	termux-shutdown.sh
-	termux-startup.sh
-		
-18) Import the ldif files in the apacheds instance. For example:
+29) Import the ldif files in the apacheds instance. For example:
 
 	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -a -f soberano.user.top.ldif
 	ldapmodify -H ldap://localhost:10389 -D "uid=admin,ou=system" -w secret -f pwdpolicies.ldif
 	
-19) In the mobile device, enable LAN capabilities. This can be done by Wifi portable hotspot,
+30) In the mobile device, enable LAN capabilities. This can be done by Wifi portable hotspot,
 	or USB/Bluetooth tethering.
 
-20) Restore an up-to-date soberano database. This can be done by means of PgAdmin.
+31) Restore an up-to-date soberano database. This can be done by means of PgAdmin, provided a proper line is included
+	in pg_hba.conf file, granting access to the server from the PgAdmin'host IP address. For example:
+	
+	host soberanodb all 192.168.0.168/32 md5
 
-21) By means of Play Store, install RawBT print service version 5.70.2 or higher.
+32) By means of Play Store, install both RawBT print service and Server for RawBT applications.
+
+33) Grant both RawBT print service and Server for RawBT the required permissions according to their documentation:
+	storage, bluetooth, autostart, print service, never disable despite being unused or battery condition, and so forth.
   
-22) Enable RawBT web socket service, and application auto start. 
+34) In Server for RawBT application, WS API must run as a service.
 
-23) To avoid print jobs to stop in the middle, configure printers to start printing after last page is spooled
+35) In RawBT application's settings, enable Run as a print service option.
+
+Notes:
+
+a) For SSH, the port is 8022.
+b) In Termux, use command whoami for getting te user name, and passwd for setting that user's password.
+c) For connecting into Termux via SSH, use the command line: ssh <username>@<jjhost> -p8022
+d) The name of a printer to be accessed through web socket is ws://<ip address>:40213
+c) To avoid print jobs to stop in the middle, configure printers to start printing after last page is spooled
 	instead of start printing immediately (proper setting depends on the OS).
 
 
-		
 	
 		

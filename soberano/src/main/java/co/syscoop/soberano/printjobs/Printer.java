@@ -105,7 +105,7 @@ public class Printer {
 		
 		WSocketClient c = new WSocketClient(new URI(printerWS));
 		try {			
-			if (c.connectBlocking(1, TimeUnit.SECONDS)) {
+			if (c.connectBlocking(60, TimeUnit.SECONDS)) {
 				RawbtPrintJob printJob = new RawbtPrintJob();
 				
 				AttributesString attrStr = new AttributesString();
@@ -125,6 +125,10 @@ public class Printer {
 		        {
 		        	printJob.println(line);					
 		        }
+		        
+		        //cut
+		        printJob.println(new String(new char[] {0x1D, 0x56, 0x41, 0x10}));
+		        
 		        c.send(printJob.GSON());
 			}
 			else {

@@ -1,3 +1,5 @@
+#!/data/data/com.termux/files/usr/bin/sh
+
 /data/data/com.termux/files/usr/opt/apacheds/bin/apacheds.sh default start
 
 /data/data/com.termux/files/usr/opt/tomcat11/bin/startup.sh

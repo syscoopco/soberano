@@ -1,7 +1,7 @@
 v2.0.2 candidate
 
-New: 
+New: Added auto cutting when printing through web socket.
 
-Fix: 
+Fix: Instructions for deploying TCP TOOL under Termux was refined.
 
 User manual: 
