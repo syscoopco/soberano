@@ -4,9 +4,13 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Configuration extends BusinessActivityTrackedObject {
 	
@@ -94,6 +98,15 @@ public class Configuration extends BusinessActivityTrackedObject {
 		
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
+	}
+	
+	public Integer cleanData() throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Business_clean\"(:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
 	@Override

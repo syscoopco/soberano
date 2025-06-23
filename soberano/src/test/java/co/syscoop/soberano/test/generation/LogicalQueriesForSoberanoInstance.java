@@ -652,12 +652,13 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "		(18, 'Reopener'),\n"
 						+ "		(19, 'Workshop 3 worker'),\n"
 						+ "		(20, 'Workshop 4 worker'),\n"
-						+ "		(21, 'Workshop 5 worker');",
+						+ "		(21, 'Workshop 5 worker'),\n"
+						+ "		(22, 'Owner');",
 						
 						
 												
 						"--assign top user to all responsibilities\n"
-						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, 19, 20, 21], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
+						+ "SELECT \"metamodel\".\"fn_User_assignToResponsibilities\"(1, ARRAY[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18, 19, 20, 21, 22], ARRAY[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]);",
 						
 							
 												
@@ -940,6 +941,84 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 								+ "    ON soberano.\"Configuration\" USING btree\n"
 								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
 								+ "    TABLESPACE pg_default;",
+								
+								
+								
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Business_clean\"(\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		qryResult integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		qryResult := -1;		\n"
+						+ "		\n"
+						+ "		--it's an owner\n"
+						+ "		IF 'Owner' IN (SELECT * from metamodel.\"fn_User_getResponsibilities\"(loginname)) THEN\n"
+						+ "\n"
+						+ "			--orders\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"Order\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--stock change records\n"
+						+ "			DELETE FROM soberano.\"StockChange\";\n"
+						+ "\n"
+						+ "			--deposits\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"Deposit\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--withdrawals\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"Withdrawal\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--cash register balancing\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"Balancing\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--inventory operations\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"InventoryOperation\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--production records\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"ProcessRun\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--material expenses\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"MaterialExpense\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--payroll expenses\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"PayrollExpense\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--service expenses\n"
+						+ "			DELETE FROM metamodel.\"EntityTypeInstance\" eti\n"
+						+ "				USING soberano.\"ServiceExpense\" ord\n"
+						+ "				WHERE ord.\"This_is_identified_by_EntityTypeInstance_id\" = eti.\"EntityTypeInstanceHasEntityTypeInstanceId\";\n"
+						+ "\n"
+						+ "			--balances on shift closures\n"
+						+ "			DELETE FROM soberano.\"ShiftClosureRecordsBalanceInCurrency\";\n"
+						+ "\n"
+						+ "			qryResult := 0;\n"
+						+ "		\n"
+						+ "		ELSE\n"
+						+ "			qryResult := -1;\n"
+						+ "		END IF;\n"
+						+ "		RETURN qryResult;\n"
+						+ "END;\n"
+						+ "$BODY$;",
 						
 						
 						

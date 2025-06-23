@@ -8,5 +8,6 @@
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<include id="incDetails" src="/other_details.zul" visible="true"></include>	
 	</window>
+	<button id="btnClean" self="@define(decisionButton)" label="${labels.caption.action.cleanData}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.CleanDataButtonComposer"></button>
 	<button id="btnApply" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ModifyOtherConfigurationButtonComposer"></button>
 </zk>

@@ -1,13 +1,9 @@
-v2.0.2
+v2.0.3 candidate
 
-New: Added auto cutting when printing through web socket.
+New: A full cleaning feature of system state (business data and history) is added. Besides business 
+	configuration, the only data kept is the quantity and value of items stored in warehouses and 
+	cash register balances. 
 
-Fix: Instructions for deploying TCP TOOL under Termux was refined.
+Fix: 
 
-User manual: Cambios respecto a la revisión anterior:
-				1) pag. 16: El administrador puede cancelar depósitos y retiros de caja.
-				2) pag. 53: Adición de párrafo “Pueden cancelarse (deshacerse) los depósitos y retiros …”.
-				3) pág. 59: Se precisa que un día puede abrirse hasta la hora de inicio de turno del día siguiente.
-				4) pag. 64: Se adiciona el epígrafe Exportar a un fichero csv contenido del informe de un cierre.
-				5) pag. 134: Se explican los botones para revisar una secuencia de pedidos: “Los botones decorados con “-” y “+” …”.
-				6) pag. 144: Se adiciona el epígrafe Formulario de un pedido para dispositivos de pequeño formato.
+User manual: 
