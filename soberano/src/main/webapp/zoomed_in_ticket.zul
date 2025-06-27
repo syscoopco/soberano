@@ -1,0 +1,6 @@
+<?page title="" contentType="text/html;charset=UTF-8"?>
+<zk>
+	<window id="wndZoomedInTicket" width="100%" height="100%" contentStyle="overflow:auto" closable="true" title="" mode="modal">
+		<textbox hflex="1" vflex="1" id="txtZoomedInTicket" multiline="true" readonly="true" style="font-family: courier; font-weight: bold;"/>
+	</window>
+</zk>

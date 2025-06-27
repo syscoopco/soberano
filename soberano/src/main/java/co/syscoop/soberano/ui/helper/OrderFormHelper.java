@@ -300,6 +300,13 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		boxOi.setId("cellOrderItemProcessRun" + oi.getProcessRunId());
 		cellOi.appendChild(vboxOi);
 		rowOi.appendChild(cellOi);
+		
+		//the user created the order item's process run is distinct to the current logged user
+		if (oi.getWorkerLoginName() != null && 
+			!oi.getWorkerLoginName().equals("") &&
+			!SpringUtility.loggedUser().toLowerCase().equals(oi.getWorkerLoginName())) {
+			cellOi.setStyle("background-color:" + oi.getWorkerColor() + ";");
+		}
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -323,6 +330,15 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			btnCancel.setClass("ContextualButton");
 			tc.appendChild(new Separator("vertical"));
 			tc.appendChild(btnCancel);
+			
+			//the user created the order item's process run is distinct to the current logged user
+			if (oi.getWorkerLoginName() != null && 
+				!oi.getWorkerLoginName().equals("") &&
+				!SpringUtility.loggedUser().toLowerCase().equals(oi.getWorkerLoginName())) {
+				tc.appendChild(new Separator("vertical"));
+				tc.appendChild(new Label(oi.getWorkerLoginName()));
+			}
+			
 			tr.appendChild(tc);
 			
 			btnCancel.addEventListener("onClick", new EventListener() {

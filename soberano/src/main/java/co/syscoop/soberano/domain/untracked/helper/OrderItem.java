@@ -17,6 +17,8 @@ public class OrderItem {
 	private String currency;
 	private BigDecimal oneRunQuantity = new BigDecimal(0);
 	private Integer thisIsAnAdditionOf = null;
+	private String workerColor = "";
+	private String workerLoginName = "";
 	
 	public Integer getProcessRunId() {
 		return processRunId;
@@ -120,5 +122,21 @@ public class OrderItem {
 
 	public void setThisIsAnAdditionOf(Integer thisIsAnAdditionOf) {
 		this.thisIsAnAdditionOf = thisIsAnAdditionOf;
+	}
+
+	public String getWorkerColor() {
+		return workerColor;
+	}
+
+	public void setWorkerColor(String workerColor) {
+		this.workerColor = workerColor;
+	}
+
+	public String getWorkerLoginName() {
+		return workerLoginName;
+	}
+
+	public void setWorkerLoginName(String workerLoginName) {
+		this.workerLoginName = workerLoginName;
 	}
 }

@@ -233,6 +233,10 @@ public class Order extends BusinessActivityTrackedObject {
 	        	orderItem.setDiscountedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("discountedRuns"));
 	        	orderItem.setEndedRuns(processRunId == 0 ? new BigDecimal(0) : rs.getBigDecimal("endedRuns"));	
 	        	orderItem.setCurrency(processRunId == 0 ? "" : rs.getString("currency"));
+	        	
+	        	orderItem.setWorkerColor(processRunId == 0 ? "" : rs.getString("workerColor"));
+	        	orderItem.setWorkerLoginName(processRunId == 0 ? "" : rs.getString("workerLoginName"));
+	        	
 	        	orderItem.setThisIsAnAdditionOf(rs.getInt("thisIsAnAdditionOf"));
 	        	if (rs.getInt("thisIsAnAdditionOf") > 0) {order.getAdditions().add(orderItem);} 
 	        	

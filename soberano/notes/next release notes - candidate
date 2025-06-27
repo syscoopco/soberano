@@ -1,8 +1,15 @@
-v2.0.3 candidate
+v2.0.3
+
+New: Now, in the order form for desktop, when double clicking ticket text box, it's zoomed-in within 
+	a modal window.
+	
+New: In an order's dash board (form), items ordered by a user other than the current logged user are colored
+	with a color identifying the creating user. For the case of additions, the creating user is identified by
+	its login name.
 
 New: A full cleaning feature of system state (business data and history) is added. Besides business 
-	configuration, the only data kept is the quantity and value of items stored in warehouses and 
-	cash register balances. 
+	configuration, the only data kept is the quantity and value of items stored in warehouses, 
+	cash register balances, and customers. 
 
 Fix: 
 

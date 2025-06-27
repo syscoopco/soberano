@@ -120,7 +120,7 @@
 					</borderlayout>
 					<borderlayout width="300px" vflex="1">
 						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
-							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto">
+							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto" apply="co.syscoop.soberano.composers.TicketTextboxComposer">
 								<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
 							</window>
 						</center>	
