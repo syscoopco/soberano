@@ -1,7 +1,21 @@
 v2.0.4 candidate
 
-New: Shift closure general report, full report, cash register report, and cost center report queries were updated.
+New: Shift closure general report, full report, cash register report, and cost center report queries were updated (simplified).
 
-Fix: 
+Fix: In shift closure reports, sales amounts didn't take into account surcharges. This was corrected.
+
+Fix: Subprocesses were shown in shift closure reports. Corrected.
+
+Fix: Errors in functions soberano."fn_Order_make"(orderid integer, itemid integer, description character varying, runs numeric, loginname character varying),
+		and soberano."fn_Order_changeDeliveryProvider"(orderid integer, providerid integer, loginname character varying),
+		caused bad calculation and presentation in tickets of reseller compensated prices. The right statement was:
+	
+	--set compensated prices
+	UPDATE soberano."ProcessRunOutputHasPriceForOrder"
+
+		SET "Price" = "Price" * (100  + deliveryProviderRate) / 100
+			WHERE "ProcessRunHasProcessRunId" = processRunId;
+			
+	Other corrections in ticket soberano."fn_Order_getTicket"(orderid integer, receivedamount numeric, change numeric, lang character, loginname character varying)
 
 User manual: 
