@@ -13,6 +13,8 @@
 		<commons-lang3>3.17.0</commons-lang3>
 		<cups4j>0.7.9</cups4j>
 		<escpos-coffee>4.1.0</escpos-coffee>
+		<fastexcel>0.19.0</fastexcel>
+		<fastexcel-reader>0.19.0</fastexcel-reader>
 		<gson>2.10.1</gson>
 		<httpcore5>5.3.4</httpcore5>
 		<jakarta.servlet-api>6.1.0</jakarta.servlet-api>
@@ -24,10 +26,13 @@
 		<java-websocket>1.5.6</java-websocket>
 		<jersey>3.1.10</jersey>
 		<junit>5.9.0</junit>
+		<jxls-jexcel>1.0.9</jxls-jexcel>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
 		<pdfbox>2.0.13</pdfbox>
 		<pdfbox-tools>2.0.13</pdfbox-tools>
+		<poi>5.4.1</poi>
+		<poi-ooxml>5.4.1</poi-ooxml>
 		<postgresql>42.4.2</postgresql>
 		<slf4j.version>2.0.0</slf4j.version>
 		<spring-dao>2.0.8</spring-dao>
@@ -37,7 +42,7 @@
 		<tomcat>11.0.7</tomcat>
 		<zats-mimic>10.0.0-jakarta</zats-mimic>
 		<zk.version>9.6.0.2</zk.version>
-		<zkee.version>10.1.0</zkee.version>
+		<zkee.version>10.2.1</zkee.version>
 	</properties>
 	<packaging>war</packaging>
 	<name>The Soberano Project</name>
@@ -115,7 +120,34 @@
 		    <groupId>commons-fileupload</groupId>
 		    <artifactId>commons-fileupload</artifactId>
 		    <version>${commons-fileupload}</version>
-		</dependency>				
+		</dependency>
+		
+		<!-- Apache POI dependencies-->
+		<dependency>
+		    <groupId>org.apache.poi</groupId>
+		    <artifactId>poi</artifactId>
+			<version>${poi}</version> 
+		</dependency> 
+		<dependency> 
+		  	<groupId>org.apache.poi</groupId> 
+		  	<artifactId>poi-ooxml</artifactId> 
+		  	<version>${poi-ooxml}</version> 
+		</dependency>
+		<dependency>
+		  	<groupId>org.jxls</groupId>
+		  	<artifactId>jxls-jexcel</artifactId>
+		  	<version>${jxls-jexcel}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.dhatim</groupId>
+		    <artifactId>fastexcel-reader</artifactId>
+		    <version>${fastexcel-reader}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.dhatim</groupId>
+		    <artifactId>fastexcel</artifactId>
+		    <version>${fastexcel}</version>
+		</dependency>
 		
 		<!-- CGLIB dependencies -->
 		<dependency>

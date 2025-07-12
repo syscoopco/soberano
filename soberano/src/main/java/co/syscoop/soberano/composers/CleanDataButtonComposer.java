@@ -80,6 +80,12 @@ public class CleanDataButtonComposer extends SelectorComposer {
 				file = new File(dirFullPath);
 				FileUtils.cleanDirectory(file);
 				
+				//export
+				dirFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
+						"records/export/";
+				file = new File(dirFullPath);
+				FileUtils.cleanDirectory(file);
+				
 				//inventory_operations
 				dirFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 						"records/inventory_operations/";

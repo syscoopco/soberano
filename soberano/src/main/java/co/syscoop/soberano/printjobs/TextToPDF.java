@@ -22,7 +22,7 @@ public class TextToPDF extends org.apache.pdfbox.tools.TextToPDF {
         return doc;
     }
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "resource" })
 	public void createPDFFromText(PDDocument doc, Reader text, PDRectangle mediaBox, final int margin) throws IOException
     {
         try

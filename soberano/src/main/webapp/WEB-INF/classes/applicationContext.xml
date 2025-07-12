@@ -343,5 +343,9 @@
  	<!-- printer profile beans -->
  	<bean name="facturalanuevaprinterprofile" class="co.syscoop.soberano.beans.FacturaLaNuevaPrinterProfile">
  	</bean>
- 	 	
+ 	
+ 	<!-- export beans -->
+ 	<bean name="exportfromshiftclosuresbean" class="co.syscoop.soberano.beans.ExportFromShiftClosuresBean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
 </beans>

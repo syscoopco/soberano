@@ -43,5 +43,8 @@
 	</hbox>
 	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintShiftClosureReportButtonComposer"></button>
-	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportShiftClosureReportButtonComposer"></button>
+	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportShiftClosureReportButtonComposer">
+		<custom-attributes arg0="exportfromshiftclosuresbean"/>
+		<custom-attributes arg1="xlsx"/>
+	</button>
 </zk>

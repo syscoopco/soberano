@@ -13,7 +13,6 @@ import org.zkoss.util.Locales;
 import co.syscoop.soberano.database.relational.PrintableDataMapper;
 import co.syscoop.soberano.database.relational.QueryBigDecimalResultMapper;
 import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
-import co.syscoop.soberano.database.relational.QueryStringResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.ShiftHasBeenClosedException;
@@ -272,18 +271,6 @@ public class ShiftClosure extends BusinessActivityTrackedObject {
 		qryParameters.put("closureId", this.getId());
 		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return (PrintableData) super.query(query, qryParameters, new PrintableDataMapper()).get(0);
-	}
-	
-	public String getCostCenterReportToCsv(String costCenterName) throws SQLException {
-		
-		//it must be passed loginname. output alias must be queryresult. both in lower case.
-		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_costCenterReportToCsv\"(:lang, :closureId, :costCenterName, :loginname) AS queryresult";
-		Map<String, Object> qryParameters = new HashMap<String,	Object>();
-		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
-		qryParameters.put("closureId", this.getId());
-		qryParameters.put("costCenterName", costCenterName);
-		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
-		return (String) super.query(query, qryParameters, new QueryStringResultMapper()).get(0);
 	}
 	
 	public PrintableData getCostCenterReportWithPrinterProfile(String costCenterName) throws SQLException {
