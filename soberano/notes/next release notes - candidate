@@ -1,29 +1,35 @@
-v2.0.4 candidate
+v2.0.4 release
+
 New: Migration to ZK Framework 10.2.1.
 
-New: Shift closure general report, full report, cash register report, and cost center report queries were updated (simplified).
+New: Shift closure general / full / cash register / and cost center report printed outputs are simplified.
 
-New: Report exporting is externalized by means of zul component custom attributes (for report parameters) and spring beans for 
-	retrieving data from database, and creating files in the target format (csv, xls, ...).
+New: Report exporting is externalized by means of zul component custom attributes, for static report parameters, 
+	and spring beans, for retrieving data from database and creating files in the target format (csv, xlsx, ...).
+	Dynamic parameters, like date ranges, depend on the form (page) from the report is requested.
 
-Fix: In shift closure reports, sales amounts didn't take into account surcharges. This was corrected.
+Fix: In some shift closure reports, sales amounts didn't take into account surcharges. This was corrected.
 
-Fix: Subprocesses were shown in shift closure reports. Corrected.
+Fix: Subprocesses were shown in some shift closure reports. Corrected.
 
-Fix: Errors in functions soberano."fn_Order_make"(orderid integer, itemid integer, description character varying, runs numeric, loginname character varying),
-		and soberano."fn_Order_changeDeliveryProvider"(orderid integer, providerid integer, loginname character varying),
+Fix: Errors related to reseller price compensation were fixed in the following functions:
+
+		FUNCTION soberano."fn_Order_make"(orderid integer, itemid integer, description character varying, 
+								runs numeric, loginname character varying),
+		
+		FUNCTION soberano."fn_Order_changeDeliveryProvider"(orderid integer, providerid integer, 
+							loginname character varying),
 		caused bad calculation and presentation in tickets of reseller compensated prices. The right statement was:
 	
-	--set compensated prices
-	UPDATE soberano."ProcessRunOutputHasPriceForOrder"
-
-		SET "Price" = "Price" * (100  + deliveryProviderRate) / 100
-			WHERE "ProcessRunHasProcessRunId" = processRunId;
+	Right query fragment: UPDATE soberano."ProcessRunOutputHasPriceForOrder"
+							SET "Price" = "Price" * (100  + deliveryProviderRate) / 100
+								WHERE ...
 			
-	Other corrections in ticket soberano."fn_Order_getTicket"(orderid integer, receivedamount numeric, change numeric, lang character, loginname character varying)
+	Correction in FUNCTION soberano."fn_Order_getTicket"(orderid integer, receivedamount numeric, change numeric, 
+														lang character, loginname character varying)
 	
-	For example, when price compensation (due to resellers) is enabled, the shown delivery fee is based on the list prices (before compensation). That's
-	the money to be given to the reseller, as commission over these prices (before applying compensation).
+	When reseller price compensation is enabled, the shown delivery fee must be based on the list prices (before 
+	compensation). That's the money to be given to the reseller, as commission over those prices.
 
 User manual: 
 

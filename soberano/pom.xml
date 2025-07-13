@@ -25,7 +25,8 @@
 		<javax-ws-rs>2.1.1</javax-ws-rs>
 		<java-websocket>1.5.6</java-websocket>
 		<jersey>3.1.10</jersey>
-		<junit>5.9.0</junit>
+		<junit>5.13.3</junit>
+		<junitlauncher>1.13.3</junitlauncher>
 		<jxls-jexcel>1.0.9</jxls-jexcel>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
@@ -250,6 +251,18 @@
 		    <version>${junit}</version>
 		    <scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+		  	<artifactId>junit-jupiter-api</artifactId>
+		  	<version>${junit}</version>
+		  	<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-launcher</artifactId>
+			<version>${junitlauncher}</version>
+			<scope>test</scope>
+		</dependency>	
 		
 		<!-- PostgreSQL dependencies -->
 		<dependency>
