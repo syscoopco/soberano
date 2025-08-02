@@ -1,35 +1,31 @@
-v2.0.4 release
+v2.0.5 release candidate
 
-New: Migration to ZK Framework 10.2.1.
-
-New: Shift closure general / full / cash register / and cost center report printed outputs are simplified.
-
-New: Report exporting is externalized by means of zul component custom attributes, for static report parameters, 
-	and spring beans, for retrieving data from database and creating files in the target format (csv, xlsx, ...).
-	Dynamic parameters, like date ranges, depend on the form (page) from the report is requested.
-
-Fix: In some shift closure reports, sales amounts didn't take into account surcharges. This was corrected.
-
-Fix: Subprocesses were shown in some shift closure reports. Corrected.
-
-Fix: Errors related to reseller price compensation were fixed in the following functions:
-
-		FUNCTION soberano."fn_Order_make"(orderid integer, itemid integer, description character varying, 
-								runs numeric, loginname character varying),
-		
-		FUNCTION soberano."fn_Order_changeDeliveryProvider"(orderid integer, providerid integer, 
-							loginname character varying),
-		caused bad calculation and presentation in tickets of reseller compensated prices. The right statement was:
+New: CREATE OR REPLACE FUNCTION soberano."z-fn_Helper_closeAllClosedOrderProcessRuns"()
 	
-	Right query fragment: UPDATE soberano."ProcessRunOutputHasPriceForOrder"
-							SET "Price" = "Price" * (100  + deliveryProviderRate) / 100
-								WHERE ...
-			
-	Correction in FUNCTION soberano."fn_Order_getTicket"(orderid integer, receivedamount numeric, change numeric, 
-														lang character, loginname character varying)
+	This function closes all the process runs of closed orders. It could be used as part of an
+	optimization where this function would be called from a periodic job (crontab or another one). 
+	The rationale is closing runs upon collecting orders could be very slow (depending on the computer)
+	due to inventory calculation an recalculation. So, a possibility
+	is to disable this (by commenting these two lines
 	
-	When reseller price compensation is enabled, the shown delivery fee must be based on the list prices (before 
-	compensation). That's the money to be given to the reseller, as commission over those prices.
+	PERFORM soberano."fn_Order_closeProcessRuns"(orderid, loginname) FROM
+	soberano."Configuration" WHERE "This_has_UpdateInventoryOnOrderClosing";
+	
+	in the body of FUNCTION soberano."fn_Order_collect"(cashregister integer,
+											orderid integer,
+											lang character,
+											currencies integer[],
+											amounts numeric[],
+											tip numeric,
+											notes character varying,
+											customer integer,
+											loginname character varying))
+
+Fix: A target file's name resulting of shift closure exporting now contains that closure shift date.
+
+Fix: Database function fn_ShiftClosure_getFullReport
+
+Fix: Database function fn_ShiftClosure_getReport
 
 User manual: 
 

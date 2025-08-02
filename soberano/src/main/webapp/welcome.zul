@@ -38,7 +38,7 @@
 						</vbox>
 		      		</row>
 		      		<row align="center">
-		      			<a label="v2.0.4 - Edición El Cotorro" href="https://github.com/syscoopco/soberano/releases"></a>
+		      			<a label="v2.0.5beta - Edición El Cotorro" href="https://github.com/syscoopco/soberano/releases"></a>
 		      		</row>
 		      		<row align="center">
 		      			<a label="${labels.pageWelcome.note2}" href="https://github.com/syscoopco/soberano/issues/"></a>

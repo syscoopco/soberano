@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -110,7 +111,9 @@ public class ExportFromShiftClosuresBean extends ExportBean implements IExportTo
 	        	rowCount++;
 		    }
 			
-			String xlsFileName = "cost_center_" + (costCenterName.equals("")?"":costCenterName.replace(" ", "")) + "_" + shiftClosureId.toString() + "." + format;
+			Date shiftClosureDate = (Date) runGetShiftClosureDateDBQuery(shiftClosureId);
+			
+			String xlsFileName = "cost_center_" + (costCenterName.equals("")?"":costCenterName.replace(" ", "")) + "_" + shiftClosureDate.toString() + "." + format;
 			String filePath = "/records/export/" + xlsFileName;
 			String fileFullPath = relativePath + "records/export/" + xlsFileName;
 			
@@ -139,6 +142,16 @@ public class ExportFromShiftClosuresBean extends ExportBean implements IExportTo
 			wbd.wb = workbook;
 			
 			return wbd;
+		}
+	}
+	
+	private final class ShiftClosureDateExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Date extractData(ResultSet rs) throws SQLException {
+			
+			rs.next();
+			return rs.getDate("shift");
 		}
 	}
 	
@@ -184,6 +197,14 @@ public class ExportFromShiftClosuresBean extends ExportBean implements IExportTo
 		qryParameters.put("costCenterName", costCenterName);
 		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
 		return super.query(query, qryParameters, new ExportCostCenterReportToXLSExtractor());
+	}
+	
+	private Object runGetShiftClosureDateDBQuery(Integer shiftClosureId) throws SQLException {
+		
+		String query = "SELECT * FROM soberano.\"fn_ShiftClosure_getTimes\"(:closureId) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("closureId", shiftClosureId);
+		return super.query(query, qryParameters, new ShiftClosureDateExtractor());
 	}
 	
 	private void getCostCenterReportToXlsx(Integer shiftClosureId, String costCenterName) throws SQLException, IOException {
