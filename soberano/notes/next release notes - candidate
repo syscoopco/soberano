@@ -1,5 +1,7 @@
 v2.0.5 release candidate
 
+New: Externalization of custom reports. Corresponding links were added to menu bar.
+
 New: CREATE OR REPLACE FUNCTION soberano."z-fn_Helper_closeAllClosedOrderProcessRuns"()
 	
 	This function closes all the process runs of closed orders. It could be used as part of an
@@ -26,6 +28,27 @@ Fix: A target file's name resulting of shift closure exporting now contains that
 Fix: Database function fn_ShiftClosure_getFullReport
 
 Fix: Database function fn_ShiftClosure_getReport
+
+Fix: In comboboxes to add items to an order, the height of comboitems were set to 20px for proper visualization
+	in responsive mode.
+	
+Fix: In new_order.zul, the sizes of customer comboitems were set to 20px for proper visualization
+	in responsive mode.
+	
+Fix: These zk style classes were override, for proper visualization of comboboxes to add items to an order in
+	responsive mode:
+	
+		.undefined {
+			transform: translate(0px, 0px) !important;
+		}
+		
+		.z-combobox-content {
+			height: auto !important;
+		}
+		
+		div[id*="cave2"] {
+			height: auto !important;
+		}
 
 User manual: 
 

@@ -11,7 +11,7 @@ public class PropObf extends SimpleStringPBEConfig {
 		super.setAlgorithm("PBEWithMD5AndDES");		
 		String obfPassword = System.getenv("SOB_OBF");
 		
-		//TODO: change Soberano instance default the password
+		//TODO: change Soberano instance default password
 		super.setPassword(obfPassword != null ? obfPassword : "Ucymp_91G6*=R");
 		RandomSaltGenerator saltGenerator = new RandomSaltGenerator();
 		super.setSaltGenerator(saltGenerator);		

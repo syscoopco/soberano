@@ -31,6 +31,15 @@
 								<menuitem label="${labels.menuItem.Collection}" href="delivery_provider_collection_report.zul"/>
 							</menupopup>
 						</menu>
+						<menu label="${labels.menuItem.CustomReports}" sclass="BarMenu">
+							<menupopup>
+								<menuitem label="${labels.menuItem.CustomReport1}" href="customreport1.zul"/>
+								<menuitem label="${labels.menuItem.CustomReport2}" href="customreport2.zul"/>
+								<menuitem label="${labels.menuItem.CustomReport3}" href="customreport3.zul"/>
+								<menuitem label="${labels.menuItem.CustomReport4}" href="customreport4.zul"/>
+								<menuitem label="${labels.menuItem.CustomReport5}" href="customreport5.zul"/>
+							</menupopup>
+						</menu>
 					</menupopup>
 				</menu>
 				<menuitem label="${labels.menuItem.Receivables}" href="receivables.zul"/>													

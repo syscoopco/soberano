@@ -1,6 +1,7 @@
 package co.syscoop.soberano.beans;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,10 @@ public class ExportBean {
 	private HashMap<String, Object> parameters;
 	
 	private DaoBase dao = null;
+	
+	private Date from = null;
+	
+	private Date until = null;
 	
 	public ExportBean(SoberanoDatasource soberanoDatasource) {
 		dao = new DaoBase(soberanoDatasource.getDataSource());
@@ -34,5 +39,21 @@ public class ExportBean {
 
 	public void setParameters(HashMap<String, Object> parameters) {
 		this.parameters = parameters;
+	}
+
+	public Date getFrom() {
+		return from;
+	}
+
+	public void setFrom(Date from) {
+		this.from = from;
+	}
+
+	public Date getUntil() {
+		return until;
+	}
+
+	public void setUntil(Date until) {
+		this.until = until;
 	}
 }

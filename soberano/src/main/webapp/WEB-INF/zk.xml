@@ -39,7 +39,9 @@
 	<!-- cache. true for production -->
 	<library-property>
 		<name>cache</name>
-		<value>true</value>
+		
+		<!-- TODO: set to true in production -->
+		<value>false</value>
 	</library-property>
   	  	  	
   	<!-- encoding of the label properties files -->

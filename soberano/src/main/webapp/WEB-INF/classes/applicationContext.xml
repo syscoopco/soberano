@@ -348,4 +348,20 @@
  	<bean name="exportfromshiftclosuresbean" class="co.syscoop.soberano.beans.ExportFromShiftClosuresBean">
  		<constructor-arg ref="soberanoDatasource"/>
  	</bean>
+ 	
+ 	<bean name="exportcustomreport1bean" class="co.syscoop.soberano.beans.ExportCustomReport1Bean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
+ 	<bean name="exportcustomreport2bean" class="co.syscoop.soberano.beans.ExportCustomReport2Bean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
+ 	<bean name="exportcustomreport3bean" class="co.syscoop.soberano.beans.ExportCustomReport3Bean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
+ 	<bean name="exportcustomreport4bean" class="co.syscoop.soberano.beans.ExportCustomReport4Bean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
+ 	<bean name="exportcustomreport5bean" class="co.syscoop.soberano.beans.ExportCustomReport5Bean">
+ 		<constructor-arg ref="soberanoDatasource"/>
+ 	</bean>
 </beans>

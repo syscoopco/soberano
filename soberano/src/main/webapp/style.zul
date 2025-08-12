@@ -180,7 +180,20 @@
 		    height: 100%;
 		    background: url('./images/dropdownarrow.png') no-repeat;
 		    background-size: contain;
-*/
 		}
+*/
+
+		.undefined {
+			transform: translate(0px, 0px) !important;
+		}
+		
+		.z-combobox-content {
+			height: auto !important;
+		}
+		
+		div[id*="cave2"] {
+			height: auto !important;
+		}
+
 	</style>
 </zk>

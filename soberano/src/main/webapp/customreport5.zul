@@ -1,0 +1,27 @@
+<?page title="${labels.customReport5.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.customReport5.WindowTitle}" sclass="PageTitle"/>
+	
+	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
+		<vbox vflex="1" id="boxDetails" hflex="1">
+			<hbox vflex="1" hflex="1" align="center">
+				<label value="${labels.caption.field.From}" sclass="Caption"></label>
+				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd"/>
+				<separator></separator>
+				<label value="${labels.caption.field.Until}" sclass="Caption"></label>
+				<datebox id="dateUntil" buttonVisible="true" format="yyyy-MM-dd"/>
+				<separator></separator>
+				<separator></separator>
+				<button id="btnRetrieve" label="${labels.caption.action.retrieve}"></button>
+			</hbox>
+			<textbox id="txtReport" rows="50" multiline="true" width="100%" readonly="true" style="font-family: courier;"/>
+		</vbox>		
+	</window>
+	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton"></button>
+	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportCustomReportButtonComposer">
+		<custom-attributes arg0="exportcustomReport5bean"/>
+	</button>
+</zk>
