@@ -116,7 +116,7 @@ public class ExportCustomReport4Bean extends ExportBean implements IExportToFile
 			} 
 			catch(Exception ex) {};
 			
-			String xlsFileName = "custom_report_1_from_" + fromDateStr + "_to_" + untilDateStr + ".xls";
+			String xlsFileName = "custom_report_1_from_" + fromDateStr + "_to_" + untilDateStr + ".xlsx";
 			String filePath = "/records/export/" + xlsFileName;
 			String fileFullPath = relativePath + "records/export/" + xlsFileName;
 			

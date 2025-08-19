@@ -41,7 +41,7 @@
 		<name>cache</name>
 		
 		<!-- TODO: set to true in production -->
-		<value>false</value>
+		<value>true</value>
 	</library-property>
   	  	  	
   	<!-- encoding of the label properties files -->

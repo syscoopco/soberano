@@ -22,6 +22,16 @@ New: CREATE OR REPLACE FUNCTION soberano."z-fn_Helper_closeAllClosedOrderProcess
 											notes character varying,
 											customer integer,
 											loginname character varying))
+											
+New: CREATE TABLE IF NOT EXISTS metamodel."Vote_history". This table is for periodically backing up table 
+	metamodel."Vote" aiming to keep it small for performance and, at the same time, preserve data for rule
+	enforcing, analysis, 	and reporting. Otherwise, metamodel."Vote" could  eventually became huge, 
+	depending on business activity.
+	
+New: CREATE TABLE IF NOT EXISTS soberano."StockChange_history". This table is for periodically backing up table 
+	soberano."StockChange" aiming to keep it small for performance and, at the same time, preserve data for rule 
+	enforcing, analysis, and reporting. Otherwise, metamodel."Vote" could  eventually became huge, depending on 
+	business activity.
 
 Fix: A target file's name resulting of shift closure exporting now contains that closure shift date.
 

@@ -1,13 +1,30 @@
+<!-- 
 <?page title="${labels.customReport1.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+ -->
+<?page title="Producción y ventas" contentType="text/html;charset=UTF-8"?>
+
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
 
 <zk>
 	<include src="/style.zul"/>
+	
+	<!-- 
 	<label self="@define(pageTitle)" value="${labels.customReport1.WindowTitle}" sclass="PageTitle"/>
+	 -->
+	<label self="@define(pageTitle)" value="Producción y ventas" sclass="PageTitle"/>
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<vbox vflex="1" id="boxDetails" hflex="1">
 			<hbox vflex="1" hflex="1" align="center">
+				<label value="${labels.caption.field.costCenter}" sclass="Caption"></label>
+				<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
+					<combobox id="cmbCostCenter" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.costCenter}" apply="co.syscoop.soberano.composers.ViewModelComposer">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)">
+							</comboitem>
+						</template>
+					</combobox>	
+				</hbox>
 				<label value="${labels.caption.field.From}" sclass="Caption"></label>
 				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd"/>
 				<separator></separator>
