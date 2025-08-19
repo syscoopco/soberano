@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -58,11 +59,11 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 		return (new SimpleDateFormat(formatStr)).format(date);
 	}
 	
-	private void setBordersToMergedCells(Sheet sheet, CellRangeAddress rangeAddress) {
-	    RegionUtil.setBorderTop(BorderStyle.MEDIUM, rangeAddress, sheet);
-	    RegionUtil.setBorderLeft(BorderStyle.MEDIUM, rangeAddress, sheet);
-	    RegionUtil.setBorderRight(BorderStyle.MEDIUM, rangeAddress, sheet);
-	    RegionUtil.setBorderBottom(BorderStyle.MEDIUM, rangeAddress, sheet);
+	private void setBordersToMergedCells(Sheet sheet, CellRangeAddress rangeAddress, BorderStyle borderStyle) {
+	    RegionUtil.setBorderTop(borderStyle, rangeAddress, sheet);
+	    RegionUtil.setBorderLeft(borderStyle, rangeAddress, sheet);
+	    RegionUtil.setBorderRight(borderStyle, rangeAddress, sheet);
+	    RegionUtil.setBorderBottom(borderStyle, rangeAddress, sheet);
 	}
 	
 	private void addDayHeaderCells(Date day, Sheet sheet, Row dayHeader, Row dayDetailsHeader, 
@@ -75,22 +76,22 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 		sheet.setColumnWidth(dayColumnIndex + 1, amountColumnWidth);
 		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, dayColumnIndex, dayColumnIndex + 1);
 		sheet.addMergedRegion(cellRangeAddress);
-		setBordersToMergedCells(sheet, cellRangeAddress);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = dayDetailsHeader.createCell(dayColumnIndex);
 		headerCell.setCellValue("Cantidad");
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(1, 1, dayColumnIndex, dayColumnIndex);
-		setBordersToMergedCells(sheet, cellRangeAddress);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		
 		headerCell = dayDetailsHeader.createCell(dayColumnIndex + 1);
 		headerCell.setCellValue("Importe");
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(1, 1, dayColumnIndex + 1, dayColumnIndex + 1);
-		setBordersToMergedCells(sheet, cellRangeAddress);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
-		
+			
 	private final class ExportCustomReportToXLSExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
@@ -128,19 +129,19 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 			headerCell.setCellValue("Producto");
 			headerCell.setCellStyle(headerStyle);
 			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, 1, 0, 0);
-			setBordersToMergedCells(sheet, cellRangeAddress);
+			setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 
 			headerCell = dayDetailsHeader.createCell(1);
 			headerCell.setCellValue("Cantidad");
 			headerCell.setCellStyle(headerStyle);
 			cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
-			setBordersToMergedCells(sheet, cellRangeAddress);
+			setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 			
 			headerCell = dayDetailsHeader.createCell(2);
 			headerCell.setCellValue("Importe");
 			headerCell.setCellStyle(headerStyle);
 			cellRangeAddress = new CellRangeAddress(1, 1, 2, 2);
-			setBordersToMergedCells(sheet, cellRangeAddress);		
+			setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);		
 			
 			Date day = new Date();			
 			int dayColumnIndex = 3;
@@ -170,19 +171,43 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 			CellStyle moneyStyle = workbook.createCellStyle();
 			moneyStyle.setWrapText(true);
 		    moneyStyle.setDataFormat((short)8);
+		    
+		    CellStyle totalStyle = workbook.createCellStyle();
+		    totalStyle.setWrapText(true);
+		    totalStyle.setDataFormat((short)8);
+		    XSSFFont totalFont = ((XSSFWorkbook) workbook).createFont();
+		    totalFont.setFontName("Arial");
+		    totalFont.setFontHeightInPoints((short) 10);
+		    totalFont.setBold(true);
+			totalStyle.setFont(totalFont);
 			
 			String category = "";
 			String product = "";
 			
-			HashMap<Integer, Double> dailyQuantities = new HashMap<Integer, Double>();
-			HashMap<Integer, Double> dailyAmountAmounts = new HashMap<Integer, Double>();
+			class DayRecord {
+				Double quantity = 0.0;
+				Double amount = 0.0;
+				int row = 0;
+				int column = 0;
+				public DayRecord(Double quantity, Double amount, int row, int column) {
+					this.quantity = quantity;
+					this.amount = amount;
+					this.row = row;
+					this.column = column;
+				}
+			};
 			
+			ArrayList<DayRecord> dayRecords = new ArrayList<DayRecord>();
+						
 			Double totalProducQuantity = 0.0;
 			Double totalProductAmount = 0.0;			
 			Double totalDayAmount = 0.0;
 			
 			Integer rowCount = 2;
 			while (rs.next()) {
+				
+				long diffInMillies = Math.abs(rs.getDate("orderdate").getTime() - from.getTime());					
+				int days = (int) ((diffInMillies / (1000*60*60*24)) % 7);
 				
 				if (product.isEmpty() || product.equals(rs.getString("iName"))) {
 					totalProducQuantity = totalProducQuantity + rs.getDouble("iQty");
@@ -196,6 +221,8 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 						cell.setCellStyle(categoryHeaderStyle);
 						rowCount++;
 					}
+					
+					dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 3));
 				}
 				else {															
 					Row row = sheet.createRow(rowCount);
@@ -203,9 +230,6 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 					cell.setCellValue(product);
 					cell.setCellStyle(style);
 					
-					long diffInMillies = Math.abs(rs.getDate("orderdate").getTime() - from.getTime());
-				    long days = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.DAYS);		    
-
 					cell = row.createCell(1);
 					cell.setCellValue(totalProducQuantity);
 					cell.setCellStyle(style);
@@ -214,12 +238,12 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 					cell.setCellValue(totalProductAmount);
 					cell.setCellStyle(moneyStyle);
 					
+					rowCount++;
+					
 					totalProducQuantity = rs.getDouble("iQty");
 					totalProductAmount = rs.getDouble("iAmount");
 					
-		        	rowCount++;
-		        	
-		        	if (!category.equals(rs.getString("iCategoryName"))) {
+					if (!category.equals(rs.getString("iCategoryName"))) {
 						category = rs.getString("iCategoryName");
 						row = sheet.createRow(rowCount);
 						cell = row.createCell(0);
@@ -227,12 +251,58 @@ public class ExportCustomReport1Bean extends ExportBean implements IExportToFile
 						cell.setCellStyle(categoryHeaderStyle);
 						rowCount++;
 					}
+					
+					dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 3));
 				}
 				
 				product = rs.getString("iName");
 				
-				totalDayAmount = rs.getDouble("iAmount");
+				totalDayAmount = totalDayAmount + rs.getDouble("iAmount");
+				
+				if (rs.isLast()) {
+																				
+					Row row = sheet.createRow(rowCount);
+					Cell cell = row.createCell(0);
+					cell.setCellValue(product);
+					cell.setCellStyle(style);
+					
+					cell = row.createCell(1);
+					cell.setCellValue(totalProducQuantity);
+					cell.setCellStyle(style);
+					
+					cell = row.createCell(2);
+					cell.setCellValue(totalProductAmount);
+					cell.setCellStyle(moneyStyle);
+					
+					rowCount++;
+				}
 		    }
+			
+			for (DayRecord dayRecord : dayRecords) {
+				Cell cell = (sheet.getRow(dayRecord.row)).createCell(dayRecord.column);
+				cell.setCellValue(dayRecord.quantity);
+				cell.setCellStyle(style);
+				
+				cell = (sheet.getRow(dayRecord.row)).createCell(dayRecord.column + 1);
+				cell.setCellValue(dayRecord.amount);
+				cell.setCellStyle(moneyStyle);
+			}
+
+			Row row = sheet.createRow(rowCount);
+			
+			Cell cell = row.createCell(1);
+			cell.setCellValue("TOTAL:");
+			cell.setCellStyle(headerStyle);
+			cell.getCellStyle().setLeftBorderColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			cell.getCellStyle().setRightBorderColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			cell.getCellStyle().setTopBorderColor(IndexedColors.GREY_25_PERCENT.getIndex());
+			cell.getCellStyle().setBottomBorderColor(IndexedColors.GREY_25_PERCENT.getIndex());			
+			cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 1, 1);
+			setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.THIN);
+			
+			cell = row.createCell(2);
+			cell.setCellValue(totalDayAmount);
+			cell.setCellStyle(totalStyle);
 			
 /*
 			Row header = sheet.createRow(0);
