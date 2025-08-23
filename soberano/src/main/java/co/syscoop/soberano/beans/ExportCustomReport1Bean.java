@@ -64,7 +64,8 @@ private Workbook workbook = null;
 		workbook = new XSSFWorkbook();
 		
 		salesSheet = workbook.createSheet("Ventas");
-		totalConsumptionSheet = workbook.createSheet("Consumo total");
+		totalConsumptionSheet = workbook.createSheet("Consumo global");
+		detailedConsumptionSheet = workbook.createSheet("Consumo por producto");
 		
 		font = ((XSSFWorkbook) workbook).createFont();
 		font.setFontName("Arial");
@@ -440,6 +441,192 @@ private Workbook workbook = null;
 		}	
 	}
 	
+	private void initWorkbookWithDetailedConsumptionSheet(Date from, Date until) {
+		
+		int productNameColumnWidth = 8000;
+		int quantityColumnWidth = 3000;
+		int unitColumnWidth = 3000;
+		int costColumnWidth = 3000;
+		
+		detailedConsumptionSheet.setColumnWidth(0, productNameColumnWidth);
+		detailedConsumptionSheet.setColumnWidth(1, quantityColumnWidth);
+		detailedConsumptionSheet.setColumnWidth(2, unitColumnWidth);
+		detailedConsumptionSheet.setColumnWidth(3, costColumnWidth);
+		
+		Row dayHeader = detailedConsumptionSheet.createRow(0);
+		Row dayDetailsHeader = detailedConsumptionSheet.createRow(1);
+					
+		Cell headerCell = dayDetailsHeader.createCell(0);
+		headerCell.setCellValue("Producto");
+		headerCell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(1, 1, 0, 0);
+		setBordersToMergedCells(detailedConsumptionSheet, cellRangeAddress, BorderStyle.MEDIUM);
+
+		headerCell = dayDetailsHeader.createCell(1);
+		headerCell.setCellValue("Cantidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
+		setBordersToMergedCells(detailedConsumptionSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = dayDetailsHeader.createCell(2);
+		headerCell.setCellValue("Unidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 2, 2);
+		setBordersToMergedCells(detailedConsumptionSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = dayDetailsHeader.createCell(3);
+		headerCell.setCellValue("Costo");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 3, 3);
+		setBordersToMergedCells(detailedConsumptionSheet, cellRangeAddress, BorderStyle.MEDIUM);		
+		
+		Date day = new Date();			
+		int dayColumnIndex = 4;
+		for (day = from; day.compareTo(until) <=  0;) {
+			
+			addDayHeaderCells(day, detailedConsumptionSheet, dayHeader, dayDetailsHeader, 
+							headerStyle, dayColumnIndex, quantityColumnWidth, costColumnWidth);
+			dayColumnIndex = dayColumnIndex + 2;
+			
+			//next day
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(day); 
+			c.add(Calendar.DATE, 1);
+			day = c.getTime();
+		}	
+	}
+	
+	private void extract(Date from, Date until, ResultSet rs, Sheet sheet, String categoryColumnName) throws SQLException {
+		
+		String costCenter = "";
+		String product = "";
+		String unit = "";
+		
+		class DayRecord {
+			Double quantity = 0.0;
+			Double cost = 0.0;
+			int row = 0;
+			int column = 0;
+			public DayRecord(Double quantity, Double cost, int row, int column) {
+				this.quantity = quantity;
+				this.cost = cost;
+				this.row = row;
+				this.column = column;
+			}
+		};
+		
+		ArrayList<DayRecord> dayRecords = new ArrayList<DayRecord>();
+					
+		Double totalProducQuantity = 0.0;
+		Double totalProductCost = 0.0;			
+		Double totalDayCost = 0.0;
+		
+		Integer rowCount = 2;
+		while (rs.next()) {
+			
+			int days = rs.getInt("days");
+			
+			if (product.isEmpty() || product.equals(rs.getString("iName"))) {
+				totalProducQuantity = totalProducQuantity + rs.getDouble("iQty");
+				totalProductCost = totalProductCost + rs.getDouble("iAmount");
+				
+				if (product.isEmpty()) {
+					costCenter = rs.getString(categoryColumnName);
+					Row row = sheet.createRow(rowCount);
+					Cell cell = row.createCell(0);
+					cell.setCellValue(costCenter);
+					cell.setCellStyle(categoryHeaderStyle);
+					rowCount++;
+				}
+				
+				dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 4));
+			}
+			else {															
+				Row row = sheet.createRow(rowCount);
+				Cell cell = row.createCell(0);
+				cell.setCellValue(product);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(totalProducQuantity);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(unit);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(totalProductCost);
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+				
+				totalProducQuantity = rs.getDouble("iQty");
+				totalProductCost = rs.getDouble("iAmount");
+				
+				if (!costCenter.equals(rs.getString(categoryColumnName))) {
+					costCenter = rs.getString(categoryColumnName);
+					row = sheet.createRow(rowCount);
+					cell = row.createCell(0);
+					cell.setCellValue(costCenter);
+					cell.setCellStyle(categoryHeaderStyle);
+					rowCount++;
+				}
+				
+				dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 4));
+			}
+			
+			product = rs.getString("iName");
+			unit = rs.getString("iUnit");
+			
+			totalDayCost = totalDayCost + rs.getDouble("iAmount");
+			
+			if (rs.isLast()) {
+																			
+				Row row = sheet.createRow(rowCount);
+				Cell cell = row.createCell(0);
+				cell.setCellValue(product);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(totalProducQuantity);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(unit);
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(totalProductCost);
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+			}
+	    }
+		
+		for (DayRecord dayRecord : dayRecords) {
+			Cell cell = (sheet.getRow(dayRecord.row)).createCell(dayRecord.column);
+			cell.setCellValue(dayRecord.quantity);
+			cell.setCellStyle(style);
+			
+			cell = (sheet.getRow(dayRecord.row)).createCell(dayRecord.column + 1);
+			cell.setCellValue(dayRecord.cost);
+			cell.setCellStyle(moneyStyle);
+		}
+
+		Row row = sheet.createRow(rowCount);
+		
+		Cell cell = row.createCell(2);
+		cell.setCellValue("TOTAL:");
+		cell.setCellStyle(globalTotalStyle);	
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 1, 1);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.THIN);
+		
+		cell = row.createCell(3);
+		cell.setCellValue(totalDayCost);
+		cell.setCellStyle(totalStyle);
+	}
+	
 	private final class ExportTotalConsumptionToXLSExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
@@ -450,133 +637,23 @@ private Workbook workbook = null;
 			
 			initWorkbookWithTotalConsumptionSheet(from, until);
 			
-			String costCenter = "";
-			String product = "";
-			String unit = "";
+			extract(from, until, rs, totalConsumptionSheet, "iCostCenterName");
 			
-			class DayRecord {
-				Double quantity = 0.0;
-				Double cost = 0.0;
-				int row = 0;
-				int column = 0;
-				public DayRecord(Double quantity, Double cost, int row, int column) {
-					this.quantity = quantity;
-					this.cost = cost;
-					this.row = row;
-					this.column = column;
-				}
-			};
+			return null;
+		}
+	}
+	
+	private final class ExportDetailedConsumptionToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
 			
-			ArrayList<DayRecord> dayRecords = new ArrayList<DayRecord>();
-						
-			Double totalProducQuantity = 0.0;
-			Double totalProductCost = 0.0;			
-			Double totalDayCost = 0.0;
+			Date from = (Date) getParameters().get("from");
+			Date until = (Date) getParameters().get("until");
 			
-			Integer rowCount = 2;
-			while (rs.next()) {
-				
-				int days = rs.getInt("days");
-				
-				if (product.isEmpty() || product.equals(rs.getString("iName"))) {
-					totalProducQuantity = totalProducQuantity + rs.getDouble("iQty");
-					totalProductCost = totalProductCost + rs.getDouble("iAmount");
-					
-					if (product.isEmpty()) {
-						costCenter = rs.getString("iCostCenterName");
-						Row row = totalConsumptionSheet.createRow(rowCount);
-						Cell cell = row.createCell(0);
-						cell.setCellValue(costCenter);
-						cell.setCellStyle(categoryHeaderStyle);
-						rowCount++;
-					}
-					
-					dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 4));
-				}
-				else {															
-					Row row = totalConsumptionSheet.createRow(rowCount);
-					Cell cell = row.createCell(0);
-					cell.setCellValue(product);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(1);
-					cell.setCellValue(totalProducQuantity);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(2);
-					cell.setCellValue(unit);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(3);
-					cell.setCellValue(totalProductCost);
-					cell.setCellStyle(moneyStyle);
-					
-					rowCount++;
-					
-					totalProducQuantity = rs.getDouble("iQty");
-					totalProductCost = rs.getDouble("iAmount");
-					
-					if (!costCenter.equals(rs.getString("iCostCenterName"))) {
-						costCenter = rs.getString("iCostCenterName");
-						row = totalConsumptionSheet.createRow(rowCount);
-						cell = row.createCell(0);
-						cell.setCellValue(costCenter);
-						cell.setCellStyle(categoryHeaderStyle);
-						rowCount++;
-					}
-					
-					dayRecords.add(new DayRecord(rs.getDouble("iQty"), rs.getDouble("iAmount"), rowCount, days * 2 + 4));
-				}
-				
-				product = rs.getString("iName");
-				unit = rs.getString("iUnit");
-				
-				totalDayCost = totalDayCost + rs.getDouble("iAmount");
-				
-				if (rs.isLast()) {
-																				
-					Row row = totalConsumptionSheet.createRow(rowCount);
-					Cell cell = row.createCell(0);
-					cell.setCellValue(product);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(1);
-					cell.setCellValue(totalProducQuantity);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(2);
-					cell.setCellValue(unit);
-					cell.setCellStyle(style);
-					
-					cell = row.createCell(3);
-					cell.setCellValue(totalProductCost);
-					cell.setCellStyle(moneyStyle);
-					
-					rowCount++;
-				}
-		    }
+			initWorkbookWithDetailedConsumptionSheet(from, until);
 			
-			for (DayRecord dayRecord : dayRecords) {
-				Cell cell = (totalConsumptionSheet.getRow(dayRecord.row)).createCell(dayRecord.column);
-				cell.setCellValue(dayRecord.quantity);
-				cell.setCellStyle(style);
-				
-				cell = (totalConsumptionSheet.getRow(dayRecord.row)).createCell(dayRecord.column + 1);
-				cell.setCellValue(dayRecord.cost);
-				cell.setCellStyle(moneyStyle);
-			}
-
-			Row row = totalConsumptionSheet.createRow(rowCount);
-			
-			Cell cell = row.createCell(2);
-			cell.setCellValue("TOTAL:");
-			cell.setCellStyle(globalTotalStyle);	
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 1, 1);
-			setBordersToMergedCells(totalConsumptionSheet, cellRangeAddress, BorderStyle.THIN);
-			
-			cell = row.createCell(3);
-			cell.setCellValue(totalDayCost);
-			cell.setCellStyle(totalStyle);
+			extract(from, until, rs, detailedConsumptionSheet, "processName");
 						
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			String fromDateStr = "";
@@ -645,6 +722,19 @@ private Workbook workbook = null;
 		return super.query(query, qryParameters, new ExportTotalConsumptionToXLSExtractor());
 	}
 	
+	private Object runDetailedConsumptionDBQuery(Date from, Date until, String costCenter) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport1_detailedConsumption\"(:lang, :fromD, :untilD, :ccenter, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());		
+		qryParameters.put("fromD", from);
+		qryParameters.put("untilD", until);
+		qryParameters.put("ccenter", costCenter);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportDetailedConsumptionToXLSExtractor());
+	}
+	
 	private void getCustomReportToXlsx(Date from, Date until, String costCenter) throws SQLException, IOException {
 		
 		//first sheet
@@ -654,7 +744,7 @@ private Workbook workbook = null;
 		runTotalConsumptionDBQuery(from, until, costCenter);
 		
 		//third sheet
-		//runDetailedConsumptionDBQuery(from, until, costCenter);
+		runDetailedConsumptionDBQuery(from, until, costCenter);
 					
 		InputStream is = Executions.getCurrent().getDesktop().getWebApp().getResourceAsStream(wbd.filePath);
 		if (is != null) {

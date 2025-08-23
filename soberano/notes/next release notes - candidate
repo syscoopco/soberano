@@ -2,6 +2,9 @@ v2.0.5 release candidate
 
 New: Externalization of custom reports. Corresponding links were added to menu bar.
 
+New: Default custom report 1: Production and sales. Excel file with 3 sheets: sales, global consumption of materials,
+	detailed consumption per product. Daily breakdown.
+
 New: CREATE OR REPLACE FUNCTION soberano."z-fn_Helper_closeAllClosedOrderProcessRuns"()
 	
 	This function closes all the process runs of closed orders. It could be used as part of an
