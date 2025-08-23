@@ -12,7 +12,9 @@
 			<button id="btnNewOrder" label="+" href="/new_order.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>
 			<barbuttonwpopupcomposer tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Activity}" composer="co.syscoop.soberano.composers.ActivityTreeComposerForButtonBar"></barbuttonwpopupcomposer>
-			<separator></separator>			
+			<separator></separator>
+			<button label="$" href="/cash_register.zul" sclass="BarButton NewButton"></button>
+			<separator></separator>		
 			<barbuttonwpopupcomposer tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Split}" composer="co.syscoop.soberano.composers.OrderSplittingTreeComposer"></barbuttonwpopupcomposer>
 			<separator></separator>
 			<barbuttonpopup tree="treeInventory" shortcutCaption="${labels.layout.template.shortcut.Inventory}" composer="co.syscoop.soberano.composers.InventoryTreeComposer"></barbuttonpopup>

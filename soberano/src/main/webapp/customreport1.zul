@@ -26,10 +26,10 @@
 					</combobox>	
 				</hbox>
 				<label value="${labels.caption.field.From}" sclass="Caption"></label>
-				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd"/>
+				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd" constraint="no empty"/>
 				<separator></separator>
 				<label value="${labels.caption.field.Until}" sclass="Caption"></label>
-				<datebox id="dateUntil" buttonVisible="true" format="yyyy-MM-dd"/>
+				<datebox id="dateUntil" buttonVisible="true" format="yyyy-MM-dd" constraint="no empty"/>
 				<separator></separator>
 				<separator></separator>
 				<button id="btnRetrieve" label="${labels.caption.action.retrieve}"></button>

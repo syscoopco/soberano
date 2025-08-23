@@ -9,10 +9,10 @@
 		<vbox vflex="1" id="boxDetails" hflex="1">
 			<hbox vflex="1" hflex="1" align="center">
 				<label value="${labels.caption.field.From}" sclass="Caption"></label>
-				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd"/>
+				<datebox id="dateFrom" buttonVisible="true" format="yyyy-MM-dd" constraint="no empty"/>
 				<separator></separator>
 				<label value="${labels.caption.field.Until}" sclass="Caption"></label>
-				<datebox id="dateUntil" buttonVisible="true" format="yyyy-MM-dd"/>
+				<datebox id="dateUntil" buttonVisible="true" format="yyyy-MM-dd" constraint="no empty"/>
 				<separator></separator>
 				<separator></separator>
 				<button id="btnRetrieve" label="${labels.caption.action.retrieve}"></button>
