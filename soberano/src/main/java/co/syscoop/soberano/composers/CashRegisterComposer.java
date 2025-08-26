@@ -142,4 +142,9 @@ public class CashRegisterComposer extends SelectorComposer {
 										Messagebox.EXCLAMATION);
 		}
 	}
+	
+	@Listen("onOK = textbox#txtInputExpression")
+	public void onOK() throws SoberanoException {
+		btnCalc_onClick();
+	}
 }
