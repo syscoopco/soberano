@@ -1,4 +1,4 @@
-v2.0.5 release candidate
+v2.0.5 release
 
 New: Now, both, a default customer and a delivery provider can be set to a counter. Upon order creation, only if none 
 	is specified, defaults are used. This is useful in case the business is selling through an intermediary provider 
