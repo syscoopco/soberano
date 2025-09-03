@@ -70,4 +70,6 @@ Fix: These zk style classes were override, for proper visualization of comboboxe
 
 User manual: 
 
-
+1) pag. 133 y 134: Se adicionó “Los fondos de las filas … Los colores se configuran en la relación Worker de la base de datos. Para el caso de las adiciones, el creador se identifica por su nombre de usuario.”.
+2) pag. 147: Se adiciona el procedimiento Aumentar ticket desde el formulario de un pedido.
+3) pag. 164: Se adiciona el procedimiento Limpiar datos del sistema.
