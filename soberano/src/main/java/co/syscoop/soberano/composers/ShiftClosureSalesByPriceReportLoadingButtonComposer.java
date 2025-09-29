@@ -3,8 +3,10 @@ package co.syscoop.soberano.composers;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.Mobile;
 
 @SuppressWarnings({ "serial" })
 public class ShiftClosureSalesByPriceReportLoadingButtonComposer extends ShiftClosureReportLoadingComposer {
@@ -17,7 +19,15 @@ public class ShiftClosureSalesByPriceReportLoadingButtonComposer extends ShiftCl
 	@Listen("onClick = button#btnSalesByPrice")
     public void btnRetrieve_onClick() throws SoberanoException {
 		
-		loadReport((Textbox) btnSalesByPrice.getParent().getParent().getParent().getParent().query("#wndShowingAll").query("#txtShownReport"),
+		Window wndShowingAll = null;
+		if (Mobile.isMobile()) {
+			wndShowingAll = (Window) btnGeneral.getParent().getParent().getParent().getParent().getParent().getParent().getParent().query("#wndShowingAll");
+		}
+		else {
+			wndShowingAll = (Window) btnGeneral.getParent().getParent().getParent().getParent().query("#wndShowingAll");
+		}
+		
+		loadReport((Textbox) wndShowingAll.query("#txtShownReport"),
 					"salesbyprice", 
 					null);
 		updateComponentStyles("btnSalesByPrice");

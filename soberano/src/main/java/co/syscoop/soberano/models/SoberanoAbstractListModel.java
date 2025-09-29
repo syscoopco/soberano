@@ -70,13 +70,25 @@ public class SoberanoAbstractListModel<T> extends AbstractListModel<T> implement
 	public String get_orderBy() {
 		return _orderBy;
 	}
+	
+	public void set_orderBy(String _orderBy) {
+		this._orderBy = _orderBy;
+	}
 
 	public boolean is_ascending() {
 		return _ascending;
 	}
+	
+	public void set_ascending(Boolean _ascending) {
+		this._ascending = _ascending;
+	}
 
 	public boolean is_descending() {
 		return _descending;
+	}
+	
+	public void set_descending(Boolean _descending) {
+		this._descending = _descending;
 	}
 	
 	public ArrayList<SQLQueryFilterParam> getFilterParams() {

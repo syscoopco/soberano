@@ -4,16 +4,32 @@ import java.sql.SQLException;
 
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zul.Textbox;
+import org.zkoss.zul.Window;
 
+import co.syscoop.soberano.util.Mobile;
 import co.syscoop.soberano.util.SpringUtility;
 
 @SuppressWarnings({ "serial" })
 public class ShiftClosuresComposer extends ShiftClosureReportLoadingComposer {
 	
+	private Window wndShowingAll = null;
+	
+	private void setWndShowingAll() {
+		
+		if (Mobile.isMobile()) {
+			wndShowingAll = (Window) btnGeneral.getParent().getParent().getParent().getParent().getParent().getParent().getParent().query("#wndShowingAll");
+		}
+		else {
+			wndShowingAll = (Window) btnGeneral.getParent().getParent().getParent().getParent().query("#wndShowingAll");
+		}
+	}
+	
 	private void processCostCenterSelection() throws SQLException, Exception {
 		
+		setWndShowingAll();
+		
 		if (cmbCostCenter.getSelectedItem() != null) {			
-			loadReport((Textbox) cmbCostCenter.getParent().getParent().getParent().getParent().getParent().query("#wndShowingAll").query("#boxDetails").query("#txtShownReport"),
+			loadReport((Textbox) wndShowingAll.query("#boxDetails").query("#txtShownReport"),
 					"costcenter", 
 					cmbCostCenter.getText());
 			updateComponentStyles("cmbCostCenter");
@@ -22,8 +38,10 @@ public class ShiftClosuresComposer extends ShiftClosureReportLoadingComposer {
 	
 	private void processWarehouseSelection() throws SQLException, Exception {
 		
+		setWndShowingAll();
+		
 		if (cmbWarehouse.getSelectedItem() != null) {			
-			loadReport((Textbox) cmbWarehouse.getParent().getParent().getParent().getParent().getParent().query("#wndShowingAll").query("#boxDetails").query("#txtShownReport"),
+			loadReport((Textbox) wndShowingAll.query("#boxDetails").query("#txtShownReport"),
 					"spi", 
 					cmbWarehouse.getText());
 			updateComponentStyles("cmbWarehouse");

@@ -1,0 +1,33 @@
+<zk>
+	<popup id="pp" width="80%">	
+		<window id="wndPPWindow" height="100%" contentStyle="overflow:auto">
+			<vbox id="vboxPPVbox" hflex="1" align="start" apply="co.syscoop.soberano.composers.ShiftClosuresComposer">
+				<button id="btnGeneral" label="${labels.caption.action.general}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralReportLoadingButtonComposer"></button>
+				<button id="btnGeneralFull" label="${labels.caption.action.generalFull}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureGeneralFullReportLoadingButtonComposer"></button>
+				<button id="btnHouseBill" label="${labels.caption.action.houseBill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureHouseBillReportLoadingButtonComposer"></button>
+				<button id="btnCashRegister" label="${labels.caption.action.cashRegister}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCashRegisterReportLoadingButtonComposer"></button>
+				<button id="btnReceivables" label="${labels.caption.action.receivables}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureReceivablesReportLoadingButtonComposer"></button>
+				<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
+					<combobox id="cmbCostCenter" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.costCenter}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)" height="20px">
+							</comboitem>
+						</template>
+					</combobox>	
+				</hbox>
+				<button id="btnSalesByPrice" label="${labels.caption.action.salesByPrice}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureSalesByPriceReportLoadingButtonComposer"></button>
+				<button id="btnNotes" label="${labels.caption.action.notes}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureNotesReportLoadingButtonComposer"></button>
+				<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
+					<combobox id="cmbWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.warehouse}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
+						<template name="model">
+							<comboitem label="@load(each.name)" value="@load(each)" height="20px">
+							</comboitem>
+						</template>
+					</combobox>	
+				</hbox>
+				<button id="btnCancellations" label="${labels.caption.action.cancellations}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCancellationsReportLoadingButtonComposer"></button>
+			</vbox>
+		</window>
+	</popup>
+	<button id="btnPPButton" visible="false" image="./images/menu_38.jpg" onClick='pp.open(self, "before_start");' sclass="BarButton NewButton"></button>	
+</zk>

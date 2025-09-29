@@ -7,7 +7,7 @@
 	<hbox self="@define(showingAllPanelHeader)" width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel')">
 		<combobox id="cmbIntelliSearch" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.CustomerViewModelComposer">
 			<template name="model">
-				<comboitem label="@load(each.name)" value="@load(each)">
+				<comboitem label="@load(each.name)" value="@load(each)" height="20px">
 				</comboitem>
 			</template>
 		</combobox>
@@ -16,17 +16,17 @@
 	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
 		 
 		<!-- TODO: DISABLE IN PRODUCTION. -->
-		 <!-- 
+		 
 		<tree id="treeObjects" apply="co.syscoop.soberano.composers.CustomersTreeComposer">
 			<treecols>
 				<treecol>
 				</treecol>
 			</treecols>
 		</tree>		 
-		 --> 
+		 
 		<!-- optimization for large amount of customers -->
 		<!-- TODO: ENABLE IN PRODUCTION. JUNIT TESTS HAVENT BEEN CHANGED YET FOR THIS OPTIMIZATION, SO TESTS WOULDNT PASS. -->
-		
+		<!-- 
 		<zscript>
 			<![CDATA[
 		  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();
@@ -45,7 +45,7 @@
 				</columns>
 			</grid>
 		</vbox>
-		  
+		   -->
 		<!-- end of optimization for large amount of customers -->
 		
 	</window>

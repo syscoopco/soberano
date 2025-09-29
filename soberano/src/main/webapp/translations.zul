@@ -1,0 +1,25 @@
+<?page title="${labels.pageTranslations.WindowTitle}" contentType="text/html;charset=UTF-8"?>
+<?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-grid.zul"?>
+
+<zk>
+	<include src="/style.zul"/>
+	<label self="@define(pageTitle)" value="${labels.pageTranslations.WindowTitle}" sclass="PageTitle"/>
+	
+	<window self="@define(inputForm)" contentStyle="overflow:auto">
+		<hbox id="boxDetails" width="100%" align="center" apply="co.syscoop.soberano.composers.TranslationsComposer">
+			<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.LanguageSelectionViewModel')">
+				<combobox id="cmbLanguage" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.language}">
+					<template name="model">
+						<comboitem label="@load(each.name)" value="@load(each)" height="20px">
+						</comboitem>
+					</template>
+				</combobox>		
+			</hbox>
+			<intbox id="intPosition" value="0" hflex="1" placeholder="${labels.caption.field.positionPlaceholder}" constraint="no empty, no negative"/>
+			<textbox id="txtFromTerm" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.fromTerm}"/>
+			<textbox id="txtToTerm" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.toTerm}"/>
+			<button id="btnRecord" label="+" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.RecordTranslationButtonComposer"></button>
+		</hbox>
+	</window>
+	<include id="incGrid" self="@define(grid)" src="/translations_details.zul"></include>
+</zk>

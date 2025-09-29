@@ -12,7 +12,7 @@
 				<hbox hflex="1" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
 					<combobox id="cmbWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.warehouse}">
 						<template name="model">
-							<comboitem label="@load(each.name)" value="@load(each)">
+							<comboitem label="@load(each.name)" value="@load(each)" height="20px">
 							</comboitem>
 						</template>
 					</combobox>		

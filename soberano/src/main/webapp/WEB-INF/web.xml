@@ -8,6 +8,28 @@
 	<display-name>TCP TOOL</display-name>
 	
 	<!-- 
+	Tomcat filters 
+	-->
+	<!-- 
+	<filter>
+    	<filter-name>RateLimitFilter Global</filter-name>
+    	<filter-class > org.apache.catalina.filters.RateLimitFilter</filter-class >
+    	<init-param>
+        	<param-name>bucketRequests</param-name>
+            <param-value>15000</param-value>
+        </init-param>
+		<init-param>
+    		<param-name>bucketDuration</param-name>
+    		<param-value>300</param-value>
+		</init-param>
+    </filter>
+    <filter-mapping>
+		<filter-name>RateLimitFilter Global</filter-name>
+		<url-pattern>*</url-pattern>
+    </filter-mapping>
+     -->
+	
+	<!-- 
 	Spring configuration
 	-->
 		

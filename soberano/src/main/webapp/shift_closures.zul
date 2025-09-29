@@ -24,7 +24,7 @@
 		<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CostCenterSelectionViewModel')">
 			<combobox id="cmbCostCenter" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.costCenter}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
 				<template name="model">
-					<comboitem label="@load(each.name)" value="@load(each)">
+					<comboitem label="@load(each.name)" value="@load(each)" height="20px">
 					</comboitem>
 				</template>
 			</combobox>	
@@ -34,13 +34,14 @@
 		<hbox width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.WarehouseSelectionViewModel')">
 			<combobox id="cmbWarehouse" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.warehouse}" apply="co.syscoop.soberano.composers.ViewModelComposer" constraint="no empty">
 				<template name="model">
-					<comboitem label="@load(each.name)" value="@load(each)">
+					<comboitem label="@load(each.name)" value="@load(each)" height="20px">
 					</comboitem>
 				</template>
 			</combobox>	
 		</hbox>
 		<button id="btnCancellations" label="${labels.caption.action.cancellations}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ShiftClosureCancellationsReportLoadingButtonComposer"></button>
 	</hbox>
+	<include self="@define(decisionButton)" src="./shift_closures_menubar.zul"></include>
 	<button id="btnRecord" self="@define(decisionButton)" label="${labels.caption.action.close}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.RecordShiftClosureButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintShiftClosureReportButtonComposer"></button>
 	<button id="btnExport" self="@define(decisionButton)" label="${labels.caption.action.export}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ExportShiftClosureReportButtonComposer">

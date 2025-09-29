@@ -1,75 +1,13 @@
-v2.0.5 release
+v2.0.6
 
-New: Now, both, a default customer and a delivery provider can be set to a counter. Upon order creation, only if none 
-	is specified, defaults are used. This is useful in case the business is selling through an intermediary provider 
-	(aka a reseller) that doesn't disclose customer data. Still, the system required to specified a customer when a 
-	delivery provider is specified. So, this feature save operator's time.
+New: Translations.
 
-New: Externalization of custom reports. Corresponding links were added to menu bar.
+New: Conceptual model and deployment script updated for translations.
 
-New: Default custom report 1: Production and sales. Excel file with 3 sheets: sales, global consumption of materials,
-	detailed consumption per product. Daily breakdown.
+New: Shift closures form mobile version added. When loading it from a tablet or form, the report buttons are grouped in a pop-up menu.
 
-New: CREATE OR REPLACE FUNCTION soberano."z-fn_Helper_closeAllClosedOrderProcessRuns"()
-	
-	This function closes all the process runs of closed orders. It could be used as part of an
-	optimization where this function would be called from a periodic job (crontab or another one). 
-	The rationale is closing runs upon collecting orders could be very slow (depending on the computer)
-	due to inventory calculation an recalculation. So, a possibility
-	is to disable this (by commenting these two lines
-	
-	PERFORM soberano."fn_Order_closeProcessRuns"(orderid, loginname) FROM
-	soberano."Configuration" WHERE "This_has_UpdateInventoryOnOrderClosing";
-	
-	in the body of FUNCTION soberano."fn_Order_collect"(cashregister integer,
-											orderid integer,
-											lang character,
-											currencies integer[],
-											amounts numeric[],
-											tip numeric,
-											notes character varying,
-											customer integer,
-											loginname character varying))
-											
-New: CREATE TABLE IF NOT EXISTS metamodel."Vote_history". This table is for periodically backing up table 
-	metamodel."Vote" aiming to keep it small for performance and, at the same time, preserve data for rule
-	enforcing, analysis, 	and reporting. Otherwise, metamodel."Vote" could  eventually became huge, 
-	depending on business activity.
-	
-New: CREATE TABLE IF NOT EXISTS soberano."StockChange_history". This table is for periodically backing up table 
-	soberano."StockChange" aiming to keep it small for performance and, at the same time, preserve data for rule 
-	enforcing, analysis, and reporting. Otherwise, metamodel."Vote" could  eventually became huge, depending on 
-	business activity.
+Fix: Folder records didn't contain folder csv.
 
-Fix: A target file's name resulting of shift closure exporting now contains that closure shift date.
+Fix: Comboitem sizes set to 20px, for proper visualization in mobile devices (tablet and phone). 
 
-Fix: Database function fn_ShiftClosure_getFullReport
-
-Fix: Database function fn_ShiftClosure_getReport
-
-Fix: In comboboxes to add items to an order, the height of comboitems were set to 20px for proper visualization
-	in responsive mode.
-	
-Fix: In new_order.zul, the sizes of customer comboitems were set to 20px for proper visualization
-	in responsive mode.
-	
-Fix: These zk style classes were override, for proper visualization of comboboxes to add items to an order in
-	responsive mode:
-	
-		.undefined {
-			transform: translate(0px, 0px) !important;
-		}
-		
-		.z-combobox-content {
-			height: auto !important;
-		}
-		
-		div[id*="cave2"] {
-			height: auto !important;
-		}
-
-User manual: 
-
-1) pag. 133 y 134: Se adicionó “Los fondos de las filas … Los colores se configuran en la relación Worker de la base de datos. Para el caso de las adiciones, el creador se identifica por su nombre de usuario.”.
-2) pag. 147: Se adiciona el procedimiento Aumentar ticket desde el formulario de un pedido.
-3) pag. 164: Se adiciona el procedimiento Limpiar datos del sistema.
+User manual:
