@@ -1,13 +1,9 @@
-v2.0.6
+v2.0.7 candidate release
 
-New: Translations.
+New: Custom Report 2 Example.
 
-New: Conceptual model and deployment script updated for translations.
-
-New: Shift closures form mobile version added. When loading it from a tablet or form, the report buttons are grouped in a pop-up menu.
-
-Fix: Folder records didn't contain folder csv.
-
-Fix: Comboitem sizes set to 20px, for proper visualization in mobile devices (tablet and phone). 
+Fix: PostgreSQL function soberano."z-fn_ReportData_customReport1_productionAndSales" improperly
+	returned inventory item code, and wrongly grouped columns, resulting in bad item day sales. 
+	Total item sales in the period was right though. 
 
 User manual:
