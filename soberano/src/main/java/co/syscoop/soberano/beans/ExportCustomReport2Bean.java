@@ -217,12 +217,50 @@ private Workbook workbook = null;
 		int priceColumnWidth = 3000;
 		int amountColumnWidth = 3000;
 		
-		dailySalesSheet.setColumnWidth(0, dateColumnWidth);
-		dailySalesSheet.setColumnWidth(1, itemNameColumnWidth);
-		dailySalesSheet.setColumnWidth(2, quantityColumnWidth);
-		dailySalesSheet.setColumnWidth(3, unitColumnWidth);
-		dailySalesSheet.setColumnWidth(4, priceColumnWidth);
-		dailySalesSheet.setColumnWidth(5, amountColumnWidth);		
+		dailyMaterialExpensesSheet.setColumnWidth(0, dateColumnWidth);
+		dailyMaterialExpensesSheet.setColumnWidth(1, itemNameColumnWidth);
+		dailyMaterialExpensesSheet.setColumnWidth(2, quantityColumnWidth);
+		dailyMaterialExpensesSheet.setColumnWidth(3, unitColumnWidth);
+		dailyMaterialExpensesSheet.setColumnWidth(4, priceColumnWidth);
+		dailyMaterialExpensesSheet.setColumnWidth(5, amountColumnWidth);
+		
+		Row header = dailyMaterialExpensesSheet.createRow(0);
+		
+		Cell headerCell = header.createCell(0);
+		headerCell.setCellValue("Fecha");
+		headerCell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, 0);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
+		headerCell.setCellValue("Producto");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(2);
+		headerCell.setCellValue("Cantidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 2, 2);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(3);
+		headerCell.setCellValue("Unidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 3, 3);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(4);
+		headerCell.setCellValue("Precio");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 4, 4);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(5);
+		headerCell.setCellValue("Importe");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 5, 5);
+		setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 	}
 	
 	private void initWorkbookWithDailyServiceExpensesSheet(Date from, Date until) {
@@ -299,35 +337,29 @@ private Workbook workbook = null;
 		dailySalesSheet.setColumnWidth(1, priceColumnWidth);		
 	}
 	
-	private void addDayTotalAmount(Integer rowCount, Integer initDayRow) {
-		Row row = dailySalesSheet.createRow(rowCount);
+	private void addDayTotalAmount(Sheet sheet, Integer rowCount, Integer initDayRow, Integer totalColumn, String totalColumnLetter) {
+		Row row = sheet.createRow(rowCount);
 		Cell cell = row.createCell(0);				
 		cell.setCellValue("TOTAL");
 		cell.setCellStyle(headerStyle);
 		
-		cell = row.createCell(4);
+		cell = row.createCell(totalColumn);
 		cell.setCellStyle(totalStyle);
-		String formula= "SUM(E" + initDayRow.toString() + ":E" + Integer.valueOf(rowCount).toString() + ")";
+		String formula= "SUM(" + totalColumnLetter + initDayRow.toString() + ":" + totalColumnLetter + Integer.valueOf(rowCount).toString() + ")";
 		cell.setCellFormula(formula);
 		
 		CellRangeAddress cellRangeAddress = new CellRangeAddress(initDayRow - 1, rowCount - 1, 0, 0);
-		row.getSheet().addMergedRegion(cellRangeAddress);
-		setBordersToMergedCells(row.getSheet(), cellRangeAddress, BorderStyle.MEDIUM);
+		if (initDayRow - 1 < rowCount - 1) {sheet.addMergedRegion(cellRangeAddress);}		
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
-		cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 0, 4);
-		setBordersToMergedCells(row.getSheet(), cellRangeAddress, BorderStyle.MEDIUM);
+		cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 0, totalColumn);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
 	
 	private final class ExportDailySalesToXLSExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
 		public Object extractData(ResultSet rs) throws SQLException {
-			
-			try {
-				initWorkbook();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 			
 			Date from = (Date) getParameters().get("from");
 			Date until = (Date) getParameters().get("until");
@@ -342,7 +374,7 @@ private Workbook workbook = null;
 				Row row = dailySalesSheet.createRow(rowCount);
 				
 				if (previousDate != null && previousDate.compareTo(rs.getDate("orderdate")) != 0) {
-					addDayTotalAmount(rowCount, initDayRow);					
+					addDayTotalAmount(dailySalesSheet, rowCount, initDayRow, 4, "E");					
 					initDayRow = rowCount + 2;					
 					rowCount++;
 				}
@@ -352,7 +384,6 @@ private Workbook workbook = null;
 				row = dailySalesSheet.createRow(rowCount);
 				Cell cell = row.createCell(0);				
 				cell.setCellValue(formatDate(rs.getDate("orderdate"), "yyyy-MM-dd"));
-				cell.setCellValue(rs.getString("orderdate"));
 				cell.setCellStyle(dateStyle);
 				
 				cell = row.createCell(1);
@@ -375,7 +406,7 @@ private Workbook workbook = null;
 				rowCount++;
 				
 				if (rs.isLast()) {
-					addDayTotalAmount(rowCount, initDayRow);					
+					addDayTotalAmount(dailySalesSheet, rowCount, initDayRow, 4, "E");					
 					initDayRow = rowCount + 2;					
 					rowCount++;
 				}
@@ -401,12 +432,98 @@ private Workbook workbook = null;
 		return super.query(query, qryParameters, new ExportDailySalesToXLSExtractor());
 	}
 	
+	private final class ExportDailyMaterialExpensesToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			Date from = (Date) getParameters().get("from");
+			Date until = (Date) getParameters().get("until");
+			
+			initWorkbookWithDailyMaterialExpensesSheet(from, until);
+			
+			Integer rowCount = 1;
+			Date previousDate = null;
+			Integer initDayRow = 2;
+			while (rs.next()) {
+				
+				Row row = dailyMaterialExpensesSheet.createRow(rowCount);
+				
+				if (previousDate != null && previousDate.compareTo(rs.getDate("expensedate")) != 0) {
+					addDayTotalAmount(dailyMaterialExpensesSheet, rowCount, initDayRow, 5, "F");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+				
+				previousDate = rs.getDate("expensedate");
+				
+				row = dailyMaterialExpensesSheet.createRow(rowCount);
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(formatDate(rs.getDate("expensedate"), "yyyy-MM-dd"));
+				cell.setCellStyle(dateStyle);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getString("iName"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(rs.getDouble("iQty"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(rs.getString("iUnit"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(4);
+				cell.setCellValue(rs.getDouble("iPrice"));
+				cell.setCellStyle(moneyStyle);
+				
+				cell = row.createCell(5);
+				String formula= "C" + Integer.valueOf(rowCount + 1).toString() + "*" + "E" + Integer.valueOf(rowCount + 1).toString();
+				cell.setCellFormula(formula);
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+				
+				if (rs.isLast()) {
+					addDayTotalAmount(dailyMaterialExpensesSheet, rowCount, initDayRow, 5, "F");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+			}
+			
+			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 5);
+			setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+									
+			return null;
+		}
+	}
+	
+	private Object runDailyMaterialExpensesDBQuery(Date from, Date until) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport2_dailyMaterialExpenses\"(:lang, :fromD, :untilD, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());		
+		qryParameters.put("fromD", from);
+		qryParameters.put("untilD", until);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportDailyMaterialExpensesToXLSExtractor());
+	}
+	
 	private void getCustomReportToXlsx(Date from, Date until, String costCenter) throws SQLException, IOException {
+		
+		try {
+			initWorkbook();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		//first sheet
 		runDailySalesDBQuery(from, until, costCenter);
 				
 		//second sheet
+		runDailyMaterialExpensesDBQuery(from, until);
 				
 		//third sheet
 		
