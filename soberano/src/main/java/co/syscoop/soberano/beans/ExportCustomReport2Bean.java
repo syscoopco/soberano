@@ -445,28 +445,72 @@ private Workbook workbook = null;
 	
 	private void initWorkbookWithWarehouseStockSheet() {
 		
-		int itemCodeColumnWidth = 3000;
-		int itemNameColumnWidth = 8000;
-		int unitColumnWidth = 3000;
-		int quantityColumnWidth = 3000;
-		int unitCostColumnWidth = 3000;
-		int valueColumnWidth = 3000;
+		int warehouseColumnWidth = 3000;
+		int itemColumnWidth = 8000;
+		int quantityColumnWidth = 3000;	
+		int unitColumnWidth = 3000;	
+		int totalValueColumnWidth = 3000;	
 		
-		dailySalesSheet.setColumnWidth(0, itemCodeColumnWidth);
-		dailySalesSheet.setColumnWidth(1, itemNameColumnWidth);
-		dailySalesSheet.setColumnWidth(2, unitColumnWidth);
-		dailySalesSheet.setColumnWidth(3, quantityColumnWidth);
-		dailySalesSheet.setColumnWidth(4, unitCostColumnWidth);
-		dailySalesSheet.setColumnWidth(5, valueColumnWidth);	
+		warehouseStockSheet.setColumnWidth(0, warehouseColumnWidth);
+		warehouseStockSheet.setColumnWidth(1, itemColumnWidth);
+		warehouseStockSheet.setColumnWidth(2, quantityColumnWidth);
+		warehouseStockSheet.setColumnWidth(3, unitColumnWidth);
+		warehouseStockSheet.setColumnWidth(4, totalValueColumnWidth);
+		
+		Row header = warehouseStockSheet.createRow(0);
+		
+		Cell headerCell = header.createCell(0);
+		headerCell.setCellValue("Almacén");
+		headerCell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, 0);
+		setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
+		headerCell.setCellValue("Artículo");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(2);
+		headerCell.setCellValue("Cantidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 2, 2);
+		setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(3);
+		headerCell.setCellValue("Valor unitario");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 3, 3);
+		setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(4);
+		headerCell.setCellValue("Valor total");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 4, 4);
+		setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
 	
 	private void initWorkbookWithCatalogSheet() {
 		
-		int itemNameColumnWidth = 8000;
+		int itemColumnWidth = 8000;
 		int priceColumnWidth = 3000;
 		
-		dailySalesSheet.setColumnWidth(0, itemNameColumnWidth);
-		dailySalesSheet.setColumnWidth(1, priceColumnWidth);		
+		catalogSheet.setColumnWidth(0, itemColumnWidth);
+		catalogSheet.setColumnWidth(1, priceColumnWidth);
+		
+		Row header = catalogSheet.createRow(0);
+		
+		Cell headerCell = header.createCell(0);
+		headerCell.setCellValue("Producto");
+		headerCell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, 0);
+		setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
+		headerCell.setCellValue("Precio");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
 	
 	private void addDayTotalAmount(Sheet sheet, Integer rowCount, Integer initDayRow, Integer totalColumn, String totalColumnLetter) {
@@ -820,19 +864,9 @@ private Workbook workbook = null;
 			initWorkbookWithDailyPaymentsSheet(from, until);
 			
 			Integer rowCount = 1;
-			Date previousDate = null;
-			Integer initDayRow = 2;
 			while (rs.next()) {
 				
 				Row row = dailyPaymentsSheet.createRow(rowCount);
-				
-//				if (previousDate != null && previousDate.compareTo(rs.getDate("orderdate")) != 0) {
-//					addDayTotalAmount(dailyPaymentsSheet, rowCount, initDayRow, 2, "C");					
-//					initDayRow = rowCount + 2;					
-//					rowCount++;
-//				}
-				
-				previousDate = rs.getDate("orderdate");
 				
 				row = dailyPaymentsSheet.createRow(rowCount);
 				Cell cell = row.createCell(0);				
@@ -848,16 +882,102 @@ private Workbook workbook = null;
 				cell.setCellStyle(moneyStyle);
 				
 				rowCount++;
-				
-//				if (rs.isLast()) {
-//					addDayTotalAmount(dailyPaymentsSheet, rowCount, initDayRow, 2, "C");					
-//					initDayRow = rowCount + 2;					
-//					rowCount++;
-//				}
 			}
 			
 			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 2);
 			setBordersToMergedCells(dailyPaymentsSheet, cellRangeAddress, BorderStyle.MEDIUM);
+									
+			return null;
+		}
+	}
+	
+	private final class ExportWarehouseStockToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			initWorkbookWithWarehouseStockSheet();
+			
+			Integer rowCount = 1;
+			while (rs.next()) {
+				
+				Row row = warehouseStockSheet.createRow(rowCount);				
+								
+				row = warehouseStockSheet.createRow(rowCount);
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(rs.getString("whouse"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getString("iName"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(rs.getDouble("iQty"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(rs.getDouble("iUnitValue"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(4);
+				cell.setCellValue(rs.getDouble("iTotalValue"));
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+			}
+			
+			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+			setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+									
+			return null;
+		}
+	}
+	
+	private void addProductCategoryRow(Integer rowCount, String categoryName) {
+		Row row = catalogSheet.createRow(rowCount);
+		Cell cell = row.createCell(0);				
+		cell.setCellValue(categoryName);
+		cell.setCellStyle(headerStyle);
+		
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 0, 1);
+		setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
+	}
+	
+	private final class ExportCatalogToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			initWorkbookWithCatalogSheet();
+			
+			Integer rowCount = 1;
+			String previousCategory = "";
+			while (rs.next()) {
+				
+				Row row = catalogSheet.createRow(rowCount);
+				
+				if (previousCategory.isEmpty() || !previousCategory.equals(rs.getString("categoryName"))) {
+					addProductCategoryRow(rowCount, rs.getString("categoryName"));	
+					rowCount++;
+				}
+				
+				previousCategory = rs.getString("categoryName");
+				
+				row = catalogSheet.createRow(rowCount);
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(rs.getString("productName"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getDouble("productPrice"));
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+			}
+			
+			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 1);
+			setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
 									
 			return null;
 		}
@@ -936,6 +1056,27 @@ private Workbook workbook = null;
 		return super.query(query, qryParameters, new ExportDailyPaymentsToXLSExtractor());
 	}
 	
+	private Object runWarehouseStockDBQuery() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport2_Stock\"(:lang, :warehouse, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());	
+		qryParameters.put("warehouse", "");
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportWarehouseStockToXLSExtractor());
+	}
+	
+	private Object runCatalogDBQuery() throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport2_Catalog\"(:lang, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportCatalogToXLSExtractor());
+	}
+	
 	private void getCustomReportToXlsx(Date from, Date until, String costCenter) throws SQLException, IOException {
 		
 		try {
@@ -963,8 +1104,10 @@ private Workbook workbook = null;
 		runDailyPaymentsDBQuery(from, until);
 		
 		//seventh
+		runWarehouseStockDBQuery();
 		
 		//eighth
+		runCatalogDBQuery();
 		
 		//workbook file creation//
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
