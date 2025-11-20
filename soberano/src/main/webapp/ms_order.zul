@@ -121,7 +121,10 @@
 					<borderlayout id="blayoutTicket" visible="false" width="300px" vflex="1">
 						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
 							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto">
-								<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
+								<vbox width="100%" height="100%">
+									<barcodescanner enable="true" type="qr,code128" continuous="false" interval="500" hflex="1" vflex="1" onDetect='Clients.log(event.getType() + " " + event.getResult())'/>
+									<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
+								</vbox>								
 							</window>
 						</center>	
 					</borderlayout>

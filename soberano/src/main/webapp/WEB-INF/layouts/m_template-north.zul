@@ -15,6 +15,8 @@
 			<barbuttonwpopupcomposer tree="treeActivity" shortcutCaption="${labels.layout.template.shortcut.Split}" composer="co.syscoop.soberano.composers.OrderSplittingTreeComposer"></barbuttonwpopupcomposer>
 			<separator></separator>
 			<button visible="true" id="btnShowTicket" label="T" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.ShowTicketFromButtonBarButtonComposer"></button>
+			<separator></separator>
+			<button id="btnScanner" image="./images/scanner.png" sclass="BarButton NewButton"></button>
 		</hbox>
 	</hlayout>
 </zk>

@@ -55,7 +55,7 @@ BEGIN
 								AND expense."This_is_at_DateTime" > pTime
 								AND expense."This_is_at_DateTime" <= cTime;
 
-			RETURN QUERY SELECT DATE_PART('day', shift)::text,
+			RETURN QUERY SELECT DATE_PART('month', shift)::text,
 								"This_has_Name",
 								SUM("This_is_for_Quantity"),
 								"Acronym",

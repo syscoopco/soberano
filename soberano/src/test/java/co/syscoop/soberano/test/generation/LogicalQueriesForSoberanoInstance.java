@@ -24805,7 +24805,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "								AND expense.\"This_is_at_DateTime\" > pTime\n"
 						+ "								AND expense.\"This_is_at_DateTime\" <= cTime;\n"
 						+ "\n"
-						+ "			RETURN QUERY SELECT DATE_PART('day', shift)::text,\n"
+						+ "			RETURN QUERY SELECT DATE_PART('month', shift)::text,\n"
 						+ "								\"This_has_Name\",\n"
 						+ "								SUM(\"This_is_for_Quantity\"),\n"
 						+ "								\"Acronym\",\n"

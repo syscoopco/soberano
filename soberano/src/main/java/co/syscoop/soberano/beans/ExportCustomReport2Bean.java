@@ -588,9 +588,11 @@ private Workbook workbook = null;
 				}
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
-			setBordersToMergedCells(dailySalesSheet, cellRangeAddress, BorderStyle.MEDIUM);
-									
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+				setBordersToMergedCells(dailySalesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+												
 			return null;
 		}
 	}
@@ -655,8 +657,10 @@ private Workbook workbook = null;
 				}
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 5);
-			setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 5);
+				setBordersToMergedCells(dailyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}		
 									
 			return null;
 		}
@@ -722,8 +726,10 @@ private Workbook workbook = null;
 				}
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 5);
-			setBordersToMergedCells(dailyServiceExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 5);
+				setBordersToMergedCells(dailyServiceExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
 									
 			return null;
 		}
@@ -784,9 +790,11 @@ private Workbook workbook = null;
 				}
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
-			setBordersToMergedCells(monthlyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
-									
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+				setBordersToMergedCells(monthlyMaterialExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+												
 			return null;
 		}
 	}
@@ -846,8 +854,11 @@ private Workbook workbook = null;
 				}
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
-			setBordersToMergedCells(monthlyServiceExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+				setBordersToMergedCells(monthlyServiceExpensesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+			
 									
 			return null;
 		}
@@ -884,9 +895,11 @@ private Workbook workbook = null;
 				rowCount++;
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 2);
-			setBordersToMergedCells(dailyPaymentsSheet, cellRangeAddress, BorderStyle.MEDIUM);
-									
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 2);
+				setBordersToMergedCells(dailyPaymentsSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+				
 			return null;
 		}
 	}
@@ -927,9 +940,11 @@ private Workbook workbook = null;
 				rowCount++;
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
-			setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
-									
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+				setBordersToMergedCells(warehouseStockSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+			
 			return null;
 		}
 	}
@@ -976,8 +991,10 @@ private Workbook workbook = null;
 				rowCount++;
 			}
 			
-			CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 1);
-			setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 1);
+				setBordersToMergedCells(catalogSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
 									
 			return null;
 		}
