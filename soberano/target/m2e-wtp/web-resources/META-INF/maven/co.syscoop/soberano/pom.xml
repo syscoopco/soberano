@@ -17,6 +17,7 @@
 		<fastexcel-reader>0.19.0</fastexcel-reader>
 		<gson>2.10.1</gson>
 		<httpcore5>5.3.4</httpcore5>
+		<jakarta.json-api>2.1.3</jakarta.json-api>
 		<jakarta.servlet-api>6.1.0</jakarta.servlet-api>
 		<jasypt>1.9.3</jasypt>
 		<java-encoder>1.3.1</java-encoder>
@@ -179,6 +180,11 @@
 		</dependency>
 		
 		<!-- Jakarta -->
+		<dependency>
+		    <groupId>jakarta.json</groupId>
+		    <artifactId>jakarta.json-api</artifactId>
+		    <version>${jakarta.json-api}</version>
+		</dependency>
 		<dependency>
 		    <groupId>jakarta.servlet</groupId>
 		    <artifactId>jakarta.servlet-api</artifactId>

@@ -292,7 +292,7 @@
 			<!-- <transport-guarantee>NONE</transport-guarantee> -->		 
 			
 			<!-- TODO: enable https in production -->
-			<transport-guarantee>NONE</transport-guarantee>					
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>					
 		</user-data-constraint>
 	</security-constraint>
 </web-app>

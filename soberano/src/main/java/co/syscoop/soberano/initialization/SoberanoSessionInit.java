@@ -63,5 +63,7 @@ public class SoberanoSessionInit implements SessionInit {
 		sess.setAttribute("production_line_board_grid_order_column", "processRunIdPair");
 		sess.setAttribute("production_line_board_grid_sort_direction", "ASC");
 		sess.setAttribute("addition_selection_view_model", new AdditionSelectionForOrderViewModel());
+		
+		sess.setAttribute("barcode_scanner_is_enabled", true);
 	}	
 }

@@ -1,0 +1,53 @@
+Browsers require https for accessing some resources like camera and microphone.
+TCPTOOL need it for barcode scanner ZK component.
+
+Command to generate the certificate and key store file to be used during development:
+
+keytool -genkeypair -alias tcptooldevcert -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore tcptooldevks.p12 -validity 3650
+
+Use 123456 as password.
+
+Pass tcptool as each param value but country. For country, use US.
+
+Copy the key store file tcptooldevks.p12 to src/main/resources. This is just for keeping a copy in the development project.
+
+tcptooldevks.p12 must be copied within the folder conf of the deployed Tomcat instance.
+
+In web app web.xml, configure this:
+
+<security-constraint>
+  	<web-resource-collection>
+  		<web-resource-name>
+  			TCP TOOL Web Aplication 
+  		</web-resource-name>
+  		<url-pattern>/*</url-pattern>
+  	</web-resource-collection>
+  	<user-data-constraint>
+		<description>
+			Constrain the user data transport for the whole application
+		</description>
+		
+		<!-- <transport-guarantee>CONFIDENTIAL</transport-guarantee> -->
+		<!-- <transport-guarantee>NONE</transport-guarantee> -->		 
+		
+		<!-- TODO: enable https in production -->
+		<transport-guarantee>CONFIDENTIAL</transport-guarantee>					
+	</user-data-constraint>
+</security-constraint>
+
+In server.xml, insert this block:
+
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol"
+           maxThreads="150" SSLEnabled="true">
+    <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol" />
+    <SSLHostConfig>
+        <Certificate certificateKeystoreFile="conf/tcptooldevks.p12"
+                     certificateKeystorePassword="123456" type="RSA" />
+    </SSLHostConfig>
+</Connector>
+
+################################################################################
+
+##	The above instructions must be used uniquely in development environment.  ##
+
+################################################################################
