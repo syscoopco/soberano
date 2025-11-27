@@ -122,7 +122,7 @@
 						<center hflex="1" autoscroll="true" sclass="DefaultBackground">
 							<window id="wndTicket" hflex="1" vflex="1" contentStyle="overflow:auto">
 								<vbox width="100%" height="100%">
-									<barcodescanner visible="true" id="bcs" enable="true" type="qr,code128,upc,ean,ean8" continuous="true" interval="3000" hflex="1" vflex="1" apply="co.syscoop.soberano.composers.BarcodeScannerComposer"/>
+									<barcodescanner visible="true" id="bcs" enable="true" type="qr,code128,upc,ean,ean8" continuous="true" interval="1000" hflex="1" vflex="1" apply="co.syscoop.soberano.composers.BarcodeScannerComposer"/>
 									<textbox hflex="1" vflex="1" id="txtTicket" multiline="true" readonly="true" style="font-family: courier;"/>
 								</vbox>								
 							</window>
