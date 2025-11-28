@@ -16,7 +16,7 @@
 			<separator></separator>
 			<button visible="true" id="btnShowTicket" label="T" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.ShowTicketFromButtonBarButtonComposer"></button>
 			<separator></separator>
-			<button id="btnScanner" image="./images/scanner.png" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.ShowBarcodeScannerFromButtonBarButtonComposer"></button>
+			<button id="btnScanner" image="./images/scanner.png" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.ShowBarcodeScannerFromButtonBarButtonMobileComposer"></button>
 		</hbox>
 	</hlayout>
 </zk>

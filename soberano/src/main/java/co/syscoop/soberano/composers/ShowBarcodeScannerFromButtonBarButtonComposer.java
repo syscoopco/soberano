@@ -19,43 +19,31 @@ public class ShowBarcodeScannerFromButtonBarButtonComposer extends SelectorCompo
 	@Wire
 	private Button btnScanner;
 	
-	@Wire
-	private Button btnShowTicket;
-	
 	@Listen("onClick = button#btnScanner")
     public void btnScanner_onClick() {
 		
-		Component blayoutOrderItems = btnScanner.getParent().
-											getParent().
-											getParent().
-											getParent().
-												query("#wndContentPanel").
-												query("#wndOrderItems").
-												query("#blayoutOrderItems");
-		
-		Borderlayout blayoutTicket = (Borderlayout) btnShowTicket.getParent().
-																getParent().
-																getParent().
-																getParent().
-																	query("#wndContentPanel").
-																	query("#wndOrderItems").
-																	query("#blayoutTicket");
-		
-		Barcodescanner bcs = (Barcodescanner) blayoutTicket.query("barcodescanner");
-		
-		if ((Boolean) (Executions.getCurrent().getSession().getAttribute("barcode_scanner_is_enabled"))) {
-			bcs.setEnable(false);
-			bcs.setVisible(false);
-			Executions.getCurrent().getSession().setAttribute("barcode_scanner_is_enabled", false);
-		}
-		else {
-			if (blayoutOrderItems.isVisible()) {				
-				blayoutOrderItems.setVisible(false);				
-				blayoutTicket.setVisible(true);
+		try {
+			Borderlayout blayoutTicket = (Borderlayout) btnScanner.getParent().
+																	getParent().
+																	getParent().
+																	getParent().
+																		query("#wndContentPanel").
+																		query("#wndOrderItems").
+																		query("#blayoutTicket");
+
+			Barcodescanner bcs = (Barcodescanner) blayoutTicket.query("barcodescanner");
+			
+			if ((Boolean) (Executions.getCurrent().getSession().getAttribute("barcode_scanner_is_enabled"))) {
+				bcs.setEnable(false);
+				bcs.setVisible(false);
+				Executions.getCurrent().getSession().setAttribute("barcode_scanner_is_enabled", false);
 			}
-			bcs.setEnable(true);
-			bcs.setVisible(true);
-			Executions.getCurrent().getSession().setAttribute("barcode_scanner_is_enabled", true);			
+				else {
+				bcs.setEnable(true);
+				bcs.setVisible(true);
+				Executions.getCurrent().getSession().setAttribute("barcode_scanner_is_enabled", true);			
+			}
 		}
+		catch(Exception ex) {}
     }
 }
