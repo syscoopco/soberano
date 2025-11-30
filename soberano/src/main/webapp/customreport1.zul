@@ -1,5 +1,5 @@
 <!-- <?page title="${labels.customReport1.WindowTitle}" contentType="text/html;charset=UTF-8"?> -->
-<?page title="Producción y ventas" contentType="text/html;charset=UTF-8"?>
+<?page title="Producción y ventas con traducciones DA" contentType="text/html;charset=UTF-8"?>
 
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template.zul"?>
 
@@ -7,7 +7,7 @@
 	<include src="/style.zul"/>
 	
 	<!-- <label self="@define(pageTitle)" value="${labels.customReport1.WindowTitle}" sclass="PageTitle"/> -->
-	<label self="@define(pageTitle)" value="Producción y ventas" sclass="PageTitle"/>
+	<label self="@define(pageTitle)" value="Producción y ventas con traducciones DA" sclass="PageTitle"/>
 	
 	<window id="wndContentPanel" self="@define(contentPanel)" height="100%" contentStyle="overflow:auto">
 		<vbox vflex="1" id="boxDetails" hflex="1">

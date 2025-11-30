@@ -36,9 +36,9 @@
 								<!--
 								 <menuitem label="${labels.menuItem.CustomReport1}" href="customreport1.zul"/>
 								 -->
-								<menuitem label="Producción y ventas" href="customreport1.zul"/>
-								<menuitem label="Producción y ventas sin traducciones" href="customreport2.zul"/>
-								<menuitem label="${labels.menuItem.CustomReport3}" href="customreport3.zul"/>
+								<menuitem label="Producción y ventas con traducciones DA" href="customreport1.zul"/>
+								<menuitem label="Ventas, gastos, caja, catálogo, y existencias B9" href="customreport2.zul"/>
+								<menuitem label="Ventas, costos, ganancias, y existencias DTUT" href="customreport3.zul"/>
 								<menuitem label="${labels.menuItem.CustomReport4}" href="customreport4.zul"/>
 								<menuitem label="${labels.menuItem.CustomReport5}" href="customreport5.zul"/>
 							</menupopup>

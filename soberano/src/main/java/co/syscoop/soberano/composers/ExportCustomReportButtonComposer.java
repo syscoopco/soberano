@@ -9,7 +9,6 @@ import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
-import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Datebox;
 import org.zkoss.zul.Messagebox;
 import co.syscoop.soberano.beans.IExportToFile;
@@ -33,11 +32,9 @@ public class ExportCustomReportButtonComposer extends SelectorComposer {
     public void btnExport_onClick() throws Exception {
 		
 		try{
-			String costCenter = ((Combobox) btnExport.getParent().getParent().getParent().query("#wndContentPanel").query("#cmbCostCenter")).getText();
 			Date dateFrom = ((Datebox) btnExport.getParent().getParent().getParent().query("#wndContentPanel").query("#dateFrom")).getValue();
 			Date dateUntil = ((Datebox) btnExport.getParent().getParent().getParent().query("#wndContentPanel").query("#dateUntil")).getValue();
 			HashMap<String, Object> parameters = new HashMap<String, Object>();
-			parameters.put("costCenter", costCenter);
 			parameters.put("from", dateFrom);
 			parameters.put("until", dateUntil);
 			
