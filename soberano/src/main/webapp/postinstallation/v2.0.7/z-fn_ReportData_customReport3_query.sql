@@ -4,8 +4,8 @@ CREATE OR REPLACE FUNCTION soberano."z-fn_ReportData_customReport3_query"(
 	untild date,
 	ccname character varying,
 	loginname character varying)
-    RETURNS TABLE("iName" character varying, "unitCost" numeric, "iPrice" numeric, 
-				"soldQuantity" numeric, opening numeric, inputs numeric, outputs numeric, ending numeric) 
+    RETURNS TABLE("iName" character varying, "unitCost" numeric, "iPrice" numeric, "soldQuantity" numeric, 
+					opening numeric, inputs numeric, outputs numeric, movements numeric, losses numeric, ending numeric) 
     LANGUAGE 'plpgsql'
     COST 100
     VOLATILE PARALLEL UNSAFE
@@ -60,13 +60,15 @@ BEGIN
 								AND orderCollectingVotet."This_is_on_Timestamp" <= cTime;
 
 			RETURN QUERY SELECT iitemo."This_has_Name",
-								priv."Value" / SUM(pro."Quantity"),
+								SUM(priv."Value") / SUM(pro."Quantity"),
 								"Price",
 								SUM(pro."Quantity"),
-								stock.opening, 
-								stock.input_, 
-								stock.output_ + stock.losses + stock.movement,
-								stock.ending
+								stockfrom.opening, 
+								COALESCE(SUM(inputs.iQty), 0.0::numeric), 
+								COALESCE(outputs.oQty, 0.0::numeric),
+								COALESCE(movements.mQty, 0.0::numeric),
+								COALESCE(losses.lQty, 0.0::numeric),
+								stockuntil.ending
 							FROM soberano."ProcessRunOutputHasPriceForOrder" prohpfo
 								INNER JOIN soberano."InventoryItem" iitemo
 									ON iitemo."InventoryItemHasInventoryItemCode" = prohpfo."InventoryItemHasInventoryItemCode"
@@ -115,26 +117,83 @@ BEGIN
 									ON shiftDateTimes.datetime = orderCollectingVotet."This_is_on_Timestamp"
 								INNER JOIN soberano."AcquirableMaterial" am
 									ON am."InventoryItemHasInventoryItemCode" = iitemi."InventoryItemHasInventoryItemCode"
-								
+
 								--param value 1002 is the id of the warehouse from which the cost center consumes materials
-								INNER JOIN (SELECT * from soberano."fn_InventoryOperation_getSPI"(to_char(untild, 'YYYY/MM/DD'), 1002, 0, lang, loginname)) stock
-									ON stock."acquirableMaterialId" = am."AcquirableMaterialHasAcquirableMaterialId"
+								INNER JOIN (SELECT * from soberano."fn_InventoryOperation_getSPI"(to_char(fromd, 'YYYY/MM/DD'), 1002, 0, lang, loginname)) stockfrom
+									ON stockfrom."acquirableMaterialId" = am."AcquirableMaterialHasAcquirableMaterialId"
+								INNER JOIN (SELECT * from soberano."fn_InventoryOperation_getSPI"(to_char(untild, 'YYYY/MM/DD'), 1002, 0, lang, loginname)) stockuntil
+									ON stockuntil."acquirableMaterialId" = am."AcquirableMaterialHasAcquirableMaterialId"
+								LEFT JOIN (SELECT SUM("This_is_called_with_Quantity") iQty,
+													"This_is_called_with_InventoryItem_with_InventoryItemHasInventor" iItem
+											FROM soberano."StockChange"
+											WHERE "This_is_called_with_Quantity" > 0
+												AND "This_is_called_with_Warehouse_with_WarehouseHasWarehouseId" = 1002
+												AND "This_is_at_DateTime" > pTime
+												AND "This_is_at_DateTime" <= cTime
+										  	GROUP BY "This_is_called_with_InventoryItem_with_InventoryItemHasInventor") inputs
+									ON inputs.iITem = am."InventoryItemHasInventoryItemCode"
+								LEFT JOIN (SELECT SUM("This_is_called_with_Quantity") oQty,
+													"This_is_called_with_InventoryItem_with_InventoryItemHasInventor" oItem
+											FROM soberano."StockChange"
+											WHERE "This_is_called_with_Quantity" < 0
+												AND "This_is_called_with_Warehouse_with_WarehouseHasWarehouseId" = 1002
+												AND "This_is_at_DateTime" > pTime
+												AND "This_is_at_DateTime" <= cTime
+										   		AND "This_is_triggered_by_ProcessRun_with_ProcessRunHasProcessRunId" IS NOT NULL
+										  	GROUP BY "This_is_called_with_InventoryItem_with_InventoryItemHasInventor") outputs
+									ON outputs.oItem = am."InventoryItemHasInventoryItemCode"
+								LEFT JOIN (SELECT SUM("This_is_called_with_Quantity") mQty,
+														"This_is_called_with_InventoryItem_with_InventoryItemHasInventor" mItem
+												FROM soberano."StockChange" sc
+													INNER JOIN soberano."Warehouse" wh
+														ON wh."WarehouseHasWarehouseId" = sc."This_is_called_with_Warehouse_with_WarehouseHasWarehouseId"
+													INNER JOIN soberano."InventoryOperation" io
+														ON io."InventoryOperationHasInventoryOperationId" = sc."This_is_of_InventoryOperation_with_InventoryOperationHasInvento"
+															AND io."This_moves_items_to_Warehouse_with_WarehouseHasWarehouseId"
+																IN (SELECT "WarehouseHasWarehouseId" 
+																			FROM soberano."Warehouse" 
+																			WHERE NOT "Warehouse_is_losses_warehouse")
+												WHERE "This_is_called_with_Quantity" < 0
+													AND "This_is_called_with_Warehouse_with_WarehouseHasWarehouseId" = 1002
+													AND "This_is_at_DateTime" > pTime
+													AND "This_is_at_DateTime" <= cTime
+													AND "This_is_triggered_by_ProcessRun_with_ProcessRunHasProcessRunId" IS NULL
+												GROUP BY "This_is_called_with_InventoryItem_with_InventoryItemHasInventor") movements
+									ON movements.mItem = am."InventoryItemHasInventoryItemCode"
+								LEFT JOIN (SELECT SUM("This_is_called_with_Quantity") lQty,
+													"This_is_called_with_InventoryItem_with_InventoryItemHasInventor" lItem
+											FROM soberano."StockChange" sc
+										   		INNER JOIN soberano."Warehouse" wh
+										   			ON wh."WarehouseHasWarehouseId" = sc."This_is_called_with_Warehouse_with_WarehouseHasWarehouseId"
+												INNER JOIN soberano."InventoryOperation" io
+													ON io."InventoryOperationHasInventoryOperationId" = sc."This_is_of_InventoryOperation_with_InventoryOperationHasInvento"
+														AND io."This_moves_items_to_Warehouse_with_WarehouseHasWarehouseId"
+															IN (SELECT "WarehouseHasWarehouseId" 
+																		FROM soberano."Warehouse" 
+																		WHERE "Warehouse_is_losses_warehouse")
+											WHERE "This_is_called_with_Quantity" < 0
+												AND "This_is_called_with_Warehouse_with_WarehouseHasWarehouseId" = 1002
+												AND "This_is_at_DateTime" > pTime
+												AND "This_is_at_DateTime" <= cTime
+										   		AND "This_is_triggered_by_ProcessRun_with_ProcessRunHasProcessRunId" IS NULL
+										  	GROUP BY "This_is_called_with_InventoryItem_with_InventoryItemHasInventor") losses
+									ON losses.lItem = am."InventoryItemHasInventoryItemCode"
 							GROUP BY iitemo."This_has_Name",
-									priv."Value",
 									"Price",
 									cat."This_is_shown_in_Position",
-									stock.opening, 
-									stock.input_, 
-									stock.output_,
-									stock.losses,
-									stock.movement,
-									stock.ending
+									stockfrom.opening, 
+									outputs.oQty,
+									movements.mQty,
+									losses.lQty,
+									stockuntil.ending
 							ORDER BY cat."This_is_shown_in_Position" ASC,
 									iitemo."This_has_Name" ASC;						
 	ELSE
 		RETURN QUERY SELECT ''::character varying,
 							0.0::numeric, 
-							0.0 numeric,
+							0.0::numeric,
+							0.0::numeric,
+							0.0::numeric,
 							0.0::numeric,
 							0.0::numeric,
 							0.0::numeric,

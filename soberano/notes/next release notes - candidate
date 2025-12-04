@@ -1,13 +1,37 @@
-v2.0.7 candidate release
+v2.0.8 La Lisa Edition
 
 New: Custom Report 2 Example.
 
 New: Custom Report 3 Example
 
-New: Barcode scanner feature added to order form.
+New: Barcode scanner feature added to order form. In modern browsers, this needs to enable camera
+	and thus to use https. In web.xml, instead of <transport-guarantee>NONE</transport-guarantee>
+	use <transport-guarantee>CONFIDENTIAL</transport-guarantee>.
+	Also, copy to the Tomcat instance conf directory the self-signed SSL certificate included
+	in the war file with the name tcptooldevks.p12. You MUST replace this certificate with the yours.
+	
+	In server.xml, the proper SSL adapter must be enabled by uncommenting this statement and setting the 
+	correct certificate file pathname (conf/tcptooldevks.p12 or the yours):
+	
+	<Connector SSLEnabled="true" maxThreads="150" port="8443" protocol="org.apache.coyote.http11.Http11NioProtocol">
+        <UpgradeProtocol className="org.apache.coyote.http2.Http2Protocol"/>
+        <SSLHostConfig>
+            <Certificate certificateKeystoreFile="conf/tcptooldevks.p12" certificateKeystorePassword="123456" type="RSA"/>
+        </SSLHostConfig>
+    </Connector>
 
 Fix: PostgreSQL function soberano."z-fn_ReportData_customReport1_productionAndSales" improperly
 	returned inventory item code, and wrongly grouped columns, resulting in bad item day sales. 
-	Total item sales in the period was right though. 
+	Total item sales in the period was right though.
+	
+Fix: Inventory recalculation always set process input values to 0. Correction:
+
+	In FUNCTION "soberano"."fn_Stock_change"("stockchangeid" integer) RETURNS "void"
+	
+	Replace this: newStockUnitValue * CASE WHEN quantity < 0 THEN 0 ELSE abs(quantity) END,
+	
+	by this: SET "Value" = newStockUnitValue * abs(quantity),
+	
+	
 
 User manual:

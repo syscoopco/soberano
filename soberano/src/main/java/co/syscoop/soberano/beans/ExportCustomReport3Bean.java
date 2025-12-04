@@ -162,6 +162,8 @@ private Workbook workbook = null;
 		int openingColumnWidth = 3000;
 		int inputsColumnWidth = 3000;
 		int outputsStockColumnWidth = 3000;
+		int movementsStockColumnWidth = 3000;
+		int lossesStockColumnWidth = 3000;
 		int currentStockColumnWidth = 3000;
 		
 		reportSheet.setColumnWidth(0, productNameColumnWidth);
@@ -179,7 +181,9 @@ private Workbook workbook = null;
 		reportSheet.setColumnWidth(12, openingColumnWidth);
 		reportSheet.setColumnWidth(13, inputsColumnWidth);
 		reportSheet.setColumnWidth(14, outputsStockColumnWidth);
-		reportSheet.setColumnWidth(15, currentStockColumnWidth);
+		reportSheet.setColumnWidth(15, movementsStockColumnWidth);
+		reportSheet.setColumnWidth(16, lossesStockColumnWidth);
+		reportSheet.setColumnWidth(17, currentStockColumnWidth);
 		
 		Row header = reportSheet.createRow(0);
 					
@@ -264,19 +268,31 @@ private Workbook workbook = null;
 		headerCell = header.createCell(13);
 		headerCell.setCellValue("Entradas");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 12, 13);
+		cellRangeAddress = new CellRangeAddress(0, 0, 13, 13);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 		
 		headerCell = header.createCell(14);
 		headerCell.setCellValue("Salidas");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 12, 14);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+		cellRangeAddress = new CellRangeAddress(0, 0, 14, 14);
+		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(15);
+		headerCell.setCellValue("Movimientos");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 15, 15);
+		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+		
+		headerCell = header.createCell(16);
+		headerCell.setCellValue("Pérdidas");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 16, 16);
+		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+		
+		headerCell = header.createCell(17);
 		headerCell.setCellValue("Existencias");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 12, 15);
+		cellRangeAddress = new CellRangeAddress(0, 0, 17, 17);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 	}
 	
@@ -406,6 +422,14 @@ private Workbook workbook = null;
 				cell.setCellStyle(style);
 				
 				cell = row.createCell(15);
+				cell.setCellValue(rs.getDouble("movements"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(16);
+				cell.setCellValue(rs.getDouble("losses"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(17);
 				cell.setCellValue(rs.getDouble("ending"));
 				cell.setCellStyle(style);
 				
