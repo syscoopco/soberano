@@ -89,6 +89,13 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
 	private static void updateServedItems(ItemOperation itemOperation, Event event) throws Exception {
 		
+ 		Component boxDetails = event.getTarget().getParent().getParent().getParent().getParent().
+									getParent().getParent().getParent().getParent().getParent().
+									getParent().getParent().getParent().getParent().getParent().
+									getParent().getParent().getParent().getParent().query("#boxDetails");
+ 		Combobox cmbItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder"));
+		cmbItemToOrder.focus();
+		
 		String buttonId = event.getTarget().getId();
 		Integer processRunId = Integer.parseInt(buttonId.substring(buttonId.indexOf("s") + 1, buttonId.length()));
 		String inventoryItemCode =  ((Label) event.getTarget().query("#lblInventoryItemCode" + processRunId.toString())).getValue();
@@ -186,10 +193,7 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			
 			//update amount fields and ticket
 			updateAmountAndTicket(confTreeitem.getOrder(), 
-								(Window) event.getTarget().getParent().getParent().getParent().getParent().getParent().
-												getParent().getParent().getParent().getParent().getParent().getParent().
-												getParent().getParent().getParent().getParent().getParent().getParent().
-												getParent().query("#wndContentPanel"));
+								(Window) boxDetails.query("#wndContentPanel"));
 		}
 		else {
 			confTreeitem.requestAction();
@@ -969,7 +973,10 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	@Override
 	public Integer makeFromForm(Component boxDetails) throws Exception {
 		
-		Comboitem cmbiItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder")).getSelectedItem();
+		Combobox cmbItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder"));
+		cmbItemToOrder.focus();
+				
+		Comboitem cmbiItemToOrder = cmbItemToOrder.getSelectedItem();
 		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
 		Decimalbox decOneRunQuantity = (Decimalbox) boxDetails.query("#decOneRunQuantity");
 		Textbox txtSpecialInstructions = (Textbox) boxDetails.query("#txtSpecialInstructions");

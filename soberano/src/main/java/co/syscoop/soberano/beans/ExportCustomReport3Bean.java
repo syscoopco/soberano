@@ -154,11 +154,11 @@ private Workbook workbook = null;
 		int quantityColumnWidth = 3000;
 		int totalGainColumnWidth = 3000;
 		int salesColumnWidth = 3000;
-		int _1percentageColumnWidth = 3000;
-		int _2percentageColumnWidth = 3000;
-		int _3percentageColumnWidth = 3000;
-		int _4percentageColumnWidth = 3000;
-		int _5percentageColumnWidth = 3000;
+//		int _1percentageColumnWidth = 3000;
+//		int _2percentageColumnWidth = 3000;
+//		int _3percentageColumnWidth = 3000;
+//		int _4percentageColumnWidth = 3000;
+//		int _5percentageColumnWidth = 3000;
 		int openingColumnWidth = 3000;
 		int inputsColumnWidth = 3000;
 		int outputsStockColumnWidth = 3000;
@@ -173,17 +173,17 @@ private Workbook workbook = null;
 		reportSheet.setColumnWidth(4, quantityColumnWidth);
 		reportSheet.setColumnWidth(5, totalGainColumnWidth);
 		reportSheet.setColumnWidth(6, salesColumnWidth);
-		reportSheet.setColumnWidth(7, _1percentageColumnWidth);
-		reportSheet.setColumnWidth(8, _2percentageColumnWidth);
-		reportSheet.setColumnWidth(9, _3percentageColumnWidth);
-		reportSheet.setColumnWidth(10, _4percentageColumnWidth);
-		reportSheet.setColumnWidth(11, _5percentageColumnWidth);
-		reportSheet.setColumnWidth(12, openingColumnWidth);
-		reportSheet.setColumnWidth(13, inputsColumnWidth);
-		reportSheet.setColumnWidth(14, outputsStockColumnWidth);
-		reportSheet.setColumnWidth(15, movementsStockColumnWidth);
-		reportSheet.setColumnWidth(16, lossesStockColumnWidth);
-		reportSheet.setColumnWidth(17, currentStockColumnWidth);
+//		reportSheet.setColumnWidth(7, _1percentageColumnWidth);
+//		reportSheet.setColumnWidth(8, _2percentageColumnWidth);
+//		reportSheet.setColumnWidth(9, _3percentageColumnWidth);
+//		reportSheet.setColumnWidth(10, _4percentageColumnWidth);
+//		reportSheet.setColumnWidth(11, _5percentageColumnWidth);
+		reportSheet.setColumnWidth(7, openingColumnWidth);
+		reportSheet.setColumnWidth(8, inputsColumnWidth);
+		reportSheet.setColumnWidth(9, outputsStockColumnWidth);
+		reportSheet.setColumnWidth(10, movementsStockColumnWidth);
+		reportSheet.setColumnWidth(11, lossesStockColumnWidth);
+		reportSheet.setColumnWidth(12, currentStockColumnWidth);
 		
 		Row header = reportSheet.createRow(0);
 					
@@ -229,70 +229,70 @@ private Workbook workbook = null;
 		cellRangeAddress = new CellRangeAddress(0, 0, 6, 6);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
+//		headerCell = header.createCell(7);
+//		headerCell.setCellValue("1%");
+//		headerCell.setCellStyle(headerStyle);
+//		cellRangeAddress = new CellRangeAddress(0, 0, 7, 7);
+//		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
+//		
+//		headerCell = header.createCell(8);
+//		headerCell.setCellValue("2%");
+//		headerCell.setCellStyle(headerStyle);
+//		cellRangeAddress = new CellRangeAddress(0, 0, 8, 8);
+//		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+//		
+//		headerCell = header.createCell(9);
+//		headerCell.setCellValue("3%");
+//		headerCell.setCellStyle(headerStyle);
+//		cellRangeAddress = new CellRangeAddress(0, 0, 9, 9);
+//		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
+//		
+//		headerCell = header.createCell(10);
+//		headerCell.setCellValue("4%");
+//		headerCell.setCellStyle(headerStyle);
+//		cellRangeAddress = new CellRangeAddress(0, 0, 10, 10);
+//		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
+//		
+//		headerCell = header.createCell(11);
+//		headerCell.setCellValue("5%");
+//		headerCell.setCellStyle(headerStyle);
+//		cellRangeAddress = new CellRangeAddress(0, 0, 11, 11);
+//		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
 		headerCell = header.createCell(7);
-		headerCell.setCellValue("1%");
+		headerCell.setCellValue("Inicio");
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(0, 0, 7, 7);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 		
 		headerCell = header.createCell(8);
-		headerCell.setCellValue("2%");
+		headerCell.setCellValue("Entradas");
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(0, 0, 8, 8);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 		
 		headerCell = header.createCell(9);
-		headerCell.setCellValue("3%");
+		headerCell.setCellValue("Salidas");
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(0, 0, 9, 9);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(10);
-		headerCell.setCellValue("4%");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 10, 10);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = header.createCell(11);
-		headerCell.setCellValue("5%");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 11, 11);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = header.createCell(12);
-		headerCell.setCellValue("Inicio");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 12, 12);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
-		
-		headerCell = header.createCell(13);
-		headerCell.setCellValue("Entradas");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 13, 13);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
-		
-		headerCell = header.createCell(14);
-		headerCell.setCellValue("Salidas");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 14, 14);
-		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = header.createCell(15);
 		headerCell.setCellValue("Movimientos");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 15, 15);
+		cellRangeAddress = new CellRangeAddress(0, 0, 10, 10);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 		
-		headerCell = header.createCell(16);
+		headerCell = header.createCell(11);
 		headerCell.setCellValue("Pérdidas");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 16, 16);
+		cellRangeAddress = new CellRangeAddress(0, 0, 11, 11);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 		
-		headerCell = header.createCell(17);
+		headerCell = header.createCell(12);
 		headerCell.setCellValue("Existencias");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(0, 0, 17, 17);
+		cellRangeAddress = new CellRangeAddress(0, 0, 12, 12);
 		setBordersToMergedCells(reportSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 	}
 	
@@ -312,30 +312,30 @@ private Workbook workbook = null;
 		formula= "SUM(" + "G2:G" + Integer.valueOf(rowCount).toString() + ")";
 		cell.setCellFormula(formula);
 		
-		cell = row.createCell(7);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "H2:H" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
-		
-		cell = row.createCell(8);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "I2:I" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
-		
-		cell = row.createCell(9);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "J2:J" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
-		
-		cell = row.createCell(10);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "K2:K" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
-		
-		cell = row.createCell(11);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "L2:L" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
+//		cell = row.createCell(7);
+//		cell.setCellStyle(totalStyle);
+//		formula= "SUM(" + "H2:H" + Integer.valueOf(rowCount).toString() + ")";
+//		cell.setCellFormula(formula);
+//		
+//		cell = row.createCell(8);
+//		cell.setCellStyle(totalStyle);
+//		formula= "SUM(" + "I2:I" + Integer.valueOf(rowCount).toString() + ")";
+//		cell.setCellFormula(formula);
+//		
+//		cell = row.createCell(9);
+//		cell.setCellStyle(totalStyle);
+//		formula= "SUM(" + "J2:J" + Integer.valueOf(rowCount).toString() + ")";
+//		cell.setCellFormula(formula);
+//		
+//		cell = row.createCell(10);
+//		cell.setCellStyle(totalStyle);
+//		formula= "SUM(" + "K2:K" + Integer.valueOf(rowCount).toString() + ")";
+//		cell.setCellFormula(formula);
+//		
+//		cell = row.createCell(11);
+//		cell.setCellStyle(totalStyle);
+//		formula= "SUM(" + "L2:L" + Integer.valueOf(rowCount).toString() + ")";
+//		cell.setCellFormula(formula);
 	}
 	
 	private final class ExportSheet1ToXLSExtractor implements ResultSetExtractor<Object> {
@@ -384,52 +384,52 @@ private Workbook workbook = null;
 				cell.setCellFormula(formula);
 				cell.setCellStyle(moneyStyle);
 				
+//				cell = row.createCell(7);
+//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*1%";
+//				cell.setCellFormula(formula);
+//				cell.setCellStyle(moneyStyle);
+//				
+//				cell = row.createCell(8);
+//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*2%";
+//				cell.setCellFormula(formula);
+//				cell.setCellStyle(moneyStyle);
+//				
+//				cell = row.createCell(9);
+//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*3%";
+//				cell.setCellFormula(formula);
+//				cell.setCellStyle(moneyStyle);
+//				
+//				cell = row.createCell(10);
+//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*4%";
+//				cell.setCellFormula(formula);
+//				cell.setCellStyle(moneyStyle);
+//				
+//				cell = row.createCell(11);
+//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*5%";
+//				cell.setCellFormula(formula);
+//				cell.setCellStyle(moneyStyle);
+				
 				cell = row.createCell(7);
-				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*1%";
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(8);
-				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*2%";
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(9);
-				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*3%";
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(10);
-				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*4%";
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(11);
-				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*5%";
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(12);
 				cell.setCellValue(rs.getDouble("opening"));
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(13);
+				cell = row.createCell(8);
 				cell.setCellValue(rs.getDouble("inputs"));
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(14);
+				cell = row.createCell(9);
 				cell.setCellValue(rs.getDouble("outputs"));
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(15);
+				cell = row.createCell(10);
 				cell.setCellValue(rs.getDouble("movements"));
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(16);
+				cell = row.createCell(11);
 				cell.setCellValue(rs.getDouble("losses"));
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(17);
+				cell = row.createCell(12);
 				cell.setCellValue(rs.getDouble("ending"));
 				cell.setCellStyle(style);
 				

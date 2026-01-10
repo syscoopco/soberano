@@ -62,6 +62,10 @@ public class ActivityTreeNodeRenderer implements TreeitemRenderer<DefaultTreeNod
 							((Intbox) wndContentPanel.query("#intObjectId")).setValue(ord.getOrderId());
 							OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
 							Vbox boxDetails = (Vbox) wndContentPanel.query("#boxDetails");
+							
+							Combobox cmbItemToOrder = ((Combobox) boxDetails.query("#cmbItemToOrder"));
+							cmbItemToOrder.focus();
+							
 							((Textbox) boxDetails.query("#txtLabel")).setValue(order.getLabel());
 							((Textbox) boxDetails.query("#txtCounters")).setValue(order.getCountersStr());
 							((Intbox) boxDetails.query("#intDiscountTop")).setValue(order.getDiscount());

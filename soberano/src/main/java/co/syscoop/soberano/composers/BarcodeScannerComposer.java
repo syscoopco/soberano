@@ -29,6 +29,15 @@ public class BarcodeScannerComposer extends SelectorComposer {
         super.doAfterCompose(comp);
 	}
 	
+	@Listen("onChanging = combobox#cmbItemToOrder")
+	public void cmbItemToOrder_onChanging(Event event) {
+	
+		Combobox cmbItemToOrder = (Combobox) event.getTarget();
+		String barcode = cmbItemToOrder.getText();
+		
+		//detect when the content is a valid barcode and add the corresponding item to the order
+	}
+	
 	@Listen("onDetect = barcodescanner#bcs")
     public void bcs_onDetect(Event event) {
 		
