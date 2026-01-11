@@ -1,10 +1,10 @@
-v2.0.9beta La Lisa Edition
+v2.0.9 La Lisa Edition
 
 New: Custom Report 2 Example.
 
 New: Custom Report 3 Example
 
-New: Barcode scanner feature added to order form. In modern browsers, this needs to enable camera
+New: Camera-based barcode scanner feature added to order form. In modern browsers, this needs to enable camera
 	and thus to use https. In web.xml, instead of <transport-guarantee>NONE</transport-guarantee>
 	use <transport-guarantee>CONFIDENTIAL</transport-guarantee>.
 	Also, copy to the Tomcat instance conf directory the self-signed SSL certificate included
@@ -19,6 +19,8 @@ New: Barcode scanner feature added to order form. In modern browsers, this needs
             <Certificate certificateKeystoreFile="conf/tcptooldevks.p12" certificateKeystorePassword="123456" type="RSA"/>
         </SSLHostConfig>
     </Connector>
+    
+New: Key strokes-based barcode scanner feature added to order form.
 
 Fix: PostgreSQL function soberano."z-fn_ReportData_customReport1_productionAndSales" improperly
 	returned inventory item code, and wrongly grouped columns, resulting in bad item day sales. 
