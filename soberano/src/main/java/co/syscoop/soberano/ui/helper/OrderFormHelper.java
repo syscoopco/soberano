@@ -11,6 +11,8 @@ import org.zkoss.zk.ui.Executions;
 import org.zkoss.zk.ui.event.Event;
 import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.event.Events;
+import org.zkoss.zkmax.zul.Barcodescanner;
+import org.zkoss.zul.Borderlayout;
 import org.zkoss.zul.Box;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Combobox;
@@ -943,6 +945,16 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		renderAdditions(order, wndContentPanel);
 		Div divOrderItems = (Div) wndContentPanel.query("#wndOrderItems").query("#divOrderItems");
 		divOrderItems.appendChild(vbox);
+		
+		Barcodescanner bcs = (Barcodescanner) wndContentPanel.query("barcodescanner");
+		if ((Boolean) (Executions.getCurrent().getSession().getAttribute("barcode_scanner_is_enabled"))) {
+			bcs.setEnable(true);
+			bcs.setVisible(true);
+		}
+		else {			
+			bcs.setEnable(false);
+			bcs.setVisible(false);	
+		}
 	}
 	
 	public void initFormForManagement(Window wndContentPanel, Integer orderId, Boolean isMobile) throws Exception {
