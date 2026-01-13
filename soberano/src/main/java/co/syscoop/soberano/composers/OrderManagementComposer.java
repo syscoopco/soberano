@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.zkoss.zk.ui.Component;
+import org.zkoss.zk.ui.event.Events;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
 import org.zkoss.zul.Button;
@@ -190,7 +191,7 @@ public class OrderManagementComposer extends OrderComposer {
 				OrderFormHelper orderFormHelper = new OrderFormHelper();
 				int result = orderFormHelper.makeFromForm(boxDetails);
 				if (result == -1) {
-					btnMake.setDisabled(false);
+					btnMake.setDisabled(false);					
 					throw new NotEnoughRightsException();						
 				}
 				else {
@@ -201,6 +202,7 @@ public class OrderManagementComposer extends OrderComposer {
 					txtQuantityExpression.setValue("0");
 					decQuantity.setValue(new BigDecimal(0));
 				}
+				Events.sendEvent("onItemToOrderProcessed", cmbItemToOrder, null);
 			}
 		}
 		catch(SomeFieldsContainWrongValuesException ex) {

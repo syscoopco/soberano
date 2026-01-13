@@ -420,6 +420,14 @@ public class Product extends InventoryItem {
 		super.get(new ProductExtractor());
 	}
 	
+	public void getFromStringId() throws SQLException {
+		
+		getQuery = "SELECT * FROM soberano.\"fn_Product_get\"(:strId, :loginname)";
+		getParameters = new HashMap<String, Object>();
+		getParameters.put("strId", this.getStringId());
+		super.get(new ProductExtractor());
+	}
+	
 	@Override
 	public Integer print() throws SoberanoException {
 		return null;

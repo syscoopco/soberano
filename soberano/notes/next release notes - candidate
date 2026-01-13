@@ -1,6 +1,8 @@
 v2.0.10beta La Lisa Edition
 
-New: 
+New: FUNCTION soberano."fn_Product_get"(productid character varying, loginname character varying).
+	This is required by the order's form product barcode processing code. Noticed instead the product
+	integer id, it takes the string inventory item id as parameter.
 
 Fix: Removed EAN-8 barcodes processing.
 

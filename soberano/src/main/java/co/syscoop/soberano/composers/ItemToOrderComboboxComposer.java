@@ -1,5 +1,6 @@
 package co.syscoop.soberano.composers;
 
+import java.math.BigDecimal;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Executions;
@@ -11,6 +12,7 @@ import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Span;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Window;
@@ -21,6 +23,7 @@ import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.tracked.ProductCategory;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.util.BarcodeValidator;
 import co.syscoop.soberano.util.Utils;
 import co.syscoop.soberano.vocabulary.Translator;
@@ -214,14 +217,43 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 		});
 	}
 	
+	@Listen("onItemToOrderProcessed = combobox#cmbItemToOrder")
+	public void cmbItemToOrder_onClearing(Event event) {
+		((Combobox) event.getTarget()).invalidate();
+	}
+	
 	@Listen("onChanging = combobox#cmbItemToOrder")
-	public void cmbItemToOrder_onChanging(Event event) {
+	public void cmbItemToOrder_onChanging(Event event) throws Exception {
 	
 		String barcode = ((InputEvent) event).getValue();
 		
 		if (BarcodeValidator.isAValidBarCode(barcode)) {
 			
 			Combobox cmbItemToOrder = (Combobox) event.getTarget();
+			
+			//within onChanging listener, this conditional statement is required
+			//since the barcode scanner sends the whole barcode instead digit by digit,
+			//so the combobox's combo items collection isn't populated.
+			if (cmbItemToOrder.getChildren().size() == 0) {
+				Product product = new Product();
+				product.setStringId(barcode);
+				try {
+					product.getFromStringId();
+				} catch (Exception e) {
+					ExceptionTreatment.logAndShow(e, 
+							Labels.getLabel("message.permissions.NonExistentObjectOrNotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+					
+					Events.sendEvent("onItemToOrderProcessed", cmbItemToOrder, null);
+					
+			        return;
+				}
+				product.setOneRunQuantity(new BigDecimal(1));
+				Comboitem cmbI = new Comboitem();
+				cmbI.setValue(product);
+				cmbItemToOrder.getChildren().add(cmbI);
+			}
 			
 			if (cmbItemToOrder.getChildren().size() == 1 && (Comboitem) cmbItemToOrder.getFirstChild() != null) {
 	        	
