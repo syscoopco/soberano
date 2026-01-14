@@ -6,4 +6,7 @@ New: FUNCTION soberano."fn_Product_get"(productid character varying, loginname c
 
 Fix: Removed EAN-8 barcodes processing.
 
+Fix: Corrections of barcode processing in ItemToOrderComboboxComposer.cmbItemToOrder_onChanging(Event) and
+	OrderManagementComposer.btnMake_onClick()
+
 User manual:
