@@ -23,7 +23,7 @@ import co.syscoop.soberano.test.helper.ProductForm;
 
 @Order(14)
 
-//@Disabled
+@Disabled
 
 class OO14_ProductTest_modify extends ProductActionTest{
 

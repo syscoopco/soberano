@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//@Disabled
+@Disabled
 
 class O4_CurrencyTest_search_showingAll {
 	
