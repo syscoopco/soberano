@@ -35,6 +35,8 @@ public class RecordOrderFormHelper extends BusinessActivityTrackedObjectFormHelp
 		counters.clear();
 		Grid grdCounters = (Grid) boxDetails.query("#grdCounters");
 		if (grdCounters.getRows().getChildren().size() > 0) {			
+			if (grdCounters.getRows().getChildren().size() == 1) 
+				((Checkbox) grdCounters.getRows().getChildren().get(0).query("checkbox")).setChecked(true);
 			for (Component item : grdCounters.getRows().getChildren()) {
 				if (((Checkbox) item.query("checkbox")).isChecked()) {
 					counters.add(((Label) item.query("label")).getValue());

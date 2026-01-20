@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(35)
 
-@Disabled
+//@Disabled
 
 class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 	
@@ -80,8 +80,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(0),										
+//							2512443.34556672);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(0),										
-							2512443.34556672);
+					1676.69696563);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -104,8 +107,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(1),										
+//							16.56379044);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(1),										
-							16.56379044);
+					16.50662275);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -152,8 +158,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(3),										
+//							78.59299677);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(3),										
-							78.59299677);
+					44.01763566);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -176,8 +185,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(4),										
+//							25371265.45800418);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(4),										
-							25371265.45800418);
+					3035.77732583);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -200,8 +212,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(5),										
+//							117676.97679988);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(5),										
-							117676.97679988);
+					58.86783442);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -224,8 +239,11 @@ class OO35_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(6),										
+//							38998140.28047801);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(6),										
-							38998140.28047801);
+					3196217.9489203);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

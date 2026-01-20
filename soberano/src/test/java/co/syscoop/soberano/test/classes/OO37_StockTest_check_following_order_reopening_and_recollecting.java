@@ -34,7 +34,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(37)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO37_StockTest_check_following_order_reopening_and_recollecting extends StockActionTest {
@@ -119,12 +119,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(0), 
+//										"mm2",
+//										"mmaterial2",
+//										462.592,
+//										"kg",										
+//										1.035983027071701E7);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(0), 
-										"mm2",
-										"mmaterial2",
-										462.592,
-										"kg",										
-										1.035983027071701E7);
+					"mm2",
+					"mmaterial2",
+					462.592,
+					"kg",										
+					2961.26064985);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -155,12 +162,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(1), 
+//										"mm4",
+//										"mmaterial4",
+//										1.000007E9,
+//										"mg",
+//										155.58669895074);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
-										"mm4",
-										"mmaterial4",
-										1.000007E9,
-										"mg",
-										155.58669895074);
+					"mm4",
+					"mmaterial4",
+					1.000007E9,
+					"mg",
+					0.0029457);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -191,12 +205,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(2), 
+//										"mm5",
+//										"mmaterial5",
+//										2207.6226218,
+//										"lb",
+//										140955.12386064);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
-										"mm5",
-										"mmaterial5",
-										2207.6226218,
-										"lb",
-										140955.12386064);
+					"mm5",
+					"mmaterial5",
+					2207.6226218,
+					"lb",
+					1334.40766767);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -227,12 +248,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(3), 
+//										"mm6",
+//										"mmaterial6",
+//										455045592.00000000,
+//										"mg",
+//										206789.50003143);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(3), 
-										"mm6",
-										"mmaterial6",
-										455045592.00000000,
-										"mg",
-										206789.50003143);
+					"mm6",
+					"mmaterial6",
+					455045592.00000000,
+					"mg",
+					0.00863309);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -263,12 +291,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(4), 
+//										"mm7",
+//										"mmaterial7",
+//										1004000.00000000,
+//										"ml",
+//										173311.80678971);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(4), 
-										"mm7",
-										"mmaterial7",
-										1004000.00000000,
-										"ml",
-										173311.80678971);
+					"mm7",
+					"mmaterial7",
+					1004000.00000000,
+					"ml",
+					19.97260529);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -299,12 +334,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(5), 
+//										"mm9",
+//										"mmaterial9",
+//										6.0,
+//										"pcs",
+//										43501244.7860377);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(5), 
-										"mm9",
-										"mmaterial9",
-										6.0,
-										"pcs",
-										43501244.7860377);
+					"mm9",
+					"mmaterial9",
+					6.0,
+					"pcs",
+					3329603.83209672);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -335,12 +377,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(6), 
+//										"mp1",
+//										"mproduct1",
+//										6.0,
+//										"kg",
+//										64889662.7880384);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
-										"mp1",
-										"mproduct1",
-										6.0,
-										"kg",
-										64889662.7880384);
+					"mp1",
+					"mproduct1",
+					6.0,
+					"kg",
+					1.49745375754224E7);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -515,12 +564,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(4), 
+//										"mm7",
+//										"mmaterial7",
+//										3000.002,
+//										"ml",
+//										1197950.84576058);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(4), 
-										"mm7",
-										"mmaterial7",
-										3000.002,
-										"ml",
-										1197950.84576058);
+					"mm7",
+					"mmaterial7",
+					3000.002,
+					"ml",
+					399.31694858);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -551,12 +607,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(5), 
+//										"mm8",
+//										"mmaterial8",
+//										97400.0,
+//										"ml",
+//										117676.97680086);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(5), 
-										"mm8",
-										"mmaterial8",
-										97400.0,
-										"ml",
-										117676.97680086);
+					"mm8",
+					"mmaterial8",
+					97400.0,
+					"ml",
+					58.86783442);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -587,12 +650,19 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(6), 
+//										"mm9",
+//										"mmaterial9",
+//										1.0,
+//										"pcs",
+//										11979513.24940921);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(6), 
-										"mm9",
-										"mmaterial9",
-										1.0,
-										"pcs",
-										11979513.24940921);
+					"mm9",
+					"mmaterial9",
+					1.0,
+					"pcs",
+					2395902.64986175);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());
@@ -639,7 +709,7 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 	}
 	
 	@Test
-	final void testCase17() {
+	final void testCase17_1() {
 
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
@@ -665,24 +735,144 @@ class OO37_StockTest_check_following_order_reopening_and_recollecting extends St
 										-1454.592,
 										"kg",										
 										0.0);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase17_2() {
+
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw8");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1008));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(1), 
 										"mm4",
 										"mmaterial4",
 										-1001000000.0,
 										"mg",
 										0.0);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase17_3() {
+
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw8");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1008));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(2), 
 										"mm5",
 										"mmaterial5",
 										-10000.0,
 										"lb",
 										0.0);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase17_4() {
+
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw8");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1008));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(3), 
 										"mm6",
 										"mmaterial6",
 										-481941500.0,
 										"mg",
 										0.0);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase17_5() {
+
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			ComponentAgent cmbWarehouseAgent = desktop.query("#wndContentPanel").query("#cmbWarehouse");
+			InputAgent cmbWarehouseInputAgent = cmbWarehouseAgent.as(InputAgent.class);
+			cmbWarehouseInputAgent.typing("mw8");
+			
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			stockForm.setComponentValue(stockForm.getCmbWarehouse(), Integer.valueOf(1008));
+			cmbWarehouseAgent.click(); 	//needed to force grid updating. 
+										//cmbWarehouse's onChange event isn't triggered under testing
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(4), 
 										"mm7",
 										"mmaterial7",

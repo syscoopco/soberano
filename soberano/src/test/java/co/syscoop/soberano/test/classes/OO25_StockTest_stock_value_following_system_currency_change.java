@@ -28,7 +28,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(25)
 
-@Disabled
+//@Disabled
 
 class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 	
@@ -85,7 +85,7 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 	}
 	
 	@Test
-	final void testCase2() {
+	final void testCase2_1() {
 		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
 		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
@@ -97,26 +97,143 @@ class OO25_StockTest_system_currency_change extends CurrencyActionTest {
 			ComponentAgent expensesGridAgent = desktop.query("grid");
 			Grid grd = expensesGridAgent.as(Grid.class);
 			
+//			testStockRecord((Row) grd.getRows().getChildren().get(0),										
+//							2512443.34556672);
+			
 			testStockRecord((Row) grd.getRows().getChildren().get(0),										
-							2512443.34556672);
+					1676.69696563);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase2_2() {
+		
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
+//			testStockRecord((Row) grd.getRows().getChildren().get(1),										
+//							16.56379044);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(1),										
-							16.56379044);
+					16.50662275);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase2_3() {
+		
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(2),										
 							0.0);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase2_4() {
+		
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
+//			testStockRecord((Row) grd.getRows().getChildren().get(3),										
+//							78.59299677);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(3),										
-							78.59299677);
+					44.01763566);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase2_5() {
+		
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
+//			testStockRecord((Row) grd.getRows().getChildren().get(4),										
+//							25371265.45800418);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(4),										
-							25371265.45800418);
+					3035.77732583);
+		}
+		catch(AssertionFailedError ex) {
+			fail(ex.getMessage());
+		}
+		catch(Throwable ex) {
+			fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	final void testCase2_6() {
+		
+		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
+		DesktopAgent desktop = Zats.newClient().connect("/stock.zul");
+		try {
+			stockForm = new StockForm(desktop,
+									(desktop.query("#wndContentPanel").query("#cmbWarehouse")).as(Combobox.class),
+									(desktop.query("grid").query("#grd")).as(Grid.class));
+			
+			ComponentAgent expensesGridAgent = desktop.query("grid");
+			Grid grd = expensesGridAgent.as(Grid.class);
+			
+//			testStockRecord((Row) grd.getRows().getChildren().get(5),										
+//							117676.97679988);
 			
 			testStockRecord((Row) grd.getRows().getChildren().get(5),										
-							117676.97679988);
-			
-			testStockRecord((Row) grd.getRows().getChildren().get(6),										
-							38998140.28047801);
+					58.86783442);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

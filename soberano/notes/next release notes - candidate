@@ -1,12 +1,44 @@
-v2.0.10beta La Lisa Edition
+v2.0.10 La Lisa Edition
 
 New: FUNCTION soberano."fn_Product_get"(productid character varying, loginname character varying).
 	This is required by the order's form product barcode processing code. Noticed instead the product
 	integer id, it takes the string inventory item id as parameter.
+	
+New: In order recording form (new_order.zul), if only one counter is configured and it's not selected, 
+	the order is still allocated to it.
 
 Fix: Removed EAN-8 barcodes processing.
 
 Fix: Corrections of barcode processing in ItemToOrderComboboxComposer.cmbItemToOrder_onChanging(Event) and
 	OrderManagementComposer.btnMake_onClick()
+	
+Fix: Bad calculation of process run output values. These lines were corrected:
+
+	In FUNCTION soberano."fn_ProcessRun_close"(processrunid integer,
+												outputitems character varying[],
+												outputquantities numeric[],
+												outputunits integer[],
+												weights integer[],
+												loginname character varying)
+												
+		Line outputvalue := outputquantities[i] * outputsTotalValue * weights[i] / 100;
+		
+		was replaced by outputvalue := outputsTotalValue * weights[i] / 100;
+		
+		And line SET "Value" = "Value" + pro."Quantity" * outputsTotalValue * weighttoredistribute / producedoutputcount / 100
+		
+		was replaced by SET "Value" = "Value" + outputsTotalValue * weighttoredistribute / producedoutputcount / 100
+												
+	In FUNCTION soberano."fn_Stock_change"(stockchangeid integer)
+	
+		Line outputvalue := itemRecord.quantity * outputsTotalValue * itemRecord.weight / 100;
+		
+		was replaced by outputvalue := outputsTotalValue * itemRecord.weight / 100;
+		
+		And line SET "Value" = "Value" + pro."Quantity" * outputsTotalValue * weighttoredistribute / producedoutputcount / 100
+		
+		was replaced by SET "Value" = "Value" + outputsTotalValue * weighttoredistribute / producedoutputcount / 100	
+		
+	Unit test cases were updated accordingly.						
 
 User manual:

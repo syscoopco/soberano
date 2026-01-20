@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O8_PayrollExpenseTest_record extends PayrollExpenseActionTest {
