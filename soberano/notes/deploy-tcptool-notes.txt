@@ -1,0 +1,152 @@
+After deploying TCPTOOL prerrequisites, do this:
+
+1) How to Fix "Access denied for user root@localhost" MySQL Error:
+
+	sudo mysql
+
+	mysql>ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '[password]';
+
+	mysql>FLUSH PRIVILEGES;
+
+	mysql>exit;
+
+	mysql -u root -p
+	
+2) Install Nextcloud by means of App Center.
+
+3) Change Nextcloud ports, as other intances of Apache2 and Tomcat are running:
+
+	sudo snap stop nextcloud
+	
+	sudo snap set nextcloud ports.http=8081 ports.https=8444
+	
+	sudo snap start nextcloud
+
+	sudo snap get nextcloud ports
+	
+4) Configure Nextcloud database:
+
+	sudo mysql -u root -p
+	
+	mysql>CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'password';
+	
+	mysql>CREATE DATABASE IF NOT EXISTS nextcloud CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+	
+	mysql>GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
+	
+	mysql>FLUSH PRIVILEGES;
+	
+	mysql>exit
+	
+5) Configure Nextcloud. Browse http://localhost:8081
+
+6) Install OnlyOffice Document Server:
+
+	Download deb package from: https://github.com/ONLYOFFICE/DocumentServer/releases/download/v9.2.1/onlyoffice-documentserver_amd64.deb
+	
+	In pg_hba.conf, 
+		
+		correct the user postgres line corresponding to host: host    all             postgres             127.0.0.1/32            scram-sha-256
+		
+		add this line: host onlyoffice onlyoffice 127.0.0.1/32 trust
+		
+	sudo apt-get install rabbitmq-server
+	
+	sudo apt-get install nginx-extras
+	
+	echo onlyoffice-documentserver onlyoffice/ds-port select 8082 | sudo debconf-set-selections
+	
+	Run this block of commands (copy and paste the whole block in terminal, and press Enter):
+	
+	***block begin***
+	
+	mkdir -p -m 700 ~/.gnupg
+	curl -fsSL https://download.onlyoffice.com/GPG-KEY-ONLYOFFICE | gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --import
+	chmod 644 /tmp/onlyoffice.gpg
+	sudo chown root:root /tmp/onlyoffice.gpg
+	sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
+	
+	***block end***
+	
+	echo "deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list
+	
+	sudo apt-get update
+	
+	***IMPORTANT: ttf-mscorefonts-installer might require VPN***
+	***Install Windscribe***
+	sudo apt-get install ttf-mscorefonts-installer
+	
+	sudo -i -u postgres psql -c "CREATE USER onlyoffice WITH PASSWORD '<PASSWORD>';"
+	
+	sudo -i -u postgres psql -c "CREATE DATABASE onlyoffice OWNER onlyoffice;"
+	
+	sudo dpkg --install ./Downloads/onlyoffice-documentserver_*.deb
+	
+	Deploy Admin Panel - Server Management:
+	
+		sudo systemctl start ds-adminpanel
+		
+		sudo systemctl enable ds-adminpanel
+	
+	Optionally, deploy examples:
+	
+		sudo systemctl start ds-example
+		
+		sudo systemctl enable ds-example
+		
+		browse to http://localhost:8082
+		
+	Configure Admin Panel -Server Management:
+	
+		Find the bootstrap token here: /var/log/onlyoffice/documentserver/adminpanel/out.log
+		
+		For regenerate the token, sudo systemctl restart ds-adminpanel.service
+		
+		Browse http://localhost:8082/admin and setup the Admin Panel.
+	
+7) Integrate OnlyOffice Document Server to Nextcloud:
+
+	Login in http://localhost:8081 with the admin account.
+	
+	Connect to Internet.
+	
+	Go to Featured apps http://localhost:8081/index.php/settings/apps/featured
+	
+	Find the row corresponding to ONLYOFFICE and push Download and enable. Wait for the process to end.
+	
+	Go to ONLYOFFICE app settings http://localhost:8081/index.php/settings/admin/onlyoffice
+	
+	Set ONLYOFFICE Docs address to http://localhost:8082
+	
+	Check Disable certificate verification.
+	
+	As secret key, paste the <SECRET> in this field of the file /etc/onlyoffice/documentserver/local.json:
+	
+		"secret": {
+			"browser": {
+			  "string": "<SECRET>"
+			}
+	
+	Expand Advanced server settings.
+	
+	Set ONLYOFFICE Doc address to OnlyOffice address http://localhost:8082
+	
+	Set Server address for internal request to Nextcloud server address http://localhost:8081, and push 
+	Save.
+	
+	In Common Settings, uncheck Enable e-mail notifications.
+	
+	
+	
+Nexcloud MySQL database credentials:
+
+database: nextcloud
+user: nextcloud
+password: XDLLTzwKE-iqp6qCllqMdbcMq-oy8SReSdHD4EhDqaLhmKxQYod88CMoWE_RYB9r
+	
+	
+	
+	
+	
+
+

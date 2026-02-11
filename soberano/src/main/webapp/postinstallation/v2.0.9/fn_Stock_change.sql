@@ -1,6 +1,10 @@
-CREATE FUNCTION "soberano"."fn_Stock_change"("stockchangeid" integer) RETURNS "void"
-    LANGUAGE "plpgsql"
-    AS $$
+CREATE OR REPLACE FUNCTION soberano."fn_Stock_change"(
+	stockchangeid integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
 DECLARE
 	inventoryitem character varying;
 	warehouse integer;
@@ -123,7 +127,8 @@ BEGIN
 				--its weight must be redistributed among the other ones
 				weighttoredistribute := weighttoredistribute + itemRecord.weight;
 			ELSE
-				outputvalue := itemRecord.quantity * outputsTotalValue * itemRecord.weight / 100;	
+				--replaced by next line outputvalue := itemRecord.quantity * outputsTotalValue * itemRecord.weight / 100;	
+				outputvalue := outputsTotalValue * itemRecord.weight / 100;	
 
 				INSERT INTO soberano."ProcessRunOutputValue"("Value", 
 															 "ProcessRunHasProcessRunId", 
@@ -147,7 +152,10 @@ BEGIN
 
 		--only outputs with quantity > 0 have rows in soberano."ProcessRunOutputValue"
 		UPDATE soberano."ProcessRunOutputValue" prov
-			SET "Value" = "Value" + pro."Quantity" * outputsTotalValue * weighttoredistribute / producedoutputcount / 100
+			
+			SET "Value" = "Value" + CASE WHEN producedoutputcount = 0 THEN 0
+										ELSE outputsTotalValue * weighttoredistribute / producedoutputcount / 100 END
+			
 			FROM soberano."ProcessRunOutput" pro
 			WHERE prov."ProcessRunHasProcessRunId" = processrunid
 				AND prov."ProcessRunHasProcessRunId" = pro."ProcessRunHasProcessRunId"
@@ -162,4 +170,4 @@ BEGIN
 							AND pr."This_is_of_Process_with_ProcessHasProcessId" = proc."ProcessHasProcessId";
 	END IF;	
 END;
-$$;
+$BODY$;

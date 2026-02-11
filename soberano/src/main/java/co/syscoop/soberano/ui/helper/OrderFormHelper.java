@@ -634,6 +634,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			
 			Map arg = new HashMap();
 			arg.put("additionSelectionViewModel", Executions.getCurrent().getSession().getAttribute("addition_selection_view_model"));
+			
+			//on responsive mode, with autocompletion combobox, ZK render the comboitems at the
+			//bottom extreme of viewport obligating the user to scroll down to chose an addition 
 			Executions.createComponents("/addition_combobox.zul", hboxChooseAddition, arg);
 			
 			Button btnAddAddition = new Button("+");

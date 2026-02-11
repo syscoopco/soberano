@@ -31,9 +31,6 @@ import org.cups4j.PrintJob.Builder;
 import org.cups4j.PrintRequestResult;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.zkoss.zul.Messagebox;
-import com.github.anastaciocintra.escpos.EscPos;
-import com.github.anastaciocintra.output.PrinterOutputStream;
-
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.WSocketClient;
 import co.syscoop.soberano.vocabulary.Labels;
@@ -168,11 +165,11 @@ public class Printer {
 			        job.print();
 			        document.close();
 			        
-			        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
-			        EscPos escPos = new EscPos(printerOutputStream);
-			        escPos.feed(1).cut(EscPos.CutMode.FULL);
-			        escPos.close();
-	            	break;
+//			        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+//			        EscPos escPos = new EscPos(printerOutputStream);
+//			        escPos.feed(1).cut(EscPos.CutMode.FULL);
+//			        escPos.close();
+//	            	break;
 	            }
 			}
 		}

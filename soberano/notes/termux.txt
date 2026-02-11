@@ -82,8 +82,7 @@ How to deploy on Android 7.0 or higher
 18) Create a script to start TCP TOOL services on boot, and make it executable:
 
 	nano .termux/boot/start-tcptool.sh
-	chmod +x .termux/boot/start-tcptool.sh
-	
+		
 19) Add the following lines:
 
 	#!/data/data/com.termux/files/usr/bin/sh
@@ -95,6 +94,10 @@ How to deploy on Android 7.0 or higher
 	CTRL + x
 	Y
 	Enter
+	
+20.1) Grant execution permission to the script:
+
+	chmod +x .termux/boot/start-tcptool.sh
 	
 21) By means of Bluetooth (or USB), copy to the Android device the system files
 (startup / shutdown scripts, web application deployment .war file, a backup of 
@@ -111,16 +114,14 @@ soberano db backup in tar format, ldif files to import in apacheds):
 22) Assuming the above files were copied to Android device's Downloads folder,
 execute the following commands to copy them to storage space managed by Termux:
 	
-	cp ~/storage/emulated/0/download/tcptool.sh $HOME
-	cp ~/storage/emulated/0/download/tcptool-shutdown.sh $HOME
-	cp ~/storage/emulated/0/download/tcptool.war $HOME
-	cp ~/storage/emulated/0/download/soberanodb-v2.0.1.tar $HOME
+	cp $HOME/storage/downloads/tcptool.sh $HOME
+	cp $HOME/storage/downloads/tcptool-shutdown.sh $HOME
+	cp $HOME/storage/downloads/tcptool.war $HOME
+	cp $HOME/storage/downloads/soberanodb-v2.0.1.tar $HOME
 	
-	cp ~/storage/emulated/0/download/pwdpolicies.ldif $HOME
-	cp ~/storage/emulated/0/download/soberano.user.top.ldif $HOME
-	
-	IT COULD BE REPLACED "emulated/0/download" BY "downloads"
-	
+	cp $HOME/storage/downloads/pwdpolicies.ldif $HOME
+	cp $HOME/storage/downloads/soberano.user.top.ldif $HOME
+		
 23) Move some of the above files to their final location within the Termux instance:
 
 	mv tcptool.sh /data/data/com.termux/files/usr/bin

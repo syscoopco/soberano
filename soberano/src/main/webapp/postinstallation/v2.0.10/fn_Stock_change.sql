@@ -152,8 +152,10 @@ BEGIN
 
 		--only outputs with quantity > 0 have rows in soberano."ProcessRunOutputValue"
 		UPDATE soberano."ProcessRunOutputValue" prov
-			--replaced by next line SET "Value" = "Value" + pro."Quantity" * outputsTotalValue * weighttoredistribute / producedoutputcount / 100
-			SET "Value" = "Value" + outputsTotalValue * weighttoredistribute / producedoutputcount / 100
+			
+			SET "Value" = "Value" + CASE WHEN producedoutputcount = 0 THEN 0
+										ELSE outputsTotalValue * weighttoredistribute / producedoutputcount / 100 END
+			
 			FROM soberano."ProcessRunOutput" pro
 			WHERE prov."ProcessRunHasProcessRunId" = processrunid
 				AND prov."ProcessRunHasProcessRunId" = pro."ProcessRunHasProcessRunId"

@@ -133,7 +133,11 @@ public class ItemToOrderComboboxComposer extends ViewModelComposer {
 				@Override
 				public void onEvent(Event event) throws Exception {
 					
-					productButtonHandler(orderId, ((Product) doo).getId(), ((Product) doo).getName(), spanProductsParentWindow);
+					Integer productId = ((Product) doo).getId();
+					Product product = new Product(productId);
+					product.get();
+					
+					productButtonHandler(orderId, productId, product.getName() + " : " + product.getStringId(), spanProductsParentWindow);
 				}
 			});
 			

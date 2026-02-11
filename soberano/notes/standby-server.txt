@@ -1,0 +1,144 @@
+How to deploy a TCPTOOL standby server for disaster recovering
+Credits: A lot of this document was taken from https://stormatics.tech/blogs/guide-on-setting-up-physical-streaming-replication-in-postgresql
+
+VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Instead, it's recommended for TCPTOOL to use 
+			repeatable read. However, it must be taken into account that for use cases might concurrently write to the database,
+			like those affecting inventory records (order manipulation and closing, SPI, material expenses, process runs, ...),
+			it's strongly recommended TCPTOOL to be used by only one user.
+--------------------------------------------------------------
+
+1) Prepare two Linux servers (primary and standby servers) with the prerequisites of TCPTOOL: PostgreSQL 17, ApacheDS, 
+	Apache Tomcat 11, and TCPTOOL web application deployed (tcptool.war).
+	
+	1.1) Both servers are connected to a network and there's IP connectivity between them, through the port used by 
+		PostgreSQL (ex. 5432). Verify with ping command and other network tools.
+	
+2) In the primary server, edit the postgresql.conf file this way:
+
+	2.1) listen_addresses = '*'
+	
+	2.2) wal_level = replica
+	
+	2.3) max_wal_senders = 10
+	
+	2.4) wal_keep_size = 64MB
+	
+3) In the primary server, create the replication user that the standby server will use to connect:
+
+	3.1) Role name: tcptool_replicator
+	
+	3.2) Use a strong password.
+	
+	3.3) Use the REPLICATION attribute. In case you're using pgAdmin, check the privilege Can initiate streaming 
+	replication and backups.
+	
+4) In the primary server, add a line to the pg_hba.conf file to allow standby server to connect to the primary server
+	by means of user tcptool_replicator. Assuming the standby server's IP address is 192.168.1.100, the line could be:
+	
+		host replication tcptool_replicator 192.168.1.100/32 scram-sha-256
+		
+5) Initialize the standby server with a base backup. In the stand by server:
+
+	5.1) Stop the running PostgreSQL instance with the proper command.
+		For example: pg_ctl -D /data/data/com.termux/files/home/postgresql_data stop
+		
+		Or
+		
+		sudo systemctl stop postgresql
+		
+	5.2) In case PostgreSQL configuration (usually in /etc/postgresql/...) and data (usually in /var/lib/...) files 
+		are mixed in a same directory (like in Termux $HOME/postgresql_data) make a backup of that directory. Example:
+		cp -r postgresql_data postgresql_data_backup.
+		
+	5.3) Remove the files located within data directory. For the case of Termux:
+	
+		rm -rf $HOME/postgresql_data/*
+		
+		For other Linux distribution: sudo -u postgres rm -rf /var/lib/postgresql/17/main/*
+		
+	5.4) Execute the command pg_basebackup. For Termux:
+	
+		pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D $HOME/postgresql_data/ -Fp -Xs -P -R
+		
+		For other Linux distribution (It's assumed PostgreSQL ver. 17, port 5432 and a typical data directory path.):
+	
+		sudo -u postgres pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D /var/lib/postgresql/17/main/ -Fp -Xs -P -R
+		
+	5.5) On request, type the password of tcptool_replicator role on the primary server.
+	
+	5.6) Wait for pg_basebackup to complete.
+	
+	5.7) Copy to the data directory the previously backed up (step 5.2) files postgresql.conf, pg_hba.conf and pg_ident.conf
+	
+	5.8) In postgtresql.conf, verify:
+	
+		hot_standby = on
+		
+		listen_addresses = '*'
+		
+		timezone is properly configured
+		
+		default_transaction_isolation = 'repeatable read'
+		
+6) Start standby server. For example, in Termux: pg_ctl -D /data/data/com.termux/files/home/postgresql_data start
+	
+	Or
+	
+	sudo systemctl start postgresql
+	
+7) Now, the standby database can be accessed from primary server or another computer by means of PostgreSQL tools or PgAdmin.		
+		
+8) TCPTOOL database is usually created with en_US.UTF8 collate. There wouldn't be any problems in case primary database and standby 
+	server use the same collate. If not, a standby server collate matching the database's must be properly generated or configured. 
+	These are the steps for the case standby server is based on Termux running in and Android phone with only Spanish - US configured 
+	as language, and the database using en_US.utf8 collate.
+	
+	7.1) In standby server, by means of Android Settings App, add English - US language. This could solve some problems when accessing
+		to standby database from primary server with PgAdmin, but not when using TCPTOOL.
+		
+	7.2) In primary server, backup soberano database:
+	
+		sudo docker exec -t postgres18 pg_dump --file "soberanodb-docker-backup.tar" --host "localhost" --port "5432" --username "postgres" --no-password --format=t --large-objects --inserts --column-inserts --verbose --quote-all-identifiers "soberano"
+	
+	7.3) In primary server, create a database (with the name soberano_es) with proper collate, encoding and template:
+	
+		CREATE DATABASE soberano_es
+		    WITH
+		    OWNER = postgres
+		    ENCODING = 'UTF8'
+		    LC_COLLATE = 'C'
+		    LC_CTYPE = 'C'
+		    LOCALE_PROVIDER = 'libc'
+		    TABLESPACE = pg_default
+		    CONNECTION LIMIT = -1
+		    IS_TEMPLATE = False;
+		    
+	7.4) Restore the backed up file (soberanodb-docker-backup.tar) on soberano_es database.
+	
+		sudo docker exec -t postgres18 pg_restore --host "localhost" --port "5432" --username "postgres" --no-password --dbname "soberano_es" --single-transaction --verbose "soberanodb-docker-backup.tar"
+		
+	7.5) Remove soberano database.
+	
+	7.6) Rename soberano_es database to soberano.
+	
+	7.7) Notice the cluster changes are replicated to the standby server cluster.
+
+	7.8) Notice for the primary server TCPTOOL instance to be usable, it also needs the standby server collate install (for example, C, es_US.utf8, another).
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
