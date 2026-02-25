@@ -12,6 +12,9 @@
 		<hlayout id="hlayCurrencies" style="overflow: auto" width="100%"></hlayout>
 		<separator></separator>
 		<hbox id="boxDetails" width="100%">
+			<cell width="5%" align="center">
+				<button id="btnBills" image="./images/bills.png" hflex="1" vflex="1" sclass="FitImage"></button>
+			</cell>
 			<cell hflex="1" align="center">
 				<textbox id="txtInputExpression" placeholder="${labels.placeholder.amountInSelectedCurrency}" sclass="CollectingTextbox"/>
 				<decimalbox visible="false" format="####.########" scale="8" id="decInput"/>

@@ -94,10 +94,13 @@ public class CashRegisterComposer extends SelectorComposer {
 		}
 		decCounted.setValue(totalEnteredAmountInSystemCurrency);
 		decInput.setValue(new BigDecimal(0.0));
+		decChange.setValue(decCounted.getValue().subtract(decToCollect.getValue()));
 		if (decCounted.getValue().subtract(decToCollect.getValue()).compareTo(new BigDecimal(0)) < 0) {
-			decChange.setValue(new BigDecimal(0));
+			decChange.setStyle("background-color: red;");
 		}
-		else decChange.setValue(decCounted.getValue().subtract(decToCollect.getValue()));
+		else {
+			decChange.setStyle("");
+		}
 		txtInputExpression.setValue("");
 	}
 

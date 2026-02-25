@@ -76,6 +76,7 @@ public class PayrollExpensesGridRenderer extends DomainObjectRowRenderer {
 											"PAYROLLEXP_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

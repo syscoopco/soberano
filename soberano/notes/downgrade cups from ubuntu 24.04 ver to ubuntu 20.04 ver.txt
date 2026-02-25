@@ -1,0 +1,54 @@
+# Esto se necesita para evitar que cambios en cups desde 20.04 hagan que
+# el contenido de ficheros pdf (recibos y demás registros impresos) se ajuste
+# al tamaño de página.
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/c/cups-filters/cups-filters_1.27.4-1ubuntu0.4_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/c/cups-filters/cups-filters-core-drivers_1.27.4-1ubuntu0.4_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/c/cups-filters/libcupsfilters1_1.27.4-1ubuntu0.4_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/c/cups-filters/libfontembed1_1.27.4-1ubuntu0.4_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/q/qpdf/libqpdf26_9.1.1-1ubuntu0.1_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/t/tiff/libtiff5_4.1.0+git191117-2ubuntu0.20.04.14_amd64.deb
+
+wget http://archive.ubuntu.com/ubuntu/pool/main/libw/libwebp/libwebp6_0.6.1-2ubuntu0.20.04.3_amd64.deb
+
+
+
+# 1. Primero, eliminar el paquete conflictivo de 24.04
+sudo dpkg --remove --force-depends libcupsfilters2-common
+
+# 2. Instalar las dependencias base de 20.04
+sudo dpkg -i libqpdf26_9.1.1-1ubuntu0.1_amd64.deb
+sudo dpkg -i libwebp6_0.6.1-2ubuntu0.20.04.3_amd64.deb
+sudo dpkg -i libtiff5_4.1.0+git191117-2ubuntu0.20.04.14_amd64.deb
+
+# 3. Instalar las bibliotecas específicas de cups-filters 1.x
+sudo dpkg -i libfontembed1_1.27.4-1ubuntu0.4_amd64.deb
+sudo dpkg -i libcupsfilters1_1.27.4-1ubuntu0.4_amd64.deb
+
+# 4. Finalmente, instalar cups-filters 1.x
+sudo dpkg -i cups-filters_1.27.4-1ubuntu0.4_amd64.deb cups-filters-core-drivers_1.27.4-1ubuntu0.4_amd64.deb
+
+# 1. Reiniciar el servicio CUPS
+sudo systemctl restart cups
+
+# 2. Verificar que CUPS esté activo y funcionando
+sudo systemctl status cups
+
+# 3. Opcional: Reiniciar también el servicio de impresión (si existe)
+sudo systemctl restart cups-browsed
+
+# 4. Verificar que los paquetes estén correctamente instalados
+dpkg -l | grep cups-filters
+
+# 5. BLOQUEAR LAS ACTUALIZACIONES DE ESTOS PAQUETES
+sudo apt-mark hold cups-filters cups-filters-core-drivers libcupsfilters1 libfontembed1
+
+# 6. Probar impresión. Por ejemplo, asumiendo que se está usando una impresora de nombre genericpos:
+lp -d genericpos -o fit-to-page=false /home/administrador/Documentos/CLOSURE_GENERAL_FULL_0.pdf
+
+

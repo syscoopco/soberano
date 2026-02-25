@@ -72,6 +72,7 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 												"DEPOSIT_",
 												false,
 												true,
+												false,
 												false);
 					}
 					else if (cashRegisterOperation.getOperation().equals("tt_WITHDRAWAL_tt")) {
@@ -84,6 +85,7 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 												"WITHDRAWAL_",
 												false,
 												true,
+												false,
 												false);
 					}
 					else if (cashRegisterOperation.getOperation().equals("tt_BALANCING_tt")) {
@@ -96,6 +98,7 @@ public class CashRegisterGridRenderer extends DomainObjectRowRenderer {
 												"BALANCING_",
 												false,
 												true,
+												false,
 												false);
 					}
 				}

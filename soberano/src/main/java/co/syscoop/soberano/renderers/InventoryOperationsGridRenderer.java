@@ -74,6 +74,7 @@ public class InventoryOperationsGridRenderer extends DomainObjectRowRenderer {
 											"INVOPERATION_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

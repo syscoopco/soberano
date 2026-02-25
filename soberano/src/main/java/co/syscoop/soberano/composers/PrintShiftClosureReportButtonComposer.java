@@ -50,7 +50,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_RECEIVABLES_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -75,7 +76,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_CASH_REGISTER_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -100,7 +102,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_HOUSEBILL_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -130,7 +133,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_COSTCENTER_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -160,7 +164,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_SPI_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -185,7 +190,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_GENERAL_FULL_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -210,7 +216,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_SALES_BY_PRICE_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -235,7 +242,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_NOTES_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -260,7 +268,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_CANCELLATIONS_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -285,7 +294,8 @@ public class PrintShiftClosureReportButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									"CLOSURE_GENERAL_" + scId,
 									false,
-									null);
+									null,
+									false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 

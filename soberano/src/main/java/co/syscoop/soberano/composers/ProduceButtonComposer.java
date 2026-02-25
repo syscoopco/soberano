@@ -194,7 +194,8 @@ public class ProduceButtonComposer extends SelectorComposer {
 							false /*true better to use computer printer 
 									settings to control feeds or blank 
 									lines printing at the end of page 
-									or document*/);
+									or document*/,
+							false);
 				}
 			}
 		}

@@ -83,6 +83,7 @@ public class MaterialExpensesGridRenderer extends DomainObjectRowRenderer {
 											"MATERIALEXP_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

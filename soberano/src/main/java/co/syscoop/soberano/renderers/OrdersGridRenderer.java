@@ -103,6 +103,7 @@ public class OrdersGridRenderer extends DomainObjectRowRenderer {
 											"ORDER_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

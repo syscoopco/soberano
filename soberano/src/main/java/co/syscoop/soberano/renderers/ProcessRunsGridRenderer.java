@@ -97,6 +97,7 @@ public class ProcessRunsGridRenderer extends DomainObjectRowRenderer {
 											"PROCESSRUN_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

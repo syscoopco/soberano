@@ -93,6 +93,7 @@ public class ProductionLineBoardGridRenderer implements RowRenderer{
 											"ALLOCATION_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

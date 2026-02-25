@@ -78,7 +78,11 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 						pp = (IPDFDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
 						pp.createPDFFile(new Order(orderId), fileToPrintFullPath);
 					}
-					catch(NoSuchBeanDefinitionException nsbdex) {			
+					catch(NoSuchBeanDefinitionException nsbdex) {
+						
+						//open cash drawer
+						Printer.openCashDrawer(null, printerProfile.getPrinterName());
+						
 						Printer.createFile(printer,
 											Translator.translate(qrwr.getReport()),
 											qrwr.getPrinterProfileId(),

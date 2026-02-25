@@ -41,7 +41,8 @@ public class PrintTicketButtonComposer extends SelectorComposer {
 									fileToPrintFullPath, 
 									printJobName, 
 									false, 
-									order);
+									order,
+									false);
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 

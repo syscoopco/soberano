@@ -402,7 +402,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			assertEquals(new BigDecimal(33.6799608952985).subtract(cashRegisterOperationForm.getDecCounted().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong counted amount.");
 			
 			//check change
-			assertEquals(new BigDecimal(0).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
+			assertEquals(new BigDecimal(33.6799608952985 - 54.15888862).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
 			
 			clickOnCollectButton(desktop);
 			clickOnCollectButton(desktop);
@@ -470,7 +470,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			assertEquals(new BigDecimal(33.6799608952985).subtract(cashRegisterOperationForm.getDecCounted().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong counted amount.");
 			
 			//check change
-			assertEquals(new BigDecimal(0).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
+			assertEquals(new BigDecimal(33.6799608952985 - 54.15888862).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
 			
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
@@ -544,7 +544,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			assertEquals(new BigDecimal(33.6799608952985).subtract(cashRegisterOperationForm.getDecCounted().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong counted amount.");
 			
 			//check change
-			assertEquals(new BigDecimal(0).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
+			assertEquals(new BigDecimal(33.6799608952985 - 54.15888862).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
 			
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
@@ -748,7 +748,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			assertEquals(new BigDecimal(9.69232638180451).subtract(cashRegisterOperationForm.getDecCounted().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong counted amount.");
 			
 			//check change
-			assertEquals(new BigDecimal(0).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
+			assertEquals(new BigDecimal(9.69232638180451 - 20.4789277247015).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
 			
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
@@ -1027,7 +1027,7 @@ class OO29_OrderTest_collect extends CashRegisterOperationActionTest {
 			assertEquals(new BigDecimal(12.6907806959913).subtract(cashRegisterOperationForm.getDecCounted().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong counted amount.");
 			
 			//check change
-			assertEquals(new BigDecimal(0).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
+			assertEquals(new BigDecimal(12.6907806959913 - 13.87805359).subtract(cashRegisterOperationForm.getDecChange().getValue()).abs().doubleValue() < 0.00000001, true, "Wrong change amount.");
 			
 			ComponentAgent cmbCustomerAgent = desktop.query("#incSouth").query("#cmbCustomer");
 			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);

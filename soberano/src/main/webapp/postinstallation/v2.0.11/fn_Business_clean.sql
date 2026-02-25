@@ -68,6 +68,10 @@ AS $BODY$
 
 			--balances on shift closures
 			DELETE FROM soberano."ShiftClosureRecordsBalanceInCurrency";
+			
+			--history
+			DELETE FROM soberano."StockChange_history";
+			DELETE FROM metamodel."Vote_history";
 
 			qryResult := 0;
 		

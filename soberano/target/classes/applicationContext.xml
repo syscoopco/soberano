@@ -139,7 +139,7 @@
         <property name="base" value="${ldap.base}"/>
         <property name="userDn" value="${ldap.userDn}"/>
         <property name="password" value="${ldap.password}"/>
-        <property name="pooled" value="true"/>
+        <property name="pooled" value="false"/>
     </bean>    
     <bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
         <constructor-arg ref="springLdapContextSource"/>
@@ -149,6 +149,28 @@
    	</bean>
    	<bean  id="contextSource" class="org.springframework.security.ldap.DefaultSpringSecurityContextSource">
 		<constructor-arg value="${ldap.ldapAddress}"/>
+		
+		    <!-- Keep this set to true for its intended purposes. Note springLdapContextSource has also pooled = true -->
+		    <property name="pooled" value="false"/>
+		    
+		    <!-- Add timeouts to prevent threads from hanging indefinitely -->
+<!-- 		    <property name="baseEnvironmentProperties"> -->
+<!-- 		        <map> -->
+<!-- 		            Timeout in milliseconds for creating a new connection -->
+<!-- 		            <entry key="com.sun.jndi.ldap.connect.timeout" value="5000"/> -->
+		            
+<!-- 		            Timeout in milliseconds for waiting for a response -->
+<!-- 		            <entry key="com.sun.jndi.ldap.read.timeout" value="5000"/> -->
+		            
+<!-- 		             Pool size limits -->
+<!-- 		            <entry key="com.sun.jndi.ldap.connect.pool.maxsize" value="30"/> -->
+<!-- 		            <entry key="com.sun.jndi.ldap.connect.pool.prefsize" value="10"/> -->
+<!-- 		            <entry key="com.sun.jndi.ldap.connect.pool.timeout" value="180000"/> -->
+<!-- 		            <entry key="com.sun.jndi.ldap.connect.pool.initsize" value="3"/> -->
+		            
+<!-- 		        </map> -->
+<!-- 		    </property> -->
+		
 	</bean>
 	<bean id="ldapAuthProvider" class="org.springframework.security.ldap.authentication.LdapAuthenticationProvider">
  		<constructor-arg>

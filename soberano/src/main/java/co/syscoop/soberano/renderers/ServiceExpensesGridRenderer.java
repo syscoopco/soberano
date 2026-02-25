@@ -77,6 +77,7 @@ public class ServiceExpensesGridRenderer extends DomainObjectRowRenderer {
 											"SERVICEEXP_",
 											false,
 											true,
+											false,
 											false);
 				}
 				catch(NotEnoughRightsException ex) {

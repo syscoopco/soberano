@@ -62,7 +62,8 @@ public class PrintDeliveryProvidersCollectionReportButtonComposer extends Select
 								fileToPrintFullPath, 
 								"REPORT_deliveryProvidersCollection",
 								false,
-								null);
+								null,
+								false);
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 

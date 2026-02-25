@@ -16,7 +16,7 @@
 	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
 		 
 		<!-- TODO: DISABLE IN PRODUCTION. -->
-		<!-- 
+		 <!--  
 		<tree id="treeObjects" apply="co.syscoop.soberano.composers.CustomersTreeComposer">
 			<treecols>
 				<treecol>
@@ -27,7 +27,7 @@
 				 
 		<!-- optimization for large amount of customers -->
 		<!-- TODO: ENABLE IN PRODUCTION. JUNIT TESTS HAVENT BEEN CHANGED YET FOR THIS OPTIMIZATION, SO TESTS WOULDNT PASS. -->
-		
+		  
 		<zscript>
 			<![CDATA[
 		  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();

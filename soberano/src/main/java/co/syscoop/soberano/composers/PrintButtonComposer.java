@@ -55,7 +55,7 @@ public class PrintButtonComposer extends SelectorComposer {
 													"records/tickets/" + 
 													"TICKET_" + orderId + ".pdf";
 					try {
-						Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false, trackedObject);
+						Printer.print(Translator.translate(pd.getTextToPrint()), pd.getPrinterProfile(), fileToPrintFullPath, "TICKET_" + orderId, false, trackedObject, false);
 					}
 					catch(Exception ex) {
 						ExceptionTreatment.logAndShow(ex, 
@@ -83,13 +83,15 @@ public class PrintButtonComposer extends SelectorComposer {
 					Printer.print(null, 
 								new String(Base64.getDecoder().decode(report)), 
 								printerProfile.getPrinterName(), 
-								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId());
+								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId(),
+								false);
 				}
 				else {
 					report = trackedObject.getReport();
 					Printer.print(Translator.translate(report),
 									trackedObject, 
 									fileToPrintFullPath,
+									false,
 									false);
 				}
 			}			

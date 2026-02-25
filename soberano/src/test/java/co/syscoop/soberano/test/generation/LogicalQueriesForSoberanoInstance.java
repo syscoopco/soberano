@@ -406,9 +406,9 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						// foreign keys to metamodel //
 						///////////////////////////////
 						"ALTER TABLE soberano.\"Activity\"\n"
-						+ "  ADD CONSTRAINT \"Activity_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "  ADD CONSTRAINT \"Activity_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 						
 						
 						
@@ -616,9 +616,23 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						"ALTER TABLE soberano.\"CashRegister\"\n"
-						+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
-						+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
-						+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								+ "  ADD CONSTRAINT \"CashRegister_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"Translation\"\n"
+								+ "  ADD CONSTRAINT \"Translation_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
+								
+								
+								
+						"ALTER TABLE soberano.\"CurrencyDenomination\"\n"
+								+ "  ADD CONSTRAINT \"CurrencyDenomination_This_is_identified_by_EntityTypeInstance_id_fkey\" FOREIGN KEY (\"This_is_identified_by_EntityTypeInstance_id\")\n"
+								+ "      REFERENCES \"metamodel\".\"EntityTypeInstance\" (\"EntityTypeInstanceHasEntityTypeInstanceId\") MATCH SIMPLE\n"
+								+ "      ON UPDATE CASCADE ON DELETE CASCADE;",
 									
 						
 						
@@ -700,7 +714,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			(28, 'PrinterProfile', '_4F6BC878-0E8B-46DB-9B2C-59A103C00C03'),\n"
 						+ "			(29, 'ProductionLine', '_D6394DC1-F701-4B68-96A3-8167D217F6E8'),\n"
 						+ "			(30, 'DeliveryProvider', '_D360A7D4-2D77-4335-B77F-BB7552B53877'),\n"
-						+ "			(31, 'Translation', '_4DA32275-BE51-40F0-B607-6D7B89E6D9AF');\n",
+						+ "			(31, 'Translation', '_4DA32275-BE51-40F0-B607-6D7B89E6D9AF'),\n"
+						+ "			(32, 'CurrencyDenomination', '_92CA9E6F-735D-4913-AD41-CC81635161CF');\n",
 						
 						
 						
@@ -737,7 +752,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "  (28, 1),\n"
 						+ "  (29, 1),\n"
 						+ "  (30, 1),\n"
-						+ "  (31, 1);\n",
+						+ "  (31, 1),\n"
+						+ "  (32, 1);\n",
 						
 						
 						
@@ -1012,6 +1028,10 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "\n"
 						+ "			--balances on shift closures\n"
 						+ "			DELETE FROM soberano.\"ShiftClosureRecordsBalanceInCurrency\";\n"
+						+ "			\n"
+						+ "			--history\n"
+						+ "			DELETE FROM soberano.\"StockChange_history\";\n"
+						+ "			DELETE FROM metamodel.\"Vote_history\";\n"
 						+ "\n"
 						+ "			qryResult := 0;\n"
 						+ "		\n"
@@ -2282,6 +2302,50 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Translation\"\n"
+								+ "    ON soberano.\"Translation\" USING btree\n"
+								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"
+								+ "    TABLESPACE pg_default;",
+								
+								
+								
+						"/* currency denomination lifecycle */\n"
+						+ "\n"
+						+ "--stage filters\n"
+						+ "INSERT INTO \"metamodel\".\"StageFilter\" (\"StageFilterHasStageFilterId\",\n"
+						+ "					\"This_filters_by_FilterExpression\", \n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\")\n"
+						+ "	VALUES (32001, 'soberano.stage.starting', 32),\n"
+						+ "		(32002, 'Recorded', 32),\n"
+						+ "		(32003, 'Disabled', 32);\n"
+						+ "			\n"
+						+ "--decisions\n"
+						+ "INSERT INTO \"metamodel\".\"Decision\" (\"DecisionHasDecisionId\",\n"
+						+ "					\"This_has_Name\",\n"
+						+ "					\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "					\"This_causes_advance_from_StageFilter_with_StageFilterHasStageFi\",\n"
+						+ "					\"This_causes_advance_to_StageFilter_with_StageFilterHasStageFilt\",\n"
+						+ "					\"Decision_is_contextual\")\n"
+						+ "	VALUES (32001, 'Add', 32, 32001, 32002, 'false'),\n"
+						+ "		(32003, 'Disable', 32, 32002, 32003, 'false'),\n"
+						+ "		(32004, 'Check', 32, 32002, 32002, 'false');\n"
+						+ "			\n"
+						+ "--responsability filters\n"
+						+ "INSERT INTO \"metamodel\".\"ResponsibilityFilter\" (\"This_belongs_to_LifeCycle_with_LifeCycleHasLifeCycleId\",\n"
+						+ "							\"This_filters_by_FilterExpression\",\n"
+						+ "							\"This_filters_by_Decision_with_DecisionHasDecisionId\")\n"
+						+ "			VALUES (32, 'Checker', 32001),\n"
+						+ "				(32, 'Manager', 32004),\n"
+						+ "				(32, 'Shift manager', 32004),\n"
+						+ "				(32, 'Manager assistant', 32004),\n"	
+						+ "				(32, 'Salesclerk', 32004),\n"
+						+ "				(32, 'Accountant', 32004),\n"
+						+ "				(32, 'Checker', 32004),\n"
+						+ "				(32, 'Auditor', 32004),\n"
+						+ "				(32, 'Manager', 32003);",
+										
+										
+										
 						"CREATE INDEX IF NOT EXISTS \"IX_ETI_Translation\"\n"
 								+ "    ON soberano.\"Translation\" USING btree\n"
 								+ "    (\"This_is_identified_by_EntityTypeInstance_id\" ASC NULLS LAST)\n"

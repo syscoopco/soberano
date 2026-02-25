@@ -1,0 +1,62 @@
+Instructions are given by each soberano database function that is needed to change:
+
+FUNCTION soberano."fn_ShiftClosure_getSales"
+
+	replace 
+	
+		IF (soberano."fn_ShiftClosure_closureAllowed"(loginname))
+	
+			--or make decisions on an existing closure
+			OR EXISTS(SELECT * FROM metamodel."fn_EntityTypeInstance_getDecisions"(20, 1, loginname)) THEN
+	
+	by
+		IF 'Manager' IN (SELECT * from metamodel."fn_User_getResponsibilities"(loginname)) THEN
+		
+
+FUNCTION soberano."fn_CashRegister_get"
+
+	replace
+	
+		The current code RETURN QUERY SELECT ... 
+												"This_has_Currency_code",
+												CASE WHEN "Balance" IS NULL THEN CAST(0 AS numeric) ELSE ROUND("Balance", 8) END
+											...
+		
+	by a fork
+	
+		IF 'Manager' IN (SELECT * from metamodel."fn_User_getResponsibilities"(loginname)) THEN
+		
+			The current code RETURN QUERY SELECT ... 
+													"This_has_Currency_code",
+													CASE WHEN "Balance" IS NULL THEN CAST(0 AS numeric) ELSE ROUND("Balance", 8) END
+												...
+						
+		ELSE
+		
+			RETURN QUERY SELECT ... 
+									"This_has_Currency_code",
+									CAST(0 AS numeric)
+								...
+		
+		END;
+		
+	Note if the user is not granted with Manager rights, all balances return 0.
+		
+FUNCTION soberano."fn_ShiftClosure_getFullReport"
+FUNCTION soberano."fn_ShiftClosure_getReport"
+FUNCTION soberano."fn_ShiftClosure_getSalesByPriceReport"
+
+	replace
+	
+		--the user has rights to record a closure,
+		IF (soberano."fn_ShiftClosure_closureAllowed"(loginname))
+	
+			--or make decisions on an existing closure
+			OR EXISTS(SELECT * FROM metamodel."fn_EntityTypeInstance_getDecisions"(20, 1, loginname)) THEN
+	
+	by
+		IF 'Manager' IN (SELECT * from metamodel."fn_User_getResponsibilities"(loginname)) THEN
+		
+
+	
+		

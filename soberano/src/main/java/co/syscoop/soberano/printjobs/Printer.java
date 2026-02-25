@@ -31,6 +31,10 @@ import org.cups4j.PrintJob.Builder;
 import org.cups4j.PrintRequestResult;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.zkoss.zul.Messagebox;
+
+import com.github.anastaciocintra.escpos.EscPos;
+import com.github.anastaciocintra.output.PrinterOutputStream;
+
 import co.syscoop.soberano.util.SpringUtility;
 import co.syscoop.soberano.util.WSocketClient;
 import co.syscoop.soberano.vocabulary.Labels;
@@ -146,7 +150,7 @@ public class Printer {
 		}		
 	}
 	
-	public static void print(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
+	public static void print(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
 		try {
 			PrintService[] printServices = null;
 			if (pss == null) {
@@ -170,6 +174,10 @@ public class Printer {
 //			        escPos.feed(1).cut(EscPos.CutMode.FULL);
 //			        escPos.close();
 //	            	break;
+			        
+			        if (openCashDrawer) {
+			        	openCashDrawer(printService);
+			        }
 	            }
 			}
 		}
@@ -181,9 +189,38 @@ public class Printer {
 	    }
 	}
 	
-	public static void print(String fileToPrintFullPath, String printerNameParam, String jobName) throws SoberanoException {
+	private static void openCashDrawer(PrintService printService) throws IOException {	
+		
+		PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+		EscPos escPos = new EscPos(printerOutputStream);
+
+		// Send the raw ESC/POS command to open the cash drawer (drawer 1)
+		byte[] command = {0x1B, 0x70, 0, 50, (byte) 250};
+		escPos.write(command, 0, command.length);   // offset 0, length 5
+
+		// Close to flush and release resources
+		escPos.close();
+	}
+	
+	public static void openCashDrawer(PrintService[] pss, String printerNameParam) throws IOException {
+		
+		PrintService[] printServices = null;
+		if (pss == null) {
+			printServices = PrintServiceLookup.lookupPrintServices(null, null);
+		}
+		else {
+			printServices = pss;
+		}			
+		for (PrintService printService : printServices) {					
+			if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
+				openCashDrawer(printService);
+            }
+		}
+	}
+	
+	public static void print(String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer) throws SoberanoException {
 		try {
-			print(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName);
+			print(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);
 		}
 		catch (Exception ex) {
 			ExceptionTreatment.logAndShow(ex, 
@@ -193,7 +230,7 @@ public class Printer {
 	    }
 	}
 	
-	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName) throws UnsupportedEncodingException, IOException, Exception {
+	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
 				printThroughSocket(textToPrint, printerNameParam);
@@ -204,7 +241,7 @@ public class Printer {
 					printCUPS(textToPrint, jobName);
 				}
 				else {
-					print(printServices, fileToPrintFullPath, printerNameParam, jobName);    
+					print(printServices, fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);    
 				}
 			}
 		}
@@ -221,7 +258,7 @@ public class Printer {
 		InputStream in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
 		Reader reader = new InputStreamReader(in, "ISO-8859-1");
 		TextToPDF textToPDF = new TextToPDF();
-		textToPDF.setFont(PDType1Font.COURIER_BOLD);
+		textToPDF.setFont(PDType1Font.COURIER);
 		textToPDF.setFontSize(fontSize);
 		textToPDF.setLandscape(false);
 		
@@ -253,14 +290,15 @@ public class Printer {
 		createPDFFile(fileContent + "--\n--\n--\n", fileFullPath, printerProfile.getFontSize());
 	}
 	
-	public void printPDFFile(String textToPrint, String fileFullPath, String jobName) throws UnsupportedEncodingException, IOException, Exception {
-		print(textToPrint, fileFullPath, printerProfile.getPrinterName(), jobName);
+	public void printPDFFile(String textToPrint, String fileFullPath, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
+		print(textToPrint, fileFullPath, printerProfile.getPrinterName(), jobName, openCashDrawer);
 	}
 	
 	public static void print(String textToPrint,
 							TrackedObject trackedObject,
 							String fileToPrintFullPath,
-							Boolean _3LF) throws Exception {
+							Boolean _3LF,
+							Boolean openCashDrawer) throws Exception {
 		Integer objectId = trackedObject.getId();
 		String printJobName = trackedObject.getClass().getSimpleName() + "_" + objectId;
 		PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
@@ -272,7 +310,7 @@ public class Printer {
 		else {
 			printer.createPDFFile(textToPrint, fileToPrintFullPath);
 		}		
-		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+		printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer);
 	}
 	
 	public static void createFile(Printer printer,
@@ -293,7 +331,8 @@ public class Printer {
 							String fileToPrintFullPath,
 							String printJobName,
 							Boolean _3LF,
-							Object objectToPrint) throws Exception {
+							Object objectToPrint,
+							Boolean openCashDrawer) throws Exception {
 		PrinterProfile printerProfile = new PrinterProfile(printerProfileId);
 		printerProfile.get();
 		Printer printer = new Printer(printerProfile);
@@ -307,7 +346,7 @@ public class Printer {
 		}
 		catch(NoSuchBeanDefinitionException nsbdex) {			
 			createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
-			printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName);
+			printer.printPDFFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer);
 		}
 		catch(Exception ex) {
 			throw ex;
@@ -319,7 +358,8 @@ public class Printer {
 									String printJobPrefix, 
 									Boolean _3LF,
 									Boolean translate,
-									Boolean minimal) throws SoberanoException, SQLException {
+									Boolean minimal,
+									Boolean openCashDrawer) throws SoberanoException, SQLException {
 		
 		PrintableData pd = null;
 		if (!minimal) {
@@ -328,11 +368,11 @@ public class Printer {
 		else {
 			pd = trackedObject.getReportMinimal();
 		}
-		if (!pd.getTextToPrint().isEmpty()) {				
+		if (!pd.getTextToPrint().isEmpty()) {			
 			try {
 				Printer.print(translate ? Translator.translate(pd.getTextToPrint()) : pd.getTextToPrint(), 
 							pd.getPrinterProfile(), pdfFileToPrintFullPath, 
-							"printJobPrefix" + trackedObject.getId(), _3LF, null);
+							"printJobPrefix" + trackedObject.getId(), _3LF, null, openCashDrawer);
 			}
 			catch(Exception ex) {
 				ExceptionTreatment.logAndShow(ex, 

@@ -87,7 +87,18 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			}
 			Order order = new Order(orderId);
 			order.get();
-			((Decimalbox) wndContentPanel.query("#decToCollect")).setValue(order.getAmountToCollect());
+			
+			Decimalbox decToCollect = (Decimalbox) wndContentPanel.query("#decToCollect");
+			decToCollect.setValue(order.getAmountToCollect());
+			Decimalbox decChange = (Decimalbox) wndContentPanel.query("#decChange");
+			decChange.setValue(new BigDecimal(0).subtract(decToCollect.getValue()));
+			if (decToCollect.getValue().compareTo(new BigDecimal(0)) > 0) {
+				decChange.setStyle("background-color: red;");
+			}
+			else {
+				decChange.setStyle("");
+			}
+			
 			if (order.getCustomer() != 0) {
 				ZKUtility.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
 			}

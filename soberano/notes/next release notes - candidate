@@ -1,6 +1,21 @@
 v2.0.11 Candidate release
 
-New: 
+New: In order form (order.zul or ms_order.zul), now it's possible to order new rounds of an item from a current round
+	of that item. It's just to push button decorated by "+", on the corresponding ordered item round tree item.
+
+New: Cash drawer is opened after closing an order.
+
+New: In cash register form, when the change is negative, the amount is shown and the background is colored in red. Before,
+	it was shown amount 0 and kept the background color unchanged.
+
+Fix: Upon business data cleaning request, remove stock changes and vote histories.
+
+Fix: Disable pools in Spring beans org.springframework.ldap.core.support.LdapContextSource and  
+	org.springframework.security.ldap.DefaultSpringSecurityContextSource. Enabling them caused
+	users logged through network to be unable to login or unexpectedly logged out immediately
+	after login. This reduces probability of that to happen.
+
+Fix: Avoid to use bold fonts in printing. It had problems with legibility of numbers in receipts printed in thermal paper. 
 
 Fix: Sending printer paper cutting command from TCPTOOL was disabled. Cutting must be controlled by means of the OS printer settings tool. 
 

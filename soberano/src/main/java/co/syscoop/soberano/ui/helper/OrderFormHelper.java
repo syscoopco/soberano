@@ -37,6 +37,7 @@ import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Order;
+import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
 import co.syscoop.soberano.enums.Stage;
@@ -124,6 +125,24 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 					BigDecimal servedItems = decServedItems.getValue().add(decOneRunQuantity.getValue()).setScale(8, RoundingMode.HALF_EVEN).stripTrailingZeros();
 					if (servedItems.compareTo(new BigDecimal(lblOrderedItems.getValue())) > 0) {
 						decServedItems.setValue(new BigDecimal(lblOrderedItems.getValue()));
+						
+						//if user is trying to increase a round's ordered quantity,
+						//better to add a new round of same product
+						Product product = new Product();
+						product.setStringId(inventoryItemCode);
+						product.getFromStringId();
+						product.setOneRunQuantity(decOneRunQuantity.getValue());
+						
+						if (cmbItemToOrder.getSelectedItem() == null || !cmbItemToOrder.getText().equals(product.getName() + " : " + product.getStringId())) {
+							Comboitem cmbItem = new Comboitem(product.getName() + " : " + product.getStringId());		
+							cmbItem.setValue(product);
+							cmbItemToOrder.getChildren().clear();
+							cmbItemToOrder.getChildren().add(cmbItem);
+							cmbItemToOrder.setSelectedIndex(0);
+							Events.sendEvent(Events.ON_CHANGE, cmbItemToOrder, null);
+						}						
+						Button btnInc = (Button) cmbItemToOrder.query("#btnInc");
+						Events.sendEvent(Events.ON_CLICK, btnInc, null);
 					}
 					else {
 						decServedItems.setValue(servedItems);
@@ -181,7 +200,10 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			if (decServedItems.getValue().compareTo(new BigDecimal(0)) > 0) {
 				btnDecServedItems.setDisabled(false);
 				if (orderedItems.equals(decServedItems.getValue())) {
-					btnIncServedItems.setDisabled(true);
+					//btnIncServedItems.setDisabled(true);
+					
+					//keep enabled to order more rounds from ordered item tree item
+					btnIncServedItems.setDisabled(false);
 				}
 				else {
 					btnIncServedItems.setDisabled(false);
@@ -422,6 +444,9 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		}
 		else {
 			btnIncServedItems.setDisabled(true);
+			
+			//keep enabled to order more rounds from ordered item tree item
+			btnIncServedItems.setDisabled(false);
 		}
 		boxOi.appendChild(btnIncServedItems);
 		btnIncServedItems.addEventListener("onClick", new EventListener() {
