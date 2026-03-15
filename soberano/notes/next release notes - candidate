@@ -1,6 +1,19 @@
 v2.0.11 Candidate release
 
-New: In stock.zul now is possible to force the unit value of an item. Owner right must be granted to the user.
+New: In stock.zul now is possible to force the unit value of an item. The corresponding decimal box now allows writes in it.
+	Owner right must be granted to the user. A Configuration object modify decision is made with the argument:
+	
+	tt_Stock_tt tt_MODIFIED_BY_tt <loginname>. 
+	tt_Warehouse_tt : <warehouseid>. 
+	tt_Item_tt : <inventoryitemcode>. 
+	tt_NewStockValue_tt : <inventoryitemvalue>.
+	
+	The database function is:
+	
+	 FUNCTION soberano."fn_Business_forceStockAdjusment"(warehouseid integer,
+														inventoryitemcode character varying,
+														inventoryitemvalue numeric,
+														loginname character varying)
 
 New: In order form (order.zul or ms_order.zul), now it's possible to order new rounds of an item from a current round
 	of that item. It's just to push button decorated by "+", on the corresponding ordered item round tree item.

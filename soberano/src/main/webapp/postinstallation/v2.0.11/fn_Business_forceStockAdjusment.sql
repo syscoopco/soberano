@@ -10,6 +10,8 @@ CREATE OR REPLACE FUNCTION soberano."fn_Business_forceStockAdjusment"(
 AS $BODY$
 	DECLARE
 		qryResult integer;
+		entityTypeInstanceId integer;
+		decisionId integer;
 	BEGIN
 		--default returning value. user has no right.
 		qryResult := -1;		
@@ -21,6 +23,38 @@ AS $BODY$
 				SET "This_has_Value" = inventoryItemValue
 				WHERE "WarehouseHasWarehouseId" = warehouseId
 					AND "InventoryItemHasInventoryItemCode" = inventoryItemCode;
+
+			SELECT objectdata."This_is_identified_by_EntityTypeInstance_id", 
+				decision."DecisionHasDecisionId"
+			FROM (SELECT "This_is_identified_by_EntityTypeInstance_id" FROM soberano."Configuration") objectdata
+				INNER JOIN (SELECT "DecisionHasDecisionId", 
+									"This_has_Name" 
+								FROM metamodel."Decision") decision
+					ON decision."DecisionHasDecisionId" = 
+						(SELECT "DecisionId" 
+						 	FROM metamodel."fn_EntityTypeInstance_getDecisions"(
+										objectdata."This_is_identified_by_EntityTypeInstance_id",
+										loginname)
+							WHERE "DecisionName" =
+						   
+								/************/
+									'Apply'
+						   		/************/						   
+						   
+						   )
+			INTO entityTypeInstanceId,
+				decisionId;	
+
+			--make the decision. this is treated like a configuration decision and it's logged as-is.
+			PERFORM metamodel."fn_Vote_vote"(loginname,
+											entityTypeInstanceId, 
+											decisionId, 
+											'tt_Stock_tt ' || 
+											' tt_MODIFIED_BY_tt ' || 
+											loginname || 
+											'. tt_Warehouse_tt : ' || warehouseid::text || '. ' ||
+											'tt_Item_tt : ' || inventoryitemcode || '. ' ||
+											'tt_NewStockValue_tt : ' || inventoryitemvalue::text || '. ');
 
 			qryResult := 0;
 		
