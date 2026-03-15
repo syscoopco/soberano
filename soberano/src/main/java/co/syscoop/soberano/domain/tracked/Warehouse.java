@@ -1,5 +1,6 @@
 package co.syscoop.soberano.domain.tracked;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
+import co.syscoop.soberano.database.relational.QueryObjectResultMapper;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
@@ -303,5 +305,17 @@ public class Warehouse extends TrackedObject {
 
 	public void setIsLossesWarehouse(Boolean isLossesWarehouse) {
 		this.isLossesWarehouse = isLossesWarehouse;
+	}
+	
+	public Integer forceStockAdjustment(Integer warehouse, String inventoryItem, BigDecimal stockUnitValue) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Business_forceStockAdjusment\"(:warehouse, :inventoryItem, :stockUnitValue, :loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("warehouse", warehouse);
+		parametersMap.put("inventoryItem", inventoryItem);
+		parametersMap.put("stockUnitValue", stockUnitValue);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 }

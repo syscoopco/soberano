@@ -1,17 +1,26 @@
 package co.syscoop.soberano.renderers;
 
 import org.zkoss.util.resource.Labels;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zul.Button;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.Decimalbox;
 import org.zkoss.zul.Group;
 import org.zkoss.zul.Label;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Row;
 import org.zkoss.zul.Vbox;
 
+import co.syscoop.soberano.domain.tracked.Warehouse;
+import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
+import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.util.rowdata.StockRowData;
 
 public class StockGridRenderer extends DomainObjectRowRenderer {
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void prepareRow(Row row, Object data) {
 		
 		StockRowData stockRowData = (StockRowData) data;
@@ -35,9 +44,56 @@ public class StockGridRenderer extends DomainObjectRowRenderer {
 		//unit value
 		Decimalbox decUnitValue = new Decimalbox(stockRowData.getUnitValue());
 		decUnitValue.setFormat("####.########");
-		decUnitValue.setReadonly(true);
+		decUnitValue.setReadonly(false);
 		decUnitValue.setWidth("100%");
 		row.appendChild(decUnitValue);
+		
+		decUnitValue.addEventListener("onChange", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				
+				try{
+					Decimalbox decStockUnitValue = (Decimalbox) event.getTarget();
+					DomainObject domainObject = (DomainObject) ((Combobox) decStockUnitValue.getParent().
+																					getParent().
+																					getParent().
+																						query("grid").
+																							getParent().
+																							getParent().
+																							getParent().
+																							getParent().
+																								query("#cmbWarehouse")
+													).getSelectedItem().getValue();
+					
+					//update the unit stock value of the item
+					Integer qryResult = (new Warehouse()).forceStockAdjustment(domainObject.getId(), 
+																				stockRowData.getInventoryItemCode(),
+																				decStockUnitValue.getValue());						
+					if (qryResult != 0) {
+						throw new NotEnoughRightsException();
+					}
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(NullPointerException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.selectAWarehouseFromTheList"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							ex.getMessage(), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+				}
+			}			
+		});
 		
 		//action column
 		Vbox actionCell = new Vbox();

@@ -1,5 +1,7 @@
 v2.0.11 Candidate release
 
+New: In stock.zul now is possible to force the unit value of an item. Owner right must be granted to the user.
+
 New: In order form (order.zul or ms_order.zul), now it's possible to order new rounds of an item from a current round
 	of that item. It's just to push button decorated by "+", on the corresponding ordered item round tree item.
 

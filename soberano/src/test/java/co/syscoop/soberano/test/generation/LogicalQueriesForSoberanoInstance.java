@@ -1044,6 +1044,41 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Business_forceStockAdjusment\"(\n"
+						+ "	warehouseid integer,\n"
+						+ "	inventoryitemcode character varying,\n"
+						+ "	inventoryitemvalue numeric,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS integer\n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "AS $BODY$\n"
+						+ "	DECLARE\n"
+						+ "		qryResult integer;\n"
+						+ "	BEGIN\n"
+						+ "		--default returning value. user has no right.\n"
+						+ "		qryResult := -1;		\n"
+						+ "		\n"
+						+ "		--it's an owner\n"
+						+ "		IF 'Owner' IN (SELECT * from metamodel.\"fn_User_getResponsibilities\"(loginname)) THEN\n"
+						+ "\n"
+						+ "			UPDATE soberano.\"Stock\"\n"
+						+ "				SET \"This_has_Value\" = inventoryItemValue\n"
+						+ "				WHERE \"WarehouseHasWarehouseId\" = warehouseId\n"
+						+ "					AND \"InventoryItemHasInventoryItemCode\" = inventoryItemCode;\n"
+						+ "\n"
+						+ "			qryResult := 0;\n"
+						+ "		\n"
+						+ "		ELSE\n"
+						+ "			qryResult := -1;\n"
+						+ "		END IF;\n"
+						+ "		RETURN qryResult;\n"
+						+ "END;\n"
+						+ "$BODY$;",
+						
+						
+						
 						"/* catalog lifecycle */\n"
 						+ "\n"
 						+ "--stage filters\n"
