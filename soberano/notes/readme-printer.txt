@@ -1,0 +1,13 @@
+Drivers that work with CUPS:
+
+1) ./WEB-INF/classes/cups-thermo-printer-master.zip
+
+		1.1) After installing the driver according to README.md file, in CUPS (localhost:631),
+			add an USB printer using the brand Zijiang and model ZJ-58.
+		
+		1.2) Establish the following default options for the printer:
+	
+			1.2.1) Feed distance after print: 18mm
+			1.2.2) Blank space at page's end: Do not print
+			1.2.3) Cutting: Cut at every page.
+		

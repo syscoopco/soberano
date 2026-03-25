@@ -62,17 +62,17 @@ class O4_CustomerTest_search_showingAll {
 		SpringUtility.setLoggedUserForTesting(userName);
 		
 		//showing all in search combobox
-		TestUtilityCode.testSearchCombobox("/customers.zul", customerCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testSearchCombobox("/customers_testing.zul", customerCount, userSuffix, baseId, qualifiedNamePattern);
 		
 		//showing all in tree
-		TestUtilityCode.testShowingAllTree("/customers.zul", customerCount, userSuffix, baseId, qualifiedNamePattern);
+		TestUtilityCode.testShowingAllTree("/customers_testing.zul", customerCount, userSuffix, baseId, qualifiedNamePattern);
 	};
 	
 	private void testForDisallowedUser(Integer userSuffix) {
 		
 		String userName = "user" + userSuffix + "@soberano.syscoop.co";
 		SpringUtility.setLoggedUserForTesting(userName);
-		DesktopAgent desktop = Zats.newClient().connect("/customers.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/customers_testing.zul");
 		ComponentAgent cmbIntelliSearch = desktop.query("center").query("combobox");
 		Tree treeObjects = (Tree) cmbIntelliSearch.as(Combobox.class).query("#wndShowingAll").query("#treeObjects");		
 		assertEquals(0,

@@ -55,7 +55,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user2@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user2@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer1fn Customer1ln : c1@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer1fnmod");
@@ -104,7 +104,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer1fn Customer1ln : c1@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer1fnmod");
@@ -151,7 +151,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer2fn Customer2ln : c2@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer2fnmod");
@@ -198,7 +198,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer3fn Customer3ln : c3@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer3fnmod");
@@ -245,7 +245,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer4fn Customer4ln : c4@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer4fnmod");
@@ -292,7 +292,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer5fn Customer5ln : c5@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer5fnmod");
@@ -339,7 +339,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer6fn Customer6ln : c6@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer6fnmod");
@@ -386,7 +386,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer7fn Customer7ln : c7@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer7fnmod");
@@ -433,7 +433,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer8fn Customer8ln : c8@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer8fnmod");
@@ -480,7 +480,7 @@ class O5_CustomerTest_modify extends CustomerActionTest {
 
 		CustomerForm customerForm = null;
 		try {
-			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers.zul");			
+			customerForm = setFormComponents("user1@soberano.syscoop.co", "customers_testing.zul");			
 			loadObjectDetails("Customer9fn Customer9ln : c9@soberano.syscoop.co");
 			
 			customerForm.setComponentValue(customerForm.getTxtFirstName(), "Customer9fnmod");

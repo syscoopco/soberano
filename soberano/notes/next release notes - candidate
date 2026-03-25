@@ -1,5 +1,8 @@
 v2.0.11 Candidate release
 
+New: A second sheet was added to custom report 3. Now the profits for a period of time is calculated from
+	expenses, sales, and opening and ending inventories.
+
 New: In stock.zul now is possible to force the unit value of an item. The corresponding decimal box now allows writes in it.
 	Owner right must be granted to the user. A Configuration object modify decision is made with the argument:
 	
@@ -62,6 +65,8 @@ Fix: Avoid division by zero. These lines were corrected:
 Fix: In closure general full report, the name of the auxiliary cost center marking the end of the items breakdown which
 	was "FIN" was changed by "z-FIN". This was due to that name is used to order the resulting dataset by cost center names,
 	so problems arose when a real cost center was named after "FIN". For example "Mercado", "Las Cachitas", ..., and any
-	other begging with a letter after "F". 
+	other begging with a letter after "F".
+	
+Fix: customers_testing.zul is used in junit testing, instead of customers.zul
 		
 User manual:

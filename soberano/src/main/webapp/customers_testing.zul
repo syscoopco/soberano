@@ -1,6 +1,13 @@
 <?page title="${labels.pageCustomers.WindowTitle}" contentType="text/html;charset=UTF-8"?>
 <?init class="org.zkoss.zk.ui.util.Composition" arg0="/WEB-INF/layouts/template-details.zul"?>
 
+<!-- 
+
+customers_testing.zul lists customers in a tree component, instead of a grid. It's referenced from ZATS Mimic test cases.
+In production, customers.zul is used as it uses a grid that is more proper for thousands of customers.
+
+ -->
+
 <zk>
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageCustomers.WindowTitle}" sclass="PageTitle"/>
@@ -13,25 +20,13 @@
 		</combobox>
 		<button id="btnNew" label="+" href="/new_customer.zul" sclass="BarButton NewButton"></button>		
 	</hbox>
-	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">
-		<zscript>
-			<![CDATA[
-		  		co.syscoop.soberano.models.CustomersGridModel model = new co.syscoop.soberano.models.CustomersGridModel();
-		  		co.syscoop.soberano.renderers.CustomersGridRenderer renderer = new co.syscoop.soberano.renderers.CustomersGridRenderer();
-			]]>
-		</zscript>
-		<vbox hflex="1">
-			<grid id="grd" height="100%" mold="paging" model="${model}" rowRenderer="${renderer}">
-				<columns sizable="true">
-					<column align="left" label="${labels.caption.columnHeader.name}" sort="auto(domainObjectName)" sortDirection="ascending">
-					</column>
-					<column align="left" visible="false" sort="auto(domainObjectId)">
-					</column>
-					<column align="center" label="${labels.caption.columnHeader.action}">					
-					</column>
-				</columns>
-			</grid>
-		</vbox>
+	<window id="wndShowingAll" self="@define(showingAllPanel)" contentStyle="overflow:auto" height="100%">		 
+		<tree id="treeObjects" apply="co.syscoop.soberano.composers.CustomersTreeComposer">
+			<treecols>
+				<treecol>
+				</treecol>
+			</treecols>
+		</tree>		
 	</window>
 	<include id="incDetails" self="@define(detailsPanel)" src="/customer.zul" visible="false"></include>	
 	<button id="btnApply" disabled="true" self="@define(decisionButton)" label="${labels.caption.action.apply}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ModifyCustomerButtonComposer"></button>

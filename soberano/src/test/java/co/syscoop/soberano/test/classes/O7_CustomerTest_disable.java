@@ -53,7 +53,7 @@ class O7_CustomerTest_disable extends CustomerActionTest {
 	@Test
 	@Order(1)
 	final void testCase1() {
-		TestUtilityCode.testDisablingObject("/customers.zul", "user1@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
+		TestUtilityCode.testDisablingObject("/customers_testing.zul", "user1@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
 	}
 	
 		
@@ -61,7 +61,7 @@ class O7_CustomerTest_disable extends CustomerActionTest {
 	@Order(2)
 	final void testCase2() {
 		try {
-			TestUtilityCode.testDisablingObject("/customers.zul", "user2@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
+			TestUtilityCode.testDisablingObject("/customers_testing.zul", "user2@soberano.syscoop.co", "c7mod@soberano.syscoop.co", 8);
 		}
 		catch(AssertionFailedError ex) {
 			fail(ex.getMessage());

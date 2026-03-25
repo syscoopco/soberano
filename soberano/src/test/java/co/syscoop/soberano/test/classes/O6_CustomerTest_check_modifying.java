@@ -38,7 +38,7 @@ class O6_CustomerTest_check_modifying extends CustomerActionTest {
 		
 		//Zats.init("./src/main/webapp");		
 		SpringUtility.setLoggedUserForTesting("user1@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/customers.zul");
+		DesktopAgent desktop = Zats.newClient().connect("/customers_testing.zul");
 		
 		cmbIntelliSearchAgent = desktop.query("center").query("combobox");
 		cmbIntelliSearch = cmbIntelliSearchAgent.as(Combobox.class);		
