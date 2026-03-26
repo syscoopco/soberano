@@ -45,6 +45,7 @@ private Workbook workbook = null;
 	private Sheet dailyMaterialExpensesSheet = null;
 	private Sheet dailyServiceExpensesSheet = null;
 	private Sheet dailyPaymentsSheet = null;
+	private Sheet monthlyTransfersSheet = null;
 	private Sheet warehouseStockSheet = null;
 	private Sheet monthlyMaterialExpensesSheet = null;
 	private Sheet monthlyServiceExpensesSheet = null;
@@ -76,6 +77,7 @@ private Workbook workbook = null;
 		monthlyMaterialExpensesSheet = workbook.createSheet("Gastos materiales mensuales");
 		monthlyServiceExpensesSheet = workbook.createSheet("Gastos en servicios mensuales");
 		dailyPaymentsSheet = workbook.createSheet("Cobros diarios");
+		monthlyTransfersSheet = workbook.createSheet("Transferencias mensuales");
 		warehouseStockSheet = workbook.createSheet("Existencias");
 		catalogSheet = workbook.createSheet("Catálogo");
 		
@@ -441,6 +443,53 @@ private Workbook workbook = null;
 		headerCell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(0, 0, 2, 2);
 		setBordersToMergedCells(dailyPaymentsSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+	}
+	
+	private void initWorkbookWithMonthlyTransfersSheet(Date from, Date until) {
+		
+		int dateColumnWidth = 3000;
+		int noteColumnWidth = 8000;
+		int orderColumnWidth = 3000;
+		int processorColumnWidth = 3000;
+		int amountColumnWidth = 3000;
+		
+		monthlyTransfersSheet.setColumnWidth(0, dateColumnWidth);
+		monthlyTransfersSheet.setColumnWidth(1, noteColumnWidth);
+		monthlyTransfersSheet.setColumnWidth(2, orderColumnWidth);
+		monthlyTransfersSheet.setColumnWidth(3, processorColumnWidth);
+		monthlyTransfersSheet.setColumnWidth(4, amountColumnWidth);
+		
+		Row header = monthlyTransfersSheet.createRow(0);
+		
+		Cell headerCell = header.createCell(0);
+		headerCell.setCellValue("Fecha");
+		headerCell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, 0);
+		setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
+		headerCell.setCellValue("Nota");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(2);
+		headerCell.setCellValue("Pedido");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 2, 2);
+		setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(3);
+		headerCell.setCellValue("Procesador");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 3, 3);
+		setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(4);
+		headerCell.setCellValue("Importe");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(0, 0, 4, 4);
+		setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);	
 	}
 	
 	private void initWorkbookWithWarehouseStockSheet() {
@@ -904,6 +953,70 @@ private Workbook workbook = null;
 		}
 	}
 	
+	private final class ExportMonthlyTransfersToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			Date from = (Date) getParameters().get("from");
+			Date until = (Date) getParameters().get("until");
+			
+			initWorkbookWithMonthlyTransfersSheet(from, until);
+			
+			Integer rowCount = 1;
+			String previousDate = null;
+			Integer initDayRow = 2;
+			while (rs.next()) {
+				
+				Row row = monthlyTransfersSheet.createRow(rowCount);
+				
+				if (previousDate != null && !previousDate.equals(rs.getString("transferdate"))) {
+					addDayTotalAmount(monthlyTransfersSheet, rowCount, initDayRow, 4, "E");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+				
+				previousDate = rs.getString("transferdate");
+				
+				row = monthlyTransfersSheet.createRow(rowCount);
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(rs.getString("transferdate"));
+				cell.setCellStyle(dateStyle);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getString("transfernote"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(rs.getInt("transferorder"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(rs.getString("transferprocessor"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(4);
+				cell.setCellValue(rs.getDouble("transferamount"));
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+				
+				if (rs.isLast()) {
+					addDayTotalAmount(monthlyTransfersSheet, rowCount, initDayRow, 4, "E");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+			}
+			
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(1, rowCount - 1, 0, 4);
+				setBordersToMergedCells(monthlyTransfersSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+												
+			return null;
+		}
+	}
+	
 	private final class ExportWarehouseStockToXLSExtractor implements ResultSetExtractor<Object> {
 		
 		@Override
@@ -1073,6 +1186,18 @@ private Workbook workbook = null;
 		return super.query(query, qryParameters, new ExportDailyPaymentsToXLSExtractor());
 	}
 	
+	private Object runMonthlyTransfersDBQuery(Date from, Date until) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport2_monthlyTransfers\"(:lang, :fromD, :untilD, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());		
+		qryParameters.put("fromD", from);
+		qryParameters.put("untilD", until);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportMonthlyTransfersToXLSExtractor());
+	}
+	
 	private Object runWarehouseStockDBQuery() throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -1102,28 +1227,31 @@ private Workbook workbook = null;
 			e.printStackTrace();
 		}
 		
-		//first sheet
+		//
 		runDailySalesDBQuery(from, until, costCenter);
 				
-		//second sheet
+		//
 		runDailyMaterialExpensesDBQuery(from, until);
 				
-		//third sheet
+		//
 		runDailyServiceExpensesDBQuery(from, until);
 		
-		//fourth
+		//
 		runMonthlyMaterialExpensesDBQuery(from, until);
 		
-		//fifth
+		//
 		runMonthlyServiceExpensesDBQuery(from, until);
 		
-		//sixth
+		//
 		runDailyPaymentsDBQuery(from, until);
 		
-		//seventh
+		//
+		runMonthlyTransfersDBQuery(from, until);
+		
+		//
 		runWarehouseStockDBQuery();
 		
-		//eighth
+		//
 		runCatalogDBQuery();
 		
 		//workbook file creation//

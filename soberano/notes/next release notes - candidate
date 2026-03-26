@@ -1,5 +1,7 @@
 v2.0.11 Candidate release
 
+New: Added to custom report 2 a monthly transfers sheet.
+
 New: A second sheet was added to custom report 3. Now the profits for a period of time is calculated from
 	expenses, sales, and opening and ending inventories.
 

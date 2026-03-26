@@ -9,7 +9,6 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,6 +62,10 @@ private Workbook workbook = null;
 	private BigDecimal materialExpenses;
 	private BigDecimal serviceExpenses;
 	private BigDecimal payrollExpenses;
+	
+	private Row openingInventoryRow;
+	private Row endingInventoryRow;
+	private Row salesRow;
 	
 	private String relativePath = "";
 	
@@ -379,12 +382,16 @@ private Workbook workbook = null;
 		cell.setCellValue(materialExpenses.doubleValue());
 		cell.setCellStyle(moneyStyle);
 		
-		Row servicesExpensesRow = reportSheet2.createRow(1);
-		cell = servicesExpensesRow.createCell(0);				
+		Row serviceExpensesRow = reportSheet2.createRow(1);
+		cell = serviceExpensesRow.createCell(0);				
 		cell.setCellValue("Gastos en servicios");
 		cell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(1, 1, 0, 0);
 		setBordersToMergedCells(reportSheet2, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		cell = serviceExpensesRow.createCell(1);
+		cell.setCellValue(serviceExpenses.doubleValue());
+		cell.setCellStyle(moneyStyle);
 		
 		Row payrollExpensesRow = reportSheet2.createRow(2);
 		cell = payrollExpensesRow.createCell(0);				
@@ -392,6 +399,10 @@ private Workbook workbook = null;
 		cell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(2, 2, 0, 0);
 		setBordersToMergedCells(reportSheet2, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		cell = payrollExpensesRow.createCell(1);
+		cell.setCellValue(payrollExpenses.doubleValue());
+		cell.setCellStyle(moneyStyle);
 		
 		Row totalExpensesRow = reportSheet2.createRow(3);
 		cell = totalExpensesRow.createCell(0);				
@@ -407,15 +418,15 @@ private Workbook workbook = null;
 		
 		reportSheet2.createRow(4);
 		
-		Row openingInventoryRow = reportSheet2.createRow(5);
+		openingInventoryRow = reportSheet2.createRow(5);
 		cell = openingInventoryRow.createCell(0);				
 		cell.setCellValue("Inventario inicial");
 		cell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(5, 5, 0, 0);
 		setBordersToMergedCells(reportSheet2, cellRangeAddress, BorderStyle.MEDIUM);
 		
-		Row endingInventoryExpensesRow = reportSheet2.createRow(6);
-		cell = endingInventoryExpensesRow.createCell(0);				
+		endingInventoryRow = reportSheet2.createRow(6);
+		cell = endingInventoryRow.createCell(0);				
 		cell.setCellValue("Inventario final");
 		cell.setCellStyle(headerStyle);
 		cellRangeAddress = new CellRangeAddress(6, 6, 0, 0);
@@ -423,7 +434,7 @@ private Workbook workbook = null;
 		
 		reportSheet2.createRow(7);
 		
-		Row salesRow = reportSheet2.createRow(8);
+		salesRow = reportSheet2.createRow(8);
 		cell = salesRow.createCell(0);				
 		cell.setCellValue("Ventas");
 		cell.setCellStyle(headerStyle);
@@ -476,7 +487,7 @@ private Workbook workbook = null;
 								headerStyle, 7, quantityColumnWidth, valueColumnWidth);		
 	}
 	
-	private void addDayTotalsRows(Sheet sheet, Integer rowCount) {
+	private void addSheet1TotalsRows(Sheet sheet, Integer rowCount) {
 		Row row = sheet.createRow(rowCount);
 		Cell cell = row.createCell(4);				
 		cell.setCellValue("TOTAL");
@@ -616,7 +627,7 @@ private Workbook workbook = null;
 				rowCount++;
 				
 				if (rs.isLast()) {
-					addDayTotalsRows(reportSheet1, rowCount);
+					addSheet1TotalsRows(reportSheet1, rowCount);
 				}
 			}
 			
@@ -624,6 +635,76 @@ private Workbook workbook = null;
 												
 			return null;
 		}
+	}
+	
+	private void fillSheet2ItemCells(ResultSet rs, Row currentItemRow, Integer cellIndexOffset) throws SQLException {
+		
+		Cell cell = null;
+		cell = currentItemRow.createCell(1 + cellIndexOffset);				
+		cell.setCellValue(rs.getBigDecimal("openingQuantity").doubleValue());
+		cell.setCellStyle(style);
+		
+		cell = currentItemRow.createCell(2 + cellIndexOffset);				
+		cell.setCellValue(rs.getBigDecimal("openingUnitCost").doubleValue());
+		cell.setCellStyle(moneyStyle);
+		
+		cell = currentItemRow.createCell(3 + cellIndexOffset);				
+		cell.setCellStyle(moneyStyle);
+		String formula = "";
+		if (cellIndexOffset == 0) {
+			formula= "B" + (currentItemRow.getRowNum() + 1) + "*C" + (currentItemRow.getRowNum() + 1);
+		}
+		else {
+			formula= "H" + (currentItemRow.getRowNum() + 1) + "*I" + (currentItemRow.getRowNum() + 1);
+		}
+		cell.setCellFormula(formula);
+		
+		cell = null;
+		cell = currentItemRow.createCell(4 + cellIndexOffset);				
+		cell.setCellValue(rs.getBigDecimal("endingQuantity").doubleValue());
+		cell.setCellStyle(style);
+		
+		cell = currentItemRow.createCell(5 + cellIndexOffset);				
+		cell.setCellValue(rs.getBigDecimal("endingUnitCost").doubleValue());
+		cell.setCellStyle(moneyStyle);
+		
+		cell = currentItemRow.createCell(6 + cellIndexOffset);				
+		cell.setCellStyle(moneyStyle);
+		if (cellIndexOffset == 0) {
+			formula= "E" + (currentItemRow.getRowNum() + 1) + "*F" + (currentItemRow.getRowNum() + 1);
+		}
+		else {
+			formula= "K" + (currentItemRow.getRowNum() + 1) + "*L" + (currentItemRow.getRowNum() + 1);
+		}
+		cell.setCellFormula(formula);	
+	}
+	
+	private void addSheet2TotalsRows(Sheet sheet, Integer rowCount) {
+		
+		Row row = sheet.createRow(rowCount);
+		Cell cell = row.createCell(2);				
+		cell.setCellValue("TOTAL");
+		cell.setCellStyle(headerStyle);
+		
+		cell = row.createCell(3);
+		cell.setCellStyle(totalStyle);
+		String formula= "SUM(" + "D17:D" + Integer.valueOf(rowCount).toString() + ")";
+		cell.setCellFormula(formula);
+		
+		cell = row.createCell(6);
+		cell.setCellStyle(totalStyle);
+		formula= "SUM(" + "G17:G" + Integer.valueOf(rowCount).toString() + ")";
+		cell.setCellFormula(formula);
+		
+		cell = row.createCell(9);
+		cell.setCellStyle(totalStyle);
+		formula= "SUM(" + "J17:J" + Integer.valueOf(rowCount).toString() + ")";
+		cell.setCellFormula(formula);
+		
+		cell = row.createCell(12);
+		cell.setCellStyle(totalStyle);
+		formula= "SUM(" + "M17:M" + Integer.valueOf(rowCount).toString() + ")";
+		cell.setCellFormula(formula);
 	}
 	
 	private final class ExportSheet2ToXLSExtractor implements ResultSetExtractor<Object> {
@@ -637,101 +718,51 @@ private Workbook workbook = null;
 			runSheet2ExpensesQuery(from, until, null);
 			
 			initWorkbookWithReportSheet2(from, until);
-/*	
-			Integer rowCount = 1;
+			
+			String previousItem = "";
+			Row currentItemRow = null;
+	
+			Integer rowCount = 16;
 			while (rs.next()) {
 				
-				Row row = reportSheet1.createRow(rowCount);
+				if (previousItem.equals(rs.getString("inventoryItemName"))) {
+					fillSheet2ItemCells(rs, currentItemRow, 6);
+					rowCount++;
+				}
+				else {
+					currentItemRow = reportSheet2.createRow(rowCount);
+					
+					Cell cell = currentItemRow.createCell(0);				
+					cell.setCellValue(rs.getString("inventoryItemName"));
+					cell.setCellStyle(style);
+					
+					fillSheet2ItemCells(rs, currentItemRow, 0);
+				}
 				
-				Cell cell = row.createCell(0);				
-				cell.setCellValue(rs.getString("iName"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(1);
-				cell.setCellValue(rs.getDouble("unitCost"));
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(2);
-				cell.setCellValue(rs.getDouble("iPrice"));
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(3);
-				String formula = "C" + Integer.valueOf(rowCount + 1).toString() + "-" + "B" + Integer.valueOf(rowCount + 1).toString();
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(4);
-				cell.setCellValue(rs.getDouble("soldQuantity"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(5);
-				formula = "D" + Integer.valueOf(rowCount + 1).toString() + "*" + "E" + Integer.valueOf(rowCount + 1).toString();
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(6);
-				formula = "C" + Integer.valueOf(rowCount + 1).toString() + "*" + "E" + Integer.valueOf(rowCount + 1).toString();
-				cell.setCellFormula(formula);
-				cell.setCellStyle(moneyStyle);
-				
-//				cell = row.createCell(7);
-//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*1%";
-//				cell.setCellFormula(formula);
-//				cell.setCellStyle(moneyStyle);
-//				
-//				cell = row.createCell(8);
-//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*2%";
-//				cell.setCellFormula(formula);
-//				cell.setCellStyle(moneyStyle);
-//				
-//				cell = row.createCell(9);
-//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*3%";
-//				cell.setCellFormula(formula);
-//				cell.setCellStyle(moneyStyle);
-//				
-//				cell = row.createCell(10);
-//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*4%";
-//				cell.setCellFormula(formula);
-//				cell.setCellStyle(moneyStyle);
-//				
-//				cell = row.createCell(11);
-//				formula = "G" + Integer.valueOf(rowCount + 1).toString() + "*5%";
-//				cell.setCellFormula(formula);
-//				cell.setCellStyle(moneyStyle);
-				
-				cell = row.createCell(7);
-				cell.setCellValue(rs.getDouble("opening"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(8);
-				cell.setCellValue(rs.getDouble("inputs"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(9);
-				cell.setCellValue(rs.getDouble("outputs"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(10);
-				cell.setCellValue(rs.getDouble("movements"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(11);
-				cell.setCellValue(rs.getDouble("losses"));
-				cell.setCellStyle(style);
-				
-				cell = row.createCell(12);
-				cell.setCellValue(rs.getDouble("ending"));
-				cell.setCellStyle(style);
-				
-				rowCount++;
+				previousItem = rs.getString("inventoryItemName");
 				
 				if (rs.isLast()) {
-					addDayTotalsRows(reportSheet1, rowCount);
+					addSheet2TotalsRows(reportSheet2, rowCount);
 				}
 			}
 			
-			sheet1LastRowIndex = rowCount;
-*/						
+			//inventory total cells
+			Cell cell = openingInventoryRow.createCell(1);
+			cell.setCellStyle(totalStyle);
+			String formula= "D" + Integer.valueOf(rowCount + 1).toString() + "+J" + Integer.valueOf(rowCount + 1).toString();
+			cell.setCellFormula(formula);
+			
+			cell = endingInventoryRow.createCell(1);
+			cell.setCellStyle(totalStyle);
+			formula= "G" + Integer.valueOf(rowCount + 1).toString() + "+M" + Integer.valueOf(rowCount + 1).toString();
+			cell.setCellFormula(formula);
+			
+			//sales cell
+			cell = salesRow.createCell(1);
+			cell.setCellStyle(totalStyle);
+			formula= "'Costos, ventas e IPV'!G" + (sheet1LastRowIndex + 1);
+			cell.setCellFormula(formula);
+						
 			return null;
 		}
 	}
