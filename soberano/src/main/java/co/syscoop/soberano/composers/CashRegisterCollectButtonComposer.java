@@ -12,7 +12,7 @@ import org.zkoss.zul.Button;
 import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
-import co.syscoop.soberano.beans.IPDFDocumentToPrint;
+import co.syscoop.soberano.beans.IDocumentToPrint;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
@@ -73,10 +73,10 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 					Printer printer = new Printer(printerProfile);
 					
 					//there is a bean for more printing customization
-					IPDFDocumentToPrint pp = null;
+					IDocumentToPrint pp = null;
 					try {
-						pp = (IPDFDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
-						pp.createPDFFile(new Order(orderId), fileToPrintFullPath);
+						pp = (IDocumentToPrint) SpringUtility.applicationContext().getBean(printerProfile.getName().toLowerCase());
+						pp.createFile(new Order(orderId), fileToPrintFullPath);
 					}
 					catch(NoSuchBeanDefinitionException nsbdex) {
 						

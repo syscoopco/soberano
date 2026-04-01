@@ -15,10 +15,11 @@ import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.domain.untracked.helper.DomainObjectQualifiedMapper;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.printjobs.PrintMethod;
 
 public class PrinterProfile extends TrackedObject {
 
-	private Integer font; 
+	private String fontName = "Courier 10 Pitch"; 
 	private Integer fontSize;
 	private Integer pageWidth;
 	private Integer pageHeight;
@@ -32,6 +33,7 @@ public class PrinterProfile extends TrackedObject {
 	private String printerName = "";
 	private ArrayList<Integer> objectsUsingThisIds = new ArrayList<Integer>();
 	private ArrayList<String> objectsUsingThisQualifiedNames = new ArrayList<String>();
+	private PrintMethod printMethod = PrintMethod.IMAGE;
 		
 	public PrinterProfile(Integer id) {
 		super(id);
@@ -401,12 +403,12 @@ public class PrinterProfile extends TrackedObject {
 		this.printerName = printerName;
 	}
 
-	public Integer getFont() {
-		return font;
+	public String getFontName() {
+		return fontName;
 	}
 
-	public void setFont(Integer font) {
-		this.font = font;
+	public void setFontName(String fontName) {
+		this.fontName = fontName;
 	}
 
 	@Override
@@ -417,5 +419,13 @@ public class PrinterProfile extends TrackedObject {
 	@Override
 	public PrintableData getReportMinimal() throws SQLException {
 		return null;
+	}
+
+	public PrintMethod getPrintMethod() {
+		return printMethod;
+	}
+
+	public void setPrintMethod(PrintMethod printMethod) {
+		this.printMethod = printMethod;
 	}
 }

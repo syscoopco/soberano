@@ -14,13 +14,14 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDMMType1Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import co.syscoop.soberano.printjobs.PrintMethod;
 import co.syscoop.soberano.printjobs.Printer;
 import co.syscoop.soberano.util.rowdata.InvoiceDataRowData;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.exception.NotEnoughRightsException;
 import co.syscoop.soberano.exception.SoberanoException;
 
-public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
+public class FacturaLaNuevaPrinterProfile implements IDocumentToPrint {
 	
 	private final static PDType1Font BUSINESS_NAME_FONT_TYPE = PDType1Font.TIMES_BOLD;
 	private final static float BUSINESS_NAME_FONT_SIZE = 15;
@@ -77,7 +78,7 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
 	}
 	
 	@Override
-	public void createPDFFile(Object objectToPrint, String fileToPrintFullPath) throws IOException, SQLException, SoberanoException {
+	public void createFile(Object objectToPrint, String fileToPrintFullPath) throws IOException, SQLException, SoberanoException {
 		
 		PDDocument document = new PDDocument();		
 		PDRectangle mediaBox = new PDRectangle(612, 792);
@@ -292,7 +293,7 @@ public class FacturaLaNuevaPrinterProfile implements IPDFDocumentToPrint {
 	}
 	
 	@Override
-	public void printPDFFile(String fileToPrintFullPath, String printerNameParam, String jobName) throws Exception {
-		Printer.print(fileToPrintFullPath, printerNameParam, jobName, false);
+	public void printFile(String fileToPrintFullPath, String printerNameParam, String jobName) throws Exception {
+		Printer.print(fileToPrintFullPath, printerNameParam, jobName, false, PrintMethod.PDF);
 	}
 }

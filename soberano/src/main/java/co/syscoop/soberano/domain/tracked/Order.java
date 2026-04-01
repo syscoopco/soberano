@@ -274,8 +274,8 @@ public class Order extends BusinessActivityTrackedObject {
 			Printer printer = new Printer(printerProfile);			
 			String textToPrint = this.retrieveTicket(new BigDecimal(0), new BigDecimal(0)).getTextToPrint();
 			String fileFullPath = "./records/orders/" + "ORDER_" + this.getId().toString();
-			printer.createPDFFile(textToPrint, fileFullPath);
-			printer.printPDFFile(textToPrint, fileFullPath, printJobName, false);
+			printer.createFile(textToPrint, fileFullPath);
+			printer.printFile(textToPrint, fileFullPath, printJobName, false);
 		} 
 		catch(NotEnoughRightsException ex) {
 			ExceptionTreatment.logAndShow(ex, 

@@ -84,7 +84,8 @@ public class PrintButtonComposer extends SelectorComposer {
 								new String(Base64.getDecoder().decode(report)), 
 								printerProfile.getPrinterName(), 
 								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId(),
-								false);
+								false,
+								printerProfile.getPrintMethod());
 				}
 				else {
 					report = trackedObject.getReport();
