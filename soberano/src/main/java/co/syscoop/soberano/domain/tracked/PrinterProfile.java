@@ -33,7 +33,7 @@ public class PrinterProfile extends TrackedObject {
 	private String printerName = "";
 	private ArrayList<Integer> objectsUsingThisIds = new ArrayList<Integer>();
 	private ArrayList<String> objectsUsingThisQualifiedNames = new ArrayList<String>();
-	private PrintMethod printMethod = PrintMethod.IMAGE;
+	private PrintMethod printMethod = PrintMethod.PDF;
 		
 	public PrinterProfile(Integer id) {
 		super(id);

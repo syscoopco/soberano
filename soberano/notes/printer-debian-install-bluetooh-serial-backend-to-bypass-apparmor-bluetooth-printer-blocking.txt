@@ -1,0 +1,38 @@
+In Debian 13, AppArmor blocks serial port access (Bluetooth). This prevents using some bluetooth printers by means of CUPS.
+
+To solve it, execute the following steps:
+
+1) Download the file https://codeload.github.com/prodocik/xprinter-xp-v3-linux/zip/refs/heads/main and extract its content to some folder.
+
+2) In the script install.sh, comment the lines: 
+
+	/rfcomm, as this package doesn't exists in Debian 13 and the equivalent is installed with 
+	bluetooth-related packages (sudo apt install blueman bluez bluez-tools).
+
+	pip3 install --user -r requirements.txt, as this trigger error due to installing python package in external environment
+
+3) After the above commented line # pip3 install --user -r requirements.txt, insert:
+
+	sudo apt update
+	sudo apt install python3-pymupdf python3-pil python3-serial
+
+4) chmod +x ./install.sh and run it.
+
+5) Turn on bluetooth printer.
+
+6) Bluetooth pair the printer and trust it by means of blueman. Do not connect through serial port, as it let rfcomm port busy.
+
+7) sudo bash cups/install-cups.sh bluetooth <MAC_ADDRESS>	
+	replacing <MAC_ADDRESS> by the device's
+
+8) Go to CUPS management web interface (localhost:631) and update the controller of the printer.
+
+9) To avoid autoscaling of documents (like pdf):
+
+	sudo lpadmin -p XprinterV3 -o print-scaling=none
+	
+10) sudo apt install cups-bsd
+
+11) Reboot the system.
+
+12) Print a test page.

@@ -70,6 +70,8 @@ public class Printer {
 	
 	private CupsPrinter selectedPrinter;
 	
+	public Printer() {};
+	
 	private void printCUPS(String textToPrint, String printJobName) throws Exception {
 		PrintRequestResult printRequestResult;
 		try { 
@@ -160,84 +162,37 @@ public class Printer {
 		}		
 	}
 	
-	private static void printPDFFile(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
+	private static void printPDF(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer) throws SoberanoException {
 		
-		PrintService[] printServices = null;
-		if (pss == null) {
-			printServices = PrintServiceLookup.lookupPrintServices(null, null);
-		}
-		else {
-			printServices = pss;
-		}			
-		for (PrintService printService : printServices) {					
-			if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
-				PDDocument document = PDDocument.load(new File(fileToPrintFullPath));
-		        PrinterJob job = PrinterJob.getPrinterJob();
-		        job.setJobName(jobName);
-		        job.setPageable(new PDFPageable(document));
-		        job.setPrintService(printService);
-		        job.print();
-		        document.close();
-		        
-//		        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
-//		        EscPos escPos = new EscPos(printerOutputStream);
-//		        escPos.feed(1).cut(EscPos.CutMode.FULL);
-//		        escPos.close();
-		        
-		        if (openCashDrawer) {
-		        	openCashDrawer(printService);
-		        }
-		        
-            	break;
-            }
-		}
-	}
-	
-	private static void printRaw(PrintService[] pss, byte[] data, String printerNameParam, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
-        
-		PrintService[] printServices = null;
-		if (pss == null) {
-			printServices = PrintServiceLookup.lookupPrintServices(null, null);
-		}
-		else {
-			printServices = pss;
-		}
-		for (PrintService printService : printServices) {					
-			if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
-				
-				//add job name
-				PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
-				aset.add(new JobName(jobName, null));
-				
-				DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
-		        Doc doc = new SimpleDoc(data, flavor, null);
-		        printService.createPrintJob().print(doc, aset);				
-		        
-//		        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
-//		        EscPos escPos = new EscPos(printerOutputStream);
-//		        escPos.feed(1).cut(EscPos.CutMode.FULL);
-//		        escPos.close();
-            			        
-		        if (openCashDrawer) {
-		        	openCashDrawer(printService);
-		        }
-		        
-		        break;
-            }
-		}
-    }
-	
-	public static void print(PrintService[] pss, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws UnsupportedEncodingException, IOException, Exception {
-		try {
-			if (printMethod == PrintMethod.PDF) {
-				printPDFFile(pss, fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);
+		try {		
+			PrintService[] printServices = null;
+			if (pss == null) {
+				printServices = PrintServiceLookup.lookupPrintServices(null, null);
 			}
-			else if (printMethod == PrintMethod.IMAGE) {
-				printRaw(pss, Files.readAllBytes(Paths.get(fileToPrintFullPath + ".png")), printerNameParam, jobName, openCashDrawer);
-			}
-			//ESCPOS_RAW
 			else {
-				
+				printServices = pss;
+			}			
+			for (PrintService printService : printServices) {					
+				if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
+					PDDocument document = PDDocument.load(new File(fileToPrintFullPath));
+			        PrinterJob job = PrinterJob.getPrinterJob();
+			        job.setJobName(jobName);
+			        job.setPageable(new PDFPageable(document));
+			        job.setPrintService(printService);
+			        job.print();
+			        document.close();
+			        
+	//		        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+	//		        EscPos escPos = new EscPos(printerOutputStream);
+	//		        escPos.feed(1).cut(EscPos.CutMode.FULL);
+	//		        escPos.close();
+			        
+			        if (openCashDrawer) {
+			        	openCashDrawer(printService);
+			        }
+			        
+	            	break;
+	            }
 			}
 		}
 		catch (Exception ex) {
@@ -247,6 +202,48 @@ public class Printer {
 					Messagebox.ERROR);
 	    }
 	}
+	
+	private static void printRaw(PrintService[] pss, byte[] data, String printerNameParam, String jobName, Boolean openCashDrawer) throws SoberanoException {
+        
+		try {
+			PrintService[] printServices = null;
+			if (pss == null) {
+				printServices = PrintServiceLookup.lookupPrintServices(null, null);
+			}
+			else {
+				printServices = pss;
+			}
+			for (PrintService printService : printServices) {					
+				if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
+					
+					//add job name
+					PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+					aset.add(new JobName(jobName, null));
+					
+					DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+			        Doc doc = new SimpleDoc(data, flavor, null);
+			        printService.createPrintJob().print(doc, aset);				
+			        
+//			        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+//			        EscPos escPos = new EscPos(printerOutputStream);
+//			        escPos.feed(1).cut(EscPos.CutMode.FULL);
+//			        escPos.close();
+	            			        
+			        if (openCashDrawer) {
+			        	openCashDrawer(printService);
+			        }
+			        
+			        break;
+	            }
+			}
+		}
+		catch (Exception ex) {
+			ExceptionTreatment.logAndShow(ex, 
+					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + jobName + ". DETAILS: " + ex.getMessage(), 
+					Labels.getLabel("messageBoxTitle.Error"),
+					Messagebox.ERROR);
+	    }
+    }
 	
 	private static void openCashDrawer(PrintService printService) throws IOException {	
 		
@@ -280,10 +277,10 @@ public class Printer {
 	public static void print(String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws SoberanoException {
 		try {
 			if (printMethod == PrintMethod.PDF) {
-				printPDFFile(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);
+				printPDF(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);
 			}
 			else if (printMethod == PrintMethod.IMAGE) {
-				printRaw(PrintServiceLookup.lookupPrintServices(null, null), Files.readAllBytes(Paths.get(fileToPrintFullPath + ".png")), printerNameParam, jobName, openCashDrawer);
+				printRaw(PrintServiceLookup.lookupPrintServices(null, null), Files.readAllBytes(Paths.get(fileToPrintFullPath + ".jpg")), printerNameParam, jobName, openCashDrawer);
 			}
 			//ESCPOS_RAW
 			else {
@@ -298,7 +295,7 @@ public class Printer {
 	    }
 	}
 	
-	private void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws UnsupportedEncodingException, IOException, Exception {
+	public void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws UnsupportedEncodingException, IOException, Exception {
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
 				printThroughSocket(textToPrint, printerNameParam);
@@ -310,10 +307,10 @@ public class Printer {
 				}
 				else {
 					if (printMethod == PrintMethod.PDF) {
-						printPDFFile(printServices, fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);  
+						printPDF(printServices, fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);  
 					}
 					else if (printMethod == PrintMethod.IMAGE) {
-						printRaw(printServices, Files.readAllBytes(Paths.get(fileToPrintFullPath + ".png")), printerNameParam, jobName, openCashDrawer);
+						printRaw(printServices, Files.readAllBytes(Paths.get(fileToPrintFullPath + ".jpg")), printerNameParam, jobName, openCashDrawer);
 					}
 					//ESCPOS_RAW
 					else {
@@ -335,7 +332,7 @@ public class Printer {
 		InputStream in = IOUtils.toInputStream(fileContent, "ISO-8859-1");
 		Reader reader = new InputStreamReader(in, "ISO-8859-1");
 		TextToPDF textToPDF = new TextToPDF();
-		textToPDF.setFont(PDType1Font.COURIER);
+		textToPDF.setFont(PDType1Font.COURIER_BOLD);
 		textToPDF.setFontSize(printerProfile.getFontSize());
 		textToPDF.setLandscape(false);
 		
@@ -377,7 +374,7 @@ public class Printer {
 													            printerProfile.getFontSize(),
 													            true);*/
 			try {				
-				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".png");
+				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".jpg");
 			}
 			finally {
 				image.flush();
@@ -407,7 +404,7 @@ public class Printer {
 													            printerProfile.getFontSize(),
 													            true);*/
 			try {
-				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".png");
+				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".jpg");
 			}
 			finally {
 				image.flush();

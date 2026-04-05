@@ -1,0 +1,16 @@
+1) ZK ZATS Mimic uses ephemeral TCP ports. This behavior is expected because ZATS launches an embedded Jetty server for each test suite, 
+	which automatically binds to a random, available port to avoid conflicts and allow tests to run in isolation.
+
+	However, if a previous test run does not clean up properly (e.g., missing Zats.end() or an abnormal termination), the Jetty server 
+	may leave a port in a lingering state. When you rerun tests, the new instance might attempt to bind to that same port (or the OS may 
+	still consider it busy), causing a "port already in use" error and aborting your JUnit tests.
+
+	To avoid this issue:
+
+	1.1) Simply rerun the tests, or
+
+	2.2) increase ephemeral port range (advanced) – if you frequently run many tests in a short time, you can expand the available port range. 
+	On Linux:
+		bash
+
+		sudo sysctl -w net.ipv4.ip_local_port_range="1024 65000"

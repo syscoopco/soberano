@@ -96,6 +96,11 @@ public class TextToPrinter {
 	    return image;
 	}
 	
+	/**
+     * 
+     * DeepSeek-generated code
+     * 
+     */
 	public static BufferedImage PDFToImage(File fileToPrintFullPath, int pageIndex, int dpi) throws Exception, IOException {
         
 		try (PDDocument document = PDDocument.load(fileToPrintFullPath)) {
@@ -107,12 +112,17 @@ public class TextToPrinter {
         }
     }
     
+	/**
+     * 
+     * DeepSeek-generated code
+     * 
+     */
     public static void saveImageToFile(BufferedImage image, String filePath) throws IOException {
        
-    	// Get the first available PNG writer
-        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("png");
+    	// Get the first available writer for that image format
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
         if (!writers.hasNext()) {
-            throw new IOException("No PNG writer available");
+            throw new IOException("No writer available for that image format.");
         }
         
         ImageWriter writer = writers.next();

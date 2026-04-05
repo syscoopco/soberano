@@ -1,0 +1,16 @@
+# Esto es importante para que funcionen los filtros de CUPS
+# de algunas impresoras térmicas, cuyos drivers vienen para
+# 32 bits.
+
+# 1. Agregar soporte para arquitectura de 32 bits
+sudo dpkg --add-architecture i386
+
+# 2. Actualizar la lista de paquetes
+sudo apt update
+
+# 3. Instalar las bibliotecas esenciales de 32 bits
+sudo apt install libc6:i386 libstdc++6:i386
+
+# 4. Instalar el paquete de compatibilidad adicional
+sudo apt install libc6-i386
+sudo apt install libcupsimage2:i386

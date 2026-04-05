@@ -80,7 +80,7 @@ public class PrintButtonComposer extends SelectorComposer {
 					//file to print path is passed in report param
 					PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
 					printerProfile.get();
-					Printer.print(null, 
+					(new Printer()).print(null, 
 								new String(Base64.getDecoder().decode(report)), 
 								printerProfile.getPrinterName(), 
 								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId(),

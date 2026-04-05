@@ -380,9 +380,31 @@ apt install -y libapache2-mod-php php-intl php-zip php-bz2 php-json php-bcmath p
 a2enmod env rewrite dir mime headers setenvif ssl
 systemctl restart apache2
 
+# Esto es importante para que funcionen los filtros de CUPS
+# de algunas impresoras térmicas, cuyos drivers vienen para
+# 32 bits.
+
+# 1. Agregar soporte para arquitectura de 32 bits
+echo "Installing 32 bits architecture packages..."
+sudo dpkg --add-architecture i386
+
+# 2. Actualizar la lista de paquetes
+sudo apt update
+
+# 3. Instalar las bibliotecas esenciales de 32 bits
+sudo apt install libc6:i386 libstdc++6:i386
+
+# 4. Instalar el paquete de compatibilidad adicional
+sudo apt install libc6-i386
+sudo apt install libcupsimage2:i386
+
+# Bluetooth tools
+echo "Installing bluetooth packages..."
+sudo apt install blueman bluez bluez-tools
+
 # Install MySQL
-apt install -y mysql-server
-mysql_secure_installation
+# apt install -y mysql-server
+# mysql_secure_installation
 
 
 
