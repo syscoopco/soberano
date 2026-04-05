@@ -294,6 +294,6 @@ public class FacturaLaNuevaPrinterProfile implements IDocumentToPrint {
 	
 	@Override
 	public void printFile(String fileToPrintFullPath, String printerNameParam, String jobName) throws Exception {
-		Printer.print(fileToPrintFullPath, printerNameParam, jobName, false, PrintMethod.PDF);
+		(new Printer(null)).print("", fileToPrintFullPath, printerNameParam, jobName, false, PrintMethod.PDF);
 	}
 }

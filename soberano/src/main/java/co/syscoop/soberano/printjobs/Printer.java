@@ -12,6 +12,7 @@ import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -72,7 +73,8 @@ public class Printer {
 	
 	public Printer() {};
 	
-	private void printCUPS(String textToPrint, String printJobName) throws Exception {
+	private void printCUPSRAW(String textToPrint, String printJobName) throws Exception {
+		
 		PrintRequestResult printRequestResult;
 		try { 
 	        CupsClient client = new CupsClient(printerProfile.getPrintServer(), 631);
@@ -84,7 +86,7 @@ public class Printer {
 						Messagebox.EXCLAMATION);
 	        }
 	        else {
-	        	for (CupsPrinter cupsPrinter : printers) {
+	            for (CupsPrinter cupsPrinter : printers) {
 		            if (cupsPrinter.getName().equals(printerProfile.getPrinterName())) {
 		                selectedPrinter = cupsPrinter;
 		            }
@@ -96,7 +98,7 @@ public class Printer {
 	        	map.put("document-format", "application/vnd.cups-raw");
 	        	map.put("document-name", printJobName);       	
 	        	
-	        	PrintJob printJob = new PrintJob.Builder(textToPrint.getBytes()).attributes(map).build();
+	        	PrintJob printJob = new PrintJob.Builder("header\\r\\nID: 1001\\r\\nHORA: 2026/04/05 17:35\\r\\nMOSTRADOR: mostrador\\r\\n--------------------\\r\\nSUBTOTAL: 0.00\\r\\n\\r\\nfooter\\r\\n" /*textToPrint.replace("\n","\n\r")*/.getBytes(StandardCharsets.UTF_16)).attributes(map).build();
 	        	printRequestResult = selectedPrinter.print(printJob);
 	        	if (!printRequestResult.isSuccessfulResult()) {
 	        		Messagebox.show(Labels.getLabel("error.print.ErrorWhilePrintingDocument") + printJobName + ". DETAILS: " + printRequestResult.getResultDescription(), 
@@ -182,10 +184,10 @@ public class Printer {
 			        job.print();
 			        document.close();
 			        
-	//		        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
-	//		        EscPos escPos = new EscPos(printerOutputStream);
-	//		        escPos.feed(1).cut(EscPos.CutMode.FULL);
-	//		        escPos.close();
+//			        PrinterOutputStream printerOutputStream = new PrinterOutputStream(printService);
+//			        EscPos escPos = new EscPos(printerOutputStream);
+//			        escPos.feed(1).cut(EscPos.CutMode.FULL);
+//			        escPos.close();
 			        
 			        if (openCashDrawer) {
 			        	openCashDrawer(printService);
@@ -203,7 +205,7 @@ public class Printer {
 	    }
 	}
 	
-	private static void printRaw(PrintService[] pss, byte[] data, String printerNameParam, String jobName, Boolean openCashDrawer) throws SoberanoException {
+	private static void printImage(PrintService[] pss, byte[] data, String printerNameParam, String jobName, Boolean openCashDrawer) throws SoberanoException {
         
 		try {
 			PrintService[] printServices = null;
@@ -274,48 +276,23 @@ public class Printer {
 		}
 	}
 	
-	public static void print(String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws SoberanoException {
-		try {
-			if (printMethod == PrintMethod.PDF) {
-				printPDF(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);
-			}
-			else if (printMethod == PrintMethod.IMAGE) {
-				printRaw(PrintServiceLookup.lookupPrintServices(null, null), Files.readAllBytes(Paths.get(fileToPrintFullPath + ".jpg")), printerNameParam, jobName, openCashDrawer);
-			}
-			//ESCPOS_RAW
-			else {
-				
-			}
-		}
-		catch (Exception ex) {
-			ExceptionTreatment.logAndShow(ex, 
-					Labels.getLabel("error.print.ErrorWhilePrintingDocument") + " PRINT JOB: " + jobName + ". DETAILS: " + ex.getMessage(), 
-					Labels.getLabel("messageBoxTitle.Error"),
-					Messagebox.ERROR);
-	    }
-	}
-	
+		
 	public void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws UnsupportedEncodingException, IOException, Exception {
+		
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
 				printThroughSocket(textToPrint, printerNameParam);
 			}
-			else {
-				PrintService[] printServices = PrintServiceLookup.lookupPrintServices(null, null);
-				if (printServices.length == 0) {
-					printCUPS(textToPrint, jobName);
+			else {				
+				if (printMethod == PrintMethod.PDF) {
+					printPDF(PrintServiceLookup.lookupPrintServices(null, null), fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);  
 				}
+				else if (printMethod == PrintMethod.IMAGE) {
+					printImage(PrintServiceLookup.lookupPrintServices(null, null), Files.readAllBytes(Paths.get(fileToPrintFullPath + ".png")), printerNameParam, jobName, openCashDrawer);
+				}
+				//CUPS-RAW
 				else {
-					if (printMethod == PrintMethod.PDF) {
-						printPDF(printServices, fileToPrintFullPath, printerNameParam, jobName, openCashDrawer);  
-					}
-					else if (printMethod == PrintMethod.IMAGE) {
-						printRaw(printServices, Files.readAllBytes(Paths.get(fileToPrintFullPath + ".jpg")), printerNameParam, jobName, openCashDrawer);
-					}
-					//ESCPOS_RAW
-					else {
-						
-					}
+					printCUPSRAW(textToPrint, jobName);
 				}
 			}
 		}
@@ -374,7 +351,7 @@ public class Printer {
 													            printerProfile.getFontSize(),
 													            true);*/
 			try {				
-				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".jpg");
+				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".png");
 			}
 			finally {
 				image.flush();
@@ -404,7 +381,7 @@ public class Printer {
 													            printerProfile.getFontSize(),
 													            true);*/
 			try {
-				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".jpg");
+				TextToPrinter.saveImageToFile(image, fileToPrintFullPath + ".png");
 			}
 			finally {
 				image.flush();

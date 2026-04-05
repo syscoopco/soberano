@@ -120,7 +120,7 @@ public class TextToPrinter {
     public static void saveImageToFile(BufferedImage image, String filePath) throws IOException {
        
     	// Get the first available writer for that image format
-        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("jpg");
+        Iterator<ImageWriter> writers = ImageIO.getImageWritersByFormatName("png");
         if (!writers.hasNext()) {
             throw new IOException("No writer available for that image format.");
         }

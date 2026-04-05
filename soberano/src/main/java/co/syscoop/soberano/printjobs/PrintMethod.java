@@ -3,7 +3,7 @@ package co.syscoop.soberano.printjobs;
 public enum PrintMethod {
     PDF(0),
     IMAGE(1),
-    ESCPOS_RAW(2);
+    CUPS_RAW(2);
 
     private final int code;
 
