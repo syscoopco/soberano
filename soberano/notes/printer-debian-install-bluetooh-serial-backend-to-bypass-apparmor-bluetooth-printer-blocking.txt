@@ -33,6 +33,8 @@ To solve it, execute the following steps:
 	
 10) sudo apt install cups-bsd
 
-11) Reboot the system.
+11) sudo apt install libcups2-dev libcupsimage2-dev
 
-12) Print a test page.
+12) Reboot the system.
+
+13) Print a test page.
