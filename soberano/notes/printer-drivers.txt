@@ -1,6 +1,16 @@
-Drivers that work with CUPS:
+0) See notes in printer-debian-install-i386-architecture-libs.txt
+	This is due to some Linux drivers are compiled for 32bits platform.
 
 0) sudo apt install libcups2-dev libcupsimage2-dev
+	These dependencies are for compiling some drivers for Linux.
+	
+0) See notes in printer-debian-install-bluetooh-serial-backend-to-bypass-apparmor-bluetooth-printer-blocking.txt
+	This is for problematic bluetooth printers in Linux.
+	
+0) In Ubuntu 24.04, you need to downgrade CUPS to the version coming with Ubuntu 20.04.
+	See this: printer-downgrade cups from ubuntu 24.04 ver to ubuntu 20.04 ver.txt
+
+In case you have troubles with your POS printer Linux CUPS filter, this works with most of them:
 
 1) ./WEB-INF/classes/cups-thermo-printer-master.zip
 
@@ -11,6 +21,6 @@ Drivers that work with CUPS:
 	
 			1.2.1) Feed distance after print: 18mm
 			1.2.2) Blank space at page's end: Do not print
-			1.2.3) Cutting: Cut at every page.
+			1.2.3) Cutting: Cut at every job.
 
 		
