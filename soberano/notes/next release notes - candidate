@@ -1,6 +1,9 @@
 v2.0.11 Candidate release
 
-New: Replace pdf printing by raw printing. In next versions this would be configurable.
+New: Database backup and download on request from UI. Before, it was assumed a background process generated the backup, and only downloading it
+	was requested.
+
+New: Prepared PrinterProfile and Printer classes for several printing methods (PDF, Image, CUPS_RAW). PDF is still being used.
 
 New: Added to custom report 2 a monthly transfers sheet.
 
