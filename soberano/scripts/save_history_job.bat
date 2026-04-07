@@ -1,0 +1,1 @@
+"C:\Program Files\PostgreSQL\12\bin\psql.exe" --host 127.0.0.1 --port 5432 --dbname soberano --username backup < "C:\BACKUPSCRIPT/save_history.sql"

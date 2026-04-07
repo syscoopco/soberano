@@ -26,7 +26,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(15)
 
-@Disabled
+//@Disabled
 
 class OO15_ProductTest_check_modifying extends ProductActionTest {
 

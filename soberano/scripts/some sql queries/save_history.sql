@@ -1,0 +1,1 @@
+select * from soberano."z-fn_Helper_saveHistory"();
