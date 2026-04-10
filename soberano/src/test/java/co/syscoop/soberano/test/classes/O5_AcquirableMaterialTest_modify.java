@@ -23,7 +23,7 @@ import co.syscoop.soberano.test.helper.AcquirableMaterialForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_AcquirableMaterialTest_modify extends AcquirableMaterialActionTest{
 

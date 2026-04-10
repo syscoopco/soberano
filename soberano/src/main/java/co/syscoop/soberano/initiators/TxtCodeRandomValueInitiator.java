@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.Page;
+import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zk.ui.util.Initiator;
 import org.zkoss.zk.ui.util.InitiatorExt;
 import org.zkoss.zul.Textbox;
@@ -25,6 +26,9 @@ public class TxtCodeRandomValueInitiator implements Initiator, InitiatorExt {
 				txtCode = (Textbox) comps[2].query("#boxDetails").query("#txtCode");
 			}
 			txtCode.setValue((sidcodeg.getTenCharsRandomString("")));
+			
+			txtCode.focus();
+			Clients.scrollIntoView(comps[2].query("#boxDetails").query("#cmbCategory"));
 		}
 		catch(Exception ex) {
 			ex.printStackTrace();
