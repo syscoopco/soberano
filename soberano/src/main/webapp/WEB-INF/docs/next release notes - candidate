@@ -1,4 +1,4 @@
-v2.0.11 Candidate release
+v2.0.11 Edición La Víbora
 
 New: Database backup and download on request from UI. Before, it was assumed a background process generated the backup, and only downloading it
 	was requested.
