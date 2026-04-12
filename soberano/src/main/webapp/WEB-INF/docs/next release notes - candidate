@@ -1,79 +1,10 @@
-v2.0.11 Edición La Víbora
+v2.0.12 La Víbora Edition candidate release.
 
-New: Database backup and download on request from UI. Before, it was assumed a background process generated the backup, and only downloading it
-	was requested.
+New: Stock records deletion on FUNCTION soberano."fn_Business_clean". Stock records are created upon shift closures.
+	"StockRecord" is one of the largest relations of the database.
 
-New: Prepared PrinterProfile and Printer classes for several printing methods (PDF, Image, CUPS_RAW). PDF is still being used.
-
-New: Added to custom report 2 a monthly transfers sheet.
-
-New: A second sheet was added to custom report 3. Now the profits for a period of time is calculated from
-	expenses, sales, and opening and ending inventories.
-
-New: In stock.zul now is possible to force the unit value of an item. The corresponding decimal box now allows writes in it.
-	Owner right must be granted to the user. A Configuration object modify decision is made with the argument:
+New: 
 	
-	tt_Stock_tt tt_MODIFIED_BY_tt <loginname>. 
-	tt_Warehouse_tt : <warehouseid>. 
-	tt_Item_tt : <inventoryitemcode>. 
-	tt_NewStockValue_tt : <inventoryitemvalue>.
-	
-	The database function is:
-	
-	 FUNCTION soberano."fn_Business_forceStockAdjusment"(warehouseid integer,
-														inventoryitemcode character varying,
-														inventoryitemvalue numeric,
-														loginname character varying)
-
-New: In order form (order.zul or ms_order.zul), now it's possible to order new rounds of an item from a current round
-	of that item. It's just to push button decorated by "+", on the corresponding ordered item round tree item.
-
-New: Cash drawer is opened after closing an order.
-
-New: In cash register form, when the change is negative, the amount is shown and the background is colored in red. Before,
-	it was shown amount 0 and kept the background color unchanged.
-
-Fix: Upon business data cleaning request, remove stock changes and vote histories.
-
-Fix: Disable pools in Spring beans org.springframework.ldap.core.support.LdapContextSource and  
-	org.springframework.security.ldap.DefaultSpringSecurityContextSource. Enabling them caused
-	users logged through network to be unable to login or unexpectedly logged out immediately
-	after login. This reduces probability of that to happen.
-
-Fix: Avoid to use bold fonts in printing. It had problems with legibility of numbers in receipts printed in thermal paper. 
-
-Fix: Sending printer paper cutting command from TCPTOOL was disabled. Cutting must be controlled by means of the OS printer settings tool. 
-
-Fix: In fast ordering window (based on product icons), some items were wrongly selected in the item-to-order autocompletion combobox.
-	It was due to when pushing product button (icon), the combobox text was filled out only with the product name without the 
-	corresponding inventory item code, so the ambiguity between comboitems upon selection.
-
-Fix: Avoid division by zero. These lines were corrected:
-
-	In FUNCTION soberano."fn_ProcessRun_close"(processrunid integer,
-												outputitems character varying[],
-												outputquantities numeric[],
-												outputunits integer[],
-												weights integer[],
-												loginname character varying)
-												
-		Line SET "Value" = "Value" + outputsTotalValue * weighttoredistribute / producedoutputcount / 100
-		
-		was replaced by SET "Value" = "Value" + CASE WHEN producedoutputcount = 0 THEN 0
-													ELSE outputsTotalValue * weighttoredistribute / producedoutputcount / 100 END
-												
-	In FUNCTION soberano."fn_Stock_change"(stockchangeid integer)
-	
-		Line SET "Value" = "Value" + outputsTotalValue * weighttoredistribute / producedoutputcount / 100
-		
-		was replaced by SET "Value" = "Value" + CASE WHEN producedoutputcount = 0 THEN 0
-													ELSE outputsTotalValue * weighttoredistribute / producedoutputcount / 100 END
-													
-Fix: In closure general full report, the name of the auxiliary cost center marking the end of the items breakdown which
-	was "FIN" was changed by "z-FIN". This was due to that name is used to order the resulting dataset by cost center names,
-	so problems arose when a real cost center was named after "FIN". For example "Mercado", "Las Cachitas", ..., and any
-	other begging with a letter after "F".
-	
-Fix: customers_testing.zul is used in junit testing, instead of customers.zul
+Fix: 
 		
 User manual:
