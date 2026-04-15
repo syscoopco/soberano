@@ -39,7 +39,7 @@
 								<menuitem label="Producción y ventas con traducciones" href="customreport1.zul"/>
 								<menuitem label="Ventas, gastos, caja, catálogo, y existencias" href="customreport2.zul"/>
 								<menuitem label="Costos, ventas, ganancia y existencias" href="customreport3.zul"/>
-								<menuitem label="${labels.menuItem.CustomReport4}" href="customreport4.zul"/>
+								<menuitem label="Compras, inventarios y ventas diarias" href="customreport4.zul"/>
 								<menuitem label="${labels.menuItem.CustomReport5}" href="customreport5.zul"/>
 							</menupopup>
 						</menu>

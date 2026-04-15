@@ -3,7 +3,7 @@ v2.0.12 La Víbora Edition candidate release.
 New: Stock records deletion on FUNCTION soberano."fn_Business_clean". Stock records are created upon shift closures.
 	"StockRecord" is one of the largest relations of the database.
 
-New: 
+New: Custom report 4 added.
 	
 Fix: 
 		
