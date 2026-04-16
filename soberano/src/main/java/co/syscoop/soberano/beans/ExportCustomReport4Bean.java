@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +26,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellUtil;
 import org.apache.poi.ss.util.RegionUtil;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -42,8 +46,9 @@ public class ExportCustomReport4Bean extends ExportBean implements IExportToFile
 private Workbook workbook = null;
 	
 	private Sheet procurementSheet = null;
-	private Sheet inventorySheet = null;
+	//private Sheet inventorySheet = null;
 	private Sheet salesSheet = null;
+	private Sheet salesTrendSheet = null;
 	
 	private XSSFFont font = null;
 	private XSSFFont boldFont = null;
@@ -53,6 +58,7 @@ private Workbook workbook = null;
 	private CellStyle dateStyle = null;
 	private CellStyle categoryHeaderStyle = null;
 	private CellStyle moneyStyle = null;
+	private CellStyle subtotalStyle = null;
 	private CellStyle totalStyle = null;
 	private CellStyle headerStyle = null;
 	private CellStyle globalTotalStyle = null;
@@ -66,8 +72,9 @@ private Workbook workbook = null;
 		workbook = new XSSFWorkbook();
 		
 		procurementSheet = workbook.createSheet("Compras");
-		inventorySheet = workbook.createSheet("Inventario");
+		//inventorySheet = workbook.createSheet("Inventario");
 		salesSheet = workbook.createSheet("Ventas");
+		salesTrendSheet = workbook.createSheet("Tendencia de ventas");
 		
 		font = ((XSSFWorkbook) workbook).createFont();
 		font.setFontName("Arial");
@@ -103,6 +110,11 @@ private Workbook workbook = null;
 		moneyStyle.setFont(font);
 		moneyStyle.setWrapText(true);
 	    moneyStyle.setDataFormat((short)8);
+	    
+	    subtotalStyle = workbook.createCellStyle();
+	    subtotalStyle.setWrapText(true);
+	    subtotalStyle.setDataFormat((short)8);
+	    subtotalStyle.setFont(boldFont);
 	    
 	    totalStyle = workbook.createCellStyle();
 	    totalStyle.setWrapText(true);
@@ -149,6 +161,17 @@ private Workbook workbook = null;
 	    RegionUtil.setBorderBottom(borderStyle, rangeAddress, sheet);
 	}
 	
+	private int daysBetweenInclusiveUtc(Date from, Date until) {
+	    
+		LocalDate fromDate = from.toInstant().atZone(ZoneOffset.UTC).toLocalDate();
+	    LocalDate untilDate = until.toInstant().atZone(ZoneOffset.UTC).toLocalDate();
+	    
+	    long daysExclusive = ChronoUnit.DAYS.between(fromDate, untilDate);
+	    long daysInclusive = daysExclusive + 1;
+	    
+	    return Math.toIntExact(daysInclusive);
+	}
+	
 	private void initWorkbookWithProcurementSheet(Date from, Date until) {
 		
 		int numberColumnWidth = 1000;
@@ -175,179 +198,299 @@ private Workbook workbook = null;
 		procurementSheet.setColumnWidth(9, valueInUSDConvertedToCUPColumnWidth);
 		procurementSheet.setColumnWidth(10, totalAmountColumnWidth);
 		
-		Row exchangeRateRow = procurementSheet.createRow(0);
-		Cell cell = exchangeRateRow.createCell(1);				
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Row fromRow = procurementSheet.createRow(0);
+		Cell cell = fromRow.createCell(1);				
+		cell.setCellValue("Desde");
+		cell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = fromRow.createCell(2);
+		cell.setCellValue(sdf.format(from));
+		cell.setCellStyle(style);
+		
+		Row untilRow = procurementSheet.createRow(1);
+		cell = untilRow.createCell(1);				
+		cell.setCellValue("Hasta");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
+		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = untilRow.createCell(2);
+		cell.setCellValue(sdf.format(until));
+		cell.setCellStyle(style);
+		
+		Row daysRow = procurementSheet.createRow(2);
+		cell = daysRow.createCell(1);				
+		cell.setCellValue("Días");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(2, 2, 1, 1);
+		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = daysRow.createCell(2);
+		cell.setCellValue(daysBetweenInclusiveUtc(from, until));
+		cell.setCellStyle(style);
+		
+		Row exchangeRateRow = procurementSheet.createRow(3);		
+		cell = exchangeRateRow.createCell(1);				
 		cell.setCellValue("Tasa de cambio");
 		cell.setCellStyle(headerStyle);
-		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 0, 0);
-		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
+		cellRangeAddress = new CellRangeAddress(3, 3, 1, 1);
+		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);		
 		cell = exchangeRateRow.createCell(2);				
 		cell.setCellValue("1.0");
 		cell.setCellStyle(style);
+	    CellUtil.setAlignment(cell, HorizontalAlignment.LEFT);
 		
-		procurementSheet.createRow(1);
-		Row header = procurementSheet.createRow(2);
+		procurementSheet.createRow(4);
+		
+		Row header = procurementSheet.createRow(5);
 					
 		Cell headerCell = header.createCell(0);
 		headerCell.setCellValue("No.");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 0, 0);
+		cellRangeAddress = new CellRangeAddress(5, 5, 0, 0);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(1);
 		headerCell.setCellValue("Fecha");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 1, 1);
+		cellRangeAddress = new CellRangeAddress(5, 5, 1, 1);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(2);
 		headerCell.setCellValue("Proveedor");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 2, 2);
+		cellRangeAddress = new CellRangeAddress(5, 5, 2, 2);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(3);
 		headerCell.setCellValue("Referencia");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 3, 3);
+		cellRangeAddress = new CellRangeAddress(5, 5, 3, 3);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(4);
 		headerCell.setCellValue("Producto");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 4, 4);
+		cellRangeAddress = new CellRangeAddress(5, 5, 4, 4);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(5);
 		headerCell.setCellValue("Cantidad");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 5, 5);
+		cellRangeAddress = new CellRangeAddress(5, 5, 5, 5);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(6);
 		headerCell.setCellValue("Unidad");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 6, 6);
+		cellRangeAddress = new CellRangeAddress(5, 5, 6, 6);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(7);
 		headerCell.setCellValue("Importe CUP");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 7, 7);
+		cellRangeAddress = new CellRangeAddress(5, 5, 7, 7);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(8);
 		headerCell.setCellValue("Importe USD");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 8, 8);
+		cellRangeAddress = new CellRangeAddress(5, 5, 8, 8);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(9);
 		headerCell.setCellValue("Importe USD a CUP");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 9, 9);
+		cellRangeAddress = new CellRangeAddress(5, 5, 9, 9);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
 		headerCell = header.createCell(10);
 		headerCell.setCellValue("Importe total");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 10, 10);
+		cellRangeAddress = new CellRangeAddress(5, 5, 10, 10);
 		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
 	
-	private void addWarehouseHeaderCells(String warehouseName, Sheet sheet, Row warehouseHeader, Row warehouseDetailsHeader, 
-										CellStyle headerStyle, int warehouseColumnIndex, int quantityColumnWidth, int valueColumnWidth) {
+	private void initWorkbookWithSalesSheet(Date from, Date until) {
 		
-		Cell headerCell = warehouseHeader.createCell(warehouseColumnIndex);
-		headerCell.setCellValue(warehouseName);
-		headerCell.setCellStyle(headerStyle);
-		sheet.setColumnWidth(warehouseColumnIndex, quantityColumnWidth);
-		sheet.setColumnWidth(warehouseColumnIndex + 1, valueColumnWidth);
-		sheet.setColumnWidth(warehouseColumnIndex + 2, quantityColumnWidth);
-		sheet.setColumnWidth(warehouseColumnIndex + 3, valueColumnWidth);
-		sheet.setColumnWidth(warehouseColumnIndex + 4, quantityColumnWidth);
-		sheet.setColumnWidth(warehouseColumnIndex + 5, valueColumnWidth);
-		CellRangeAddress cellRangeAddress = new CellRangeAddress(14, 14, warehouseColumnIndex, warehouseColumnIndex + 5);
-		sheet.addMergedRegion(cellRangeAddress);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex);
-		headerCell.setCellValue("Cantidad inicial");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex, warehouseColumnIndex);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex + 1);
-		headerCell.setCellValue("Valor unitario inicial");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex + 1, warehouseColumnIndex + 1);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex + 2);
-		headerCell.setCellValue("Valor total inicial");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex + 2, warehouseColumnIndex + 2);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex + 3);
-		headerCell.setCellValue("Cantidad final");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex + 3, warehouseColumnIndex + 3);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex + 4);
-		headerCell.setCellValue("Valor unitario final");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex + 4, warehouseColumnIndex + 4);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = warehouseDetailsHeader.createCell(warehouseColumnIndex + 5);
-		headerCell.setCellValue("Valor total final");
-		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(15, 15, warehouseColumnIndex + 5, warehouseColumnIndex + 5);
-		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
-	}
-	
-	private void initWorkbookWithInventorySheet(Date from, Date until) {
-		
-		int numberColumnWidth = 1000;
 		int dateColumnWidth = 3000;
 		int productNameColumnWidth = 8000;
-		int quantityColumnWidth = 4000;
-		int valueColumnWidth = 4000;
+		int quantityColumnWidth = 3000;
+		int priceColumnWidth = 3000;
+		int amountColumnWidth = 3000;
 		
-		inventorySheet.setColumnWidth(0, numberColumnWidth);
-		inventorySheet.setColumnWidth(1, dateColumnWidth);
-		inventorySheet.setColumnWidth(3, productNameColumnWidth);
+		salesSheet.setColumnWidth(0, dateColumnWidth);
+		salesSheet.setColumnWidth(1, productNameColumnWidth);
+		salesSheet.setColumnWidth(2, quantityColumnWidth);
+		salesSheet.setColumnWidth(3, priceColumnWidth);
+		salesSheet.setColumnWidth(4, amountColumnWidth);
 		
-		Row warehouseHeader = inventorySheet.createRow(0);
-		Row header = inventorySheet.createRow(1);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
+		Row fromRow = salesSheet.createRow(0);
+		Cell cell = fromRow.createCell(1);				
+		cell.setCellValue("Desde");
+		cell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = fromRow.createCell(2);
+		cell.setCellValue(sdf.format(from));
+		cell.setCellStyle(style);
+		
+		Row untilRow = salesSheet.createRow(1);
+		cell = untilRow.createCell(1);				
+		cell.setCellValue("Hasta");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = untilRow.createCell(2);
+		cell.setCellValue(sdf.format(until));
+		cell.setCellStyle(style);
+		
+		Row daysRow = salesSheet.createRow(2);
+		cell = daysRow.createCell(1);				
+		cell.setCellValue("Días");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(2, 2, 1, 1);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = daysRow.createCell(2);
+		cell.setCellValue(daysBetweenInclusiveUtc(from, until));
+		cell.setCellStyle(style);
+		CellUtil.setAlignment(cell, HorizontalAlignment.LEFT);
+		
+		salesSheet.createRow(3);
+		
+		Row header = salesSheet.createRow(4);
+					
 		Cell headerCell = header.createCell(0);
-		headerCell.setCellValue("No.");
-		headerCell.setCellStyle(headerStyle);
-		CellRangeAddress cellRangeAddress = new CellRangeAddress(1, 1, 0, 0);
-		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
-		
-		headerCell = header.createCell(1);
 		headerCell.setCellValue("Fecha");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
-		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);		
-				
-		headerCell = header.createCell(2);
+		cellRangeAddress = new CellRangeAddress(4, 4, 0, 0);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
 		headerCell.setCellValue("Producto");
 		headerCell.setCellStyle(headerStyle);
-		cellRangeAddress = new CellRangeAddress(2, 2, 2, 2);
-		setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cellRangeAddress = new CellRangeAddress(4, 4, 1, 1);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
-		addWarehouseHeaderCells("Almacén", procurementSheet, warehouseHeader, header, 
-								headerStyle, 1, quantityColumnWidth, valueColumnWidth);
+		headerCell = header.createCell(2);
+		headerCell.setCellValue("Cantidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 2, 2);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
-		addWarehouseHeaderCells("Mostrador", procurementSheet, warehouseHeader, header, 
-								headerStyle, 7, quantityColumnWidth, valueColumnWidth);	
+		headerCell = header.createCell(3);
+		headerCell.setCellValue("Precio");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 3, 3);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(4);
+		headerCell.setCellValue("Importe");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 4, 4);
+		setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);		
+	}
+	
+	private void initWorkbookWithSalesTrendSheet(Date from, Date until) {
+		
+		int productNameColumnWidth = 8000;
+		int priceColumnWidth = 3000;
+		int quantityColumnWidth = 3000;
+		int dailyAverageColumnWidth = 3000;
+		int dailyPlanColumnWidth = 3000;
+		
+		salesTrendSheet.setColumnWidth(0, productNameColumnWidth);
+		salesTrendSheet.setColumnWidth(1, priceColumnWidth);
+		salesTrendSheet.setColumnWidth(2, quantityColumnWidth);
+		salesTrendSheet.setColumnWidth(3, dailyAverageColumnWidth);
+		salesTrendSheet.setColumnWidth(4, dailyPlanColumnWidth);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Row fromRow = salesTrendSheet.createRow(0);
+		Cell cell = fromRow.createCell(1);				
+		cell.setCellValue("Desde");
+		cell.setCellStyle(headerStyle);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(0, 0, 1, 1);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = fromRow.createCell(2);
+		cell.setCellValue(sdf.format(from));
+		cell.setCellStyle(style);
+		
+		Row untilRow = salesTrendSheet.createRow(1);
+		cell = untilRow.createCell(1);				
+		cell.setCellValue("Hasta");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(1, 1, 1, 1);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = untilRow.createCell(2);
+		cell.setCellValue(sdf.format(until));
+		cell.setCellStyle(style);
+		
+		Row daysRow = salesTrendSheet.createRow(2);
+		cell = daysRow.createCell(1);				
+		cell.setCellValue("Días");
+		cell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(2, 2, 1, 1);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		cell = daysRow.createCell(2);
+		cell.setCellValue(daysBetweenInclusiveUtc(from, until));
+		cell.setCellStyle(style);
+		CellUtil.setAlignment(cell, HorizontalAlignment.LEFT);
+		
+		salesTrendSheet.createRow(3);
+		
+		Row header = salesTrendSheet.createRow(4);
+					
+		Cell headerCell = header.createCell(0);
+		headerCell.setCellValue("Producto");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 0, 0);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(1);
+		headerCell.setCellValue("Precio");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 1, 1);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(2);
+		headerCell.setCellValue("Cantidad");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 2, 2);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(3);
+		headerCell.setCellValue("Promedio diario");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 3, 3);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+		
+		headerCell = header.createCell(4);
+		headerCell.setCellValue("Plan diario");
+		headerCell.setCellStyle(headerStyle);
+		cellRangeAddress = new CellRangeAddress(4, 4, 4, 4);
+		setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);	
+	}
+	
+	private String addMonthSubtotalRow(int month, int rowCount, int lastMonthSubtotalRow) {
+		
+		Row row = procurementSheet.createRow(rowCount);
+		String formula = "SUM(" + "K" + (lastMonthSubtotalRow + Integer.valueOf(2)) + ":K" + rowCount  + ")";
+		
+		
+		Cell cell = row.createCell(9);
+		cell.setCellValue("Subtotal mes " + month);
+		cell.setCellStyle(headerStyle);
+		
+		cell = row.createCell(10);
+		cell.setCellFormula(formula);
+		cell.setCellStyle(totalStyle);
+		
+		return formula;
 	}
 	
 	private final class ExportProcurementSheetToXLSExtractor implements ResultSetExtractor<Object> {
@@ -360,17 +503,38 @@ private Workbook workbook = null;
 			
 			initWorkbookWithProcurementSheet(from, until);
 			
-			Integer rowCount = 3;
+			int currentMonth = 0;			
+			String totalFormula = "0";
+			Integer rowCount = 6;
+			Integer lastMonthSubtotalRow = 5;
+			Integer rowNumber = rowCount - 2;
+			
 			while (rs.next()) {
 				
-				Row row = procurementSheet.createRow(rowCount);
+				Row row;
+				String formula;
+				Cell cell;
 				
-				Cell cell = row.createCell(0);							//A				
-				cell.setCellValue(rowCount - 1);
+				String expenseDate = rs.getString("expenseDate");
+				int month = LocalDate.parse(expenseDate).getMonthValue();
+				
+				if (currentMonth > 0 &&
+					month != currentMonth) {
+					totalFormula = addMonthSubtotalRow(currentMonth, rowCount, lastMonthSubtotalRow) + "+" + totalFormula;
+					lastMonthSubtotalRow = rowCount;
+					rowCount++;
+				}
+				currentMonth = month;
+				
+				row = procurementSheet.createRow(rowCount);
+				
+				cell = row.createCell(0);											
+				cell.setCellValue(rowNumber);						//A
+				rowNumber++;
 				cell.setCellStyle(style);
 				
-				cell = row.createCell(1);
-				cell.setCellValue(rs.getString("expenseDate"));			//B
+				cell = row.createCell(1);								
+				cell.setCellValue(expenseDate);							//B
 				cell.setCellStyle(style);
 				
 				cell = row.createCell(2);
@@ -421,55 +585,174 @@ private Workbook workbook = null;
 				}
 				
 				cell = row.createCell(9);
-				Integer columnIndex = Integer.valueOf(rowCount + 1);
-				String formula = "C1" + "*I" + Integer.valueOf(rowCount + 1).toString();
+				Integer rowIndex = Integer.valueOf(rowCount + 1);
+				formula = "C4" + "*I" + Integer.valueOf(rowCount + 1).toString();
 				cell.setCellFormula(formula);
 				cell.setCellStyle(moneyStyle);
 				
 				cell = row.createCell(10);				
-				formula = "F" + columnIndex.toString() + "*(H" + columnIndex.toString() + "+J" + columnIndex.toString() + ")";
+				formula = "F" + rowIndex.toString() + "*(H" + rowIndex.toString() + "+J" + rowIndex.toString() + ")";
 				cell.setCellFormula(formula);
 				cell.setCellStyle(moneyStyle);
-			
+				
 				rowCount++;
 				
-//				if (rs.isLast()) {
-//					addSheet1TotalsRows(reportSheet1, rowCount);
-//				}
+				if (rs.isLast()) {
+					totalFormula = addMonthSubtotalRow(currentMonth, rowCount, lastMonthSubtotalRow) + "+" + totalFormula;
+					
+					row = procurementSheet.createRow(++rowCount + 1);
+					
+					cell = row.createCell(9);
+					cell.setCellValue("TOTAL");
+					cell.setCellStyle(headerStyle);
+					
+					cell = row.createCell(10);
+					cell.setCellFormula(totalFormula);
+					cell.setCellStyle(totalStyle);
+				}
+			}
+			
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(6, rowCount - 1, 0, 10);
+				setBordersToMergedCells(procurementSheet, cellRangeAddress, BorderStyle.MEDIUM);
 			}
 												
 			return null;
 		}
 	}
 	
-	private void addSheet2TotalsRows(Sheet sheet, Integer rowCount) {
-		
+	private String formatDate(Date date, String formatStr) {
+		return (new SimpleDateFormat(formatStr)).format(date);
+	}
+	
+	private void addDayTotalAmount(Sheet sheet, Integer rowCount, Integer initDayRow, Integer totalColumn, String totalColumnLetter) {
 		Row row = sheet.createRow(rowCount);
-		Cell cell = row.createCell(2);				
+		Cell cell = row.createCell(0);				
 		cell.setCellValue("TOTAL");
 		cell.setCellStyle(headerStyle);
 		
-		cell = row.createCell(3);
+		cell = row.createCell(totalColumn);
 		cell.setCellStyle(totalStyle);
-		String formula= "SUM(" + "D17:D" + Integer.valueOf(rowCount).toString() + ")";
+		String formula= "SUM(" + totalColumnLetter + initDayRow.toString() + ":" + totalColumnLetter + Integer.valueOf(rowCount).toString() + ")";
 		cell.setCellFormula(formula);
 		
-		cell = row.createCell(6);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "G17:G" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
+		CellRangeAddress cellRangeAddress = new CellRangeAddress(initDayRow - 1, rowCount - 1, 0, 0);
+		if (initDayRow - 1 < rowCount - 1) {sheet.addMergedRegion(cellRangeAddress);}		
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 		
-		cell = row.createCell(9);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "J17:J" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
-		
-		cell = row.createCell(12);
-		cell.setCellStyle(totalStyle);
-		formula= "SUM(" + "M17:M" + Integer.valueOf(rowCount).toString() + ")";
-		cell.setCellFormula(formula);
+		cellRangeAddress = new CellRangeAddress(rowCount, rowCount, 0, totalColumn);
+		setBordersToMergedCells(sheet, cellRangeAddress, BorderStyle.MEDIUM);
 	}
 	
+	private final class ExportSalesSheetToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			Date from = (Date) getParameters().get("from");
+			Date until = (Date) getParameters().get("until");
+			
+			initWorkbookWithSalesSheet(from, until);
+			
+			Integer rowCount = 5;
+			Date previousDate = null;
+			Integer initDayRow = 6;
+			while (rs.next()) {
+				
+				Row row = salesSheet.createRow(rowCount);
+				
+				if (previousDate != null && previousDate.compareTo(rs.getDate("orderdate")) != 0) {
+					addDayTotalAmount(salesSheet, rowCount, initDayRow, 4, "E");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+				
+				previousDate = rs.getDate("orderdate");
+				
+				row = salesSheet.createRow(rowCount);
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(formatDate(rs.getDate("orderdate"), "yyyy-MM-dd"));
+				cell.setCellStyle(dateStyle);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getString("iName"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(rs.getDouble("iQty"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				cell.setCellValue(rs.getDouble("iPrice"));
+				cell.setCellStyle(moneyStyle);
+				
+				cell = row.createCell(4);
+				String formula= "C" + Integer.valueOf(rowCount + 1).toString() + "*" + "D" + Integer.valueOf(rowCount + 1).toString();
+				cell.setCellFormula(formula);
+				cell.setCellStyle(moneyStyle);
+				
+				rowCount++;
+				
+				if (rs.isLast()) {
+					addDayTotalAmount(salesSheet, rowCount, initDayRow, 4, "E");					
+					initDayRow = rowCount + 2;					
+					rowCount++;
+				}
+			}
+			
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(4, rowCount - 1, 0, 4);
+				setBordersToMergedCells(salesSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+												
+			return null;
+		}
+	}
+	
+	private final class ExportSalesTrendSheetToXLSExtractor implements ResultSetExtractor<Object> {
+		
+		@Override
+		public Object extractData(ResultSet rs) throws SQLException {
+			
+			Date from = (Date) getParameters().get("from");
+			Date until = (Date) getParameters().get("until");
+			
+			initWorkbookWithSalesTrendSheet(from, until);
+			
+			Integer rowCount = 5;
+			while (rs.next()) {
+				
+				Row row = salesTrendSheet.createRow(rowCount);
+				
+				Cell cell = row.createCell(0);				
+				cell.setCellValue(rs.getString("iName"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(1);
+				cell.setCellValue(rs.getDouble("iPrice"));
+				cell.setCellStyle(moneyStyle);
+				
+				cell = row.createCell(2);
+				cell.setCellValue(rs.getDouble("iQty"));
+				cell.setCellStyle(style);
+				
+				cell = row.createCell(3);
+				String formula= "ROUND(C" + Integer.valueOf(rowCount + 1) + "/C3, 2)";
+				cell.setCellFormula(formula);
+				cell.setCellStyle(style);
+				
+				rowCount++;
+			}
+			
+			if (rowCount > 1) {
+				CellRangeAddress cellRangeAddress = new CellRangeAddress(5, rowCount - 1, 0, 4);
+				setBordersToMergedCells(salesTrendSheet, cellRangeAddress, BorderStyle.MEDIUM);
+			}
+												
+			return null;
+		}
+	}
+		
 	private Object runProcurementSheetDBQuery(Date from, Date until, String costCenter) throws SQLException {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -482,6 +765,32 @@ private Workbook workbook = null;
 		return super.query(query, qryParameters, new ExportProcurementSheetToXLSExtractor());
 	}
 	
+	private Object runSalesSheetDBQuery(Date from, Date until, String costCenter) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport2_dailySales\"(:lang, :fromD, :untilD, :ccenter, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());		
+		qryParameters.put("fromD", from);
+		qryParameters.put("untilD", until);
+		qryParameters.put("ccenter", costCenter);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportSalesSheetToXLSExtractor());
+	}
+	
+	private Object runSalesTrendSheetDBQuery(Date from, Date until, String costCenter) throws SQLException {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String query = "SELECT * FROM soberano.\"z-fn_ReportData_customReport4_salesTrend\"(:lang, :fromD, :untilD, :ccenter, :loginname) AS queryresult";
+		Map<String, Object> qryParameters = new HashMap<String,	Object>();
+		qryParameters.put("lang", Locales.getCurrent().getLanguage());		
+		qryParameters.put("fromD", from);
+		qryParameters.put("untilD", until);
+		qryParameters.put("ccenter", costCenter);
+		qryParameters.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return super.query(query, qryParameters, new ExportSalesTrendSheetToXLSExtractor());
+	}
+	
 	private void getCustomReportToXlsx(Date from, Date until, String costCenter) throws SQLException, IOException {
 		
 		try {
@@ -492,6 +801,12 @@ private Workbook workbook = null;
 		
 		//first sheet
 		runProcurementSheetDBQuery(from, until, costCenter);
+		
+		//third sheet
+		runSalesSheetDBQuery(from, until, costCenter);
+		
+		//fourth sheet
+		runSalesTrendSheetDBQuery(from, until, costCenter);
 		
 		//workbook file creation//
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
