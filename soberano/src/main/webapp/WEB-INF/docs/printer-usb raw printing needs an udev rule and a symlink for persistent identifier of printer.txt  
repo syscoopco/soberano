@@ -1,0 +1,76 @@
+The following applies to Linux USB raw printing. That's when in the class co.syscoop.soberano.domain.tracked.PrinterProfile,
+the property printMethod is set to PrintMethod.USB_RAW:
+
+1) The name of the printer is configured in a printer profile: 
+	Three bars menu (TCPTOOL UI Top-Left) -> Configuration -> Printer profiles
+	
+2) For an USB printer, that name is the device's identifier. For example: /dev/usb/lp0
+	
+3) It is desirable to set a printer name only one time during its use time.
+	
+4) The problem with USB printers in Linux is that, every time the system enumerates USB devices, it assigns numbers 
+	in sequence. This can change because: 
+	
+	a) Different USB Port: Plugging the printer into a different USB port on your computer or a different port on 
+		a hub can change its discovery order and thus its number;
+
+.	b) System Reboot: Even with the printer in the same port, a simple reboot can sometimes cause the kernel to 
+		discover devices in a different order, changing the assigned number;.
+
+	c) Device Disconnection/Reconnection: Disconnecting and reconnecting the printer might cause it to be rediscovered. 
+		If another USB device (like a flash drive) was also connected or disconnected in the meantime, the numbering 
+		can shift.
+		
+	d) Kernel Module Loading: The order in which kernel modules load can be non-deterministic and influence the naming 
+		order of devices..
+
+	e) Power State: A printer being turned off or put into a low-power state (like sleep) when other devices are 
+		discovered could also affect the numbering order.
+
+	f) Number Persistence: The numbering can "drift." For example, after multiple disconnects and reconnects, a printer 
+	might move from lp0 to lp8 without ever being lp1 through lp7.
+	
+5) To avoid the above, following the following steps:
+
+	5.1) Connect to one of the USB ports, and turn on the USB printer.
+	
+	5.2) In a terminal, execute this command to find out the device identifier: sudo ls /dev/usb/lp*
+	
+	5.3) Assuming the identifier is /dev/usb/lp0, find its unique attributes by means of this command:
+	
+		sudo udevadm info -a -n /dev/usb/lp0 | grep -E 'ATTRS{idVendor}|ATTRS{idProduct}|ATTRS{serial}' | head -3
+		
+	5.4) Assuming the identifier is /dev/usb/lp0, find the device's path by means of this command:
+	
+		udevadm info --query=path --name=/dev/usb/lp0
+		
+	5.5) Now, using the path, find the subsystem the device belongs to by means of this command:
+	
+		udevadm info --query=property --path=/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.2/1-1.2:1.0/usbmisc/lp0
+		
+	5.4) Create a new udev rule file. The number at the start (e.g., 99) ensures your rule is processed after many 
+		default ones. Command:
+		
+		sudo nano /etc/udev/rules.d/99-thermal-printer.rules
+		
+	5.5) Add the following line to the file, replacing the attribute values with the ones you found. 
+		The SYMLINK parameter defines the persistent name you want to create.
+		
+		ACTION=="add", SUBSYSTEM=="usbmisc", KERNEL=="lp*", ATTRS{idVendor}=="28e9", ATTRS{idProduct}=="0289", ATTRS{serial}=="000000000004", SYMLINK+="thermal_printer", MODE="0666"
+		
+	5.6) Finally, by means of these commands, reload the udev rules and trigger them to create the symlink.
+	
+		sudo udevadm control --reload-rules
+		sudo udevadm trigger
+		
+	5.7) After this, you should see the new symlink:
+	
+		ls -l /dev/thermal_printer
+		
+	5.8) Now, you can use the symlink (/dev/thermal_printer) as the printer profile's printer name field value. In this example:
+	
+		/dev/thermal_printer
+		
+		
+		
+.

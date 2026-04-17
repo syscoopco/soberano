@@ -1,5 +1,9 @@
 v2.0.12 La Víbora Edition candidate release.
 
+New: USB raw printing. No CUPS needed for printing directly through USB ports. In WEB-INF/docs folder, there
+	is a note explaining how to configure a symlink allowing the printer to get safely unplugged and 
+	plugged again, or connected to another port, and still keeping a persistent identifier.
+
 New: Stock records deletion on FUNCTION soberano."fn_Business_clean". Stock records are created upon shift closures.
 	"StockRecord" is one of the largest relations of the database.
 
