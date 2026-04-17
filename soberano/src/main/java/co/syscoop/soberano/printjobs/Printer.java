@@ -97,6 +97,13 @@ public class Printer {
 	    // Select code page PC850
 	    baos.write(27); baos.write(116); baos.write(2); // ESC t 2
 	    
+	    // Select font
+	    //baos.write(27); baos.write(33); baos.write(0);  //Font A, normal
+	    //baos.write(27); baos.write(33); baos.write(1);  //Font B, normal
+	    //baos.write(27); baos.write(33); baos.write(32); //Font A, double‑width
+	    //baos.write(27); baos.write(33); baos.write(16); //Font A, double‑height
+	    //baos.write(27); baos.write(33); baos.write(49); //Font B, double‑width + double‑height
+	    
 	    // Feed 4 lines to skip top margin
 	    // for (int i = 0; i < 4; i++) baos.write(10);
 	    
@@ -302,7 +309,7 @@ public class Printer {
 				else if (printMethod == PrintMethod.IMAGE) {
 					printImage(PrintServiceLookup.lookupPrintServices(null, null), Files.readAllBytes(Paths.get(fileToPrintFullPath + ".png")), printerNameParam, jobName, openCashDrawer);
 				}
-				//CUPS-RAW
+				//RAW
 				else {
 					printRAW(textToPrint, jobName);
 				}
