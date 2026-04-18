@@ -7,6 +7,7 @@ import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
+import org.zkoss.zul.Combobox;
 import org.zkoss.zul.DefaultTreeNode;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Include;
@@ -134,6 +135,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 									((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 									((Textbox) incDetails.query("#txtPrintServer")).getValue(),
 									((Textbox) incDetails.query("#txtPrinterName")).getValue(),
+									((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue(),
 									objectUsingThisIds,
 									objectUsingThisNames)).record();
 	}
@@ -158,6 +160,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 												((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 												((Textbox) incDetails.query("#txtPrintServer")).getValue(),
 												((Textbox) incDetails.query("#txtPrinterName")).getValue(),
+												((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue(),
 												objectUsingThisIds,
 												objectUsingThisNames));
 		return super.getTrackedObject().modify();

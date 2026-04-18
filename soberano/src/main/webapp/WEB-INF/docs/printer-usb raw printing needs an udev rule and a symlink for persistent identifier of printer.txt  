@@ -1,5 +1,5 @@
 The following applies to Linux USB raw printing. That's when in the class co.syscoop.soberano.domain.tracked.PrinterProfile,
-the property printMethod is set to PrintMethod.USB_RAW:
+the property printMethod is set to PrintMethod.RAW:
 
 1) The name of the printer is configured in a printer profile: 
 	Three bars menu (TCPTOOL UI Top-Left) -> Configuration -> Printer profiles

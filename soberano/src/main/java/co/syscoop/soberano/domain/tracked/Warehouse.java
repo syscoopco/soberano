@@ -307,7 +307,19 @@ public class Warehouse extends TrackedObject {
 		this.isLossesWarehouse = isLossesWarehouse;
 	}
 	
-	public Integer forceStockAdjustment(Integer warehouse, String inventoryItem, BigDecimal stockUnitValue) throws Exception {
+	public Integer forceStockQuantityAdjustment(Integer warehouse, String inventoryItem, BigDecimal stockQuantity) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Business_forceStockQuantityAdjusment\"(:warehouse, :inventoryItem, :stockQuantity, :loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("warehouse", warehouse);
+		parametersMap.put("inventoryItem", inventoryItem);
+		parametersMap.put("stockQuantity", stockQuantity);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer forceStockUnitValueAdjustment(Integer warehouse, String inventoryItem, BigDecimal stockUnitValue) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
 		String qryStr = "SELECT soberano.\"fn_Business_forceStockAdjusment\"(:warehouse, :inventoryItem, :stockUnitValue, :loginname) AS queryresult";		

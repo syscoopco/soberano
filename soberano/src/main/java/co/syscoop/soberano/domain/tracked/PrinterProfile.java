@@ -33,7 +33,7 @@ public class PrinterProfile extends TrackedObject {
 	private String printerName = "";
 	private ArrayList<Integer> objectsUsingThisIds = new ArrayList<Integer>();
 	private ArrayList<String> objectsUsingThisQualifiedNames = new ArrayList<String>();
-	private PrintMethod printMethod = PrintMethod.USB_RAW;
+	private PrintMethod printMethod = PrintMethod.RAW;
 		
 	public PrinterProfile(Integer id) {
 		super(id);
@@ -56,7 +56,8 @@ public class PrinterProfile extends TrackedObject {
 			Boolean isDefaultPrinter,
 			Boolean isManagementPrinter,
 			String printServer,
-			String printerName) {
+			String printerName,
+			PrintMethod printMethod) {
 		super(id, entityTypeInstanceId, name);
 		this.setQualifiedName(name + " : " + printServer);		
 		this.setFontSize(fontSize);
@@ -70,6 +71,7 @@ public class PrinterProfile extends TrackedObject {
 		this.setIsManagementPrinter(isManagementPrinter);
 		this.setPrintServer(printServer);
 		this.setPrinterName(printerName);
+		this.setPrintMethod(printMethod);
 	}
 	
 	public PrinterProfile(Integer id, 
@@ -86,6 +88,7 @@ public class PrinterProfile extends TrackedObject {
 			Boolean isManagementPrinter,
 			String printServer,
 			String printerName,
+			PrintMethod printMethod,
 			ArrayList<Integer> objectsUsingThisIds,
 			ArrayList<String> objectsUsingThisQualifiedNames) {
 		this(id, 
@@ -101,7 +104,8 @@ public class PrinterProfile extends TrackedObject {
 			isDefaultPrinter,
 			isManagementPrinter,
 			printServer,
-			printerName);	
+			printerName,
+			printMethod);	
 		this.objectsUsingThisIds = objectsUsingThisIds;
 		this.objectsUsingThisQualifiedNames = objectsUsingThisQualifiedNames;
 	}
@@ -127,6 +131,7 @@ public class PrinterProfile extends TrackedObject {
 				+ "											:isManagementPrinter, "
 				+ "											:printServer, "
 				+ "											:printerName, "
+				+ "											:printMethod, "
 				+ "											:objectUsingThisIds, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
@@ -142,6 +147,7 @@ public class PrinterProfile extends TrackedObject {
 		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
 		recordParameters.addValue("printServer", this.getPrintServer());
 		recordParameters.addValue("printerName", this.getPrinterName());
+		recordParameters.addValue("printMethod", this.getPrintMethod());
 		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -164,6 +170,7 @@ public class PrinterProfile extends TrackedObject {
 				+ "													:isManagementPrinter,"
 				+ "													:printServer, "
 				+ "													:printerName, "
+				+ "													:printMethod, "
 				+ "													:objectUsingThisIds,"	
 				+ "													:loginname) AS queryresult";
 		modifyParameters = new MapSqlParameterSource();
@@ -179,7 +186,8 @@ public class PrinterProfile extends TrackedObject {
 		modifyParameters.addValue("isDefaultPrinter", this.getIsDefaultPrinter());
 		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
 		modifyParameters.addValue("printServer", this.getPrintServer());
-		modifyParameters.addValue("printerName", this.getPrinterName());	
+		modifyParameters.addValue("printerName", this.getPrinterName());
+		modifyParameters.addValue("printMethod", this.getPrintMethod());
 		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;
@@ -224,7 +232,8 @@ public class PrinterProfile extends TrackedObject {
 														rs.getBoolean("isDefaultPrinter"),
 														rs.getBoolean("isManagementPrinter"),
 														rs.getString("printServer"),
-														rs.getString("printerName"));
+														rs.getString("printerName"),
+														PrintMethod.fromCode(rs.getInt("printMethod")));
 				}
 				return printerProfile;
 			}
@@ -280,6 +289,7 @@ public class PrinterProfile extends TrackedObject {
 		setIsManagementPrinter(sourcePrinterProfile.getIsManagementPrinter());
 		setPrintServer(sourcePrinterProfile.getPrintServer());
 		setPrinterName(sourcePrinterProfile.getPrinterName());
+		setPrintMethod(sourcePrinterProfile.getPrintMethod());
 		setObjectsUsingThisIds(sourcePrinterProfile.getObjectsUsingThisIds());
 		setObjectsUsingThisQualifiedNames(sourcePrinterProfile.getObjectsUsingThisQualifiedNames());
 	}

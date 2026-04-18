@@ -9,7 +9,16 @@
 		<separator></separator>
 		<label value="${labels.caption.field.printerName}" sclass="Caption"></label>			
 		<textbox id="txtPrinterName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.printerNamePlaceholder}" constraint="no empty"/>
+		<separator></separator>		
+		<label value="${labels.caption.field.printMethod}" sclass="Caption"></label>			
+		<combobox id="cmbPrintMethod" selectedIndex="-1" constraint="no empty, strict">
+			<comboitem label="PDF" value="0"/>
+			<comboitem label="JPG" value="1"/>			
+			<comboitem label="RAW" value="2"/>
+		</combobox>		
+		<textbox id="txtPrinterName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.printerNamePlaceholder}" constraint="no empty"/>
 		<separator></separator>
+		
 		<checkbox id="chkIsDefaultPrinter" checked="false" label="${labels.caption.field.defaultPrinter}" sclass="Caption"></checkbox>
 		<separator></separator>
 		<checkbox id="chkIsManagementPrinter" checked="false" label="${labels.caption.field.managementPrinter}" sclass="Caption"></checkbox>

@@ -34,9 +34,56 @@ public class StockGridRenderer extends DomainObjectRowRenderer {
 		//quantity
 		Decimalbox decQuantity = new Decimalbox(stockRowData.getQuantity());
 		decQuantity.setFormat("####.########");
-		decQuantity.setReadonly(true);
+		decQuantity.setReadonly(false);
 		decQuantity.setWidth("100%");
 		row.appendChild(decQuantity);
+		
+		decQuantity.addEventListener("onChange", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				
+				try{
+					Decimalbox decQuantity = (Decimalbox) event.getTarget();
+					DomainObject domainObject = (DomainObject) ((Combobox) decQuantity.getParent().
+																					getParent().
+																					getParent().
+																						query("grid").
+																							getParent().
+																							getParent().
+																							getParent().
+																							getParent().
+																								query("#cmbWarehouse")
+													).getSelectedItem().getValue();
+					
+					//update the quantity of the item
+					Integer qryResult = (new Warehouse()).forceStockQuantityAdjustment(domainObject.getId(), 
+																				stockRowData.getInventoryItemCode(),
+																				decQuantity.getValue());						
+					if (qryResult != 0) {
+						throw new NotEnoughRightsException();
+					}
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(NullPointerException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.validation.selectAWarehouseFromTheList"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							ex.getMessage(), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+				}
+			}			
+		});
 		
 		//unit
 		row.appendChild(new Label(stockRowData.getUnit()));
@@ -67,7 +114,7 @@ public class StockGridRenderer extends DomainObjectRowRenderer {
 													).getSelectedItem().getValue();
 					
 					//update the unit stock value of the item
-					Integer qryResult = (new Warehouse()).forceStockAdjustment(domainObject.getId(), 
+					Integer qryResult = (new Warehouse()).forceStockUnitValueAdjustment(domainObject.getId(), 
 																				stockRowData.getInventoryItemCode(),
 																				decStockUnitValue.getValue());						
 					if (qryResult != 0) {

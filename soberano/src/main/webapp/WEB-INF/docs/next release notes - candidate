@@ -1,10 +1,29 @@
 v2.0.12 La Víbora Edition candidate release.
 
+New: In stock.zul now is possible to force the quantity of an item. The corresponding decimal box now allows writes in it.
+	Owner right must be granted to the user. A Configuration object modify decision is made with the argument:
+	
+	tt_Stock_tt tt_MODIFIED_BY_tt <loginname>. 
+	tt_Warehouse_tt : <warehouseid>. 
+	tt_Item_tt : <inventoryitemcode>. 
+	tt_NewStockQuantity_tt : <inventoryitemquantity>.
+	
+	The database function is:
+	
+	 FUNCTION soberano."fn_Business_forceStockQuantityAdjusment"(warehouseid integer,
+														inventoryitemcode character varying,
+														inventoryitemquantity numeric,
+														loginname character varying)
+ 
+
 New: USB/Bluetooth raw printing. No CUPS needed for printing directly through USB/Bluetooth devices. In WEB-INF/docs 
 	folder, there is a note explaining how to configure a symlink (USB case) allowing the printer to get safely unplugged 
 	and plugged again, or connected to another port, and still keeping a persistent identifier. In WEB-INF/docs folder, 
 	ther is also a note explaining the bluetooth case.
-
+	
+New: Now is possible to configure a print method a printer profile uses. Options are: PDF, PNG, RAW. This can be done by means of
+	printer profiles configuration form (printer_profiles.zul).
+	
 New: Stock records deletion on FUNCTION soberano."fn_Business_clean". Stock records are created upon shift closures.
 	"StockRecord" is one of the largest relations of the database.
 
