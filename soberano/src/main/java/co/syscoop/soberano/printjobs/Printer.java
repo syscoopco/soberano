@@ -16,7 +16,12 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import javax.print.attribute.*;
 import javax.print.attribute.standard.JobName;
@@ -67,20 +72,48 @@ public class Printer {
 	
 	public Printer() {};
 	
-	private void printRawToUsb(String textToPrint, String printerName) throws Exception {
+	private void printRawToDevice(String textToPrint, String printerName) throws Exception {
 		
-	    // Prepare the byte array with all necessary commands
-	    byte[] data = buildPrintData(textToPrint);
-	    
-	    // Write directly to the USB device
-	    try (OutputStream out = new FileOutputStream(printerName)) {
-	        out.write(data);
-	        out.flush(); // Ensure all data is sent
-	        // The try-with-resources will close the stream, which also flushes
-	    }
-	    
-	    // Small delay to let the printer finish processing
-	    Thread.sleep(200);
+		ExecutorService executor = Executors.newSingleThreadExecutor();
+		Future<OutputStream> future = executor.submit(() -> new FileOutputStream(printerName));
+		
+				int OPEN_TIMEOUT_SECONDS = 20;
+
+		        try (OutputStream out = future.get(OPEN_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
+		            out.write(buildPrintData(textToPrint));
+		            out.flush();
+		            
+		            // Small delay to let printer finish
+		            Thread.sleep(200);
+		        } catch (TimeoutException e) {
+		        	
+		            // Cancel the task that is stuck in open()
+		            future.cancel(true);
+		            throw new IOException("Printer not reachable: open() timed out after " + OPEN_TIMEOUT_SECONDS + " seconds", e);
+		        } catch (InterruptedException e) {
+		            Thread.currentThread().interrupt();
+		            throw new IOException("Interrupted while opening printer", e);
+		        } catch (ExecutionException e) {
+		        	
+		            // The open() threw an exception
+		            throw new IOException("Failed to open printer device", e.getCause());
+		        } finally {
+		            executor.shutdownNow();
+		        }
+		
+		//		THIS CODE DOES NOT HANDLE HANGING DUE TO PRINTER OFF, OR ANY OTHER REASON.
+		//	    // Prepare the byte array with all necessary commands
+		//	    byte[] data = buildPrintData(textToPrint);
+		//	    
+		//	    // Write directly to the USB device
+		//	    try (OutputStream out = new FileOutputStream(printerName)) {
+		//	        out.write(data);
+		//	        out.flush(); // Ensure all data is sent
+		//	        // The try-with-resources will close the stream, which also flushes
+		//	    }
+		//	    
+		//	    // Small delay to let the printer finish processing
+		//	    Thread.sleep(200);
 	}
 
 	private byte[] buildPrintData(String textToPrint) throws IOException {
@@ -122,10 +155,10 @@ public class Printer {
 	    return baos.toByteArray();
 	}
 	
-	private void printRAW(String textToPrint, String printJobName) throws Exception {
+	private void printRaw(String textToPrint, String printJobName) throws Exception {
 		
 		try {
-				printRawToUsb(textToPrint, printerProfile.getPrinterName());
+				printRawToDevice(textToPrint, printerProfile.getPrinterName());
 	    }
 		catch (Exception ex) {
 			ExceptionTreatment.logAndShow(ex, 
@@ -311,7 +344,7 @@ public class Printer {
 				}
 				//RAW
 				else {
-					printRAW(textToPrint, jobName);
+					printRaw(textToPrint, jobName);
 				}
 			}
 		}

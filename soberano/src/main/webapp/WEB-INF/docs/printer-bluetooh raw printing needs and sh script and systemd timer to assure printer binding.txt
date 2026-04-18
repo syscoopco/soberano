@@ -1,0 +1,122 @@
+This is for printing by means of bluetooth bypassing cups (so, no queue management), and assuring printer binding
+despite turning it (or the computer) off and on:
+
+1. Turn on bluetooth printer.
+
+2. Bluetooth pair the printer and trust it by means of blueman. Do not connect through serial port, as it let rfcomm port busy.
+
+3. Create a Persistent Configuration with rfcomm.conf:
+
+	3.1 sudo nano /etc/bluetooth/rfcomm.conf
+	
+	3.2 Insert the block (replace <MAC_ADDRESS> with your printer's mac address):
+	
+		rfcomm0 {
+		    bind yes;
+		    device <MAC_ADDRESS>;
+		    channel 1;
+		    comment "Thermal Printer";
+		}
+		
+4. Automate Reconnection with a Systemd Service:
+
+	4.1 sudo nano /usr/local/bin/bind-bt-printer.sh
+	
+	4.2 Paste the following content, replacing the MAC address with your own:
+	
+		#!/bin/bash
+		MAC="<MAC_ADDRESS>"
+		DEVICE="/dev/rfcomm0"
+		
+		# Check if the device is already bound and working
+		if rfcomm show $DEVICE | grep -q $MAC; then
+		    # It's already bound, do nothing
+		    exit 0
+		else
+		    # Not bound, attempt to bind it
+		    logger "Printer not bound. Attempting to bind $DEVICE to $MAC"
+		    # Release the device if it's bound to something else
+		    rfcomm release $DEVICE 2>/dev/null
+		    # Bind the device
+		    if rfcomm bind $DEVICE $MAC 1; then
+		        logger "Successfully bound $DEVICE to $MAC"
+		        chmod 666 $DEVICE
+		    else
+		        logger "Failed to bind printer. Is it powered on and paired?"
+		    fi
+		fi
+		
+	4.3 Make the script executable: sudo chmod +x /usr/local/bin/bind-bt-printer.sh
+	
+	4.4 Create the systemd service: sudo nano /etc/systemd/system/bluetooth-printer.service
+	
+	4.5 Add the following content:
+	
+		[Unit]
+		Description=Bind Bluetooth Printer
+		After=bluetooth.service
+		Requires=bluetooth.service
+		
+		[Service]
+		Type=oneshot
+		ExecStart=/usr/local/bin/bind-bt-printer.sh
+		RemainAfterExit=yes
+		
+		[Install]
+		WantedBy=multi-user.target
+		
+	4.6 Create and start a systemd timer: sudo nano /etc/systemd/system/bluetooth-printer.timer
+	
+	4.7 Add the following content:
+	
+		[Unit]
+		Description=Timer to bind Bluetooth printer every minute
+		Requires=bluetooth-printer.service
+		
+		[Timer]
+		OnBootSec=1min
+		OnUnitActiveSec=1min
+		
+		[Install]
+		WantedBy=timers.target
+		
+	4.8 Enable and start the timer:
+	
+		sudo systemctl daemon-reload
+		sudo systemctl enable bluetooth-printer.timer
+		sudo systemctl start bluetooth-printer.timer
+		
+5. Test and verify:
+
+	5.1 Test the script manually: First, ensure the printer is turned on and in range.
+	
+		sudo /usr/local/bin/bind-bt-printer.sh
+		
+	5.2 Then check the device and its permissions.
+	
+		ls -l /dev/rfcomm0
+		
+		should return:
+		
+		crw-rw-rw- 1 root dialout 216, 0 ...
+		
+	5.3 Reboot your system: After the reboot, check the device file again. It should be present, even if the printer was off at the time.
+	
+		ls -l /dev/rfcomm0
+		
+	5.4 Simulate a "hotplug" event:
+
+	    Turn the printer off.
+	
+	    Run sudo rm /dev/rfcomm0 to manually remove the device node.
+	
+	    Turn the printer back on.
+	
+	    Wait up to a minute for the systemd timer to run.
+	
+	    Run ls -l /dev/rfcomm0 again. The device node should be recreated.
+	    
+6. Now, in TCPTOOL, you can use the identifier /dev/rfcomm0 as the printer profile's printer name field value.
+	
+		
+
