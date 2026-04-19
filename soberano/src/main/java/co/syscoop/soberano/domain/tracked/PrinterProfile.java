@@ -2,6 +2,7 @@ package co.syscoop.soberano.domain.tracked;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -147,7 +148,7 @@ public class PrinterProfile extends TrackedObject {
 		recordParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
 		recordParameters.addValue("printServer", this.getPrintServer());
 		recordParameters.addValue("printerName", this.getPrinterName());
-		recordParameters.addValue("printMethod", this.getPrintMethod());
+		recordParameters.addValue("printMethod", this.getPrintMethod().getCode(), Types.SMALLINT);
 		recordParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.record();
 		return qryResult > 0 ? qryResult : -1;
@@ -187,7 +188,7 @@ public class PrinterProfile extends TrackedObject {
 		modifyParameters.addValue("isManagementPrinter", this.getIsManagementPrinter());
 		modifyParameters.addValue("printServer", this.getPrintServer());
 		modifyParameters.addValue("printerName", this.getPrinterName());
-		modifyParameters.addValue("printMethod", this.getPrintMethod());
+		modifyParameters.addValue("printMethod", this.getPrintMethod().getCode(), Types.SMALLINT);
 		modifyParameters.addValue("objectUsingThisIds", createArrayOfSQLType("integer", this.getObjectsUsingThisIds().toArray()));
 		Integer qryResult = super.modify();
 		return qryResult == 0 ? qryResult : -1;

@@ -20,6 +20,7 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.models.NodeData;
+import co.syscoop.soberano.printjobs.PrintMethod;
 import co.syscoop.soberano.util.ui.ZKUtility;
 
 public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
@@ -90,6 +91,9 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtName"), printerProfile.getName());
 		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrintServer"), printerProfile.getPrintServer());
 		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#txtPrinterName"), printerProfile.getPrinterName());
+		
+		ZKUtility.setValueWOValidation((Combobox) incDetails.query("#cmbPrintMethod"),  printerProfile.getPrintMethod().getCode());
+		
 		((Checkbox) incDetails.query("#chkIsDefaultPrinter")).setChecked(printerProfile.getIsDefaultPrinter());
 		((Checkbox) incDetails.query("#chkIsManagementPrinter")).setChecked(printerProfile.getIsManagementPrinter());
 		ZKUtility.setValueWOValidation((Intbox) incDetails.query("#intFontSize"), printerProfile.getFontSize());
@@ -135,7 +139,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 									((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 									((Textbox) incDetails.query("#txtPrintServer")).getValue(),
 									((Textbox) incDetails.query("#txtPrinterName")).getValue(),
-									((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue(),
+									PrintMethod.fromCode(Integer.parseInt(((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue())),
 									objectUsingThisIds,
 									objectUsingThisNames)).record();
 	}
@@ -160,7 +164,7 @@ public class PrinterProfileFormHelper extends TrackedObjectFormHelper {
 												((Checkbox) incDetails.query("#chkIsManagementPrinter")).isChecked(),
 												((Textbox) incDetails.query("#txtPrintServer")).getValue(),
 												((Textbox) incDetails.query("#txtPrinterName")).getValue(),
-												((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue(),
+												PrintMethod.fromCode(Integer.parseInt(((Combobox) incDetails.query("#cmbPrintMethod")).getSelectedItem().getValue())),
 												objectUsingThisIds,
 												objectUsingThisNames));
 		return super.getTrackedObject().modify();
