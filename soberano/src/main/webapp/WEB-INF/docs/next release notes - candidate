@@ -29,6 +29,7 @@ New: Stock records deletion on FUNCTION soberano."fn_Business_clean". Stock reco
 
 New: Custom report 4 added.
 	
-Fix: 
+Fix: Stock quantities and values recording disabled upon shift closures. The corresponding insertion lines were commented in
+	FUNCTION soberano."fn_ShiftClosure_create".
 		
 User manual:
