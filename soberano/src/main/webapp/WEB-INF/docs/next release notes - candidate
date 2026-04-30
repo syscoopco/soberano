@@ -1,5 +1,7 @@
 v2.0.12 La Víbora Edition candidate release.
 
+New: Instructions for deploying a Docker-based PostgreSQL instance for physical replication testing purpose.
+
 New: In stock.zul now is possible to force the quantity of an item. The corresponding decimal box now allows writes in it.
 	Owner right must be granted to the user. A Configuration object modify decision is made with the argument:
 	
