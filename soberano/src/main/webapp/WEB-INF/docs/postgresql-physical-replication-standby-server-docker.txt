@@ -7,7 +7,7 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 			it's strongly recommended TCPTOOL to be used by only one user.
 --------------------------------------------------------------
 
-1) Prepare two Linux servers (primary and standby servers) with the prerequisites of TCPTOOL: PostgreSQL 17, ApacheDS, 
+1) Prepare two Linux servers (primary and standby servers) with the prerequisites of TCPTOOL: PostgreSQL 18, ApacheDS, 
 	Apache Tomcat 11, and TCPTOOL web application deployed (tcptool.war).
 	
 	1.1) Both servers are connected to a network and there's IP connectivity between them, through the port used by 
@@ -37,14 +37,33 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 	
 		host replication tcptool_replicator 192.168.1.100/32 scram-sha-256
 		
-5) Initialize the standby server with a base backup. In the stand by server:
+4.1) Do not forget to restart the primary server by means of some command like:
+
+	systemctl restart postgresql
+		
+5) 
+
+
+
+Initialize the standby server with a base backup. In the stand by server:
 
 	5.1) Stop the running PostgreSQL instance with the proper command.
 		For example: pg_ctl -D /data/data/com.termux/files/home/postgresql_data stop
 		
 		Or
 		
-		sudo systemctl stop postgresql
+			sudo systemctl stop postgresql
+		
+		Or in Docker stop and remove the existing container (keep the volume for now) (pg18 is the name of the container)
+		
+			docker stop pg18
+			sudo docker rm pg18
+			
+			Start a temporary container with sleep infinity (prevents PostgreSQL from starting)
+			
+			sudo docker run -d --name pg18_temp \
+			  -v postgres_data_18:/var/lib/postgresql \
+			  postgres:18 sleep infinity
 		
 	5.2) In case PostgreSQL configuration (usually in /etc/postgresql/...) and data (usually in /var/lib/...) files 
 		are mixed in a same directory (like in Termux $HOME/postgresql_data) make a backup of that directory. Example:
@@ -56,14 +75,48 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 		
 		For other Linux distribution: sudo -u postgres rm -rf /var/lib/postgresql/17/main/*
 		
+		Or in Docker clear the old data from the volume (if any) (postgres_data_18 is the name of the volume):
+		
+				sudo docker exec pg18_temp rm -rf /var/lib/postgresql/*
+			
+			Run pg_basebackup inside the temporary container
+			
+				sudo docker exec -e PGPASSWORD='your_strong_password' pg18_temp \
+				  pg_basebackup -h 172.17.0.1 -U tcptool_replicator -D /var/lib/postgresql \
+				  -Fp -Xs -R -v -P -w
+				  
+			Stop and remove the temporary container
+			
+				sudo docker stop pg18_temp
+				sudo docker rm pg18_temp
+		
+	5.31) Run the PostgreSQL service:
+	
+		In Termux:
+		
+			pg_ctl -D /data/data/com.termux/files/home/postgresql_data start
+		
+		In other Linux distributions:
+	
+			systemctl start postgresql
+		
+		Or in Docker start your normal PostgreSQL container using the now‑populated volume (pg18 is the name of the container)
+		
+			sudo docker run -d --name pg18 \
+				  -v postgres_data_18:/var/lib/postgresql \
+				  -e POSTGRES_USER=postgres \
+				  -e POSTGRES_PASSWORD=postgres \
+				  -e POSTGRES_DB=postgres \
+				  postgres:18
+	
 	5.4) Execute the command pg_basebackup. For Termux:
 	
-		pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D $HOME/postgresql_data/ -Fp -Xs -P -R
+			pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D $HOME/postgresql_data/ -Fp -Xs -P -R
 		
-		For other Linux distribution (It's assumed PostgreSQL ver. 17, port 5432 and a typical data directory path.):
+		For other Linux distribution (It's assumed PostgreSQL ver. 18, port 5432 and a typical data directory path.):
 	
-		sudo -u postgres pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D /var/lib/postgresql/17/main/ -Fp -Xs -P -R
-		
+			sudo -u postgres pg_basebackup -h <primary_ip> -p 5432 -U tcptool_replicator -D /var/lib/postgresql/18/main/ -Fp -Xs -P -R
+				
 	5.5) On request, type the password of tcptool_replicator role on the primary server.
 	
 	5.6) Wait for pg_basebackup to complete.

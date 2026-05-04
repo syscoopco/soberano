@@ -1,31 +1,73 @@
 Tested in Ubuntu Debian 13 (Trixie). Might need VPN.
 
 1) Install Docker.
-
-	# Update package index and install prerequisites
-	sudo apt update
-	sudo apt install ca-certificates curl
-	# Add Docker's official GPG key
+	
+	# Remove Existing, Conflicting Packages 
+	for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+	
+	# Update & Install Prerequisites
+	sudo apt-get update
+	sudo apt-get install ca-certificates curl
+	
+	# Add Docker’s official GPG key
 	sudo install -m 0755 -d /etc/apt/keyrings
-	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+	sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
 	sudo chmod a+r /etc/apt/keyrings/docker.asc
-	# Add the repository to Apt sources
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 	
-	# Install Docker Engine
-	sudo apt update
-	sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	# Add the Docker repository (using bookworm as the codename)
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt-get update
 	
-	# Verify installation
+	# Install Docker Engine and plugins
+	sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	
+	# Verify Docker installation
+	docker --version
+	docker compose version
 	sudo docker run hello-world
 	
-	# Run Docker as regular user
-	sudo usermod -aG docker $USER
+2) Install PostgreSQL.
+
+	# Pull the image
+	docker pull postgres:18
 	
+		# In case of network or bad connection, alternatively, you can load a saved image file. For example:
+		docker load -i /home/user/installers/docker_image_files/postgres-18.tar
+		docker images | grep postgres		
+
+	# Create a persistent volume. You can remove your container without losing your databases.
+	sudo docker volume create postgres_data_18
 	
+	# Run the container ("pg18" is the container's name)
+	docker run -d \
+	  --name pg18 \
+	  -e POSTGRES_USER=postgres \
+	  -e POSTGRES_PASSWORD=postgres \
+	  -e POSTGRES_DB=postgres \
+	  -v postgres_data_18:/var/lib/postgresql \
+	  postgres:18
+	  
+	 # Check and write down the IP address used to communicate with host from Docker container.
+	 ifconfig -a
+	 
+3) Configure pg_hba.conf and postgresql.conf, as usual. They are located in /var/lib/docker/volumes/postgres_data_18/_data/18/docker/
+
+	For testing purpose, this pg_hba.conf content works:
 	
+	# TYPE  DATABASE        USER            ADDRESS                 METHOD
+	local   all             all                                     trust
+	host    all             all             0.0.0.0/0               scram-sha-256
+	host    all             all             ::/0                    scram-sha-256
+	 
+4) Restart the Docker container containing the PostgreSQL instance ("pg18" is the container's name).
+
+	sudo docker restart pg18
 	
+5) Reset postgres user password.	
+
+6) Find out the IP of the container ("pg18" is the container's name).
+
+	sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pg18
 	
-	
-	
-	
+7) By means of PgAdmin or psql, verify PostgreSQL is running under the container.
+
