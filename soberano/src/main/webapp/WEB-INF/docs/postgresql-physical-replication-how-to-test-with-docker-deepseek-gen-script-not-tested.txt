@@ -1,0 +1,171 @@
+#!/bin/bash
+set -e  # exit on error
+
+# ======================================================
+# CONFIGURATION – EDIT THESE VALUES
+# ======================================================
+
+# Primary PostgreSQL connection details
+PRIMARY_HOST="172.17.0.1"          # IP of primary on Docker bridge
+PRIMARY_PORT="5432"
+REPL_USER="tcptool_replicator"
+REPL_PASSWORD="12345"
+
+# Locale used by primary (if not C.UTF-8, it will be installed inside the init container)
+PRIMARY_LOCALE="es_CU.UTF-8"
+
+# Standby container and volume names
+STANDY_CONTAINER="pg_hot_standby"
+STANDY_VOLUME="pg_hot_standby_data"
+
+# Docker image
+POSTGRES_IMAGE="postgres:18"
+
+# (Optional) Path to a saved .tar image – leave empty to pull
+# SAVED_IMAGE_TAR="/path/to/postgres-18.tar"
+
+# ======================================================
+# PREPARATION
+# ======================================================
+
+# If you already have Docker installed, comment out the next section.
+echo "=== Installing Docker (if not already) ==="
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove -y $pkg 2>/dev/null || true; done
+sudo apt-get update
+sudo apt-get install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian bookworm stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Optional: load image from tar instead of pulling
+if [ -n "$SAVED_IMAGE_TAR" ] && [ -f "$SAVED_IMAGE_TAR" ]; then
+    echo "=== Loading PostgreSQL image from $SAVED_IMAGE_TAR ==="
+    docker load -i "$SAVED_IMAGE_TAR"
+else
+    echo "=== Pulling PostgreSQL image $POSTGRES_IMAGE ==="
+    docker pull $POSTGRES_IMAGE
+fi
+
+echo "=== Creating directory structure ==="
+mkdir -p ~/pg_hot_standby/conf.d
+cd ~/pg_hot_standby
+
+# ======================================================
+# CONFIGURATION FILES
+# ======================================================
+
+echo "=== Writing postgresql.conf ==="
+cat > postgresql.conf <<EOF
+include_dir = '/etc/postgresql/conf.d'
+EOF
+
+echo "=== Writing conf.d/00-standby.conf ==="
+cat > conf.d/00-standby.conf <<EOF
+hot_standby = on
+primary_conninfo = 'host=$PRIMARY_HOST port=$PRIMARY_PORT user=$REPL_USER password=$REPL_PASSWORD'
+listen_addresses = '*'
+default_transaction_isolation = 'repeatable read'
+hot_standby_feedback = on
+max_connections = 4000
+shared_buffers = 256MB
+timezone = 'America/Havana'
+EOF
+
+echo "=== Writing pg_hba.conf ==="
+cat > pg_hba.conf <<EOF
+local   all             all                                     trust
+host    all             all             127.0.0.1/32            trust
+host    all             all             ::1/128                 trust
+host    all             all             172.18.0.1/32           scram-sha-256
+EOF
+
+echo "=== Writing docker-compose.yml ==="
+cat > docker-compose.yml <<EOF
+services:
+  db:
+    image: $POSTGRES_IMAGE
+    container_name: $STANDY_CONTAINER
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      LANG: C.UTF-8
+      LC_COLLATE: C.UTF-8
+      LC_CTYPE: C.UTF-8
+    volumes:
+      - $STANDY_VOLUME:/var/lib/postgresql
+      - ./conf.d/:/etc/postgresql/conf.d/:ro
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    command: >
+      postgres
+      -c config_file=/etc/postgresql/postgresql.conf
+      -c hba_file=/etc/postgresql/pg_hba.conf
+    # ports:
+    #   - "5433:5432"
+
+volumes:
+  $STANDY_VOLUME:
+    name: $STANDY_VOLUME
+EOF
+
+# ======================================================
+# VOLUME AND BACKUP
+# ======================================================
+
+echo "=== Creating Docker volume ==="
+docker volume create $STANDY_VOLUME
+
+echo "=== Preparing PostgreSQL 18+ subdirectory ==="
+docker run --rm -v $STANDY_VOLUME:/var/lib/postgresql $POSTGRES_IMAGE \
+  sh -c "mkdir -p /var/lib/postgresql/18/docker"
+
+echo "=== Starting temporary init container ==="
+docker run -d --name standby_init -v $STANDY_VOLUME:/var/lib/postgresql $POSTGRES_IMAGE sleep infinity
+
+echo "=== Emptying target directory ==="
+docker run --rm -v $STANDY_VOLUME:/var/lib/postgresql $POSTGRES_IMAGE \
+  sh -c "rm -rf /var/lib/postgresql/18/docker/* /var/lib/postgresql/18/docker/.[!.]*" 2>/dev/null || true
+
+# Install required locale if not C.UTF-8
+if [ "$PRIMARY_LOCALE" != "C.UTF-8" ]; then
+    echo "=== Installing locale $PRIMARY_LOCALE inside init container ==="
+    docker exec -i --user root standby_init bash -c "
+        apt-get update &&
+        apt-get install -y locales &&
+        sed -i '/${PRIMARY_LOCALE%.*}/s/^# //g' /etc/locale.gen &&
+        locale-gen ${PRIMARY_LOCALE}
+    "
+fi
+
+echo "=== Running pg_basebackup ==="
+docker exec -e PGPASSWORD="$REPL_PASSWORD" standby_init \
+  pg_basebackup -h "$PRIMARY_HOST" -U "$REPL_USER" \
+  -D /var/lib/postgresql/18/docker \
+  -Fp -Xs -R -v -P -w
+
+echo "=== Cleaning up temporary container ==="
+docker stop standby_init && docker rm standby_init
+
+# ======================================================
+# START STANDBY
+# ======================================================
+
+echo "=== Starting standby container with docker compose ==="
+docker compose up -d
+
+echo "=== Checking logs (last 20 lines) ==="
+docker compose logs db --tail 20
+
+echo "=== Standby IP address ==="
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $STANDY_CONTAINER
+
+echo "=== Setup complete! ==="
+echo "To connect: psql -h <IP> -U postgres -d postgres (password: postgres)"
+echo "To stop: docker compose down"
+echo "To start over: docker compose down -v && docker volume rm $STANDY_VOLUME && rm -rf ~/pg_hot_standby"
+

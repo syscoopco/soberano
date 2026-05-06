@@ -1,10 +1,11 @@
 How to deploy a TCPTOOL standby server for disaster recovering
 Credits: A lot of this document was taken from https://stormatics.tech/blogs/guide-on-setting-up-physical-streaming-replication-in-postgresql
 
-VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Instead, it's recommended for TCPTOOL to use 
-			repeatable read. However, it must be taken into account that for use cases might concurrently write to the database,
-			like those affecting inventory records (order manipulation and closing, SPI, material expenses, process runs, ...),
-			it's strongly recommended TCPTOOL to be used by only one user.
+VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Instead, it's recommended to use repeatable read.
+				That's why it's strongly recommended TCPTOOL to be used by only one user in case a fail requires standby server
+				to be promoted to primary without changing isolation level to serializable. This is particularly important for 
+				use cases like those affecting inventory records (order manipulation and closing, SPI, material, expenses, 
+				process runs, ...). Readonly use cases are not affected.
 --------------------------------------------------------------
 
 1) Prepare two Linux servers (primary and standby servers) with the prerequisites of TCPTOOL: PostgreSQL 17, ApacheDS, 
@@ -80,7 +81,9 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 		
 		default_transaction_isolation = 'repeatable read'
 		
-6) Start standby server. For example, in Termux: pg_ctl -D /data/data/com.termux/files/home/postgresql_data start
+6) Restart standby server. For example, in Termux: 
+	pg_ctl -D /data/data/com.termux/files/home/postgresql_data stop
+	pg_ctl -D /data/data/com.termux/files/home/postgresql_data start
 	
 7) Now, the standby database can be accessed from primary server or another computer by means of PostgreSQL tools or PgAdmin.		
 		
@@ -89,14 +92,14 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 	These are the steps for the case standby server is based on Termux running in and Android phone with only Spanish - US configured 
 	as language, and the database using en_US.utf8 collate.
 	
-	7.1) In standby server, by means of Android Settings App, add English - US language. This could solve some problems when accessing
+	8.1) In standby server, by means of Android Settings App, add English - US language. This could solve some problems when accessing
 		to standby database from primary server with PgAdmin, but not when using TCPTOOL.
 		
-	7.2) In primary server, backup soberano database:
+	8.2) In primary server, backup soberano database:
 	
 		pg_dump --file "soberanodb-backup.tar" --host "localhost" --port "5432" --username "postgres" --no-password --format=t --large-objects --inserts --column-inserts --verbose --quote-all-identifiers "soberano"
 	
-	7.3) In primary server, create a database (with the name soberano_es) with proper collate, encoding and template:
+	8.3) In primary server, create a database (with the name soberano_es) with proper collate, encoding and template:
 	
 		CREATE DATABASE soberano_es
 		    WITH
@@ -109,17 +112,17 @@ VERY IMPORTANT: Hot-standby server cannot use serializable isolation level. Inst
 		    CONNECTION LIMIT = -1
 		    IS_TEMPLATE = False;
 		    
-	7.4) Restore the backed up file (soberanodb-backup.tar) on soberano_es database.
+	8.4) Restore the backed up file (soberanodb-backup.tar) on soberano_es database.
 	
 		pg_restore --host "localhost" --port "5432" --username "postgres" --no-password --dbname "soberano_es" --single-transaction --verbose "soberanodb-backup.tar"
 		
-	7.5) Remove soberano database.
+	8.5) Remove soberano database.
 	
-	7.6) Rename soberano_es database to soberano.
+	8.6) Rename soberano_es database to soberano.
 	
-	7.7) Notice the cluster changes are replicated to the standby server cluster.
+	8.7) Notice the cluster changes are replicated to the standby server cluster.
 
-	7.8) Notice for the primary server TCPTOOL instance to be usable, it also needs the standby server collate install (for example, C, es_US.utf8, another).
+	8.8) Notice for the primary server TCPTOOL instance to be usable, it also needs the standby server collate install (for example, C, es_US.utf8, another).
 
 	
 

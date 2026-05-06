@@ -1,5 +1,7 @@
 Tested in Ubuntu Debian 13 (Trixie). Might need VPN.
 
+0) Coming from postgresql-physical-replication-standby-server-docker.txt
+
 1) Install Docker.
 	
 	# Remove Existing, Conflicting Packages 
@@ -26,48 +28,157 @@ Tested in Ubuntu Debian 13 (Trixie). Might need VPN.
 	docker compose version
 	sudo docker run hello-world
 	
-2) Install PostgreSQL.
+2) Pull PostgreSQL image.
 
 	# Pull the image
 	docker pull postgres:18
 	
 		# In case of network or bad connection, alternatively, you can load a saved image file. For example:
 		docker load -i /home/user/installers/docker_image_files/postgres-18.tar
-		docker images | grep postgres		
+		docker images | grep postgres
+		
+3) Create the host directory structure for PostgreSQL hot-stand server to run under a Docker container:
 
-	# Create a persistent volume. You can remove your container without losing your databases.
-	sudo docker volume create postgres_data_18
+	mkdir -p ~/pg_hot_standby/conf.d
+	cd ~/pg_hot_standby
 	
-	# Run the container ("pg18" is the container's name)
-	docker run -d \
-	  --name pg18 \
-	  -e POSTGRES_USER=postgres \
-	  -e POSTGRES_PASSWORD=postgres \
-	  -e POSTGRES_DB=postgres \
-	  -v postgres_data_18:/var/lib/postgresql \
-	  postgres:18
-	  
-	 # Check and write down the IP address used to communicate with host from Docker container.
-	 ifconfig -a
-	 
-3) Configure pg_hba.conf and postgresql.conf, as usual. They are located in /var/lib/docker/volumes/postgres_data_18/_data/18/docker/
+4) Create main postgresql.conf (contains include_dir):
 
-	For testing purpose, this pg_hba.conf content works:
+	nano ~/pg_hot_standby/postgresql.conf
+		
+	add this line in the file 
 	
-	# TYPE  DATABASE        USER            ADDRESS                 METHOD
-	local   all             all                                     trust
-	host    all             all             0.0.0.0/0               scram-sha-256
-	host    all             all             ::/0                    scram-sha-256
-	 
-4) Restart the Docker container containing the PostgreSQL instance ("pg18" is the container's name).
-
-	sudo docker restart pg18
+include_dir = '/etc/postgresql/conf.d'
+		
+	and save (ctrl-x, yes, enter)
 	
-5) Reset postgres user password.	
+5) Create the standby-specific settings (notice replication user and its password have to be changed):
 
-6) Find out the IP of the container ("pg18" is the container's name).
-
-	sudo docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pg18
+	nano ~/pg_hot_standby/conf.d/00-standby.conf
 	
-7) By means of PgAdmin or psql, verify PostgreSQL is running under the container.
+	add these lines to the file
+	
+hot_standby = on
+primary_conninfo = 'host=172.17.0.1 port=5432 user=tcptool_replicator password=12345'
+listen_addresses = '*'
+default_transaction_isolation = 'repeatable read'
 
+hot_standby_feedback = on
+
+max_connections = 4000 # max connections cannot be lower than primary servers'
+shared_buffers = 256MB
+timezone = 'America/Havana' # primary and standby servers must have same collate
+
+	and save (ctrl-x, yes, enter)
+		
+6) Create the standby pg_hba.conf configuration file (correct host docker IP):
+
+	nano ~/pg_hot_standby/pg_hba.conf
+	
+	add these lines to the file
+
+local all all trust
+host all all 127.0.0.1/32 trust
+host all all ::1/128 trust
+host all all 172.18.0.1/32 scram-sha-256
+		
+	and save (ctrl-x, yes, enter)
+		
+7) Create the docker-compose.yml file:
+
+	nano ~/pg_hot_standby/docker-compose.yml
+	
+	add these lines
+	
+services:
+  db:
+    image: postgres:18
+    container_name: pg_hot_standby
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      LANG: C.UTF-8
+      LC_COLLATE: C.UTF-8
+      LC_CTYPE: C.UTF-8
+    volumes:
+      - pg_hot_standby_data:/var/lib/postgresql
+      - ./conf.d/:/etc/postgresql/conf.d/:ro
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf:ro
+    command: >
+      postgres
+      -c config_file=/etc/postgresql/postgresql.conf
+      -c hba_file=/etc/postgresql/pg_hba.conf
+    # Optional: expose standby on a different host port
+    # ports:
+    #   - "5433:5432"
+
+volumes:
+  pg_hot_standby_data:
+    name: pg_hot_standby_data
+	
+	and save (ctrl-x, yes, enter)
+
+8) Create the persistent Docker volume:
+
+	docker volume create pg_hot_standby_data
+
+9) Prepare the volume with the correct PostgreSQL 18+ subdirectory:
+
+	docker run --rm -v pg_hot_standby_data:/var/lib/postgresql postgres:18 \
+  sh -c "mkdir -p /var/lib/postgresql/18/docker"
+
+10) Run pg_basebackup into the subdirectory using a temporary container:
+
+	# Start temporary container
+	docker run -d --name standby_init -v pg_hot_standby_data:/var/lib/postgresql postgres:18 sleep infinity
+	
+	# Assure pg_basebackup target directory is empty or does not exist
+	docker run --rm -v pg_hot_standby_data:/var/lib/postgresql postgres:18 \
+  sh -c "rm -rf /var/lib/postgresql/18/docker/* /var/lib/postgresql/18/docker/.[!.]*"  
+  
+  	#########################
+  	#IMPORTANT: This is needed depending on the collates of primary server.
+  	# Enter the container and install the required locale
+	# We need to install the 'locales' package which contains the 'locale-gen' command
+	
+	# LIKELY YOUR REQUIRED LOCALE IS ANOTHER ONE
+	
+	# Install the 'locales' package which provides 'locale-gen'
+	docker exec -i --user root standby_init bash -c "apt-get update && apt-get install -y locales && sed -i '/es_CU.UTF-8/s/^# //g' /etc/locale.gen && locale-gen es_CU.UTF-8"
+	
+	# Uncomment the line for 'es_CU.UTF-8' in /etc/locale.gen, making it active
+	docker exec -it --user root standby_init bash -c "sed -i '/es_CU.UTF-8/s/^# //g' /etc/locale.gen"
+	
+	# Generate the locale
+	docker exec -it --user root standby_init locale-gen es_CU.UTF-8 
+	#########################
+	
+	# Run pg_basebackup (adjust host ip, PGPASSWORD, host, user)
+	docker exec -e PGPASSWORD='12345' standby_init \
+	  pg_basebackup -h 172.18.0.1 -U tcptool_replicator \
+	  -D /var/lib/postgresql/18/docker \
+	  -Fp -Xs -R -v -P -w 	
+	
+	# Remove temporary container
+	docker stop standby_init && docker rm standby_init
+	
+11) Start the standby server:
+
+	docker compose up -d
+	
+12) Verify logs:
+
+	docker compose logs db --tail 30
+	
+13) Connect to standby (from host):
+
+	docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' pg_hot_standby
+	
+14) If you need to start over completely
+	
+	docker compose down -v
+	docker volume rm pg_hot_standby_data
+	rm -rf ~/pg_hot_standby
