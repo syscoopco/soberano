@@ -9,6 +9,8 @@ import co.syscoop.soberano.domain.untracked.Stock;
 public class StockGridModel extends SoberanoAbstractListModel<Object>
 {
 	private Integer warehouseId = 0;
+	private Integer acquirableMaterialId = 0;
+	private String amNameFilterStr = "";
 	
 	public StockGridModel() {
 		
@@ -16,12 +18,16 @@ public class StockGridModel extends SoberanoAbstractListModel<Object>
 		super("inventoryItemName", true, false);
 	}
 	
-	public StockGridModel(Integer warehouseId) {
+	public StockGridModel(Integer warehouseId,
+						Integer acquirableMaterialId,
+						String amNameFilterStr) {
 		
 		//the set is sorted by inventoryItemName alphabetically (ascending).
 		super("inventoryItemName", true, false);
 		
 		this.warehouseId = warehouseId;
+		this.setAcquirableMaterialId(acquirableMaterialId);
+		this.setAmNameFilterStr(amNameFilterStr);
 	}
 	
 	@Override
@@ -29,7 +35,7 @@ public class StockGridModel extends SoberanoAbstractListModel<Object>
 
 		try {
 			if (_size < 0)
-				_size = new Stock(warehouseId).getCount();
+				_size = new Stock(warehouseId, acquirableMaterialId, amNameFilterStr).getCount();
 			return _size;
 		} 
 		catch (SQLException e) 
@@ -44,7 +50,7 @@ public class StockGridModel extends SoberanoAbstractListModel<Object>
 		if (_cache == null || index < _beginOffset || index >= _beginOffset + _cache.size()) {
 			try {
 				_beginOffset = index;
-				_cache = (new Stock(warehouseId)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
+				_cache = (new Stock(warehouseId, acquirableMaterialId, amNameFilterStr)).getAll(_orderBy == null?"inventoryItemName":_orderBy,
 													_ascending?false:true, 
 													50, 
 													_beginOffset, 
@@ -56,5 +62,21 @@ public class StockGridModel extends SoberanoAbstractListModel<Object>
 			}
 		}
 		return _cache.get(index - _beginOffset);
+	}
+
+	public Integer getAcquirableMaterialId() {
+		return acquirableMaterialId;
+	}
+
+	public void setAcquirableMaterialId(Integer acquirableMaterialId) {
+		this.acquirableMaterialId = acquirableMaterialId;
+	}
+
+	public String getAmNameFilterStr() {
+		return amNameFilterStr;
+	}
+
+	public void setAmNameFilterStr(String amNameFilterStr) {
+		this.amNameFilterStr = amNameFilterStr;
 	}
 }

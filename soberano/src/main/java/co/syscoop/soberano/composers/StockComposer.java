@@ -1,7 +1,6 @@
 package co.syscoop.soberano.composers;
 
 import java.sql.SQLException;
-
 import org.zkoss.zk.ui.select.SelectorComposer;
 import org.zkoss.zk.ui.select.annotation.Listen;
 import org.zkoss.zk.ui.select.annotation.Wire;
@@ -19,26 +18,52 @@ public class StockComposer extends SelectorComposer {
 	private Combobox cmbWarehouse;
 	
 	@Wire
+	private Combobox cmbMaterial;
+	
+	@Wire
 	private Box boxDetails;
 	
-	private void processWarehouseSelection() throws SQLException {
+	private void processParamSelection() throws SQLException {
 		
 		StockGridModel stockGridModel = null;
-		if (cmbWarehouse.getSelectedItem() != null) {
+		if (cmbWarehouse.getSelectedItem() != null && cmbMaterial.getSelectedItem() != null) {
 			
-			//re-render the grid with the selected warehouse stock
-			stockGridModel = new StockGridModel(((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId());			
+			//re-render the grid with the selected warehouse and item
+			stockGridModel = new StockGridModel(((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+										((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
+										"");			
+		}
+		else if (cmbWarehouse.getSelectedItem() != null) {
+			
+			//re-render the grid with the selected warehouse
+			stockGridModel = new StockGridModel(((DomainObject) cmbWarehouse.getSelectedItem().getValue()).getId(),
+											0,
+											cmbMaterial.getText());
+		}
+		else if (cmbMaterial.getSelectedItem() != null) {
+			
+			//re-render the grid with the selected material
+			stockGridModel = new StockGridModel(0,
+											((DomainObject) cmbMaterial.getSelectedItem().getValue()).getId(),
+											"");
 		}
 		else {
-			//re-render the grid with the whole stock
-			stockGridModel = new StockGridModel();	
+			//re-render the grid with the whole stock, filtered by material name
+			stockGridModel = new StockGridModel(0, 
+											0,
+											cmbMaterial.getText());	
 		}
 		((Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid")).setModel(stockGridModel);
 	}
 	
 	@Listen("onChange = combobox#cmbWarehouse")
     public void cmbWarehouse_onChange() throws SQLException {
-		processWarehouseSelection();
+		processParamSelection();
+	}
+	
+	@Listen("onChange = combobox#cmbMaterial")
+    public void cmbMaterial_onChange() throws SQLException {
+		processParamSelection();
 	}
 	
 	/*
@@ -47,6 +72,6 @@ public class StockComposer extends SelectorComposer {
 	 */
 	@Listen("onClick = combobox#cmbWarehouse")
     public void cmbWarehouse_onClick() throws SQLException {
-		if (SpringUtility.underTesting()) processWarehouseSelection();
+		if (SpringUtility.underTesting()) processParamSelection();
 	}
 }

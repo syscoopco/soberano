@@ -39,7 +39,7 @@ public class SPIInitiator implements Initiator, InitiatorExt {
 			try {
 				try {dateShift.setText(shiftDateStr);} catch(Exception ex) {};
 				try {ZKUtility.setValueWOValidation(cmbWarehouse, warehouseId);} catch(Exception ex) {};
-				try {ZKUtility.setValueWOValidation(cmbWarehouse, acquirableMaterialId);} catch(Exception ex) {};
+				try {ZKUtility.setValueWOValidation(cmbMaterial, acquirableMaterialId);} catch(Exception ex) {};
 				try {chkWithOpeningStock.setChecked(withOpeningStock);} catch(Exception ex) {};
 				try {chkWithStockOnClosure.setChecked(withStockOnClosure);} catch(Exception ex) {};
 				try {chkWithChanges.setChecked(withChanges);} catch(Exception ex) {};

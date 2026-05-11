@@ -1,4 +1,6 @@
-v2.0.12 La Víbora Edition candidate release.
+v2.0.12 Calzada Edition
+
+New: In stock.zul now is possible to filter by inventory item.
 
 New: Instructions for deploying a Docker-based PostgreSQL instance for physical replication testing purpose.
 

@@ -1,0 +1,187 @@
+After deploying TCPTOOL prerrequisites, do this:
+
+0) Update the system:
+
+	sudo apt update -y && sudo apt upgrade -y
+
+1) Install MariaDB database service and PHP:
+
+	sudo apt install mariadb-server -y
+
+	sudo systemctl start mariadb && sudo systemctl enable mariadb
+
+	sudo systemctl status mariadb
+
+	sudo apt install php libapache2-mod-php php-cgi php-mysqli php-pear php-phpseclib php-mysql php-mbstring php-zip php-gd php-curl php-common -y
+
+	php -v
+
+2) Create Nextcloud Database and User:
+
+	sudo mysql
+
+	MariaDB> CREATE USER 'nextcloud'@'localhost' IDENTIFIED BY 'StrongPasswordHere';
+	MariaDB> CREATE DATABASE nextcloud;
+	MariaDB> GRANT ALL PRIVILEGES ON nextcloud.* TO 'nextcloud'@'localhost';
+	MariaDB> FLUSH PRIVILEGES;
+	MariaDB> EXIT;
+
+3) Download and Install Nextcloud (credits: https://www.rosehosting.com/blog/how-to-install-nextcloud-on-debian-13/):
+
+	cd /var/www/html
+
+	wget -c https://download.nextcloud.com/server/releases/latest.zip
+
+	unzip latest.zip
+
+	chown -R www-data:www-data nextcloud/
+
+	find . -type f -exec chmod 644 {} \;
+
+	find . -type d -exec chmod 755 {} \;
+
+	rm latest.zip
+
+	sudo touch /etc/apache2/sites-available/nextcloud.conf
+
+	nano /etc/apache2/sites-available/nextcloud.conf
+
+		Add these lines:
+
+<VirtualHost *:8081>
+ServerName yourdomainhere.com
+DocumentRoot /var/www/html/nextcloud
+<Directory /var/www/html/nextcloud>
+AllowOverride All
+</Directory>
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+		Save the changes with Ctrl-x, Yes, Enter
+
+	nano /etc/apache2/ports.conf
+
+		At the end, at the line:
+
+			Listen 8081
+
+		Save the changes with Ctrl-x, Yes, Enter
+
+	sudo a2enmod rewrite
+
+	sudo a2ensite nextcloud.conf
+
+	sudo a2dissite 000-default.conf
+	
+	apachectl -t
+
+	systemctl restart apache2
+
+	Verify Nextcloud is properly installed and listening by port 8081. Navigate to http://localhost:8081/
+
+4) Install OnlyOffice Document Server:
+
+	cd /root/tcptool-instaladores
+
+	wget -c https://github.com/ONLYOFFICE/DocumentServer/releases/download/v9.2.1/onlyoffice-documentserver_amd64.deb
+	
+	nano /etc/postgresql/18/main/pg_hba.conf
+		
+		correct the user postgres line corresponding to host: host    all             postgres             127.0.0.1/32            scram-sha-256
+		
+		add this line: host onlyoffice onlyoffice 127.0.0.1/32 trust
+		
+	sudo apt-get install rabbitmq-server
+	
+	sudo apt-get install nginx-extras
+	
+	echo onlyoffice-documentserver onlyoffice/ds-port select 8082 | sudo debconf-set-selections
+	
+	Run this block of commands (copy and paste the whole block in terminal, and press Enter):
+	
+	***block begin***
+	
+	mkdir -p -m 700 ~/.gnupg
+	curl -fsSL https://download.onlyoffice.com/GPG-KEY-ONLYOFFICE | gpg --no-default-keyring --keyring gnupg-ring:/tmp/onlyoffice.gpg --import
+	chmod 644 /tmp/onlyoffice.gpg
+	sudo chown root:root /tmp/onlyoffice.gpg
+	sudo mv /tmp/onlyoffice.gpg /usr/share/keyrings/onlyoffice.gpg
+	
+	***block end***
+	
+	echo "deb [signed-by=/usr/share/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" | sudo tee /etc/apt/sources.list.d/onlyoffice.list
+	
+	sudo apt-get update
+	
+	***IMPORTANT: ttf-mscorefonts-installer might require VPN***
+	***Install Windscribe***
+	sudo apt-get install ttf-mscorefonts-installer
+	
+	sudo -i -u postgres psql -c "CREATE USER onlyoffice WITH PASSWORD '<PASSWORD>';"
+	
+	sudo -i -u postgres psql -c "CREATE DATABASE onlyoffice OWNER onlyoffice;"
+
+	sudo dpkg --install ./onlyoffice-documentserver_*.deb IMPORTANT: In case this results in missing dependencies error, run 
+		
+		apt --fix-broken install	
+	
+	Deploy Admin Panel - Server Management:
+	
+		sudo systemctl start ds-adminpanel
+		
+		sudo systemctl enable ds-adminpanel
+	
+	Optionally, deploy examples:
+	
+		sudo systemctl start ds-example
+		
+		sudo systemctl enable ds-example
+		
+		browse to http://localhost:8082
+		
+	Configure Admin Panel -Server Management:
+	
+		Find the bootstrap token here: /var/log/onlyoffice/documentserver/adminpanel/out.log
+		
+		For regenerate the token, 
+		
+			sudo systemctl restart ds-adminpanel.service
+		
+		Browse http://localhost:8082/admin and setup the Admin Panel.	
+
+5) Integrate OnlyOffice Document Server to Nextcloud:
+
+	Logout and relogin in http://localhost:8081 with the admin account. Tested as root in Linux, and saving password in the browser upon request.
+	
+	Connect to Internet.
+	
+	Go to Featured apps http://localhost:8081/index.php/settings/apps/featured
+	
+	Find the row corresponding to ONLYOFFICE and push Download and enable. Wait for the process to end.
+	
+	Go to ONLYOFFICE app settings http://localhost:8081/index.php/settings/admin/onlyoffice
+	
+	Set ONLYOFFICE Docs address to http://localhost:8082
+	
+	Check Disable certificate verification.
+	
+	As secret key, paste the <SECRET> in this field of the file /etc/onlyoffice/documentserver/local.json:
+	
+		"secret": {
+			"browser": {
+			  "string": "<SECRET>"
+			}
+	
+	Expand Advanced server settings.
+	
+	Set ONLYOFFICE Doc address to OnlyOffice address http://localhost:8082
+	
+	Set Server address for internal request to Nextcloud server address http://localhost:8081, and push 
+	Save.
+	
+	In Common Settings, uncheck Enable e-mail notifications.
+
+	Push Save.
+	
+	

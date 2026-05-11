@@ -50,8 +50,7 @@ public class SPIComposer extends SelectorComposer {
 	public void doAfterCompose(Component comp) throws Exception {
     	
           super.doAfterCompose(comp);
-    }
-	
+    }	
 	
 	private void processParamSelection() throws SQLException {
 		
