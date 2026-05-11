@@ -12500,7 +12500,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "							  				ON unit.\"UnitHasUnitId\" = inventoryItem.\"This_is_measured_in_Unit_with_UnitHasUnitId\"\n"
 						+ "							  					AND unit.\"Language\" = lang\n"
 						+ "\n"
-						+ "										INNER JOIN soberano.\"AcquirableMaterial\" amat\n"
+						+ "										LEFT JOIN soberano.\"AcquirableMaterial\" amat\n"
 						+ "											ON amat.\"InventoryItemHasInventoryItemCode\" = inventoryItem.\"InventoryItemHasInventoryItemCode\"\n"
 						+ "												  \n"
 						+ "							  		WHERE --user can make decisions on inventory operations \n"

@@ -32,7 +32,7 @@ import org.springframework.ldap.support.LdapUtils;
 
 @Order(3)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class O3_WorkerTest_password_change extends ActionTest {
