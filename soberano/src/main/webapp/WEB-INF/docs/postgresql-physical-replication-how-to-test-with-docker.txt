@@ -1,4 +1,4 @@
-Tested in Ubuntu Debian 13 (Trixie). Might need VPN.
+Tested in Debian 13 (Trixie). Might need VPN.
 
 0) Coming from postgresql-physical-replication-standby-server-docker.txt
 

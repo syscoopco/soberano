@@ -1,0 +1,53 @@
+recipe:
+
+0) configure settings in postgresql.conf of publisher and subscriber, and restart both servers
+1) full db backup in the publisher
+2) transactional restore in the subscriber
+3) publication creation query in publisher
+4) subscription creation query in subscriber
+
+
+#################
+#PUBLISHER SIDE #
+#################
+
+max_level = logical
+max_wal_senders = 50		# max number of walsender processes
+							# (change requires restart)
+max_replication_slots = 50
+
+QUERIES:
+
+CREATE PUBLICATION soberano_pub
+    FOR ALL TABLES
+    WITH (publish = 'insert, update', publish_via_partition_root = false);
+
+
+for verification:
+
+SELECT * FROM pg_publication_tables;
+
+SELECT slot_name, slot_type, active FROM pg_replication_slots;
+
+##################
+#SUBSCRIBER SIDE #
+##################
+
+listen_addresses = '*'
+max_connections = 4000
+shared_buffers = 256MB
+wal_level = logical   # optional, but recommended
+max_logical_replication_workers = 10   # default is 4
+max_sync_workers_per_subscription = 5 # default is 2
+
+QUERIES:
+
+CREATE SUBSCRIPTION soberano_sub
+    CONNECTION 'host=<HOST'S IP ADDRESS> port=5432 dbname=soberano user=logical_rep_user password=<STRONG PASSWORD>'
+    PUBLICATION soberano_pub
+    WITH (copy_data = false);
+    
+for verification:
+
+SELECT srrelid::regclass, srsubstate FROM pg_subscription_rel where srsubstate = 'r';
+    

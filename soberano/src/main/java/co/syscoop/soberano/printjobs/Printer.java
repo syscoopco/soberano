@@ -329,7 +329,7 @@ public class Printer {
 	}
 	
 		
-	public void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod) throws UnsupportedEncodingException, IOException, Exception {
+	public void print(String textToPrint, String fileToPrintFullPath, String printerNameParam, String jobName, Boolean openCashDrawer, PrintMethod printMethod, Boolean _3LF) throws UnsupportedEncodingException, IOException, Exception {
 		
 		try {
 			if (!(printerNameParam.indexOf("ws://") == -1)) {
@@ -344,7 +344,11 @@ public class Printer {
 				}
 				//RAW
 				else {
-					printRaw(textToPrint, jobName);
+					if (printerProfile == null) {
+						printerProfile = new PrinterProfile();
+						printerProfile.setPrinterName(printerNameParam);
+					}						
+					printRaw(_3LF ? textToPrint + "--\n--\n--\n" : textToPrint, jobName);
 				}
 			}
 		}
@@ -445,8 +449,8 @@ public class Printer {
 		}
 	}
 	
-	public void printFile(String textToPrint, String fileFullPath, String jobName, Boolean openCashDrawer) throws UnsupportedEncodingException, IOException, Exception {
-		print(textToPrint, fileFullPath, printerProfile.getPrinterName(), jobName, openCashDrawer, printerProfile.getPrintMethod());
+	public void printFile(String textToPrint, String fileFullPath, String jobName, Boolean openCashDrawer, Boolean _3LF) throws UnsupportedEncodingException, IOException, Exception {
+		print(textToPrint, fileFullPath, printerProfile.getPrinterName(), jobName, openCashDrawer, printerProfile.getPrintMethod(), _3LF);
 	}
 	
 	public static void print(String textToPrint,
@@ -465,7 +469,7 @@ public class Printer {
 		else {
 			printer.createFile(textToPrint, fileToPrintFullPath);
 		}		
-		printer.printFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer);
+		printer.printFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer, _3LF);
 	}
 	
 	public static void createFile(Printer printer,
@@ -501,7 +505,7 @@ public class Printer {
 		}
 		catch(NoSuchBeanDefinitionException nsbdex) {			
 			createFile(printer, textToPrint, printerProfileId, fileToPrintFullPath, _3LF);
-			printer.printFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer);
+			printer.printFile(textToPrint, fileToPrintFullPath, printJobName, openCashDrawer, _3LF);
 		}
 		catch(Exception ex) {
 			throw ex;

@@ -191,10 +191,11 @@ public class ProduceButtonComposer extends SelectorComposer {
 					Printer.print(Translator.translate(textsToPrint.get(plId)),
 							productionLine,
 							fileToPrintFullPath + "-" + plId.toString(),
-							false /*true better to use computer printer 
-									settings to control feeds or blank 
-									lines printing at the end of page 
-									or document*/,
+							true /* instead of true, it would be better to use computer printer 
+									settings to control feeds or blank lines printing at the end
+									of page or document, BUT in RAW printing no such settings exist.
+									an improvement could be to add feed lines additions to printer 
+									profile configuration.*/,
 							false);
 				}
 			}

@@ -48,8 +48,10 @@ public class PrintButtonComposer extends SelectorComposer {
 			trackedObject.setId(orderId);
 			trackedObject.get();
 			
+			PrintableData pd = new Order(orderId).retrieveTicket();
+			
 			if (((Order) trackedObject).getStageId() == Stage.ONGOING) {
-				PrintableData pd = new Order(orderId).retrieveTicket();
+				
 				if (!pd.getTextToPrint().isEmpty()) {				
 					String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 													"records/tickets/" + 
@@ -80,12 +82,13 @@ public class PrintButtonComposer extends SelectorComposer {
 					//file to print path is passed in report param
 					PrinterProfile printerProfile = new PrinterProfile(trackedObject.getPrinterProfile());
 					printerProfile.get();
-					(new Printer()).print(null, 
+					(new Printer()).print(Translator.translate(pd.getTextToPrint()), 
 								new String(Base64.getDecoder().decode(report)), 
 								printerProfile.getPrinterName(), 
 								trackedObject.getClass().getSimpleName() + "_" + trackedObject.getId(),
 								false,
-								printerProfile.getPrintMethod());
+								printerProfile.getPrintMethod(),
+								false);
 				}
 				else {
 					report = trackedObject.getReport();
