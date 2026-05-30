@@ -26,6 +26,7 @@
 		<javax-ws-rs>2.1.1</javax-ws-rs>
 		<java-websocket>1.5.6</java-websocket>
 		<jersey>3.1.10</jersey>
+		<jsoup>1.22.2</jsoup>
 		<junit>5.13.3</junit>
 		<junitlauncher>1.13.3</junitlauncher>
 		<jxls-jexcel>1.0.9</jxls-jexcel>
@@ -41,6 +42,7 @@
 		<spring-ldap>1.3.1.RELEASE</spring-ldap>
 		<spring-ldap-core>2.4.1</spring-ldap-core>
 		<spring.version>6.2.6</spring.version>
+		<sqlite-jdbc>3.53.1.0</sqlite-jdbc>
 		<tomcat>11.0.7</tomcat>
 		<zats-mimic>10.0.0-jakarta</zats-mimic>
 		<zk.version>9.6.0.2</zk.version>
@@ -82,7 +84,7 @@
 	</pluginRepositories>
 	<dependencies>
 	
-		<!-- Apache dependencies -->
+		<!-- Apache -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -151,7 +153,7 @@
 		    <version>${fastexcel}</version>
 		</dependency>
 		
-		<!-- CGLIB dependencies -->
+		<!-- CGLIB -->
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
@@ -192,7 +194,7 @@
 		    <scope>provided</scope>
 		</dependency>
 		
-		<!-- Jasypt dependencies -->		
+		<!-- Jasypt -->		
 		<dependency>
 		    <groupId>org.jasypt</groupId>
 		    <artifactId>jasypt</artifactId>
@@ -218,7 +220,7 @@
 		    <version>${javaluator}</version>
 		</dependency>
 		
-		<!-- Javax dependencies -->
+		<!-- Javax -->
 <!-- 		<dependency> -->
 <!-- 		    <groupId>javax.servlet</groupId> -->
 <!-- 		    <artifactId>javax.servlet-api</artifactId> -->
@@ -238,7 +240,7 @@
 		    <version>${java-websocket}</version>
 		</dependency>	
 		
-		<!-- Jersey dependencies -->
+		<!-- Jersey -->
 		<dependency>
 		    <groupId>org.glassfish.jersey.containers</groupId>
 		    <artifactId>jersey-container-servlet</artifactId>
@@ -248,9 +250,16 @@
 		    <groupId>org.glassfish.jersey.inject</groupId>
 		    <artifactId>jersey-hk2</artifactId>
 		    <version>${jersey}</version>
-		</dependency>					
+		</dependency>
 		
-		<!-- JUnit dependencies -->
+		<!-- jsoup -->
+		<dependency>
+		    <groupId>org.jsoup</groupId>
+		    <artifactId>jsoup</artifactId>
+		    <version>${jsoup}</version>
+		</dependency>
+		
+		<!-- JUnit -->
 		<dependency>
 		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-engine</artifactId>
@@ -270,14 +279,14 @@
 			<scope>test</scope>
 		</dependency>	
 		
-		<!-- PostgreSQL dependencies -->
+		<!-- PostgreSQL -->
 		<dependency>
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 		    <version>${postgresql}</version>
 		</dependency>
 		
-		<!-- SLf4J dependencies -->
+		<!-- SLf4J -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
@@ -289,7 +298,7 @@
 		    <version>${slf4j.version}</version>
 		</dependency>
 		
-		<!-- Spring dependencies -->
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -348,7 +357,15 @@
 			<version>${spring.version}</version>
 		</dependency>
 		
-		<!-- Tomcat dependencies -->
+		<!-- SQLite JDBC -->
+		<dependency>
+		    <groupId>org.xerial</groupId>
+		    <artifactId>sqlite-jdbc</artifactId>
+		    <version>${sqlite-jdbc}</version>
+		    <scope>compile</scope>
+		</dependency>
+		
+		<!-- Tomcat -->
 		<dependency>
 		    <groupId>org.apache.tomcat</groupId>
 		    <artifactId>tomcat-juli</artifactId>
@@ -360,7 +377,7 @@
 		    <version>${tomcat}</version>
 		</dependency>
 						
-		<!-- ZK dependencies EE -->		
+		<!-- ZK EE -->		
 		<dependency>
 			<groupId>zk</groupId>
 			<artifactId>zcommon</artifactId>

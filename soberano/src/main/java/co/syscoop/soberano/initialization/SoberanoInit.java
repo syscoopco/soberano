@@ -1,5 +1,6 @@
 package co.syscoop.soberano.initialization;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import jakarta.servlet.ServletContext;
@@ -33,5 +34,15 @@ public class SoberanoInit implements WebAppInit {
 		//initialize printed allocations
 		wapp.setAttribute("printed_allocations", printedAllocations);
 		wapp.setAttribute("last_printed_grouped_allocations", lastPrintedGroupedAllocations);
+		
+		//path to the gtin database path
+		wapp.setAttribute("gtin_database_file_path", soberanoProperties.getGtinDatabaseFilePath());
+		
+		//register sqlite driver. important for reading form gtin database
+		try {
+			java.sql.DriverManager.registerDriver(new org.sqlite.JDBC());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

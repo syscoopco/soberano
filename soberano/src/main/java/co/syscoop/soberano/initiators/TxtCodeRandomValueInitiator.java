@@ -27,7 +27,7 @@ public class TxtCodeRandomValueInitiator implements Initiator, InitiatorExt {
 			}
 			txtCode.setValue((sidcodeg.getTenCharsRandomString("")));
 			
-			txtCode.focus();
+			txtCode.select();
 			Clients.scrollIntoView(comps[2].query("#boxDetails").query("#cmbCategory"));
 		}
 		catch(Exception ex) {

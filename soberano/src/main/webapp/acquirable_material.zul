@@ -2,7 +2,7 @@
 <zk>
 	<vbox id="vboxForm" hflex="1" vflex="1" visible="true" apply="co.syscoop.soberano.composers.AcquirableMaterialFormComposer">
 		<label value="${labels.caption.field.code}" sclass="Caption"></label>
-		<textbox id="txtCode" readonly="false" maxlength="30" hflex="1" placeholder="${labels.caption.field.codePlaceholder}" constraint="no empty"/>
+		<textbox id="txtCode" readonly="false" maxlength="30" hflex="1" placeholder="${labels.caption.field.codePlaceholder}" constraint="no empty" apply="co.syscoop.soberano.composers.ProducCodeTextboxComposer"/>
 		<separator></separator>
 		<label value="${labels.caption.field.name}" sclass="Caption"></label>
 		<textbox id="txtName" readonly="false" maxlength="255" hflex="1" placeholder="${labels.caption.field.namePlaceholder}" constraint="no empty"/>

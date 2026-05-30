@@ -328,6 +328,9 @@
 		<property name="vocabulary">
 			<value>${vocabulary}</value>
 		</property>
+		<property name="gtinDatabaseFilePath">
+			<value>${gtin.databaseFilePath}</value>
+		</property>
 	</bean>
 	<bean name="urlLogoutSuccessHandler" class="co.syscoop.soberano.spring.LogoutSuccessHandlerImpl"/>
 	

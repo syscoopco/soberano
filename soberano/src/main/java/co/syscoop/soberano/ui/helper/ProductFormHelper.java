@@ -107,7 +107,7 @@ public class ProductFormHelper extends TrackedObjectFormHelper {
 		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decPrice"), new BigDecimal(0.0));
 		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decReferencePrice"), new BigDecimal(0.0));
 		
-		((Textbox) incDetails.query("#txtCode")).focus();
+		((Textbox) incDetails.query("#txtCode")).select();
 		Clients.scrollIntoView(incDetails.query("#cmbCategory"));
 	}
 

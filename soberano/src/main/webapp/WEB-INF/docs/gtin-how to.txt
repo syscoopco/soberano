@@ -1,0 +1,83 @@
+1) The gtin database (csv file with more than 70MM of product's bar codes, names, categories, ...) is downloaded from
+	https://www.data.gouv.fr/fr/datasets/base-de-codes-barres-noms-et-categories-produits/
+	
+2) The uncompressed file's size is about 20GB
+	
+3) Access from TCPTOOL code is by means of SQLite.
+
+4) In Debian base distribution, SQLite is installed by executing:
+
+	sudo apt install sqlite3 libsqlite3-dev
+	
+5) Go to the directory containing the .csv file.
+
+6) Remove the csv header row for a cleaner import later:
+
+	tail -n +2 ./open4goods-gtin-dataset.csv > ./open4goods-gtin-dataset-no-header.csv 
+	
+7) Create the database:
+	
+	sqlite3 gtin.db
+	
+	This command creates a new database file named gtin.db in your current directory and drops you into the sqlite3 interactive shell. 
+	If the file already exists, it simply opens it.
+	
+8) In the sqlite3 shell, create the schema (only one relation):
+
+	CREATE TABLE products (
+	    gtin TEXT PRIMARY KEY,
+	    brand TEXT,
+	    model TEXT,
+	    name TEXT,
+	    last_updated TEXT,
+	    gs1_country TEXT,
+	    gtinType TEXT,
+	    offers_count INTEGER,
+	    min_price REAL,
+	    currency TEXT,
+	    categories TEXT,
+	    url TEXT
+	);
+	
+9) Before importing, run these commands in the sqlite3 shell, one by one, to drastically speed up the process for a large file:
+
+	PRAGMA journal_mode = OFF;
+	PRAGMA synchronous = 0;
+	PRAGMA cache_size = 1000000;
+	PRAGMA locking_mode = EXCLUSIVE;
+	PRAGMA temp_store = MEMORY;
+	BEGIN TRANSACTION;
+	
+10) First, tell SQLite that the input is CSV and then import the file (IT TAKES HOURS!!!):
+
+	.mode csv
+	.import ./open4goods-gtin-dataset-no-header.csv products
+	
+11) After the import finishes, commit the transaction (inside sqlite3 shell, run commands one by one)
+
+	COMMIT;
+	PRAGMA journal_mode = WAL;
+	ANALYZE;
+	
+12) Still, inside sqlite3 shell, create the index on gtin (IT TAKES HOURS!!!):
+
+	CREATE INDEX idx_gtin ON products(gtin);
+	
+13) Verify the index (inside sqlite3 shell):
+
+	.indices products
+
+	You should see idx_gtin in the output.
+	
+14) Exit the shell.
+
+15) IMPORTANT!! Despite the sqlite dependency is managed by means of Maven, it's required to copy the corresponding
+	jar (for example, sqlite-jdbc-3.53.1.0.jar) ro WEB-INF/lib folder 
+	
+16) Use main.products in hard coded queries: SELECT * FROM main.products WHERE gtin = ?;
+	
+	
+	
+
+	
+	

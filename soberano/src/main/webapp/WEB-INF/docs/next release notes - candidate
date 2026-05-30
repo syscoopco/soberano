@@ -1,5 +1,9 @@
 v2.0.13 Kohly Edition - Candidate release
 
+New: In new_product.zul and new_acquirable_material.zul, now is possible to scan a bar code and if the product is included in
+	open4goods-data-open database, or in https://go-upc.com/, the name field is filled out automatically. An Internet connection
+	is required for go-upc.
+
 Fix: With RAW printing mode, after collecting an order, the ticket encoded in the URL wasn't printed. Solved not using
 	that URL field to get the content to print
 

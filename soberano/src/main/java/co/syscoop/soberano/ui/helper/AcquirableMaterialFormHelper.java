@@ -60,7 +60,7 @@ public class AcquirableMaterialFormHelper extends TrackedObjectFormHelper {
 		ZKUtility.setValueWOValidation((Decimalbox) incDetails.query("#decMinimumInventoryLevel"), new BigDecimal(0.0));
 		ZKUtility.setValueWOValidation((Textbox) incDetails.query("#cmbUnit"), "");
 		
-		((Textbox) incDetails.query("#txtCode")).focus();
+		((Textbox) incDetails.query("#txtCode")).select();
 		Clients.scrollIntoView(incDetails.query("#txtCode"));
 	}
 
