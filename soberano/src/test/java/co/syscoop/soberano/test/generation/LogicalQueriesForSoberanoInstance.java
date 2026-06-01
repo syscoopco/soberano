@@ -7141,8 +7141,11 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "BEGIN\n"
 						+ "	--here, the item already exists in that warehouse since stock change was called before.\n"
 						+ "	SELECT \"This_is_called_with_Quantity\", \n"
-						+ "			CASE WHEN \"This_takes_value_from_Warehouse_with_WarehouseHasWarehouseId\" IS NULL THEN \"This_is_called_with_Value\"\n"
-						+ "				ELSE \"This_has_Value\" END,\n"
+						
+						+ "			\"This_is_called_with_Value\",\n"
+						
+						+ "			--CASE WHEN \"This_takes_value_from_Warehouse_with_WarehouseHasWarehouseId\" IS NULL THEN \"This_is_called_with_Value\"\n"
+						+ "			--	ELSE \"This_has_Value\" END,\n"
 						+ "			\"This_is_called_with_Warehouse_with_WarehouseHasWarehouseId\",\n"
 						+ "			\"This_is_called_with_InventoryItem_with_InventoryItemHasInventor\",\n"
 						+ "			\"This_is_triggered_by_ProcessRun_with_ProcessRunHasProcessRunId\"\n"
