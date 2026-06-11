@@ -11,5 +11,9 @@ Fix: In public class ProduceButtonComposer, back to the previous approach of pri
 	production allocation ticket. This is because in RAW printing (no CUPS) computer's printer settings aren't available 
 	to control that, and RAW is the most popular printing method. An improvement could be to add a setting to printer 
 	profile configuration controlling such behaviour.
+	
+Fix: Inventory recalculation by means of pl/pgsql FUNCTION fn_Stock_recalculateInventoryFrom was wrong for the cases when the quantity
+	in origin warehouse felt to zero or below. For example, an inventory operation moving a quantity of 1000 or more 1500 of an item with
+	a stock quantity in the origin of 1000.
 		
 User manual:
