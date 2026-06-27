@@ -61,7 +61,7 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 				
 				//in this point, if query result is positive, it's assumed it contains an order id,
 				//likely a new one created automatically
-				Executions.sendRedirect("/order.zul?id=" + orderId);
+				Executions.sendRedirect("/order.zul?id=" + qrwr.getResult());
 			}			
 			else if (!qrwr.getReport().isEmpty()) {
 				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
