@@ -55,9 +55,15 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 		try{
 			QueryResultWithReport qrwr = ((CashRegisterFormHelper) trackedObjectFormHelper).collect(boxDetails);
 			
-			if (!qrwr.getReport().isEmpty()) {
+			Integer orderId = ZKUtility.getObjectIdFromURLQuery("oid");
+			
+			if (qrwr.getResult() > 0) {
 				
-				Integer orderId = ZKUtility.getObjectIdFromURLQuery("oid");
+				//in this point, if query result is positive, it's assumed it contains an order id,
+				//likely a new one created automatically
+				Executions.sendRedirect("/order.zul?id=" + orderId);
+			}			
+			else if (!qrwr.getReport().isEmpty()) {
 				String fileToPrintFullPath = SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 												"records/tickets/" + 
 												"TICKET_" + orderId + ".pdf";
@@ -81,7 +87,7 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 					catch(NoSuchBeanDefinitionException nsbdex) {
 						
 						//open cash drawer
-						Printer.openCashDrawer(null, printerProfile.getPrinterName());
+						Printer.openCashDrawer(null, printerProfile);
 						
 						Printer.createFile(printer,
 											Translator.translate(qrwr.getReport()),

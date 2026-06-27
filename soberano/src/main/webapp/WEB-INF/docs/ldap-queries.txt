@@ -1,0 +1,20 @@
+ldapmodify -a -H ldap://127.0.0.1:10389   -D "uid=admin,ou=system" -w replace_by_admin_password << 'EOF'
+dn: uid=replace_by_entry_uid,ou=users,ou=system
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetorgPerson
+uid: replace_by_entry_uid
+sn: replace_by_entry_uid
+cn: replace_by_entry_uid
+userPassword: replace_by_entry_password
+EOF
+
+ldapmodify -H ldap://127.0.0.1:10389 -D "uid=admin,ou=system" -w replace_by_admin_password << 'EOF'
+dn: uid=replace_by_entry_uid,ou=users,ou=system
+changetype: delete      
+EOF             
+
+ldapwhoami -H ldap://127.0.0.1:10389 \
+  -D "uid=replace_by_entry_uid,ou=users,ou=system" \
+  -w 'replace_by_entry_password'

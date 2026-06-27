@@ -312,19 +312,49 @@ public class Printer {
 		escPos.close();
 	}
 	
-	public static void openCashDrawer(PrintService[] pss, String printerNameParam) throws IOException {
+	private static void rawlyOpenCashDrawer(String printerName) throws Exception {
+	    byte[] command = {0x1B, 0x70, 0, 50, (byte) 250}; // ESC p 0 t1 t2
+
+	    ExecutorService executor = Executors.newSingleThreadExecutor();
+	    Future<OutputStream> future = executor.submit(() -> new FileOutputStream(printerName));
+
+	    int TIMEOUT_SECONDS = 20;
+
+	    try (OutputStream out = future.get(TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
+	        out.write(command);
+	        out.flush();
+	        Thread.sleep(200); // let the drawer kick
+	    } catch (TimeoutException e) {
+	        future.cancel(true);
+	        throw new IOException("Printer not reachable: open() timed out after " + TIMEOUT_SECONDS + " seconds", e);
+	    } catch (InterruptedException e) {
+	        Thread.currentThread().interrupt();
+	        throw new IOException("Interrupted while opening printer", e);
+	    } catch (ExecutionException e) {
+	        throw new IOException("Failed to open printer device", e.getCause());
+	    } finally {
+	        executor.shutdownNow();
+	    }
+	}
+	
+	public static void openCashDrawer(PrintService[] pss, PrinterProfile printerProfile) throws Exception {
 		
-		PrintService[] printServices = null;
-		if (pss == null) {
-			printServices = PrintServiceLookup.lookupPrintServices(null, null);
+		if (printerProfile.getPrintMethod() == PrintMethod.RAW) {
+			rawlyOpenCashDrawer(printerProfile.getPrinterName());
 		}
 		else {
-			printServices = pss;
-		}			
-		for (PrintService printService : printServices) {					
-			if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerNameParam.replace("\\", "").trim().toLowerCase())) {
-				openCashDrawer(printService);
-            }
+			PrintService[] printServices = null;
+			if (pss == null) {
+				printServices = PrintServiceLookup.lookupPrintServices(null, null);
+			}
+			else {
+				printServices = pss;
+			}			
+			for (PrintService printService : printServices) {					
+				if (printService.getName().replace("\\", "").trim().toLowerCase().equals(printerProfile.getPrinterName().replace("\\", "").trim().toLowerCase())) {
+					openCashDrawer(printService);
+	            }
+			}
 		}
 	}
 	

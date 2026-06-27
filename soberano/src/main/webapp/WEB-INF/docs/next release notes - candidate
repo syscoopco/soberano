@@ -3,9 +3,17 @@ v2.0.13 Kohly Edition - Candidate release
 New: In new_product.zul and new_acquirable_material.zul, now is possible to scan a bar code and if the product is included in
 	open4goods-data-open database, or in https://go-upc.com/, the name field is filled out automatically. An Internet connection
 	is required for go-upc.
+	
+New: Upon collecting an order, if soberano."fn_Order_collect" returned a positive query result, it is assumed that number
+	is an order id, likely of a new one created automatically from within soberano."fn_Order_collect" for reducing the 
+	work load of the salesclerk/checker who wouldn't have to manually create a new order every time it close some. This 
+	feature would prevent to print the ticket after collecting. The change was introduced in method 
+	CashRegisterCollectButtonComposer.btnCollect_onClick
 
 Fix: With RAW printing mode, after collecting an order, the ticket encoded in the URL wasn't printed. Solved not using
 	that URL field to get the content to print
+	
+Fix: With RAW printing mode, upon collecting an order, the cash drawer was not opened. Solved it.
 
 Fix: In public class ProduceButtonComposer, back to the previous approach of printing three feed lines at the end of the 
 	production allocation ticket. This is because in RAW printing (no CUPS) computer's printer settings aren't available 
