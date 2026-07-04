@@ -1,5 +1,7 @@
 v2.0.13 Kohly Edition - Candidate release
 
+New: Custom report 5 added: IPV (Sales (ventas) Inventory (producción) Production (inventario) in English)
+
 New: In new_product.zul and new_acquirable_material.zul, now is possible to scan a bar code and if the product is included in
 	open4goods-data-open database, or in https://go-upc.com/, the name field is filled out automatically. An Internet connection
 	is required for go-upc.
