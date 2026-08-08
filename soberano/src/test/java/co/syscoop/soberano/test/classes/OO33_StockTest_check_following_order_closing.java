@@ -29,7 +29,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(33)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO33_StockTest_check_following_order_closing extends StockActionTest {

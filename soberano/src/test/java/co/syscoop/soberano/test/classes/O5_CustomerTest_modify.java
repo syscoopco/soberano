@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.CustomerForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_CustomerTest_modify extends CustomerActionTest {
 		

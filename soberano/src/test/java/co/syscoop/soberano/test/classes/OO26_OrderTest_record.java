@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(26)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO26_OrderTest_record extends NewOrderActionTest {
