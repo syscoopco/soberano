@@ -14,6 +14,7 @@ public class BarcodeValidator {
 
         // 2. Define the weight pattern based on the barcode length
         switch (length) {
+        	case 8:  // EAN-8
             case 12: // UPC-A
                 // For EAN-8 and UPC-A: even indices (0-based) get weight 3, odd get 1.
                 weights = new int[]{3, 1};
