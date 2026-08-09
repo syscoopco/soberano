@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.exception.ProcessRunningException;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class AcquirableMaterial extends InventoryItem { 
 
@@ -168,5 +170,67 @@ public class AcquirableMaterial extends InventoryItem {
 	@Override
 	public Integer print() throws SoberanoException {
 		return null;
+	}
+	
+	public final class AcquirableMaterialMapperWithId implements RowMapper<Object> {
+
+		public AcquirableMaterial mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				AcquirableMaterial domainObject = new AcquirableMaterial();
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					domainObject.setId(id);
+					domainObject.setName(rs.getString("domainObjectName"));
+				}
+				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAll(String typed, int nrows) throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("typed", typed);
+		qryParams.put("nrows", nrows);
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_AcquirableMaterial_getAll\"(:typed, :nrows, :loginname)", 
+					qryParams, 
+					new AcquirableMaterialMapperWithId());
+	}
+	
+	public final class AcquirableMaterialMapperWithStringId implements RowMapper<Object> {
+
+		public AcquirableMaterial mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				AcquirableMaterial domainObject = new AcquirableMaterial();
+				String id = rs.getString("domainObjectStringId");
+				if (!rs.wasNull()) {
+					domainObject.setStringId(id);
+					domainObject.setName(rs.getString("domainObjectName"));
+				}
+				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAllWithStringId(String typed, int nrows) throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("typed", typed);
+		qryParams.put("nrows", nrows);
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_AcquirableMaterial_getAllWithStringId\"(:typed, :nrows, :loginname)", 
+					qryParams, 
+					new AcquirableMaterialMapperWithStringId());
 	}
 }

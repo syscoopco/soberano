@@ -361,6 +361,17 @@ public class Product extends InventoryItem {
 					new ProductMapperWithStringId());
 	}
 	
+	public List<Object> getAllWithUnitForOrder(String typed, int nrows) throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("typed", typed);
+		qryParams.put("nrows", nrows);
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Product_getAllWithStringIdForOrder\"(:typed, :nrows, :loginname)", 
+					qryParams, 
+					new ProductMapperWithStringId());
+	}
+	
 	public List<Object> getWithUnitForOrder() throws SQLException {
 		
 		Map<String, Object> qryParams = new HashMap<String, Object>();

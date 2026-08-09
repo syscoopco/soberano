@@ -5,13 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
 import co.syscoop.soberano.domain.untracked.ContactData;
 import co.syscoop.soberano.domain.untracked.PrintableData;
 import co.syscoop.soberano.exception.SoberanoException;
+import co.syscoop.soberano.util.SpringUtility;
 
 public class Customer extends TrackedObject {
 	
@@ -284,5 +287,36 @@ public class Customer extends TrackedObject {
 
 	public void setNameFilterStr(String nameFilterStr) {
 		this.nameFilterStr = nameFilterStr;
+	}
+	
+	public final class CustomerMapperWithId implements RowMapper<Object> {
+
+		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+			
+			try {
+				Customer domainObject = new Customer();
+				int id = rs.getInt("domainObjectId");
+				if (!rs.wasNull()) {
+					domainObject.setId(id);
+					domainObject.setName(rs.getString("domainObjectName"));
+				}
+				return domainObject;
+			}
+			catch(Exception ex)
+			{
+				throw ex;
+			}			
+	    }
+	}
+	
+	public List<Object> getAll(String typed, int nrows) throws SQLException {
+		
+		Map<String, Object> qryParams = new HashMap<String, Object>();
+		qryParams.put("typed", typed);
+		qryParams.put("nrows", nrows);
+		qryParams.put("loginname", SpringUtility.loggedUser().toLowerCase());		
+		return query("SELECT * FROM soberano.\"fn_Customer_getAll\"(:typed, :nrows, :loginname)", 
+					qryParams, 
+					new CustomerMapperWithId());
 	}
 }

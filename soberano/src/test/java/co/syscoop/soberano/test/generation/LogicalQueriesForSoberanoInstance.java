@@ -5515,6 +5515,48 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_AcquirableMaterial_getAll\"(\n"
+						+ "	typed text,\n"
+						+ "	nrows integer,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT * FROM soberano.\"fn_AcquirableMaterial_getAll\"(loginname) sq\n"
+						+ "						WHERE LOWER(sq.\"domainObjectName\") LIKE '%' || LOWER(typed) || '%'\n"
+						+ "						ORDER BY \"domainObjectName\" ASC\n"
+						+ "						LIMIT nrows;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_AcquirableMaterial_getAllWithStringId\"(\n"
+						+ "	typed text,\n"
+						+ "	nrows integer,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectStringId\" character varying, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT * FROM soberano.\"fn_AcquirableMaterial_getAllWithStringId\"(loginname) sq\n"
+						+ "						WHERE LOWER(sq.\"domainObjectName\") LIKE '%' || LOWER(typed) || '%'\n"
+						+ "						ORDER BY \"domainObjectName\" ASC\n"
+						+ "						LIMIT nrows;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_InventoryItem_updateStockQuantities\"(\n"
 						+ "	item character varying,\n"
 						+ "	oldunit integer,\n"
@@ -13051,6 +13093,25 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						
 						
 						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_getAll\"(\n"
+						+ "	typed text, nrows integer, loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectName\" text) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT * FROM soberano.\"fn_Customer_getAll\"(loginname) sq\n"
+						+ "						WHERE LOWER(sq.\"domainObjectName\") LIKE '%' || LOWER(typed) || '%'\n"
+						+ "						ORDER BY \"domainObjectName\" ASC\n"
+						+ "						LIMIT nrows;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
 						"CREATE OR REPLACE FUNCTION soberano.\"fn_Customer_getCount\"(qnfilter text, loginname character varying)\n"
 						+ "    RETURNS integer\n"
 						+ "    LANGUAGE 'plpgsql'\n"
@@ -18627,6 +18688,27 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "											ON pout.\"InventoryItemHasInventoryItemCode\" = pout1.\"InventoryItemHasInventoryItemCode\"\n"
 						+ "												AND pout.\"proid\" = pout1.\"ProcessHasProcessId\") sq\n"
 						+ "						ORDER BY \"domainObjectName\" ASC;\n"
+						+ "	END;	\n"
+						+ "$BODY$;",
+						
+						
+						
+						"CREATE OR REPLACE FUNCTION soberano.\"fn_Product_getAllWithStringIdForOrder\"(\n"
+						+ "	typed text,\n"
+						+ "	nrows integer,\n"
+						+ "	loginname character varying)\n"
+						+ "    RETURNS TABLE(\"domainObjectId\" integer, \"domainObjectStringId\" character varying, \"domainObjectName\" text, unit integer, \"oneRunQuantity\" numeric) \n"
+						+ "    LANGUAGE 'plpgsql'\n"
+						+ "    COST 100\n"
+						+ "    VOLATILE PARALLEL UNSAFE\n"
+						+ "    ROWS 100\n"
+						+ "\n"
+						+ "AS $BODY$\n"
+						+ "	BEGIN\n"
+						+ "		RETURN QUERY SELECT * FROM soberano.\"fn_Product_getAllWithStringIdForOrder\"(loginname) sq\n"
+						+ "						WHERE LOWER(sq.\"domainObjectName\") LIKE '%' || LOWER(typed) || '%'\n"
+						+ "						ORDER BY \"domainObjectName\" ASC\n"
+						+ "						LIMIT nrows;\n"
 						+ "	END;	\n"
 						+ "$BODY$;",
 						
