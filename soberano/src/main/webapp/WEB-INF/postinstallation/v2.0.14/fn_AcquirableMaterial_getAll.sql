@@ -10,9 +10,14 @@ CREATE OR REPLACE FUNCTION soberano."fn_AcquirableMaterial_getAll"(
 
 AS $BODY$
 	BEGIN
-		RETURN QUERY SELECT * FROM soberano."fn_AcquirableMaterial_getAll"(loginname) sq
+		RETURN QUERY SELECT *
+						FROM (SELECT DISTINCT "AcquirableMaterialHasAcquirableMaterialId", 
+									"This_has_Name" || ' : ' || am."InventoryItemHasInventoryItemCode" "domainObjectName"
+									FROM soberano."AcquirableMaterial" am
+							 			INNER JOIN soberano."InventoryItem" ii
+											ON am."InventoryItemHasInventoryItemCode" = ii."InventoryItemHasInventoryItemCode") sq
 						WHERE LOWER(sq."domainObjectName") LIKE '%' || LOWER(typed) || '%'
-						ORDER BY "domainObjectName" ASC
+						ORDER BY sq."domainObjectName" ASC
 						LIMIT nrows;
 	END;	
 $BODY$;

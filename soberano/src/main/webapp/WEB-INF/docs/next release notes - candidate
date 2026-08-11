@@ -1,5 +1,12 @@
 v2.0.14 Kohly Edition - Candidate release
 
+New: At database level for the time being, a counter can be stocked by a cost center. So, FUNCTION soberano."fn_Order_make"(
+	orderid integer, itemid integer, description character varying, runs numeric, loginname character varying) was changed
+	in the way if the order's counter is stocked by a cost center, that cost center has precedence over the product's cost
+	center.
+
+New: EAN-8 barcode validation added.
+
 New: Some autodrop comboboxes optimized to not load the entire set of items from database. 
 
 New: Custom report 5 added: IPV (Sales (ventas) Inventory (producción) Production (inventario) in English)

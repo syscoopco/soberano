@@ -4,6 +4,7 @@ public class WebApplicationProperties {
 	
 	private String vocabulary = "soberano";
 	private String gtinDatabaseFilePath = "${catalina.home}/gtin.db";
+	private String cashRegisterPrintTicketWhenCollectingPayment = "false";
 
 	public String getVocabulary() {
 		return vocabulary;
@@ -19,5 +20,13 @@ public class WebApplicationProperties {
 
 	public void setGtinDatabaseFilePath(String gtinDatabaseFilePath) {
 		this.gtinDatabaseFilePath = gtinDatabaseFilePath;
+	}
+
+	public String getCashRegisterPrintTicketWhenCollectingPayment() {
+		return cashRegisterPrintTicketWhenCollectingPayment;
+	}
+
+	public void setCashRegisterPrintTicketWhenCollectingPayment(String cashRegisterPrintTicketWhenCollectingPayment) {
+		this.cashRegisterPrintTicketWhenCollectingPayment = cashRegisterPrintTicketWhenCollectingPayment;
 	}
 }

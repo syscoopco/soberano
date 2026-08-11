@@ -331,6 +331,9 @@
 		<property name="gtinDatabaseFilePath">
 			<value>${gtin.databaseFilePath}</value>
 		</property>
+		<property name="cashRegisterPrintTicketWhenCollectingPayment">
+			<value>${cashRegister.PrintTicketWhenCollectingPayment}</value>
+		</property>
 	</bean>
 	<bean name="urlLogoutSuccessHandler" class="co.syscoop.soberano.spring.LogoutSuccessHandlerImpl"/>
 	

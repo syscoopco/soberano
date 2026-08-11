@@ -13,9 +13,11 @@ import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.beans.IDocumentToPrint;
+import co.syscoop.soberano.beans.WebApplicationProperties;
 import co.syscoop.soberano.database.relational.QueryResultWithReport;
 import co.syscoop.soberano.domain.tracked.Order;
 import co.syscoop.soberano.domain.tracked.PrinterProfile;
+import co.syscoop.soberano.domain.tracked.TrackedObject;
 import co.syscoop.soberano.exception.ConfirmationRequiredException;
 import co.syscoop.soberano.exception.DebtorRequiredException;
 import co.syscoop.soberano.exception.DisabledCurrencyException;
@@ -68,12 +70,18 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 												"records/tickets/" + 
 												"TICKET_" + orderId + ".pdf";
 				try {
-					//20240726: Barbosa requested not to print ticket on collecting. Better to add a global setting 
-					//enabling / disabling this. This line was commented for just creating the file to print and 
-					//navigating to the (just closed) order's management form.
-					//Printer.print(Translator.translate(qrwr.getReport()), qrwr.getPrinterProfileId(), fileToPrintFullPath, "TICKET_" + orderId, false);
+					WebApplicationProperties soberanoProperties = (WebApplicationProperties) SpringUtility.applicationContext().getBean("soberanoProperties");
+					if (soberanoProperties.getCashRegisterPrintTicketWhenCollectingPayment().equals("true")) {
+						
+						TrackedObject trackedObject = new Order(orderId);
+						trackedObject.get();
+						Printer.print(Translator.translate(qrwr.getReport()),
+								trackedObject, 
+								fileToPrintFullPath,
+								false,
+								false);
+					}
 					
-					/*20240727: replace this block to print from here (cash register form after order collecting)*/
 					PrinterProfile printerProfile = new PrinterProfile(qrwr.getPrinterProfileId());
 					printerProfile.get();
 					Printer printer = new Printer(printerProfile);
@@ -103,7 +111,6 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 						Executions.sendRedirect("/order.zul?id=" + orderId + 
 								"&report=" + Base64.getEncoder().encodeToString(fileToPrintFullPath.getBytes()));
 					}
-					/*****/
 				}
 				catch(Exception ex) {
 					ExceptionTreatment.logAndShow(ex, 
@@ -111,12 +118,7 @@ public class CashRegisterCollectButtonComposer extends CashRegisterTrackedObject
 							Labels.getLabel("messageBoxTitle.Error"),
 							Messagebox.ERROR);
 				}				
-			}				
-			/*20240726: Uncomment to stay in cash register form after order collecting. 
-			Executions.sendRedirect("/cash_register.zul?id=" + 
-					((Intbox) boxDetails.query("#intSelectedCashRegister")).getValue().toString() + "&oid=" +
-					((Intbox) boxDetails.query("#intSelectedOrder")).getValue().toString());
-			*/
+			}
 		}
 		catch(ConfirmationRequiredException ex) {
 			return;
