@@ -100,7 +100,11 @@ public class CashRegisterFormHelper extends BusinessActivityTrackedObjectFormHel
 			}
 			
 			if (order.getCustomer() != 0) {
-				ZKUtility.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
+				//ZKUtility.setValueWOValidation((Combobox) hboxCustomer.query("#cmbCustomer"), order.getCustomer());
+				
+				Combobox cmbCustomer = (Combobox) hboxCustomer.query("#cmbCustomer");
+				cmbCustomer.setText(order.getCustomerStr());
+				ZKUtility.selectComboitemByLabel(cmbCustomer, order.getCustomerStr());
 			}
 			if (order.getStageId() == Stage.ONGOING || order.getStageId() == Stage.CLOSED_NOT_COLLECTED) {
 				wndContentPanel.query("#hboxToCollect").setVisible(true);

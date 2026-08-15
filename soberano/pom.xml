@@ -370,11 +370,13 @@
 		    <groupId>org.apache.tomcat</groupId>
 		    <artifactId>tomcat-juli</artifactId>
 		    <version>${tomcat}</version>
+		    <scope>provided</scope>
 		</dependency>
 		<dependency>
 		    <groupId>org.apache.tomcat</groupId>
 		    <artifactId>tomcat-websocket</artifactId>
 		    <version>${tomcat}</version>
+		    <scope>provided</scope>
 		</dependency>
 						
 		<!-- ZK EE -->		

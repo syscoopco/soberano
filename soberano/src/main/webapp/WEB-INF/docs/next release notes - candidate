@@ -1,13 +1,21 @@
-v2.0.14 Kohly Edition - Candidate release
+v2.1 ViBu Edition - 
+
+New: Disabled automatically empty cash register. It only works with single cash register environment.
+
+New: 5 cash registers are deployed by default. So, RULE_EXISTENCE_4 was disabled: This trigger is not created
+	tg_CashRegister_before_insert_RULE_EXISTENCE_4
+
+New: At database level for the time being, a counter can be configured for the payments originating in it to be deposited
+	in a specified cash register, and the corresponding changes to be withdrawn from it as well.
 
 New: At database level for the time being, a counter can be stocked by a cost center. So, FUNCTION soberano."fn_Order_make"(
 	orderid integer, itemid integer, description character varying, runs numeric, loginname character varying) was changed
 	in the way if the order's counter is stocked by a cost center, that cost center has precedence over the product's cost
 	center.
 
-New: EAN-8 barcode validation added.
+New: EAN-8 and EAN-12 barcode validation added.
 
-New: Some autodrop comboboxes optimized to not load the entire set of items from database. 
+New: Some autodrop comboboxes optimized to not load the entire set of items from database. For example: cmbItemToOrder and cmbCustomer.
 
 New: Custom report 5 added: IPV (Sales (ventas) Inventory (producción) Production (inventario) in English)
 

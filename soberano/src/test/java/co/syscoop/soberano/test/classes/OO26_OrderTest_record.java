@@ -30,7 +30,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(26)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO26_OrderTest_record extends NewOrderActionTest {
@@ -97,77 +97,77 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 		}
 	}
 	
-	@Test
-	@Order(2)
-	final void testCase2() {
-		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
-		newOrderForm = new NewOrderForm(desktop,
-										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
-										desktop.query("grid").query("#grdCounters").as(Grid.class),
-										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
-										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
-		try {
-			newOrderForm.setComponentValue(newOrderForm.getTxtLabel(), "label1");
-			
-			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
-			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
-			
-			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
-			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
-			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
-			cmbCustomerAgent.click();
-			
-			clickOnRecordButton(desktop);
-			//uncomment if confirmation is required clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			testNotEnoughRightsException(ex);
-		}
-	}
+//	@Test
+//	@Order(2)
+//	final void testCase2() {
+//		SpringUtility.setLoggedUserForTesting("user22@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
+//		newOrderForm = new NewOrderForm(desktop,
+//										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+//										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+//										desktop.query("grid").query("#grdCounters").as(Grid.class),
+//										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
+//										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
+//		try {
+//			newOrderForm.setComponentValue(newOrderForm.getTxtLabel(), "label1");
+//			
+//			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
+//			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
+//			
+//			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
+//			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
+//			cmbCustomerInputAgent.typing("c2mod");
+//			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
+//			cmbCustomerAgent.click();
+//			
+//			clickOnRecordButton(desktop);
+//			//uncomment if confirmation is required clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			testNotEnoughRightsException(ex);
+//		}
+//	}
 	
-	@Test
-	@Order(3)
-	final void testCase3() {
-		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
-		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
-		newOrderForm = new NewOrderForm(desktop,
-										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
-										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
-										desktop.query("grid").query("#grdCounters").as(Grid.class),
-										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
-										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
-		try {
-			newOrderForm.setComponentValue(newOrderForm.getTxtLabel(), "label1");
-			
-			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
-			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
-			
-			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
-			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
-			cmbCustomerInputAgent.typing("c2mod");
-			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
-			cmbCustomerAgent.click();
-			
-			clickOnRecordButton(desktop);
-			//uncomment if confirmation is required clickOnRecordButton(desktop);
-			
-			fail("None exception was thrown when it should.");
-		}
-		catch(AssertionFailedError ex) {
-			fail(ex.getMessage());
-		}
-		catch(Throwable ex) {
-			testNotEnoughRightsException(ex);
-		}
-	}
+//	@Test
+//	@Order(3)
+//	final void testCase3() {
+//		SpringUtility.setLoggedUserForTesting("user6@soberano.syscoop.co");
+//		DesktopAgent desktop = Zats.newClient().connect("/new_order.zul");
+//		newOrderForm = new NewOrderForm(desktop,
+//										desktop.query("textbox").query("#txtLabel").as(Textbox.class),
+//										desktop.query("textbox").query("#cmbCustomer").as(Combobox.class),
+//										desktop.query("grid").query("#grdCounters").as(Grid.class),
+//										desktop.query("south").query("button").query("#btnRecord").as(Button.class),
+//										desktop.query("grid").getNextSibling().query("include").query("#grd").as(Grid.class));
+//		try {
+//			newOrderForm.setComponentValue(newOrderForm.getTxtLabel(), "label1");
+//			
+//			desktop.query("checkbox").query("#chkmc2").as(CheckAgent.class).check(false);
+//			desktop.query("checkbox").query("#chkmc4").as(CheckAgent.class).check(true);	
+//			
+//			ComponentAgent cmbCustomerAgent = desktop.query("textbox").query("#cmbCustomer");
+//			InputAgent cmbCustomerInputAgent = cmbCustomerAgent.as(InputAgent.class);
+//			cmbCustomerInputAgent.typing("c2mod");
+//			newOrderForm.setComponentValue(newOrderForm.getCmbCustomer(), Integer.valueOf(1002));
+//			cmbCustomerAgent.click();
+//			
+//			clickOnRecordButton(desktop);
+//			//uncomment if confirmation is required clickOnRecordButton(desktop);
+//			
+//			fail("None exception was thrown when it should.");
+//		}
+//		catch(AssertionFailedError ex) {
+//			fail(ex.getMessage());
+//		}
+//		catch(Throwable ex) {
+//			testNotEnoughRightsException(ex);
+//		}
+//	}
 	
 	@Test
 	@Order(4)

@@ -35,17 +35,15 @@ AS $BODY$
 	BEGIN
 		--default returning value. user has no right.
 		qryResult := -1;
-
-		--if the counter is stocked by a cost center, that cost center has precedence over the
-		--cost center where the product is usually produced.
-		--IMPORTANT: the cost center doesn't change in case the counter changes (order movement)
-		SELECT "This_is_stocked_by_CostCenter_with_CostCenterHasCostCenterId"
+--if the counter is stocked by a cost center, that cost center has precedence over the
+--cost center where the product is usually produced.
+--IMPORTANT: the cost center doesn't change in case the counter changes (order movement)
+SELECT "This_is_stocked_by_CostCenter_with_CostCenterHasCostCenterId"
 			FROM soberano."Counter" counter
 				INNER JOIN soberano."CounterOrder" counterorder
-					ON counter."CounterHasCounterId" = counterorder."counterorder"
+					ON counter."CounterHasCounterId" = counterorder."CounterHasCounterId"
 						AND counterorder."OrderHasOrderId" = orderid
-			INTO costCenter;
-		
+			INTO costCenter;		
 		SELECT proc.*, 
 				CASE WHEN inputitemsarr IS NULL THEN ARRAY[]::character varying[] ELSE inputitemsarr END,
 				array(select unnest(inputquantitiesarr) * runs),
@@ -57,9 +55,7 @@ AS $BODY$
 			FROM (SELECT objectdata."This_is_identified_by_EntityTypeInstance_id", 
 								objectdata."This_is_identified_by_Label",
 								process."ProcessHasProcessId",
-								CASE WHEN costCenter IS NULL 
-										THEN "This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe"
-										ELSE costCenter END,
+								"This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe",
 								decision."DecisionHasDecisionId",
 				  				process."This_has_Name"
 							FROM soberano."Order" objectdata

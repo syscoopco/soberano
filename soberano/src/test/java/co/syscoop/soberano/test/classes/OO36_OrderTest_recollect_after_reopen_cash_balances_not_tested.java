@@ -31,7 +31,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(36)
 
-@Disabled
+//@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO36_OrderTest_recollect_after_reopen_cash_balances_not_tested extends CashRegisterOperationActionTest {

@@ -21,7 +21,7 @@ import co.syscoop.soberano.test.helper.CostCenterForm;
 
 @Order(9)
 
-@Disabled
+//@Disabled
 
 class O9_CostCenterTest_modify extends CostCenterActionTest {
 

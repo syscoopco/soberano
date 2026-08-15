@@ -11,7 +11,7 @@ In production, customers.zul is used as it uses a grid that is more proper for t
 <zk>
 	<include src="/style.zul"/>
 	<label self="@define(pageTitle)" value="${labels.pageCustomers.WindowTitle}" sclass="PageTitle"/>
-	<hbox self="@define(showingAllPanelHeader)" width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel')">
+	<hbox self="@define(showingAllPanelHeader)" width="100%" align="center" apply="org.zkoss.bind.BindComposer" viewModel="@id('vm') @init('co.syscoop.soberano.view.viewmodel.CustomerSelectionViewModel_testing')">
 		<combobox id="cmbIntelliSearch" model="@load(vm.model)" autodrop="true" autocomplete="true" hflex="1" placeholder="${labels.placeholder.search}" apply="co.syscoop.soberano.composers.CustomerViewModelComposer">
 			<template name="model">
 				<comboitem label="@load(each.name)" value="@load(each)" height="20px">

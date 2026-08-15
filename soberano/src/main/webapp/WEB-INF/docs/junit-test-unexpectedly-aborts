@@ -14,3 +14,26 @@
 		bash
 
 		sudo sysctl -w net.ipv4.ip_local_port_range="1024 65000"
+		
+	Or:
+	
+	echo 'net.ipv4.ip_local_port_range = 1024 65535' | sudo tee /etc/sysctl.d/99-zats-ports.conf
+	
+	echo -e 'net.ipv4.tcp_tw_reuse = 1\nnet.ipv4.tcp_fin_timeout = 15' | sudo tee -a /etc/sysctl.d/99-zats-ports.conf
+	
+	sudo sysctl --system
+	
+	sysctl net.ipv4.ip_local_port_range
+	
+	Or:
+	
+	Hard code a delay after the first Zats.init() call for letting Jetty to take its time:
+	
+	Zats.init("./src/main/webapp");
+		
+	// Give embedded Jetty and background contexts a moment to fully stabilize
+    Thread.sleep(30000); 
+    
+    Or:
+    
+    Add a breakpoint to the first Zats.init() call and just step over and then go on.
