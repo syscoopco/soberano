@@ -361,7 +361,7 @@ AS $BODY$
 												currencies,
 												amounts,
 												notes,
-												'soberano.user.top');
+												loginname);
 				
 					changeAmount := totalInputAmount - toCollectAmount;
 
@@ -375,7 +375,7 @@ AS $BODY$
 																currencies,
 																withdrawalAmountsArray,
 																notes,
-																'soberano.user.top');
+																loginname);
 					END IF;
 					SELECT * FROM soberano."fn_Order_getTicket"(orderid, totalInputAmount, changeAmount, lang, 'soberano.user.top') INTO qryReport;					
 				END IF;

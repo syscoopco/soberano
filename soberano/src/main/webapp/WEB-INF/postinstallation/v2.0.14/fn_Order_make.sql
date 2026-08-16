@@ -55,7 +55,9 @@ SELECT "This_is_stocked_by_CostCenter_with_CostCenterHasCostCenterId"
 			FROM (SELECT objectdata."This_is_identified_by_EntityTypeInstance_id", 
 								objectdata."This_is_identified_by_Label",
 								process."ProcessHasProcessId",
-								"This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe",
+								CASE WHEN costCenter IS NULL 
+										THEN "This_is_usually_produced_in_CostCenter_with_CostCenterHasCostCe"
+										ELSE costCenter END,
 								decision."DecisionHasDecisionId",
 				  				process."This_has_Name"
 							FROM soberano."Order" objectdata
