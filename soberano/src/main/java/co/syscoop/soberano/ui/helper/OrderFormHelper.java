@@ -53,6 +53,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 	
 	private static HashMap<String, Treeitem> parentProcessRunTreeitems = new HashMap<String, Treeitem>();
 	
+	//needed for clearing the static field to avoid memory leak
+	public void clearParentProcessRunTreeitems() {
+		parentProcessRunTreeitems.clear();
+	}
+	
 	@Override
 	public Integer recordFromForm(Box boxDetails) throws Exception {
 		return null;

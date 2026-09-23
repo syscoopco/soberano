@@ -41,5 +41,9 @@ public class BillButtonComposer extends BusinessActivityTrackedObjectButtonCompo
 			e.printStackTrace();
 			e.fillInStackTrace();
 		}
+		finally {
+			//clear the parent process run items map (static field) to avoid memory leaks
+			((OrderFormHelper) super.trackedObjectFormHelper).clearParentProcessRunTreeitems();
+		}
 	}
 }

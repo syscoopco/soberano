@@ -38,5 +38,9 @@ public class BillFromFastOrderingWindowButtonComposer extends BusinessActivityTr
 			e.printStackTrace();
 			e.fillInStackTrace();
 		}
+		finally {
+			//clear the parent process run items map (static field) to avoid memory leaks
+			((OrderFormHelper) super.trackedObjectFormHelper).clearParentProcessRunTreeitems();
+		}
 	}
 }

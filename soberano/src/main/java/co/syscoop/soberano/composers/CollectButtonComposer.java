@@ -32,5 +32,9 @@ public class CollectButtonComposer extends BusinessActivityTrackedObjectButtonCo
 		} catch (Exception e) {
 			Executions.sendRedirect("/cash_register.zul?oid=" + ((Intbox) boxDetails.query("#intObjectId")).getValue().toString() + "&fast=false");
 		}
+		finally {
+			//clear the parent process run items map (static field) to avoid memory leaks
+			((OrderFormHelper) super.trackedObjectFormHelper).clearParentProcessRunTreeitems();
+		}
 	}
 }

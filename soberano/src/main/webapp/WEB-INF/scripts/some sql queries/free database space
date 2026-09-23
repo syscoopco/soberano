@@ -1,0 +1,19 @@
+--getting table sizes in bytes
+select schemaname, relname, pg_size_pretty(pg_total_relation_size(relid))
+	from pg_stat_user_tables
+	order by pg_total_relation_size(relid) desc;
+
+--delete orders older than 7 days
+DELETE FROM metamodel."EntityTypeInstance" eti
+				USING soberano."Order" ord
+				WHERE ord."This_is_identified_by_EntityTypeInstance_id" = eti."EntityTypeInstanceHasEntityTypeInstanceId"
+					AND now()::date - "This_is_created_at_Timestamp"::date > 7;
+
+--delete process runs older than 7 days
+DELETE FROM metamodel."EntityTypeInstance" eti
+				USING soberano."ProcessRun" ord
+				WHERE ord."This_is_identified_by_EntityTypeInstance_id" = eti."EntityTypeInstanceHasEntityTypeInstanceId"
+					AND now()::date - "This_is_created_at_Timestamp"::date > 7;
+					
+--run full autovacuum
+VACUUM (FULL, ANALYZE, VERBOSE);

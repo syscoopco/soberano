@@ -1,0 +1,23 @@
+In applicationContext.xml:
+
+<!-- authenticated access -->
+<security:intercept-url pattern="/*" access="permitAll()"/>
+<security:intercept-url pattern="/job_orders/*" access="permitAll()"/>
+<security:intercept-url pattern="/receipts/*" access="permitAll()"/>
+<security:intercept-url pattern="/reports/*" access="permitAll()"/>
+<security:intercept-url pattern="/zkau/view/**" access="permitAll()"/>
+
+In database:
+
+INSERT INTO metamodel."UserIsAssignedToResponsibilityForAuthority"(
+	"UserHasUserId", "ResponsibilityHasResponsibilityId", "AuthorityHasAuthorityId")
+	SELECT 2, "ResponsibilityHasResponsibilityId", 1 FROM metamodel."UserIsAssignedToResponsibilityForAuthority"
+		WHERE "UserHasUserId" = 1
+		ORDER BY "UserHasUserId" ASC, "ResponsibilityHasResponsibilityId" ASC, "AuthorityHasAuthorityId" ASC;
+
+INSERT INTO soberano."Worker"("This_has_LoginName")
+	VALUES ('anonymoususer');
+	
+UPDATE metamodel."User"
+	SET "This_has_LoginName" = 'anonymoususer'
+	WHERE "UserHasUserId" = 2;
