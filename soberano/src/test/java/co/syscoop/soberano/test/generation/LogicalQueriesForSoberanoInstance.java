@@ -7550,7 +7550,7 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "			itemValue numeric NOT NULL, \n"
 						+ "			item character varying(30) COLLATE pg_catalog.\"default\" NOT NULL,\n"
 						+ "		    CONSTRAINT \"PK_stockValuesBeforeFallingToOrBelowZero\" PRIMARY KEY (warehouse, item)\n"
-						+ "		);\n"
+						+ "		) ON COMMIT DROP;\n"
 						+ "		\n"
 						+ "		--rerun the item's stock changes (inventory history) from start time\n"
 						+ "		FOR stockChangeRecord IN SELECT \"StockChangeHasStockChangeId\",\n"
@@ -7647,7 +7647,8 @@ public class LogicalQueriesForSoberanoInstance extends LogicalQueriesBatch {
 						+ "\n"
 						+ "				END IF;\n"
 						+ "			END IF;\n"
-						+ "		END LOOP;		\n"
+						+ "		END LOOP;\n"
+						+ "		DROP TABLE \"stockValuesBeforeFallingToOrBelowZero\";\n"
 						+ "	END;\n"
 						+ "$BODY$;",
 						

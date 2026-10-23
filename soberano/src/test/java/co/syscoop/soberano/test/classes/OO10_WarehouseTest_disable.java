@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(10)
 
-@Disabled
+//@Disabled
 
 class OO10_WarehouseTest_disable extends WarehouseActionTest{
 

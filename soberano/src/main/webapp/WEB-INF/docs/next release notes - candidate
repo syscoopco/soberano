@@ -1,4 +1,4 @@
-v2.1 ViBu Edition - Candidate Release
+v2.1.1 ViBu Edition - Candidate Release
 
 New: Disabled automatically empty cash register. It only works with single cash register environment.
 
@@ -28,6 +28,9 @@ New: Upon collecting an order, if soberano."fn_Order_collect" returned a positiv
 	work load of the salesclerk/checker who wouldn't have to manually create a new order every time it close some. This 
 	feature would prevent to print the ticket after collecting. The change was introduced in method 
 	CashRegisterCollectButtonComposer.btnCollect_onClick
+	
+Fix: In FUNCTION fn_Stock_recalculateInventoryFrom, the temporary table stockValuesBeforeFallingToOrBelowZero
+	was not dropped causing errors. Now it's explicitly dropped on return and on commit.
 	
 Fix: Memory leak solved by clearing the field OrderFormHelper.parentProcessRunTreeitems when billing and collecting an order:
 		
