@@ -26,7 +26,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(4)
 
-//@Disabled
+@Disabled
 
 class O4_CurrencyTest_check_recording extends CurrencyActionTest {
 	

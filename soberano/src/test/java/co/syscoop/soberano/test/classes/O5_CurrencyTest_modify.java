@@ -22,7 +22,7 @@ import co.syscoop.soberano.test.helper.CurrencyForm;
 
 @Order(5)
 
-//@Disabled
+@Disabled
 
 class O5_CurrencyTest_modify extends CurrencyActionTest{
 

@@ -9,6 +9,7 @@ public class MaterialAcquisition {
 	private BigDecimal quantity = new BigDecimal(0.0);	
 	private AcquirableMaterial material = new AcquirableMaterial();	
 	private Unit unit = new Unit();
+	private Warehouse warehouse = new Warehouse();
 
 	public BigDecimal getQuantity() {
 		return quantity;
@@ -40,5 +41,13 @@ public class MaterialAcquisition {
 
 	public void setExpense(AcquisitionExpense expense) {
 		this.expense = expense;
+	}
+
+	public Warehouse getWarehouse() {
+		return warehouse;
+	}
+
+	public void setWarehouse(Warehouse warehouse) {
+		this.warehouse = warehouse;
 	}
 }

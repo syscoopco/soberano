@@ -30,6 +30,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 		((Decimalbox) boxDetails.query("#decAmount")).setValue((BigDecimal) null);
 		((Textbox) boxDetails.query("#txtAmountExpression")).setValue("");
 		((Textbox) boxDetails.query("#txtReference")).setText("");
+		((Combobox) boxDetails.query("#cmbMaterial")).setSelectedItem(null);
 		Grid grd = (Grid) boxDetails.getParent().getParent().getParent().query("center").query("window").query("grid");
 		grd.setModel(new MaterialExpensesGridModel());
 	}
@@ -45,6 +46,8 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 		Decimalbox decQuantity = (Decimalbox) boxDetails.query("#decQuantity");
 		Decimalbox decAmount = (Decimalbox) boxDetails.query("#decAmount");
 		Textbox txtReference = (Textbox) boxDetails.query("#txtReference");
+		Combobox cmbWarehouse = (Combobox) boxDetails.query("#cmbWarehouse");
+		Comboitem cmbiWarehouse = cmbWarehouse.getSelectedItem();
 		
 		if (cmbiProvider == null ||
 			cmbiMaterial == null ||
@@ -55,7 +58,7 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 			decAmount.getValue() == null) {
 			throw new SomeFieldsContainWrongValuesException();
 		}
-		else {
+		else {			
 			Integer qryResult = (new MaterialExpense(dateExpenseDate.getValue(),
 										((DomainObject) cmbiProvider.getValue()).getId(),
 										((DomainObject) cmbiMaterial.getValue()).getId(),
@@ -63,7 +66,8 @@ public class MaterialExpenseFormHelper extends BusinessActivityTrackedObjectForm
 										Integer.parseInt(cmbiUnit.getValue()),
 										decAmount.getValue(),
 										((DomainObject) cmbiCurrency.getValue()).getId(),
-										txtReference.getText())).record();
+										txtReference.getText(),
+										cmbWarehouse.getSelectedItem() != null ? ((DomainObject) cmbiWarehouse.getValue()).getId() : 0).record());
 			if (qryResult == -2) {
 				throw new WrongDateTimeException();
 			}

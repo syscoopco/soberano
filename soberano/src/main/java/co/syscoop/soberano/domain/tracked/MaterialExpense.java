@@ -41,7 +41,8 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 							Integer unit,
 							BigDecimal amount,
 							Integer currency,
-							String reference) {
+							String reference,
+							Integer warehouse) {
 		super.setOccurrenceTime(expenseDate);
 		acquisition.getExpense().getProvider().setId(provider);
 		acquisition.getMaterial().setId(material);
@@ -50,6 +51,7 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 		acquisition.getExpense().setAmount(amount);
 		acquisition.getExpense().getCurrency().setId(currency);
 		super.setReference(reference);
+		acquisition.getWarehouse().setId(warehouse);
 	}
 
 	@Override
@@ -77,6 +79,7 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 				+ "											:expenseDate, "
 				+ "											:amount, "
 				+ "											:currency, "
+				+ "											:warehouse, "
 				+ "											:loginname) AS queryresult";
 		recordParameters = new MapSqlParameterSource();
 		recordParameters.addValue("acquirableMaterial", this.getAcquisition().getMaterial().getId());
@@ -87,6 +90,7 @@ public class MaterialExpense extends BusinessActivityTrackedObject {
 		recordParameters.addValue("expenseDate", super.getOccurrenceTime());
 		recordParameters.addValue("amount", this.getAcquisition().getExpense().getAmount());
 		recordParameters.addValue("currency", this.getAcquisition().getExpense().getCurrency().getId());
+		recordParameters.addValue("warehouse", this.getAcquisition().getWarehouse().getId());
 		
 		return super.record();
 	}
