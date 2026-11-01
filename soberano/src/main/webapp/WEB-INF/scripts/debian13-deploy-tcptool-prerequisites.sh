@@ -97,6 +97,8 @@ echo "Installing pgAdmin 4 (desktop mode)..."
 apt install -y pgadmin4-desktop
 apt install -y pgadmin4-web
 
+sudo /usr/pgadmin4/bin/setup-web.sh
+
 # Display installation summary
 echo -e "\n=========================================="
 echo "pgAdmin 4 INSTALLATION COMPLETE!"

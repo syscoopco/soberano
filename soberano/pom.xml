@@ -193,7 +193,7 @@
 		    <version>${jakarta.servlet-api}</version>
 		    <scope>provided</scope>
 		</dependency>
-		
+				
 		<!-- Jasypt -->		
 		<dependency>
 		    <groupId>org.jasypt</groupId>
@@ -543,64 +543,50 @@
 			
 	</dependencies>
 	<build>
-		<finalName>${project.artifactId}</finalName>
-		<plugins>
-			<!-- Run with Jetty -->
-			<plugin>
-				<groupId>org.eclipse.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<version>10.0.5</version>
-				<configuration>
-					<webApp>
-						<contextPath>/${project.artifactId}</contextPath>
-						<allowDuplicateFragmentNames>true</allowDuplicateFragmentNames>
-						<scanIntervalSeconds>5</scanIntervalSeconds>
-					</webApp>					
-				</configuration>
-			</plugin>
-			<!-- Compile java -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<source>8</source>
-					<target>8</target>
-				</configuration>
-			</plugin>
-			<!-- Build war -->
-			<plugin>
-				<artifactId>maven-war-plugin</artifactId>
-				<groupId>org.apache.maven.plugins</groupId>
-				<version>3.3.2</version>
-			</plugin>
-			<!-- Pack zips -->
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2</version>
-				<executions>
-					<execution>
-						<id>webapp</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-						<configuration>
-							<finalName>soberano${packname}</finalName>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>src/main/assembly/webapp.xml</descriptor>
-							</descriptors>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- surefire -->
-			<plugin>
-            	<groupId>org.apache.maven.plugins</groupId>
-            	<artifactId>maven-surefire-plugin</artifactId>
-            	<version>2.22.2</version>
-        	</plugin>
-		</plugins>
+	    <finalName>${project.artifactId}</finalName>
+	    <plugins>
+	        	
+	        <!-- Compile for Java 17+ -->
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-compiler-plugin</artifactId>
+	            <version>3.13.0</version>
+	            <configuration>
+	                <release>17</release>
+	            </configuration>
+	        </plugin>
+	
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-war-plugin</artifactId>
+	            <version>3.4.0</version>
+	        </plugin>
+	
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-assembly-plugin</artifactId>
+	            <version>3.7.1</version>
+	            <executions>
+	                <execution>
+	                    <id>webapp</id>
+	                    <phase>package</phase>
+	                    <goals><goal>single</goal></goals>
+	                    <configuration>
+	                        <finalName>soberano${packname}</finalName>
+	                        <appendAssemblyId>false</appendAssemblyId>
+	                        <descriptors>
+	                            <descriptor>src/main/assembly/webapp.xml</descriptor>
+	                        </descriptors>
+	                    </configuration>
+	                </execution>
+	            </executions>
+	        </plugin>
+	
+	        <plugin>
+	            <groupId>org.apache.maven.plugins</groupId>
+	            <artifactId>maven-surefire-plugin</artifactId>
+	            <version>3.5.2</version>
+	        </plugin>
+	    </plugins>
 	</build>
 </project>

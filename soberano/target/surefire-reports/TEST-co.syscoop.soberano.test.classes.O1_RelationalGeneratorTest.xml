@@ -56,6 +56,6 @@
     <property name="java.class.version" value="65.0"/>
   </properties>
   <testcase name="co.syscoop.soberano.test.classes.O1_RelationalGeneratorTest" classname="co.syscoop.soberano.test.classes.O1_RelationalGeneratorTest" time="0">
-    <skipped message="class co.syscoop.soberano.test.classes.O1_RelationalGeneratorTest is @Disabled"/>
+    <skipped message="class co.syscoop.soberano.test.classes.O1_RelationalGeneratorTest is //@Disabled"/>
   </testcase>
 </testsuite>
