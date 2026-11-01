@@ -20,17 +20,20 @@
 		<jakarta.json-api>2.1.3</jakarta.json-api>
 		<jakarta.servlet-api>6.1.0</jakarta.servlet-api>
 		<jasypt>1.9.3</jasypt>
-		<java-encoder>1.3.1</java-encoder>
 		<javaluator>3.0.3</javaluator>
-		<javax.servlet-api>4.0.1</javax.servlet-api>
 		<javax-ws-rs>2.1.1</javax-ws-rs>
+		<java-version>17</java-version>
 		<java-websocket>1.5.6</java-websocket>
 		<jersey>3.1.10</jersey>
 		<jsoup>1.22.2</jsoup>
 		<junit>5.13.3</junit>
 		<junitlauncher>1.13.3</junitlauncher>
 		<jxls-jexcel>1.0.9</jxls-jexcel>
+		<maven-assembly-plugin>3.7.1</maven-assembly-plugin>
 		<maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+		<maven-compiler-plugin>3.13.0</maven-compiler-plugin>
+		<maven-surefire-plugin>3.5.2</maven-surefire-plugin>
+		<maven-war-plugin>3.4.0</maven-war-plugin>
 		<packname>-${project.version}-FL-${maven.build.timestamp}</packname>
 		<pdfbox>2.0.13</pdfbox>
 		<pdfbox-tools>2.0.13</pdfbox-tools>
@@ -38,9 +41,8 @@
 		<poi-ooxml>5.4.1</poi-ooxml>
 		<postgresql>42.4.2</postgresql>
 		<slf4j.version>2.0.0</slf4j.version>
-		<spring-dao>2.0.8</spring-dao>
-		<spring-ldap>1.3.1.RELEASE</spring-ldap>
-		<spring-ldap-core>2.4.1</spring-ldap-core>
+		<spring-ldap-core>3.3.8</spring-ldap-core>
+		<spring-security.version>6.2.6</spring-security.version>
 		<spring.version>6.2.6</spring.version>
 		<sqlite-jdbc>3.53.1.0</sqlite-jdbc>
 		<tomcat>11.0.7</tomcat>
@@ -206,33 +208,13 @@
 		    <version>${jasypt}</version>
 		</dependency>	
 		
-		<!--  java encoder -->
-		<dependency>
-		    <groupId>org.owasp.encoder</groupId>
-		    <artifactId>encoder</artifactId>
-		    <version>${java-encoder}</version>
-		</dependency>			
-		
 		<!-- javaluator -->
 		<dependency>
 			<groupId>com.fathzer</groupId>
 		    <artifactId>javaluator</artifactId>
 		    <version>${javaluator}</version>
 		</dependency>
-		
-		<!-- Javax -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>javax.servlet</groupId> -->
-<!-- 		    <artifactId>javax.servlet-api</artifactId> -->
-<!-- 		    <version>${javax.servlet-api}</version> -->
-<!-- 		    <scope>provided</scope> -->
-<!-- 		</dependency> -->
-<!-- 		<dependency> -->
-<!-- 		    <groupId>javax.ws.rs</groupId> -->
-<!-- 		    <artifactId>javax.ws.rs-api</artifactId> -->
-<!-- 		    <version>${javax-ws-rs}</version> -->
-<!-- 		</dependency>		 -->
-		
+				
 		<!-- Java-WebSocket -->
 		<dependency>
 		    <groupId>org.java-websocket</groupId>
@@ -287,15 +269,20 @@
 		</dependency>
 		
 		<!-- SLf4J -->
+		
+		<!-- API: visible to main code, ships in WAR -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-api</artifactId>
 		    <version>${slf4j.version}</version>
 		</dependency>
+		
+		<!-- Binding: tests only, must NOT ship in WAR -->
 		<dependency>
 		    <groupId>org.slf4j</groupId>
 		    <artifactId>slf4j-simple</artifactId>
 		    <version>${slf4j.version}</version>
+		    <scope>test</scope>
 		</dependency>
 		
 		<!-- Spring -->
@@ -306,19 +293,8 @@
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-dao</artifactId>
-		    <version>${spring-dao}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-jdbc</artifactId>
 		    <version>${spring.version}</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.springframework.ldap</groupId>
-		    <artifactId>spring-ldap</artifactId>
-		    <version>${spring-ldap}</version>
-		    <type>pom</type>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.ldap</groupId>
@@ -328,28 +304,33 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-config</artifactId>
-		    <version>${spring.version}</version>
+		    <version>${spring-security.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
-		    <version>${spring.version}</version>
+		    <version>${spring-security.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-ldap</artifactId>
-		    <version>${spring.version}</version>
+		    <version>${spring-security.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-web</artifactId>
-		    <version>${spring.version}</version>
+		    <version>${spring-security.version}</version>
 		</dependency>
 		<dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-test</artifactId>
 		    <version>${spring.version}</version>
 		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-tx</artifactId>
+		    <version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -550,22 +531,22 @@
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-compiler-plugin</artifactId>
-	            <version>3.13.0</version>
+	            <version>${maven-compiler-plugin}</version>
 	            <configuration>
-	                <release>17</release>
+	                <release>${java-version}</release>
 	            </configuration>
 	        </plugin>
 	
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-war-plugin</artifactId>
-	            <version>3.4.0</version>
+	            <version>${maven-war-plugin}</version>
 	        </plugin>
 	
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-assembly-plugin</artifactId>
-	            <version>3.7.1</version>
+	            <version>${maven-assembly-plugin}</version>
 	            <executions>
 	                <execution>
 	                    <id>webapp</id>
@@ -585,7 +566,7 @@
 	        <plugin>
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-surefire-plugin</artifactId>
-	            <version>3.5.2</version>
+	            <version>${maven-surefire-plugin}</version>
 	        </plugin>
 	    </plugins>
 	</build>
