@@ -44,7 +44,7 @@ class OO26_OrderTest_record extends NewOrderActionTest {
 																//to runtime locale not available under 
 																//testing environment
 		
-		Zats.init("./src/main/webapp");
+		//Zats.init("./src/main/webapp");
 	}
 
 	@AfterAll

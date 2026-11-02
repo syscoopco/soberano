@@ -1,0 +1,152 @@
+1) In Terminal, install ollama:
+
+	curl -fsSL https://ollama.com/install.sh | sh
+	
+2) In Terminal, pull the model:
+
+	ollama pull qwen2.5-coder:1.5b
+	
+3) In Terminal verify ollama actually sees your model:
+
+	ollama list
+	curl http://localhost:11434/api/tags
+
+4) In Eclipse, go to Help → Install New Software...
+
+	Click Add...
+	
+	Enter Name: EclipseLlama
+	
+	Enter Location: https://vijaytank.github.io/eclipsellama/updatesite/
+	
+	Click Add, select EclipseLlama, and follow the wizard to restart Eclipse.
+	
+5) After restarting, open the configuration panel:
+
+    Go to Window → Preferences → EclipseLlama.
+
+    Ollama endpoint URL: Set it to http://localhost:11434 (the default).
+
+	Default model: Select or type qwen2.5-coder:1.5b as your model. This is critical—do not leave it at the default codellama, which is too large for your RAM.
+
+	Settings are stored in ~/.eclipsellama/config.properties if you prefer to edit them manually.
+
+6) In Eclipse, go to Help > Install New Software...
+
+	Click Add... and use the following update site URL:	https://sterlp.github.io/eclipse-peon-ai/
+
+	Select Eclipse Peon AI from the list, complete the wizard, and restart Eclipse when prompted.
+
+	After restarting, open the tool window: Window > Show View > ..., search for "AI Peon", and open it.
+	
+7) Connect Peon AI to Your Local Qwen Model. In Eclipse:
+
+    Go to Window > Preferences > AI Peon.
+
+    Set the connection details exactly as follows:
+
+    	Provider: OLLAMA
+
+    	Model: qwen2.5-coder:1.5b (or simply qwen2.5-coder)
+
+    	Base URL: http://localhost:11434
+
+    	API Key: Leave it empty.
+
+8) Install and Initialize the ZK Doc MCP Server:
+
+	curl -LsSf https://astral.sh/uv/install.sh | sh
+	
+	source "$HOME/.local/bin/env"
+	
+	uv venv --python 3.10
+	
+	source .venv/bin/activate
+	
+	uv pip install zk-doc-mcp-server
+	
+9) Clone the ZK documentation repo:
+
+	sudo apt update
+	
+	sudo apt install -y git
+
+	git clone --depth 1 https://github.com/zkoss/zkdoc.git ~/.zk-doc-mcp/repo
+	
+10) Point the MCP Server to Your Local Copy:
+
+		The ZK documentation confirms that the server can be configured to use local docs 
+		instead of cloning from Git by setting two environment variables:
+
+    		ZK_MCP_USE_GIT=false
+
+    		ZK_MCP_SRC_DIR=~/.zk-doc-mcp/repo
+
+		Because you cloned to the default path (~/.zk-doc-mcp/repo), you only strictly need 
+		ZK_MCP_USE_GIT=false—the server will find the docs there by default. But setting both is safer.
+		
+11) Create a small script, e.g. ~/run-zk-mcp.sh:
+
+		nano ~/run-zk-mcp.sh
+		
+			#!/bin/bash
+			export ZK_MCP_USE_GIT=false
+			export ZK_MCP_SRC_DIR="/root/.zk-doc-mcp/repo"
+			export FASTMCP_SHOW_SERVER_BANNER=false
+			export FASTMCP_SHOW_BANNER=false
+			export PYTHONWARNINGS=ignore
+			exec uvx zk-doc-mcp-server
+			
+		chmod +x ~/run-zk-mcp.sh
+		
+12) Pre-index ZK Docs:
+ 
+ 	In Terminal,
+ 	
+ 		ZK_MCP_USE_GIT=false uvx zk-doc-mcp-server init
+ 		
+ 	This could take long.
+		
+13) Connect Peon AI to the ZK Doc MCP Server:
+
+	In Eclipse, open the MCP configuration panel: Peon AI / MCP Settings 
+	(this is typically found within the Peon AI preferences or the view itself).
+
+	Add a new server with the following details. This tells Peon AI to use the 
+	uvx command to run the ZK Doc server you installed:
+	
+		Type: STDIO (local process)
+
+    	Name: zk-doc (or any name you prefer)
+    	
+    	Protocol version: Auto
+
+    	Command: /root/run-zk-mcp.sh
+    	
+ 14) Pre-index ZK Docs:
+ 
+ 	In Terminal,
+ 	
+ 		ZK_MCP_USE_GIT=false uvx zk-doc-mcp-server init
+ 		
+ 15) Test AI Peon chat with a ZK question. For example, prompt:
+ 
+ 	Search the ZK documentation for how to bind a Listbox model in MVVM in ZK 10.
+    	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

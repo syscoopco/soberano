@@ -1,5 +1,7 @@
 v2.1.2 ViBu Edition - Candidate Release
 
+New: Added a dev note about how to configure AI assistance to the project.
+
 New: After recording a material expense, the combobox with the list of materials is cleared.
 
 New: When recording a material expense, now is possible to specify a warehouse other than the procurement warehouse.
