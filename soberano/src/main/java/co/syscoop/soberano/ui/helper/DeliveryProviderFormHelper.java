@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import org.zkoss.util.resource.Labels;
 import org.zkoss.zk.ui.Component;
 import org.zkoss.zk.ui.WrongValueException;
+import org.zkoss.zk.ui.event.Event;
+import org.zkoss.zk.ui.event.EventListener;
 import org.zkoss.zk.ui.util.Clients;
 import org.zkoss.zul.Button;
 import org.zkoss.zul.Checkbox;
@@ -16,6 +18,7 @@ import org.zkoss.zul.Doublebox;
 import org.zkoss.zul.Hbox;
 import org.zkoss.zul.Include;
 import org.zkoss.zul.Intbox;
+import org.zkoss.zul.Messagebox;
 import org.zkoss.zul.Textbox;
 import org.zkoss.zul.Treecell;
 import org.zkoss.zul.Treechildren;
@@ -24,6 +27,7 @@ import org.zkoss.zul.Treeitem;
 import co.syscoop.soberano.domain.tracked.DeliveryProvider;
 import co.syscoop.soberano.domain.untracked.DeliveryFee;
 import co.syscoop.soberano.domain.untracked.DomainObject;
+import co.syscoop.soberano.exception.ExceptionTreatment;
 import co.syscoop.soberano.models.NodeData;
 import co.syscoop.soberano.util.ui.ZKUtility;
 
@@ -33,6 +37,7 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 	private ArrayList<String> feePostalCodes = new ArrayList<String>();
 	private ArrayList<BigDecimal> fees = new ArrayList<BigDecimal>();
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void addDeliveryFee(String country,
 										String postalCode,
 										BigDecimal fee,
@@ -46,8 +51,25 @@ public class DeliveryProviderFormHelper extends TrackedObjectFormHelper {
 			
 			Decimalbox decFee = new Decimalbox(fee);
 			decFee.setFormat("####.########");
-			decFee.setReadonly(true);
 			hbox.appendChild(decFee);
+			
+			decFee.addEventListener("onChange", new EventListener() {
+
+				@Override
+				public void onEvent(Event event) throws Exception {
+					
+					try{
+						Decimalbox decFee = (Decimalbox) event.getTarget();
+						((DeliveryFee) ((Treeitem) decFee.getParent().getParent().getParent().getParent()).getValue()).setFee(decFee.getValue());
+					}
+					catch(Exception ex) {
+						ExceptionTreatment.logAndShow(ex, 
+								ex.getMessage(), 
+								Labels.getLabel("messageBoxTitle.Error"),
+								Messagebox.ERROR);
+					}
+				}			
+			});			
 			
 			ZKUtility.addRowDeletionButton("btnInputRowDeletion" + country + "_" + postalCode, hbox);
 			
