@@ -53,6 +53,7 @@ public class ChangeSalesAgentComboboxComposer extends SelectorComposer {
 				throw new NotEnoughRightsException();
 			}
 			else {
+				txtSalesAgentCommissionExpression.setValue("0.0");
 				Window wndContentPanel = (Window) cmbSalesAgent.query("#wndContentPanel");
 				OrderFormHelper.updateAmountAndTicket(order, wndContentPanel);
 			}
@@ -75,7 +76,7 @@ public class ChangeSalesAgentComboboxComposer extends SelectorComposer {
     public void txtSalesAgentCommissionExpression_onChange() throws Throwable {
 		
 		try {
-			Double evalResult = Double.parseDouble(Utils.evaluate(txtSalesAgentCommissionExpression.getValue()));
+			Double evalResult = Double.parseDouble(Utils.evaluate(txtSalesAgentCommissionExpression.getText().isEmpty() ? "0.0" : txtSalesAgentCommissionExpression.getValue()));
 			decSalesAgentCommission.setValue(new BigDecimal(evalResult));
 			txtSalesAgentCommissionExpression.setValue(decSalesAgentCommission.getValue().toString());			
 			

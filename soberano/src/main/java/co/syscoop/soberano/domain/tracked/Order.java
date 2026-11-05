@@ -53,6 +53,7 @@ public class Order extends BusinessActivityTrackedObject {
 	private String stage = "";
 	private Stage stageId = Stage.ONGOING;
 	private Integer salesAgent = 0;
+	private String salesAgentName = "";
 	private Double salesAgentCommission = 0.0;
 	
 	private ContactData deliveryContactData = null;	
@@ -94,7 +95,10 @@ public class Order extends BusinessActivityTrackedObject {
 				Integer province,
 				Double latitude,
 				Double longitude,
-				Integer printerProfile) {
+				Integer printerProfile,
+				Integer salesAgent,
+				String salesAgentName,
+				Double salesAgentCommission) {
 		super(id);
 		this.label = label;
 		this.countersStr = counters;
@@ -121,6 +125,9 @@ public class Order extends BusinessActivityTrackedObject {
 											 latitude,
 											 longitude));
 		this.setPrinterProfile(printerProfile);
+		this.salesAgent = salesAgent;
+		this.salesAgentName = salesAgentName;
+		this.salesAgentCommission = salesAgentCommission;
 	}
 	
 	public Order() {
@@ -200,7 +207,10 @@ public class Order extends BusinessActivityTrackedObject {
 										rs.getInt("provinceId"),
 										rs.getDouble("latitude"),
 										rs.getDouble("longitude"),
-										rs.getInt("printerProfile"));
+										rs.getInt("printerProfile"),
+										rs.getInt("salesAgent"),
+										rs.getString("salesAgentName"),
+										rs.getDouble("salesAgentCommission"));
 	        	}
 	        	if (categoryCurrentlyBeingExtracted.isEmpty() || !categoryCurrentlyBeingExtracted.equals(rs.getString("category"))) {
 	        		categoryCurrentlyBeingExtracted = rs.getString("category");
@@ -320,6 +330,9 @@ public class Order extends BusinessActivityTrackedObject {
 		deliveryContactData = new ContactData(sourceOrder.getDeliveryContactData());
 		setPrinterProfile((sourceOrder).getPrinterProfile());
 		setAdditions((sourceOrder).getAdditions());
+		setSalesAgent((sourceOrder).getSalesAgent());
+		setSalesAgentName((sourceOrder).getSalesAgentName());
+		setSalesAgentCommission((sourceOrder).getSalesAgentCommission());
 	}
 	
 	public Integer make(Integer itemId, String description, BigDecimal runs) throws Exception {
@@ -974,5 +987,13 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setSalesAgentCommission(Double salesAgentCommission) {
 		this.salesAgentCommission = salesAgentCommission;
+	}
+
+	public String getSalesAgentName() {
+		return salesAgentName;
+	}
+
+	public void setSalesAgentName(String salesAgentName) {
+		this.salesAgentName = salesAgentName;
 	}
 }

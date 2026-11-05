@@ -21,8 +21,11 @@
 			<separator></separator>
 			<button label="${labels.layout.template.shortcut.Process}" href="/process_runs.zul" sclass="BarButton NewButton"></button>
 			<separator></separator>
+			<!--
 			<button id="btnScanner" image="./images/scanner.png" sclass="BarButton NewButton" apply="co.syscoop.soberano.composers.ShowBarcodeScannerFromButtonBarButtonComposer"></button>
-			<separator></separator>				
+			<separator></separator>
+			-->
+							
 			<!-- TODO: apply composer -->					
 			<button visible="false" id="btnNewDeliveryBarButton" image="./images/delivery.jpg" sclass="BarButton NewButton"></button>
 			<timer id="timerAlerts" delay="300000" repeats="true" apply="co.syscoop.soberano.composers.AlertsTimerComposer"></timer>

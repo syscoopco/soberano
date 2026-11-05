@@ -76,7 +76,7 @@
 					<label value="${labels.caption.field.comission}" sclass="Caption" hflex="1"></label>			
 					<hbox hflex="1">
 						<textbox id="txtSalesAgentCommissionExpression" hflex="1" placeholder="${labels.placeholder.salesAgentCommission}" apply="co.syscoop.soberano.composers.ChangeSalesAgentComboboxComposer"/>
-						<decimalbox visible="false" format="####.########" scale="8" id="decSalesAgentCommission" hflex="1" placeholder="${labels.placeholder.salesAgentCommission}"/>
+						<decimalbox visible="false" format="####.########" scale="8" id="decSalesAgentCommission" hflex="1" placeholder="${labels.placeholder.salesAgentCommission}" constraint="no negative"/>
 						<label value=" % "></label>
 					</hbox>
 				</vbox>
