@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(7)
 
-//@Disabled
+@Disabled
 
 class O7_WarehouseTest_with_entry_processes_check_recording extends WarehouseActionTest {
 

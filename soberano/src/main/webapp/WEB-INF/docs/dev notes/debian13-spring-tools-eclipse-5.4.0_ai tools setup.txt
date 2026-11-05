@@ -1,3 +1,6 @@
+OLlama with small local model
+=============================
+
 1) In Terminal, install ollama:
 
 	curl -fsSL https://ollama.com/install.sh | sh
@@ -53,7 +56,11 @@
 
     	API Key: Leave it empty.
 
-8) Install and Initialize the ZK Doc MCP Server:
+
+ZK Docs as context, locally
+===========================
+
+1) Install and Initialize the ZK Doc MCP Server:
 
 	curl -LsSf https://astral.sh/uv/install.sh | sh
 	
@@ -65,7 +72,7 @@
 	
 	uv pip install zk-doc-mcp-server
 	
-9) Clone the ZK documentation repo:
+2) Clone the ZK documentation repo:
 
 	sudo apt update
 	
@@ -73,19 +80,7 @@
 
 	git clone --depth 1 https://github.com/zkoss/zkdoc.git ~/.zk-doc-mcp/repo
 	
-10) Point the MCP Server to Your Local Copy:
-
-		The ZK documentation confirms that the server can be configured to use local docs 
-		instead of cloning from Git by setting two environment variables:
-
-    		ZK_MCP_USE_GIT=false
-
-    		ZK_MCP_SRC_DIR=~/.zk-doc-mcp/repo
-
-		Because you cloned to the default path (~/.zk-doc-mcp/repo), you only strictly need 
-		ZK_MCP_USE_GIT=false—the server will find the docs there by default. But setting both is safer.
-		
-11) Create a small script, e.g. ~/run-zk-mcp.sh:
+3) Create a small script, e.g. ~/run-zk-mcp.sh:
 
 		nano ~/run-zk-mcp.sh
 		
@@ -99,7 +94,7 @@
 			
 		chmod +x ~/run-zk-mcp.sh
 		
-12) Pre-index ZK Docs:
+4) Pre-index ZK Docs:
  
  	In Terminal,
  	
@@ -107,46 +102,101 @@
  		
  	This could take long.
 		
-13) Connect Peon AI to the ZK Doc MCP Server:
+5) In Terminal,
 
-	In Eclipse, open the MCP configuration panel: Peon AI / MCP Settings 
-	(this is typically found within the Peon AI preferences or the view itself).
-
-	Add a new server with the following details. This tells Peon AI to use the 
-	uvx command to run the ZK Doc server you installed:
+	uv tool install --upgrade ollmcp
 	
-		Type: STDIO (local process)
+6) Register and verify the ZK MCP Server. In Terminal,
 
-    	Name: zk-doc (or any name you prefer)
-    	
-    	Protocol version: Auto
+	ollmcp mcp add zk-doc -- /root/run-zk-mcp.sh
+	
+	ollmcp mcp list
+	
+7) Try it:
 
-    	Command: /root/run-zk-mcp.sh
-    	
- 14) Pre-index ZK Docs:
- 
- 	In Terminal,
- 	
- 		ZK_MCP_USE_GIT=false uvx zk-doc-mcp-server init
- 		
- 15) Test AI Peon chat with a ZK question. For example, prompt:
- 
- 	Search the ZK documentation for how to bind a Listbox model in MVVM in ZK 10.
-    	
+	ollmcp --model qwen2.5-coder:1.5b
+	
+8) Test with Human-in-the-Loop Confirmation. Try this prompt:
+
+	Search the ZK documentation for how to bind a Listbox model in MVVM in ZK 10.
 
 
+Remote (more powerful) models with openrouter and a self-hosted gateway
+=======================================================================
 
+IMPORTANT: I was unable to configure the chatbot's plugin 
+		(https://psychic-coder.github.io/eclipse-chatbot-plugin2/) 
+		in Eclipse. For some reason, the settings were not shown 
+		in Window → Preferences.
 
+1) Register in openrouter.ai and get an API key.
 
+2) Deploy freellmpool on Your Laptop:
 
+	uv tool install freellmpool
+	
+	Start the Gateway: Run freellmpool proxy --port 8080
+	Leave this terminal running. Your local endpoint is now http://localhost:8080/v1.
+	
+	Add OpenRouter Key: To make OpenRouter models available through the pool, 
+	set your key as an environment variable before starting the proxy:
+	
+	echo 'export OPENROUTER_API_KEY="sk-or-..."' >> ~/.bashrc
+	source ~/.bashrc
+	
+3) Install Chatbot Assistant in Eclipse:
 
+	In Eclipse, go to Help → Install New Software...
 
+	Click Add... and enter this update site: 
+	https://psychic-coder.github.io/eclipse-chatbot-plugin2/.
 
+	Select Chatbot Assistant, complete the wizard, and restart Eclipse. 
+	Open the view via Window → Show View → Other... → Chatbot Assistant.
+	
+4) Configure Chatbot Assistant:
 
+	In the plugin's settings (gear icon or Window → Preferences):
 
+    	Provider/API Type: OpenAI (or OpenAI-Compatible)
 
+    	Base URL: http://localhost:8080/v1
 
+		API Key: anything (this is ignored by freellmpool)
 
+		Model Name: qwen/qwen3-coder:free (the exact free model ID for OpenRouter)
+		
+5) Test with Your Eclipse Project Code:
 
+    Open a Java class from soberano in the editor.
+
+    Select a specific method (avoid whole-class selection to prevent context limits).
+
+    In the Chatbot Assistant, ask: "Explain the selected code."
+
+    The request flows: Chatbot → freellmpool (localhost:8080) → OpenRouter → Qwen model. 
+    freellmpool automatically handles routing and failover.
+    
+
+Remote (more powerful) models with openrouter and AI Peon
+=========================================================
+
+1) Window → Preferences → Peon AI.
+
+	Fill the four fields exactly as follows:
+		
+		Provider:	OPEN_AI
+		
+		Model:	nvidia/nemotron-3-ultra-550b-a55b:free
+		
+		Base URL:	https://openrouter.ai/api/v1
+		
+		API Key:	Your sk-or-... OpenRouter key
+
+		The direct OpenRouter configuration is the simplest path if you are comfortable 
+		with the key sitting in Peon AI's preferences. The freellmpool configuration 
+		routes through your local gateway, which keeps the OpenRouter key out of Eclipse 
+		entirely—but you must ensure freellmpool has the OPENROUTER_API_KEY available 
+		in its environment when you start it, or it will not be able to forward the request.
 
 

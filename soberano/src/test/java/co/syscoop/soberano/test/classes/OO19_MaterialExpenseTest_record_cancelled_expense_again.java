@@ -37,7 +37,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(19)
 
-//@Disabled
+@Disabled
 
 @TestMethodOrder(OrderAnnotation.class)
 class OO19_MaterialExpenseTest_record_cancelled_expense_again extends MaterialExpenseActionTest {

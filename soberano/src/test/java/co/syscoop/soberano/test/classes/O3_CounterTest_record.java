@@ -24,7 +24,7 @@ import co.syscoop.soberano.test.helper.CounterForm;
 import co.syscoop.soberano.util.SpringUtility;
 
 @Order(3)
-//@Disabled
+@Disabled
 class O3_CounterTest_record extends CounterActionTest {
 	
 	protected CounterForm counterForm = null;

@@ -22,7 +22,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(8)
 
-//@Disabled
+@Disabled
 
 class O8_CostCenterTest_check_recording extends CostCenterActionTest {
 

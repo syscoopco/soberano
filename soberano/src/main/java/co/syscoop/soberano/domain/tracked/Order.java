@@ -52,6 +52,8 @@ public class Order extends BusinessActivityTrackedObject {
 	private ArrayList<String> categories = new ArrayList<String>();
 	private String stage = "";
 	private Stage stageId = Stage.ONGOING;
+	private Integer salesAgent = 0;
+	private Double salesAgentCommission = 0.0;
 	
 	private ContactData deliveryContactData = null;	
 	
@@ -618,6 +620,32 @@ public class Order extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer changeSalesAgent(Integer providerId) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_changeSalesAgent\"(:orderId, "
+							+ "										:providerId, "
+							+ "										:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("providerId", providerId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer changeSalesAgentCommission(BigDecimal commission) throws Exception {
+		
+		//it must be passed loginname. output alias must be queryresult. both in lower case.
+		String qryStr = "SELECT soberano.\"fn_Order_changeSalesAgentCommission\"(:orderId, "
+							+ "										:commission, "
+							+ "										:loginname) AS queryresult";		
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("orderId", this.getId());
+		parametersMap.put("commission", commission);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	public Integer changeDeliveryProvider(Integer providerId) throws Exception {
 		
 		//it must be passed loginname. output alias must be queryresult. both in lower case.
@@ -930,5 +958,21 @@ public class Order extends BusinessActivityTrackedObject {
 
 	public void setDeliveryById(Integer deliveryById) {
 		this.deliveryById = deliveryById;
+	}
+
+	public Integer getSalesAgent() {
+		return salesAgent;
+	}
+
+	public void setSalesAgent(Integer salesAgent) {
+		this.salesAgent = salesAgent;
+	}
+
+	public Double getSalesAgentCommission() {
+		return salesAgentCommission;
+	}
+
+	public void setSalesAgentCommission(Double salesAgentCommission) {
+		this.salesAgentCommission = salesAgentCommission;
 	}
 }
