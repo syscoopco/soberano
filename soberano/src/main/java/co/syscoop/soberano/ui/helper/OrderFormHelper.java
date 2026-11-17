@@ -889,10 +889,11 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			//always, allow print ticket when order is closed
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnPrint")).setDisabled(false);
 		}
-		
-		((Combobox) wndContentPanel.query("#cmbSalesAgent")).setText(order.getSalesAgentName());
-		ZKUtility.selectComboitemByLabel(((Combobox) wndContentPanel.query("#cmbSalesAgent")), order.getSalesAgentName());
-		((Textbox) wndContentPanel.query("#txtSalesAgentCommissionExpression")).setValue(order.getSalesAgentCommission().toString());
+
+		//TODO: Restore this code for sales agents.	
+//		((Combobox) wndContentPanel.query("#cmbSalesAgent")).setText(order.getSalesAgentName());
+//		ZKUtility.selectComboitemByLabel(((Combobox) wndContentPanel.query("#cmbSalesAgent")), order.getSalesAgentName());
+//		((Textbox) wndContentPanel.query("#txtSalesAgentCommissionExpression")).setValue(order.getSalesAgentCommission().toString());
 		
 		return order;
 	}

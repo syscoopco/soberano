@@ -36,6 +36,7 @@ public class ProduceFromFastOrderingWindowButtonComposer extends SelectorCompose
 		try {
 			Integer orderId = (Integer) btnProduce.query("#" + btnProduce.getAttribute("parentWindow")).getAttribute("orderId");
 			ProduceButtonComposer.produce(orderId, 
+										"all",
 										SpringUtility.getPath(this.getClass().getClassLoader().getResource("").getPath()) + 
 										"records/production_lines/" + 
 										"ORDER_" + orderId + "_ALLOCATIONS" + ".pdf");
