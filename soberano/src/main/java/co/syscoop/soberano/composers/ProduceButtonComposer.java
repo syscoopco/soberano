@@ -34,12 +34,6 @@ public class ProduceButtonComposer extends SelectorComposer {
 	@Wire
 	protected Button btnProduce;
 	
-	@Wire
-	protected Button btnProduce1;
-	
-	@Wire
-	protected Button btnProduce2;
-	
 	@SuppressWarnings("unchecked")
 	public void doAfterCompose(Component comp) throws Exception {
     	
@@ -72,7 +66,7 @@ public class ProduceButtonComposer extends SelectorComposer {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void produce(Integer orderId, String productionLines, String fileToPrintFullPath) throws SoberanoException {
+	public static void produce(Integer orderId, String fileToPrintFullPath) throws SoberanoException {
 		
 		try {
 			Order order = new Order(orderId);
@@ -94,90 +88,86 @@ public class ProduceButtonComposer extends SelectorComposer {
 						try{
 							Integer allocationId = ((ProcessRunOutputAllocation) object).getId();
 							Integer productionLineId = ((ProcessRunOutputAllocation) object).getProductionLineId();
+							if (productionLineIds.indexOf(productionLineId) == -1) productionLineIds.add(productionLineId);
 							
-							if (productionLines.equals("all") || productionLines.equals(productionLineId.toString())) {
+							String description = ((ProcessRunOutputAllocation) object).getDescription();
+							String itemName = ((ProcessRunOutputAllocation) object).getItemName();
+							
+							//print allocation only in case it wasn't printed yet
+							HashMap<Integer, HashMap<Integer, Boolean>> thisOrderPrintedAllocations = 
+									((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
+																						getCurrent().
+																						getDesktop().
+																						getWebApp().
+																						getAttribute("printed_allocations")).
+																							get(orderId);
+							
+							//order hasn't been collected. it's still open.
+							if (thisOrderPrintedAllocations != null) {										
+								HashMap<Integer, Boolean> productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
 								
-								if (productionLineIds.indexOf(productionLineId) == -1) productionLineIds.add(productionLineId);
+								if (productionLineAllocations == null) {
+									thisOrderPrintedAllocations.put(productionLineId, new HashMap<Integer, Boolean>());
+									productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
+								}
 								
-								String description = ((ProcessRunOutputAllocation) object).getDescription();
-								String itemName = ((ProcessRunOutputAllocation) object).getItemName();
+								Boolean allocationWasPrinted = 
+										productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
 								
-								//print allocation only in case it wasn't printed yet
-								HashMap<Integer, HashMap<Integer, Boolean>> thisOrderPrintedAllocations = 
-										((HashMap<Integer, HashMap<Integer, HashMap<Integer, Boolean>>>) Executions.
-																							getCurrent().
-																							getDesktop().
-																							getWebApp().
-																							getAttribute("printed_allocations")).
-																								get(orderId);
-								
-								//order hasn't been collected. it's still open.
-								if (thisOrderPrintedAllocations != null) {										
-									HashMap<Integer, Boolean> productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
+								//allocation was not printed yet, or it's grouped
+								if (!allocationWasPrinted || allocationId == 0) {
 									
-									if (productionLineAllocations == null) {
-										thisOrderPrintedAllocations.put(productionLineId, new HashMap<Integer, Boolean>());
-										productionLineAllocations = thisOrderPrintedAllocations.get(productionLineId);
-									}
-									
-									Boolean allocationWasPrinted = 
-											productionLineAllocations.get(allocationId) == null ? false : productionLineAllocations.get(allocationId);
-									
-									//allocation was not printed yet, or it's grouped
-									if (!allocationWasPrinted || allocationId == 0) {
+									//allocations grouped
+									if (allocationId == 0) {
 										
-										//allocations grouped
-										if (allocationId == 0) {
-											
-											HashMap<Integer, String> thisOrderLastPrintedGroupedAllocations =
-													((HashMap<Integer, HashMap<Integer, String>>) Executions.
-																									getCurrent().
-																									getDesktop().
-																									getWebApp().
-																									getAttribute("last_printed_grouped_allocations")).get(orderId);
-											
-											String thisProductionLineLastPrintedAllocationsForThatOrder = "";
-											
-											if (thisOrderLastPrintedGroupedAllocations == null) {											
+										HashMap<Integer, String> thisOrderLastPrintedGroupedAllocations =
 												((HashMap<Integer, HashMap<Integer, String>>) Executions.
 																								getCurrent().
 																								getDesktop().
 																								getWebApp().
-																								getAttribute("last_printed_grouped_allocations")).put(orderId, new HashMap<Integer, String>());
-												thisOrderLastPrintedGroupedAllocations = ((HashMap<Integer, HashMap<Integer, String>>) Executions.
-														getCurrent().
-														getDesktop().
-														getWebApp().
-														getAttribute("last_printed_grouped_allocations")).get(orderId);
-											}
-											else {
-												thisProductionLineLastPrintedAllocationsForThatOrder = thisOrderLastPrintedGroupedAllocations.get(productionLineId);
-											}										
-											
-											if (printedGroupedproductionLineIds.indexOf(productionLineId) == -1) {											
-												
-												String thisProductionLineCurrentAllocationsForThatOrder = (new Order(orderId)).getProductionLineGroupedAllocations(productionLineId);
-												
-												//allocations changed since last printing
-												if (!thisProductionLineCurrentAllocationsForThatOrder.equals(thisProductionLineLastPrintedAllocationsForThatOrder)) {
-													thisOrderLastPrintedGroupedAllocations.put(productionLineId, thisProductionLineCurrentAllocationsForThatOrder);
-													textsToPrint.put(productionLineId, header + description + "\n" + thisProductionLineCurrentAllocationsForThatOrder);
-												}
-												printedGroupedproductionLineIds.add(productionLineId);
-											}										
+																								getAttribute("last_printed_grouped_allocations")).get(orderId);
+										
+										String thisProductionLineLastPrintedAllocationsForThatOrder = "";
+										
+										if (thisOrderLastPrintedGroupedAllocations == null) {											
+											((HashMap<Integer, HashMap<Integer, String>>) Executions.
+																							getCurrent().
+																							getDesktop().
+																							getWebApp().
+																							getAttribute("last_printed_grouped_allocations")).put(orderId, new HashMap<Integer, String>());
+											thisOrderLastPrintedGroupedAllocations = ((HashMap<Integer, HashMap<Integer, String>>) Executions.
+													getCurrent().
+													getDesktop().
+													getWebApp().
+													getAttribute("last_printed_grouped_allocations")).get(orderId);
 										}
 										else {
-											if (textsToPrint.get(productionLineId) == null) {
-												textsToPrint.put(productionLineId, header + "\n");
-											}
+											thisProductionLineLastPrintedAllocationsForThatOrder = thisOrderLastPrintedGroupedAllocations.get(productionLineId);
+										}										
+										
+										if (printedGroupedproductionLineIds.indexOf(productionLineId) == -1) {											
 											
-											if (!description.isEmpty()) {											
-												textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + description + "\n");
-											}
+											String thisProductionLineCurrentAllocationsForThatOrder = (new Order(orderId)).getProductionLineGroupedAllocations(productionLineId);
 											
-											productionLineAllocations.put(allocationId, true);							
-											textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + itemName + "\n\n");
+											//allocations changed since last printing
+											if (!thisProductionLineCurrentAllocationsForThatOrder.equals(thisProductionLineLastPrintedAllocationsForThatOrder)) {
+												thisOrderLastPrintedGroupedAllocations.put(productionLineId, thisProductionLineCurrentAllocationsForThatOrder);
+												textsToPrint.put(productionLineId, header + description + "\n" + thisProductionLineCurrentAllocationsForThatOrder);
+											}
+											printedGroupedproductionLineIds.add(productionLineId);
+										}										
+									}
+									else {
+										if (textsToPrint.get(productionLineId) == null) {
+											textsToPrint.put(productionLineId, header + "\n");
 										}
+										
+										if (!description.isEmpty()) {											
+											textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + description + "\n");
+										}
+										
+										productionLineAllocations.put(allocationId, true);							
+										textsToPrint.put(productionLineId, textsToPrint.get(productionLineId) + itemName + "\n\n");
 									}
 								}
 							}
@@ -224,35 +214,7 @@ public class ProduceButtonComposer extends SelectorComposer {
 		try {
 			Vbox boxDetails = (Vbox) btnProduce.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
 			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
-			produce(orderId, (String) btnProduce.getAttribute("productionLines"), fileToPrintFullPath);
-		}
-		catch(Exception ex)	{
-			throw ex;
-		}
-	}
-	
-	//TODO: Temporary code. Generalize.
-	@Listen("onClick = button#btnProduce1")
-    public void btnProduce1_onClick() throws Throwable {
-		
-		try {
-			Vbox boxDetails = (Vbox) btnProduce1.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
-			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
-			produce(orderId,  (String) btnProduce1.getAttribute("productionLines"), fileToPrintFullPath);
-		}
-		catch(Exception ex)	{
-			throw ex;
-		}
-	}
-	
-	//TODO: Temporary code. Generalize.
-	@Listen("onClick = button#btnProduce2")
-    public void btnProduce2_onClick() throws Throwable {
-		
-		try {
-			Vbox boxDetails = (Vbox) btnProduce2.getParent().getParent().getParent().query("#wndContentPanel").query("#boxDetails");
-			orderId = ((Intbox) boxDetails.query("#intObjectId")).getValue();
-			produce(orderId,  (String) btnProduce2.getAttribute("productionLines"), fileToPrintFullPath);
+			produce(orderId, fileToPrintFullPath);
 		}
 		catch(Exception ex)	{
 			throw ex;

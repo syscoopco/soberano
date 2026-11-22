@@ -58,8 +58,6 @@
 						<button id="btnNewProvider" label="+" href="/new_delivery_provider.zul"></button>	
 					</hbox>
 				</vbox>
-				
-				<!--  TODO: Restore this code for sales agents.
 				<separator></separator>
 				<vbox hflex="1">
 					<label value="${labels.caption.field.salesAgent}" sclass="Caption" hflex="1"></label>			
@@ -82,8 +80,6 @@
 						<label value=" % "></label>
 					</hbox>
 				</vbox>
-				-->
-				
 			</hbox>
 			<separator></separator>
 			<label id="lblDeliverTo" visible="false" value="${labels.caption.field.deliverTo}" sclass="Caption"></label>			
@@ -179,27 +175,7 @@
 	<label id="lblStage" value="${labels.caption.field.stage}" self="@define(decisionButton)" sclass="Caption"/>
 	<textbox id="txtStage" self="@define(decisionButton)" readonly="true" value=""/>
 	<separator self="@define(decisionButton)"></separator>
-	
-	<!-- TODO: Restore this code.
-	<button id="btnProduce" self="@define(decisionButton)" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer">
-		<custom-attributes productionLines="all"/>
-	</button>
-	-->
-	
-	<!-- TODO: Temporary code. Generalize. -->
-	<button id="btnProduce" self="@define(decisionButton)" label="Producir BEBIDAS" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer">
-		<custom-attributes productionLines="1001"/>
-	</button>
-	
-	<button id="btnProduce1" self="@define(decisionButton)" label="Producir COCINA" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer">
-		<custom-attributes productionLines="1002"/>
-	</button>
-	
-	<button id="btnProduce2" self="@define(decisionButton)" label="Producir PIZZERÍA" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer">
-		<custom-attributes productionLines="1006"/>
-	</button>
-	<!--  -->
-	
+	<button id="btnProduce" self="@define(decisionButton)" label="${labels.caption.action.produce}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.ProduceButtonComposer"></button>
 	<button id="btnBill" self="@define(decisionButton)" label="${labels.caption.action.bill}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.BillButtonComposer"></button>
 	<button id="btnPrint" self="@define(decisionButton)" label="${labels.caption.action.print}" sclass="DecisionButton" apply="co.syscoop.soberano.composers.PrintOrderButtonComposer"></button>
 </zk>

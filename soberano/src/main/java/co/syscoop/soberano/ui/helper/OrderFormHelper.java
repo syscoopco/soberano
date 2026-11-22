@@ -441,6 +441,34 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		lblInventoryItemCode.setVisible(false);
 		boxOi.appendChild(lblInventoryItemCode);
 		
+		Button btnDelay = new Button();
+		btnDelay.setImage("./images/delay_15.jpg");
+		btnDelay.setId("btnDelay" + oi.getProcessRunId().toString());
+		boxOi.appendChild(btnDelay);
+		btnDelay.addEventListener("onClick", new EventListener() {
+
+			@Override
+			public void onEvent(Event event) throws Exception {
+				
+				try {
+					((Treecell) boxOi.getParent().getParent()).setStyle("background-color:" + "red;");
+					updateServedItems(ItemOperation.CANCELALL, event);
+				}
+				catch(NotEnoughRightsException ex) {
+					ExceptionTreatment.logAndShow(ex, 
+							Labels.getLabel("message.permissions.NotEnoughRights"), 
+							Labels.getLabel("messageBoxTitle.Warning"),
+							Messagebox.EXCLAMATION);
+				}
+				catch(Exception ex)	{
+					ExceptionTreatment.logAndShow(ex, 
+							ex.getMessage(), 
+							Labels.getLabel("messageBoxTitle.Error"),
+							Messagebox.ERROR);
+				}
+			}
+		});		
+		
 		Button btnIncServedItems = new Button("+");
 		btnIncServedItems.setId("btnIncServedItems" + oi.getProcessRunId().toString());
 		if ((oi.getCanceledRuns()).compareTo(new BigDecimal(0)) > 0) {
@@ -889,11 +917,10 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 			//always, allow print ticket when order is closed
 			((Button) boxDetails.getParent().getParent().query("#incSouth").query("#hboxDecisionButtons").query("#btnPrint")).setDisabled(false);
 		}
-
-		//TODO: Restore this code for sales agents.	
-//		((Combobox) wndContentPanel.query("#cmbSalesAgent")).setText(order.getSalesAgentName());
-//		ZKUtility.selectComboitemByLabel(((Combobox) wndContentPanel.query("#cmbSalesAgent")), order.getSalesAgentName());
-//		((Textbox) wndContentPanel.query("#txtSalesAgentCommissionExpression")).setValue(order.getSalesAgentCommission().toString());
+		
+		((Combobox) wndContentPanel.query("#cmbSalesAgent")).setText(order.getSalesAgentName());
+		ZKUtility.selectComboitemByLabel(((Combobox) wndContentPanel.query("#cmbSalesAgent")), order.getSalesAgentName());
+		((Textbox) wndContentPanel.query("#txtSalesAgentCommissionExpression")).setValue(order.getSalesAgentCommission().toString());
 		
 		return order;
 	}

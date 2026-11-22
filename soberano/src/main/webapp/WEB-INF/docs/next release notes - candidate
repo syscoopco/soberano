@@ -1,11 +1,8 @@
-v2.1.4 ViBu Edition Candidate Release
+v2.1.4.2 ViBu Edition Candidate Release
 
-New: In order.zul, now a separated button for each production line is used for triggering corresponding process run allocations.
-	Before, the only one Produce button triggered the allocations of every ordered item pending to be produce. This release is 
-	for trials: fixed production lines are used. In upcoming versions the feature is expected to be configurable. The rationale of this
-	is to delay some allocations.
-
-New: Sales agent components are disabled in order.zul
+New: In order.zul, now it is possible to delay a process run allocation for production. That means, to lock an ordered item 
+	round for it not to allocate its production the next time Produce button is pushed. It remains locked until the user unlock
+	the round (ordered item row) explicitly.
 
 New: In the delivery providers configuration form, now you can edit individual fees. You don't need to remove a zone 
 	row just to add it again with a new fee. Now you can just edit / update the new fee.
@@ -49,6 +46,13 @@ New: Upon collecting an order, if soberano."fn_Order_collect" returned a positiv
 	feature would prevent to print the ticket after collecting. The change was introduced in method 
 	CashRegisterCollectButtonComposer.btnCollect_onClick
 	
+Fix: When calling FUNCTION soberano."fn_Product_disable" the product was still shown as it were in the catalog. This was add to the
+	function:
+	
+		UPDATE soberano."Product"
+				SET "Product_is_enabled" = false
+				WHERE "ProductHasProductId" = itemid;
+
 Fix: In FUNCTION fn_Stock_recalculateInventoryFrom, the temporary table stockValuesBeforeFallingToOrBelowZero
 	was not dropped causing errors. Now it's explicitly dropped on return and on commit.
 	

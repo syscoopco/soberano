@@ -1,0 +1,12 @@
+sudo tee /etc/X11/xorg.conf.d/20-noblank.conf > /dev/null <<'EOF'
+Section "ServerFlags"
+    Option "BlankTime"   "0"
+    Option "StandbyTime" "0"
+    Option "SuspendTime" "0"
+    Option "OffTime"     "0"
+EndSection
+EOF
+
+sudo systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+sudo systemctl restart display-manager
