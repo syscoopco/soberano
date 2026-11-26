@@ -36,6 +36,7 @@ import org.zkoss.zul.Vbox;
 import org.zkoss.zul.Window;
 
 import co.syscoop.soberano.domain.tracked.Order;
+import co.syscoop.soberano.domain.tracked.ProcessRunOutputAllocation;
 import co.syscoop.soberano.domain.tracked.Product;
 import co.syscoop.soberano.domain.untracked.DomainObject;
 import co.syscoop.soberano.domain.untracked.helper.OrderItem;
@@ -442,17 +443,40 @@ public class OrderFormHelper extends BusinessActivityTrackedObjectFormHelper {
 		boxOi.appendChild(lblInventoryItemCode);
 		
 		Button btnDelay = new Button();
-		btnDelay.setImage("./images/delay_15.jpg");
+		btnDelay.setLabel("\u23F8");	
 		btnDelay.setId("btnDelay" + oi.getProcessRunId().toString());
 		boxOi.appendChild(btnDelay);
+		
+		if (oi.getProcessRunOutputAllocationIsOmitted()) {
+			btnDelay.setLabel("\u23F5");                       // ⏵  ← one backslash
+		    ((Treecell) boxOi.getParent().getParent()).setStyle("background-color:red;");
+		}
+		else {
+			btnDelay.setLabel("\u23F8");                       // ⏸
+		    ((Treecell) boxOi.getParent().getParent()).setStyle("background-color:transparent;");
+		}
+		
 		btnDelay.addEventListener("onClick", new EventListener() {
 
 			@Override
 			public void onEvent(Event event) throws Exception {
 				
 				try {
-					((Treecell) boxOi.getParent().getParent()).setStyle("background-color:" + "red;");
-					updateServedItems(ItemOperation.CANCELALL, event);
+					if ("\u23F5".equals(((Button) event.getTarget()).getLabel())) {
+					    if ((new ProcessRunOutputAllocation()).undoMarkAllAsOmitted(oi.getProcessRunId()) == -1) {
+					    	throw new NotEnoughRightsException();
+					    } else {
+					    	btnDelay.setLabel("\u23F8");                       // ⏸
+						    ((Treecell) boxOi.getParent().getParent()).setStyle("background-color:transparent;");
+					    };
+					} else {					   
+					    if ((new ProcessRunOutputAllocation()).markAllAsOmitted(oi.getProcessRunId()) == -1) {
+					    	throw new NotEnoughRightsException();
+					    } else {
+					    	 btnDelay.setLabel("\u23F5");                       // ⏵  ← one backslash
+							    ((Treecell) boxOi.getParent().getParent()).setStyle("background-color:red;");
+					    };
+					}
 				}
 				catch(NotEnoughRightsException ex) {
 					ExceptionTreatment.logAndShow(ex, 

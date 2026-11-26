@@ -260,7 +260,9 @@ public class Order extends BusinessActivityTrackedObject {
 	        	
 	        	if (!(rs.getInt("thisIsAnAdditionOf") > 0)) {
 	        		order.getOrderItems().get(categoryCurrentlyBeingExtracted + ":" + descriptionCurrentlyBeingExtracted).add(orderItem);
-	        	}	        	
+	        	}
+	        	
+	        	orderItem.setProcessRunOutputAllocationIsOmitted(rs.getBoolean("processRunOutputAllocationIsOmitted"));
 	        }
 	        return order;
 		}

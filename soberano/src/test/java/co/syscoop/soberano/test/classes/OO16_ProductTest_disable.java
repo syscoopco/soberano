@@ -19,7 +19,7 @@ import co.syscoop.soberano.test.helper.TestUtilityCode;
 
 @Order(16)
 
-@Disabled
+//@Disabled
 
 class OO16_ProductTest_disable  extends ProductActionTest {
 

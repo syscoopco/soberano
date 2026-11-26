@@ -24,7 +24,7 @@ import co.syscoop.soberano.util.SpringUtility;
 
 @Order(6)
 
-@Disabled
+//@Disabled
 
 class O6_CounterTest_check_modifying extends CounterActionTest {
 	

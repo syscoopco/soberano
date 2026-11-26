@@ -20,6 +20,8 @@ public class OrderItem {
 	private String workerColor = "";
 	private String workerLoginName = "";
 	
+	private Boolean processRunOutputAllocationIsOmitted = false;
+	
 	public Integer getProcessRunId() {
 		return processRunId;
 	}
@@ -138,5 +140,13 @@ public class OrderItem {
 
 	public void setWorkerLoginName(String workerLoginName) {
 		this.workerLoginName = workerLoginName;
+	}
+
+	public Boolean getProcessRunOutputAllocationIsOmitted() {
+		return processRunOutputAllocationIsOmitted;
+	}
+
+	public void setProcessRunOutputAllocationIsOmitted(Boolean processRunOutputAllocationIsOmitted) {
+		this.processRunOutputAllocationIsOmitted = processRunOutputAllocationIsOmitted;
 	}
 }

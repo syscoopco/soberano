@@ -93,6 +93,24 @@ public class ProcessRunOutputAllocation extends BusinessActivityTrackedObject {
 		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
 	}
 	
+	public Integer undoMarkAllAsOmitted(Integer processRunnId) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRunOutputAllocation_undoMarkAllAsOmitted\"(:processRunnId, :loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunnId", processRunnId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
+	public Integer markAllAsOmitted(Integer processRunnId) throws SQLException, Exception {
+		
+		String qryStr = "SELECT * FROM soberano.\"fn_ProcessRunOutputAllocation_markAllAsOmitted\"(:processRunnId, :loginname) AS queryresult";
+		Map<String,	Object> parametersMap = new HashMap<String, Object>();
+		parametersMap.put("processRunnId", processRunnId);
+		parametersMap.put("loginname", SpringUtility.loggedUser().toLowerCase());
+		return (Integer) super.query(qryStr, parametersMap, new QueryObjectResultMapper()).get(0);
+	}
+	
 	@Override
 	public PrintableData getReportFull() throws SQLException {
 		
